@@ -1,0 +1,927 @@
+//CONTENTS
+//Data types
+//Declarations
+//Concatenate
+//Float decimal double
+//Calculation shortcute
+//String handling
+//Length
+//Indexing and zero based index
+//Indexing and getting the last letter of a word
+//Mad lib game
+//Arrays
+//Nested arrays
+//Acessing array datas with indexes
+//Modify array datas with indexes
+//Accessing multidimensional arrays with indexes
+//Manipulate arrays with push()
+//Manipulate arrays with pop()
+//Manipulate arrays with shift()
+//Manipulate arrays with unshift()
+//Functions basics
+//Passing values to functions with arguments
+//Global scope and functions
+//Local scope and function
+//Global vs local scope in functions
+//Return a value from a function with return statement
+//Understanding undefined value returned from a function
+//Stand in line
+//Use conditional logic with if statements
+//Comparison with the equality (==) and the strict equality(===) operator
+//Comparison with the inequality (!=) and the strict inequality(!==) operator
+//Coding using && statement
+//Coding using || statement
+//Logical order in if-alse statement
+//Switch statements
+//Multiple identical function in switch statements
+//Returning Boolean Values from Functions
+//Returning early pattern from functions
+//Counting cards
+//Javascript objects, handling object datas
+//Using objects for lookups
+//Testing objects for properties
+//Manipulating complex objects
+//Accessing nested objects
+//Accessing nested arrays
+//Iterate with while loops in arrays
+//Iterate even numbers with a for loop
+//Iterate odd numbers with a for loop
+//Counting down numbers with a for loop
+//iterate through an array with a for loop
+//Nesting for loops
+//Profile lookup
+
+////////////////////////////////////////////////////////////////
+/*DATA TYPES
+    undefined, null boolean, string, symbol, nuber, object*/
+
+
+////////////////////////////////////////////////////////////////
+//DECLARATIONS
+    var varName1 //public
+    let varName2 //private
+    const pi = 3.14 //value will never change
+    console.log(varName1) //to print out variable
+
+
+////////////////////////////////////////////////////////////////
+//CONCATENATE
+    var a = 1;
+    var b = a + "String";
+    console.log(b) //1String
+    var b += "Hello";
+    console.log(b) //1String Hello
+
+
+////////////////////////////////////////////////////////////////
+//FLOAT DECIMAL DOUBLE
+    var a1 = 2.0;
+
+
+////////////////////////////////////////////////////////////////
+//CALCULATION SHORTCUTS
+    var a2 = 11;
+    a2 += 9; //Answer is 20 and can do all calculation operations like this
+    //Exponent: 2 ** 3 = 8
+
+
+////////////////////////////////////////////////////////////////
+//STRING HANDLING
+    var stringZero = "Hello";
+    var stringOne = "\"I will blow your house down\" he said"; //adding quote inside string
+    var stringTwo = `<a href="http://link.com"></a>`;
+    var stringThree = '<a href="http://link.com"></a>';
+
+    /*
+    CODE    OUTPUTS
+    \"          double quote
+    \\          backslash
+    \n          newline
+    \r          carriage return
+    \t           tab
+    \b          backspace
+    \f          formfeed
+    */
+
+
+////////////////////////////////////////////////////////////////
+//LENGTH
+//adding ".length" to a variable name will find the indexing length of a string
+    var lastNameLength = 0;
+    var lastName = "Hello";
+    lastNameLength = lastName.length;
+    console.log(lastNameLength)//will output number 5
+
+
+////////////////////////////////////////////////////////////////
+//INDEXING and ZERO BASED INDEX
+    var firstLetter = ""
+    var lastName = "Erlich"
+    firstLetter = lastName[2] //will output letter L
+    console.log(firstLetter)
+
+
+////////////////////////////////////////////////////////////////
+//INDEXING GETTING LAST LETTER OF WORD
+    var firstName = "Hello"
+    var lastLetter = firstName[firstName.length = 1];
+    console.log(lastLetter) //output letter o
+
+
+////////////////////////////////////////////////////////////////
+//MAD LIB GAME
+    function wordBlanks(myNoun, myAdjective, myVerb, myAdverb){
+        var result = "";
+        result += "The " + myAdjective + " " + myNoun + " " + myVerb + " to the store" + myAdverb + ".";
+        
+        return result;
+    }
+    console.log(wordBlanks("dog", "big", "ran", "quickly"));
+
+
+////////////////////////////////////////////////////////////////
+//ARRAYS
+    var ourArray = ["John", 23];
+
+
+////////////////////////////////////////////////////////////////
+//NESTED ARRAYS
+    var ourArray = [["universe, 42"], ["everything", 101010]];
+
+
+////////////////////////////////////////////////////////////////
+//ACCESSING ARRAY DATAS WITH INDEXES
+    var ourArray = [50, 60, 70]; 
+    var ourData = ourArray[0]; 
+    console.log(ourData); //output 50 where index 0 is 50
+
+
+////////////////////////////////////////////////////////////////
+//MODIFY ARRAY DATA WITH INDEXES
+    var ourArray = [18,64,99];
+    ourArray[1]=45;
+    console.log(ourArray); //outputs [18, 45, 99]
+
+
+////////////////////////////////////////////////////////////////
+//ACCESS MULTIDIMENSIONAL ARRAYS WITH INDEXES
+    var myArray = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [[10, 11, 12], 13, 14,]] //Note: 10, 11, 12, 13, 14 are in 3 layers deep array
+    var myData = myArray[0][0];  //[2][1] will give you number 8
+    console.log(myData);
+
+
+////////////////////////////////////////////////////////////////
+//MANIPULATE ARRAYS WITH push()
+    var ourArray = ["Stimpson", "J", "cat"];
+    ourArray.push(["happy", "joy"]);
+    //ourArray now equals ["Simpson", "J", "cat", ["happy", "joy"]]
+
+
+////////////////////////////////////////////////////////////////
+//MANIPULATE ARRAYS WITH pop() //extracting the last value from an array and move it into a variable
+    var ourArray = [1, 2, 3];
+    var removedFromOurArray = ourArray.pop();
+    //removedFromOurArray now contains 3, and ourArray variable is now [1, 2]
+    console.log(ourArray);
+
+
+////////////////////////////////////////////////////////////////
+//MANIPULATE ARRAYS WITH shift() //extracting the first value from an array and move it into a variable
+    var ourArray = ["Stimpson", "J", ["cat"]];
+    var removedFromOurArray = ourArray.shift();
+    // removedFromOurArray now equals "Stimpson" and ourArray now equals ["J", ["cat"]]
+
+
+////////////////////////////////////////////////////////////////
+//MANIPULATE ARRAYS WITH unshift() //adding value into the beginning of an array
+    var ourArray = ["Stimpson", "J", "cat"];
+    ourArray.shift(); //ourArray now equals ["J", "cat"]
+    ourArray.unshift("Happy");
+    //ourArray now equals ["Happy", "J", "cat"]
+
+
+////////////////////////////////////////////////////////////////
+//FUNCTIONS BASICS
+    function ourReusableFunction(){
+        console.lof("Hey");
+    }
+    ourReusableFunction();
+    ourReusableFunction();
+    //output will be called twice
+
+
+////////////////////////////////////////////////////////////////
+//PASSING VALUES TO FUNCTIONS WITH ARGUMENTS
+    function ourFunctionWithArgs(a, b){
+        console.log(a - b);
+    }
+    ourFunctionWithArgs(10, 5); //Outputs 5
+
+
+////////////////////////////////////////////////////////////////
+//GLOBAL SCOPE AND FUNCTIONS
+    var myGlobal = 10;
+    function fun1(){
+        oopsGlobal = 5; //if declared with "var" inside a function, the variable becomes private and cannot be used in function fun2
+    }
+    function fun2(){
+        var output = "";
+        if (typeof myGlobal != "undefined"){
+            output += "myGlobal " + myGlobal;
+        }
+        if (typeof oppsGlobal != "undefined"){
+            output += " oopsGlobal: " + oopsGlobal;
+        }
+        console.log(output);
+    }
+    fun1(); //output 5
+    fun2(); //myGlobal10 oopsGlobal5
+
+
+////////////////////////////////////////////////////////////////
+//LOCAL SCOPE AND FUNCTIONS
+    function myLocalScope(){
+        var myVar = 5; //Note that this will be private to this function
+        console.log(myVar); //will output 5 on console
+    }
+    myLocalScope();
+    console.log(myVar); //Error because this can't access private variables
+
+
+////////////////////////////////////////////////////////////////
+//GLOBAL VS LOCAL SCOPE in FUNCTIONS
+    var outerWear = "Tshirts";
+    function myOutfit(){
+        var outerWear = "sweater";
+        return outerWear;
+    }
+    console.log(myOutfit()); //output "sweater" in console because "sweater" overwrites "Tshirts"
+    console.log(outerWear); //output "Tshirt"
+
+
+////////////////////////////////////////////////////////////////
+//RETURN A VALUE FROM A FUNCTION WITH A RETURN STATEMENT
+    function minusSeven(num){
+        return num - 7;
+    }
+    console.log(minusSeven(10)); //outputs number 3 on console
+
+
+////////////////////////////////////////////////////////////////
+//UNDERSTANDING UNDEFINED VALUE RETURNED FROM A FUNCTION
+    var sum = 0;
+    function addThree(){
+        sum = sum + 3;
+    }
+    console.log(addThree()); //if there's no "return" in the function, the value will be "undefined"
+
+
+////////////////////////////////////////////////////////////////
+//ASSIGNMENT WITH A RETURNED VALUE
+//Example#1
+    var changed = 0;
+    function change(num){
+        return (num + 5) / 3;
+    }
+    changed = change(10); //answer 5
+
+//Example#2
+    var processed = 0;
+    function processArg(num){
+        return (num + 3) / 5;
+    }
+    processed = processedArg(7);
+
+
+////////////////////////////////////////////////////////////////
+//STAND IN LINE
+    function nextInLine(arr, time){
+        arr.push(num); //3. the code to insert a value into the variable
+        return arr.shift(); //4. remove first item and returns the first item in the array
+        //return item; //5. remove this line to make way for point 4
+    }
+    var testArr = [1, 2, 3, 4, 5];
+    //1. JSON.stringify is to change an array into a string so it can be printed out in the console
+    console.log("Before: " + JSON.stringify(testArr)); 
+    console.log(nextInLine(testArr, 6)); //2. add 6 to the array
+    console.log("After: " + JSON.stringify(testArr));
+    //6. Output: "Before: [1,2,3,4,5]"
+    //7. Output "After: [2,3,4,5,6]"
+
+
+////////////////////////////////////////////////////////////////
+//USE CONDITIONAL LOGIC WITH IF STATEMENTS
+    function ourTrueOrFalse(isTrue){
+        if (isItTrue){
+            return "Yes, it is true";
+        }
+        return "No, it is false";
+    }
+    console.log(ourTrueOrFalse(true));
+
+
+////////////////////////////////////////////////////////////////
+//COMPARISON WITH THE EQUALITY & STRICT EQUALITY OPERATOR
+//Equality
+    function testEqual(val){
+        if(val == 12){
+            return "Equal";
+        }
+    }
+    return "Not Equal";
+    //testEqual(10);
+    Console.log(testEqual(10));
+
+    //Strict Equality
+    //3 == 3 : true
+    //3 == '3' : true
+    //3 === 3 : true
+    //3 === '3' : false //because '3' didnt convert to number and vice versa
+    function compareEquality(a, b){
+        if(a === b){
+            return "Equal";
+        }
+    }
+    return "Not Equal";
+    console.log(compareEquality(10, "10")); //"10" is a string and didn't convert to number like 10, therefore output is false
+
+
+////////////////////////////////////////////////////////////////
+//COMPARISON WITH THE INEQUALITY & STRICT INEQUALITY OPERATOR
+//Inequality
+    function testEqual(val){
+        if(val != 12){
+            return "Not Equal";
+        }
+    }
+    return "Equal";
+    //testEqual(10);
+    Console.log(testEqual(10));
+
+    //Strict Inequality
+    //3 != 3 : false
+    //3 != '3' : false
+    //3 !== 3 : false
+    //3 !== '3' : true //because '3' didnt convert to number and vice versa
+    function compareEquality(a, b){
+        if(a !== b){
+            return "Not Equal";
+        }
+    }
+    return "Equal";
+    console.log(compareEquality(10, "10")); //"10" is a string and didn't convert to number like 10, therefore output is true
+
+
+////////////////////////////////////////////////////////////////
+//CODE USING && (AND STATEMENT)
+    function andStatement(){
+        if (val < 10){
+            if (val > 8){
+                return "9";            
+            }
+        }
+    }
+    function andStatement(){
+        if (val < 10 && val > 8){
+            return "9";
+        }
+    }
+
+
+////////////////////////////////////////////////////////////////
+//CODE USING || (OR STATEMENT)
+    function andStatement(){
+        if (val > 20){
+            return "Outside";
+        }
+            if (val < 10){
+            return "Outside";
+        }
+        return "Inside";
+    }
+    function andStatement(){
+        if (val < 10 || val > 20){
+            return "Outside";
+        }
+        return "Inside";
+    }
+
+
+////////////////////////////////////////////////////////////////
+//LOGICAL ORDER IN IF-ELSE STATEMENTS
+    function orderMyLogic(val){
+        if (val < 10){
+            return "Less than 10";
+        } else if (val < 5){
+            return "Less than 5";
+        }else {
+            return "Greater than or equal to 10";
+        }
+    }
+    console.log(orderMyLogic(10)); //output "Less than 10"
+    console.log(orderMyLogic(3)); //output "Less than 10"
+    //Order is impotant so <5 should be first and <10 should be second
+
+
+////////////////////////////////////////////////////////////////
+//SWITCH STATEMENTS
+    https://www.youtube.com/watch?v=PkZNo7MFNFg&t=5776s
+    var names = ["Hole-in-one", "Eagle", "Birdie", "Par", "Bogey", "Double Bogey", "Go Home!"];
+    function golfScore(par, strokes){
+        if (strokes == 1){
+            return names[0];
+        } else if (strokes <= par - 2){
+            return names[1]
+        } else if (strokes == par - 1){
+            return names[2]
+        } else if (strokes == par){
+            return names[3]
+        } else if (strokes == par + 1){
+            return names[4]
+        } else if (strokes == par + 2){
+            return names[5]
+        } else    (strokes >= par + 3){
+            return names[6]
+        }         
+    }
+    console.log(goldScore(5,4));
+    //------------------------------------------------------------------------------------------------------------------------
+    //NOTE: there is no such thing as multi variables switch statement. Switch statements don't handle arrays
+    //because the name of an array is the pointer to the elements in an array and switch statements don't handle pointers.
+    var names = ["Hole-in-one", "Eagle", "Birdie", "Par", "Bogey", "Double Bogey", "Go Home!"];
+    function golfScore(par, strokes){
+        switch (par, strokes){
+            case strokes == 1:
+                return names[0];
+                break;
+            case strokes <= par - 2:
+                return names[1];
+                break;
+            case strokes == par - 1:
+                return names[2];
+                break;
+            case strokes == par:
+                return names[3];
+                break;
+            case strokes == par + 1:
+                return names[4];
+                break;
+            case strokes == par + 2:
+                return names[5];
+                break;
+            case strokes >= par + 3:
+                return names[6];
+                break;
+            default:
+                return "Invalid";
+                break;
+        }
+    }
+    console.log(golfScore(5,4));
+
+
+////////////////////////////////////////////////////////////////
+//MULTIPLE IDENTICAL OPTIONS IN SWITCH STATEMENTS
+    function sequentialSizes(val){
+        var answer = "";
+        switch(val){
+            case 1:
+            case 2:
+            case 3:
+                answer = "Low";
+                break;
+            case 4:
+            case 5:
+            case 6:
+                answer = "Mid";
+                break;
+            case 7:
+            case 8:
+            case 9:
+                answer = "High";
+                break;   
+        }
+        return answer;
+    }
+    console.log(sequentialSizes(1));
+    //If you enter 1, result is low. if 4, result will be Mid
+
+
+////////////////////////////////////////////////////////////////
+//RETURNING BOOLEAN VALUES FROM FUNCTIONS
+//All comparison operators return true or false values
+    function isLess(a, b){
+        if (a < b){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    console.log(isLess(10,15));//True
+    //------------------------------------------------------------------
+    function isLess(a, b){
+        return a < b;
+    }
+    console.log(isLess(10, 15));//True
+
+
+    //RETURNING EARLY PATTERN FROM FUNCTIONS
+    function abTest(a, b){
+        
+        if (a < 0 || b < 0){
+            return undefined;
+        }
+        
+        return Math.round(Math.pow(Math.sqrt(a) + Math.sqrt(b), 2));
+    }
+    console.log(abTest(2, 2)); //returns 8. But if (-2,2) will return null or undefined
+
+
+////////////////////////////////////////////////////////////////
+//COUNTING CARDS
+//Black jack card counting function
+    var count = 0;
+    function cc(card){
+        swithc(card){
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+                count++;
+                break;
+            case 10:
+            case "J":
+            case "Q":
+            case "K":
+            case "A":
+                count--;
+                break;
+        }
+        
+        var holdbet = 'Hold';
+        if (count > 0){
+            holdbet = 'Bet';
+        }
+        
+        
+        //return "change Me";
+        return count + " " + holdbet;
+    }
+    cc(2); cc(3); cc(7); cc('K'); cc('A');
+    console.log(cc(4));
+
+
+////////////////////////////////////////////////////////////////
+//JAVASCRIPT OBJECTS, HANDLING OBJECT DATAS
+//Objects are like arrays, but instead of using indexes to access datas you use properties
+    var ourDog = {
+        "name": "Camper",
+        "bark sound": "woofwoof",
+        12: "Montana",
+        "name2": "Baby"
+        "legs": 4,
+        "tails": 1,
+        "friends": ["everything"]
+    };
+
+    //use dot notation to access data
+    var dogName = ourDog.name;
+    console.log(dogName); //returns Camper
+
+    //use bracket notation to access data. 
+    //NOTE: the name needs to have space in between
+    var dogSound = ourDog["bark sound"]; //single quotes will also work
+    console.log(dogSound); //returns woofwoof
+
+    //use variables to access data
+    var dogNumber = 12;
+    var dog = ourDog[dogNumber]; //output Montana
+
+    //updating object properties
+    ourDog.name = "booboo";
+    var dogName2 = ourDog.name2;
+    console.log(dogname2); //returns booboo
+    
+    //adding properties
+    ourDog.bark = "bow-wow";
+
+    //delete properties
+    delete ourDog.bark;
+
+
+////////////////////////////////////////////////////////////////
+//USING OBJECTS FOR LOOKUPS
+    function phoneticLookup(val){
+        var result = "";
+        switch (val){ 
+            case "alpha":
+            result = "Adams";
+            break;
+            case "bravo":
+            result = "Boston";
+            break;
+            case "charlie":
+            result = "Chicago";
+            break;
+        }
+        //you can get rid of switch statement and use lookup instead
+        var lookup = {
+            "alpha": "Adams",
+            "brave": "Boston",
+            "charlie": "Chicago"
+        };
+        result = lookup[val];
+        return result;
+    }
+    console.log(phoneticLookup("charlie")); //output Chicago
+
+
+////////////////////////////////////////////////////////////////
+//TESTING OBJECTS FOR PROPERTIES
+    //using hasOwnProperty function
+    //checkProp only returns true or false
+    var myObj = {
+        gift: "pony",
+        pet: "kitten",
+        bed: "sleigh",
+    };
+    function checkObj(checkProp){
+        if (myObj.hasOwnProperty(checkProp)){
+            return myObj[checkProp];
+        }else {
+            return "Not found";
+        }
+        //return "Change Me!";
+    }
+    console.log(checkObj(gift)); //returns pony
+
+
+////////////////////////////////////////////////////////////////
+//MANIPULATING COMPLEX OBJECTS (Very similar to JSON)
+//arrays=>[], objects{}
+//Therefore the items below is a list of objects inside an array
+//You can have another array within an object eg formats
+//And multiple objects within the main array
+var myMusic = [ //main array
+    {
+    "artist": "Billy Joel",
+    "title": "Piano Man",
+    "release_year": 1973,
+    "formats": ["CD", "8T", "LP"], //sub array
+    "gold": true
+    },
+    { //second object
+        "artist": "Beau Carnes",
+        "title": "Serial Man",
+        "release_year": 2003,
+        "formats": ["Youtube Video"], //sub array
+        "gold": false
+    }
+];
+
+
+////////////////////////////////////////////////////////////////
+//ACCESSING NESTED OBJECTS
+var myStorage = {
+    "car":  {
+        "inside": {
+            "glove box": "maps",
+            "passanger seat": "pillow"
+        },
+        "outside": {
+            "trunk": "jack"
+        }
+    }
+};
+var gloveBoxContents = myStorage.car.inside["glove box"]; //because there's space in glove box, the reason to use square brackets
+console.log(gloveBoxContents) //outputs "maps"
+
+
+////////////////////////////////////////////////////////////////
+//ACCESSING NESTED ARRAYS
+var myPlants = [
+    {
+        type: "flowers",
+        list: [
+            "rose",
+            "tulip",
+            "dandelion"
+        ]
+    },
+    {
+        type: "trees",
+        list: [
+            "fir",
+            "pine",
+            "birch"            
+        ]
+    }
+];
+var secondTree = "myPlants[1].list[1]"; //outputs pine
+
+
+////////////////////////////////////////////////////////////////
+//RECORD COLLECTION
+var collection = {
+    "2548": { //the numbers represent the ID
+        "album": "Slippery When Wet", //album, artist and tracks are the properties/prop
+        "artist": "Bon Jovi",
+        "tracks": ["Let It Rock", "You Give Love a Bad Name"]
+    },
+    "2468": {
+        "album": "1999",
+        "artist": "Prince",
+        "tracks": ["1999", "Little Red Corvette"]
+    },
+    "1245": {
+        "artist": "Robert Palmer",
+        "tracks": [ ]
+    },
+    "2468": {
+        "album": "ABBA Gold",
+        
+    },
+};
+
+//Keep a copy of the collection for tests
+//The JSON means backing up data before making any changes
+var collectionCopy = JSON.parse(JSON.stringify(collection));
+
+//If for tracks, value means add value to the last array
+function updateRecords(id, prop, value){ 
+
+    if (value === ""){ //if no value in the property, it means delete the property by default
+        delete collection[id][prop];
+    } else if (prop === "tracks"){ //if tracks property, then add the value at the end
+        collection[id][prop] = collection[id][prop] || []; //if the track exist, then add to array, if not exist, add as itself
+        collection[id][prop].push(value); //using the push method to insert value
+    } else { //set property to equal value
+        collection[id][prop] = value;
+    }
+    
+    return collection;
+}
+
+console.log(updateRecords(5439, "artist", "ABBA")); //Outputs 5439: {album: "ABBA Gold", artist: "ABBA"} NOTE: doesnt matter as it only writes over
+console.log(updateRecords(2468, "tracks", "test")); //adds in "test" to "tracks" under 2468
+
+
+
+////////////////////////////////////////////////////////////////
+//ITERATE WITH WHILE LOOPS IN ARRAYS
+var myArray = [];
+
+var i = 0;
+while(i < 5){
+    myArray.push(i);
+    i++;
+}
+console.log(myArray); //Outputs [0, 1, 2, 3, 4]
+
+
+////////////////////////////////////////////////////////////////
+//ITERATE WITH FOR LOOPS IN ARRAYS
+//var i = 0 //declaration for the variable "i"
+//i<5         //if less than 5, then repeat the loops NOTE: it will stop at 4.
+//i++         //increment the variable i by 1
+var ourArray = [];
+for (var i = 0; i < 5; i++){ 
+    ourArray.push(i);
+}
+var myArray = [];
+
+
+////////////////////////////////////////////////////////////////
+//ITERATE EVEN NUMBERS WITH A FOR LOOP
+var ourArray = [];
+for (var i = 0; i < 10; i += 2){
+    ourArray.push(i);
+}
+console.log(ourArray); // Output [0, 2, 4, 6, 8]
+
+
+////////////////////////////////////////////////////////////////
+//ITERATE ODD NUMBERS WITH A FOR LOOP
+var ourArray = [];
+for (var i = 1; i < 10; i += 2){ //Since it starts at 1 instead of 0, it gives you the odd numbers
+    ourArray.push(i);
+}
+console.log(ourArray); // Output [1, 3, 5, 7, 9]
+
+
+////////////////////////////////////////////////////////////////
+//COUNTING DOWN NUMBERS WITH A FOR LOOP
+var ourArray = [];
+for (var i = 10; i > 0; i -= 2){ //var i = 9 for odd numbers
+    ourArray.push(i);
+}
+console.log(ourArray); // Output [10, 8, 6, 4, 2]
+
+
+////////////////////////////////////////////////////////////////
+//ITERATE THROUGH AN ARRAY WITH A FOR LOOP
+var ourArr = [9, 10, 11, 12];
+var ourTotal = 0;
+
+for (var i = 0; i < ourArr.length; i++){
+    ourTotal += ourArr[i]; //basically adds up all the numbers to 42
+    //same as ourTotal = ourTotal + ourArr[i]
+}
+console.log(ourTotal); //output 42
+
+////////////////////////////////////////////////////////////////
+//NESTING FOR LOOPS
+function multiplyAll(arr){
+    var product = 1;
+    
+    for (var i=0; i < arr.length; i++){ //arr.length has 3 elements
+        for (var j = 0; j < arr[i].length; j++){ //arr[i].length has individual numbers within an element. 2 and 3 respectively
+            product *= arr[i][j]; //i is outer array and j is the inner array
+        }
+    }
+    
+    return product;
+}
+//multiply all the numbers within the nested arrays
+var product = multiplyAll([[1, 2], [3, 4], [5, 6, 7]]);
+console.log(product); //Answer 5040
+
+////////////////////////////////////////////////////////////////
+//ITERATE WITH DO... WHILE LOOPS
+//Example 1
+var myArray = [];
+var i = 10;
+while (i < 5){
+    myArray.push(i);
+    i++;
+}
+console.log(i, myArray); //Output 10,[]
+
+//Example 2
+var myArray = [];
+var i = 10;
+do {
+    //therefore this code runs once before checking the condition at "while"
+    myArray.push(i);
+    i++;
+} while (i < 5) //by default, while conditions will be true. If false, the condition breaks out of the loop.
+console.log(i, myArray); //Output 11,[10]
+
+
+////////////////////////////////////////////////////////////////
+//PROFILE LOOKUP
+var contacts = [
+    {
+        "firstNname": "Akira",
+        "lastName": "Laine",
+        "number": "012341",
+        "likes": ["Pizza", "Coding", "Brownie"]
+    },
+    {
+        "firstNname": "Harry",
+        "lastName": "Potter",
+        "number": "876785",
+        "likes": ["Hogwats", "Magic", "Hagrid"]
+    }
+];
+function lookUpProfile(name, prop){
+    for (var i = 0; i < contacts.length; i++){
+        if(contacts[i].firstName === name){
+            return contacts[i][prop] || "no such property";
+        }
+    }
+    return "No such contact";
+}
+var data = lookUpProfile("Akira", "lastName"); //if not in data, it will output "no such property or contact"
+console.log(data); //output Laine
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
