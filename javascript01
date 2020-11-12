@@ -51,6 +51,26 @@
 //Nesting for loops
 //Profile lookup
 
+//Generate random fractions
+//Generate random whole numbers
+//Generate random whole number within a range
+//Use the parseInt function (convert string to integer)
+//Use the parseInt function with a Radix
+//Use conditional ternary operator
+//Use multiple conditional ternary operator
+//Differences betwee the var, let and const keywords
+//Mutate and array declared in const
+//Prevent object mutation
+//Use arrow functions to write concise anonymous functions
+//Write arrow functions with parameters
+//Write higher order arrow functions part 1
+//Write higher order arrow functions part 2
+//Using the rest operator with the function parameter
+//Use the Spread Operator to Evaluate Arrays In-Place
+//Use Destructing Assignment to Assign Variables from Objects
+
+
+
 ////////////////////////////////////////////////////////////////
 /*DATA TYPES
     undefined, null boolean, string, symbol, nuber, object*/
@@ -897,10 +917,284 @@ var data = lookUpProfile("Akira", "lastName"); //if not in data, it will output 
 console.log(data); //output Laine
 
 
+////////////////////////////////////////////////////////////////
+//GENERATE RANDON FRACTIONS
+function randomFraction(){
+    //return 0;
+    return Math.random(); //will generate random decimal numbers
+}
+console.log(randomFraction());
+
+////////////////////////////////////////////////////////////////
+//GENERATE RANDOM WHOLE NUMBERS
+var randomNumberBetween0and19 = Math.floor(Math.random() * 20); 
+//Math.floor rounds down to the nearest whole number
+//Math.random will never give you whole number
+//*20 will give you 0 to 19 not including 20
+function randomWholeNum(){
+    return Math.floor(Math.random() * 10); //*10 will give you a number between 0 and 9
+}
+console.log(randomWholeNum());
+
+////////////////////////////////////////////////////////////////
+//GENERATE RANDOM WHOLE NUMBERS WITHIN A RANGE
+function ourRandomRange(ourMin, ourMax){
+    return Math.floor(Math.random() * (ourMax - ourMin + 1)) + ourMin;
+}
+
+var ourRandom = ourRandomRange(1, 9);
+console.log(ourRandom);
+
+
+////////////////////////////////////////////////////////////////
+//USE THE parseInt Function
+function convertToInteger(str){
+    return parseInt(str);
+}
+convertToInteger("56"); //This will convert the string 56 to integer 56
+
+
+////////////////////////////////////////////////////////////////
+//USE THE parseInt FUNCTION WITH A RADIX
+//Radix base 2 is binary
+//Radix base 10 is normal integer
+function convertToInteger(str){ //convert binary to integer
+    return parseInt(str, 2) //2 represents binary    
+}
+convertToInteger("10011");
+
+
+////////////////////////////////////////////////////////////////
+//USE THE CONDITIONAL (TERNARY) OPERATOR
+//condition ? statement-if-true : statement-if-false;
+//One line if-else expression
+function checkEqual(a, b){
+    /*Similar to this
+    if (a === b) {
+        return true;
+    }
+    else {
+        return false;
+    }*/
+    return a === b ? true : false; //NOTE the : and ?
+}
+checkEqual(1, 2);
+
+////////////////////////////////////////////////////////////////
+//USE MULTIPLE CONDITIONAL (TERNARY) OPERATORS
+function checkSign(num){
+    return num > 0 ? "positive" : num < 0 ? "negative" : "zero" //if false/0 will return zero
+}
+console.log(checkSign(10));  //positive
+console.log(checkSign(-10)); //negative
+console.log(checkSign(0));    //zero
+
+////////////////////////////////////////////////////////////////
+//DIFFERENCES BETWEEN THE VAR, LET AND CONST KEYWORDS
+//var = variables can be declared many times / public
+//let = variables can be declared only once / private
+//const = variables that cannot be modified, it is common to declare a variable like this const VARIABLE = A; //use all caps
+function abc(){
+    "use strict"; //enables strict mode, catches common coding mistakes and unsafe actions
+                        //alot of people uses strict at the top of the file or just as a function to catch a mistake
+}
+
+////////////////////////////////////////////////////////////////
+//MUTATE AN ARRAY DECLARED IN CONST
+const s = [5, 7, 2];
+function editInPlace(){
+    "use strict";
+    //s = [2, 5, 7]; //this code cannot rearrange the array
+    //but this method can rearrange
+    s[0] = 2;
+    s[1] = 5;
+    s[2] = 7;
+}
+editInPlace();
+console.log(s);
+
+////////////////////////////////////////////////////////////////
+//PREVENT OBJECT MUTATION
+function freezeObj(){
+    "use strict";
+    const MATH_CONSTANTS = { //1. declaring math_constants variable with Pi and uses try-catch block to test variable
+        PI: 3.14
+    };
+    
+    Object.freeze(MATH_CONSTANTS); //5. adding this will freeze the const variable therefore PI will still be 3.14
+    
+    //try-catch block
+    try {
+        MATH_CONSTANTS.PI = 99; //2. test to reassign pi to 99
+    }catch(ex){ //3. ex stands for error or exception
+        console.log(ex); //4. outputs 99 since math_constants has been reassigned to 99
+    }
+    return MATH_CONSTANTS.PI;
+}
+const PI = freezeObj();
+console.log(PI);
+
+
+////////////////////////////////////////////////////////////////
+//USE ARROW FUNCTIONS TO WRITE CONCISE ANONYMOUS FUNCTIONS
+//A function without a name
+//nameless function can be converted into arrow function
+
+//FROM THIS:
+var magic = function(){
+    return new Date();
+};
+
+//TO THIS:
+var magic () => {
+    return new Date;
+}
+
+//TO THIS:
+var magic = () => new Date();
+
+
+
+////////////////////////////////////////////////////////////////
+//WRITE ARROW FUNCTIONS WITH PARAMETERS
+
+//Convert this to arrow function
+var myConcat = function(arr1, arr2){
+    return arr1.concat(arr2);
+};
+console.log(myConcat([1, 2], [3, 4, 5]));
+
+//The arrow function
+var myConcat = (arr1, arr2) => arr1.concat(arr2);
+console.log(myConcat([1, 2], [3, 4, 5])); //Outputs [1, 2, 3, 4, 5]
+
+
+////////////////////////////////////////////////////////////////
+//WRITE HIGHER ORDER ARROW FUNCTIONS PART 1
+//Map, filter and reduce
+//Whenever on function takes another function as an argument, hat's a good time for arrow function
+    const realNumberArray = [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2];
+    const squareList = (arr) => {
+        const squaredIntegers = arr;
+        return squaredIntegers;
+    };
+    const squaredIntegers = squareList(realNumberArray);
+    console.log(squaredIntegers); //Outputs [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2];
+
+    //adding filter function
+        const realNumberArray = [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2];
+        const squareList = (arr) => {
+            const squaredIntegers = arr.filter; //adding filter function
+            return squaredIntegers;
+        };
+        const squaredIntegers = squareList(realNumberArray);
+        console.log(squaredIntegers);
+
+        //adding arrow function
+            const realNumberArray = [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2];
+            const squareList = (arr) => {
+                //adding arrow function NOTE: num is a single argument therefore you don't need brackets num()
+                const squaredIntegers = arr.filter(num => Number.isInteger(num) && num > 0); 
+                return squaredIntegers; 
+            };
+            const squaredIntegers = squareList(realNumberArray);
+            console.log(squaredIntegers);//Result will be arrays with numbers more than 0 and also integers, therefore, 4, 42 and 6
+
+             //adding the map function to get the decimal numbers
+                    const realNumberArray = [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2];
+                    const squareList = (arr) => {
+                        //adding map function where .map contains 4, 424 and 6. Now e want to square those numbers.
+                        const squaredIntegers = arr.filter(num => Number.isInteger(num) && num > 0).map(x => x * x); //x means every element in the new array
+                        return squaredIntegers;
+                    };
+                    const squaredIntegers = squareList(realNumberArray);
+                    console.log(squaredIntegers); //Outputs [16, 1764, 36]
+                    
+                    
+////////////////////////////////////////////////////////////////
+//WRITE HIGHER ORDER ARROW FUNCTIONS PART 2
+const increment = (function(){
+    return function increment(number, value = 1){ //value = 1 means  the value will increment by 1 by default if not set in the console.log
+        return number + value;        
+    };
+}) ();
+console.log(increment(5, 2)); //increment by 2
+console.log(increment(5));     //increment by 1
+
+
+////////////////////////////////////////////////////////////////
+//USING THE REST OPERATOR WITH FUNCTION PARAMETERS
+//Without the rest operator
+    const sum = (function(){
+        return function sum(x, y, z){ //1. summing x, y and z
+            const args = [ x, y, z ]; //2. converting x, y and z into an array called args
+            return args.reduce((a, b) => a + b, 0); //3. then reducing them summing them all here
+        };
+    }) ();
+    console.log(sum(1, 2, 3)); //Outputs 6 because 1 + 2 + 3
+
+//Using the rest operator
+    const sum = (function(){
+        return function sum(...args){ //1. using the rest operator (the 3 dots)
+            return args.reduce((a, b) => a + b, 0); //3. then reducing them summing them all here
+        };
+    }) ();
+    console.log(sum(1, 2, 3)); //Outputs 6 because 1 + 2 + 3
+
+
+////////////////////////////////////////////////////////////////
+//USE THE SPREAD OPERATOR TO EVALUATE ARRAYS IN-PLACE
+//Without spread operator
+const arr1 = ['JAN', 'FEB', 'MAR', 'APR', 'MAY'];
+let arr2;
+(function(){
+    arr2 = arr1; //arr1 will write over arr2, hence the potato in arr2
+    arr1[0] = 'potato'
+}) ();
+console.log(arr2); //Outputs ['potato', 'FEB', 'MAR', 'APR', 'MAY']
+
+//With spread operator
+const arr1 = ['JAN', 'FEB', 'MAR', 'APR', 'MAY'];
+let arr2;
+(function(){
+    arr2 = [...arr1]; //adding the spread operator, this will write all the contents of arr2 into arr1
+    arr1[0] = 'potato'
+}) ();
+console.log(arr2); //Outputs ['JAN', 'FEB', 'MAR', 'APR', 'MAY']
+
+
+////////////////////////////////////////////////////////////////
+//USE DESTRUCTING ASSIGNMENT TO ASSIGN VARIABLES FROM OBJECTS
+
+
 
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
