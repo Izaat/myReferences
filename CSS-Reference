@@ -1,0 +1,381 @@
+BACKGROUND
+CSS ELEMENT SELECTOR
+CSS CLASS SELECTOR
+CSS ID SELECTOR
+CSS INLINE STYLINGS
+SPECIFICITY & WHEN TO USE SELECTORS
+PSUEDOSELECTORS
+ADVANCED SELECTORS
+ATTRIBUTE SELECTOR
+TYPES OF UNITS
+TEXT DECORATIONS
+TEXT TRANSFORM
+TEXT - FONT SIZE BOLDING & STYLE
+USING EXTERNAL FONTS
+CHANGING CONTENT SIZE
+CSS BORDERS - BOX MODEL
+MARGINS AND PADDINGS
+FLEXBOX PROPERTIES
+
+
+
+
+
+
+
+
+
+
+
+/*Linking to css from html*/
+/*CSS BACKGROUND*/
+    /*Html*/
+        <head>
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        </head>
+    /*style.css*/
+        body{
+            background: red;
+            /*background: url("LINK");*/
+        }
+
+   /*BACKGROUND*/
+    /*Html//
+        <div id="service-image"></div>
+    /*style.css*/
+        #service-image{
+            height: 400px; //image container
+            width: 100px;//image container
+            background: url("LINK");
+            background-repeat: no-repeat; //disable repeat but did not resize the container
+            background-size: 50px 100px;
+            background-size: cover; //stretches to container
+            background-size: contain; //fits original image size into image container
+            background: rgba(1,2,3,4); //where the 4th number means opacity and 0% means fully transparent- a means alpha//
+            background: linear-gradient(to right, rgb(0,0,0), rgb(0,0,0), rgba(0,0,0,0)); //black gradients to the right where the right most color is transparent
+            background: linear-gradient(to bottom right, rgb(0,0,0), rgb(0,0,0), rgba(0,0,0,0)); //black gradients to the bottom right corner where the bottom right most color is transparent
+            background: linear-gradient(-90deg, rgb(0,0,0), rgb(0,0,0), rgba(0,0,0,0)); //black gradients to the right where the angled color is transparent
+            //radial gradient will not work when background image is set to cover
+            background: radial-gradient(circle, red 20%, blue 30%, green 20%); //green will be inside and red will be outside and % refers to thickness and circle converts the default ellipse to a circle
+        }
+        
+
+/*CSS ELEMENT SELECTOR*/
+    /*Html*/
+        <h1></h1>
+        <p></p> //tet will be red
+    /*style.css*/
+        p{
+            color: red;
+        }
+
+
+/*CSS CLASS SELECTOR*/
+    /*Html*/
+        <h2 class="aclass">This text will be black.</h2>
+        <p class="aclass">Also this.</p>
+    /*style.css*/
+        .aclass{
+            color:black;
+        }
+
+/*CSS ID SELECTOR*/
+    /*Html*/
+        <h3 id="sometext">Orange text.</h3>
+        <p id="sometext">Orange text.</p>
+    /*style.css*/
+        #sometext{
+            color: orange;
+        }
+        
+
+/*CSS INLINE STYLINGS*/
+    /*Html*/
+        <h2 style="color: blue;">Blue text</h2>
+    /*style.css*/
+        //NIL
+        
+
+/*SPECIFICITY & WHEN TO USE SELECTORS*/
+       //Note: "Class-selectors" can overwrite "Element-selectors"
+       //Note: "ID-selectors" can overwrite "Class-selectors"
+       //Note: "inline-stylings" can overwrite "ID-selectors"
+       
+       
+/*PSUEDOSELECTORS*/
+    /*HOVER*/
+        /*style.css*/
+        h2:hover {color:red} //when mouse hovers, things change to red
+    
+    /*PARENT-CHILD*/
+        /*Html*/
+        <p>
+            <ul>
+                <li></li> //first-child
+                <li></li> //second-child
+                <li></li> //last-child
+                //also nth-child and only-child
+            </ul>
+        </p>
+        
+        /*style.css*/
+        /*li and td can be used interchangeably*/
+        li:first-child{color:steelblue;}
+        td:first-child{color:steelblue;}
+        
+    /*Linking*/
+        /*Html*/
+        <a href="https://www.google.com"> id="google-link"</a>
+        /*style.css*/
+        #google-link:link{color:blue;}
+        #google-link:visited{color:red;}
+        
+
+/*ADVANCED SELECTORS*/
+    /*Adjacent sibling selectors*/
+        /*Can share same style across more than 2 tags*/
+        /*style.css*/
+        h2 + a {
+            color:red;
+        }
+        
+    /*General sibling selectors*/
+        /*every button to follow parent style*/
+        /*Html*/
+        <form>
+            <input type="email" placeholder="Email">
+            <textarea></textarea>
+            <button>Submit</button>
+        </form>
+        /*style.css*/
+        textarea ~ button{
+            color:purple;
+        }
+        
+        
+    /*Child selectors*/
+        /*every single li to copy ul*/
+        /*Html*/
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        /*style.css
+        ul > li{
+            color:blue;
+        }
+        
+     /*Descendant selectors*/
+        /*the li and every single li under ol to copy ul*/
+        /*Html*/
+        <ul>
+            <li></li>
+            <li></li>
+                <ol>
+                    <li></li>
+                </ol>
+        </ul>
+        /*style.css*/
+        ul li{
+            color:blue;
+        }
+        
+        
+ /*ATTRIBUTE SELECTOR*/
+        /*Html*/
+            <h2 class="subtitle">About</h2>
+            <td class="subtitle">Lorem ipsum</td>
+            <h2 class="subtitle article-subtitle">About</h2>
+            <h2 class="subtitle article-subtitle">Lorem ipsum</h2>
+            <h2 class="subtitle-article-subtitle">About</h2>
+            <h2 class="article-subtitle-example">Lorem ipsum</h2>
+            <img src="../img/image1.jpg">
+            <img src="../img/image1.jpg">
+        /*style.css*/
+            h2[class=subtitle]{
+                color: blue;
+            }    //turns all the tags containing "subtitle" to blue 
+            
+            h2[class~=article-subtitle]{
+                color: blue;
+            }    //turns all the tags containing "article-subtitle" (with space)within its class name to blue 
+            
+            h2[class|=subtitle]{
+                color: blue;
+            }    //turns all the tags containing "article-subtitle" (without spaces) to blue 
+            
+            img[src^="../img/"]{
+                border: 10px solid black;
+            } //add borders to all images that STARTS with "../img/"
+        
+             img[src$="../img/"]{
+                border: 10px solid black;
+            } //add borders to all images that ENDS with "../img/"
+            
+             img[src*="../img/"]{
+                border: 10px solid black;
+            } //add borders to all images that CONTAINS "../img/"
+            
+            
+        
+ 
+     /*TYPES OF UNITS*/
+     /*Absolute Values | pt, px, pc, cm, mm Absolut values*/
+     /*Relative Values// em(double), vw(view-width), vh(view-height), where vw and vh is percentage of viewport -your display size-*/
+     
+     /*TEXT DECORATIONS*/
+     .link{
+         text-decoration: none;
+         text-decoration: underline;
+         text-decoration: line-through;
+         text-decoration: overline;
+     }
+     
+     /*TEXT TRANSFORM*/
+     /*make all letters capitalized*/
+     body{
+         text-transform: capitalize; /*capitalize first letter of every single word in the website*/
+         text-transform: uppercase; /*capitalize every single word in the website */
+         text-transform: lowercase; /*lowercase every single word in the website */
+     }
+        
+     .example{
+         text-align: center;
+         text-align: left;
+         text-align: right;
+         text-align: justify; //the squarish alignment icon in MSwords that looks like the menu icon in mobile devices
+     }   
+        
+    /*TEXT - FONT SIZE BOLDING & STYLE*/
+    
+    #font{
+        font-size: 10px;
+        font-weight: 600; //bolding
+     }   
+    .italic{
+        font-style: italic;
+        font-style: oblique; //a little italic
+    }
+    
+    #font{
+        font-family: "Times New Roman", serif; //if TNR is not available if not then use serif font
+     }   
+     
+     
+     /*USING EXTERNAL FONTS*/
+     /*Html*/
+     /*make sure link is above stylesheet*/
+        <html><head>
+            <link href="https://fonts-googleapis.com/css?family=Lato:400,700|Sarabun:400,700" rel="stylesheet">
+            <link rel="stylesheet" type="text/css" href="../css/style.css">
+        </head></html>
+     /*style.css*/
+        body{
+            font-family: "Lato", sans-serif; //by default if font server is down then local font sans-serif will takeover
+        }
+        .subtitle{
+            font-family: "Sarabun";
+        }
+     
+/*CHANGING CONTENT SIZE*/
+    /*Html*/
+    <img src="../img/img-1.jpg" id="about-us-image">
+    /*style.css*/
+    #about-us-image{
+        height: 300px;
+        width: 60%;
+    }
+
+/*CSS BORDERS - BOX MODEL*/
+    //style.css
+    #service-image{
+        //border: size style color; //style(dotted, dashed, solid, double), color (rgb, hex)
+        border: 10px solid #000000;
+        
+    }
+
+
+
+/*MARGIN AND PADDING*/
+   //style.css
+    #service-image{
+        margin: 40px;
+        
+        
+        //padding: top right bottom left;
+        padding: 40px 20px 5px 0; 
+        //OR you can also do this
+        padding: 40px;
+        padding-right: 20px;
+        padding-bottom: 5px;
+        
+    }
+
+/*FLEXBOX PROPERTIES*/
+    //html//
+    <div class="container">
+        <div class="container-item" style="1"; flex-grow: 1; flex-shrink: 3;  flex-basis: 100px;>A</div>
+        <div class="container-item" style="5"; flex-grow: 1; flex-shrink: 3;  flex-basis: 100px;>B</div>
+        <div class="container-item" style="4"; flex-grow: 1; flex-shrink: 2;  flex-basis: 100px;>C</div>
+        <div class="container-item" style="2"; flex-grow: 1; flex-shrink: 2;  flex-basis: 100px;>D</div>
+        <div class="container-item" style="6"; flex-grow: 1; flex-shrink: 3;  flex-basis: 100px;>E</div>
+        <div class="container-item" style="3"; flex-grow: 1; flex-shrink: 2;  flex-basis: 100px;>F</div>
+        //add in style="order: 1"; or style="order: any number"; to reorder the list
+        //add in flex-grow to resize the object to grow relative to the other within a container. Default is 0 (responsiveness)
+        //add in flex-shrink to resize the object to shrink relative to the other within a container. Default is 1 (responsiveness)
+        //add in flex-basis
+        
+    </div>
+    //style.css//
+    .container{
+        background-color: rgb(250, 250, 250);
+        margin: 10px
+        
+        display: flex;
+        flex-direction: row; //row, column, row-reverse, column-reverse
+        //something like wrap text in MSWords
+        flex-wrap: wrap; //wrap, wrap-reverse, nowrap (default value)
+        
+        //alignment
+        justify-content:  center; //center, flex-end, space-between, space-around
+        align-items: center; //center, flex-start, flex-end, stretch, baseline (aligning to centerline of object)
+        
+    }
+    .container-item{
+        //background, color, font-size, text-align, width, line-height, margin
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
