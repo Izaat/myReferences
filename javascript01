@@ -68,7 +68,21 @@
 //Using the rest operator with the function parameter
 //Use the Spread Operator to Evaluate Arrays In-Place
 //Use Destructing Assignment to Assign Variables from Objects
-
+//Use destructuring to obtain temperature
+//Use destructuring in nested objects
+//Use destructuring to assign variables from arrays
+//Use destructuring with rest operators 
+//Use destructuring to pass an object as a function's parameters (Commonly used as API calls)
+//Create strings using template literals (using backticks NOT single quotes)
+//Write concise object literal declarations using simple fields
+//Write concise declarative functions
+//Use class syntax to define a constructor function
+//Use getters and setters to control access to an object
+//Understanding the differences between import and require
+//Use export to reuse a code block
+//Use * to import everything from a file
+//Create an export fallback with export default
+//Importing an export default
 
 
 ////////////////////////////////////////////////////////////////
@@ -1165,37 +1179,320 @@ console.log(arr2); //Outputs ['JAN', 'FEB', 'MAR', 'APR', 'MAY']
 
 ////////////////////////////////////////////////////////////////
 //USE DESTRUCTING ASSIGNMENT TO ASSIGN VARIABLES FROM OBJECTS
+    var voxel = {x: 3.6, y: 7.4, z: 6.54};
+
+    //old method of destructuring syntax
+    var a = voxel.x; //so now variable a has a value of 3.6
+    var b = voxel.y;
+    var c = voxel.z;
+
+    //simpler destructuring syntax
+    const { x:a, y:b, z:c} = voxel; //now variable a has a value of 3.6
 
 
+////////////////////////////////////////////////////////////////
+//USE DESTRUCTING TO OBTAIN TEMPERATURE
+const AVG_TEMPERATURES = {
+    today: 77.5,
+    tomorrow: 79
+};
+
+function getTempOfTmrw(avgTemperatures){
+    "use strict";
+    const {tomorrow : tempOfTomorrow} = avgTemperatures;
+    return tempOfTomorrow;
+}
+console.log(getTempOfTmrw(AVG_TEMPERATURES)); //Outputs 79
+
+
+////////////////////////////////////////////////////////////////
+//USE DESTRUCTING IN NESTED OBJECTS
+//the LOCAL_FORECAST attributes will be used to run getMaxOfTmrw function as "forecast"
+//forecast equals to maxOfTomorrow variable
+//maxOfTomorrow = max>tomorrow>LOCAL_FORECAST
+
+const LOCAL_FORECAST = {
+    today: { 
+            min: 72, 
+            max: 83
+    },
+    tomorrow: { 
+            min: 73.3, 
+            max: 84.6
+    }
+};
+
+function getMaxOfTmrw(forecast){ //forecast is the value of which table to use
+    "use strict";
+    const { tomorrow : { max : maxOfTomorrow }} = forecast; //
+    return maxOfTomorrow;
+}
+console.log(getMaxOfTmrw(LOCAL_FORECAST)); //Outputs 84.6
+
+
+////////////////////////////////////////////////////////////////
+//USE DESTRUCTING TO ASSIGN VARIABLES FROM ARRAYS
+//Part1
+    cont [z, x, , y] = [1, 2, 3, 4, 5, 6]; //use space to skip the value 3
+    console.log(z, x, y); //output 1,2,4
+    
+//Part2
+    let a = 8, b = 6;
+    (() => {
+        "use strict";
+        [a, b] = [b, a] //this line swaps the value between a and b
+    }) ();
+    console.log(a); //6
+    console.log(b); //8
+    
+    
+////////////////////////////////////////////////////////////////
+//USE DESTRUCTURING WITH THE REST OPERATOR
+const source = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+function removeFirstTwo(list){
+    const [ , , ...arr] = list; //to remove the first 2 elements in the array
+    //const [ a, b, ...arr] = list; //a will be 1 and b will be 2 and th rest will be in arr
+    return arr;
+}
+
+const arr = removeFirstTwo(source);
+console.log(arr); // [3, 4, 5, 6, 7, 8, 9, 10]
+console.log(source); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    
+
+////////////////////////////////////////////////////////////////
+//USE DESTRUCTURING TO PASS AN OBJECT AS A FUNCTION'S PARAMETERS
+//Returning only the elements we need instead of the entire list of elements
+//Commonly use with API calls
+const stats = {
+    max: 56.78,
+    standard_deviation: 4.34,
+    median: 34.54,
+    mode: 23.87,
+    min: -0.75,
+    average: 35.85
+};
+const half = (function() {
+    /*Original 
+    return function half(stats){       //this returns the entire list of elements inside of stats
+        return (stats.max + stats.min) / 2.0;
+    };*/
+    
+    return function half( {max, min } ) {    //this returns only the selected elements from stats i.e max and min
+        return (max + min) / 2.0;
+    };
+}) ();
+
+console.log(stats); //{ max: 56.78, standard_deviation: 4.34, median: 34.54, mode: 23.87, min: -0.75, average: 35.85}
+console.log(half(stats)); //28.015
+
+
+////////////////////////////////////////////////////////////////
+//CREATE STRINGS USING TEMPLATE LITERALS
+    //Part 1
+    //Using backtick, NOT single quote
+    const person = {
+        name: "Jon",
+        age: 56
+    };
+    const greeting = `Hello there, ${person.name}! You are ${person.age} years old.`;
+    console.log(greeting); //Hello there, Jon! You are 56 years old.
+
+    //Part 2
+    const result = {
+        success: ["max-length", "no-amd", "prefer-arrow-functions"],
+        failure: ["no-var", "var-on-top", "linebreak"],
+        skipped: ["id-blacklist", "no-dup-keys"]
+    };
+    function makeList(arr) {
+        const resultDisplayArray = [];
+        for (let i = 0; i < arr.length; i++){
+            resultDisplayArray.push(`<li class="text-warning">${arr[i]}</li>`)
+        }
+        return resultDisplayArray;
+    }
+    
+    /**
+    *makeList(result.failure) should return:
+    *[ `<li class="text-warning">no-var</li>`,
+    *  `<li class="text-warning">var-on-top</li>`,
+    *  `<li class="text-warning">linebreak</li>` ]
+    **/
+
+    const resultDisplayArray = makeList(result.failure);
+
+    console.log(resultDisplayArray);
+    //[ "<li class="text-warning">no-var</li>",  "<li class="text-warning">var-on-top</li>", "<li class="text-warning">linebreak</li>"]
+
+
+////////////////////////////////////////////////////////////////
+//WRITE CONCISE OBJECT LITERAL DECLARATIONS USING SIMPLE FIELDS
+    //Part 1 - we can make the code below een simpler
+    const createPerson = (name, age, gender) => {
+        return { //too many repetition here
+            name: name,
+            age: age,
+            gender: gender
+        };
+    };
+    console.log(createPerson("Person1", 56, "male"));
+    
+    //Part2 - The simpler version of the code above
+    const createPerson = (name, age, gender) => ( { name, age, gender } );
+    console.log(createPerson("Person1", 56, "male"));
+
+////////////////////////////////////////////////////////////////
+//WRITE CONCISE DECLARATIE FUNCTIONS
+    //Part 1 - The long way
+    const bicycle = {
+        gear: 2,
+        setGear: function(newGear){
+            "use strict";
+            this.gear = newGear;
+        }
+    };
+    bicycle.setGear(3);
+    console.log(bicycle.gear);
+
+    //Part 2 - The simpler way
+    const bicycle = {
+        gear: 2,
+        setGear(newGear){ //by removing the "function"
+            "use strict";
+            this.gear = newGear;
+        }
+    };
+    bicycle.setGear(3);
+    console.log(bicycle.gear);
+
+
+////////////////////////////////////////////////////////////////
+//USE CLASS SYNTAX TO DEFINE A CONSTRUCTOR FUNCTION
+    //Part1 - older way to create an object
+    var SpaceShuttle = function(targetPlanet){
+        this.targetPlanet = targetPlanet;
+    }
+    var zeus = new SpaceShuttle('Jupiter');
+    console.log(zeus.targetPlanet);
+
+    //Part2 - new way, the class syntax replaces the constructor
+    class SpaceShuttle {
+        constructor(targetPlanet){
+            this.targetPlanet = targetPlanet;
+        }
+    }
+    var zeus = new SpaceShuttle('Jupiter');
+    console.log(zeus.targetPlanet);
+    
+    
+    //Part 3 - another example
+    function makeClass(){
+        return Vegetable;
+    }
+    const Vegetable = makeClass();
+    const carrot = new Vegetable('carrot');
+    console.log(carrot.name); //Outputs carrot
+    
+    //Part 4 - 
+    function makeClass(){
+        class Vegetable {
+            constructor(name){
+                this.name = name;
+            }
+        }
+        return Vegetable;
+    }
+    const Vegetable = makeClass();
+    const carrot = new Vegetable('carrot');
+    console.log(carrot.name); //Outputs carrot
+
+
+////////////////////////////////////////////////////////////////
+//USE GETTERS AND SETTERS TO CONTROL ACCESS TO AN OBJECT
+        //Part 1
+        class Book {
+            constructor(author){
+                this._author = author;
+            }
+            
+            //getter
+            get writer(){
+                return this._author;
+            }
+            
+            //setter
+            set writer(updatedAuthor){
+                this._author = updatedAuthor;
+            }
+        }
+
+        //Part 2
+        function makeClass(){
+            class Thermostat{
+                constructor(temp){
+                    //creating private variable this._temp constrained to this class
+                    this._temp = 5/9 * (temp - 32); //convert fahrenheit to celsius equation
+                }
+                get temperature(){
+                    return this._temp; //this will be in celsius
+                }
+                set temperature(updateTemp){
+                    this._temp = updatedTemp; //will still be in celsius
+                }
+            }
+            return Thermostat;
+        }
+        const Thermostat = makeClass(); //function returns Thermostat class
+        const thermos = new Thermostat(76); //76 will go to the constructor(temp), in turn converting to Celsius
+        let temp = thermos.temperature; //thermos.temperature will use getter NOTE: getter and setters are properties therefore no parentheses
+        thermos.temperature = 26; //thermos.temperature will use setter to updatedTemp
+        temp = thermos.temperature;
+        console.log(temp); //Output 26
+
+
+////////////////////////////////////////////////////////////////
+//UNDERSTANDING THE DIFFERENCES BETWEEN IMPORT AND REQUIRE
+//In the past we use require function to retrieve function from another file, now we have import and export
+    //string_function.js
+        export const capitalizeString = str => str.toUpperCase() //toUpperCase makes every letter uppercase
+        //the export enables the code to be exported into another file
+
+    //index.js
+    import { capitalizeString } from "./string_function"
+        const cap = capitalizeString("hello");
+        console.log(cap); //Outputs HELLO
+        
+
+////////////////////////////////////////////////////////////////
+//USE EXPORT TO REUSE A CODE BLOCK
+//Now we export in a different way, by adding export at the very begining of the code
+const capitalizeString = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+export { capitalizeString };
+export const foo = "bar";
+export const bar = "foo";
+
+////////////////////////////////////////////////////////////////
+//USE * TO IMPORT EVERYTHING FROM A FILE
+import * as capitalizeStrings from "capitalize_strings";
+
+//* represents "everything"
+//capitalizeStrings is the object name
+//"capitalize_strings" is the name of the file 
+
+
+////////////////////////////////////////////////////////////////
+//CREATE AN EXPORT FALLBACK WITH EXPORT DEFAULT
+export default function subtract(x, y) {return x - y;} //"export default" is the fallback
+
+//IMPORTING AN EXPORT DEFAULT
+import subtract from "math_functions"; //if not a default export, you put curly braces around "subtract"
+subtract(7,4); //this line from a file called math_functions
 
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
