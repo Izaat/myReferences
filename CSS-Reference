@@ -1,3 +1,6 @@
+/*https://www.youtube.com/watch?v=1Rs2ND1ryYc*/
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 BACKGROUND
 CSS ELEMENT SELECTOR
 CSS CLASS SELECTOR
@@ -16,17 +19,19 @@ CHANGING CONTENT SIZE
 CSS BORDERS - BOX MODEL
 MARGINS AND PADDINGS
 FLEXBOX PROPERTIES
+THE FLEX PROPERTY SHORTCUT
+ITEM ALIGNMENT (align-self)
+GRID VS FLEXBOX
+PREFIXES FOR BROWSER SUPPORT
+TRANSFORMATION FUNCTIONS
+ANIMATION VS TRANSITION
+ADDING ANIMATION
 
 
 
 
 
-
-
-
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*Linking to css from html*/
 /*CSS BACKGROUND*/
     /*Html*/
@@ -39,6 +44,7 @@ FLEXBOX PROPERTIES
             /*background: url("LINK");*/
         }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    /*BACKGROUND*/
     /*Html//
         <div id="service-image"></div>
@@ -59,7 +65,7 @@ FLEXBOX PROPERTIES
             background: radial-gradient(circle, red 20%, blue 30%, green 20%); //green will be inside and red will be outside and % refers to thickness and circle converts the default ellipse to a circle
         }
         
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*CSS ELEMENT SELECTOR*/
     /*Html*/
         <h1></h1>
@@ -69,7 +75,7 @@ FLEXBOX PROPERTIES
             color: red;
         }
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*CSS CLASS SELECTOR*/
     /*Html*/
         <h2 class="aclass">This text will be black.</h2>
@@ -79,6 +85,7 @@ FLEXBOX PROPERTIES
             color:black;
         }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*CSS ID SELECTOR*/
     /*Html*/
         <h3 id="sometext">Orange text.</h3>
@@ -88,20 +95,21 @@ FLEXBOX PROPERTIES
             color: orange;
         }
         
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*CSS INLINE STYLINGS*/
     /*Html*/
         <h2 style="color: blue;">Blue text</h2>
     /*style.css*/
         //NIL
         
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*SPECIFICITY & WHEN TO USE SELECTORS*/
        //Note: "Class-selectors" can overwrite "Element-selectors"
        //Note: "ID-selectors" can overwrite "Class-selectors"
        //Note: "inline-stylings" can overwrite "ID-selectors"
        
        
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////       
 /*PSUEDOSELECTORS*/
     /*HOVER*/
         /*style.css*/
@@ -130,7 +138,7 @@ FLEXBOX PROPERTIES
         #google-link:link{color:blue;}
         #google-link:visited{color:red;}
         
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*ADVANCED SELECTORS*/
     /*Adjacent sibling selectors*/
         /*Can share same style across more than 2 tags*/
@@ -181,7 +189,7 @@ FLEXBOX PROPERTIES
             color:blue;
         }
         
-        
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////       
  /*ATTRIBUTE SELECTOR*/
         /*Html*/
             <h2 class="subtitle">About</h2>
@@ -219,11 +227,13 @@ FLEXBOX PROPERTIES
             
             
         
- 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
      /*TYPES OF UNITS*/
      /*Absolute Values | pt, px, pc, cm, mm Absolut values*/
      /*Relative Values// em(double), vw(view-width), vh(view-height), where vw and vh is percentage of viewport -your display size-*/
      
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      /*TEXT DECORATIONS*/
      .link{
          text-decoration: none;
@@ -232,6 +242,7 @@ FLEXBOX PROPERTIES
          text-decoration: overline;
      }
      
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      /*TEXT TRANSFORM*/
      /*make all letters capitalized*/
      body{
@@ -247,6 +258,7 @@ FLEXBOX PROPERTIES
          text-align: justify; //the squarish alignment icon in MSwords that looks like the menu icon in mobile devices
      }   
         
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /*TEXT - FONT SIZE BOLDING & STYLE*/
     
     #font{
@@ -262,7 +274,7 @@ FLEXBOX PROPERTIES
         font-family: "Times New Roman", serif; //if TNR is not available if not then use serif font
      }   
      
-     
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
      /*USING EXTERNAL FONTS*/
      /*Html*/
      /*make sure link is above stylesheet*/
@@ -277,7 +289,8 @@ FLEXBOX PROPERTIES
         .subtitle{
             font-family: "Sarabun";
         }
-     
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
 /*CHANGING CONTENT SIZE*/
     /*Html*/
     <img src="../img/img-1.jpg" id="about-us-image">
@@ -287,6 +300,8 @@ FLEXBOX PROPERTIES
         width: 60%;
     }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*CSS BORDERS - BOX MODEL*/
     //style.css
     #service-image{
@@ -296,7 +311,7 @@ FLEXBOX PROPERTIES
     }
 
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*MARGIN AND PADDING*/
    //style.css
     #service-image{
@@ -312,6 +327,8 @@ FLEXBOX PROPERTIES
         
     }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*FLEXBOX PROPERTIES*/
     //html//
     <div class="container">
@@ -346,23 +363,177 @@ FLEXBOX PROPERTIES
         //background, color, font-size, text-align, width, line-height, margin
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*THE FLEX PROPERTY SHORTCUT*/
+//flex grow shrink basis; where grow default is 0, shrink default is 1, no default value for basis
+//flex: 1 1 100px;
+//therefore no need to type in "flex-grow: 1; flex-shrink: 2;  flex-basis: 100px;"
+    //html//       
+    <div class="container">
+        <div class="container-item" style="1"; flex: 1 3 100px;>A</div>
+        <div class="container-item" style="5"; flex: 1 3 100px;>B</div>
+        <div class="container-item" style="4"; flex: 1 2 100px;>C</div>
+        <div class="container-item" style="2"; flex: 1 2 100px;>D</div>
+        <div class="container-item" style="6"; flex: 1 3 100px;>E</div>
+        <div class="container-item" style="3"; flex: 1 2 100px;>F</div>
+        //add in style="order: 1"; or style="order: any number"; to reorder the list
+        //add in flex-grow to resize the object to grow relative to the other within a container. Default is 0 (responsiveness)
+        //add in flex-shrink to resize the object to shrink relative to the other within a container. Default is 1 (responsiveness)
+        //add in flex-basis
+    </div>
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*ITEM ALIGNMENT*/
+//align-self: auto|stretch|center|flex-start|flex-end|baseline|initial|inherit;
+https://www.w3schools.com/cssref/css3_pr_align-self.asp
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*GRID VS FLEXBOX*/
+//Grid will always be equal within inner spaces
+//Html//
+    <div class="grid-container">
+            <div class="grid-item" style="abckground: rgb(255, 150, 150);">1</div>
+            <div class="grid-item" style="abckground: rgb(255, 150, 150);">1</div>
+            <div class="grid-item" style="abckground: rgb(255, 150, 150);">1</div>
+            <div class="grid-item" style="abckground: rgb(255, 150, 150);">1</div>
+    </div>
+    
+//style.css//
+.grid-container{
+    background-color: rgb(250, 250, 250);
+    margin: 10px;
+    height: 300px;
+    
+    display: grid; //setup grid container 
+    //grid-template-columns: col-1 col-2 col-n... ; //where col1, col2 and coln are in px
+    //grid-template-rows: row1 row2 rown.. ; //where row1, row2 and rwn are in px, 50 px and above
+    grid-template-columns: auto auto auto ;
+    grid-template-rows: auto auto auto ;
+    
+    //horizontal alignment
+    justify-content: end | start; //where start is on left side and end is on right side of browser
+    justify-content: space-evenly | space-between | space-around; 
+    
+    //vertical alignment
+    align-content: space-evenly | space-between | space-around;  
+}
+
+.grid-item{
+    color: black;
+    font-size: 25px;
+    text-align: center;
+    
+    width: 70px;
+    line-height: 40px;
+    margin: 10px;
+}
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*PREFIXES FOR BROWSER SUPPORT */  
+    //stryle.css
+    .submit-button{            //base class
+        margin: 20px 10px;
+        padding: 10px 15px;
+        border: none;
+        text-decoration: none;
+        font-family: "Lato", sans-serif;
+        font-weight: 600;
+        font-size: 20px;
+        color: white;
+        background: rgb(89,150,255);
+        -webkit-transition: all 500ms ease; //for chrome browser 
+        -moz-transition: all 500ms ease;  //for firefox browser
+        /*-o- //for opera browser */
+    }
+    .submit-button: hover {     //pseudo class (when hover)
+        background: rgb(147, 187, 255);
+        padding: 20px 30px;
+    }
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*TRANSFORMATION FUNCTIONS */  
+    //stryle.css
+    .submit-button{   
+        :
+        :
+        :
+        transfom: translate(); //2D translation
+        //translate(50px, 30px) /*(right, y-shift)*/
+        
+        transform: scale(): //2D scaling
+        //scale(2.5); //scale up to 2.5 times
+        
+        transfom: rotate();
+        //rotation(-45deg) //in degrees in relation to the current
+        
+        transfom: skewX(); || skewY();
+        //skewX(-45deg) //turns to parallellogram
+        //skewY(-45deg) //rotated parallellogram
+        
+        transform: matrix(); //use when you do not want to use the codes above
+        //matrix(scaleX, skewX, skewY, scaleY, translateX, translateY)
+        //matrix(1, 0.45, 0.45, 1, 100, 50)
+    }
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* ANIMATION VS TRANSITION */
+/*Transition you have to change every single attributes*/
+/*Animation you can put at the start or when the page is refreshed*/
+/*Animations need keyframes*/
+/*keep keyframes at the bottom*/
 
+/*example1*/
+@keyframes red-to-black{ /*you can name this anything you want*/
+    from{background: red;} //starting point
+    to{background: black;} //ending point
+}
+/*example2*/
+@keyframes red-to-black{ /*you can name this anything you want*/
+    0% {background: red;}
+    50% {background: yellow;}
+    100% {background: black;}
+}
+/*example3*/
+@keyframes red-to-black{ /*you can name this anything you want*/
+    0% {background: red; transform: translate(0px, 0px);}
+    50% {background: yellow; transform: translate(10px, 10px);} /*you can use scale or skew or whatever you want*/
+    100% {background: black; transform: translate(20px, 20px);}
+}
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*ADDING ANIMATION*/
 
+//html//
+    <h2 class="subtitle" id="about-me">About Me</h2>
 
+//style.css
+    #about-me{ /*the long version*/
+        animation-name: red-to-black;
+        animation-duration: 4s; /*the default value is 0s so it wont animate, if set to 4s, it animates but for 1 cycle*/
+        animation-timing-function: linear; /*For speed; ease, linear, ease-in, ease-out*/
+        animation-delay: 2s; /*refresh browser and has to wait 2s before it animates*/
+        animation-iteration-count: infinite; /*loops infinite*/
+            /*animation-iteration-count: 2; //loops 2 times*/
+        animation-direction: alternate-reverse; /*normal, reverse, alternate(bounce back), alternate-reverse(bounce at reverse) */
+    }
+    
+    #about-me{ /*Shortcut*/
+        /*animation: keyFrameName duration speed delay iterationCount direction;*/
+        -webkit-animation: red-to-black 4s linear 2s infinite alternate-reverse;
+        -moz-animation: red-to-black 4s linear 2s infinite alternate-reverse;
+        -ms-animation: red-to-black 4s linear 2s infinite alternate-reverse; /*internet explorer*/
+    }
 
-
-
+    @keyframes red-to-black { 
+        0% {background: red; transform: translate(0px, 0px);}
+        50% {background: yellow; transform: translate(10px, 10px);} 
+        100% {background: black; transform: translate(20px, 20px);}
+    }
 
     
     
