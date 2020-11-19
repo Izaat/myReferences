@@ -1,0 +1,213 @@
+https://www.youtube.com/watch?v=sbnh8-T2wn4
+After Effects Tutorial
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01 - Create new composition
+02 - Framerates
+03 - Cutting the frames
+04 - Animation presets
+05 - Layout
+06 - Toolbars
+07 - Shortcuts
+08 - Video Quality when enlarging a video
+09 - 3D renderings
+10 - Convert any 2D project into single flat layer
+11 - Accessing Animation library
+12 - Video playing inside letters effects
+13 - After Effects Templates
+14 - 3D Text
+15 - Write on text effect
+16 - Combining WriteOn Effects and In-Video playing inside letters effects
+
+
+
+01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
+//Create new composition from mp4
+    1. Drag and drop mp4 from Project panel and into the 'Create new composition' icon (next to folder icon) located within the Project panel itself
+    2. You can also head to Menu>Composition>New composition
+    3. Adjust the duration of the composition in duration section
+    4. Framerate is usually 29.97
+    5. Preset is HDTV 1080 29.97
+    6. Background color refers to the base layer
+    7. Scroll mouse button to zoom in or zoom out
+    IMPORTANT NOTE: Drag and drop mp4 to the new composition icon in order to match up all the properties and framerates of the video.
+    IMPORTANT NOTE:  Make sure that the start timecode is at 0,00,00,00. to align to the clip. Or it will follow the camera time code by default and tracking will be difficult
+
+02 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////02
+//Framerate
+    //1. If the video was recorded in higher frame rate e.g120fps, the video in AE will be in slowmotion
+    //2. Speed the video up by lowering the computer lag.
+    //3. To do this, within the composition panel, between colour management icon and the transparency grid toggle icon, there's a drop down menu
+    //4. Menu>Auto, Full, Half, Third, Quarter
+    //5. Full is high quality playback and quarter is low quality playback (less laggy)
+
+03 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////03
+//Cutting the frames
+    //To cut frames, Ctrl+Shift+D
+
+04 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////04
+//Animation Presets
+    //Menu>Animation>Animation Presets
+    //C:\..\Adobe\Adobe-AE-Folder\Support Files\Presets\
+    //Folder will list down all the animation presets
+    //Open one of the files and AE will automatically insert into composition
+    //You can copy and paste the key frame positions within the timeline
+
+05 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////05
+//Layout
+    //Drag and drop the name of panel to any position you desire
+    //To reset to default layout, Menu>Workspace>Reset Standard
+
+06 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////06
+//Toolbars
+    //Selection tool: Move only the clip
+    //Handtool: move the clip and the composition area together
+    //Rotation: Rotates the clip
+    //Shapes: Creates shape over the video
+    //Shapes: For highlighted video, this will crop/mask out the video clip according to the shape selected
+    //Pen: Draw out custom shape over the clip
+    //Pen: For highlighted video, you can draw the mask of your clip
+    //Rotobrush: Uses AI to figure out what is being selected 
+
+07 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////07
+//Shortcuts
+    //Ctrl+Shift+D : To split/chop the clip
+    //Shift+Drag: Snap to place
+    //N: Seal the edit
+    //Hold Y: Move anchorpoint to location 
+
+08 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////08
+//Video Quality when enlarging a video
+    //When you enlarge the video to zoom into a certain object, quality is lost
+    //To solve this, resize the video resolution
+    
+09 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////09
+//3D renderings
+    //Adboe 2015 does not support as there is  not "3D Renderer" tab in "Composition Settings" menu
+    //But we can solve this by going to Composition>CompositionSettings>Advanced and change the 3D renderer oprion from Classic to Ray-tracing
+    //Add in an image of the world into project panel.
+    //Drag and drop image into composition panel
+    //On the panel on the right hand side, find "effects and presets" tab
+    //Search for CC Spehere, drag and drop it into composition panel
+    //Result is called "Fake 3D"  because it turns any flat images into 3D
+    //To convert text layers and background layer into a single flat layer, right click on timeline panel and select "pre-compose"
+    
+10 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////10   
+//Convert any 2D project into single flat layer
+    //To convert text layers and background layer into a single flat layer, right click on timeline panel and select "pre-compose"
+
+11 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////11
+//Access animation library
+    //Menu>Animation>Apply Animation Preset
+    
+12 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////12  
+//Video playing inside letters effects
+    //Add a video to composition
+    //Add a really thick bolded texts into the composition
+    //Inside composition list panel, under video's ".trkMat" column, select "AlphaMatte" from the dropdown menu
+    //You can also have every letter of the word to play different videos by shrinking the video
+    //Use dropShadow on the text, set dropShadow opacity to 100%,  Distance to 24.0, softness to 63.0
+    
+    //Precompose composition with hard dark shadow
+        //Delete dropShadow effects
+        //Highlight both text and video element, right-click and select pre-compose
+        //Add dropShadow effect to precomposed element
+        //set pdropShadow opacity to 100%, distance to 14 and softness to 60
+        //Under Project panel, select dropShadow and duplicate (ctrl+D)
+        //To change the text, double click the pre-comp layer and the video and text will popup again in the composition panel
+
+13 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////13
+//After Effects Templates
+//https://motionarray.com/browse/after-effects-templates
+
+14 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////14
+//3D text animation
+    //Create new composition with Cinematic 4D turned on
+    //Write a bold text
+    //In timeline panel, turn on 3D Layer
+    //Drop down layer, find geometry and increase Extrusion depth to 75.00
+    //From menu, select Layer>New>Light>Create new light effect 
+    //Hold shift and drag light to zoom light out from object - You can test this by rotating
+    //Position the text to start point of of the animation
+    //In timeline panel, under text layer, dropdown layer and open the "Transform" layer
+    //Switch on "Orientation" by clicking on the stopwatch, this will create a keyframe
+    //Insert keyframes as you desire and play
+    
+
+15 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////14
+//Write on text effect
+    //Write a text on a new composition
+    //On the right hand panel, navigate to the effects tab
+    //Open Generate>Write-on
+    //Or alternatively, search for "Write-On" and apply to the text
+    //On the left hand side project panel, change color to red
+    //A small circular brush will appear at thecenter of the text
+    //Resize the brush "BrushSize" on the project panel to 40
+    //Position the brush to initial position
+    //activate keyframe effects>write-on>BrushPosition
+    //Insert all the keyframes
+    //Change "PaintStyle" from "OriginalImage" to "RevealOriginalImage"
+    //Play
+
+
+16 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////12  
+//Combining WriteOn Effects and In-Video playing inside letters effects
+    //New composition, add in a short video
+        //First layer,will be the video
+        //Copy over the video to make second layer, drag video to the end of first layer and lock it with "N"
+        //Rightclick on the second layer and under the menu, select time>time-reverseLayer
+        //Now that you have a video that plays and reverses itself
+        //add in third layer video with the first layer video so it plays again at the end after it reverses
+        //Highlight all three of the layers with a box and right-click
+        //select "pre-compose" to form a single video layer.
+    //Write a text over the composition
+    //Under timeline panel, change precompose " .TrkMat" to AlphaMatte
+    //Select both layers and precompose them both one more time 
+    //Go to the right-hand panel, find write-on effects under effects tab
+        //Drop it to the composition
+        //Change write-On color to red in the Project panel
+        //Resize the brush "BrushSize" on the project panel to 40
+        //Position the brush to initial position
+        //activate keyframe effects>write-on>BrushPosition
+        //Insert all the keyframes
+        //Change "PaintStyle" from "OriginalImage" to "RevealOriginalImage"
+        //Play
+    //You can also add in drop shadow Perspective>DropShadow
+        //Opacity=100, Distance=19, Softness=58
+        //Press CTRL+D to  duplicate the dropshadow effect
+        //Set Distance=1.0, softness=30.0 for the second dropShadow
+        //Play
+    //You can also add in "Scale" effect so the text will be expanding as it animates
+    //Add in color correction by opening the precomposes to the video
+        //Add in ColorCorrection>Vibrance to the clip
+        //Turn up vibrancet o 100 on the project panel
+    //Add in brightness effect to the composition ColorCorrection>Brightness&Contrast to the first clips
+        //Play
+    
+17 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////12  
+//
+
+
+https://www.youtube.com/watch?v=sbnh8-T2wn4
+//03:39:57
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
