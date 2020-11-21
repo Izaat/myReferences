@@ -1,0 +1,734 @@
+//TWINCAT3
+
+//CONTENT
+01. Intro
+02. Data types
+03. PLC overrun
+04. Oven Sample
+05. Adding Visualization
+06. State Machines
+07. Function Blocks Part 1
+08. Function Blocks Part 2
+09. Arrays, Structures, Enumerations
+10. Pointers and Memory manipulation Part 1
+11. Pointers and Memory manipulation Part 2
+
+
+01. //////////////////////////////////////////////////////////////////////////////////////////////////
+//INTRO
+//In Visual Studio, File>New>Project>TwinCat Projects>TwinCat XAE>Ok
+//Right click on "PLC" in Solution Explorer
+//Add New Item>Standard PLC Project > Add
+//To run program, Login and then run
+
+
+02. //////////////////////////////////////////////////////////////////////////////////////////////////
+//DATA TYPES
+Bool (8 bits), 
+byte (8bits), 
+word (16bits), 
+dword (32bits), 
+sint (8bit mem, -128 to 127) //short signed integer
+ usint
+int, unint
+dint (32bit mem, -2 billion to 2 billion)
+udint
+real, lreal (really large numbers)
+string //strings mus be in single quotes and not double quotes
+time, time_of_day
+date, date_and_time
+array, pointer, enum, struct, alias
+
+
+03. //////////////////////////////////////////////////////////////////////////////////////////////////
+//PLC OVERRUN
+//NOTE: Overrun means when the PLC cpu takes longer time to read the program (similar to program timeout)
+//If you have a long code and it takes the system longer time (more than 1ms) to read the entire program, it will overrun
+//When the system reads for-loops or while-loops, it will stay there until the loop finishes, adding up the read time
+//Increase the read time to avoid overrun
+
+
+04. //////////////////////////////////////////////////////////////////////////////////////////////////
+//OVEN SIMPLE SAMPLE
+    //Program Main
+        Var
+            bPizzaInOven: BOOL;
+            
+            //timer
+            fbMyTimer: TON //Cook Time
+            
+            //trigs
+            fbMyTrigger : R_TRIG; //Pizza Counter
+            
+            bBuzzer: BOOL;
+            iTotalPizzaCooked: UDINT;
+        END_VAR
+
+    //Sub Main
+        fbMyTimer(IN:=bPizzaInOven, PT:=T#6S);
+        
+        /*
+        IF fbMyTimer.Q THEN
+            bBuzzer := TRUE;
+        ELSE
+            bBuzzer := FALSE;
+        END_IF
+        */  //Use this instead
+        bBuzzer := fbMyTimer.Q;
+        
+        fbMyTrigger(fbMyTimer.Q);
+        
+        IF fbMyTrigger.Q THEN
+            //iTotalPizzaCooked++ doesnt work
+            iTotalPizzaCooked := iTotalPizzaCooked + 1;
+        END_IF
+    
+
+05. //////////////////////////////////////////////////////////////////////////////////////////////////
+/Adding Visualization
+    //SolutionExplorer>Solution>Project>PLC>Project>Name>VISUs>Add>Visualization
+    //Click on Toolbox tab at the side of SolutionExplorer
+    //Draw some button andthen go to "Properties Panel" on the right side of the screen
+    //Find InputConfiguration dropdown menu
+    //Configure "OnMouseClick" and add in "Execute ST-Code"
+    //add in MAIN.bPizzaInOven := TRUE;
+    //For time display, add in box and text and add in "Elapsed Time: %s"
+    //Under Properties, lookup "Text variables" and then add in  "MAIN.fbMyTimer.ET" in "Text Variable" Input text box
+
+
+06. //////////////////////////////////////////////////////////////////////////////////////////////////
+//STATE MACHINES
+    //Program Main
+        Var
+            bPizzaInOven: BOOL;
+            bPizzaOnDeck: BOOL;
+            bPizzaDone: BOOL;
+            
+            //timer
+            fbMyTimer: TON; //Cook Time
+            
+            bLoadPizza : BOOL; //put a pizza oninput side
+            bRemovePizza : BOOL; //take pizza out
+            iState : DINT;
+            sStateDesc: STRING;
+            
+            //trigs
+            fbMyTrigger : R_TRIG; //Pizza Counter
+            
+            bBuzzer: BOOL;
+            iTotalPizzaCooked: UDINT;
+        END_VAR
+
+    //Sub Main
+        /* Moved to case 20
+        fbMyTimer(IN:=bPizzaInOven, PT:=T#6S);
+        bBuzzer := fbMyTimer.Q;        
+        fbMyTrigger(fbMyTimer.Q);        
+        IF fbMyTrigger.Q THEN
+            //iTotalPizzaCooked++ doesnt work
+            iTotalPizzaCooked := iTotalPizzaCooked + 1;
+        END_IF */
+        
+        IF bPizzaOnDeck AND NOT bPizzaInOven THEN
+            bPizzaOnDeck := FALSE;
+            bPizzaInOven := TRUE;
+        END_IF
+        
+        IF bLoadPizza THEN
+            bLoadPizza := FALSE;
+            bPizzaOnDeck := TRUE;
+        END_IF
+        
+        IF bRemovePizza THEN
+            bPizzaDone := FALSE;
+            bRemovePizza := FALSE;
+        END_IF
+        
+        CASE iState OF:
+            0 :  //wait for input signal
+                sStateDesc := 'Oven Empty';
+                IF bPizzaInOven THEN //condition = true | false
+                    iState := 10;
+                END_IF
+                
+            10: //In process
+                sStateDsc := 'Baking in Process';
+                fbMyTimer(IN:=bPizzaInOven, PT:=T#6S);
+                IF fbMyTimer.Q THEN
+                    fbMyTimer(IN:=FALSE);
+                    iState := 20;
+                END_IF
+                
+            20: //Process completed
+                IF NOT bPizzaDone THEN
+                    //Simulate conveyor
+                    bPizzaInOven := FALSE;
+                    bPizzaDone := TRUE;
+                    bBuzzer := FALSE;
+                    iState := 30;
+                ELSE
+                    bBuzzer := TRUE;
+                END_IF
+            30: 
+                iTotalPizzaCooked := iTotalPizzasCooked + 1;
+                iState := 0;
+                
+            ELSE 
+                sStateDesc := 'Invalid state!';
+                
+        END_CASE
+        
+
+
+07. //////////////////////////////////////////////////////////////////////////////////////////////////
+//FUNCTION BLOCKS PART 1
+    //Main
+        VAR 
+            A: REAL := 20;
+            B: REAL := 3;
+            AddRes : REAL;
+            SubRes : REAL;
+            MulRes : REAL;
+            DivRes: REAL;
+            Arithematic: myArithFB;
+        END_VAR
+
+    //Main-Sub
+        Arithematic(num01 := A, num02 := B);
+        AddRes := Arithematic.Addresult;
+        SubRes := Arithematic.Subresult;
+        MulRes := Arithematic.Mulresult;
+        DivRes := Arithematic.Divresult;
+
+    //myArithFB
+        FUNCTION BLOCK myArithFB
+        VAR_INPUT
+            num01: REAL;
+            num02: REAL;
+        END_VAR
+        
+        VAR_OUTPUT
+            Addresult: REAL;
+            Subresult: REAL;
+            Mulresult: REAL;
+            Divresult: REAL;
+        END_VAR
+        
+    //myArithFB-Sub
+        Addresult := num01 + num02;
+        Subresult := num01 - num02;
+        Mulresult := num01 * num02;
+        Divresult := num01 / num02;
+        
+        
+08. //////////////////////////////////////////////////////////////////////////////////////////////////
+//FUNCTION BLOCKS PART 2        
+//POU>RightClick>Add>POU>Select "Function Block" in popup window, highlight "Function" and click on input text box
+//Under categories tab, select Standard types > Bool | String | INT | ETC  
+
+    //FB - FB_PIZZA_OVEN - Main //Everything in ProgramMain been transferred to Function Block
+            VAR_INPUT           
+
+             END_VAR
+            
+            VAR_OUTPUT
+                iTotalPizzaCooked: UDINT;
+                bBuzzer: BOOL;
+                bLight : BOOL;
+            END_VAR
+            
+            VAR
+                fbLoad_RTRIG : R_TRIG;
+                fbRemove_RTRIG : R_TRIG;
+                
+                fbMyTimer: TON; //Cook Time
+                bPizzaInOven: BOOL;
+                bPizzaOnDeck: BOOL;
+                bPizzaDone: BOOL;
+                iState : DINT;
+                sStateDesc: STRING;
+            END_VAR
+            
+    //FB - FB_PIZZA_OVEN - Sub
+            IF bPizzaOnDeck AND NOT bPizzaInOven THEN
+                bPizzaOnDeck := FALSE;
+                bPizzaInOven := TRUE;
+            END_IF
+            
+            fbLoad_RTRIG(clk := bLoadPizza);
+            IF fbLoadPizza THEN
+                //bLoadPizza := FALSE;
+                bPizzaOnDeck := TRUE;
+            END_IF
+            
+            fbRemove_RTRIG(clk := bRemovePizza);
+            IF fbRemovePizza THEN
+                bPizzaDone := FALSE;
+                //bRemovePizza := FALSE;
+            END_IF
+            
+            CASE iState OF:
+                0 :  //wait for input signal
+                    sStateDesc := 'Oven Empty';
+                    IF bPizzaInOven THEN //condition = true | false
+                        iState := 10;
+                    END_IF
+                    
+                10: //In process
+                    sStateDsc := 'Baking in Process';
+                    fbMyTimer(IN:=bPizzaInOven, PT:=T#6S);
+                    IF fbMyTimer.Q THEN
+                        fbMyTimer(IN:=FALSE);
+                        iState := 20;
+                    END_IF
+                    
+                20: //Process completed
+                    IF NOT bPizzaDone THEN
+                        //Simulate conveyor
+                        bPizzaInOven := FALSE;
+                        bPizzaDone := TRUE;
+                        bBuzzer := FALSE;
+                        iState := 30;
+                    ELSE
+                        bBuzzer := TRUE;
+                    END_IF
+                30: 
+                    iTotalPizzaCooked := iTotalPizzasCooked + 1;
+                    iState := 0;
+                    
+                ELSE 
+                    sStateDesc := 'Invalid state!';
+                    
+            END_CASE
+
+    //Program-Main
+        VAR 
+            fbMyPizzaOven : FB_PIZZA_OVEN;
+            fbMyPizzaOven2 : FB_PIZZA_OVEN; //You can add as many pizza ovens with this line of code
+            
+            //USING BASIC ARRAYS
+            fbMyPizzaOven : ARRAY [1..10] OF FB_PIZZA_OVEN; //Or add this line to add 10 pizza ovens
+            
+            bLoadPizza : BOOL; //put a pizza oninput side
+            bRemovePizza : BOOL; //take pizza out
+        END_VAR    
+
+    //Program-Sub
+        fbMyPizzaOven(bLoadPizza:=bLoadPizza, bRemovePizza:=bRemovePizza);
+        fbMyPizzaOven2(bLoadPizza:=bLoadPizza, bRemovePizza:=bRemovePizza); //You can add as many pizza ovens with this line of code
+        
+        //USING BASIC ARRAYS
+        fbMyPizzaOven[0](bLoadPizza:=bLoadPizza, bRemovePizza:=bRemovePizza); //Or add this line to add 10 pizza ovens
+        fbMyPizzaOven[1](bLoadPizza:=bLoadPizza, bRemovePizza:=bRemovePizza); //Or add this line to add 10 pizza ovens
+        
+
+09. //////////////////////////////////////////////////////////////////////////////////////////////////                     ///////////////////////Missing point 23
+//ARRAYS STRUCTURES ENUMERATION - //25points Total, Pt 21 onwards for enumeration tutorial 
+//Right click on DUT(Data Unit Type) > Add >DUT Highligh "Structure" and name to ST_PIZZA
+
+    //DUT - ST_PIZZA
+        TYPE ST_PIZZA :
+            STRUCT
+                    bExist : BOOL;
+                    dtTimeEnteredOven : DT; //DT=Date/Time
+                    dtTimeExitedOven : DT;
+                    tTimeInOven : TIME;
+                    //Pepperoni : BOOL; //POINT 1 - True if pizza type is pepperoni, Now go to POINT 2 in FB turn BOOL into structures //POINT19 - enumerating multiple pizza types by removing this line and use iType instead
+                    //iType : DINT; //POINT20 - Add this line and add another DUT and use "Enumeration" instead of "structure". Name it E_PIZZA_TYPES //POINT22 Remove and change to POINT23
+                    eType : E_PIZZA_TYPES; //POINT24, now go to POINT25 in FB_PIZZA_OVEN-Sub
+                    
+            END_STRUCT
+        END_TYPE
+    //
+    
+    //DUT - E_PIZZATYPES 
+        TYPE E_PIZZA_TYPES :
+        (
+            //enum_member := 0 //POINT21 - Remove and add 3 lines below, they will be global variables
+            eType_Cheese := 0,
+            eType_Pepperoni := 1,
+            eType_Sausage := 2
+        );
+        END_TYPE
+    //
+    
+    //FB - FB_PIZZA_OVEN - Main
+            VAR_INPUT           
+
+             END_VAR
+            
+            VAR_OUTPUT
+                iTotalPizzaCooked: UDINT;
+                bBuzzer: BOOL;
+                bLight : BOOL;
+            END_VAR
+            
+            VAR
+                fbLoad_RTRIG : R_TRIG;
+                fbRemove_RTRIG : R_TRIG;
+                iState : DINT;
+                sStateDesc: STRING;                
+                fbMyTimer: TON; //Cook Time
+               
+                stPizzaInOven: ST_PIZZA; //POINT 2 - replace "b" to  "st" and replace BOOL to ST_PIZZA then go to POINT 3
+                stPizzaOnDeck: ST_PIZZA;
+                stPizzaDone: ST_PIZZA;
+            END_VAR
+            
+            VAR CONSTANT
+                stNULL_PIZZA : ST_PIZZA; //POINT8
+            VAR_END
+    //
+    
+    //FB - FB_PIZZA_OVEN - Sub
+    
+            IF stPizzaOnDeck.bExist AND NOT stPizzaInOven.bExist THEN  //POINT 3 - add st and ends with .bExist at the end of every variable name
+                stPizzaInOven := stPizzaOnDeck //POINT 6, make stPizzaOnDeck as possible location of Pizza
+                //stPizzaOnDeck.bExist := FALSE; //POINT 7 - can remove this line after adding POINT6
+                //stPizzaInOven.bExist := TRUE; POINT 7 - can remove this line after adding POINT6
+                stPizzaOnDeck := stNULL_PIZZA; // POINT9
+            END_IF
+            
+            fbLoad_RTRIG(clk := bLoadPizza);
+            IF fbLoadPizza_RTRIG.Q THEN
+                //bLoadPizza := FALSE;                            //POINT 4 - Not required
+                stPizzaOnDeck.bExist := TRUE;
+                stPizzaOnDeck.eType := sType_Pepperoni; //POINT25
+            END_IF
+            
+            fbRemove_RTRIG(clk := bRemovePizza);
+            IF fbRemovePizza_RTRIG.Q THEN
+                //stPizzaDone.bExist := FALSE; //POINT17 - Remove
+                stPizzaDone.bExist := stNULL_PIZZA; //POINT18 add this and run program at this point
+                //bRemovePizza := FALSE; //Not Required //POINT 5 - Not required
+            END_IF
+            
+            CASE iState OF:
+                0 :  //wait for input signal
+                    sStateDesc := 'Oven Empty';
+                    IF stPizzaInOven.bExist THEN //condition = true | false //POINT12 - adding.bExist
+                        iState := 10;
+                    END_IF
+                    
+                10: //In process
+                    sStateDsc := 'Baking in Process';
+                    fbMyTimer(IN:=bPizzaInOven, PT:=T#6S);
+                    IF fbMyTimer.Q THEN
+                        fbMyTimer(IN:=FALSE);
+                        iState := 20;
+                    END_IF
+                    
+                20: //Process completed
+                    IF NOT stPizzaDone.bExist THEN //POINT10  - adding.bExist
+                        //Simulate conveyor
+                        //stPizzaInOven.bExist := FALSE;  //POINT11 - adding.bExist //POINT15 - Removing This line after POINT14
+                        //stPizzaDone.bExist := TRUE; //POINT 13 - Remove this and add POINT14
+                        stPizzaDone := stPizzaInOven; //POINT14 - After adding you can remove POINT11
+                        stPizzaInOven := stNULL_PIZZA; //POINT16 - add this line
+                        bBuzzer := FALSE;
+                        iState := 30;
+                    ELSE
+                        bBuzzer := TRUE;
+                    END_IF
+                30: 
+                    iTotalPizzaCooked := iTotalPizzasCooked + 1;
+                    iState := 0;
+                    
+                ELSE 
+                    sStateDesc := 'Invalid state!';
+                    
+            END_CASE
+    //
+    
+    //Program-Main
+        VAR 
+
+            fbMyPizzaOven : ARRAY [0..10] OF FB_PIZZA_OVEN; //For 10 pizza ovens
+            
+            bLoadPizza : BOOL; //put a pizza oninput side
+            bRemovePizza : BOOL; //take pizza out
+            
+            i : DINT;
+            
+            //arrMyBools : ARRAY [0..100] OF INT; //check the entire list of arrays for fault
+            //arrMyBools : ARRAY [0..100] OF BOOL;
+            //arrMyBools : ARRAY [0..100] OF STRING;
+            
+        END_VAR    
+        
+        //OR You can do this Part 1
+        /*
+        VAR
+            fbMyPizzaOven : ARRAY [0..MAX_OVENS] OF FB_PIZZA_OVEN; //For 10 pizza ovens           
+            bLoadPizza : BOOL; //put a pizza oninput side
+            bRemovePizza : BOOL; //take pizza out
+            i : DINT;
+        END_VAR
+        VAR CONSTANT
+            MAX_OVENS : DINT := 5; //This is 6 ovens, so add 5 more oven. because it starts at 0
+        END_VAR
+        */
+    //
+    
+    //Program-Sub
+        FOR i := 0 TO 10 DO:
+            fbMyPizzaOven[i] (bLoadPizza:=bLoadPizza , bRemovePizza );
+        END_FOR
+        
+        /*
+        //OR You can do this Part 2
+        FOR i := 0 TO MAX_OVENS DO:
+            fbMyPizzaOven[i] (bLoadPizza:=bLoadPizza , bRemovePizza );
+        END_FOR
+        */
+    //
+
+
+
+
+10. //////////////////////////////////////////////////////////////////////////////////////////////////
+//POINTERS AND MEMORY MANIPULATION PART 1
+    //Imagine a spreadsheet, 4 columns, and 20 rows, where array[1, 2] represents column 1 and row 2. Column 1 is right most column and every single box is 8 bits (0000 0000) or DINT
+    //in DINT, 32 bits means the entire row, 4 columns or 4 bytes
+    //If the value is 255, then the memory will store 1111 1111 on column 1 and row 1.
+    //Rows are also known as elements or index where the first ow is element 0
+    //Every new data will pass through Element 0 and data will be pushed to incremented rows whenever new data comes in
+    //The comment above are for integers, but how do we know how many rows and columns are needed for a variable name or a function let's say "ST_PIZZA"?
+    //There is a helper function that determines the size required for such thing
+    //It will handle any array that pass into it
+    //Under SolutionExplorer>POUs, Add POU
+    //Highlight "Type" as Function, Return Type: BOOL, //NOTE: Dont think it returns anything, but it is just random to use BOOL, name it as F_FIFO_WRITE
+    //It is a function, and not a function block. It doesn't store any data
+    //F_FIFO_WRITE - Main
+            FUNCTION F_FIFO_WRITE : BOOL;
+                VAR_INPUT  
+                        cbData : UDINT; //count of bytes of data (4 bytes or 4 columns)
+                        cbBuffer : UDINT; //counts the size of data where 1 buffer = columns * rows
+                END_VAR
+
+    //Each buffer size has memory location so we need to code a line that points to the memory location addressing also known as POINTERS
+    //F_FIFO_WRITE - Main
+            FUNCTION F_FIFO_WRITE : BOOL;
+                VAR_INPUT  
+                        cbData : UDINT; 
+                        pData : POINTER TO BYTE; //DWORD is 64 bits //Or you can also use POINTER TO BYTE
+                        cbBuffer : UDINT; 
+                        pBuffer : ; //POINTER TO BUFFER, This is dangerous and do not do this on the production system, may cause conflicts
+                END_VAR
+    //This is to write a code that moves the memory from element 0 to element 1 so new data can come into the buffer - Let's call it "Memory forwarding" or FW_MemMove
+    //There are 3 types of memory forwarding; pDest, pSrc, cbLen under FW_MemMove function
+    //pDest == New buffer
+    //pSrc == Buffer source to copy from
+    //cbLen == number of characters to copy from
+    //Therefore: Copying of entire buffer downward, freeing the element 0 for new data to come in
+        //F_FIFO_WRITE - Sub
+                FW_MemMove (pDest := pBuffer + cbData, pSrc := pBuffer, cbLen := cbBuffer - cbData);
+        //Meaning of cbLen := cbBuffer - cbData
+                //20 rows of data when copied downwards, there will be an extra row, the unwanted row 21. So we need to copy 19 rows instead and move it downwards, without overflowing to another buffer memory
+        //Meaning of pDest := pBuffer + cbData
+                //We do not know how many bits/columns being used by the data so we add cbData to pBuffer to fill up all 32 bits
+        //Meaning fof pSrc := pBuffer
+                //Just a pointer to the beginning to the buffer
+    //Adding new data to the newly free row
+    //Therefore:
+        //F_FIFO_WRITE - Sub
+                FW_MemMove (pDest := pBuffer + cbData, pSrc := pBuffer, cbLen := cbBuffer - cbData);
+                FW_MemMove(pDest := pBuffer, pSrc := pData, cbLen := cbData);
+
+    //Go to Content11 to see the full POU
+    //NOTE: You can also find out about MemCopy, MemCompute to do Bitwise operations with giant data, MemClear, MemSet to do 0 or 1.
+    //WARNING: Never store the pointers into a variable because memories change location without you knowing and you might overwrite other data by accident
+
+
+11. //////////////////////////////////////////////////////////////////////////////////////////////////                  
+//POINTERS AND MEMORY MANIPULATION PART 2 - Read through all 5 points
+      
+    //POU - F_FIFO_WRITE - Main                 ///////////////////POINT4 - Add in POUs and then go to FB.Sub POINT2
+               FUNCTION F_FIFO_WRITE : BOOL;
+                VAR_INPUT  
+                        cbData : UDINT; 
+                        pData : POINTER TO BYTE;
+                        cbBuffer : UDINT; 
+                        pBuffer : POINTER TO BYTE;
+                END_VAR
+    
+    //POU - F_FIFO_WRITE - Sub
+                FW_MemMove (pDest := pBuffer + cbData, pSrc := pBuffer, cbLen := cbBuffer - cbData);
+                FW_MemMove(pDest := pBuffer, pSrc := pData, cbLen := cbData);
+
+    //DUT - ST_PIZZA
+        TYPE ST_PIZZA :
+            STRUCT
+                    bExist : BOOL;
+                    dtTimeEnteredOven : DT; //DT=Date/Time
+                    dtTimeExitedOven : DT;
+                    tTimeInOven : TIME;
+                    eType : E_PIZZA_TYPES; 
+                    
+            END_STRUCT
+        END_TYPE
+    //
+    
+    //DUT - E_PIZZATYPES 
+        TYPE E_PIZZA_TYPES :
+        (
+            eType_Cheese := 0,
+            eType_Pepperoni := 1,
+            eType_Sausage := 2
+        );
+        END_TYPE
+    //
+    
+    //FB - FB_PIZZA_OVEN - Main
+            VAR_INPUT           
+
+             END_VAR
+            
+            VAR_OUTPUT
+                iTotalPizzaCooked: UDINT;
+                bBuzzer: BOOL;
+                bLight : BOOL;
+            END_VAR
+            
+            VAR
+                fbLoad_RTRIG : R_TRIG;
+                fbRemove_RTRIG : R_TRIG;
+                iState : DINT;
+                iLastState: DINT;                                                        ////////////POINT1 Add this line, Go to FB.sub
+                sStateDesc: STRING;                
+                fbMyTimer: TON; //Cook Time
+               
+                stPizzaInOven: ST_PIZZA;
+                stPizzaOnDeck: ST_PIZZA;
+                stPizzaDone: ST_PIZZA;
+                
+                arrStateDescHistory : ARRAY [1..100] OF STRING; ////////////////POINT3 Add this line and go to 11.Conten above for description about how memories of arrays work
+                                                                                                ////////////////OR skip to POINT4 in POU
+                
+            END_VAR
+            
+            VAR CONSTANT
+                stNULL_PIZZA : ST_PIZZA; 
+            VAR_END
+    //
+    
+    //FB - FB_PIZZA_OVEN - Sub
+    
+            IF stPizzaOnDeck.bExist AND NOT stPizzaInOven.bExist THEN 
+                stPizzaInOven := stPizzaOnDeck;
+                stPizzaOnDeck := stNULL_PIZZA;
+            END_IF
+            
+            fbLoad_RTRIG(clk := bLoadPizza);
+            IF fbLoadPizza_RTRIG.Q THEN
+                stPizzaOnDeck.bExist := TRUE;
+                stPizzaOnDeck.eType := sType_Pepperoni; 
+            END_IF
+            
+            fbRemove_RTRIG(clk := bRemovePizza);
+            IF fbRemovePizza_RTRIG.Q THEN
+                stPizzaDone.bExist := stNULL_PIZZA; 
+
+            END_IF
+            
+            CASE iState OF:
+                0 :  //wait for input signal
+                    sStateDesc := 'Oven Empty';
+                    IF stPizzaInOven.bExist THEN //condition = true | false 
+                        iState := 10;
+                    END_IF
+                    
+                10: //In process
+                    sStateDsc := 'Baking in Process';
+                    fbMyTimer(IN:=bPizzaInOven, PT:=T#6S);
+                    IF fbMyTimer.Q THEN
+                        fbMyTimer(IN:=FALSE);
+                        iState := 20;
+                    END_IF
+                    
+                20: //Process completed
+                    IF NOT stPizzaDone.bExist THEN 
+                        //Simulate conveyor
+                        stPizzaDone := stPizzaInOven; 
+                        stPizzaInOven := stNULL_PIZZA; 
+                        bBuzzer := FALSE;
+                        iState := 30;
+                    ELSE
+                        bBuzzer := TRUE;
+                    END_IF
+                30: 
+                    iTotalPizzaCooked := iTotalPizzasCooked + 1;
+                    iState := 0;
+                    
+                ELSE 
+                    sStateDesc := 'Invalid state!';
+                    
+            END_CASE
+            
+            IF iLastState   <> iState THEN                                              //////////////////POINT2 add this paragraph. Then go to FB-Main
+                
+                F_FIFO_WRITE(                                                              ////////////////////POINT5 - add this and then run
+                            cbData := SIZEOF(sStateDesc), //counts the byte of data
+                            pData := ADR(sStateDesc),       //pointer to our data
+                            cbBuffer := SIZEOF(arrStateDescHistory), //counts the byte size of buffer
+                            pBuffer := ADR(arrStateDescHistory) //address of buffer, the first row first column of element
+                );  //do stuff here to log transitions               
+                iLasState := iState;        //reset for next iteration
+            END_IF
+    //
+    
+    //Program-Main
+        VAR 
+
+            fbMyPizzaOven : ARRAY [0..10] OF FB_PIZZA_OVEN; //For 10 pizza ovens
+            
+            bLoadPizza : BOOL; //put a pizza oninput side
+            bRemovePizza : BOOL; //take pizza out
+            
+            i : DINT;
+            
+            //arrMyBools : ARRAY [0..100] OF INT; //check the entire list of arrays for fault
+            //arrMyBools : ARRAY [0..100] OF BOOL;
+            //arrMyBools : ARRAY [0..100] OF STRING;
+            
+        END_VAR    
+        
+        //OR You can do this Part 1
+        /*
+        VAR
+            fbMyPizzaOven : ARRAY [0..MAX_OVENS] OF FB_PIZZA_OVEN; //For 10 pizza ovens           
+            bLoadPizza : BOOL; //put a pizza oninput side
+            bRemovePizza : BOOL; //take pizza out
+            i : DINT;
+        END_VAR
+        VAR CONSTANT
+            MAX_OVENS : DINT := 5; //This is 6 ovens, so add 5 more oven. because it starts at 0
+        END_VAR
+        */
+    //
+    
+    //Program-Sub
+        FOR i := 0 TO 10 DO:
+            fbMyPizzaOven[i] (bLoadPizza:=bLoadPizza , bRemovePizza );
+        END_FOR
+        
+        /*
+        //OR You can do this Part 2
+        FOR i := 0 TO MAX_OVENS DO:
+            fbMyPizzaOven[i] (bLoadPizza:=bLoadPizza , bRemovePizza );
+        END_FOR
+        */
+    //
+
+
+
+
+
+
+
+
+
+
+
+
+
