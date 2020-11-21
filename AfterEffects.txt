@@ -1,4 +1,5 @@
-After Effects
+After Effects Tutorial
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
 01 - Create new composition
@@ -17,7 +18,10 @@ CONTENTS
 14 - 3D Text
 15 - Write on text effect
 16 - Combining WriteOn Effects and In-Video playing inside letters effects
-
+17 - Masking animations
+18 - Effect Tab Brief breakdown
+19 - Color Effects - 04:56:03
+20 - Effects & Presets
 
 
 01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
@@ -133,7 +137,7 @@ CONTENTS
     //Insert keyframes as you desire and play
     
 
-15 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////15
+15 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////14
 //Write on text effect
     //Write a text on a new composition
     //On the right hand panel, navigate to the effects tab
@@ -149,7 +153,7 @@ CONTENTS
     //Play
 
 
-16 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////16  
+16 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////12  
 //Combining WriteOn Effects and In-Video playing inside letters effects
     //New composition, add in a short video
         //First layer,will be the video
@@ -183,10 +187,55 @@ CONTENTS
     //Add in brightness effect to the composition ColorCorrection>Brightness&Contrast to the first clips
         //Play
     
-17 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////17  
-//Effects Keyframe
-    //Layer porperty keyframes
+17 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////12  
+//Masking Animation
     //NOTE: Selecting all the keyframes and rightclick>easy ease for smoother transition
+    //Masking is a glorified crop, the looney toons black surroundings that shrinks
+    //When you use the rectangle tool without highlighting the video on the timeline panel, it will draw boxes
+    //Butwhen you highlight the video, the rectangle tool become the mask drawing tool.
+    //Use path as keyframe to animate the masking size
+    //Use pen tool to adjust themask
+    //Feather is for blurring the hard lines divided by the mask
+
+
+18 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////12  
+//Effect Tab brief breakdown
+    //Blur&Sharpen
+        //radialFastBlur == rotational blur CW and CCW at the same time about the axis
+        //gaussianBlur == Blurs the entire screen
+        //vectorBlur == water effect the entire screen
+        //miniMax == Looks like your camera's out of focus with squarey effects to it
+    **ColorCorrection
+    **Generate
+    **ImmersiveVideo    //Simulates the video quality of certain video cameras
+    **Keying
+    **NoiseGrain           //Applies to **Immersive
+    //Obsolete == Effects that are already obsolete by Adobe
+    //Perspective == Turns your videos into shapes  i.e CC Sphere
+    //Simulation == Activates snowfall, rainfall, etc to your foreground
+    //Text == Timestamp and stuffs
+
+
+19 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Color Effects 
+    //Basics - Not in use usually
+        //brightness and contrast || auto contrast
+        //vibrance
+        //levels
+    **Lumetri Tools - No Lumetri Tool in AE2015
+        //Just drop the LUT
+    //Toner = vintage look
+    //Colorama = thermal sensor look
+    //Hue&Saturation - turns entire clip to another colour, example Mexico where it is reddish
+        //OR use //ChangeToColor where you can isolate the object by selecting the color to change example green forest background to purple forest 
+
+
+20 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Effects & Presets
+
+
+
+
 
 
 
@@ -203,6 +252,17 @@ CONTENTS
 	//From OutputModule, click on lossless to adjust the properties, Select QuickTime for MP4 and format=H.264
 	//Click OutputTo and choose you location
 	//Click the render button on the right hand side of the screen just below the effects selection panel
+
+
+
+
+
+
+
+
+
+
+
 
 
 
