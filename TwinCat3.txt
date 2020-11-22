@@ -12,6 +12,7 @@
 09. Arrays, Structures, Enumerations
 10. Pointers and Memory manipulation Part 1
 11. Pointers and Memory manipulation Part 2
+12. Time math
 
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -720,6 +721,236 @@ array, pointer, enum, struct, alias
         */
     //
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////// 
+12. //////////////////////////////////////////////////////////////////////////////////////////////////                  
+//GLOBAL VARIABLES ==See all 17 points
+    //SolutionExplorer>PLC>Project>GVL>Add Global Variable List //Name it HMI_VARS
+    //It's easier for the HMI guy to check the global variables from a single file.
+    //GVL - HMI_VARS                                                                                    ///////////////POINT1 Add this
+            VAR_GLOBAL
+                iState : DINT;
+                bStartButton : BOOL;
+                
+                //To show all the history that came out from the oven           
+                arrPizzaHistory : ARRAY [0..100] OF ST_PIZZA;                              ///////////////POINT2 Add this then go to FB_PIZZA_OVEN - Sub
+                 
+            END_VAR
+         
+    //POU - F_FIFO_WRITE - Main               
+               FUNCTION F_FIFO_WRITE : BOOL;
+                VAR_INPUT  
+                        cbData : UDINT; 
+                        pData : POINTER TO BYTE;
+                        cbBuffer : UDINT; 
+                        pBuffer : POINTER TO BYTE;
+                END_VAR
+    
+    //POU - F_FIFO_WRITE - Sub
+                FW_MemMove (pDest := pBuffer + cbData, pSrc := pBuffer, cbLen := cbBuffer - cbData);
+                FW_MemMove(pDest := pBuffer, pSrc := pData, cbLen := cbData);
+
+    //DUT - ST_PIZZA
+        TYPE ST_PIZZA :
+            STRUCT
+                    bExist : BOOL;
+                    dtTimeEnteredOven : DT; //DT=Date/Time
+                    dtTimeExitedOven : DT;
+                    tTimeInOven : TIME;
+                    eType : E_PIZZA_TYPES; 
+                    
+            END_STRUCT
+        END_TYPE
+    //
+    
+    //DUT - E_PIZZATYPES 
+        TYPE E_PIZZA_TYPES :
+        (
+            eType_Cheese := 0,
+            eType_Pepperoni := 1,
+            eType_Sausage := 2
+        );
+        END_TYPE
+    //
+    
+    //FB - FB_PIZZA_OVEN - Main
+            VAR_INPUT           
+
+             END_VAR
+            
+            VAR_OUTPUT
+                iTotalPizzaCooked: UDINT;
+                bBuzzer: BOOL;
+                bLight : BOOL;
+            END_VAR
+            
+            VAR
+                fbNT_GetTime : NT_GetTime;                                          ///////////////POINT10 - Add this function to get time. Function already created by default in SolutionExplorer>Reference>Tc2_Utilities
+                stCurrentTime : TIMESTRUCT;                                         ///////////////POINT11 - Add this line and go to Point12 in Sub
+                dtCurrentTime : DT; //Date time structure                       ////////////POINT14 - Add this line and then point 15 in fb_pizza_oven - sub
+                //
+                fbLoad_RTRIG : R_TRIG;
+                fbRemove_RTRIG : R_TRIG;
+                iState : DINT;
+                iLastState: DINT; 
+                sStateDesc: STRING;                
+                fbMyTimer: TON; //Cook Time
+               
+                stPizzaInOven: ST_PIZZA;
+                stPizzaOnDeck: ST_PIZZA;
+                stPizzaDone: ST_PIZZA;
+                
+                arrStateDescHistory : ARRAY [1..100] OF STRING; 
+                
+            END_VAR
+            
+            VAR CONSTANT
+                stNULL_PIZZA : ST_PIZZA; 
+            VAR_END
+    //
+    
+    //FB - FB_PIZZA_OVEN - Sub
+            fbNT_GetTime(                                                       //////////POINT12
+                NETID:= ' ',   //An IP address or you can use 'local' like 'localhost'. Or we can just leave it blank as null-string if only 1 single PLC
+                START := TRUE,                               //You may replace "TRUE" with "fbMyTimer" (function located at the bottom) to run 1s timer manually
+                TMOUT:= T#5s,
+                TIMESTR=>stCurrentTime
+                dtCurrentTime := SYSTEMTIME_TO_DT(stCurrentTime);       ////////POINT13 Add this line for another date-time structure then go to point14
+            );
+            
+            
+            IF stPizzaOnDeck.bExist AND NOT stPizzaInOven.bExist THEN 
+                stPizzaInOven := stPizzaOnDeck;
+                stPizzaOnDeck := stNULL_PIZZA;
+            END_IF
+            
+            fbLoad_RTRIG(clk := bLoadPizza);
+            IF fbLoadPizza_RTRIG.Q THEN
+                stPizzaOnDeck.bExist := TRUE;
+                stPizzaOnDeck.eType := sType_Pepperoni; 
+            END_IF
+            
+            fbRemove_RTRIG(clk := bRemovePizza);
+            IF fbRemovePizza_RTRIG.Q THEN
+                F_FIFO_WRITE(                                                                                                                                   ///////////////POINT4 - Paste Point3 Here
+                            cbData := SIZEOF(stPizzaDone), //counts the byte of data                                                     ///////////////POINT5 - Replace sStateDesc with stPizzaDone
+                            pData := ADR(stPizzaDone),       //pointer to our data                                                           ///////////////POINT6 - Replace sStateDesc with stPizzaDone
+                            cbBuffer := SIZEOF(arrPizzaHistory), //counts the byte size of buffer                               /////////POINT7 - Replace arrStateDescHistory with arrPizzaHistory from GVL
+                            pBuffer := ADR(arrPizzaHistory) //address of buffer, the first row first column of element          /////////POINT8 - Replace arrStateDescHistory with arrPizzaHistory from GVL then go to point9 at the bottom to create a table
+                );  //do stuff here to log transitions           
+                stPizzaDone := stNULL_PIZZA; 
+
+            END_IF
+            
+            CASE iState OF:
+                0 :  //wait for input signal
+                    sStateDesc := 'Oven Empty';
+                    IF stPizzaInOven.bExist THEN //condition = true | false 
+                        stPizzaInOven.dtTimeEnteredOven := dtCurrentTime;                                                      ///////////POINT15 - Copying dtCurrentTime to dtTimeEnteredOven, same format. Go to Point16 to know when it is out of oven
+                        iState := 10;
+                    END_IF
+                    
+                10: //In process
+                    sStateDsc := 'Baking in Process';
+                    fbMyTimer(IN:=bPizzaInOven, PT:=T#6S);
+                    IF fbMyTimer.Q THEN
+                        fbMyTimer(IN:=FALSE);
+                        iState := 20;
+                    END_IF
+                    
+                20: //Process completed
+                    IF NOT stPizzaDone.bExist THEN 
+                        stPizzaInOven.dtTimeExitedOven := dtCurrentTime                                                     /////////////////POINT16 - Add this line and go to point 17 below
+                        //Simulate conveyor
+                        stPizzaDone := stPizzaInOven; 
+                        stPizzaInOven := stNULL_PIZZA; 
+                        bBuzzer := FALSE;
+                        iState := 30;
+                    ELSE
+                        bBuzzer := TRUE;
+                    END_IF
+                30: 
+                    stPizzaDone.tTimeInOven := stPizzaDone.dtTimeExitedOven - stPizzaDone.dtTimeEnteredOven; ////////////////POINT17 - How long is the pizza in the oven. NOTE: date-time(dt) minus date-time(dt) equals to time(t) variable
+                    iTotalPizzaCooked := iTotalPizzasCooked + 1;
+                    iState := 0;
+                    
+                ELSE 
+                    sStateDesc := 'Invalid state!';
+                    
+            END_CASE
+            
+            IF iLastState   <> iState THEN  
+                
+                F_FIFO_WRITE(                                                                                                                   //////////////POINT3 - Copy the function and Past in Point4
+                            cbData := SIZEOF(sStateDesc), //counts the byte of data
+                            pData := ADR(sStateDesc),       //pointer to our data
+                            cbBuffer := SIZEOF(arrStateDescHistory), //counts the byte size of buffer
+                            pBuffer := ADR(arrStateDescHistory) //address of buffer, the first row first column of element
+                );  //do stuff here to log transitions               
+                iLasState := iState;        //reset for next iteration
+            END_IF
+    //
+    
+    //Program-Main
+        VAR 
+
+            fbMyPizzaOven : ARRAY [0..10] OF FB_PIZZA_OVEN; //For 10 pizza ovens
+            
+            bLoadPizza : BOOL; //put a pizza oninput side
+            bRemovePizza : BOOL; //take pizza out
+            
+            i : DINT;
+            
+            //arrMyBools : ARRAY [0..100] OF INT; //check the entire list of arrays for fault
+            //arrMyBools : ARRAY [0..100] OF BOOL;
+            //arrMyBools : ARRAY [0..100] OF STRING;
+            
+        END_VAR    
+        
+        //OR You can do this Part 1
+        /*
+        VAR
+            fbMyPizzaOven : ARRAY [0..MAX_OVENS] OF FB_PIZZA_OVEN; //For 10 pizza ovens           
+            bLoadPizza : BOOL; //put a pizza oninput side
+            bRemovePizza : BOOL; //take pizza out
+            i : DINT;
+        END_VAR
+        VAR CONSTANT
+            MAX_OVENS : DINT := 5; //This is 6 ovens, so add 5 more oven. because it starts at 0
+        END_VAR
+        */
+    //
+    
+    //Program-Sub
+        FOR i := 0 TO 10 DO:
+            fbMyPizzaOven[i] (bLoadPizza:=bLoadPizza , bRemovePizza );
+        END_FOR
+        
+        /*
+        //OR You can do this Part 2
+        FOR i := 0 TO MAX_OVENS DO:
+            fbMyPizzaOven[i] (bLoadPizza:=bLoadPizza , bRemovePizza );
+        END_FOR
+        */
+    //
+
+
+    //POINT9 - Create a table to show the history of arrPizzaHistory array in HMI
+         //Under SolutionExplorer, select toolbox
+        //CommonControls>Table
+        //Drag and drop into Visualization
+        //Properties   
+                Property>Data array = HMI_VARS.arrPizzaHistory
+        //Entire spreadsheet will pop right into the table
+        //Next is to go to point10 (in FB_PIZZA_OVEN-Main) to insert date and time into the table //06:13
+
+
+//////////
+Create swuare waves with 1 second interval
+        //Main //See POINT12
+            fbMyTimer : TON;
+        //Sub
+            bMyTimer(IN:=NOT fbMyTimer.Q, PT:=T#100MS);
 
 
 
