@@ -1,4 +1,3 @@
-https://www.youtube.com/watch?v=Ej_Pcr4uC2Q
 import 'dart:io'; //something like iostream
 
 NOTE: everything in dart is object, the sub of class
@@ -267,16 +266,6 @@ dynamic
 
 
 
-
-
-
-
-
-
-
-
-https://www.youtube.com/watch?v=Ej_Pcr4uC2Q
-27:07
 
 
 
