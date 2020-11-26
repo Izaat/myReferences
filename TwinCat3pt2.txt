@@ -1,0 +1,158 @@
+https://www.youtube.com/watch?v=AQmIWVyjJGo&list=PLE1CU6EebvTD29gsHo1djsKU7J5Dtp0Bn&index=4
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01. Connecting to the PLC
+02. TwinCAT - Connecting
+03. Testing part 1
+04. Testing part 2
+05. 
+
+01. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONNECTING TO PLC
+            Connecting to the PLC
+                ControlPanel > NetworkInternet > NetworkConnections > LocalAreaNetwork > RightClick > Properties
+                NetworkTab > TCP/IPv4 > Properties > Advanced > IPSettingsTab > Add
+                IP Address: 192.168.1.254
+                Subnet: 255.255.255.0
+                Now you network card has 2 IP addresses
+                Open Angry IP Scanner > Just press Play nad it'll do a ping sweep
+                PLC will pop up as 192.168.1.130
+                WindowsStartButon > Run > "mstst"
+                Remote Desktop Connection wll appear, set IP as PLC
+                Click on "Connect" and Windows Security window will pop up
+                Default Beckoff Administrator Password: 1
+                This will lead you into the window embedded operating system in Beckoff PLC
+                
+            Connecting to Twincat
+                Your PC's Windows > VisualStudio > File > New > Project
+                Entire list of files will appear in Solution Explorer
+                Select System and click on "Choose target" button
+                Click on "Search (Ethernet)" > Type in the PLC's IP address on "Enter Hos Name" input box and click the button
+                Remember the AMS NetId : 5.32.241.178.1.1
+                RouteName(Target) = Host Name
+                Make sure "hostname" check box is ticked and target route is "static"
+                    Click on "Add Route" button
+                                If it fails, try ping the Hostname/Routename example c:\ping CX-20F1B2
+                If connecting via "hostname" fails, then check "IPaddress" checkbox and try again.
+                     Username: Administrator
+                     Password: 1
+                Under connection column, there should be "X" which means it is connected
+                Click on "Close" button
+                You may start new plc project from now onwards 
+                
+            Testing out connection
+                //MAIN(PRG) - Main
+                    VAR
+                        heartbeat : DINT;
+                    END_VAR
+                //MAIN(PRG) - Sub
+                    heartbeat =:= heartbeat + 1;
+                    
+            Run program and heartbeat value will increase by increments of 1
+
+END OF CONNECTING TO PLC
+
+
+02. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+TWINCAT - Connecting
+        Under SolutionExplorer, Open up I/O folder and RightClick on Devices, the Insert Device 
+            In Insert Device window, Dropdown EtherCAT and select EtherCAT Master
+            A device will be added to TwinCat Project > I/O > Devices > Device 1 (EtherCAT)
+            Select the device and go to the Adapter Tab
+            Under NetworkAdapter > OS (NDIS), click on Search button and a list of devices will be listed down in a popup window 
+            Select "Local Area Connection (TwinCAT-Intel PCI Ethernet Adapter (Gigabit))"
+            Click on "Restart TwinCAT Config Mode", the blue icon button located above the the solution explorer under the menu (File, Edit, Etc) 
+            Select Load I/O device in the prompt
+            Rename "Device 1 (EtherCAT)" to "Local NIC (EtherCAT)"
+            After renaming, the devices will expand and "Term 1 (EK1100)" will appear
+            This includes all the input/output modules connected to the terminals 
+            "WCState" is helpful when you're debugging as well as the Input and Output folders above the "InfoData" folder
+            Save and activate the configuration by clicking on the "blue steps" icon located above the solution explorer
+            A warning message will appear  "Device 'Local NIC" needs sync master (at least on variable lined to a task variable) - click ok
+                Warning appears because there is no program being assigned
+            You may "Login" to test the PLC
+
+03. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+TWINCAT - Testing part 1
+        //Program_Main - Main
+            VAR
+                heartbeat : BYTE;
+                one AT %Q* : BOOL;  //%Q* is the memory address where Q is the output and * means map handling, nowadays you don't have to add the * anymore
+                two AT %Q* : BOOL;
+                three AT %Q* : BOOL;
+                four AT %Q* : BOOL;
+                
+                prox AT %I* : BOOL; //Input
+            END_VAR
+
+        //Program_Main - Sub
+            heartbeat := heartbeat + 1;
+            one := heartbeat MOD 2 = 0;         //This just means the system will take heartbeats, and modular divides it and check if the value equals to 0 , if yes, then the bit is ON
+            two := heartbeat MOD 4 = 0;             //Basically it blinks n a sequence
+            three := heartbeat MOD 8 = 0;
+            four := heartbeat MOD 16 = 0;
+            
+        //Now go to Menu > Build > BuildSolution
+        //Ignore the warning
+        //RightClick on SolutionExplorer > Project > Term1 > Term4 > Channel1 > Output and select "ChangeLink", An "Attach Variable Output" window will appear
+        //Untitled1 is the PLC runtime program
+        //Expand the Instance and select MAIN.one > QB772192.0.BOOL[1,0]
+        //Do the same for Channel 2 and assign its output to variable "MAIN.two"
+        
+        //Now go to SolutionExplorer > Project > Term1 > Term3 > Channel5 > Input and assign to "MAIN.prox"
+        //Activate Configuration        //This should be click whenever you reassign the I/O address
+        //Login and run
+        //Select SolutionExplorer > Project > Term1 > Term4 > Channel1 > Output and open the "Online" tab to see the i/o graph
+
+04. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+TWINCAT - Testing part 2
+        //Program_Main - Main
+            VAR
+                heartbeat : BYTE;
+                one AT %Q* : BOOL; 
+                two AT %Q* : BOOL;
+                three AT %Q* : BOOL;
+                four AT %Q* : BOOL;
+                
+                prox AT %I* : BOOL; //Input
+            END_VAR
+
+        //Program_Main - Sub
+            heartbeat := heartbeat + 1;
+            IF prox = TRUE THEN
+                one := heartbeat MOD 2 = 0; 
+                two := heartbeat MOD 4 = 0; 
+                three := heartbeat MOD 8 = 0;
+                four := heartbeat MOD 16 = 0;
+            ELSE
+                one := FALSE; 
+                two := FALSE; 
+                three := FALSE; 
+                four := FALSE; 
+            END_IF
+            
+        //Now test this by activating the sensor connected to Input 5
+        //Once activated, the output will blink in sequence
+
+05. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
