@@ -1,0 +1,312 @@
+https://www.youtube.com/watch?v=Ej_Pcr4uC2Q
+import 'dart:io'; //something like iostream
+
+NOTE: everything in dart is object, the sub of class
+Run dart file by typing in "dart filename.dart" in the console
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//CONTENTS//
+01. ORIENTATE VIRTUAL PHONE TO LANDSCAPE
+02. OUTPUT, STRINGS AND PRINTING
+03. COMMENTING
+04. DECLARATIONS
+05. MULTILINE STRINGS
+06. CONVERTING STRING TO INTEGER AND BACK
+07. DEFINING A CONSTANT
+08. STANDARD OPERATORS
+09. SHORTCUT
+10. ADD AND REMOVE FROM ARRAY
+11. CLASSES
+12. CLASSES WITH PRIVATE INSTANCE / SECURITY
+13. CLASS INHERITENCE
+14. NULL AWARE OPERATOR
+
+
+
+
+
+
+
+
+
+01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ORIENTATE VIRTUAL PHONE TO LANDSCAPE
+//main.dart//
+void main(){
+    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]); //You can use .landscapeRight doesnt matter
+}
+
+02 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//OUTPUT, STRINGS AND PRINTING
+main(){
+    stdout.writeIn('What is your name: ');
+    String name = stdin.readLineSync(); //box to type in your name
+    print('My name is $name'); //Outputs my name is whatever
+}
+
+03 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//COMMENTING
+//In-line comment
+/*Block comment*/
+///Documentation
+
+
+04 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//DECLARATIONS
+Strongly type Programming Lang. Variable is known at compile time. (C++, Java, Swift)
+Dynamic type programming Lang. Variable is know at run time. (Python, Ruby, Javascript)
+
+//strongly type//
+int, double, string, bool. //var can be any of these 4 declarations
+//Dynamic type//
+dynamic
+
+
+//calling the variables is similar to PHP $variable
+
+
+05 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MULTILINE STRINGS
+    main(){
+        var s2 = """This is also
+        multiline-sting.""";
+        print(s2);
+    } //Outputs the multiline. Shortcut to writing a string without using <br>
+
+
+06 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//CONVERTING STRING TO INTEGER AND BACK
+    main(){
+        var one = int.parse('1');
+        assert(one == 1); //String to Int
+        
+        var oneDotOne = double.parse('1.1');
+        assert(oneDotOne == 1); //String to double
+        NOTE: cannot convert letters andwords into int or double
+        
+        String oneAsString = 1.toString();
+        assert(oneAsString == '1'); //int to string
+        
+        String piAsString = 3.14.toStringAsFixed(2); //'2' means 2 floating point number or 2 decimal places
+        assert(piAsString == '3.14'); //double to String
+        
+    }
+
+
+
+07 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//DEFINING A CONST
+    main(){
+        const aConstNum = 0; // int constant
+        const aConstBool = true; //bool constant
+        const aConstString = 'hello'; //string constant
+        
+        print(aConstNum); //output 0
+        print(aConstBool); //output true
+        print(aConstString); //output hello
+        
+        print(aConstNum.runtimeType); //output int
+        print(aConstBool.runtimeType); //output bool
+        print(aConstString.runtimeType); //output string
+        
+        //runtimeType is compile during runtime
+    }
+
+
+08 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//STANDARD OPERATORS
+    void main() {
+        int num = 10 + 22;
+        num = num - 2;
+        
+        print(num);
+        
+        num = num % 5; //remainder
+        print(num);    
+        
+        //relational 
+        num (num == 0) {    // ==, !=, >=, <=
+            print('Zero');
+        }
+        
+        num = 100;
+        num *= 2;       //shortcut 100*2
+        print(num);
+
+        //unary operator
+        ++num; //pre-increment
+        num++; //post-increment
+        num += 1; //similar to ++
+        num -= 1; //similar to --
+        print(num);
+        
+        //logical && and logical ||
+        if (num > 200 && num < 203){
+            print('200 to 202');
+        }
+        
+    }
+
+
+09 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//SHORTCUT
+    void main(){
+        String greet = greeting();
+        print(greet);
+    }
+    
+    //instead of doing this
+    String greeting(){
+        return 'hello';
+    }
+    
+    //do this instead
+    String greeting() => 'hello';
+
+
+10 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ADD AND REMOVE FROM ARRAY
+    void main(){
+        List <String> names = ['one', 'two', 'three'];      //adding "<String>"  disables any other datatype like numbers to enter into the array
+        
+        names.add('four');          //output ['one', 'two', 'three', 'four']
+        names.remove('five');   //output ['two', 'three', 'four']
+        
+        print(names);
+
+    }
+
+11 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//CLASSES
+    void main(){
+        User userOne = User();
+        print(userOne.name);       //output mario
+        print(userOne.Age);         //output 25
+        userOne.login();               //output user login    
+        
+    }
+
+    class User {
+        String username = 'mario';
+        int age = 25;
+           
+        void login(){
+            print ('user logged in');
+        }
+    }
+
+
+12 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//CLASSES WITH PRIVATE INSTANCE / SECURITY
+    void main(){
+        User userOne = User('luigi', 25);
+        print(userOne.username);      //Output luigi
+        
+        User userTwo = User('mario', 30);
+        print(userTwo.username);  //Output mario
+        
+    }
+
+    class User {
+        String username = 'mario';
+        int age = 25;
+        
+        User(String username, int age){
+            this.username = username;       // ... = username is the variable from the bracket User(String username, ...)
+            this.age = age;
+        }
+        
+    }
+
+
+13 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//CLASS INHERITENCE
+    void main(){
+        User userOne = User('luigi', 25);
+        print(userOne.username);      //Output luigi
+        
+        User userTwo = User('mario', 30);
+        print(userTwo.username);  //Output mario
+        
+        SuperUser userThree = SuperUser('yoshi', 20);
+        print(userThree.username);  //output yoshi
+        userThree.publish();        //output published update
+        
+    }
+
+    class User {
+        String username = 'mario';
+        int age = 25;
+        
+        User(String username, int age){
+            this.username = username;       // ... = username is the variable from the bracket User(String username, ...)
+            this.age = age;
+        }
+        
+    }
+    
+    class SuperUser extends User{
+        SuperUser(String username, int age) : super(username, age)   //assigning zero argument constructor to the superclass
+                                                                                                            //this modifies the value of the variable in User()
+        //
+        void publish() {
+            print('published update');
+        }
+    }
+
+
+
+
+
+14 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//NULL AWARE OPERATOR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://www.youtube.com/watch?v=Ej_Pcr4uC2Q
+27:07
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
