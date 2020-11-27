@@ -1,5 +1,4 @@
-After Effects Tutorial
-
+AfterEffects
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
 01 - Create new composition
@@ -21,7 +20,13 @@ CONTENTS
 17 - Masking animations
 18 - Effect Tab Brief breakdown
 19 - Color Effects - 04:56:03
-20 - Effects & Presets
+20 - Exporting to MP4
+21 - Effects & Presets
+22 - Green Screens
+23 - Masking
+24 - Rotoscoping
+24 - Motion Tracking
+
 
 
 01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
@@ -137,7 +142,7 @@ CONTENTS
     //Insert keyframes as you desire and play
     
 
-15 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////14
+15 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////15
 //Write on text effect
     //Write a text on a new composition
     //On the right hand panel, navigate to the effects tab
@@ -153,7 +158,7 @@ CONTENTS
     //Play
 
 
-16 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////12  
+16 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////16  
 //Combining WriteOn Effects and In-Video playing inside letters effects
     //New composition, add in a short video
         //First layer,will be the video
@@ -186,11 +191,12 @@ CONTENTS
         //Turn up vibrancet o 100 on the project panel
     //Add in brightness effect to the composition ColorCorrection>Brightness&Contrast to the first clips
         //Play
+
     
-17 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////12  
+17 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////17  
 //Masking Animation
     //NOTE: Selecting all the keyframes and rightclick>easy ease for smoother transition
-    //Masking is a glorified crop, the looney toons black surroundings that shrinks
+    //Masking is a glorified crop, the looney toons black surroundings that shrinks //Or you can use Generate>Circles Effect for this invert circle must be ticked
     //When you use the rectangle tool without highlighting the video on the timeline panel, it will draw boxes
     //Butwhen you highlight the video, the rectangle tool become the mask drawing tool.
     //Use path as keyframe to animate the masking size
@@ -198,7 +204,7 @@ CONTENTS
     //Feather is for blurring the hard lines divided by the mask
 
 
-18 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////12  
+18 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////18  
 //Effect Tab brief breakdown
     //Blur&Sharpen
         //radialFastBlur == rotational blur CW and CCW at the same time about the axis
@@ -216,8 +222,8 @@ CONTENTS
     //Text == Timestamp and stuffs
 
 
-19 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Color Effects 
+19 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////19
+//Color Effects 04:56:03
     //Basics - Not in use usually
         //brightness and contrast || auto contrast
         //vibrance
@@ -230,28 +236,131 @@ CONTENTS
         //OR use //ChangeToColor where you can isolate the object by selecting the color to change example green forest background to purple forest 
 
 
-20 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Effects & Presets
-
-
-
-
-
-
-
-
-
-
-
-
-
- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+20 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////20
 //Exporting to MP4
 	//Menu>Composition>AddToRenderQueue == OR == CTRL + M
 	//From timeline panel, clickonrenderSettings and adjust to your settings
 	//From OutputModule, click on lossless to adjust the properties, Select QuickTime for MP4 and format=H.264
 	//Click OutputTo and choose you location
 	//Click the render button on the right hand side of the screen just below the effects selection panel
+
+
+21 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////21
+//Effects & Presets
+    FishEyeLens - Spherize
+    Inverted FishEye - CCLens                                            //Use this effect on text layer to make them have a jumping effect
+    Text Effects - Warp
+    Warping Effects
+        - Linear warp - CC Smear
+        - Radial Warp - Twirl
+        - Big Head Effect - Buldge - Feathered out frames
+        - Big Nose Effect - Magnify - Hard frames
+        - Camera Stabilizer - Warp Stabilizer                      //Need to use 4k clip for 1080p composition
+        - Light streak reflections - CC Light Sweep
+        - Radial light beam / Sun - CC Light Rays               //Effects you get when there's enlightenment
+    Background Folder
+        - Create new layer over an existing video/clip > Create Solids
+        - Effects > Animation presets > Background
+        - Make sure the layer is on top
+        - Drag and drop any of the effects into the composition
+        - Bring the opacity of the effect down to make the video underneath it to show up
+    Generate Folder
+        - Circle - Looney toons shrinking circle effect, Invert circle must be ticked
+        - Light reflections on camera - Lens Flare
+
+
+22 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////22
+//Green Screens
+    Keylight effect
+        Start a new composition
+        From the "Effects and Presets" tab, add in "Keylight" from the "Keying" folder into the composition
+        Under "Effect Controls" panel, change "Screen Color" to the color of the screen using the eyedropper
+        NOTE1: When there is green in the coloro blue, the blue will fade out
+        NOTE2: Wrinkled green screen will affect the quality of the background
+    Image-Utilities Folder
+        Keying
+            Blue blur
+            Green Blur
+            Keylight_Key Cleaner
+    Keying Folder
+        Keylight(1.2)
+        Linear Color Key        
+    Crease Removal from Green Screen (Using Keylight 1.2)
+        Increase the "Screen Gain" to 130 but do note that it will affect the color blue to be more transparent
+        In order to fix this, duplicate the clip few more times until the transparency in blue disappears
+    Replacing the green screen background
+        Just add an image of clip into the composition as another layer
+
+    Artificial green screen
+        Add texts with effects
+        Add Solid layer and change black to green //Layer should be behind the text (layer on top of the text layer)
+        Export as single video
+        Reload video (text with green background) as new composition
+        Use keylight to remove the green backtround
+
+23 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////22
+//Masking
+    Masking transition
+        Similar to Premier Pro masking transition for videos using the pen tool
+    Rotoscope masking
+        Use rotoscope tool to skip the painstaking pen tool for complex objects like moving hands
+
+23 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////22
+//Rotoscoping
+    Advanced version of masking
+    Isolating the wrist and fingers movement with the rotobrush tool
+    Select the rotorbrush tool and double click on the composition
+        To resize the brush, CTRL+LeftClick+DragMouse
+        Draw the object - This will highlight the area you want to isolate
+        Hold ALT and highlight the area that you don't want to highlight around the object
+        Spacebar to play the video and navigate
+        Ctrl + ArrowRight to navigate frame by frame
+        Selection bar below the timeruler. Modify the size to adjust how many frames to be affected by the rotoscope effect
+        Once you've completed with the selection, slice and duplicate the clip and then remove the rotoscope effect from the original clip
+        Play with transparent background switched on
+
+24 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////22
+//Motion Tracking
+    Menu > Animation > Track Motion
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Additional - Industry standards
+    //Use Color Correction > Curves
+    //Benefits of using Pre-Compose
+            //To combining the layers into a single layer 
+            //It also isolates the pre-comp layer from other parent layers so the effects applied wont affect other layers
+            //Organizing the layer
+            //Pre-composed layers can be reused and shorten your workload without recreating the entire animation
+            //Move attributes into new composition
+                        Applied keyframes/effets are independent from the objects like texts/images/clips so you can replace them without afffecting the attributes
+                        Attributes will be adaptive to the clip  size or any other attributes
+    //Adding Solid layers
+    //Drop Shadows
+    //Add "adjustment layer" (similar to adding compressors into the mastering in music production)
+        Add "Lumetri" color correction effect into this layer, In Creative > Look, use "SL Iron LDR"
+    //Match the clip's fps to the compostion
+
+
+
+
+
+
+
+
 
 
 
