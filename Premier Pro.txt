@@ -1,0 +1,96 @@
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01 - Color Grading Matching
+02 - Keyboard Shortcuts
+03 - Other Tips
+04 - Transition
+
+
+
+
+
+
+01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Color Grading Matching
+	//With 2 videos (source and target) within a single timeline, Go to effects control and add in Lumetri Color
+	//Under "Color Wheels and Motions", lick on "Composition View" to bring both videos up onto the sequence panel to be compared side by side
+	//Source will be on the left and target will be on the right, the arrows below the source video represents the clips selected
+	//Hit the "Apply match" button
+
+
+02. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Keyboard Shortcuts and Other Tips
+    //Setting the start point and end point of your clips to by pressing "i" and "o" respectively in the Source panel. 
+            This will shorten the clip and lowers the CPU usage before loading the clip into the Sequence panel
+    //'S' to activate snap function
+    //Timeline Tools
+            //Track select Forward == selecting all the clips to the right hand side of the screen
+            //Track select Backwards == selecting all the clips to the left hand side of the screen
+            //Ripple Edit Tool == Basically a shortcut for shortening a target clip and automatically snapping the target clip to the clip before it without dragging
+            //Razor Tool (C) == Slicing or Cut the clip
+            //Slip Tool == Modifying the timestamp of the clip without modifying the chopped clip size //Rarely being used
+            //Slide Tool == ??
+            //Pen Tool == ??
+            //Hand Tool == To adjust the clip view in the sequence panel
+    //Copy/Paste == You need to select the target layer (Blue Highlight)
+    //Duplicate == Hold Alt and drag a clip
+    
+
+03. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Other Tips
+    //Dragging video only or Audio only into the timeline
+            In the Source panel, you can either drag one of the 2 icons at the centrer "Drag Video only" or "Drag audio only" 
+    //If an image to be displayed over the clip is maller than the frame size, then in the timeline panel, right click on the image layer and then click on "Set to Frame Size"
+            Or alternatively you can go to the source panel and open the effects control tab, under Video effects > Motion, adjust the scale
+    //Viewing the audio waveform in the timeline
+            Adjust the size by adjusting the scrollbar on the right hand side of the panel
+
+
+04. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Transitions 
+    //You can select which one of the effects in the folder to be your default transition
+    //Audio Transitions: Effects > Audio Transitions > Crossfade // Ctrl + Shift + D
+        Constant Power == increases the output decibel to match the loudest audio in the clip
+    //Video Transition: To be applied in between 2 clips
+        Cross dissolve: Opacity transitions
+    //Custom Transitions
+        Masking Method // Where movement of an object in the clip helps the transition to another video
+            In the source panel, mask an area to be transitioned Effects > Opacity > Pen Tool
+            Draw the area and tick on "Invert"
+            Adjust "Mask Feather"
+            Animate "MaskPath" and "MaskExpansion" frame by frame until they fill up the entire screen
+            Add a clip directly under the masked clip in a new layer
+
+
+
+
+
+
+
+
+
+
+2:06:20
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
