@@ -4,7 +4,8 @@ CONTENTS
 02. TwinCAT - Connecting
 03. Testing part 1
 04. Testing part 2
-05. 
+05. EtherCAT
+06. Numeric Control
 
 01. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONNECTING TO PLC
@@ -134,6 +135,59 @@ TWINCAT - Testing part 2
         //Once activated, the output will blink in sequence
 
 05. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+EtherCAT
+    //TopLeft port is input. The BottomLeft port and RightHand port is output
+    //Layout
+        PLC > EK1100 I/Os > Devices
+    //OSI Layer             - EtherCAT
+        7. Application     - Cyclic Data Exchange and Mailbox Acyclic Data Access
+        6. Presentation   -  N/A      
+        5. Session           -  N/A   
+        4. Transport        -  N/A   
+        3. Network          -  N/A   
+        2. DataLink         - Process Data Mapping, AutoForwarder, Ethernet MAC
+        1. Physical          - 100BASE-TX/FX
+    
+    //Determinism in fieldbuses- Time alignment between multiple layers irregardless of how fast
+    //Real-time signal - how fast the port is listening to signals, the higher the hertrate, the higher the realtime performance.
+    //EtherCAT is real-time deterministic fieldbus
+    //CANopen protocol over EtherCAT (CoE) - application profiles for valves and controllers
+    //Servodrive-Profile over EtherCAT (SoE) - comms interface for motion control applications
+
+
+06. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Numerical Control - 
+    //Adding a drive
+            //Restart to Config mode and don't activate free run
+            //Under I/O > Devices > RightClick on NIC(EtherCAT) > Scan
+            //Then you can add or remove any devices you want 
+            //Once done, Activate configuration, Run mode, login and run
+            //Click on I/O > Devices > NIC (EtherCAT) and head to the center panel and open up "Online" tab
+            //Add: 1, Name: Drive7 (AX52##), State: ERR PREOP INIT_ERR, CRC: 0.0 
+            //Select "Op" in Actual State to see the send frames and other data to check the condition
+            //Click on SlnExplorer > I/O > Devices > NIC(EtherCAT) > Drive and open the Drive manager tab in the center panel
+            //You can see the error codes at the table under "Diagnostic Code" column
+                //After making changes, click on "download" located below the list of tabs in the Drive Manager tab
+                //Then click on "Activate configuration" from the menu
+            //Under ChannelA, open the "Motor and Feedback"
+            //Open the dropdown menu under "Feedback 1 connector" and select 14 X14(One cable feedback)
+            //Click on "Scan feedback 1 / motor" and everything will be configured automatically
+            //Make sure the DCLinkOk columns are green
+            //Click on "Set NC Parameters" button and then click on "Activate Configuration" at the main menu
+            //Restart TwinCat in runMode => OK            
+    //Linking to NC
+            //RightClick on SolutionExplorer > Project > Motion, then Add New Item and select NC/PTP Configuration (PTP = Point to Point)
+            //A new dropdown (NC-Task) item will be added to the Motion subfolder
+            //RightClick on NC-Task > Axes and add new item (ContinuousAxis, EncoderAxis, TimeGenerator, 2SpeedDiscreteAxis, LowCostStepperAxis)
+            //Select ContinuousAxis and "Axis1" will appear under NC-Task > Axes
+            //Under Axis1, go to the settings tab and click on "LinkToI/O" button
+            //Change the setting, save and click on "Activate Configuration" again
+            //Under Axis1, go to the Online tab. The number with the largest font size is the current position
+            //Click on F8 to reset
+            //To activate the limit switches, under "Enabling" section, click on set button and tick on Controller, FeedFw, FeedBw. Then F8(Reset) button
+            //F5 to enable
+    //Now you can jog the motor with F1 to F4
+
 
 
 
