@@ -6,6 +6,7 @@ CONTENTS
 04. Testing part 2
 05. EtherCAT
 06. Numeric Control
+07. PLCOpen Standards
 
 01. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONNECTING TO PLC
@@ -188,6 +189,47 @@ Numerical Control -
             //F5 to enable
     //Now you can jog the motor with F1 to F4
 
+07. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+PLCOpen Standards
+    Programming standards and libraries
+    https://www.plcopen.org
+    Adding Library
+        RightClick on SolutionExplorer > Project > PLC > Project > Project > References, and click on AddLibrary
+        Open Motion > PTP and add in Tc2_MC2 and Tc2_NC
+    Add in "AxisA : AXIS_REF;" into the Program Main
+    Add in "AxisA.ReadStatus();" into the Program Main - Sub
+    Then go to Solution Explorer > TwinCAT > Motion > NC_Task > Axes > Axis 1 and open up settings tab
+    Click on "Link to PLC" button and select Main.AxisA(Untitled Instance)
+    Save and "Acitvate Configuration"
+    Once on Run mode tab, open up AxisA tree
+    //Example
+        //Program_Main - Main
+            VAR
+                heartbeat : BYTE;
+                one AT %Q* : BOOL; 
+                two AT %Q* : BOOL;
+                three AT %Q* : BOOL;
+                four AT %Q* : BOOL;
+                
+                prox AT %I* : BOOL; //Input
+                
+                AxisA : AXIS_REF;
+            END_VAR
+
+        //Program_Main - Sub
+            heartbeat := heartbeat + 1;
+            IF prox = TRUE THEN
+                one := heartbeat MOD 2 = 0; 
+                two := heartbeat MOD 4 = 0; 
+                three := heartbeat MOD 8 = 0;
+                four := heartbeat MOD 16 = 0;
+            ELSE
+                one := FALSE; 
+                two := FALSE; 
+                three := FALSE; 
+                four := FALSE; 
+            END_IF    
+            AxisA.ReadStatus();
 
 
 
