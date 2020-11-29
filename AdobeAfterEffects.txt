@@ -1,4 +1,4 @@
-AfterEffects
+Good to use 4k clip on 1080p sequence so your effects wont bleed out of the video frame (visible black off screen background)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
 01 - Create new composition
@@ -25,7 +25,9 @@ CONTENTS
 22 - Green Screens
 23 - Masking
 24 - Rotoscoping
-24 - Motion Tracking
+25 - Motion Tracking
+26 - Exporting
+27 - Time stretching
 
 
 
@@ -298,14 +300,14 @@ CONTENTS
         Reload video (text with green background) as new composition
         Use keylight to remove the green backtround
 
-23 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////22
+23 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////23
 //Masking
     Masking transition
         Similar to Premier Pro masking transition for videos using the pen tool
     Rotoscope masking
         Use rotoscope tool to skip the painstaking pen tool for complex objects like moving hands
 
-23 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////22
+24 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////24
 //Rotoscoping
     Advanced version of masking
     Isolating the wrist and fingers movement with the rotobrush tool
@@ -319,23 +321,47 @@ CONTENTS
         Once you've completed with the selection, slice and duplicate the clip and then remove the rotoscope effect from the original clip
         Play with transparent background switched on
 
-24 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////22
+25 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////25
 //Motion Tracking
-    Menu > Animation > Track Motion
+    //Positional
+        Menu > Animation > Track Motion
+        Move the tracking area to the object you want to be tracked
+        Once done, click play on the Tracker Tab
+        Once the process is complete, click stop.
+        To link a text to the motion tracker
+            - Menu > Layer > New > NullObject, this will create Null layer
+            - Highlight Null layer and click on edit target in tracker tab. 
+            - Select Null layer and the hit Apply in Tracker Tab
+            - This will lead you back to the composition. Add text to the composition 
+            - In the timeline panel, find the curly icon (parent column) and drag the icon from text layer to the Null layer 
+    //Rotation/Scale
+        Give the Rotation and scle checkbox a ticked
+        Adjust the 2 trackpoints. The rest of the process is similar to the position tracking
+        Makesure the tracking points are contrasting from its backgound, otherwise the scaling wont work
+        To realign the text, adjust the motion tracking sequence in Null layer
 
 
-
-
-
-
-	
-
-
-
-
-
-
-
+26 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////26
+//Exporting
+    Menu > Composition > Add to Render queue //Slow render and output files are large, press CapsLock to disable frame by frame live preview  for fastetr render
+    Menu > Composition > Add to Adobe Encoder Queue, This will open Adobe media encoder. Use H.264 for mp4
+	Exporting with transparent background
+        In Adobe Media Encoder, wait for your composition to pop up in Queue tab and then click on quicktime
+        Use Quicktime renderer in Adobe Media encoder
+        Under video tab, go to video codec section, select "Animation"
+        At render section, go to Max depth section(located above advanced setting section), and give 8bpc + alpha a tick
+        In "Output Name:", select your folder location and save
+        At the top right hand corner of the window, hit the "start queue" button (play icon)
+    Exporting as image
+        Composition > Save frame as
+        Do your settings and click "render"
+        
+        
+27 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////27
+//Time stretching
+    RightClick on clip layer and select "time"
+    If time = 200, it slows down. 50, it speeds up. 100 is default
+        
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Additional - Industry standards
@@ -353,32 +379,6 @@ CONTENTS
     //Add "adjustment layer" (similar to adding compressors into the mastering in music production)
         Add "Lumetri" color correction effect into this layer, In Creative > Look, use "SL Iron LDR"
     //Match the clip's fps to the compostion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //You can Copy/Paste keyframes to another layer 
+    //Apply "easy-ease" on motion keyframes
 
