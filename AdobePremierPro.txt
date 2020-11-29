@@ -1,23 +1,32 @@
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
-01 - Color Grading Matching
+01 - Color Grading & Correction
 02 - Keyboard Shortcuts
 03 - Other Tips
 04 - Transition
-
-
+05 - Motion Tracking
+06 - Exporting
+07 - Video speed manipulation
 
 
 
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Color Grading Matching
-	//With 2 videos (source and target) within a single timeline, Go to effects control and add in Lumetri Color
-	//Under "Color Wheels and Motions", lick on "Composition View" to bring both videos up onto the sequence panel to be compared side by side
-	//Source will be on the left and target will be on the right, the arrows below the source video represents the clips selected
-	//Hit the "Apply match" button
-
+Color Grading & Correction
+    //Color correction - matching the color palette between 2 clips or the shooting site
+    //Color grading - enhancing the colour palette, correct first before grading, i.e recording vs mastering in audio production
+    //Import a LUT
+            //Under Lumetri panel, go to creative tab. Click on "Look". Choose one or import 
+            //List of good LUT:  
+                        Fuji Eterna 250D Kodak 2395 (by Adobe)
+    //Color Grading Matching
+            //With 2 videos (source and target) within a single timeline, Go to effects control and add in Lumetri Color
+            //Under "Color Wheels and Motions", lick on "Composition View" to bring both videos up onto the sequence panel to be compared side by side
+            //Source will be on the left and target will be on the right, the arrows below the source video represents the clips selected
+            //Hit the "Apply match" button
+    //Adjustment Layer - To overlay multiple clips within a single layer without having to adjust the color to all the clips individually
+            Under Lower Project Panel, RightClick and click on "New Item" andthen "Adjustment Layer"
+            Then drag the layer into the timeline
 
 02. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Keyboard Shortcuts and Other Tips
@@ -45,6 +54,9 @@ Other Tips
             Or alternatively you can go to the source panel and open the effects control tab, under Video effects > Motion, adjust the scale
     //Viewing the audio waveform in the timeline
             Adjust the size by adjusting the scrollbar on the right hand side of the panel
+    //Importing Transition&Effects Presets
+        Under Timeline layer section, go to Effects tab and Right click on Presets folder
+    //Vignette == Border
 
 
 04. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,13 +77,51 @@ Transitions
 
 
 
+05. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Motion tracking
+    //Motion tracking with MaskPath - CPU heavy
+        It works like the rotoscope in after effects, using AI to track
+        Effects > Opacity > Create ellipse around the target
+        Press "play" under Opacity > Mask > Mask Path
+    //Once the path complete rendering, you can it with transparent background
+        Export sequence and render it as Quicktime instead of H.264 in the Format - this will give you another selections in "Video Codec" section
+        In the VideoCodec section, choose "Animation"
+        In the Effects-Video-Audio section, open the video tab
+            Change "Depth" to 8-bpc+alpha
+        Under BasicVideoSetting section, change width and height to 1920 and 1080
+        Choose your location and click export
+        
+
+06. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Exporting
+    Exporting selected time/section of the clip 
+        Select the start point by pressing "I" and select the end point by pressing "O"
+        Pre-render (for previewing your creations) and also makes your exports quicker
+                For video clips, Menu > Sequence > Render In to Out
+                If you are using alot of effects, Menu > Sequence > Render Effects In to Out
+        NOTE: To export to mp4, make sure in the Export settings,"Source Range" is set to "Sequence In/Out"
+    Export sequence 
+        Menu > File > Export > Media
+        Export settings:
+            Format: H.264 (For Mp4)
+            Preset: Match source - High Bit Rate
+    Exporting as images
+        In the multitrack panel, go to the time frame of your selected image target and using the Razor, slice the clip
+        Press "I" and "O" at the exact location //this will select as one single frame
+        Menu > File > Export Media
+        Change "Format" to an image format of your choice
+    Format Presets, they have Youtube1080P & 4k presets  
+    Exporting to maximum quality - CPU Heavy
+        Format: H.264
+        Preset: Match Source - High Bitrate
+        Under tabs Effects-Video-Audio Tabs section, check the tickbox on "Render at Maximum Depth"
+        Under Export button section, check the tickbox for "Use Maximum Render Quality"
 
 
+07. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Video speed manipulation
 
 
-
-
-2:06:20
 
 
 
