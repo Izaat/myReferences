@@ -120,6 +120,21 @@ Transitions
 
 07. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Video speed manipulation
+    Basics
+        In the multitrack panel, RightClick on the and select Speed/Duration
+        NOTE: keep the link icon activated
+        Reverse speed = reversing the clip or use "-100%" in speed input box
+    Intermediate - Speed Ramp (Automate the video speed)
+        In the multitrack panel, enlarge the video track preview height using the scrollbar 
+        Find the small "FX" icon and RightClick on it, select TimeRemapping > Speed
+        At the video time position where you want to adjust the speed, use the pen tool and click on the clip - an adjustable section will show up on top
+        Open up the section to select your length of time, this will be your "transition time" section
+        Use the normal mouse (Selection Tool) to drag the line OUTSIDE the "transition time" section upwards to increase the clip speed, or downwards to decrease the speed
+        Drag the the center marker horizontally in the transition time section to adjust the time easing. Default is the gradual 45 degree slope. Max is a vertical slope.
+    Intermediate    
+        Speed Ramp Transitions
+
+
 
 
 
