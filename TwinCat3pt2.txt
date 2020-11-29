@@ -1,3 +1,4 @@
+TIPS: When in doubt about the naming conventions or spellings, press CTRL + Spacebar
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
 01. Connecting to the PLC
@@ -7,6 +8,7 @@ CONTENTS
 05. EtherCAT
 06. Numeric Control
 07. PLCOpen Standards
+08. MC_Power, MC_Reset, MC_Jog
 
 01. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONNECTING TO PLC
@@ -232,9 +234,86 @@ PLCOpen Standards
             AxisA.ReadStatus();
 
 
+08. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+MC_Power, MC_Reset, MC_Jog
+    //Program_Main - Main
+            VAR
+                heartbeat : BYTE;
+                one AT %Q* : BOOL; 
+                two AT %Q* : BOOL;
+                three AT %Q* : BOOL;
+                four AT %Q* : BOOL;
+                
+                prox AT %I* : BOOL; //Input
+                
+                AxisA : AXIS_REF;
+                
+                McPower : MC_Power;
+                McReset : MC_Reset;
+                McJogging : MC_Jog;
+            END_VAR
 
+        //Program_Main - Sub
+            heartbeat := heartbeat + 1;
+            AxisA.ReadStatus();
+    
+    //Under MAIN(Online) Tab, open up the McPower Tree
+        Earlier, we activated these 3 manually. Now we have to activate them using PLC
+            Enable, Enable_Position, Enable_Negative = Controller, FeedFw, FeedBw
+        Override = Speed of axis
 
+    //Program_Main - Main
+            VAR
+                heartbeat : BYTE;
+                one AT %Q* : BOOL; 
+                two AT %Q* : BOOL;
+                three AT %Q* : BOOL;
+                four AT %Q* : BOOL;
+                prox AT %I* : BOOL; //Input
+                AxisA : AXIS_REF;
+                
+                McPower : MC_Power;
+                McReset : MC_Reset;
+                McJogging : MC_Jog;
+                iState : DINT;
+            END_VAR
 
+        //Program_Main - Sub
+            heartbeat := heartbeat + 1;
+            AxisA.ReadStatus();
+            
+            //McPower(Axis:=AxisA);
+            McPower(Axis:=AxisA, Enable:=TRUE, Enable_Positive:=TRUE, Enable_Negative:=TRUE);      //Powering up the drive for Case State 20
+            McReset(Axis:=AxisA);
+            McJogging(Axis:=AxisA);
+            
+            CASE iState OF
+                0: //Initialize
+                    iState := 10;
+                
+                10: //Start Drive Reset
+                    McReset(Axis:=AxisA, Execute:=TRUE);
+                    IF McReset.Done THEN
+                        iState := 20;
+                    ELSE IF McReset.Error THEN
+                        iState := 999;
+                    END_IF
+                    
+                20: //Wait for Drive to reset
+                    IF McPower.Status THEN             //This needs to be True. But in order to make it true, parameters (Enable, Enable_Positive, Enable_Negative)  
+                        iState := 30;                  //need to be added into the McPower. See Above (//Powering up the drive)
+                    END_IF
+                
+                30:  //Wait for drive command
+                    McJogging(Axis:=AxisA, JogForward:=prox);               //The jogging is tied to the Digital input of the PLC
+                    
+                999: //Error handling
+            END_CASE
+
+        //At this point, you may save and run the program
+        //Motor will rotate when you activate the proximity sensor
+
+09. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
