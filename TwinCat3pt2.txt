@@ -9,6 +9,7 @@ CONTENTS
 06. Numeric Control
 07. PLCOpen Standards
 08. MC_Power, MC_Reset, MC_Jog
+09. MC_Velocity
 
 01. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONNECTING TO PLC
@@ -314,6 +315,87 @@ MC_Power, MC_Reset, MC_Jog
         //Motor will rotate when you activate the proximity sensor
 
 09. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+MC_Velocity     == 11 points
+
+    //Program_Main - Main
+            VAR
+                heartbeat : BYTE;
+                one AT %Q* : BOOL; 
+                two AT %Q* : BOOL;
+                three AT %Q* : BOOL;
+                four AT %Q* : BOOL;
+                prox AT %I* : BOOL; //Input
+                AxisA : AXIS_REF;
+                
+                McPower : MC_Power;
+                McReset : MC_Reset;
+                McJogging : MC_Jog;
+                
+                McVelocity : MC_MoveVelocity;
+                McStop : MC_Stop;
+                CurrentVelocityCmd : DINT;                        //01. Use for checking output and testing, 
+                                                                  //no scale installed so we do not know the unit being used (mm/s or rpm) therefore the existence of this line
+                iState : DINT;
+                
+            END_VAR
+            
+            
+    //Program_Main - Sub
+            heartbeat := heartbeat + 1;
+            currentVelocityCmd := 1000;                           //02. Giving the value since we don't have the unit yet
+            AxisA.ReadStatus();
+            
+            //McPower(Axis:=AxisA);
+            McPower(Axis:=AxisA, Enable:=TRUE, Enable_Positive:=TRUE, Enable_Negative:=TRUE);  
+            McReset(Axis:=AxisA);
+            McJogging(Axis:=AxisA);
+            
+            CASE iState OF
+                0: //Initialize
+                    iState := 10;
+                
+                10: //Start Drive Reset
+                    McReset(Axis:=AxisA, Execute:=TRUE);
+                    IF McReset.Done THEN
+                        iState := 20;
+                    ELSE IF McReset.Error THEN
+                        iState := 999;
+                    END_IF
+                    
+                20: //Wait for Drive to reset
+                    IF McPower.Status THEN           
+                        iState := 40;                                 //04. To replace "Goto Case 30" with "Case 40"
+                    END_IF
+                
+                30:  //Wait for drive JOG command                     //03. This will be assigned as Jogging command
+                    McJogging(Axis:=AxisA, JogForward:=prox);    
+                    
+                40: //Wait for velocity command                       //05. To add thisline to make way for MC_Velocity command
+                    MCVelocity(
+                        Axis:=AxisA,
+                        Velocity:=CurrentVelocityCmd,
+                        Acceleration:=10000,                           //06. Value to be obtained through trial and error
+                        Deceleration:=10000,
+                        Jerk:=1000000,                                  //07. Change of acceleration limitation, and this value means no limit.
+                        Direction:=MC_Direction.MC_Positive_Direction,
+                        Execute:=prox                                   //08. This will execute on the rising edge of prox sensor. But this wont stop the motor hence we require a IF command to stop the motor
+                    );
+                    
+                    IF NOT prox THEN
+                        McVelocity(Axis:=AxisA, Execute:=FALSE);        //09. This stops the motor when proximity sensor is not activated
+                        iState:=900;                                    //10. this will jump to case 900
+                    END_IF
+                    
+                900: //Stop Servo                                       //11. This Will be the Stop function and will jump back to case 40
+                    McStop(Axis:=AxisA, Execute:=TRUE);
+                    IF prox THEN
+                        McStop(Axis:=AxisA, Execute:=FALSE);                
+                        iState := 40;
+                    END_IF
+                    
+                999: //Error handling
+            END_CASE
+
 
 
 
