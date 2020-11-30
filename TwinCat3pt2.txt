@@ -10,6 +10,7 @@ CONTENTS
 07. PLCOpen Standards
 08. MC_Power, MC_Reset, MC_Jog
 09. MC_Velocity
+10. Using game throttle to control motor speed
 
 01. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONNECTING TO PLC
@@ -398,6 +399,126 @@ MC_Velocity     == 11 points
 
 
 
+10. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Using game throttle to control motor speed == 7 points
+    
+    //02. Add Functions MAP (FUN)
+    //PLC > Project > Project > POU > Functions
+    //FUN - MAP - Main
+            FUNCTION MAP : DINT
+            VAR_INPUT
+                x : DINT;
+                in_min : DINT;
+                in_max: DINT;
+                out_min: DINT;
+                out_max: DINT;
+            END_VAR
+    //FUN - MAP - Sub
+            IF ((in_max - in_min) + out_min) <> 0 THEN
+                MAP := DINT_TO_INT((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
+            ELSE
+                MAP := 0;
+            END_IF
+            RETURN;
+    
+    //Program_Main - Main
+            VAR
+                heartbeat : BYTE;
+                one AT %Q* : BOOL; 
+                two AT %Q* : BOOL;
+                three AT %Q* : BOOL;
+                four AT %Q* : BOOL;
+                
+                prox AT %I* : BOOL; //Input
+                
+                //Dynamic throttling
+                Throttle AT %I* : INT;                                               
+                LastThrottle :INT;                                                                      
+
+                //01. For the game throttle. In order to know if its INT, go to SlnExplorer >> Term1 (EK1100)> Term2 (EL3255) 
+                    //Where the throttle is connected> AI Standard Ch 1 > Value  > Open Online Tab
+                    //under Value textbox, the number is in "counts" and the number in <9.09> represents the voltage //voltage and counts drops as soon as you crank the throttle
+                    //under Variable tab, see "Type:". "Size:" is in bytes.
+                    //Go to Menu > Build > BuildSolution 
+                    // Once completed, RightClick on SlnExplorer >> Term2 > AI Standard Ch1 > Value, and select "ChangeLink"
+                    //DoubleClick on "MAIN.Throttle", save file and click on "Activate Configuration"
+                    //LogIn and Run the PLC
+       
+                AxisA : AXIS_REF;                                                                      
+                //                                                                                              
+                McPower : MC_Power;                                                             
+                McReset : MC_Reset;                                                              
+                McJogging : MC_Jog;
+                
+                McVelocity : MC_MoveVelocity;
+                McStop : MC_Stop;
+                CurrentVelocityCmd : DINT;  
+                
+                iState : DINT;
+                
+            END_VAR           
+            
+    //Program_Main - Sub
+            heartbeat := heartbeat + 1;
+            //currentVelocityCmd := 1000;                                         //03. Remove this line and add the followings
+                CurrentVelocityCmd := MAP(Throttle,29800, 22600, 0, 2800);        //04. MAP(Input, No throttle, Max throttle, min speed of motor, max speed of motor )
+                IF CurrentVelocityCmd < 50 THEN
+                    CurrentVelocityCmd := 0;                                      //07. Adding the biting point to the throttle. Therefore throttle needs to crank more then 50 then motor will start
+                END_IF
+            AxisA.ReadStatus();
+            
+            //McPower(Axis:=AxisA);
+            McPower(Axis:=AxisA, Enable:=TRUE, Enable_Positive:=TRUE, Enable_Negative:=TRUE);  
+            McReset(Axis:=AxisA);
+            McJogging(Axis:=AxisA);
+            
+            CASE iState OF
+                0: //Initialize
+                    iState := 10;
+                
+                10: //Start Drive Reset
+                    McReset(Axis:=AxisA, Execute:=TRUE);
+                    IF McReset.Done THEN
+                        iState := 20;
+                    ELSE IF McReset.Error THEN
+                        iState := 999;
+                    END_IF
+                    
+                20: //Wait for Drive to reset
+                    IF McPower.Status THEN           
+                        iState := 40;                                     
+                    END_IF
+                
+                30:  //Wait for drive JOG command                         
+                    McJogging(Axis:=AxisA, JogForward:=prox);    
+                    
+                40: //Wait for velocity command                        
+                    MCVelocity(
+                        Axis:=AxisA,
+                        Velocity:=CurrentVelocityCmd,
+                        Acceleration:=10000,                                      
+                        Deceleration:=10000,
+                        Jerk:=1000000,                                                   
+                        Direction:=MC_Direction.MC_Positive_Direction,
+                        Execute:=prox   AND (LastThrottle<>Throttle)                 //05. Adding LastThrottle not equals to throttle
+                    );
+                    
+                    IF NOT prox THEN
+                        McVelocity(Axis:=AxisA, Execute:=FALSE);       
+                        iState:=900;                                                       
+                    END_IF
+                    
+                    LastThrottle := Throttle;                                        //06. Changing the max every scan cycle
+                    
+                900: //Stop Servo                                               
+                    McStop(Axis:=AxisA, Execute:=TRUE);
+                    IF prox THEN
+                        McStop(Axis:=AxisA, Execute:=FALSE);                
+                        iState := 40;
+                    END_IF
+                    
+                999: //Error handling
+            END_CASE
 
 
 
