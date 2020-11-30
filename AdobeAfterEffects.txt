@@ -29,6 +29,7 @@ CONTENTS
 26 - Exporting
 27 - Time stretching
 28 - Additional
+29 - Creating Lower Thirds
 
 
 01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
@@ -382,3 +383,9 @@ CONTENTS
     //You can Copy/Paste keyframes to another layer 
     //Apply "easy-ease" on motion keyframes
 
+29 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////28
+//Creating Lower Thirds - The Title animation that pops up at the bottom of  the screen
+    Create shape - The background for text
+    Pre-compose the shape layer
+    Highlight pre-compose layer and use the pen tool to draw a mask (this creates a layer under the pre-compose layer)
+    Enable the MaskPath timing and select Mask path to animate the entire mask shape to the end position
