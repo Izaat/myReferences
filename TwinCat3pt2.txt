@@ -10,7 +10,7 @@ CONTENTS
 07. PLCOpen Standards
 08. MC_Power, MC_Reset, MC_Jog
 09. MC_Velocity
-10. Using game throttle to control motor speed
+10. Using throttle to control motor speed
 
 01. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONNECTING TO PLC
@@ -400,7 +400,7 @@ MC_Velocity     == 11 points
 
 
 10. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Using game throttle to control motor speed == 7 points
+Using a throttle to control motor speed == 7 points
     
     //02. Add Functions MAP (FUN)
     //PLC > Project > Project > POU > Functions
