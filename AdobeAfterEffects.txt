@@ -30,6 +30,7 @@ CONTENTS
 27 - Time stretching
 28 - Additional
 29 - Creating Lower Thirds
+30 - Duplicating a person to 2 people effect
 
 
 01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
@@ -389,3 +390,10 @@ CONTENTS
     Pre-compose the shape layer
     Highlight pre-compose layer and use the pen tool to draw a mask (this creates a layer under the pre-compose layer)
     Enable the MaskPath timing and select Mask path to animate the entire mask shape to the end position
+
+
+30 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////30
+//Duplicating a person to 2 people effect
+    Layer 2 clips over the other in the multitrack
+    Select a clip layer and use the pen tool to draw a mask over
+    Play video
