@@ -7,8 +7,7 @@ CONTENTS
 05 - Motion Tracking
 06 - Exporting
 07 - Video speed manipulation
-
-
+08 - Video Effects
 
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -135,7 +134,38 @@ Transitions
         Speed Ramp Transitions
 
 
-
+08. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Video Effects
+    //Stabilizing shaky clips - Just like in AfterEffects, try doing this on a larger clip with smaller screen
+            - Video Effects > Distort > Warp Stabilizer
+    //Green Screen Editing
+        Removing the green background 
+            - Video Effects > Keying > Ultra Key     
+            - Use the eyedropper and click on the background
+    //Automating clips to align itself to the music beats - It will save you days of manual editing
+            - Go to multitrack without selecting any layers with music clip already added to the multitrack, 
+            - Make sue the audio track is on the second audio layer to make way for the clips  that has audio track in ithem
+            - Play audio clip and add markers by pressing 'M' on every beat - markers will be shown above the time ruler
+            - Then realign those markers to snap onto the nearest frames
+            - Insert 'In' point to the clips you are going to use in the source panel
+            - Highlight all the clips 'Shift + Click'
+            - Go to Menu > Clip > Automate to Sequence
+            - In the dialog box, under the "To-Come-for-ya" section, Change Placement settings to "At unnumbered markers" and click 'OK'
+            - Adjust the video clips and then click on Menu > Sequence > Render-in-and-out
+            - Play and watch the sequence play synced to the beat
+    //Auto sync pre-recorded music audio track to footage music audio
+            - Highlight all clips and RightClick
+            - Click on 'Synchronize'
+    //VHS effect
+            Video Effects > Distort > Wave Warp
+                WaveType : Sine
+                WaveHeight: 25
+                WaveWidth: 1000
+                Direction: -0.1
+                Pinning: AllEdges
+            Video Effects > Noise & Grain > Noise
+                Amount of Noise: 20%                
+            Export    
 
 
 
