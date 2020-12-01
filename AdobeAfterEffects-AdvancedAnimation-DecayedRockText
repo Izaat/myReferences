@@ -7,6 +7,8 @@ CONTENTS
 04 - Lightings
 05 - Detailings for 3D text edges
 06 - Extrude
+07 - Surface details (Layer 1) - Moss Effect
+08 - Surface details (Layer 2) - Cracks Effect
 
 
 01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
@@ -139,3 +141,95 @@ CONTENTS
         Intensity: 140%
         Reposition if you need to
             
+07 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Surface details (Layer 1) - Moss Effect
+    Duplicate Alpha layer
+        Precompose the layer and name it MainMoss
+    Hide the MainMoss layer by deactivating the eye in the main composition
+    Open the composition on split screen
+        Hide the Alpha layer by deactivating the eye
+        Create a new solid layer in the composition
+            Menu > Layer > New > Solid
+            Name it Moss
+            Add Cell Pattern Effect
+                Effect & Preset Tab > Generate > Cell Pattern
+                    Contextual Slider: 280.0
+                    Size: 6.0
+            Add Turbulent Displace Effect        
+                Effect & Preset Tab > Distort > Turbulent Displace
+                    Amount: 100
+                    Size: 2.0
+                    Complexity: 2.0
+            Add Fractal Noise Effect        
+                Effect & Preset Tab > Noise & Grain > Fractal Noise
+                    Contrast: 250.01
+                    Brightness: -35.0
+                    Blending Mode: Change 'Normal' to 'Multiply'
+    Duplicate Texture/Title Layer and name it 'MossFX'
+        Delete all the effects contained in it
+        Solo this layer
+        Add Color Correction Curves 1
+            Menu > Effects > Color Correction > Curves
+                Lower down the white in RGB range to 1/4th the scale
+        Add in the CC Glass effect
+            Menu > Effect > Stylize > CC Glass
+                Surface Section
+                    Bump Map: MainMoss
+                    Softness: 0.0
+                    Displacement: 0.0
+                    //Height: 20.0 - This can create indentations to the effect
+                Light Section
+                    Using: AE Lights
+                Shading
+                    //Ambient: 90.0
+                    //Metal: 1.0
+        Add in Transparency (SetMatte1)
+            Menu > Effect > Channel > Set Matte
+                Take Matte From Layer: Alpha (Main Alpha Layer)
+        Add in Transparency (SetMatte2)
+            Menu > Effect > Channel > Set Matte
+                Take Matte From Layer: MainMoss
+                Use For Matte: Luminance
+        Add Color Correction Curves 2
+            Menu > Effects > Color Correction > Curves
+                Channel: Alpha  
+                    Grab any point in the graph and crank up the line to vertical 
+        //Add in DropShadow Effect
+            Effects & Presets Tab
+                Perspective > Drop Shadow
+                    Opacity: 100%
+                    Direction: Rotate until it aligns with the light
+                    Distance: 2.0
+                    
+    Unhide the MossFX
+    Removing the MossFX from the Bevel
+        Add Simple Choker Effect
+            Menu > Effect > Matte > Simple Choker
+            Move the effect between the SetMatte effects
+                ChokeMatte: 24.0          
+        Softening the ChokerEffect edges
+            Menu > Effect > Blur & Sharpen > Channel Blur 
+            Move the effect below the Choker effect
+                Alpha Blurriness: 8.0
+    Color Correction on MossFX
+        Menu > Effect > Color Correction > Curves
+            Bring down the Red channel
+            Bring up the red channel
+    Animating
+        Open MainMoss Composition
+            You can add in keyframes for any attributes under Cell Pattern effect
+            You can also use the Fractal Noise > Brightness to animate depletion and growth
+
+08 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Surface details (Layer 2) - Cracks Effect
+
+
+
+
+
+
+
+
+
+
+
