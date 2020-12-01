@@ -87,6 +87,7 @@ Structures
 05. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //StatelessWidget vs StatefulWidget
     Stateless: cannot change overtime as we use the app
+        Flutter has an awesome feature in StatelessWidget where it changes only the minor changes without restarting the app
         Example: layouts like the menu list
     Stateful: can change over time as we use the app, 
         Example: score texts in mobile games, 
@@ -113,3 +114,13 @@ Structures
     Based on point 6, the StatelessWidget has its own build() function. 
     By adding @override, it uses the build() function that you created in Scaffold(), 
     instead of using the build() function your class inherited from the StatelessWidget class
+    Be aware of all the functions within the StatelessWidget and StatefulWidget while programming
+    
+    
+    
+    
+    
+    
+    
+    
+    
