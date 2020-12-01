@@ -87,7 +87,7 @@ Structures
 05. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //StatelessWidget vs StatefulWidget
     Stateless: cannot change overtime as we use the app
-        Flutter has an awesome feature in StatelessWidget where it changes only the minor changes without restarting the app
+        Flutter has an awesome feature in StatelessWidget where it changes only the minor changes in realtime without restarting the app
         Example: layouts like the menu list
     Stateful: can change over time as we use the app, 
         Example: score texts in mobile games, 
