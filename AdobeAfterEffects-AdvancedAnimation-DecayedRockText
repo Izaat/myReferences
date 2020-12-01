@@ -6,7 +6,7 @@ CONTENTS
 03 - Text Texture and 3D stylings
 04 - Lightings
 05 - Detailings for 3D text edges
-06 - 
+06 - Extrude
 
 
 01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
@@ -112,4 +112,30 @@ CONTENTS
                 Opacity: 80%
                 
 06 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                
+//Extrude
+    Duplicate the Texture/Title layer and name it "Extrude"
+        Place it below Texture/Title Layer above Shadows layer 
+        Add Radial Blur Effect
+            Menu > Effect > Blur & Sharpen > CC Radial Blur
+                Type: Change "Scratch" to "Fading Zoom"
+                Amount: -8.0
+        Add in Color Correcting Curves effect
+            Menu > Effect > Color Correction > Curves
+                Channel: Alpha
+                    Move the black curve graph line to be vertical (This will make it look more like solid instead of blurry effect)
+                Channel: RGB
+                    Darken it down by lowering the white line
+    Highlight the 2 shadow layers and hit "S" to open up the Scale
+        Scale it down until the shadow aligns to the depth of the Extrude layer
+    Select Texture/Title layer
+        Add in Color Correcting Curves effect
+            Menu > Effect > Color Correction > Curves
+            In the Effect Controls tab, Place the effect right at the top 
+            Darken it by bringing down the white curve
+        Under CCGlass effect, open the "Shading" tree
+            Diffuse: 36.0
+            Roughness: 0.14
+    Adjust the Point Light layer
+        Intensity: 140%
+        Reposition if you need to
+            
