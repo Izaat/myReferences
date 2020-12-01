@@ -11,6 +11,7 @@ CONTENTS
 08. MC_Power, MC_Reset, MC_Jog
 09. MC_Velocity
 10. Using throttle to control motor speed
+11. Configuring a Stepper Motor
 
 01. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONNECTING TO PLC
@@ -521,7 +522,110 @@ Using a throttle to control motor speed == 7 points
             END_CASE
 
 
+11. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Configuring a stepper Motor
+Running Stepper Motor with Beckoff EL4071 Slice
 
+    Restart TwinCAT System in Config Mode
+                Load Devices: Yes
+                Free Run Mode: No
+    Adding new Device and Configurations
+        RightClick on Solution Explorer > I/O > Devices
+            Add New Item
+            Select EtherCAT > EtherCAT Master 
+            Device 2 will appear
+        Highlight Device 2
+            Open up Adapter Tab
+            Search > Select PCI Bus/Slot 3/0 Slot 7
+        In SolutionExplorer, RightClick on Device2 and Scan
+            Scan Motors? : Yes
+            Append linked axis to: NC-Configuration
+        In SolutionExplorer
+            Open I/O > Device2 > Term1
+                Inside will be the list of all the new devices found
+                Take note of the names
+            Open Motion > NC-Task1 > Axes
+                Find stepper's interface, the name will appear in the Settings tab > Link To I/O textbox
+            Disable the unwanted axis
+    Activate Configuration
+        In SolutionExplorer            
+                Open Online Tab                
+                    Check all boxes in Enabling section and click set
+                    Reset(F8)
+                    Switch drive ON (F5)
+                    Jog (F1-F4)
+                        Error: TCNC (500): error 6.187082 exceeds limit of 5.00 // 17744 (0x4550)
+                        This is under controller error Error(Hex) Column 4550
+                        Lag Distance: How for current distance is from your commanded distance
+                            This can happen if you motor's overloaded or stalled
+                            Otherwise, motor not configured properly
+        In SolutionExplorer
+            Open Motion > NC-Task1 > Axes > Axis
+                Set Encoder
+                    Open "Enc" and open NC-Encoder Tab
+                    Under Type:
+                        Select Simulation encoder since there is no encodeer for the stepper motor
+                        This method bypass the physical encoder by linking the input command directly to the encoder input of PLC        
+    Activate Configuration                    
+        Reset, SwitchON and Jog
+        Notice in the Online tab, the current position is out of the position but it can still run
+    Stepper Motor
+        Stepping
+            1.8 degree/Step
+            360 / 1.8 = 200 steps per revolution
+        Microstepping
+            Using PWM to increase the resolution by 64
+            1.8/64 = 0.028125 degrees per microstep
+            64*200 = 12800 steps per revolution
+        Application
+            Motor attached to a gear with 24 teeth. Pitch of belt tooth = 3mm
+            24*3 = 72mm per rev, this will be the 'Feed Constant'
+            72/12800 = 0.005625mm per step
+    In SolutionExplorer
+        Open Motion > NC-Task1 > Axes > Axis > Enc
+            Open Parameter Tab
+                Scaling Factor Numerator: Change 0.0001 to 0.005625
+                Click on 'Download' and 'Save Now' to save into registry
+                Scaling Factor Denominator
+                    This is for the system to automatically calculate and adjust itself if a weird number like 0.0066666666666666666667 is set to the 'ScalingFactorNumerator' 
+                    Because if without this being set, your conveyor will be out of position by half a meter the next day
+                    Leave it at defauly 1.0
+                Maximum Dynamics   
+                    Use 'Stepper Calculation Tool' software
+                        Input values and set base Frequency to 2000 fullsteps/sec
+                            The higher the value, the faster it goes, but decreases the accuracy
+                        Reference Velocity = 720 mm/sec
+                    Input number 
+                        Reference Velocity: 720
+                        Maximum Velocity: 720
+                Default Dynamics:
+                    Default Acceleration: 167.0 (So it won't skip steps during acceleration)
+                Download and Save        
+        Open Motion > NC-Task1 > Axes > Axis
+            Open Online Tab
+                Target Velocity: 200 mm/s
+                Reset(F8), Switch ON(F5) and Jog
+                
+    Inverting the motor rotation CW/CCW
+        In SolutionExplorer
+            Open Motion > NC-Task1 > Axes > Axis > Drive
+                Open Parameter Tab
+                    Output Settings 
+                        Invert Motor Polarity: TRUE || FALSE
+                        Make sure the change the counting direction as well
+            Open Motion > NC-Task1 > Axes > Axis > Enc
+                Open Parameter Tab
+                    Encoder Evaluation 
+                        Invert Encoder Counting Direction: TRUE || FALSE
+                        
+    Jogging with the Functions Tab                   
+        In SolutionExplorer
+            Open Motion > NC-Task1 > Axes > Axis
+                Open Functions Tab
+                    Target position: -10
+                    Target Velocity: 100        
+                Click Start button
+                You can change Absolute or Relative
 
 
 
