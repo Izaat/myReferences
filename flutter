@@ -1,0 +1,112 @@
+widget_test.dart for debugging
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01. Shortcuts/Tips
+02. Structures
+03. Texts
+04. Colors
+05. StatelessWidget vs StatefulWidget
+06. Hot reload
+07. @override
+
+
+
+
+
+01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Shurtcuts/Tips
+    Press CTRL+Q in Android Studio to open up the list of parameters
+
+02. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+https://api.flutter.dev/flutter/material/material-library.html#classes
+Structures
+    //MaterialApp() == A wrapper and the root widget by google 
+            //Inside MaterialApp bracket, type in, home: Text('Hello'), and end every line/widget with comma. 
+            //SemiColon not being used for widgets
+    //The shortcut called "=>"
+            //void main() => runApp(MaterialApp());
+            //IS SIMILAR TO:
+            //void main() { 
+                runApp( 
+                    MaterialApp(
+                        home: Text('Hello'), 
+                    ) 
+                );
+            }
+    //Instead of using "Text('Hello')," for "home:" inside of "MaterialApp()", we can use "Scaffold()" to activate a tree of of widgets
+    //Scaffolding - You cant even wrap a text in Scaffold. It is just a feature.
+        //Instead, you can us "appBar: AppBar(),". 
+        //To add in text, add in "title: Text('Hello')," into the AppBar()
+        //Example:
+            void main() {
+                runApp(MaterialApp(
+                    home: Scaffold(
+                        appBar: AppBar(
+                            title: Text('Hello'),
+                        ),
+                    ),
+                ));
+            }
+    //Classes, similarities with Html
+        //appBar: is like the header tag in html
+        //body: is similar to body tag in html 
+
+    //body: 
+            this widget has child: 
+
+
+03. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Texts
+    //runApp > MaterialApp() > home: Scaffold() >
+            appBar: AppBar() > title: Text() || centerTitle: true
+            body: Center() > child:Text() > 'String'
+            body: Center() > child: Text() > style: TextStyle() > fontSize || fontWeight
+            floatingActionButton: FloatingActionButton() > child: Text() > 'String'
+                    //for FloatingActionButton(), you must put 'onPressed(){}'
+    //Adding external fonts
+        >>you can download any fonts and add them into a new folder Project > projectName > fonts
+        >>go to pubspec.yaml
+                NOTE: the spaces and alignments are important for this file
+                look for the class called 'fonts:' and enable it by removing the hashes (#)
+                under fonts: > family: , add in the name for the external font file ('YourFont')
+                under fonts: > fonts: > assets: , add in the location of the file
+                    the location of pubspec.yaml is the same as the project folder, therefore 'fonts/YourFont.ttf' as font location
+                under body: Center() > child: Text() > style: TextStyle(), add in fontFamily: 'YourFont'
+                save to update and restart
+
+04. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Colors
+    //runApp > MaterialApp() > home: Scaffold() >
+            appBar: AppBar() > backgroundColor: Colors.red[600]
+            body: Center() > child: Text() > style: TextStyle() > color: Colors.grey[600]
+            floatingActionButton: FloatingActionButton > backgroundColor: Colors.red[600]
+
+05. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//StatelessWidget vs StatefulWidget
+    Stateless: cannot change overtime as we use the app
+        Example: layouts like the menu list
+    Stateful: can change over time as we use the app, 
+        Example: score texts in mobile games, 
+    
+06. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Hot Reload - 
+    For the emulator to automatically reload the app instead of manually doing so
+    Flutter will automatically detect the changes made to the code and updates the app accordingly after you save file
+    Flutter will only update the changes made without handling the entire app, this way, the rebuild will be much faster
+    Such is the power of using StatelessWidget
+    
+    //runApp(); > MaterialApp() > home: yourClassName(),
+    
+    //class yourClassName extends StatelessWidget {
+            @override
+            Widget build(BuildContext context){
+                //return Container( );                          //to replace the Container class with all the contents under Scaffold class
+                return Scaffold(contents bla bla bla);
+            }
+        }
+
+07. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//@override
+    Based on point 6, the StatelessWidget has its own build() function. 
+    By adding @override, it uses the build() function that you created in Scaffold(), 
+    instead of using the build() function your class inherited from the StatelessWidget class
