@@ -1,3 +1,6 @@
+Whenever you see '>' it means that it has to be inside the bracket.
+Example: Class1(); > Class2() > function1, function2 
+Meaning: Class1(Class2(function1, function2));
 widget_test.dart for debugging
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
