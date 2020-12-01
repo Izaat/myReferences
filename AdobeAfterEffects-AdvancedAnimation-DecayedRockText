@@ -1,0 +1,115 @@
+After Effects Decayed Rock 3D Text Animation 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01 - Source Title
+02 - Bevel
+03 - Text Texture and 3D stylings
+04 - Lightings
+05 - Detailings for 3D text edges
+06 - 
+
+
+01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
+//Source Title
+    Create new composition
+    Use text tool to create title 
+    Pre-compose and name it to Alpha
+    Duplicate the PreComp Alpha 
+    PreCompose it another time and call it Bevel
+    
+02 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Bevel   -This creates the chamfer around the text
+    Select Bevel composition and add in inner glow layer style
+        - Menu > Layer > LayerStyles > InnerGlow
+        - BlendMode: Normal
+        - Opacity: 100%
+        - Color: Black
+        - Technique: Precise
+        - Size: 20
+    Add Adjustment Layer
+        - Layer > New > Adjustment Layer
+        - Add in Solid composite to Adjustment Layer   
+            Menu > Effect > Channel > Solid Composite
+                Color: Black
+        - Add in Fast/Box Blur to the Adjustment Layer
+            Menu > Effect > Blur&Sharpen > Fast/Box Blur
+                BlurRadius: 1
+                Iteration: 1
+                RepeatEdgePixels: Yes
+                
+03 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Text Texture with 3D Styling
+    Add a texture image to the main composition and place it on top of all the layers
+        Precompose the image and call it 'Texture'
+    Add in CC Glass to Texture composition
+        Menu > Effect > Stylize > CCGlass
+        Under EffectsControlTab:
+            BumpMap: Change to layer "Bevel" as source
+            Softness: 0.0
+            Displacement: 0.0
+    Add in Set Matte Effect
+        Menu > Effect > Channel > SetMatte
+            TakeMatteFromLayer: Change to Alpha as the source
+    Hide Bevel Layer and Alpha Layer in the Main Composition
+    
+    
+04 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Lightings
+    Adjusting the Light Settings
+        Under Effects Control Tab of Texture composition:
+            CCGlass
+                Light
+                    Using: AE Lights
+    Add in Main Light Layer to Main composition
+        Menu > Layer > New > Light
+        Light Type: Parallel
+        Intensity: 250%
+        Adjust the lighting position on the composition panel using the XYZ axes to light up the target object at an angle
+    Add in Ambient Light Layer to the Main Composition
+        Menu > Layer > New > Light 
+        Light Type: Ambient
+        Intensity: 50%
+    Add in Point Light Layer to the Main Composition
+        Menu > Layer > New > Light 
+        Light Type: Point
+        Color: Any Color
+        Intensity: 50%
+        Reposition light to another end of the screen light up the edges of the target object where the main light doesn't hit
+        
+05 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Detailings for 3D text edges
+    Open up Bevel Composition in split composition screen
+        Then Create new solid 
+            Menu > Layer > New > Solid
+            Name the layer as 'Fractal'
+            Add in Fractal Noise effect into the Fractal composition
+                Effects&PresetsTab > Noise & Grain > Fractal Noise
+            Under the Fractal composition layer's Mode column, change "Normal" to "Add"
+            Under effects control tab, change the Fractal Type settings to Max
+                Fractal Noise
+                    Fractal Type: Max
+                    Invert: Ticked
+                    Contrast: 85.0
+                    Brightness: -20.0
+        Duplicate the Alpha Layer and position this layer on top of the Fractal layer
+            Add in Invert effect to this layer
+                Menu > Effect > Channel > Invert
+            Add in fast/Box Blur effect to this layer
+                    Menu > Effect > Blur&Sharpen > Fast/Box Blur
+                        Blur Radius: 12.0
+            Opacity: 40%
+        Adding Dents
+            Create New solid and name it "Dents"
+                Add in Fractal Noise Effect - Making the surface looks weathered
+                    Effects&PresetsTab > Noise & Grain > Fractal Noise
+                    Under the Dent layer's Mode column, change "Normal" to "Multiply"
+                    Under effects control tab, change the Fractal Type settings
+                        Contrast: 70
+                        Brightness: 60
+                Add in Unsharp Mask effect - Making the indentation sharper looking
+                    Menu > Effect > Blur & Sharpen > Unsharp Mask
+                        Amount: 50
+                Opacity: 80%
+                
+06 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                
