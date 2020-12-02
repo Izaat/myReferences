@@ -2,6 +2,9 @@ Whenever you see '>' it means that it has to be inside the bracket.
 Example: Class1(); > Class2() > function1, function2 
 Meaning: Class1(Class2(function1, function2));
 widget_test.dart for debugging
+Opening the list of available properties available within the class
+    press CTRL+Q when you type in 'whatever('
+    dropdown menu listing all the available functions will also appear when you type in 'whatever.'
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
 01. Shortcuts/Tips
