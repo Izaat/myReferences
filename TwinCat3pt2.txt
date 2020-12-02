@@ -12,6 +12,7 @@ CONTENTS
 09. MC_Velocity
 10. Using throttle to control motor speed
 11. Configuring a Stepper Motor
+12. Axis Homing
 
 01. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONNECTING TO PLC
@@ -627,6 +628,163 @@ Running Stepper Motor with Beckoff EL4071 Slice
                 Click Start button
                 You can change Absolute or Relative
 
+
+
+12. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+Axis Homing (Using Stepper Motor) - 8 points
+https://infosys.beckhoff.com/english.php?content=../content/1033/ax5000_usermanual/html/ax5000_homing.htm&id=
+    Incremental encoders: 2 chanels(A, B)
+    Absolute encoders: 7 channels Grey code
+    https://www.phidgets.com/docs/Encoder_Primer
+    
+    NOTE: The Drive and Encoder parameters right now were inverted to TRUE
+    Calibration Cam Search was also inverted
+        NC-Task > Axes > Axis > Enc > Parameter Tab
+            Homing: 
+                Invert Direction for Calibration Cam Search: TRUE //The direction of travel to find home sensor
+                Invert Direction for Sync Impulse Search: FALSE //The direction of travel to find sync pulse during homing
+    In Program Main, change link for AxisA : AXIS_REF;
+        SolutionExplorer > PLC > Project > Instance > PlcTaskInputs > MAIN.AxisA
+            RightClick and click on Clear Link
+            RightClink and then click on Change Link
+                In dialog box,
+                    Select Mtion > NC-Task1 > Axes > Axis > ToPlc > QB336.0, MC.NCTOPLC_AXIS_REF[256.0]
+                    In NC, system doesn't care if it's a servo or stepper. This makes it easier to upgrade or downgrade the motor 
+
+            //FUN - MAP - Main
+                    FUNCTION MAP : DINT
+                    VAR_INPUT
+                        x : DINT;
+                        in_min : DINT;
+                        in_max: DINT;
+                        out_min: DINT;
+                        out_max: DINT;
+                    END_VAR
+            //FUN - MAP - Sub
+                    IF ((in_max - in_min) + out_min) <> 0 THEN
+                        MAP := DINT_TO_INT((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
+                    ELSE
+                        MAP := 0;
+                    END_IF
+                    RETURN;
+            
+            //Program_Main - Main
+                    VAR
+                        heartbeat : BYTE;
+                        one AT %Q* : BOOL; 
+                        two AT %Q* : BOOL;
+                        three AT %Q* : BOOL;
+                        four AT %Q* : BOOL;
+                        
+                        prox AT %I* : BOOL; //Input
+                        
+                        //Dynamic throttling
+                        Throttle AT %I* : INT;                                               
+                        LastThrottle :INT;                                                                      
+               
+                        AxisA : AXIS_REF;                                                                      
+               
+                        McPower : MC_Power;                                                             
+                        McReset : MC_Reset;                                                              
+                        McJogging : MC_Jog;
+                        
+                        McVelocity : MC_MoveVelocity;
+                        McStop : MC_Stop;
+                        McHome : MC_HOME;                                                  //01. Add this
+                        CurrentVelocityCmd : DINT;  
+                        
+                        iState : DINT;
+                        
+                    END_VAR           
+                    
+            //Program_Main - Sub
+                    heartbeat := heartbeat + 1;                                                     
+                    CurrentVelocityCmd := MAP(Throttle,29800, 22600, 0, 2800);    
+                    IF CurrentVelocityCmd < 50 THEN
+                        CurrentVelocityCmd := 0;                                                               
+                    END_IF
+                    AxisA.ReadStatus();
+                    
+                    McPower(Axis:=AxisA, Enable:=TRUE, Enable_Positive:=TRUE, Enable_Negative:=TRUE);  
+                    McReset(Axis:=AxisA);
+                    McJogging(Axis:=AxisA);
+                    McHome (Axis := AxisA, bCalibrationCam := prox);      //02. Add this line, this assigns the proximity sensor to be the home switch under bCalibrationCam
+                    
+                    CASE iState OF
+                        0: //Initialize
+                            iState := 10;
+                        
+                        10: //Start Drive Reset
+                            McHome (Axis := AxisA, Execute := FALSE);                           //03. Resetting
+                            McReset(Axis:=AxisA, Execute:=TRUE);
+                            IF McReset.Done THEN
+                                iState := 20;
+                            ELSIF McReset.Error THEN
+                                iState := 999;
+                            END_IF
+                            
+                        20: //Wait for Drive to reset
+                            //IF McPower.Status THEN                                             //04. Remove
+                            IF McPower.Status AND CurrentVelocityCmd > 1000 THEN        //05. Add this line. If the throttle (CurrentVelocityCmd) is more than 1000 (activated)
+                                iState := 40;                                     
+                            END_IF
+                        
+                        30:  //Wait for drive JOG command                         
+                            McJogging(Axis:=AxisA, JogForward:=prox);    
+                            
+                        40: //Wait for velocity command                        
+                            MCVelocity(
+                                Axis:=AxisA,
+                                Velocity:=CurrentVelocityCmd,
+                                Acceleration:=10000,                                      
+                                Deceleration:=10000,
+                                Jerk:=1000000,                                                   
+                                Direction:=MC_Direction.MC_Positive_Direction,
+                                Execute:=prox   AND (LastThrottle<>Throttle)                
+                            );
+                            
+                            IF NOT prox THEN
+                                McVelocity(Axis:=AxisA, Execute:=FALSE);       
+                                iState:=900;                                                       
+                            END_IF
+                            
+                            LastThrottle := Throttle;                                             
+                        
+                        100:  //Start Homing Process                                               //06. Add Case 100, 110 and 200
+                            //HomingMode := MC_homingMode.                             //07. Add this optional line to McHome bracket below for more options on homing
+                            //Position :=                                      //08. Home Positioning options. In case you home to sensor but actual position is out by few mm. 
+                            //                                                              //Use this line to fine tune so you don't end up with negative values
+                            
+                            McHome(Axis := AxisA, bCalibrationCam := prox, Execute := TRUE);
+                            IF McHome.Busy THEN
+                                iState := 110;
+                            END_IF
+                            
+                        110:   //Homing running, wait for homing to complete.
+                            IF McHome.Done AND NOT McHome.Error THEN
+                                McHome(Axis := AxisA, Execute := FALSE);
+                                iState := 200;
+                            ELSIF McHome.Error THEN
+                                McHome(Axis := AxisA, Execute := FALSE);
+                                iState := 999;
+                            END_IF
+
+                        200:  //Homing Complete. Ready to Run
+                            IF CurrentVelocityCmd > 1000 THEN
+                                iState := 100;
+                            END_IF
+                        
+                        900: //Stop Servo                                               
+                            McStop(Axis:=AxisA, Execute:=TRUE);
+                            IF prox THEN
+                                McStop(Axis:=AxisA, Execute:=FALSE);                
+                                iState := 40;
+                            END_IF
+                            
+                        999: //Error handling
+                    END_CASE
+
+    Activate Configuration and Run to test
 
 
 
