@@ -11,7 +11,7 @@ CONTENTS
 05. StatelessWidget vs StatefulWidget
 06. Hot reload
 07. @override
-
+08. Images & Assets
 
 
 
@@ -117,7 +117,23 @@ Structures
     Be aware of all the functions within the StatelessWidget and StatefulWidget while programming
     
     
-    
+08. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Images & Assets
+    Scaffold(); > body: Center(), > child: Image(), >
+        image: NetworkImage('image url'), //OR
+        image: AssetImage('assets/yourimage.jpg'),
+            //store your images in ../ProjectName/assets
+            //NOTE: main.dart is inside ../ProjectName/lib
+            //Under pubspec.yaml, activate 'assets:',
+            //Add assets/ to include all files inside the folder.
+            //Or, assets/yourimage.jpg to include only the file
+            #blablabla
+            assets:
+            - assets/
+    -OR- the shortcut
+    Scaffold(); > body: Center(), > child: >
+        Image.network('image url'),
+        Image.asset('assets/yourimage.jpg'),    
     
     
     
