@@ -15,6 +15,7 @@ CONTENTS
 12 - Environment
 13 - Animated LightRays
 14 - Optional (Replacing texts with a logo/image)
+15 - Animate everything
 
 01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
 //Source Title
@@ -419,6 +420,33 @@ CONTENTS
 
 14 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Optional (Replacing texts with a logo/image)
+    Open the Alpha Layer composition
+        Hide the text layer
+        Drag and drop the adobe illustrator file    
+            Open layer in split screen
+            Make sure that the logo is white            
+            Add Tint effect
+                Menu > Effect > Color Correction > Tint
+                    Map Black To : White
+            Mask the section you want
+            Turn on the continuous rasterization icon (fx is the fourth icon, cont. rasterization is the second icon)
+            Adjust the Scale
+
+15 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Animate everything
+    MainComposition
+        Open Cracks Composition in split screen
+        Copy Drag and drop the Alpha layer from the MainComposition and into the Cracks composition
+            Place this on top of the Cracks layer
+                For Linear transition, 
+                    Menu > Effect > Transition > Linear Wipe
+                For Radial Transition                    
+                    Menu > Effect > Color Correction > Curves
+                        Channel: Alpha
+                            Line to be about vertical, set to the right hand side, (1/3) of graph box
+                    Menu > Effect > Blur & Sharpen > Fast/Box Blur
+                        Increase the Blur Radius
+                    Use blur radius to animate
 
 
 
