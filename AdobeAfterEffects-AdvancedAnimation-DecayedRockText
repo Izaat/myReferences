@@ -9,7 +9,7 @@ CONTENTS
 06 - Extrude
 07 - Surface details (Layer 1) - Moss Effect
 08 - Surface details (Layer 2) - Cracks Effect
-
+09 - Surface details (Layer 3) - Grass Effect
 
 01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
 //Source Title
@@ -222,10 +222,62 @@ CONTENTS
 
 08 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Surface details (Layer 2) - Cracks Effect
+    Hide the MossFX Layer
+    Open up the Bevel Layer in split screen
+    Create a new Solid Layer
+        Menu > Layer > New > Solid
+        Name this layer 'Cracks'
+        Add Cell Pattern effect into the Crack layer
+            Effects & Presets Tab > Generate > Cell Pattern
+                Cell Pattern: Crytals HQ
+                Contextual Slide: 1800.0
+                Size: 100.0                                                 //To change the size
+        Add Turbulent Displace effect
+            Effects & Presets Tab > Distort > Turbulent Displace
+                Size: 4.0
+                Complexity: 3.0
+        Precompose this layer    
+            Menu > Layer > Precompose
+            Name it Cracks
+        Change Mode to 'Multiply'
+        Opacity: 70%
+    Getting depth in the cracks
+        In the Projects panel, find the 'Cracks' composition that you created.
+            Drag and drop into the MainComposition
+            Set Mode to 'Multiply'
+            Add Set Matte effect
+                Menu > Effect > Channel > Set Matte
+                    Take Matte from Layer: Alpha
+    Unhide the MossFX layer
+    
+//Making the moss only grow in the area of the cracks
+    Open MainMoss and open Moss layer in split screen
+    In the Project Panel, look for the Cracks composition under the MainComposition
+        Drag and drop it into the MainMoss composition
+        And place it right at the top
+            Add Invert effect                                   //Moss growing along the cracks
+                Menu > Effect > Channel > Invert
+            Set the Cracks Mode to 'Multiply'       //Moss looks like it's growing randomly along the cracks
+            Add Fast/Box Blur effect
+                Menu > Effect > Blur & Sharpen > Fast/Box Blur
+                    Blur Radius: 6.0                           //This makes the moss thicker but faded
+            Add Curves Color Correction
+                Menu > Effect > Color Correction > Curves
+                    In RGB, take the white line to almost vertical to brighten up
+            Add Turbulent Displace effect
+                Effects & Presets Tab > Distort > Turbulent Displace
+                    Amount: 150.0
+                    Size: 11.0
+                    Complexity: 3.0
+
+//To change the size of cracks together with the moss growth
+    Open Cracks composition, select cracks
+    Under Cell Pattern effect, increase/decrease the size
 
 
 
-
+09 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Surface details (Layer 3) - Grass Effect
 
 
 
