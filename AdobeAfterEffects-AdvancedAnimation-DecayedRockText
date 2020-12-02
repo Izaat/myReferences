@@ -6,10 +6,13 @@ CONTENTS
 03 - Text Texture and 3D stylings
 04 - Lightings
 05 - Detailings for 3D text edges
-06 - Extrude
-07 - Surface details (Layer 1) - Moss Effect
-08 - Surface details (Layer 2) - Cracks Effect
-09 - Surface details (Layer 3) - Grass Effect
+06 - Shadows
+07 - Extrude
+08 - Surface details (Layer 1) - Moss
+09 - Surface details (Layer 2) - Cracks Effect
+10 - Surface details (Layer 3) - Grass Effect
+11 - Final Color Correction
+12 - Environment
 
 01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
 //Source Title
@@ -49,6 +52,10 @@ CONTENTS
             BumpMap: Change to layer "Bevel" as source
             Softness: 0.0
             Displacement: 0.0
+            Shading >                   //For Final Color adjustment in point 11.
+                Ambient: 70.0
+                Specular: 20.0
+                Roughness: 0.30
     Add in Set Matte Effect
         Menu > Effect > Channel > SetMatte
             TakeMatteFromLayer: Change to Alpha as the source
@@ -112,8 +119,31 @@ CONTENTS
                     Menu > Effect > Blur & Sharpen > Unsharp Mask
                         Amount: 50
                 Opacity: 80%
-                
+
 06 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Shadows
+    Add an image to the main composition for the background
+        Add in Color Correcting Curves effect
+            Menu > Effect > Color Correction > Curves
+                Under Effects Control tab, Lower the white graph top point to the bottom 1/4th point
+    Duplicate the alpha layer and rename it "Shadows"
+        Activate Solo Mode
+        Place this layer below Texture/Title Layer
+        Add Tint effect to this layer
+            Menu > Effect >  Color Correction > Tint
+                Under Effects Control Tab
+                    Map White To: Change to Black
+        Activate Transparency
+        Add Radial Blur Effect
+            Menu > Effect > Blur & Sharpen > CC Radial Blur
+                Type: Change "Scratch" to "Fading Zoom"
+                Center: 1264, -4130 (Move center way up high random position)
+                Amount: 11.0    
+        Deactivate Solo Mode to see the effects taking shape  
+    Duplicate the "Shadow" Layer for dimensional effect, name it "Shadow 2"
+        One layer will be the hard shadow and the other will be the extended shadow
+
+07 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Extrude
     Duplicate the Texture/Title layer and name it "Extrude"
         Place it below Texture/Title Layer above Shadows layer 
@@ -141,7 +171,7 @@ CONTENTS
         Intensity: 140%
         Reposition if you need to
             
-07 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+08 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Surface details (Layer 1) - Moss Effect
     Duplicate Alpha layer
         Precompose the layer and name it MainMoss
@@ -220,7 +250,7 @@ CONTENTS
             You can add in keyframes for any attributes under Cell Pattern effect
             You can also use the Fractal Noise > Brightness to animate depletion and growth
 
-08 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+09 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Surface details (Layer 2) - Cracks Effect
     Hide the MossFX Layer
     Open up the Bevel Layer in split screen
@@ -276,7 +306,7 @@ CONTENTS
 
 
 
-09 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+10 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Surface details (Layer 3) - Grass Effect
     In MainComposition duplicate MossFX
         Name this as GrassFX
@@ -325,7 +355,13 @@ CONTENTS
         Randomly change the parameters above
 
 
-
+11 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Final Color Correction 
+    Add in an Adjustment Layer to the MainCompostion and place this right on top
+        Add in Curves Effect
+            Menu > Layer> New > Adjustment Layer
+                Adjust the RGB channel
+    Adjust the Shadings in Texture/Title composition's shadings. (See Point03)
 
 
 
