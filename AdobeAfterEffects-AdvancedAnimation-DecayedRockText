@@ -386,6 +386,36 @@ CONTENTS
 
 13 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Animated LightRays
+    MainComposition
+        Create a new Solid Layer and call this 'AnimatedLightRays'
+            Menu > Layer > New > Solid
+            Add in Fractal Noise effect into the Fractal composition
+                Effects&PresetsTab > Noise & Grain > Fractal Noise
+                    Contrast: 270.0
+                    Brightness: -6.0
+            Use ellipse tool and draw a mask around where the source of LightSpot is located
+            Add Radial Blur Effect
+                Menu > Effect > Blur & Sharpen > CC Radial Blur
+                    Type: Fading Zoom
+                    Amount: 60                    
+                    Center: Move the centerpoint way off the screen (zoom out and move), this should also be aligned to the angle of LightSpot
+            From here, you'll see the screen cut-off lines enveloping the ellipse
+            To remove, add in Solid Composite effect
+                Menu > Channel > Solid Composite
+                    Place this effect on top of the the RadialBlur effect
+                    Color: Set to Black
+        Scale the Solid Layer up to about 150%
+        Set Mode to 'Screen'
+        Reshape the ellipse
+        Hit F on keyboard to open the Mask1 > Mask Feather
+            Adust to 120 by 120
+//Animation
+    Add keyframes for Fractal Noise
+        Effects Control > Fractal Noise
+            Evolution
+                0deg to 180deg
+
+
 
 
 
