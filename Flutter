@@ -15,6 +15,7 @@ CONTENTS
 06. Hot reload
 07. @override
 08. Images & Assets
+09. Icons and Buttons
 
 
 
@@ -139,7 +140,30 @@ Structures
         Image.asset('assets/yourimage.jpg'),    
     
     
-    
+09. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Buttons & Icons
+    Scaffold(); > body: Center(), > child: Icon(), >
+        Icon.airport_shuttle,
+        color: Colors.lightBlue,
+        size: 50.0,
+
+    Scaffold(); > body: Center(), > child: RaisedButton(), >        //RaisedButton(), FlatButton(), FloatingButton()
+        onPressed: () {},                           //{} > print(); > 'string', add function into {} to make it pressable
+        child: Text(), > 'click me'
+
+//Icon inside a button
+    Scaffold(); > body: Center(), >
+        child: RaisedButton.icon(), >
+            onPressed: () {},
+            icon: Icon(), > Icons.mail
+            label: Text(), > 'mail me'
+            color: Colors.amber,
+        -OR-
+        child: IconButton(), >          //it shows icon which can be press where icon class cannot be pressed
+            onPressed: () {},
+            icon: Icon(), > Icon.mail
+            label: Text(), > 'mail me'
+            color: Colors.amber    
     
     
     
