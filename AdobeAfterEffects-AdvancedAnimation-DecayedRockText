@@ -447,7 +447,11 @@ CONTENTS
                     Menu > Effect > Blur & Sharpen > Fast/Box Blur
                         Increase the Blur Radius
                     Use blur radius to animate
-
+        Open Bevel Composition
+            Under the Alpha Layer,
+                Just animate the Inner Glow size to animate the bevel size
+                Layer Styles > Inner Glow Size
+                    Size: From 20 to 40
 
 
 
