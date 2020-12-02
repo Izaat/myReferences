@@ -278,6 +278,51 @@ CONTENTS
 
 09 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Surface details (Layer 3) - Grass Effect
+    In MainComposition duplicate MossFX
+        Name this as GrassFX
+        Deactivate some effects
+            DropShadow, ChannelBlur, SimpleChoker
+        Add in CCHair effects
+            Effects & Presets Tab > Simulation > CC Hair
+                Length: 50.0
+                Thickness: 1.30
+                Weight: 0.10
+                Density: 330.0
+                Hairfall Map > 
+                    Add Noise: 20.0
+                HairColor > 
+                    Color: Greenish
+                    Inheritence: 50
+                    Opacity: 80
+                Shading >
+                    Specular: 0.0
+        Add Turbulent Displace effects
+            Effects & Presets Tab > Distort > Turbulent Displace
+                Size: 3.0
+                
+//Animation
+    Create a new Solid layer in MainComposition and name this 'WindMap'
+        Add Fractal Noise effect
+            Effects & Presets Tab > Noise & Grain > Fractal Noise
+                Complexity: 2.0
+                Insert keyframes to animate the evolution from 0deg to 320deg
+        Precompose and call this WindMap
+    Hide the WindMap composition in the MainComposition
+    Open grassFX composition
+        Under CCHair effect > Hairfall Map
+            Map Strength: 33.0
+            Map Layer: WindMap
+        If you solo the GrassFX in transparent background, you'll be able see the grass moving with time         
+        Add Color Correction Curve
+            Menu > Effect > Layer > Color Correction > Curves
+                Adjust the color
+    In the MainComposition, Duplicate the GrassFX and place this below the title (Name this GrassFX2)
+        Scale: 95%
+        CCHair > 
+            Length: 40.0
+            Weight: 0.62
+    Do the same for GrassFX3 and place this on top of GrassFX1 for even more randomness
+        Randomly change the parameters above
 
 
 
