@@ -13,6 +13,7 @@ CONTENTS
 10 - Surface details (Layer 3) - Grass Effect
 11 - Final Color Correction
 12 - Environment
+13 - Animated LightRays
 
 01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
 //Source Title
@@ -366,4 +367,32 @@ CONTENTS
 
 12 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Environment
+    Add in a LightSpot image with a transparent background into the MainComposition
+        Place this layer below the Adjustment Layer
+            Move the light centerpoint to the edge of the display
+            Make sure it is aligned to the angle of the shadow
+        Add in Color Corretion Curves
+            Menu > Effect > Color Correction > Curves
+                Adjust accordingly
+        Scale: 700.0    
+    Add in a particle video clip with transparent background into the MainComposition
+        RightClick > Transform > Fit to Comp
+            Scale it up a bit more over the composition size
+        Add in Color Corretion Curves
+            Menu > Effect > Color Correction > Curves
+                Adjust accordingly
+        Mode: Screen
+        Move this layer to below the Adjustment Layer
+
+13 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Animated LightRays
+
+
+
+
+
+
+
+
+
 
