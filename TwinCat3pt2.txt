@@ -789,6 +789,10 @@ https://infosys.beckhoff.com/english.php?content=../content/1033/ax5000_usermanu
 
 13. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 MC_Absolute & MC_Relative - 7 points
+How the motor will move
+    1. Hit throttle, motor will move to prox, readjust and stop. This will be the home 0. Now you'll be in state 200
+    2. Hit throttle again, motor will proceed with absolute move first to position, then do relative move back and forth, and then abs return to 0
+    3. Will repeat step 2 whenever throttle being activated
 
             //FUN - MAP - Main
                     FUNCTION MAP : DINT
