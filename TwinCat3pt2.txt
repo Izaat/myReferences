@@ -13,6 +13,7 @@ CONTENTS
 10. Using throttle to control motor speed
 11. Configuring a Stepper Motor
 12. Axis Homing
+13. MC_Absolute & MC_Relative
 
 01. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONNECTING TO PLC
@@ -786,6 +787,248 @@ https://infosys.beckhoff.com/english.php?content=../content/1033/ax5000_usermanu
 
     Activate Configuration and Run to test
 
+13. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+MC_Absolute & MC_Relative - 7 points
+
+            //FUN - MAP - Main
+                    FUNCTION MAP : DINT
+                    VAR_INPUT
+                        x : DINT;
+                        in_min : DINT;
+                        in_max: DINT;
+                        out_min: DINT;
+                        out_max: DINT;
+                    END_VAR
+            //FUN - MAP - Sub
+                    IF ((in_max - in_min) + out_min) <> 0 THEN
+                        MAP := DINT_TO_INT((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
+                    ELSE
+                        MAP := 0;
+                    END_IF
+                    RETURN;
+            
+            //Program_Main - Main
+                    VAR
+                        heartbeat : BYTE;
+                        one AT %Q* : BOOL; 
+                        two AT %Q* : BOOL;
+                        three AT %Q* : BOOL;
+                        four AT %Q* : BOOL;
+                        
+                        prox AT %I* : BOOL; //Input
+                        
+                        //Dynamic throttling
+                        Throttle AT %I* : INT;                                               
+                        LastThrottle :INT;                                                                      
+               
+                        AxisA : AXIS_REF;                                                                      
+               
+                        McPower : MC_Power;                                                             
+                        McReset : MC_Reset;                                                              
+                        McJogging : MC_Jog;
+                        
+                        McVelocity : MC_MoveVelocity;
+                        McStop : MC_Stop;
+                        McHome : MC_HOME;                                                   
+                        CurrentVelocityCmd : DINT;  
+                        
+                        iState : DINT;
+                        
+                        McMoveAbs : MC_MoveAbsolute;                            //01. Add this entire paragraph
+                        McMoveRel : MC_MoveRelative;
+                        iNumMoves : DINT := 5;
+                        iCurrMove : DINT;
+                        fMoveDistEachTime : REAL := 10;
+                        fRelMoveDist : REAL;
+                        
+                    END_VAR           
+                    
+            //Program_Main - Sub
+                    heartbeat := heartbeat + 1;                                                     
+                    CurrentVelocityCmd := MAP(Throttle,29800, 22600, 0, 2800);    
+                    IF CurrentVelocityCmd < 50 THEN
+                        CurrentVelocityCmd := 0;                                                               
+                    END_IF
+                    
+                    AxisA.ReadStatus();
+                    
+                    McPower(Axis:=AxisA, Enable:=TRUE, Enable_Positive:=TRUE, Enable_Negative:=TRUE);  
+                    McReset(Axis:=AxisA);
+                    McJogging(Axis:=AxisA);
+                    McHome (Axis := AxisA, bCalibrationCam := prox);            
+                    
+                    McMoveAbs (Axis:=AxisA);                                        //02. Add thsese two lines
+                    McMoveRel (Axis:=AxisA);
+                    
+                    CASE iState OF
+                        0: //Initialize
+                            iState := 10;
+                        
+                        10: //Start Drive Reset
+                            McHome (Axis := AxisA, Execute := FALSE);           
+                            McReset(Axis:=AxisA, Execute:=TRUE);
+                            IF McReset.Done THEN
+                                iState := 20;
+                            ELSIF McReset.Error THEN
+                                iState := 999;
+                            END_IF
+                            
+                        20: //Wait for Drive to reset
+                            //IF McPower.Status THEN                                                                  
+                            IF McPower.Status AND CurrentVelocityCmd > 1000 THEN               
+                                iState := 40;                                     
+                            END_IF
+                        
+                        30:  //Wait for drive JOG command                         
+                            McJogging(Axis:=AxisA, JogForward:=prox);    
+                            
+                        40: //Wait for velocity command                        
+                            MCVelocity(
+                                Axis:=AxisA,
+                                Velocity:=CurrentVelocityCmd,
+                                Acceleration:=10000,                                      
+                                Deceleration:=10000,
+                                Jerk:=1000000,                                                   
+                                Direction:=MC_Direction.MC_Positive_Direction,
+                                Execute:=prox   AND (LastThrottle<>Throttle)                
+                            );
+                            
+                            IF NOT prox THEN
+                                McVelocity(Axis:=AxisA, Execute:=FALSE);       
+                                iState:=900;                                                       
+                            END_IF
+                            
+                            LastThrottle := Throttle;                                             
+                        
+                        100:  //Start Homing Process                                                          
+                            McHome(Axis := AxisA, bCalibrationCam := prox, Execute := TRUE);
+                            IF McHome.Busy THEN
+                                iState := 110;
+                            END_IF
+                            
+                        110:   //Homing running, wait for homing to complete.
+                            IF McHome.Done AND NOT McHome.Error THEN
+                                McHome(Axis := AxisA, Execute := FALSE);
+                                iState := 200;
+                            ELSIF McHome.Error THEN
+                                McHome(Axis := AxisA, Execute := FALSE);
+                                iState := 999;
+                            END_IF
+
+                        200:  //Homing Complete. Ready to Run
+                            IF CurrentVelocityCmd > 1000 THEN
+                                iState := 300;                                                  //03. Change iState from 100 to 300
+                            END_IF
+                            
+                        300: //Start ABS Move to center to prep for processing part             //04. Add in Cases from 300 to 510
+                            McMoveAbs (                                                         //05. values will be in mm or mm/s
+                                Axis := AxisA,
+                                Position := 100,
+                                Velocity := 100,                                               //06. max speed (vmax), 
+                                Acceleration := 500,                                           //read up about triangle move where the two points of acc and dec point meets
+                                Deceleration := 500,
+                                Jerk := 100000,                                               //07. The second derivative of velocity,  derivative of acceleration
+                                Execute := TRUE                                             //Jerk is for easing the motor from acceleration to vmax and to deceleration,
+                            );                                                              //smoothening out the motion. The lower the number of Jerk, the smoother it is
+                            iState := 310;
+                        
+                        310:    //Wait for abs move to complete
+                            IF McMoveAbs.Done AND NOT McMoveAbs.Error THEN
+                                McMoveAbs (Axis := AxisA, Execute := FALSE);
+                                iCurrMove := 1;
+                                iState := 400;
+                            ELSIF McMoveAbs.Error THEN
+                                McMoveAbs (Axis := AxisA, Execute := FALSE);
+                                iState := 999;
+                            END_IF
+                        
+                        400:    //Start Rel Move
+                            //Do we have more to do? activated by case 460 as loop
+                            IF iCurrMove < iNumMove THEN
+                                //increment movecountrer for next time.
+                                iCurrMove := iCurrMove + 1;
+                                //Calculate Distance
+                                fRelMoveDist := DINT_TO_REAL(iCurrMove) * fMoveDistEachTime;
+                                iState := 410;
+                            ELSE
+                                //Nothing to do
+                                iState := 500;
+                            END_IF
+                        
+                        410: //Start rel move in pos direction
+                            McMoveRel (
+                                Axis := AxisA,
+                                Distance := fRelMoveDist,
+                                Velocity := 720,
+                                Acceleration := 2000,
+                                Deceleration := 2000,
+                                Jerk := 1000000,
+                                Execute := TRUE
+                            );
+                            iState := 420;
+                        
+                        420: //Wait on rel move to complete
+                            IF McMoveRel.Done AND NOT McMoveRel.Error THEN
+                                McMoveRel (Axis := AxisA, Execute := FALSE);
+                                iState := 450;
+                            ELSIF McMoveRel.Error THEN
+                                McMoveRel (Axis := AxisA, Execute := FALSE);
+                                iState := 999;
+                            END_IF
+                        
+                        450: //Move negative rel back to start position
+                            McMoveRel (
+                                Axis := AxisA,
+                                Distance := -fRelMoveDist,
+                                Velocity := 720,
+                                Acceleration := 2000,
+                                Deceleration := 2000,
+                                Jerk := 1000000,
+                                Execute := TRUE
+                            );
+                            iState := 460;
+                        
+                        460: //Wait on rel move to complete
+                            IF McMoveRel.Done AND NOT McMoveRel.Error THEN
+                                McMoveRel (Axis := AxisA, Execute := FALSE);
+                                iState := 400;
+                            ELSIF McMoveRel.Error THEN
+                                McMoveRel (Axis := AxisA, Execute := FALSE);
+                                iState := 999;
+                            END_IF
+                        
+                        500: //Start ABS Move Back to Home position 0
+                            McMoveAbs (
+                                Axis := AxisA,
+                                Position := 0,
+                                Velocity := 100,
+                                Acceleration := 100,
+                                Deceleration := 100,
+                                Jerk := 100000,
+                                Execute := TRUE
+                            );
+                            
+                            iState := 510;
+                            
+                        510: //Wait for abs move to complete
+                            IF McMoveAbs.Done AND NOT McMoveAbs.Error THEN
+                                McMoveAbs (Axis := AxisA, Execute := FALSE);
+                                iCurrMove := 1;
+                                iState := 200;
+                            ELSIF McMoveAbs.Error THEN
+                                McMoveAbs (Axis := AxisA, Execute := FALSE);
+                                iState := 999;
+                            END_IF
+                        
+                        900: //Stop Servo                                               
+                            McStop(Axis:=AxisA, Execute:=TRUE);
+                            IF prox THEN
+                                McStop(Axis:=AxisA, Execute:=FALSE);                
+                                iState := 40;
+                            END_IF
+                            
+                        999: //Error handling
+                    END_CASE
 
 
 
