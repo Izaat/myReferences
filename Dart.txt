@@ -21,13 +21,6 @@ Run dart file by typing in "dart filename.dart" in the console
 14. NULL AWARE OPERATOR
 
 
-
-
-
-
-
-
-
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ORIENTATE VIRTUAL PHONE TO LANDSCAPE
 //main.dart//
