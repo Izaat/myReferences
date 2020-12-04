@@ -14,6 +14,7 @@ CONTENTS
 11. Configuring a Stepper Motor
 12. Axis Homing
 13. MC_Absolute & MC_Relative
+14. ScopeView
 
 01. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONNECTING TO PLC
@@ -1034,7 +1035,22 @@ How the motor will move
                         999: //Error handling
                     END_CASE
 
-
+14. ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Scope View
+    //Create new project in Visual Studio
+        TwinCAT Measurement > YT Scope project (Yaxis to Time)
+            SolutionExplorer > MeasurementProject > YTScopeProject > 
+                PropertiesPanel > 
+                    Record > RingBuffer: True
+                    RecordMode > RecordTime > Change time to 60 instead of 10sec                    
+                YTChart > 
+                    PropertiesPanel > DefaultDisplayWidth > Change time to 30 instead of 10sec
+                    AxisGroup > RightClick > TargetBrowser
+                        Routes > PLC > Port
+                            Main > AxisA > Add your variables by double clicking on the name
+                                iState
+                                NCToPLC > ActPos, ActVelo
+            Once all settings being defined, hit record
 
 
 
