@@ -192,6 +192,7 @@ Structures
 11. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Rows and Columns
     You can add Rows() inside Column() or vice versa
+    You can also have children widget to parent another parent widget
 
     //Rows
         Scaffold(); > body: Row(), >
