@@ -16,6 +16,8 @@ CONTENTS
 07. @override
 08. Images & Assets
 09. Icons and Buttons
+10. Containers & Paddings
+11. Rows
 
 
 
@@ -164,6 +166,56 @@ Structures
             icon: Icon(), > Icon.mail
             label: Text(), > 'mail me'
             color: Colors.amber    
-    
+10. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Containers & Paddings
+    Scaffold(); > body: Container(), >          //Container restricts itself to child
+        color: Color.grey[400],
+        child: > Test(), > 'String'
+        padding: EdgeInsets. >
+            .symmetric(horizontal: 30.0, vertical: 10.0),
+                //requires two values to control hor. and vert. direction, works like "linked" being activated in Elementor
+            .fromLTRB(left, top, right, bottom),
+                //requires 4 values
+            .all(20.0),
+                //20 pixels of padding, same with symmetric
+        margin: > You can use this with EdgeInsets.
+
+    Scaffold(); > body: Padding(),      //cant apply color and margin to padding widget
+        color: Color.grey[400],
+                child: > Test(), > 'String'
+                padding: EdgeInsets. >
+                    .symmetric(horizontal: 30.0, vertical: 10.0),
+                    .fromLTRB(left, top, right, bottom),
+                    .all(20.0),
+                margin: > You can use this with EdgeInsets.
+
+11. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Rows
+    Scaffold(); > body: Row(), >
+        mainAxisAlignment: MainAxisAlignment.# >      //main axis = horizontal
+            .center,        //centers the entire row, like the center text icon in MSWords
+            .spaceEvenly,   //space everything evenly, includes left and right
+            .spaceAround    //same as .spaceevenly, just that space in between elements are doubled
+            .end            //snaps everything to the right. no space between elements
+            .spaceBetween   //Space between every element, but no space at left and right.
+            .start          //snaps everything to the left. no space between elements
+        crossAxisAlignment: CrossAxisAlignment.#       //cross axis = vertical
+            .center         //default value at the top
+            .stretch        //stretches everything vertically to entire screen
+            .start          //snaps to top-end of the tallest element
+            .end            //snaps to bottom-end of the tallest element
+            .values
+        children: <Widget> [],       //you can list multiple 'Class(child:#)' inside the Row() class, classes needs to be inside []
+        children: <Widget> [], >
+            Text(), > 'String'
+            FlatButton(), >
+                onPressed: (){},
+                color: Colors.amber,
+                child: Text() > 'String'
+            Container(), >
+                color: Colors.cyan,
+                padding: EdgeInsets.all(30.0),
+                child: Text() > 'String'
+
     
     
