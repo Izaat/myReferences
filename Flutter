@@ -17,7 +17,7 @@ CONTENTS
 08. Images & Assets
 09. Icons and Buttons
 10. Containers & Paddings
-11. Rows
+11. Rows and Columns
 
 
 
@@ -190,32 +190,56 @@ Structures
                 margin: > You can use this with EdgeInsets.
 
 11. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Rows
-    Scaffold(); > body: Row(), >
-        mainAxisAlignment: MainAxisAlignment.# >      //main axis = horizontal
-            .center,        //centers the entire row, like the center text icon in MSWords
-            .spaceEvenly,   //space everything evenly, includes left and right
-            .spaceAround    //same as .spaceevenly, just that space in between elements are doubled
-            .end            //snaps everything to the right. no space between elements
-            .spaceBetween   //Space between every element, but no space at left and right.
-            .start          //snaps everything to the left. no space between elements
-        crossAxisAlignment: CrossAxisAlignment.#       //cross axis = vertical
-            .center         //default value at the top
-            .stretch        //stretches everything vertically to entire screen
-            .start          //snaps to top-end of the tallest element
-            .end            //snaps to bottom-end of the tallest element
-            .values
-        children: <Widget> [],       //you can list multiple 'Class(child:#)' inside the Row() class, classes needs to be inside []
-        children: <Widget> [], >
-            Text(), > 'String'
-            FlatButton(), >
-                onPressed: (){},
-                color: Colors.amber,
-                child: Text() > 'String'
-            Container(), >
-                color: Colors.cyan,
-                padding: EdgeInsets.all(30.0),
-                child: Text() > 'String'
+//Rows and Columns
+    You can add Rows() inside Column() or vice versa
+
+    //Rows
+        Scaffold(); > body: Row(), >
+            mainAxisAlignment: MainAxisAlignment.# >      //main axis = horizontal
+                .center,                                  //centers the entire row, like the center text icon in MSWords
+                .spaceEvenly,                             //space everything evenly, includes left and right
+                .spaceAround                              //same as .spaceevenly, just that space in between elements are doubled
+                .end                                      //snaps everything to the right. no space between elements
+                .spaceBetween                             //Space between every element, but no space at left and right.
+                .start                                    //snaps everything to the left. no space between elements
+            crossAxisAlignment: CrossAxisAlignment.#      //cross axis = vertical
+                .center                                   //default value at the top
+                .stretch                                  //stretches everything vertically to entire screen
+                .start                                    //snaps to top-end of the tallest element
+                .end                                      //snaps to bottom-end of the tallest element
+                .values
+            children: <Widget> [],       //you can list multiple 'Class(child:#)' inside the Row() class, classes needs to be inside []
+            children: <Widget> [], >
+                Text(), > 'String'
+                FlatButton(), >
+                    onPressed: (){},
+                    color: Colors.amber,
+                    child: Text() > 'String'
+                Container(), >
+                    color: Colors.cyan,
+                    padding: EdgeInsets.all(30.0),
+                    child: Text() > 'String'
+
+    //Columns
+       Scaffold(); > body: Column(), >
+            mainAxisAlignment: MainAxisAlignment.# >      //main axis = vertical
+                .center,                                  //centers the entire column to the left but vertically center
+                .spaceEvenly,                             //space everything evenly, includes top and bottom
+                .spaceAround                              //same as .spaceevenly, just that space in between elements are doubled
+                .end                                      //snaps everything to the bottom
+                .spaceBetween                             //Space between every element, but no space at top and bottom
+                .start                                    //snaps everything to the top
+            crossAxisAlignment: CrossAxisAlignment.# >    //cross axis = horizontal
+                .center                                   //snaps to bottom but everything is at the center of column, left of the screen
+                .stretch                                  //stretches everything horizontally to the entire screen
+                .start                                    //snaps to left-end of the widest element
+                .end                                      //snaps to right-end of the widest element
+                .values
+            children: <Widget> [], >
+                Container(), >
+                    color: Colors.cyan,
+                    padding: EdgeInsets.all(30.0),
+                    child: Text() > 'String'
 
     
     
