@@ -18,7 +18,7 @@ CONTENTS
 09. Icons and Buttons
 10. Containers & Paddings
 11. Rows and Columns
-
+12. Shortcuts
 
 
 
@@ -243,4 +243,27 @@ Structures
                     child: Text() > 'String'
 
     
-    
+12. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Shortcuts
+    Use the lightbulb on Android Studio to perform the shortcuts.
+        'Wrap' means adding a parent to a widget
+        'Replace with children' means removing a parent widget
+        You can do the same shortcuts on 'Flutte Outline' side panel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
