@@ -267,7 +267,7 @@ Structures
     Scaffold(); > body: Row(), > children: <Widget> [] > 
         Expanded (), > child: Image.asset('assets/yourimage.jpg') //[optional] See 08. for adding image
         Expanded (), >
-            flex: 3,
+            flex: 3,                                              //[optional]
             child : Container() >
                 padding: EdgeInsets.all(30.0),
                 color: Colors.cyan,
