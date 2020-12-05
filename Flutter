@@ -93,11 +93,22 @@ Structures
 
 05. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //StatelessWidget vs StatefulWidget
-    Stateless: cannot change overtime as we use the app
+
+    Stateless: cannot change over time as we use the app, need to restart app in order to see changes
         Flutter has an awesome feature in StatelessWidget where it changes only the minor changes in realtime without restarting the app
-        Example: layouts like the menu list
+        Example of statelessWidget: layouts like the menu list
+        
     Stateful: can change over time as we use the app, 
-        Example: score texts in mobile games, 
+        Example of StatefulWidget: Highscore and current score texts and numbers in mobile games,
+            class Test extends StatefulWidget {} >
+                @override
+                _TestState createState() => _TestState();                
+            class _TestState extends State<Test> {} >
+                @override
+                Widget build(BuildContext context) {} >
+                    return Container();                                                 //Just replace Container() with your Scaffold()
+        Alternatively, instead of replacing your entire Scaffold() with the Container(), you can select the StatelessWidget extension, click on light bulb and select 'convert to stateful'
+            //See 12. for more info
     
 06. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Hot Reload - 
