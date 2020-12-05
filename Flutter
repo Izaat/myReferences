@@ -111,11 +111,16 @@ Structures
             //See 12. for more info, result will be as follows
             
         class YourClassName extends StatefulWidget {} > 
-            int yourGameScore = 0;                                                          //add this
+            int yourGameScore = 0;                                                       //add this
             @override   
-            Scaffold (), > body: Padding(), > child: Column(), > Text(), > 
-                '$yourGameScore',                                                              //add this
-                style: TextStyle(), > color: , letterSpacing: , etc.
+            Scaffold (), > 
+                floatingActionButton: FloatingActionButton() > 
+                    onPressed: () {}, > setState(); > (){}, > yourGameScore += 1;        //add setState and > represents it should go into curly brackets if available
+                    child: Icon(Icons.add)
+                    backgroundColor: Colors.grey[800],
+                body: Padding(), > child: Column(), > Text(), > 
+                    '$yourGameScore',                                                    //add this
+                    style: TextStyle(), > color: , letterSpacing: , etc.
                 
         Restart App to see changes in the app.        
     
