@@ -114,9 +114,9 @@ Structures
             int yourGameScore = 0;                                                       //add this
             @override   
             Scaffold (), > 
-                floatingActionButton: FloatingActionButton() > 
+                floatingActionButton: FloatingActionButton(), > 
                     onPressed: () {}, > setState(); > (){}, > yourGameScore += 1;        //add setState and > represents it should go into curly brackets if available
-                    child: Icon(Icons.add)
+                    child: Icon(Icons.add),
                     backgroundColor: Colors.grey[800],
                 body: Padding(), > child: Column(), > Text(), > 
                     '$yourGameScore',                                                    //add this
