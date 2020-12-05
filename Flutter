@@ -19,6 +19,7 @@ CONTENTS
 10. Containers & Paddings
 11. Rows and Columns
 12. Shortcuts
+13. Expanded widgets
 
 
 
@@ -251,6 +252,24 @@ Structures
         You can do the same shortcuts on 'Flutte Outline' side panel
 
 
+13. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Expanded Widget
+    If the container being duplicated 3x without expanded() and flex, it will snap to the top left, all taking the same size
+    If the container being duplicated 3x with one of the container being wrapped by the expanded() class, BUT all were without flex, 
+        the containers without expand() will snap to the right, making way for the container with expand() to expand horizontally.
+    If the container being duplicated 3x and all of them being wrapped by the expanded() class, BUT all were without flex, all of them will expand EQUALLY
+    "Flex" represents size. //optional
+        Add all flex values under 'children: <Widget>' for the denominator, the total will be your assigned value of the width of the screen
+        Under Expanded(), the flex value will be the numerator
+        Numerator/Denominator
+    
+    Scaffold(); > body: Row(), >
+        children: <Widget> [] > Expanded (), >
+            flex: 3,
+            child : Container() >
+                padding: EdgeInsets.all(30.0),
+                color: Colors.cyan,
+                child: Text(), > 'String'
 
 
 
