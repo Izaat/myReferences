@@ -108,7 +108,16 @@ Structures
                 Widget build(BuildContext context) {} >
                     return Container();                                                 //Just replace Container() with your Scaffold()
         Alternatively, instead of replacing your entire Scaffold() with the Container(), you can select the StatelessWidget extension, click on light bulb and select 'convert to stateful'
-            //See 12. for more info
+            //See 12. for more info, result will be as follows
+            
+        class YourClassName extends StatefulWidget {} > 
+            int yourGameScore = 0;                                                          //add this
+            @override   
+            Scaffold (), > body: Padding(), > child: Column(), > Text(), > 
+                '$yourGameScore',                                                              //add this
+                style: TextStyle(), > color: , letterSpacing: , etc.
+                
+        Restart App to see changes in the app.        
     
 06. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Hot Reload - 
