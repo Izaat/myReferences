@@ -254,17 +254,19 @@ Structures
 
 13. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Expanded Widget
-    If the container being duplicated 3x without expanded() and flex, it will snap to the top left, all taking the same size
-    If the container being duplicated 3x with one of the container being wrapped by the expanded() class, BUT all were without flex, 
-        the containers without expand() will snap to the right, making way for the container with expand() to expand horizontally.
-    If the container being duplicated 3x and all of them being wrapped by the expanded() class, BUT all were without flex, all of them will expand EQUALLY
+    If the container being duplicated 3x without Expanded() and flex, it will snap to the top left, all taking the same size
+    If the container being duplicated 3x with one of the container being wrapped by the Expanded() class, BUT all were without flex, 
+        the containers without Expanded() will snap to the right, making way for the container with Expanded() to expand horizontally.
+    If the container being duplicated 3x and all of them being wrapped by the Expanded() class, BUT all were without flex, all of them will expand EQUALLY
     "Flex" represents size. //optional
         Add all flex values under 'children: <Widget>' for the denominator, the total will be your assigned value of the width of the screen
         Under Expanded(), the flex value will be the numerator
         Numerator/Denominator
+    You can also wrap Expanded() widget to images
     
-    Scaffold(); > body: Row(), >
-        children: <Widget> [] > Expanded (), >
+    Scaffold(); > body: Row(), > children: <Widget> [] > 
+        Expanded (), > child: Image.asset('assets/yourimage.jpg') //[optional] See 08. for adding image
+        Expanded (), >
             flex: 3,
             child : Container() >
                 padding: EdgeInsets.all(30.0),
