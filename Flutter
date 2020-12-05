@@ -262,7 +262,7 @@ Structures
         Add all flex values under 'children: <Widget>' for the denominator, the total will be your assigned value of the width of the screen
         Under Expanded(), the flex value will be the numerator
         Numerator/Denominator
-    You can also wrap Expanded() widget to images
+    You can also wrap Expanded() widget and all its properties to images
     
     Scaffold(); > body: Row(), > children: <Widget> [] > 
         Expanded (), > child: Image.asset('assets/yourimage.jpg') //[optional] See 08. for adding image
