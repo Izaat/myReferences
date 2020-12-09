@@ -1,10 +1,47 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//WooCommerce RestAPI
+CONTENTS
+01. WooCommerce Setup
+02. WooCommerce API Setup and test
+03. WooCommerce RestAPI integration with Flutter
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//01. WooCommerce Setup
+    //Install and setup Woocommerce in wordpress as usual
+    //Add a product
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//02. WooCommerce API Setup and Testing
+
+    //Wordpress > WooCommerce > Settings >
+        Advanced Tab > 
+            REST API Tab
+                Description: flutter app key
+                User: ph190506...
+                Permission: Read/Write
+                -Generate Key
+                    ConsumerKey + ConsumerSecret
+            LegacyAPI
+                LegacyAPI: Enabled
+    
+    //Testing
+        woocommerce.github.io/woocommerce-rest-api-docs/#list-all-products
+            WooRestAPI > Products > List products
+                HTTPrequest: /wp-json/wc/v3/products
+        Open Postman Software
+            Start GetT-Request Workspace
+                Get: https://yourWebsite.com/wp-json/wc/v3/products?consumer_key=ck_123456&consumer_secret=cs_123456
+                    Send
+                You'll receive data in the body tab > console
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//03. WooCommerce RestAPI integration with Flutter
+
     //../lib/config.dart//////////////////////
         class Config {
             static String key = "";
             static String sceret = ""; //note the spelling
-            static String url = "https://youwebsite.com/wp-json/wc/v3/";    //URL where the file resides
+            static String url = "https://yourWebsite.com/wp-json/wc/v3/";    //URL where the file resides
             static String customerURL = "";
         }
         
@@ -220,3 +257,243 @@
                 );
             } //ShowMessage(){}
         } //ClassFormHelper
+
+    //../lib/utils/ProgressHUD.dart/////////////////////////////////////////////////////////////
+        import 'package:flutter/material.dart';
+        
+        class ProgressHUD extends StatelessWidget {
+            final Widget child;
+            final bool inAsyncCall;
+            final double opacity;
+            final Color color;
+            final Animation<Color> valueColor;
+            
+            ProgressHUD({
+                Key key,
+                @required this.child,
+                @required this.inAsyncCall,
+                this.opacity = 0.3,
+                this.color = Colors.grey,
+                this.valueColor,
+            }) : super(key : key);
+            
+            @override
+            Widget build(BuildContext context){
+                List<Widget> widgetList = new List<Widget>();
+                widgetList.add(child);
+                if (inAsyncCall) {
+                    final modal = new Stack(
+                        children: [
+                            new Opacity(
+                                opacity: opacity,
+                                child: ModalBarrier(dismissible: false, color: color),
+                            ), //Opacity
+                            new Center(
+                                child: new CircularProgressIndicator()
+                            ), //Center
+                        ],
+                    ); //Stack
+                    widgetList.add(modal);
+                } //inAsyncCall
+                return Stack(
+                    children: widgetList,
+                ); //Stack
+            } //BuildContext            
+        } //ProgressHUD
+
+    //../lib/utils/validator_service.dart/////////////////////////////////////////////////////////////
+        extension EmailValidator on String {
+            bool isValidEmail(){
+                return RegExp(
+                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+                ).hasMatch(this);
+            }
+        }
+
+    //../lib/pages/signup_page.dart/////////////////////////////////////////////////////////////
+        //link to _SignupPageState
+        
+        import 'package:flutter/material.dart';
+        class SignupPage extends StatefulWidget {
+            @override
+            _SignupPageState createState() => _SignupPageState();
+        }
+        
+        class _SignupPageState extends State<SignupPage> {
+            APIService apiService;
+            CustomerModel model;
+            GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+            bool hidePassword = true;
+            bool isApiCallProcess = false;            
+            
+            @override
+            void initState() {
+                apiService = new APIService();
+                model = new CustomerModel();
+            }
+            
+            @override
+            Widget build(BuildContext context) {
+                return new Scaffold(
+                    appBar: AppBar(
+                        backgroundColor: Colors.redAccent,
+                        automaticallyImplyLeading: true,
+                        title: Text("Sign Up"),                        
+                    ), //AppBar
+                    body: ProgressHUD(
+                        child: new Form(
+                            key: globalKey,
+                            child: _formUI(),
+                        ),
+                        inAsyncCall: isApiCallProcess,
+                        opacity: 0.3,
+                    ),
+                ); //Scaffold
+            } //BuildContext
+            
+            Widget _formUI() {
+                return SingleChildScrollView(
+                    child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Container(
+                            child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                        FormHelper.fieldLabel("First Name"),
+                                        FormHelper.textInput(
+                                            context,
+                                            model.firstName,
+                                            (value) => {
+                                                this.model.firstName = value,
+                                            },
+                                            onValidate: (value) {
+                                                if (value.toString().isEmpty) {
+                                                    return 'Please enter First Name.';
+                                                }
+                                                return null;
+                                            },
+                                        ),
+                                        
+                                        FormHelper.fieldLabel("Last Name"),
+                                        FormHelper.textInput(
+                                            context,
+                                            model.lastName,
+                                            (value) => {
+                                                this.model.lastName = value,
+                                            },
+                                            onValidate: (value) {
+                                                return null;
+                                            }
+                                        ),
+                                        
+                                        FormHelper.fieldLabel("Email Id"),
+                                        FormHelper.textInput(
+                                            context,
+                                            model.email,
+                                            (value) => {
+                                                this.model.email = value,
+                                            },
+                                            onValidate: (value) {
+                                                if (value.toString().isEmpty){
+                                                    return 'Please enter Email Id.';
+                                                }
+                                                
+                                                if (value.isNotEmpty && !value.toString().isValidEmail()) {
+                                                    return 'Please enter valid email id';
+                                                }
+                                                return null;
+                                            }, //value
+                                        ),  //FormHelper.textInput()
+                                        
+                                        FormHelper.fieldLabel("Password"),
+                                        FormHelper.textInput(
+                                            context,
+                                            model.password,
+                                            (value) => {
+                                                this.model.password = value,
+                                            },
+                                            onValidate: (value) {
+                                                if (value.toString().isEmpty) {
+                                                    return 'Please enter Password.';
+                                                }
+                                                return null;
+                                            },
+                                            obscureText: hidePassword,
+                                            suffixIcon: IconButton(
+                                                onPressed: () {
+                                                    setState((){
+                                                        hidePassword = !hidePassword;
+                                                    });
+                                                },
+                                                color: Theme.of(context).accentColor.withOpacity(0.4),
+                                                icon: Icon(
+                                                    hidePassword ? Icons.visibility_off : Icons.visibility,
+                                                ), //Icon
+                                            ), //IconButton
+                                        ),
+                                        SizedBox(
+                                            height: 20,
+                                        ),   //SizedBox 
+                                        new Center(
+                                            child: FormHelper.saveButton(
+                                                "Register",
+                                                () {
+                                                    if (validateAndSave()) {
+                                                        print(model.toJson());
+                                                        setState((){
+                                                            isApiCallProcess = true;
+                                                        });
+                                                        
+                                                        apiService.createCustomer(model).then(
+                                                            (ret) {
+                                                                setState(() {
+                                                                    isApiCallProcess = false;
+                                                                });
+                                                                
+                                                                if (ret) {
+                                                                    FormHelper.showMessage(
+                                                                        context,
+                                                                        "WooCommerce App",
+                                                                        "Registration Successful",
+                                                                        "Ok",
+                                                                        () {
+                                                                            Navigator.of(context).pop();
+                                                                        },
+                                                                    );
+                                                                } else {
+                                                                    FormHelper.showMessage(
+                                                                        context,
+                                                                        "WooCommerce App",
+                                                                        "Email Id already Registered.",
+                                                                        "Ok",
+                                                                        () {
+                                                                            Navigator.of(context).pop();
+                                                                        },
+                                                                    ); //showMessage
+                                                                } //else
+                                                            }, //(ret)
+                                                        );  //apiService
+                                                    }
+                                                },
+                                            ),
+                                        ), //Center                                        
+                                    ], //Column(children:[])
+                                ), //Column
+                            ), //Align
+                        ), //Container
+                    ), //Padding
+                ); //SingleChildScrollView
+            } //_formUI      
+            
+            bool validateAndSave() {
+                final form = globalKey.currentState;
+                if (form.validate()) {
+                    form.save();
+                    return true;
+                }
+                return false;
+            }            
+        } //_SignupPageState
+
