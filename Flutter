@@ -20,6 +20,7 @@ CONTENTS
 11. Rows and Columns
 12. Shortcuts
 13. Expanded widgets
+14. List of data
 
 
 
@@ -297,6 +298,43 @@ Structures
                 padding: EdgeInsets.all(30.0),
                 color: Colors.cyan,
                 child: Text(), > 'String'
+
+14. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Lists of data
+
+    Folder Project > test
+        Delete widget_test.dart //MyApp class from this file clashes with the main.dart file
+        
+    //main.dart
+        import 'package:flutter/material.dart';
+        void main() => runApp(); > MaterialApp() >
+            home: QuoteList(),
+
+        class QuoteList extends StatefulWidget {} > 
+            @override
+            _QuoteState createState () => _QuoteListState();
+            
+        class _QuoteState extends State<Quote>{} > 
+            List<String> quotes = []; > 
+                'Quote1',
+                'Quote2',
+                'Quote3',
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                backgroundColor: Colors.grey[200],
+                appBar: AppBar(), > 
+                    title: Text(), > 'Awesome Quotes'
+                    centerTitle: true,
+                    backgroundColor: Colors.redAccent,
+                body: Column() > children: quotes.map().toList(), 
+                    //.map() >
+                        (quoteParam) {} >
+                            return Text(); > quoteParam
+                    //.toList()
+                        > -empty-
+
+    //Output: Shows the list of quotes on the screen
+    //Tips: children: quotes.map((quoteParam) => Text(quoteParam)).toList(),
 
 
 
