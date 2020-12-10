@@ -31,6 +31,7 @@ CONTENTS
 28 - Additional
 29 - Creating Lower Thirds
 30 - Duplicating a person to 2 people effect
+31 - Scaling Expression
 
 
 01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
@@ -397,3 +398,14 @@ CONTENTS
     Layer 2 clips over the other in the multitrack
     Select a clip layer and use the pen tool to draw a mask over
     Play video
+
+31 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////31
+//Scaling Expression
+    Open Scale of a composition and add in this expression 
+        //Make object not scale down when being sucked into the centre/vortex.
+        s = [];
+        ps = parent.transform.scale.value;
+        for (i = 0; i<ps.length; i++){
+            s[i] = value[i]*100/ps[i];
+        }
+        s
