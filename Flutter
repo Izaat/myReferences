@@ -21,7 +21,8 @@ CONTENTS
 12. Shortcuts
 13. Expanded widgets
 14. List of data
-
+15. Custom Classes Part 1
+16. Custom Classes Part 2
 
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -337,7 +338,97 @@ Structures
     //Tips: children: quotes.map((quoteParam) => Text(quoteParam)).toList(),
 
 
+15. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Custom Classes Part 1
+    Follow the code on 14.
+    
+    //quote.dart
+        class Quote {} > 
+            String text;
+            String author;            
+            Quote () {} >
+                () > String text, String author
+                {} > 
+                    this.text = text;
+                    this.author = author;
+        //Adding in new quotes
+        Quote myquote = Quote('Quote4', 'Quote5');
+                
+    //main.dart
+        import 'package:flutter/material.dart';
+        void main() => runApp(); > MaterialApp() >
+            home: QuoteList(),
 
+        class QuoteList extends StatefulWidget {} > 
+            @override
+            _QuoteState createState () => _QuoteListState();
+            
+        class _QuoteState extends State<Quote>{} > 
+            List<String> quotes = []; > 
+                'Quote1',
+                'Quote2',
+                'Quote3',
+                
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                backgroundColor: Colors.grey[200],
+                appBar: AppBar(), > 
+                    title: Text(), > 'Awesome Quotes'
+                    centerTitle: true,
+                    backgroundColor: Colors.redAccent,
+                body: Column() > children: quotes.map().toList(), 
+                    //.map() >
+                        (quoteParam) {} >
+                            return Text(); > quoteParam
+                    //.toList()
+                        > -empty-
+
+
+16. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Custom Classes Part 2
+    Follow the code on 15.
+    Using named Parameters. Example, Author, title, etc
+    
+    //quote.dart
+        class Quote {} > 
+            String text;
+            String author;            
+            Quote ()  > {this.text, this.author}                                             //see the diff with 15.
+
+        //Adding in new quotes
+        //Quote myquote = Quote(text: 'Quote4', author: 'Quote5');        //see the diff with 15. Line not in use for app
+                
+    //main.dart
+        import 'package:flutter/material.dart';
+        import 'quote.dart';
+        void main() => runApp(); > MaterialApp() >
+            home: QuoteList(),
+
+        class QuoteList extends StatefulWidget {} > 
+            @override
+            _QuoteState createState () => _QuoteListState();
+            
+        class _QuoteState extends State<Quote>{} > 
+            List<Quote> quotes = []; > 
+                Quote1(author: 'Writer01', text: 'BookTitle01'),
+                Quote2(author: 'Writer02', text: 'BookTitle02'),
+                Quote3(author: 'Writer03', text: 'BookTitle03')
+                
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                backgroundColor: Colors.grey[200],
+                appBar: AppBar(), > 
+                    title: Text(), > 'Awesome Quotes'
+                    centerTitle: true,
+                    backgroundColor: Colors.redAccent,
+                body: Column() > children: quotes.map().toList(), 
+                    //.map() >
+                        (quoteParam) {} >
+                            return Text(); > '${quoteParam.text} - ${quoteParam.author}'
+                    //.toList()
+                        > -empty-
+                        
+    RestartApp and run
 
 
 
