@@ -18,7 +18,11 @@ Run dart file by typing in "dart filename.dart" in the console
 11. CLASSES
 12. CLASSES WITH PRIVATE INSTANCE / SECURITY
 13. CLASS INHERITENCE
-14. NULL AWARE OPERATOR
+14. NULL AWARE OPERATOR - ?. , ?? , ??=
+15. TERNARY OPERATOR  
+16. TYPE TEST OPERATOR
+17. CONDITIONAL STATEMENT
+18. LOOP STATEMENT
 
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -247,11 +251,138 @@ dynamic
     }
 
 
-
-
-
 14 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //NULL AWARE OPERATOR
+    //(?.)
+    If the variable/function is not defined, then output 'null'. 
+    If contains value, then proceed
+    Usually it'll output error messages if variable is not defined
+        
+        class Num {
+            int num = 10;
+        }   
+        main() {
+            var n = Num();
+            int number;
+            if (n != null){     // the entire if-function can be replaced with: number = n?.num;
+                number = n.num;
+            }      
+            print(number); //Output 10 if everything is defined, 'null' if 'Num()' being removed from 'var n'
+        }
+
+    // (??)
+    If the variable/function is not defined, this will output a value instead of null shown ablove
+    Instead of,
+        number = n?.num; //outputs value 'null' if 'Num()' being removed from 'var n'
+    We use this,
+        number = n?.num ?? 0;   //outputs value '0' if 'Num()' being removed from 'var n'
+
+
+    //(??=)
+    This statement adds in a default value the variable if the variable has no value in it
+    This avoids program to crash if there is no value assigned to the variable.
+    
+        main(){
+            int number;
+            print(number ??= 100);
+        }
+        
+    Output: value will be 100
+
+
+15 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//TERNARY OPERATOR
+
+    void main() {
+        int x = 100;
+        var result = x % 2 == 0 ? 'Even' : 'Odd';       //100 divide by 2, //if remainder is 0, print even. If remainder is not 0, print odd
+        print(result);
+    }
+
+
+16 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//TYPE TEST OPERATOR
+    void main(){
+        var x = 100;
+        if (x is int){
+            print('integer'); //prints integer if x = 100, but if x = 100.00, it wont print integer as the variable is not defined as 'int'
+        }
+    }
+
+
+17 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//CONDITIONAL STATEMENT
+    IF Statement
+        void main() {
+            int number = 100;
+            
+            if (number % 2 == 0) {
+                print('Even');
+            }
+            else if (number % 3 == 0) {
+                print('Odd');
+            }
+            else {
+                print('Confused');
+            }
+        }
+    
+    SWITCH STATEMENT
+        void main() {
+            int number = 0;
+            
+            switch(number) {
+                case 0:
+                    print('Even');
+                    break;
+                case 1:
+                    print('Odd');
+                    break;
+                default:
+                    print('Confused');    
+            }
+        }
+
+
+18 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//LOOP STATEMENT
+    FOR
+        void main () {
+            for (var i = 1; i <= 10; ++i) {
+                print(i);
+            }
+        }
+
+    FOR-IN
+        void main () {
+            var numbers = [1,2,3];
+            
+            for (var n in numbers) {
+                print(n);
+            }
+            
+            for (var i = 0; i< numbers.length; ++i) {
+                print(numbers[i]);
+            }
+            
+        }
+        
+    FOR-EACH
+        void main() {
+            var numbers = [1, 2, 3];
+            
+            numbers.forEach( (n) => print(n) );
+        }
+
+    WHILE
+        void main() {
+            int num = 5;
+            while (num > 0){    //Also see 'do' loop
+                print(num);
+                num -= 1;
+            }
+        } //prints out 5,4,3,2,1
+
 
 
 
