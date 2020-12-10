@@ -1,0 +1,105 @@
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01. Simple Mapping
+02. Documentary style mapping
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//01. Simple Mapping
+    Create Composition and name it 'MainComp'
+    Animated line path
+        Add world map into the composition
+        Add a new solid layer and name it 'Stroke'
+            Hide layer from view
+            Click on pen tool and draw a line
+        Add stroke effect to MainComp
+            Mask path of the pen
+        Animate the stroke 
+            RightClick on keyframe point, add keyframe assistant, easy ease
+                Graph editor to control the speed
+    Animated follow cam
+        RightClick on layer > New > Camera
+        Add New null object in MainComp
+        Select and enable 3D on Stroke Layer, Image Layer and Null Layer
+        Select Camera Layer and Link/Parent to Null Layer
+        Select Null Layer
+            Press R to open up Rotation list
+            Shift + P to add in Positioning
+            Animate all
+            Select all keyframes and add in easy ease
+                RightClick on keyframes > Keyframe Assistant > Easy Ease
+            Graph Editor
+        Camera Layer > Camera options
+            Depth of Field: ON
+            Aperture: 130 pixels
+            Focal Distance: Tweak until the focus is sharp while the background is blurry
+    Add animated Pin Location
+        Add the Pin Image with transparent background
+            Activate 3D mode on this layer //Right now, the image lays flat on the map
+            Move this image to location of the map
+            Click on Pan-Behind to reposition the anchor pointof this layer
+            Press R to rotate it vertically //This will make it stand on Z axis
+            Animate keyframes + Easy Easy + DropShadow
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//02. Documentary style mapping
+    Photoshop
+        Removing background from the map
+            Menu > Select > Color Range
+            Click onto the background until everything is selected
+                Shift + Click to add other part of the area
+                Once complete, press OK and delete
+        Convert the area of the undeleted into vector
+            Ctrl + Click on the layer in Right Handside Panel
+            Select Dotted Box tool on Left Hand Side Tool Bar, right click on selected path, and select 'Make Work Path'
+            Create new layer on the Right hand Side Panel and Delete the Previous layer
+            Resize the image, Menu > Image > Canvas Size
+            On right hand side panel, Open Paths Tab
+                Right Click on 'Work Path' and select 'Fill Path'
+                Contents: Forground Color and click Ok
+                Right Click on 'Work Path' again and select 'Delete Path'
+        Save as Png file with transparency and import this to After Effects
+
+    After Effects
+        Create a Composition with the png file and name this MapComp
+        Add another composition in MapComp and name this MainComp
+            Add MapComp to MainComp
+            Add Solid Layer and place this layer below the MapComp
+            Add all the texts (City names, Country names, etc)
+            Add 2 shape layers and place over your desired location. 
+                Layers should be at the top of other layers
+            Add another shape layer and draw a line using the pen tool connecting the 2 points
+                Once done, rightclick on the layer and select 'Trim Paths'
+                Open Trim path option and decrease 'End' to 0%
+                Add keyframe to another timeframe and adjust TrimPath's end to 100%
+                Place this layer below the 2 points layer
+                Menu > Layer > Layer Styles > Outer Glow
+                    Size: 20
+                    Opacity: 90
+            Add Texture to the map
+                Find and image with texture and place this layer on top of the map layer
+                Menu > Effect > Color Correction > 
+                    Hue/Saturation > Master Saturation: -100
+                    Levels > Adjust Histogram
+                Change Mode to overlay
+            Select all layers and activate 3D    
+            Add camera
+                Menu > Layer > New > Camera
+                    Select Camera layer or press C to toggle Camera (rotate, pan amd zoom) to control map in 3D space
+                    Set keyframes R and P
+            Add Light Layer
+                Menu > Layer > New > Light
+                    Light Type: Point Light
+                    Adjust the light position intensity and location and distance to the map
+                    Light Option > 
+                        Shadow Diffusion : 100
+                        Intensity: 130
+            Add depth to texts
+                Select all and drag the Z-axis
+            Add glow to map
+                Select Map
+                    Menu > Layer > Layer Styles > Inner Glow
+                        Size: 65
+                        Opacity: 30
+                    Add Drop Shadow   
