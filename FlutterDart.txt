@@ -23,6 +23,7 @@ Run dart file by typing in "dart filename.dart" in the console
 16. TYPE TEST OPERATOR
 17. CONDITIONAL STATEMENT
 18. LOOP STATEMENT
+19. COLLECTION CLASSES
 
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -384,7 +385,41 @@ dynamic
         } //prints out 5,4,3,2,1
 
 
+19 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//COLLECTION CLASSES
 
+    LIST //See Flutter topic 14.
+        ///////////
+        void main() {
+            List names = ['Name01', 'Name02'];  //If 'List <String> names', then no other data types other than String can be used
+            print (names[0]);       //Outputs Name01
+            print(names.length); //Outputs 2
+        }
+        
+        ///////////
+        void main() {
+            var names = ['Name01', 'Name02'];   //This automatically turns into String. If add in 10 and 10.01, it changes from String into object
+            for (var n in names) {
+                print(n);       //Name01, Name02
+            }
+        }
+        ///////////
+        void main() {
+            List <String> names = ['Name01', 'Name02'];     //if "const ['Name01', 'Name02']" is used, nothing can be changed
+            names[1] = 'Name03';        
+            for (var n in names) {
+                print(n);       //Name01, Name03
+            }
+        }
+        ///////////
+        void main() {
+            List <String> names = ['Name01', 'Name02'];
+            var names2 = [...names]; //the triple dots uses the original array, similar to javascript
+            names[1] = 'Name03';        
+            for (var n in names2) {
+                print(n);       //Name01, Name02
+            }
+        }
 
 
 
