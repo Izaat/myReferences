@@ -437,7 +437,30 @@ dynamic
             print(variable1.runtimeType);   //Output _CompactLinkedHashSet<String>
         }
 
-
+    MAP
+        ///////////
+        void main() {
+            var variable1 = {
+                //Key       :   Value
+                'first'       :   'variable1',
+                'second'  :   'variable2',
+                'third'      :   'variable3',
+                4             :   'variable4' 
+            };
+            print (variable1['third']);      //Output: variable3
+            print (variable1[4]);              //Output: variable4
+        }
+        ///////////
+        void main() {
+            var variable1 = Map();
+            variable1 ['first'] = 'Number1';
+            print (variable1['first']);      //Output: Number1
+        }
+        ///////////
+        void main() {
+            var variable1 = {'first': 'Number1', 'second': 'Number2'};
+            print (variable1['second']);      //Output: Number2
+        }
 
 
 
