@@ -23,7 +23,7 @@ Run dart file by typing in "dart filename.dart" in the console
 16. TYPE TEST OPERATOR
 17. CONDITIONAL STATEMENT
 18. LOOP STATEMENT
-19. COLLECTION CLASSES
+19. COLLECTION CLASSES [LIST, SET, MAP]
 
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -420,7 +420,22 @@ dynamic
                 print(n);       //Name01, Name02
             }
         }
-
+    SET
+        ///////////
+        void main() {
+            var variable1 = {};
+            print(variable1.runtimeType);   //Output _InternalLinkedHashMap<dynamic, dynamic>
+        }
+        ///////////
+        void main() {
+            var variable1 = <String> {};
+            print(variable1.runtimeType);   //Output _CompactLinkedHashSet<String>
+        }
+        ///////////
+        void main() {
+            Set <String> variable1 = {};
+            print(variable1.runtimeType);   //Output _CompactLinkedHashSet<String>
+        }
 
 
 
