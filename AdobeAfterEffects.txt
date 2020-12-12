@@ -412,11 +412,38 @@ CONTENTS
 
 32 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////30
 // Extrude expression
-    Open a composition, select the target layer, and add in this expression 
-    Hold Alt and click on Position
+    Open a composition
+    Add A layer and call this 'Target'
+       Add effects - turbulent noise, posterize, find edges and extract
+    Add Camera and Null object and place the 2 layers at the bottom
+    Activate 3D on target layer, Camera layer and null layer
+    Select Camera layer and link/parent it to the null layer
+    Reorientate the null layer
+    Select target layer, add effect
+    	Menu > Effect > Expression Controls > Layer Controls
+	Menu > Effect > Expression Controls > Slider Controls
+		Slider Control 1 : HeightX
+		Slider Control 2 : SlopeX
+		Slider Control 3 : PositionX
+    Select the target layer, and add in this index expression 
+    Hold Alt and click on Position stopwatch
         value-[0,0,index*5]
-    Duplicate the layer
-    This will stack up the layer over each other forming an extrusion
-
-
-
+    	Duplicate the layer
+    	This will stack up the layer over each other forming a parallel extrusion
+    Select target layer and Alt + Click on Turbulent Noise effect > Brightness stop watch
+        Add this expression
+	value-[0,0,index*5]
+    	Duplicate target layer and and this will form a contoured extrusion using the brightness level of turbulent noise effect
+	**
+	To control with single layer
+		Target layer > Effects > PositionX > Expression: Brightness 
+			highlight the expression 5 and parent to slope slider
+				new expression: value+index*effect("LayerControl")("Layer").effect("slope")("Slider")
+		Target layer > Effects > Position > Expression: position 
+			highlight the expression 5 and parent to height slider
+				new expression: value-[0,0,index*effect("LayerControl")("Layer").effect("height")("Slider")]
+		Target layer > Effects > Turbulent Noise > Brightness > Expression: Brightness
+			Add the expression + and parent to position slider
+				new expression: value+index*effect("LayerControl")("Layer").effect("slope")("Slider")+effect("position"("Slider")
+	Duplicate layer
+	Adjust the slope, height and position
