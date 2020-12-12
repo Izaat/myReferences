@@ -32,7 +32,7 @@ CONTENTS
 29 - Creating Lower Thirds
 30 - Duplicating a person to 2 people effect
 31 - Scaling Expression
-
+32 - Extrude Epression
 
 01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
 //Create new composition from mp4
@@ -409,3 +409,14 @@ CONTENTS
             s[i] = value[i]*100/ps[i];
         }
         s
+
+32 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////30
+// Extrude expression
+    Open a composition, select the target layer, and add in this expression 
+    Hold Alt and click on Position
+        value-[0,0,index*5]
+    Duplicate the layer
+    This will stack up the layer over each other forming an extrusion
+
+
+
