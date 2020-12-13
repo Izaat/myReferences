@@ -33,6 +33,7 @@ CONTENTS
 30 - Duplicating a person to 2 people effect
 31 - Scaling Expression
 32 - Extrude Epression
+33 - Count Down numbers (Using slider)
 
 01 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////01
 //Create new composition from mp4
@@ -447,3 +448,42 @@ CONTENTS
 				new expression: value+index*effect("LayerControl")("Layer").effect("slope")("Slider")+effect("position"("Slider")
 	Duplicate layer
 	Adjust the slope, height and position
+
+33 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////33
+//Count Down numbers (Using slider)
+    Add text to composition and add Slider Control to Text Layer
+    Parent/Link 
+        Text > SourceText to Effects > SliderControl > Slider
+        Source Text Expression : Math.round(effect("Slider Control")("Slider"))         //Math.round is to round off decimal places to whole numbers
+    Control Number with slider and add keyframes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
