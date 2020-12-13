@@ -23,6 +23,7 @@ CONTENTS
 14. List of data
 15. Custom Classes Part 1
 16. Custom Classes Part 2
+17. Extract widgets
 
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -431,7 +432,107 @@ Structures
     RestartApp and run
 
 
+17. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Extracting Widgets - 12 points
 
+    //1. Extract Card widget and put it into stateless widget
+        On the right hand side of the screen, open the "FlutterOutline" tab
+            Highlight the CardMargin (Inside the tree _QuoteListState>quoteTemplate)
+            Right click on it and select "Extract widget"
+            Name this "QuoteCard" and click on "Refactor"
+    
+    
+    //quote.dart
+        class Quote {} > 
+            String text;
+            String author;            
+            Quote ();  > {this.text, this.author}                              
+               
+    //main.dart
+        import 'package:flutter/material.dart';
+        import 'quote.dart';
+        void main() => runApp(); > MaterialApp() >
+            home: QuoteList(),
+
+        class QuoteList extends StatefulWidget {} > 
+            @override
+            _QuoteListState createState () => _QuoteListState();
+            
+        class _QuoteListState extends State<QuoteList>{} > 
+            List<Quote> quotes = []; > 
+                Quote(author: 'Writer01', text: 'BookTitle01'),
+                Quote(author: 'Writer02', text: 'BookTitle02'),
+                Quote(author: 'Writer03', text: 'BookTitle03')
+            
+            /*
+            Widget quoteTemplate(quoteParam) {                                      //2. This section will be added after extraction
+                return newQuoteCard(quoteParam: quoteParam);                        //8. By default, the content of the bracket is blank and need a constuctor to pass data
+            }                                                                       //10. Despite the extraction, the widget is actually redundant. So delete it.
+            */
+            
+            /*
+            Widget quoteTemplate(quoteParam) {} > return Card(); >                  //3. This entire section will go to QuoteCard()
+                margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+                child: Padding(), >                                                     
+                    padding: const EdgeInsets.all(8.0),                     
+                    child: Column(), > 
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget> [], >
+                            Text(), > 
+                                quoteParam.text,
+                                style: TextStyle() > 
+                                    fontSize: 18.0,
+                                    color: Colors.grey[600],
+                                SizedBox(), > height: 6.0
+                                Text() >
+                                    quoteParam.author,
+                                    style: TextStyle() > 
+                                        fontSize: 14.0,
+                                        color: Colors.grey[800]                                         
+            */
+            
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                backgroundColor: Colors.grey[200],
+                appBar: AppBar(), > 
+                    title: Text(), > 'Awesome Quotes'
+                    centerTitle: true,
+                    backgroundColor: Colors.redAccent,
+                body: Column() > children: quotes.map().toList(), 
+                    //.map() >
+                        //(quoteParam) => quoteTemplate(quoteParam)                   //11. This will be replaced with the line below
+                        (quoteParam) => QuoteCard(quoteParam: quoteParam)
+                        
+                    //.toList()
+                        > -empty-
+
+        //12. /Since the entire class now is external, this can be transferred to another dart file and use 'import' to call.   //12.   Place file in ../lib/quote_card.dart
+        //dont forget to copy paste all the imported files commands listed under main.dart into quote_card.dart file
+        class QuoteCard extends StatelessWidget {} >                                   //4. The new placement method for the extracted widget
+            //const QuoteCard({Key key,}) : super(key: key);                          //5. Not in use. Can be deleted
+            
+            final Quote quoteParam;                                                   //9. The new constructor
+            QuoteCard({this.quoteParam});
+            
+            @override                                                                 //6. Add override
+            Widget build(BuildContext context) {} > return Card(); >                  //7. quoteTemplate(quoteParam) changes to build(BuildContext context)
+                margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+                child: Padding(), >                                                     
+                    padding: const EdgeInsets.all(8.0),                     
+                    child: Column(), > 
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget> [], >
+                            Text(), > 
+                                quoteParam.text,
+                                style: TextStyle() > 
+                                    fontSize: 18.0,
+                                    color: Colors.grey[600],
+                                SizedBox(), > height: 6.0
+                                Text() >
+                                    quoteParam.author,
+                                    style: TextStyle() > 
+                                        fontSize: 14.0,
+                                        color: Colors.grey[800]
 
 
 
