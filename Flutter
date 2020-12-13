@@ -24,6 +24,8 @@ CONTENTS
 15. Custom Classes Part 1
 16. Custom Classes Part 2
 17. Extract widgets
+18. Functions as Parameters
+19. World time App
 
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -535,11 +537,71 @@ Structures
                                         color: Colors.grey[800]
 
 
+18. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Functions as Parameters - Vid #21 - 7 points
+
+    //quote_card.dart
+        class QuoteCard extends StatelessWidget {} >                        
+            
+            final Quote quoteParam;                                    
+            final Function delete;                                             //6. This defines the delete 
+            //QuoteCard({this.quoteParam});                         //4. Receiving commmand from main.dart        
+            QuoteCard({this.quoteParam, this.delete});         //5. This will be added, but need to define 'delete'
+            
+            @override                                                                                
+            Widget build(BuildContext context) {} > return Card(); >   
+                margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+                child: Padding(), >                                                     
+                    padding: const EdgeInsets.all(8.0),                     
+                    child: Column(), > 
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget> [], >
+                            Text(), > 
+                                quoteParam.text,
+                                style: TextStyle() > 
+                                    fontSize: 18.0,
+                                    color: Colors.grey[600],
+                                SizedBox(), > height: 6.0
+                                Text() >
+                                    quoteParam.author,
+                                    style: TextStyle() > 
+                                        fontSize: 14.0,
+                                        color: Colors.grey[800]
+                                SizedBox(height: 8.0),                                   //1. Delete button for each of the card
+                                FlatButton.icon() >
+                                    //onPressed: () {},                                       //2a. If the brackets are blank, you can't delete the cards directly from the quote_card file. 
+                                    onPressed: delete,                                   //7. The delete function
+                                    label: Test('delete quote'),                     //2b. Can only be deleted from main.dart because data does not reside in stateless widget, but in state object
+                                    icon: Icon(Icons.delete),                         //2c. The solution is pass the command through "QuoteCard({this.quote});" first to access main.dart
+                                
+    //main.dart
+        class _QuoteListState extends State<QuoteList>{} > 
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                backgroundColor: Colors.grey[200],
+                appBar: AppBar(), > 
+                    title: Text(), > 'Awesome Quotes'
+                    centerTitle: true,
+                    backgroundColor: Colors.redAccent,
+                body: Column() > children: quotes.map().toList(), 
+                    //.map() >           
+                        //(quoteParam) => QuoteCard(quoteParam: quoteParam)                       //3. Can only be deleted from this line, (quoteParam: quoteParam).
+                        -Therefore-
+                        (quoteParam) => QuoteCard() >
+                            quoteParam: quoteParam,
+                            delete: () {}
+                                {} > setState(); > () {}
+                                    {} > quotes.remove() > quoteParam
+                                        
+                        
+                        
+                    //.toList()
+                        > -empty-
 
 
 
-
-
+19. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//World Time App
 
 
 
