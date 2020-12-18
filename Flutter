@@ -25,7 +25,8 @@ CONTENTS
 16. Custom Classes Part 2
 17. Extract widgets
 18. Functions as Parameters
-19. World time App
+19. World time App #1
+20. World time App #2
 
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -601,7 +602,106 @@ Structures
 
 
 19. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//World Time App
+//World Time App #1 - Vid #22
+    //Number of screens: 3 = Home screen, loading screen,  location screen
+        Create a new package/folder under the 'lib' folder and name it 'pages'
+        Create the individual dart files for the 3 pages (home.dart, loading.dart, choose_location.dart)
+        Add the 'import' code for material.dart package to all the pages files
+        Create stateful widget for the home.dart
+        Use 'SafeArea widget' to make the app avoid covering the system's main header bar (battlife/time/internet connection/wifi level), see point 2
+    
+    //main.dart
+        import 'package:flutter/material.dart';
+        import 'package:YourAppFolderName/pages/home.dart';     //1. This will direct to the home.dart file NOTE: 'package:flutter..' not being used here. This has the same functionality.
+        void main() => runApp(); >
+            MaterialApp() > 
+                home: Home(),
+    
+    //home.dart
+        import 'package:flutter/material.dart';
+        class Home extends StatefulWidget {} > 
+            @override
+            _HomeState createState() => _HomeState();
+            
+        class _HomeState extends State<Home> {} >
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                //body: Text(), > 'Home Screen'                                   //2. Wrap text() with new SafeArea Widget 
+                body: SafeArea(), > child: Text() > 'Home Screen'
+
+    //choose_location.dart
+        import 'package:flutter/material.dart';
+        class ChooseLocation extends StatefulWidget {} > 
+            @override
+            _ChooseLocationState createState() => _ChooseLocationState();
+            
+        class _ChooseLocationState extends State<ChooseLocation> {} >
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                body: Text(), > 'ChooseLoc Screen'             
+                
+    //loading.dart
+        import 'package:flutter/material.dart';
+        class Loading extends StatefulWidget {} > 
+            @override
+            _LoadingState createState() => _LoadingState();
+            
+        class _LoadingState extends State<Loading> {} >
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                body: Text(), > 'Loading Screen'         
+
+20. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//World Time App #2 - Using Dart Mapping method to route - 9 points
+
+    //main.dart
+        import 'package:flutter/material.dart';
+        import 'package:YourAppFolderName/pages/home.dart';
+        import 'package:YourAppFolderName/pages/Loading.dart';
+        import 'package:YourAppFolderName/pages/choose_location.dart';
+        
+        void main() => runApp(); >
+            MaterialApp() > 
+                //home: Home(),                                                           //03. So this line should be removed to avoid conflicts with the default base Loading.dart
+                //initialRoute: '/home',                                                  //04. This line is for testing purposes but this is how you test the app without the Home()-Loading() conflicts
+                routes: {}, >
+                    //  '/contact',                                                       //01. routing to the contact folder where (context) is the current position within the tree you're in
+                    '/': (context) => Loading(),                                          //02. this loads the Loading.dart file as the default base but take note that this widget conflicts with 'home: Home() command'
+                    '/home': (context) => Home(),
+                    '/location': (context) => ChooseLocation(),
+
+    //home.dart
+        import 'package:flutter/material.dart';
+        class Home extends StatefulWidget {} > 
+            @override
+            _HomeState createState() => _HomeState();
+            
+        class _HomeState extends State<Home> {} >
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                //body: SafeArea(), > child: Text() > 'Home Screen'                         //05. To remove this line for the Column()
+                body: SafeArea(), > child: Column() > children: <Widget>[], >
+                    FlatButton.icon(), > onPressed: () {}, >
+                        Navigator.pushNamed(context, '/location');                            //06. pushNamed(context, routeName)                            
+                    icon: Icon(Icons.edit_location),
+                    label: Text('Edit Location'),
+
+    //choose_location.dart
+        import 'package:flutter/material.dart';
+        class ChooseLocation extends StatefulWidget {} > 
+            @override
+            _ChooseLocationState createState() => _ChooseLocationState();
+            
+        class _ChooseLocationState extends State<ChooseLocation> {} >
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                backgroundColor: Colors.grey[200],                                            //07. Add this line
+                appBar: AppBar(), >                                                          //08. appBar function being added here is to add the 'Back' button that leads back to the homepage
+                    backgroundColor: Colors.blue[900],
+                    title: Text('Choose Location'),
+                    centerTitle: true,
+                    elevation: 0,                                                             //09. 0 means removing the dropShadow
+                body: Text(), > 'Choose Location Screen'    
 
 
 
