@@ -24,6 +24,7 @@ Run dart file by typing in "dart filename.dart" in the console
 17. CONDITIONAL STATEMENT
 18. LOOP STATEMENT
 19. COLLECTION CLASSES [LIST, SET, MAP]
+20. FUNCTIONS [Anonymous, Positional, Named, Hybrid]
 
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -461,9 +462,80 @@ dynamic
             var variable1 = {'first': 'Number1', 'second': 'Number2'};
             print (variable1['second']);      //Output: Number2
         }
+        ///////////                                         -----Use for routing
+        void main() {
+            Map student = {'name': 'name01', 'age': 25};
+            print (student['name']); //Outputs name01
+        }
 
 
+20 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FUNCTIONS
+    /////////////
+    //Example 1
+        void main() {
+            showOutput(square(2.5));
+        }
+        dynamic square (var num) {      //dynamic can read any type of number value (float, int, double, num)
+            return num*num;
+        }
+        void showOutput(var msg) {
+            print msg;
+        }   //Output: 4
+    ///////////////
+    //Anonymous function
+        /////
+        //Without anonymous
+        main() {
+            var list = ['var1', 'var2', 'var3'];
+            list.forEach(printF);
+        }
+        void printF(item){
+            print(item); 
+        }
+        Output: var1, var2, var3
+        
+        //////
+        //With anonymous function       //A function without any name (see missing printF)
+        main() {
+            var list = ['var1', 'var2', 'var3'];
+            list.forEach((item) {
+                print(item);
+            });
+        }
+        Output: var1, var2, var3
 
+    /////////////////
+    //Positional parameter argument
+        void main() {
+            print(sum(10, 20));
+        }
+        dynamic sum(var num1, var num2) => num1 + num2;     //Where num1 is 10 and num2 is 20           
+    
+    /////////////////
+    //Named parameter argument
+        void main() {
+            print(sum (num1: 10, num2: 20) );
+        }
+        dynamic sum({var num1, var num2}) => num1 + num2;
+
+     /////////////////
+     //Hybrid of Positional and Named parameter
+        void main() {
+            print(sum (10, num2: 20) );
+        }
+        dynamic sum(var num1, {var num2}) => num1 + num2;
+
+    /////////////////
+     //Positional and Named parameter shortcut
+        void main() {
+            print(sum (10) );
+            print(sum(10, num2: 20));
+        }
+        dynamic sum(var num1, {var num2}) => num1 + (num2 ?? 0);         //OR
+        dynamic sum(var num1, {var num2=0}) => num1 + num2;              //Provides same function as the line above
+        //Output: 10
+        //Output: 30
 
 
 
