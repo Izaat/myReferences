@@ -24,7 +24,7 @@ Run dart file by typing in "dart filename.dart" in the console
 17. CONDITIONAL STATEMENT
 18. LOOP STATEMENT
 19. COLLECTION CLASSES [LIST, SET, MAP]
-20. FUNCTIONS [Anonymous, Positional, Named, Hybrid]
+20. FUNCTIONS [Anonymous, Positional, Named, Hybrid, Optional]
 
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -537,7 +537,15 @@ dynamic
         //Output: 10
         //Output: 30
 
-
+    /////////////////
+     //Make Positional as Optional parameter
+        void main() {
+            print(sum (10, 20) );
+            print(sum(20));
+        }        
+        dynamic sum(var num1, [var num2]) => num1 + ( num2 ?? 0 );   
+        //Output: 30
+        //Output: 20
 
 
 
