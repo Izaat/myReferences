@@ -54,9 +54,9 @@ CONTENTS
     Menu at the bottom of the screen.
         MoveL | v1000 | z100 | tool0 | WObj:=wobj0
         MoveL > 
-            MoveJ: 
+            MoveJ: Joint
             MoveL: Linear
-            MoveAbsJ:
+            MoveAbsJ:Joint Absolute
             MoveExtJ: 
         v1000 > Velocity/Speed (m/s)
             Use v30 for real robot
