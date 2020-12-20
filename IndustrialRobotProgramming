@@ -1,0 +1,130 @@
+Industrial Robot Programming
+ABB Robot Studio
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01 - Start
+02 - Coordinate Systems
+03 - Motion Types
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01 Start
+    New 
+        Solution with Station and Robot Controller
+            RobotModel: IRB4600 40kg
+    Menu > Controller > 
+        Backup              //backup files
+        Restart             //restart controller
+        Input/Outputs   //add input and outputs
+        FlexPendant      //Controls the pendant from RStudio
+        Control Panel   //Controlling the power, estop, manual/auto buttons of IRC from the RStudio
+    Menu > RAPID
+        Synchronize > Sync to RAPID     //Syncing to text based program language
+        Synchronize > Sync to Station    //Syncing to the real robot
+        Start   //Start program
+        Run Mode //Selecting Single Cycle or Continuous
+        Program     //Load, save, rename, save to controller, load from controller
+        Apply          //Updates the controller with the changes made on RStudio
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02 Coordinate Systems 
+    Set to Local coordinate reference
+        Menu > Target > Reference > Local
+            Local: This will will follow the end of arm coordinate system
+            World: This follows the Base of the robot
+            ABB = wobj
+            Fanuc = userframe
+            X, Y, Z, Pitch (A), Roll (B), Yaw (C) 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03 Motion Types 
+    Setting up Paths
+        Solutions Panel > Paths & Target Tab > Solution > IRB > T_ROB > Workobjects & Targets > wobj0 > wobj0_of > Target_10
+            Duplicate Target_10 (CopyPaste)
+            In Toolbar, find Freehand Tools, select the Linear icon (linear arrow and a mouse cursor)
+            Move the 3D orientation for each Targetfile
+            Repeat the duplicate-move-rename process. Rename them to 10, 20, 30, ...
+            Highlight all the path files you created            
+            RightClick > Add New Path
+            New sub tree will be added to Paths & Procedures Tree
+                Solutions Panel > Paths & Target Tab > Solution > IRB > T_ROB > Paths & Procedures > Path_# > 
+                    MoveL--- Target10
+                    MoveL--- Target20
+                    MoveL--- Target30
+        
+    Menu at the bottom of the screen.
+        MoveL | v1000 | z100 | tool0 | WObj:=wobj0
+        MoveL > 
+            MoveJ: 
+            MoveL: Linear
+            MoveAbsJ:
+            MoveExtJ: 
+        v1000 > Velocity/Speed (m/s)
+            Use v30 for real robot
+        z100 > Zone 
+            The accuracy of the endpoint //Unit in mm diameter (sphere), the smaller the number the tighter the tolerance
+            The shortcut path the robot takes (It will always take the shortcut when it passes through a point )
+
+    To run the robot
+        RightClick on Path_#
+            Solutions Panel > Paths & Target Tab > Solution > IRB > T_ROB > Paths & Procedures > Path_#
+            Select Sychronize to RAPID
+            Once completed, open RAPID Tab in the Main Menu
+            
+        Naming the module (If error "RAPID symbol 'main' in T_ROB not found" appears )
+            RightClick on T_ROB
+            Solutions Panel > Paths & Target Tab > Solution > IRB > T_ROB > New Module
+                Input  name to Module Name (Name it as "main")
+                The 'main' file will appear under Program modules tree
+                    DoubleClick to open the file and input the following
+                    
+                    MODULE mainProg
+                        PROC main()
+                            Path_#;
+                        ENDPROC                        
+                    ENDMODULE
+                
+                Head over to ToolBarMenu > Controller Section 
+                    Click on Apply Icon
+        
+        Open RAPID Tab
+            Main Menu > RAPID > Solution Panel > IRB_Model > RAPID > T_ROB1 > Module > Path_#
+                DoubleClick on Path_#
+                Code willl show up in the main screen                
+
+        Position data
+            pos trans = translation
+            orient rot = orientation
+            confdata robconf = robot's configuration
+            extjoint extax = external joints if you have extra axes
+        
+        In main screen, open the View1 tab
+            Click on play button to RUN
+
+    Adjusting the orientation of the robot in case "Joint out of range" error appears
+        Highlight the Target file in wobj# tree,
+            Solutions Panel > Paths & Target Tab > Solution > IRB > T_ROB > Workobjects & Targets > wobj0 > wobj0_of > Target_10
+            RightClick > ModifyTarget > Rotate
+                "Rotate: Target_#" will appear
+                Under Rotation (deg)
+                    Add (-5) value and click apply.
+                    Click apply few times to move the robot to correction position
+        RightClick on Target file in wobj# tree again
+            Solutions Panel > Paths & Target Tab > Solution > IRB > T_ROB > Workobjects & Targets > wobj0 > wobj0_of > Target_10
+                Select "View Robot at Target"
+
+        Main Menu Toolbar > Synchronize > Synchronize to Station
+            Check all boxes and hit OK
+
+        Turning off the program Pointers
+            Main Menu ToolBar > Test and Debug > Uncheck Follow Program Pointer
+
+        Return to View# Tab and Hit Play 
+
+    Actual Robot Path
+        The robot will move From Target10, through Target20, ends at Target30 without returning. It will return to Target10 without passing through Target20
+        To make the robot returns to Target10 in 1 cycle,
+            RAPID > T_ROB > Module1 > Path_#
+                Under PROC Function, copy and paste Target10 path below Target30
+            RAPID TAB > Toolbar Menu > Controller Section > Apply
+        Hit Play in View Tab again to watch the updated path
+
