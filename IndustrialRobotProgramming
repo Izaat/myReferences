@@ -131,7 +131,8 @@ CONTENTS
     Changing Linear Motion to Joint Motion 
         Just replace the MoveL to MoveJ in the programming section and Click on Apply in RAPID > Toolbar > Controller Section
         
-        
+    SingleCycle / ContinuousCycle
+        RAPID Tab > Toolbar Menu > Controller > Run Mode > Single Cycle / Continuous
         
         
         
