@@ -25,6 +25,7 @@ Run dart file by typing in "dart filename.dart" in the console
 18. LOOP STATEMENT
 19. COLLECTION CLASSES [LIST, SET, MAP]
 20. FUNCTIONS [Anonymous, Positional, Named, Hybrid, Optional]
+21. CONSTRUCTOR
 
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -547,7 +548,103 @@ dynamic
         //Output: 30
         //Output: 20
 
+21 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//CLASSES
+    
+    //Normal Method//////////////////////////////
+        class Person {
+            String name;
+            int age;
+            
+            //method
+            void showOutput() {
+                print(name);
+                print(age);
+            }
+        }
+        void main() {
+            //object
+            Person person1 = Person();
+            person1.name = 'Name';
+            person1.age = 35;
+            person1.showOutput();
+        }
+        Output: Name, 35
 
+    //Constructor (Default)//////////////////////////
+        class Person {
+            String name;
+            int age;
+            
+            Person(String name, [int age = 18]) {
+                this.name = name;
+                this.age = age;
+            }
+            
+            //method
+            void showOutput() {
+                print(name);
+                print(age);
+            }
+        }
+        void main() {
+            Person person1 = Person('Name'); //if adds the age value it will overwrite the age of 18
+            person1.showOutput();
+        }
+        Output: Name, 18
+
+    //Constructor (Default) Shortcut/////////////////
+        class Person {
+            String name;
+            int age;
+            
+            Person(this.name, [this.age = 18]);
+            
+            //method
+            void showOutput() {
+                print(name);
+                print(age);
+            }
+        }
+        void main() {
+            Person person1 = Person('Name1'); //if adds the age value it will overwrite the age of 18
+            person1.showOutput();
+            
+            Person person2 = Person('Name2', 25)
+            person2.showOutput();
+        }
+        Output: Name1, 18, Name2, 25
+    
+    //Named Constructor///////////////////////////
+        class Person {
+            String name;
+            int age;
+            
+            Person(this.name, [this.age = 18]);
+            
+            //named constructor
+            Person.guest() {                            //className.constructorName()
+                name = 'Guest';
+                age  = 18;
+            }
+            
+            //method
+            void showOutput() {
+                print(name);
+                print(age);
+            }
+        }
+        void main() {
+            Person person1 = Person('Name1'); //if adds the age value it will overwrite the age of 18
+            person1.showOutput();
+            
+            Person person2 = Person('Name2', 25)
+            person2.showOutput();
+            
+            var person3 = Person guest();
+            person3.showOutput();
+        }
+        Output: Name1, 18, Name2, 25, Guest, 18
 
 
 
