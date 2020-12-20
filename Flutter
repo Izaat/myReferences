@@ -28,6 +28,8 @@ CONTENTS
 19. World time App #1
 20. World time App #2
 21. Widget Lifecycle, Stateful Widget Triggers (setState, initState, Build, Dispose)
+22. Asynchronous Codes
+23. Packages
 
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -747,10 +749,155 @@ Structures
                             child: Text('counter is $counter'),
 
 
+22. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////22
+//Asynchronous Code  
+    An action that starts now but finishes few seconds later, 
+    Example, interacting with API endpoint or database to get data
+    Starts the action to call the database and finishes once it gets the required data from 3rd party
+    A non-blocking code. it means that while this code is running, the rest of the app runs as per normal
+    Similar to Async in Javascript
+
+    //WITHOUT ASYNC///////////////////////////////////////////////////////////////////////////////////22.01
+    //choose_location.dart
+        import 'package:flutter/material.dart';
+        class ChooseLocation extends StatefulWidget {} > 
+            @override
+            _ChooseLocationState createState() => _ChooseLocationState();
+            
+        class _ChooseLocationState extends State<ChooseLocation> {} > 
+        
+            void getData() {} >
+                {} >
+                    Future.delayed(); >                   //Simulate delay and network request for a username
+                        Duration(), > seconds: 3,      //3 seconds until timeout
+                        () {} > 
+                            {} > print() > 'Request Simulated 1'
+                            
+                    Future.delayed(); >                   //Simulate delay and network request for a username
+                        Duration(), > seconds: 2,      //2 seconds until timeout
+                        () {} > 
+                            {} > print() > 'Request Simulated 2'
+                            
+                    print('Request 3');
+            
+            @override
+            void initState() {} >               
+                {} >
+                    super.initState();
+                    getData();
+            
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                backgroundColor: Colors.grey[200],                                     
+                appBar: AppBar(), >                                          
+                    backgroundColor: Colors.blue[900],
+                    title: Text('Choose Location'),
+                    centerTitle: true,
+                    elevation: 0,                           
+                body: RaisedButton(), >    
+                    onPressed: () {}, >        
+                        {} > setState(); > () {} >
+                            {} > counter += 1;
+                    child: Text('counter is $counter'),
+                    
+        OUTPUT: 'Request 3' will appear first, followed by 'Request 2', then ends with 'Request 1'
+                        This is because Request 2 and Request 1 runs at the same time 
+                        If Request 2 depends on the value of Request 1, then the entire code will fail.
+                        To solve this, Async function is needed
+       
+    //WITH ASYNC//////////////////////////////////////////////////////////////////////////////////////////////22.02
+    //choose_location.dart
+        import 'package:flutter/material.dart';
+        class ChooseLocation extends StatefulWidget {} > 
+            @override
+            _ChooseLocationState createState() => _ChooseLocationState();
+            
+        class _ChooseLocationState extends State<ChooseLocation> {} > 
+        
+            void getData() async {} >                       //aync function is activated
+                {} >
+                    await Future.delayed(); >              //await means once you done, start next line
+                        Duration(), > seconds: 3,  
+                        () {} > 
+                            {} > print() > 'Request Simulated 1'
+                            
+                    Future.delayed(); >             
+                        Duration(), > seconds: 2,  
+                        () {} > 
+                            {} > print() > 'Request Simulated 2'
+                            
+                    print('Request 3');
+            
+            @override
+            void initState() {} >               
+                {} >
+                    super.initState();
+                    getData();
+            
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                backgroundColor: Colors.grey[200],                                     
+                appBar: AppBar(), >                                          
+                    backgroundColor: Colors.blue[900],
+                    title: Text('Choose Location'),
+                    centerTitle: true,
+                    elevation: 0,                           
+                body: RaisedButton(), >    
+                    onPressed: () {}, >        
+                        {} > setState(); > () {} >
+                            {} > counter += 1;
+                    child: Text('counter is $counter'),
+
+        OUTPUT: 'Request 1' will appear first, followed by 'Request 3', then ends with 'Request 2'
+    
+    //WITH ASYNC BUT HAVING MULTIPLE "await"///////////////////////////////////////////////////////////22.03
+    //choose_location.dart
+        import 'package:flutter/material.dart';
+        class ChooseLocation extends StatefulWidget {} > 
+            @override
+            _ChooseLocationState createState() => _ChooseLocationState();
+            
+        class _ChooseLocationState extends State<ChooseLocation> {} > 
+        
+            void getData() async {} >              
+                {} >
+                    String request1 = await Future.delayed(); >     //Wait until Request 1 is added to "request1", then it will continue
+                        Duration(), > seconds: 3,  
+                        () {} > 
+                            {} > return 'Request Simulated 1';
+                            
+                    String request2 = await Future.delayed(); >             
+                        Duration(), > seconds: 2,  
+                        () {} > 
+                            {} > return 'Request Simulated 2';
+                            
+                    print($request1 - $request2);                               //Wait until both values in Request1 and Request2 are returned
+            
+            @override
+            void initState() {} >               
+                {} >
+                    super.initState();
+                    getData();
+            
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                backgroundColor: Colors.grey[200],                                     
+                appBar: AppBar(), >                                          
+                    backgroundColor: Colors.blue[900],
+                    title: Text('Choose Location'),
+                    centerTitle: true,
+                    elevation: 0,                           
+                body: RaisedButton(), >    
+                    onPressed: () {}, >        
+                        {} > setState(); > () {} >
+                            {} > counter += 1;
+                    child: Text('counter is $counter'),
+
+        OUTPUT: 'Request 1 - Request 2'                           //This is good when 1 request depends on another
 
 
-
-
+23. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////23
+//Packages
 
 
 
