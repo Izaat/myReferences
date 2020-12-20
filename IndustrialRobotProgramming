@@ -54,8 +54,8 @@ CONTENTS
     Menu at the bottom of the screen.
         MoveL | v1000 | z100 | tool0 | WObj:=wobj0
         MoveL > 
-            MoveJ: Joint
-            MoveL: Linear
+            MoveJ: Joint (Uses sperical tolerance - not accurate)
+            MoveL: Linear (Tighter constraints)
             MoveAbsJ:Joint Absolute
             MoveExtJ: 
         v1000 > Velocity/Speed (m/s)
@@ -127,4 +127,12 @@ CONTENTS
                 Under PROC Function, copy and paste Target10 path below Target30
             RAPID TAB > Toolbar Menu > Controller Section > Apply
         Hit Play in View Tab again to watch the updated path
-
+    
+    Changing Linear Motion to Joint Motion 
+        Just replace the MoveL to MoveJ in the coding section
+        
+        
+        
+        
+        
+        
