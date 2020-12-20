@@ -27,6 +27,7 @@ CONTENTS
 18. Functions as Parameters
 19. World time App #1
 20. World time App #2
+21. Widget Lifecycle, Stateful Widget Triggers (setState, initState, Build, Dispose)
 
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -703,6 +704,61 @@ Structures
                     centerTitle: true,
                     elevation: 0,                                                             //09. 0 means removing the dropShadow
                 body: Text(), > 'Choose Location Screen'    
+
+21. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Widget Lifecycle  - Applicable for getting data from 3rd party API
+
+    State Triggers for Stateful Widgets
+        setState() - triggers the build function
+        initState() - called only once when the widget is created
+        Build()       - builds the widget tree, triggered everytime we use setState()
+        Dispose()  - when the widget / state object is removed
+
+    Applying intiState()
+        //choose_location.dart
+            import 'package:flutter/material.dart';
+            class ChooseLocation extends StatefulWidget {} > 
+                @override
+                _ChooseLocationState createState() => _ChooseLocationState();
+                
+            class _ChooseLocationState extends State<ChooseLocation> {} >
+            
+                int counter = 0;
+                
+                @override
+                void initState() {                    
+                    super.initState();                                        //"super" means run whatever function being inherit first before running the initState() 
+                    print('initState function ran');
+                }
+                
+                @override
+                Widget build(BuildContext context) {} >                  
+                    return Scaffold(); >
+                        backgroundColor: Colors.grey[200],                                     
+                        appBar: AppBar(), >                                          
+                            backgroundColor: Colors.blue[900],
+                            title: Text('Choose Location'),
+                            centerTitle: true,
+                            elevation: 0,                           
+                        body: RaisedButton(), >                             //See console and observe that everytime the button is pressed, it retriggers the build function, adding 1 to the counter
+                            onPressed: () {}, >                             //but notice that the initState didn't run again
+                                {} > setState(); > () {} >
+                                    {} > counter += 1;
+                            child: Text('counter is $counter'),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
