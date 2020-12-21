@@ -1,0 +1,190 @@
+Blender Grease Pencil Animation 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01 - Tips
+02 - Grease Pencil Animations
+03 - Working with multiple scenes
+04 - Exporting
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Tips
+    Grease Pencil Object : Blank
+        Add Grease Pencil Object
+            Menu > Layout >
+                Object > Add > Grease Pencil > Blank
+                    Object > Draw
+        Enable reference plane
+            Menu > Layout > Draw Mode:
+                Layout Tool > Viewport Overlays > Canvas
+                    Origin toolbox > Drawing plane // view you can snap it to any view
+        Selecting your drawing objects
+            Menu > Layout> Object Mode: OR Ctrl+Tab
+                Click on any object
+        Opening Multi-layer Window
+            RightPanel > GPencil > 
+                Open Object Data Properties Tab (Swiggly Icon)
+                    Here, you can add or delete layers like Adobe
+        Color of Drawing lines
+            Drawing Mode > RightPanel > GPencil > 
+                Open Material Properties Tab (Ball Icon)
+                    You can create multiple material properties and link them to different sets of drawings
+    
+    Grease Pencil Object : Stroke
+        Keyboard
+            A       : Select all in the drawing
+            Alt+A: Deselect All
+            B    : Box select option (If you're using stylus)
+            G    : Grab to move multiple points
+            R    : Rotate
+            S     : Scale
+            X     : X-Axis
+            Y     : Y-Axis
+            Z     : Z-Axis
+            Tab : Edit Mode / Object Mode Toggle
+            Shift+D: Duplicate
+
+        Sculpt Mode                  
+            Sculpting the strokes
+            F                  : Resizing the brush size
+            Shift (Hold) : Smoothen out the strokes
+            Align everything to a selected Plane
+        
+        Draw Mode 
+            With Draw selected
+                Ctrl (Hold)   : Eraser
+                Filling: Select the FILL icon
+                    Create new material with 'Stroke' unselected and 'Fill' selected under the right hand panel, Material Tab (Ball Icon)
+                    Note1: that if there is a broken line, the Fill will fill up the entire screen
+                    Note2: The drawing plane must be selected properly, select the Drawing Plane View (Top center tool bar)
+                    Note3: If there is breakage in the drawing, you can Hold CTRL key and "Draw" to cover the "Hole" with the Fill. 
+                        Once done, you can fill up color without any 'Bleeding'
+                    Note4: In the right hand panel, open layer tab (Sqwiggly Icon)
+                        If you select another layer and fill, your fill will be directly behind the line drawings layer.
+                    Note5: In relation to Note4, you can realign the fill layer onto the rawing layer
+                        Go to Object Menu > Edit mode > Grease Pencil > Clean Up > Reproject Strokes > Front, 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Grease Pencil Animation = Toggle camera view Numpad 0 or the Camera Icon
+    
+    Starting New File
+        Main Menu > New > 2D Animation
+            On Right Panel > World Properties Tab
+                The color represents the color of the world.
+                You can select to Green World for GreenScreen, Dark black for night scenes and bright yellowish for day scenes
+            Selecting the drawing tool
+                Right below the Main Menu, Click on the Square Pencil Icon. Select the Drawing tool from Markers to brushes.
+                    Open Material Tab on the Right Hand Side Panel to choose the ink
+            2 Panels at the Bottom of the Screen (Dope Sheet and Playback Timeline Panels)
+                DopeSheet
+                    Deleting the keyframes also deletes the drawings
+                    When you draw and another keyframe, the one before it will automatically becomes an onion skin
+                    Onion Skin Settings
+                        Right Hand Panel > Object Data Properties Tab > Onion Skinning Section
+                        To disable the Onion Skinning, go to Viewport Overlays located at the top right hand corner (Black and White Circle icon)
+                            Under Draw Grease Pencil section, uncheck 'Onion Skin'
+                    Moving the keyframes: You can drag and drop the keyframes to any part of the frame
+                    Editing the entire drawing (example the head) without redrawing
+                        Object Menu > Edit Mode
+                            Select Mode Menu > Choose 'Select all strokepoints'
+                            You can draw a square to highlight the head
+                    Duplicate keyframes - Shift+D
+                    Duplicating a drawing hidden in another layer to be a reference
+                        Object Menu > Edit Mode
+                        Select the drawing or part of the drawing
+                        Copy and paste into the other keyframe
+                        G, X, Y, Z to grab and move the drawing
+                        To delete, return to edit mode, right click and press delete
+                    Keyframe scaling and repositioning > In Draw mode, select the keyframes and press S on keyboard for scale and G to move the keyframes around
+                
+                Playback Timeline Panel / Looping
+                    To do re-setting the total number of keyframes, click on the "End" button (Top right hand side of the Playback Timeline panel, bottom of screen) 
+
+            Sketching | Inking | Filling
+                On the right hand side panel, open the Object Data Properties Tab and add in the layers for the sketch, Ink and filling
+                Keyboard E : Start new line at the end of the line you've just drawn
+
+    Add Modifiers on top of the inked and filled animations, without modifiers, the object is not anchored
+        //Without the modifiers, theh character will rotate anywhere withing the 3D space
+        //But we need to snap the character's botton to the workspace floor
+        //To do this: 
+            Rename th e Stroke Object to Character
+            Go to edit mode
+            Use the select cursor (located on the right hand side toolbar)
+            select the lines that are supposed to be anchored to the 'floor'
+            Activate 3D cursor
+                Top right  hand side toolbar, click on the overlay icon (2 circles in black and white)
+                3D Cursor checkbox needs to be checked
+            Snap 3D cursor to the selected lines
+                Shift+S will open up Snap window
+                Click on Cursor to selected
+            Set origin to 3D cursor
+                Go to Object mode
+                    Right Click on the character
+                    Set Origin > Origin to 3D cursor
+            Once done, you can now rotate the character around its selected lines
+        //Time offset modifier - Cycling a set of frames number of times          
+            In Object mode, adjust the 'End' frames to specific time (The bottom of screen) - Let say End = 200
+            Right hand side panel - Modifier Properties (Wrench Icon) > Add Time Offset 
+                Custom Range - The selected single cycle of frames
+                Keep Loop : Checkbox checked - for looping through end frame of 200
+                Shift+D to duplicate the entire cycle (If you modify the original, the duplicated ones won't be modified)
+                Alt+D to create instance of the cycle (Instance means when you modify the original, the instances will follow with the modified drawings)
+                Alt  + S/G/R (Scale, Grab, Rotate) to reset to original parameters
+                Frame Offset : If you duplicate a cycle and adjust the frame offset to one of it, the cycling steps wont follow the duplicated ones
+        //Noise modifier
+            Factor : The higher the number, the more lines will flicker
+        //Thickness modifier
+            Thickness Factor : The higher the number, the thicker the lines
+        //Tint modifier
+            Changes the entire colour of the cycle without changing the color frame by frame  
+    
+    
+    Coordinating the cycle through the camera
+        Move the entire cycle to offscreen
+        From the ObjectMode > Timeline Panel > Editing Context View > GreasePencil, change from GreasePencil to DopeSheet  
+            This will open up the keyframe timeline panel of Dopesheet
+            Highlight the Cycle,
+            With mouse cursor over at the drawings panel, 
+                //Press i to Insert keyframe. Dropdown menu will appear and select location - This will add a keyframe for the camera
+            Press G to move the drawing cycles to another position
+                //Press i to Insert another keyframe.
+            Speed Graph
+                //Open Editor Type (Icon on the left side of the Dopesheet Icon)
+                Select Graph Editor
+                    The higher the number, the faster
+                    Click on graph and press T. Select Linear for constant speed
+        R = X-Axis
+        G = Y-Axis
+        B = Z-Axis
+        
+    Animating the camera itself
+        In Dopesheet, Press G - X/Y/Z to move the camera position
+        Press i to insert keyframe
+        Move camera again and press i again to insert another keyframe
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Working with multiple scenes
+    At the top right hand corner (Scene text input box) - Cone and black sphere icon
+        Linked Copy = Instances of the scenes
+        Full Copy = Duplication of the scene
+        Rename the Scene name
+        Now you can select between few scenes.
+    Editing many scenes together
+        Create new scene
+        Add new workspace 
+            Main Menu > + > Video Editing > Video Editing
+            Video editing page will appear
+        Adding scenes to timeline
+            Shift+A to bring out the Add drop menu
+            Then Scene > YourScenes
+    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. Exporting
+    In video editing workspace,
+        Go to the right hand side screen, Output properties tab, 
+            File Format: FFmpeg video
+            Encoding: Mpeg4
+            Video Codec : H.264
