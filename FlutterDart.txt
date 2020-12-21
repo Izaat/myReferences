@@ -25,7 +25,7 @@ Run dart file by typing in "dart filename.dart" in the console
 18. LOOP STATEMENT
 19. COLLECTION CLASSES [LIST, SET, MAP]
 20. FUNCTIONS [Anonymous, Positional, Named, Hybrid, Optional]
-21. CONSTRUCTOR
+21. CONSTRUCTOR [Default Constructor, Named Constructor, Class Inheritence]
 
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -676,7 +676,38 @@ dynamic
             print(age);
         }
 
+    //Class Inheritence///////////////////////////
+        class Vehicle {
+            String model;
+            int year;
+            
+            Vehicle(this.model, this.year) {
+                print(this.model);
+                print(this.year);
+            }
+            
+            void showOutput() {
+                print(model);                                                   //this.model can also be used here
+                print(year);
+            }
+        }
 
+        class Car extends Vehicle {
+            double price;
+            
+            Car(String model, int year, this.price) : super(model, year);       //'super' calls the Vehicle Class for the value of model and year
+            
+            void showOutput() {
+                super.showOutput();                                             //'super' calls the showOutput() from the Vehicle Class
+                print(this.price);
+            }
+        }
+
+        void main() {
+            var car1 = Car('Accord', 2014, 150000);
+            car1.showOutput();
+        }
+        //OUTPUT: Accord, 2014, Accord, 2014, 150000.0
 
 
 
