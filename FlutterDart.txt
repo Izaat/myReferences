@@ -615,7 +615,7 @@ dynamic
         }
         Output: Name1, 18, Name2, 25
     
-    //Named Constructor///////////////////////////
+    //Named Constructor #1///////////////////////////
         class Person {
             String name;
             int age;
@@ -646,7 +646,35 @@ dynamic
         }
         Output: Name1, 18, Name2, 25, Guest, 18
 
+    //Named Constructor #2///////////////////////////
+        class X {
+            final name;                         
+            static const int age = 10;   
+            X(this.name);
+        }
+        main() {
+            var x = X('Jack');
+            print(x.name);
+            
+            //x.name = 'Jill';     //Changes name to Jill but "name" must be defined as "var" instead of "final". Or it will cause an error.
+            //print(x.name);
+            
+            //print(x.age);       //can't call age because it is static, the only way to access 'age' is by calling the class
+            print(X.age);          //Outputs 10
+            
+            var y = X('Jill');       //Outputs Jill
+            print(y.name);
+        }
 
+    //Named Constructor #3///////////////////////////
+        
+        main() {
+            final name = 'Jack';        //the name value can't be changed
+            const age = 30;             //age value cant be changed
+            
+            print(name);
+            print(age);
+        }
 
 
 
