@@ -151,7 +151,7 @@ Structures
         }
 
 07. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//@override
+//@override - Also read flutterdart.txt (Classes)
     Based on point 6, the StatelessWidget has its own build() function. 
     By adding @override, it uses the build() function that you created in Scaffold(), 
     instead of using the build() function your class inherited from the StatelessWidget class
