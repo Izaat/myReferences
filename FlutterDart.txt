@@ -676,7 +676,7 @@ dynamic
             print(age);
         }
 
-    //Class Inheritence///////////////////////////
+    //Class Inheritence///////////////////////////////
         class Vehicle {
             String model;
             int year;
@@ -709,7 +709,8 @@ dynamic
         }
         //OUTPUT: Accord, 2014, Accord, 2014, 150000.0
 
-
+    //Method @override//////////////////////////////////////////////////////
+        also read Topic7 in flutter.txt (@override)
 
 
 
