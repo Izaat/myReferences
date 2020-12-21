@@ -5,6 +5,7 @@ CONTENTS
 01 - Start
 02 - Coordinate Systems
 03 - Motion Types
+04 - Tool Frames
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Start
@@ -134,6 +135,64 @@ CONTENTS
     SingleCycle / ContinuousCycle
         RAPID Tab > Toolbar Menu > Controller > Run Mode > Single Cycle / Continuous
         
-        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04 Tool Frames
+    //Make new part/tool
+        Main Menu > Modelling > Solid > Pyramid
+            Reference: World
+            Base Center Point: 0, 0, 0
+            Orientation: 0, 0, 0
+            Center to Corner Point: 150mm
+            Center to Side: This is automatically calculated with Center to Corner Point
+            Height: 300mm
+            Number of Sides: 40
+            * This will create a pyramid directly at the base of the robot arm
+        On the left hand side panel, under the modelling tab, Components>Part# will appear
+            Rename this to 'Tool01'
+            Right Click > Attach To > IRB
+            Update: Yes
+            The pyramid will attach itself to the end of arm after selecting 'Yes'
+    //Creating tool Data to make robot coordinate its path according to the tool
+        Main Menu > Home Tab > Other > Create Tool Data
+        On the left hand side panel, Create tool data tab will appear.
+            MiscData > 
+                Name : PyramidToolData
+                Robot holds tool : True
+            ToolFrame > 
+                Position: X:0, Y:0, Z:300   //Offset value of tooltip to the end of arm flange, 
+                                                        //You can get the value by hovering mouse over the tip and click on the sphere when it appears
+                Rotation: rx: 0, ry:0, rz:0  //RPY=Roll,Pitch,Yaw //Quaternion
+            LoadData >
+                Weight: This will automatically change the dynamics and collision detection of the robot
+            Create and a new crossair will appear at the tip of the pyramid
+        Solution > IRB > T_ROB > Tooldata >
+            tool0 = the data of the default position of the end of arm
+            PyramidToolData = The data you just created
+        Selecting tool data as the default when you work with the robot
+            Main Menu > Home Tab >  
+                Freehand Section > Change World to Active Tool
+                Settings Section > Workobject
+                    Tool: Pyramid Tool Data
+        Click on the Robot to move
+    //Snapping tool tip to robot path
+        Left hand side panel > Paths & Targets > Solution > IRB > T_ROB > Workobject > wobj0 > wobj_of > 
+            Right Click on Target_10
+            Select View Robot as Target
+    //Reorientate the tool
+        Left hand side panel > Paths & Targets > Solution > IRB > T_ROB > Workobject > wobj0 > wobj_of > 
+            Right Click on Target_10
+            Select ModifyTarget > Rotate
+        Rotation (deg) : -5 and click Apply multiple time to rotate
+    
+            Red: X
+            Green: Y
+            Blue: Z
+            
+        NOTE: While performing reorientation, make sure tool doesn't crash into itself before Synchronizing to RAPID
+
+    //Teaching
+        Move robot to any position
+        Main Menu > Home Tab > Path Programming Section > Teach Target
+            This will add another Target file into the workobject tree        
         
         
