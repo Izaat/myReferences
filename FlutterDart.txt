@@ -25,7 +25,7 @@ Run dart file by typing in "dart filename.dart" in the console
 18. LOOP STATEMENT
 19. COLLECTION CLASSES [LIST, SET, MAP]
 20. FUNCTIONS [Anonymous, Positional, Named, Hybrid, Optional]
-21. CONSTRUCTOR [Default Constructor, Named Constructor, Class Inheritence]
+21. CONSTRUCTOR [Default Constructor, Named Constructor, Class Inheritence, @override]
 
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
