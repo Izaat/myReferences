@@ -30,6 +30,7 @@ CONTENTS
 21. Widget Lifecycle, Stateful Widget Triggers (setState, initState, Build, Dispose)
 22. Asynchronous Codes
 23. World Time App #3 - Integrating with World Time API
+24. World Time App #4 - Make getData() reusable, and Future <void>
 
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -896,7 +897,7 @@ Structures
         OUTPUT: 'Request 1 - Request 2'                           //This is good when 1 request depends on another
 
 
-23. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////22
+23. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////23
 //World Time App #3 - Integrating with World Time API
     worldtimeapi.org/timezones
     Retrieving JSON file
@@ -943,7 +944,84 @@ Structures
                 body: Text(), > 'Loading Screen'      
 
 
+24. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////24
+//World Time App #4     - 19 points
+    //Make getTime() more reusable by migrating to its own files
+    
+    //../lib/services/world_time.dart
+        import 'package:http/http.dart';
+        import 'dart:convert';
+        
+        class WorldTime {} > 
+            String location;                                                                    //01. location name for UI to pass to constructor
+            String time;                                                                        //02. the time in that location. Will take in point 06. 
+            String flag;                                                                        //03. url to an asset flag icon
+            String url;                                                                         //04. location url for API endpoint: Splitting the url into 2 components "http://worldtimeapi.org/api/timezone" and "/Europe/London"
+            
+            WorldTime(); > {this.location, this.flag, this.url}                                 //08. This will make WorldTime() receive all the values in location, flag and url
+            
+            //void getTime() async {} >                                                         //15. Adding Future <void>, a temporary placeholder memory value until everything completes
+            Future <void> getTime() async {} > 
+                {} >
+                    Response response = await get('http://worldtimeapi.org/api/timezone/$url');     //05. the split url takes 'url' variable
+                    Map data = jsonDecode(response.body);
+                      
+                    //getting properties from JSON data (datetime & utc_offset)
+                    String datetime = data['datetime'];
+                    String offset = data['utc_offset'].substring(1,3);                       
+                     
+                    //create DateTime object and calculating time
+                    DateTime now = DateTime.parse(datetime);                                      //06. Since this is in "datetime", we need to convert it into String and pass it to "time" variable (02)                     
+                    now = now.add(); > Duration() > hours: int.parse() > offset                                          
+                    
+                    //set the time property
+                    time = now.toString();                                                        //07. This converts the datetime into string as mentioned in point 06.               
 
+        //WorldTime instance = WorldTime(); >                                                     //09. Inputting the value into the '$url'. //10. Cut and paste this entire section to 11. 
+        //    location: 'Berlin',
+        //    flag: 'germany.png',
+        //    url: 'Europe/Berlin'
+        //instance.getTime()                                                                      //10. when this line runs, it executes the world_time.dart getTime()
+        
+    //loading.dart
+        import 'package:flutter/material.dart';
+        import 'package:projectName/services/world_time.dart';
+        
+        class Loading extends StatefulWidget {} > 
+            @override
+            _LoadingState createState() => _LoadingState();
+            
+        class _LoadingState extends State<Loading> {} >      
+            
+            String time = 'loading';                                                               //17. Once at this point, you're able to print out claculated time in console. Now to show it in display.
+            
+            //void setupWorldTime() {} >                                                           //11. Copied from 09.
+            void setupWorldTime() async {}                                                         //16. Since 'await' has been added, 'async' must be added to the function
+                {} >
+                    WorldTime instance = WorldTime(); >    
+                        location: 'Berlin',
+                        flag: 'germany.png',
+                        url: 'Europe/Berlin'
+                    await instance.getTime();                                                     //12. This calls getTime from world_time.dart.
+                    print(instance.time);                                         //14a. This wont print the time yet as it is async. 
+                                                                                  //14b. To solve this, add 'await' in point 12. and "Future<void>" in world_time.dart (see 15.)
+                    setState(); > () {} >                                                         //19. This upadates the time property
+                        {} >
+                            time = instance.time;
+                            
+            @override
+            void initState() {} >
+                {} >
+                    super.intiState();
+                    //getTime();                                                                   //13. Change getTime() to setupWorldTimeTime()
+                    setupWorldTime();
+            
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                //body: Text(), > 'Loading Screen'                                                 //18. To outport the calculated time to screen
+                body: Padding(), > 
+                    padding: EdgeInsets.all(50.0),
+                    child: Text(time),
 
 
 
