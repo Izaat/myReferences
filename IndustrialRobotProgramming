@@ -6,6 +6,9 @@ CONTENTS
 02 - Coordinate Systems
 03 - Motion Types
 04 - Tool Frames
+05 - Work Objects
+06 - Configurations and Programming
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Start
@@ -195,4 +198,191 @@ CONTENTS
         Main Menu > Home Tab > Path Programming Section > Teach Target
             This will add another Target file into the workobject tree        
         
-        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05 Work Objects - Make Robot Move Automatically To Path
+    //Syncing Pyramid Tool Data and Virtual Robot
+        Main Menu > Home Tab > Synchronize > Synchronize to RAPID >
+            Check all checkboxes except Workobject 
+                Tool Data > PyramidToolData > Module Column > user
+                This will add 'user' module tree to system module LeftHandPanel > IRB > RAPID > T_ROB > Module# > 'user'
+        LeftHandPanel > IRB > RAPID > T_ROB > Module# > Path#
+            In T_ROB/Module/PROC function,
+                MoveL Target_#, v1000, z100, tool0\WObj:=wobj0;
+                    Change ALL 'tool0\WObj:' to 'PyramidToolData\WObj:'         //where tool0 is the robot end of arm flange
+                    In Main Menu > RAPID Tab > Hit Apply
+                    Return to Main Menu > Home Tab > Hit Play
+        Now your tool will be playing along the created path
+
+    //Teaching Robot Barriers as Workobject 
+        Main Menu > Home Tab > Other > Create Workobject
+            In Workobject Tab (Left Hand Side Panel)
+                Robot holds workobject : For multi robots, since only one robot sitting on the ground, then false
+                Moved by mechanical unit : Move by extra axis i.e conveyor
+                Programmed : False if controlled by external sources program i.e External Motion Controller
+                User Frame : General Area / Fixtures
+                    Click on "..." button unter "Position X,Y,Z" and click on the corner of the "barrier" in the sim viewer
+                Object Frame : Multiple Object on a Table / Fixture
+                Click on Create button and now you'll have "Workobject_1_of" subtree under T_ROB > Workobject & Targets > Workobject_1_of
+    
+    //Creating Task / Target
+        Highlight "Workobject_1_of", Go to Main Menu > Home Tab > Target
+            In Right Hand Side > Create Target Tab > 
+                Reference : Workobject
+                Target name: Target_1 , EStop
+                Workobject: Workobject_1
+                In sim viewer panel, click on any of the point snapping icon to snap the point to the target, 
+                    This will create a "Point" in Create Target Tab, Points Section
+                Click on Create button and close the tab
+                This creates the "Target File" under "Workobject_1_of"
+                Click on "Target File" and reposition the Snap Point in the Sim Viewer
+        Right Click on "Target File" and click on Modify Target > Rotate OR click on
+            Home Tab > Freehand > Rotation Icon, to move the robot to the position            
+        Highlight the Target File
+            Right Click and Select "Add to new path"
+                This Creates another (Path_#2) under "Paths & Procedures" 
+                Rename this to "Push"
+                Highlight "Push", Right Click, and select Synchronize to RAPID
+                    Click OK
+            Now you'll see another PROC function appears in the programming window (MainMenu > RAPID Tab > Highlight Path_#)
+        Edit the Path_# 
+            Copy Paste Target_10 code and place this inside Push(), ON TOP and BELOW of "MoveL Target_Push"      
+            Click on Apply (Main Menu > RAPID Tab > Apply)
+        Edit the Main Program
+            RAPID Tab > Left Hand Side Panel > Solution > IRB > RAPID > T_ROB > mainProg > main
+            Under PROC main()
+                !Path_10;
+                Push;
+        Highlight Home Tab > Paths & Procedures > Push
+            Synchronize to Station
+        Disable Path_#
+            Right Click Home Tab > Paths & Procedures > Path_#
+                Select View > Uncheck Visible
+        Play Robot
+            Main Menu > Home Tab > Sim Viewer > Play Button
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+06 Configurations and Programming
+    
+    //RAPID Tab >> Controller Tab >> Tree (Station > RAPID > T_ROB > Module > Push) >> IRB Tab >> T_ROB/Module Tab >>
+        MODULE Module1
+            CONST robtarget Target_10:=[...];
+            CONST robtarget Target_20:=[...];
+            CONST robtarget Target_30:=[...];
+            CONST robtarget Target_Push_10:=[...];
+            PROC Path_10()
+                MoveL Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;
+                MoveL Target_20, v1000, z100, PyramidToolData\WObj:=wobj0;
+                MoveL Target_30, v1000, z100, PyramidToolData\WObj:=wobj0;
+            ENDPROC
+            
+            PROC Push()
+                !Start at Home
+                MoveL Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;
+                
+                !Go to target
+                MoveL Target_Push_10, v500, z15, PyramidToolData\WObj:=Workobject_1;     //Change speed from v30 to v500 (0.5m/s)
+                
+                !Push
+                //FUNC robtarget RelTool (robtarget Point, num Dx, num Dy, num Dz [\Rx:=num] [\Ry:=num] [\Rz:=num])         //The ones in Square Brackets (Rotational X, Y, Z) are optional, units in mm
+                MoveL RELTOOL (Target_Push_10, 10, 0, 0, 25) v30, z15, PyramidToolData\WObj:=Workobject_1;
+                
+                !Retracting after push
+                MoveL RELTOOL (Target_Push_10, 10, 0, 0, -50) v500, z15, PyramidToolData\WObj:=Workobject_1;
+                
+                !Return Home
+                MoveL Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;
+            ENDPROC
+            
+        ENDMODULE
+    
+    //Once done, Main Menu > RAPID Tab > Apply
+    //Head back to the Simulation viewer tab
+    //Main Menu > RAPID > Synchronize > Synchronize to Station
+    //Hit Play button in Simulation Viewer - NOTE: This wil cause an error for you to do the configuration
+    //Configurations let you choose the orientations of each robot axis. A single pose of the robot may have multiple configurations since each axis has 360 deg
+
+    //Right Click on Main Menu > Home Tab > Solution panel > Paths & Targets Tab > Solution > IRB > T_ROB > Workobjects & Targets > wobj0 > wobj0_of > Target_10
+        Select Configurations and Configurations Tab will open
+            Under the configurations section box, a list of configurations will appear
+            Select one from that list and hit apply
+        Now when the robot reaches the path (Target_10), your robot will be at your selected configuration.
+        Notice that the warning sign on Target_10 disappears
+        NOTE: Avoid flipping the entire robot base around.
+
+    //Delete RELTOOL Paths under Home > Solution > Paths & Procedures Tree > Push > MoveL RELTOOL
+
+    //Right Click on Home > Solution > Paths & Procedures Tree > Push
+        Select Configurations > Auto Configuration
+            Verify Configuration to double check on the movements
+    //Right Click on Home > Solution > Paths & Procedures Tree > Push
+        Select Synchronize to RAPID
+    
+    //Since it is not advisable to use Linear motion when the robot is moving, re-edit the program to the one below
+        //Linear motion follows path (Moves exactly along the path) - This slows down the process
+        //Joint motion follows the path points. Faster to get from one point to another. But careful with this as the robot may crash into something.
+
+    //RAPID Tab >> Controller Tab >> Tree (Station > RAPID > T_ROB > Module > Push) >> IRB Tab >> T_ROB/Module Tab >>
+        MODULE Module1
+            CONST robtarget Target_10:=[...];
+            CONST robtarget Target_20:=[...];
+            CONST robtarget Target_30:=[...];
+            CONST robtarget Target_Push_10:=[...];
+            PROC Path_10()
+                MoveL Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;
+                MoveL Target_20, v1000, z100, PyramidToolData\WObj:=wobj0;
+                MoveL Target_30, v1000, z100, PyramidToolData\WObj:=wobj0;
+            ENDPROC
+            
+            PROC Push()
+                !Start at Home
+                MoveJ Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;                               
+                
+                !Move to position
+                MoveJ Target_Push_10, v500, z15, PyramidToolData\WObj:=Workobject_1
+                
+                !Push
+                //FUNC robtarget RelTool (robtarget Point, num Dx, num Dy, num Dz [\Rx:=num] [\Ry:=num] [\Rz:=num])  //The ones in Square Brackets (Rotational X, Y, Z) are optional, units in mm
+                MoveL Reltool (Target_Push_10, 10, 0, 0, 25) v20, fine, PyramidToolData\WObj:=Workobject_1;
+                
+                //PROC WaitRob([\InPos] | [\ZeroSpeed])                                          //Wait until stop point or zerospeed
+                WaitRob \InPos;                                                 //This is useful if there are bunch of outputs that needs to be activated (Start Spindle or Lightings or etc). 
+                //                                                                                //Otherwise the robot will immediately start on the next command line
+                
+                !Retracting after push
+                MoveL Reltool (Target_Push_10, 10, 0, 0, -50) v500, z50, PyramidToolData\WObj:=Workobject_1;  //Change z15 to z50               
+                
+                !Return Home
+                MoveJ Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;
+            ENDPROC
+            
+        ENDMODULE
+
+    //Once done, Main Menu > RAPID Tab > Apply
+    //Head back to the Simulation viewer tab
+    //Main Menu > RAPID > Synchronize > Synchronize to Station
+    //Hit Play button in Simulation Viewer
+
+    //If the robot speed is too slow and need adjustment
+        Main Menu > RAPID Tab > Test and Debug Section > Stop Button                                        //Stopping the simulation
+        Main Menu > RAPID Tab > Test and Debug Section > Program Pointer > Follow Program Pointer           //The icon will mark which part of code you are currently on
+        Main Menu > RAPID Tab > Test and Debug Section > Program Pointer > Go to Motion Pointer 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
