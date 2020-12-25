@@ -283,7 +283,8 @@ CONTENTS
                 MoveL Target_Push_10, v500, z15, PyramidToolData\WObj:=Workobject_1;     //Change speed from v30 to v500 (0.5m/s)
                 
                 !Push
-                //FUNC robtarget RelTool (robtarget Point, num Dx, num Dy, num Dz [\Rx:=num] [\Ry:=num] [\Rz:=num])         //The ones in Square Brackets (Rotational X, Y, Z) are optional, units in mm
+                //FUNC robtarget RelTool (robtarget Point, num Dx, num Dy, num Dz [\Rx:=num] [\Ry:=num] [\Rz:=num])         
+                //The ones in Square Brackets (Rotational X, Y, Z) are optional, units in mm
                 MoveL RELTOOL (Target_Push_10, 10, 0, 0, 25) v30, z15, PyramidToolData\WObj:=Workobject_1;
                 
                 !Retracting after push
@@ -341,12 +342,13 @@ CONTENTS
                 MoveJ Target_Push_10, v500, z15, PyramidToolData\WObj:=Workobject_1
                 
                 !Push
-                //FUNC robtarget RelTool (robtarget Point, num Dx, num Dy, num Dz [\Rx:=num] [\Ry:=num] [\Rz:=num])  //The ones in Square Brackets (Rotational X, Y, Z) are optional, units in mm
+                //FUNC robtarget RelTool (robtarget Point, num Dx, num Dy, num Dz [\Rx:=num] [\Ry:=num] [\Rz:=num])  
+                //The ones in Square Brackets (Rotational X, Y, Z) are optional, units in mm
                 MoveL Reltool (Target_Push_10, 10, 0, 0, 25) v20, fine, PyramidToolData\WObj:=Workobject_1;
                 
-                //PROC WaitRob([\InPos] | [\ZeroSpeed])                                          //Wait until stop point or zerospeed
-                WaitRob \InPos;                                                 //This is useful if there are bunch of outputs that needs to be activated (Start Spindle or Lightings or etc). 
-                //                                                                                //Otherwise the robot will immediately start on the next command line
+                //PROC WaitRob([\InPos] | [\ZeroSpeed])               //Wait until stop point or zerospeed
+                WaitRob \InPos;                                       //This is useful if there are bunch of outputs that needs to be activated (Start Spindle or Lightings or etc). 
+                //                                                    //Otherwise the robot will immediately start on the next command line
                 
                 !Retracting after push
                 MoveL Reltool (Target_Push_10, 10, 0, 0, -50) v500, z50, PyramidToolData\WObj:=Workobject_1;  //Change z15 to z50               
