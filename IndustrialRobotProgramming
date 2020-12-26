@@ -8,7 +8,7 @@ CONTENTS
 04 - Tool Frames
 05 - Work Objects
 06 - Configurations and Programming
-
+07 - Robot Configuration - Determine robot motions on every path, ConfL, ConfJ, SingArea
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Start
@@ -370,10 +370,82 @@ CONTENTS
         Main Menu > RAPID Tab > Test and Debug Section > Program Pointer > Go to Motion Pointer 
  
  
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07 Robot Configuration - Determine robot motions on every path
+    //Avoiding every axis from abruptly rotating 360 deg during motion as there are multiple configurations for each path
+    //Matching robot positions
+        Main Menu > Home Tab > Solution > IRB > T_ROB > Workobjects > wobj > wobj_of > Target_#
+            Right Click on Target_# and select 'Add new path'
+                This will create a new path under 'Paths & Procedures' tree
+                Right Click on the new Path# and select 'Configurations > Auto Configuration'
+    //ConfL & ConfJ
+        //ConfL - Monitors the configuration during linear movement
+        //ConfJ - Monitors the configuration during joint movement
+        //If you are doing Joint movements while there are linear movements around the part, and you do not want to worry about the configuration.
+        //You can switch the configuration to ON or OFF. Example, 
+        //PROC ConfL( [\ON] | [\OFF])
+        //Example:
+        //RAPID Tab >> Controller Tab >> Tree (Station > RAPID > T_ROB > Module > Push) >> IRB Tab >> T_ROB/Module Tab >>
+            MODULE Module1
+                CONST robtarget Target_10:=[...];
+                CONST robtarget Target_20:=[...];
+                CONST robtarget Target_30:=[...];
+                CONST robtarget Target_Push_10:=[...];
+                PROC Path_10()
+                    MoveL Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;
+                    MoveL Target_20, v1000, z100, PyramidToolData\WObj:=wobj0;
+                    MoveL Target_30, v1000, z100, PyramidToolData\WObj:=wobj0;
+                ENDPROC
+                
+                PROC Push()
+                    !Start at Home
+                    MoveJ Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;                               
+                    
+                    !Move to position
+                    MoveJ Target_Push_10, v500, z15, PyramidToolData\WObj:=Workobject_1
+                    
+                    !Push
+                    ConfL \On;                                                                                                                                                 //This activates Linear Configuration
+                    MoveL Reltool (Target_Push_10, 10, 0, 0, 25) v20, fine, PyramidToolData\WObj:=Workobject_1;                     
+                    WaitRob \InPos;                                          
+                    
+                    !Retracting after push
+                    MoveL Reltool (Target_Push_10, 10, 0, 0, -50) v500, z50, PyramidToolData\WObj:=Workobject_1;       
+                    ConfL \Off;                                                                                                                                                  //This deactivatesLinear Configuration
+                    
+                    !Return Home
+                    MoveJ Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;
+                ENDPROC
+                
+            ENDMODULE    
+    
+    //SingArea  - Singularity Area - Defines interpolation around singular points
+        //PROC SingArea ( [\Wrist] | [\LockAxis4] | [\Off] )
  
  
- 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
  
  
