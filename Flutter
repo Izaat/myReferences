@@ -31,7 +31,7 @@ CONTENTS
 22. Asynchronous Codes
 23. World Time App #3 - Integrating with World Time API
 24. World Time App #4 - Make getData() reusable, and Future <void>
-
+25. Error Handling - Try & Catch
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Shurtcuts/Tips
@@ -1023,7 +1023,21 @@ Structures
                     padding: EdgeInsets.all(50.0),
                     child: Text(time),
 
-
+25. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////25
+//Error Handling
+    //Try & Catch Structure
+        #Problem Structure
+            class Class () {} > String theProblemVariable;
+            void variable1 () { "BlaBlaBla" }
+            void variable2 () { "AllTheProblemCodesHere" }
+        #Error Handling Structure
+            void variable1 () { "BlaBlaBla" }
+            void variable2 () {} >
+                try{} > "AllTheProblemCodesHere"
+                catch (e) {} > 
+                    print ( 'Error: $e' );
+                    theProblemVariable = 'Your theProblemVariable has errors';
+        //Now when there is a problem, it will print out 'Your theProblemVariable has errors' onto the app and Error message into the console
 
 
 
