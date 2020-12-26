@@ -32,6 +32,7 @@ CONTENTS
 23. World Time App #3 - Integrating with World Time API
 24. World Time App #4 - Make getData() reusable, and Future <void>
 25. Error Handling - Try & Catch
+26. World Time App #5 - Passing Route Data (ModalRoute)
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Shurtcuts/Tips
@@ -1039,7 +1040,77 @@ Structures
                     theProblemVariable = 'Your theProblemVariable has errors';
         //Now when there is a problem, it will print out 'Your theProblemVariable has errors' onto the app and Error message into the console
 
+26. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////26
+//World Time App #5 - Passing Route Data
+    //Output the time into Home Screen
 
+    //../lib/pages/loading.dart
+        import 'package:flutter/material.dart';
+        import 'package:projectName/services/world_time.dart';
+        
+        class Loading extends StatefulWidget {} > 
+            @override
+            _LoadingState createState() => _LoadingState();
+            
+        class _LoadingState extends State<Loading> {} >      
+            
+            //String time = 'loading';                                                      //03. Remove                               
+            
+            //void setupWorldTime() {} >                                                                                      
+            void setupWorldTime() async {}                                                                             
+                {} >
+                    WorldTime instance = WorldTime(); >    
+                        location: 'Berlin',
+                        flag: 'germany.png',
+                        url: 'Europe/Berlin'
+                    await instance.getTime();                                                                              
+                    //print(instance.time);                                              //02. Remove
+                    //setState(); > () {} >                                              //01. Remove setState
+                    //    {} >
+                    //        time = instance.time;
+                    //Navigator.pushNamed(context, '/home');                             //05. This is for redirection to home (push home screen over the loading screen). So use 06. instead.
+                    //Navigator.pushReplacementNamed(context, '/home');                  //06. This replaces the entire loading screen with home screen. But this cannot output the data since the data is not in home.dart
+                    Navigator.pushReplacementNamed(context, '/home', arguments: {} );    //07. By adding 'arguments: {} ' we  can  pass values/properties into home.dart to be shown in home screen
+                        arguments{} >                                                    //08. 3 properties being rerouted into home.dart (location, flag and time) from world_time.dart
+                            'location': instance.location,
+                            'flag' : instance.flag,
+                            'time': instance.time,
+                        
+            @override
+            void initState() {} >
+                {} >
+                    super.intiState();
+                    setupWorldTime();
+            
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                body: Padding(), > 
+                    padding: EdgeInsets.all(50.0),
+                    //child: Text(time),                                                  //04. Replace 'time' with 'loading'
+                    child: Text('loading'), 
+
+    //../lib/pages/home.dart
+        import 'package:flutter/material.dart';
+        class Home extends StatefulWidget {} > 
+            @override
+            _HomeState createState() => _HomeState();
+            
+        class _HomeState extends State<Home> {} >
+        
+            Map data {};                                                                  //09. This creates a map for the received properties from 08. whenever home screen starts
+        
+            @override
+            Widget build(BuildContext context) {} > 
+                //ModalRoute.of(context).settings.arguments;                              //10. This line receives the argument from 07. Note the "arguments:" in line 07.
+                data = ModalRoute.of(context).settings.arguments;                         //11. By adding "data =", it overides and maps out the received data into line 09. (Map data)
+                //print(data);                                                            //12. To test, run this line and it will print out the data in the console
+                return Scaffold(); >
+                    body: SafeArea(), > child: Column() > children: <Widget>[], >
+                        FlatButton.icon(), > 
+                            onPressed: () {}, >
+                                Navigator.pushNamed(context, '/location');                           
+                            icon: Icon(Icons.edit_location),
+                            label: Text('Edit Location'),
 
 
 
