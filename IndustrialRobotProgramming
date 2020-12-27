@@ -10,6 +10,7 @@ CONTENTS
 06 - Configurations and Programming
 07 - Robot Configuration - Determine robot motions on every path, ConfL, ConfJ, SingArea
 08 - Using Work Objects
+09 - I/O - SetDO, WaitDI, SetAO, WaitAO, Configuration, Realtime View
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Start
@@ -522,7 +523,87 @@ CONTENTS
             Select all Workobjects (including the tree) and press Ok
     //Play Simulation 
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+09 - I/O - SetDO, WaitDI, SetAO, WaitAO, Configuration, Realtime View
+    
+    //SetDO - Changes the value of a digital output signal
+        PROC SetDO( [\SDelay:=num] | [\Sync], signaldo Signal, dionum Value )
+        
+    //WaitDI - Waits until a digital input signal is set
+        PROC WaitDI (signaldi Signal, dionum Value [\MaxTime:=num] [\TimeFlag:=bool] )
+        
+    //SetAO - Changes the value of an analog output signal
+        PROC SetAO(signalao Signal, num Value)
+    
+    //WaitAO - waits until an analog output signal value is set
+        PROC WaitAO (signalao Signal [\LT] | [\GT], num Value [\MaxTime:=num] [\ValueAtTimeout:=num] )
+        
+    //Configuration PLC
+        Main Menu > Controller Tab > Solution Panel > Controller Tab > IRB Tree > Configuration > I/O System
+            Central Viewer Panel > Configuration Tab > Type Column > Signal 
+                //All assigned I/O devices and mapping will be listed in here
+    
+    //Realtime View PLC
+        Main Menu > Controller Tab > Solution Panel > Controller Tab > IRB Tree > I/O System
+        
+    //RAPID Tab >> Controller Tab >> Tree (Station > RAPID > T_ROB > Module > Push) >> IRB Tab >> T_ROB/Module Tab >>
+            MODULE Module1
+                CONST robtarget Target_10:=[...];
+                CONST robtarget Target_20:=[...];
+                CONST robtarget Target_30:=[...];
+                CONST robtarget Target_Push_10:=[...];
+                PROC Path_10()
+                    MoveL Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;
+                    MoveL Target_20, v1000, z100, PyramidToolData\WObj:=wobj0;
+                    MoveL Target_30, v1000, z100, PyramidToolData\WObj:=wobj0;
+                ENDPROC
+                
+                PROC Push()
+                    !Start at Home
+                    MoveJ Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;                               
+                    
+                    !Move to position
+                    MoveJ Target_Push_10, v500, z15, PyramidToolData\WObj:=Workobject_1
+                    
+                    !Push                    
+                    MoveL Reltool (Target_Push_10, 10, 0, 0, 25) v20, fine, PyramidToolData\WObj:=Workobject_1;                     
+                    WaitRob \InPos;                                          
+                    
+                    //Example
+                    SetDO StartDrill, 1;                                                                                                                                                          //Example
+                    WaitDI DrillComplete, 1 \MaxTime:=5;
+                    SetAo SpindleSpeed, 30000;
+                    
+                    !Retracting after push
+                    MoveL Reltool (Target_Push_10, 10, 0, 0, -50) v500, z50, PyramidToolData\WObj:=Workobject_1;                           
+                    
+                    !Return Home
+                    MoveJ Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;
+                    
+                    MoveJ Target_30, v1000, z100, PyramidToolData\WObj:=wobj0; 
+                    
+                    !------------------------------------------------------------------
+                    !Start robot to Workobject 2               
+                    
+                    !Move to position       
+                    MoveJ Target_Push_10, v500, z15, PyramidToolData\WObj:=Workobject_2;
+                    
+                    !Push                    
+                    MoveL Reltool (Target_Push_10, 10, 0, 0, 25) v20, fine, PyramidToolData\WObj:=Workobject_2;                     
+                    WaitRob \InPos;                                          
+                    
+                    !Retracting after push
+                    MoveL Reltool (Target_Push_10, 10, 0, 0, -50) v500, z50, PyramidToolData\WObj:=Workobject_2;     
+                    
+                    !Done with workobject 20
+                    
+                    !Back Home
+                    MoveJ Target_30, v1000, z100, PyramidToolData\WObj:=wobj0;    
+                    MoveJ Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;  
+                    
+                ENDPROC
+                
+            ENDMODULE
 
 
 
