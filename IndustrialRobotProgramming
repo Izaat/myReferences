@@ -9,6 +9,7 @@ CONTENTS
 05 - Work Objects
 06 - Configurations and Programming
 07 - Robot Configuration - Determine robot motions on every path, ConfL, ConfJ, SingArea
+08 - Using Work Objects
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Start
@@ -422,7 +423,104 @@ CONTENTS
     //SingArea  - Singularity Area - Defines interpolation around singular points
         //PROC SingArea ( [\Wrist] | [\LockAxis4] | [\Off] )
  
- 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+08 Using Work Objects
+    //Adding another workobject (Adding same task but at different position)
+    //NOTE: All tasks are relative to the Workobject points. See Point 05.
+    //Add object - Main Menu > Home Tab > Import Library > Equipment/UserLibrary
+        The new object will appear in Main Menu > Home Tab > Solution Panel > Layout Tab
+    //Move Object - Main Menu > Home Tab > Freehand Section > Move
+    //Assign datum point to workobject - Main Menu > Home Tab > Other > Create Workobject
+        Create Workobject Tab will appear in Solution Panel
+            Click the text box in User Frame Section > Position X,Y, Z
+            Head to the Simulation Viewer screen and click on the datum point of the new object (Same as Workobject 1)
+            Click on Create
+            Workobject 2 will appear in Solution Panel > Paths & Targets Tab
+    //Sync to RAPID - Main Menu > Home Tab > Controller > Synchronize > Sync to RAPID
+        Select all the workobjects listed under T_ROB > Workobject
+    //Toggling between robot positions - See the various robot positions based on its points along the path in Simulation Viewer
+            Main Menu > Home Tab > Solution Panel > Paths & Targets Tab > 
+                In Workobjects & Target Tree, select any Target_# file
+    //Adding robot configuration when robot approaches the new workobject
+        Right Click on the Workobjects & Targets Tree > wobj0 > wobj0_of > Target_30
+            Select Configurations, Configurations tab will appear in Soulution Panel
+                Select the configurations from the list and Click Apply button
+    //Program editing
+        RAPID Tab >> Controller Tab >> Tree (Station > RAPID > T_ROB > Module > Push) >> IRB Tab >> T_ROB/Module Tab >>
+            MODULE Module1
+                CONST robtarget Target_10:=[...];
+                CONST robtarget Target_20:=[...];
+                CONST robtarget Target_30:=[...];
+                CONST robtarget Target_Push_10:=[...];
+                PROC Path_10()
+                    MoveL Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;
+                    MoveL Target_20, v1000, z100, PyramidToolData\WObj:=wobj0;
+                    MoveL Target_30, v1000, z100, PyramidToolData\WObj:=wobj0;
+                ENDPROC
+                
+                PROC Push()
+                    !Start at Home
+                    MoveJ Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;                               
+                    
+                    !Move to position
+                    MoveJ Target_Push_10, v500, z15, PyramidToolData\WObj:=Workobject_1
+                    
+                    !Push                    
+                    MoveL Reltool (Target_Push_10, 10, 0, 0, 25) v20, fine, PyramidToolData\WObj:=Workobject_1;                     
+                    WaitRob \InPos;                                          
+                    
+                    !Retracting after push
+                    MoveL Reltool (Target_Push_10, 10, 0, 0, -50) v500, z50, PyramidToolData\WObj:=Workobject_1;       
+                    
+                    
+                    !Return Home
+                    MoveJ Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;
+                    
+                    MoveJ Target_30, v1000, z100, PyramidToolData\WObj:=wobj0;      //01. This line is the new workobject
+                    
+                    !Start robot to Workobject 20                                                               //05. Add this line. Remember to change to Workobject_2           
+                    
+                    !Move to position                                                                                 //02. Copy and paste the entire path movements here
+                    MoveJ Target_Push_10, v500, z15, PyramidToolData\WObj:=Workobject_2;
+                    
+                    !Push                    
+                    MoveL Reltool (Target_Push_10, 10, 0, 0, 25) v20, fine, PyramidToolData\WObj:=Workobject_2;                     
+                    WaitRob \InPos;                                          
+                    
+                    !Retracting after push
+                    MoveL Reltool (Target_Push_10, 10, 0, 0, -50) v500, z50, PyramidToolData\WObj:=Workobject_2;     
+                    
+                    !Done with workobject 20
+                    
+                    !Back Home
+                    MoveJ Target_30, v1000, z100, PyramidToolData\WObj:=wobj0;      //03. Copied from poit 01.
+                    MoveJ Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;      //04. Copied from !Start at Home
+                    
+                ENDPROC
+                
+            ENDMODULE   
+        
+        Once done with editing, Click on RAPID Tab > Controller Section > Apply
+        In Simulation Viewer, Click on Play
+    //Synchronize to Station once everything runs smoothly in Simulation Viewer
+        RAPID Tab > Synchronize to Station
+            Select all and click on Ok
+
+    //Repositioning Workobject 2
+        In Home Tab > Soluton Panel > Layout Tab
+            Right click the Workobject you want to reposition and select Position > Offset Position 
+            Offset Position will appear in Solution Panel
+                Reference: World
+                Edit the relative value to current position in the Translation and Rotation.
+                Click Apply
+        Matching robot path to new workobject location
+            Right click on Home Tab > Solution Panel > Paths & Targets > T_ROB Tree > Workobjects & Targets > Workobject_2
+                Select Offset Position - Offset Position Tab will appear
+                    Reference: Local
+                    Input the new relative value
+        Synchronize to RAPID           
+            Select all Workobjects (including the tree) and press Ok
+    //Play Simulation 
 
 
 
