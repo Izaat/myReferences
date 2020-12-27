@@ -1,0 +1,73 @@
+Blender 3D Animation 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01 - Interface
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01 Interface
+    Main
+        Main Menu, 
+        Workspace Tabs, 
+        Modes (View) - Object Mode, Draw Mode (GreasePencil), Edit Mode (GreasePencil) 
+        Viewport Modes (Toolbar Top Right Hand Side), - Mesh, Solid, Color, Render
+        Properties Panel (Right Hand Side) - Settings, Render, Output, View Layer, Scene, World, Object, Physics, Object Constraints, Object Data, Texture
+        
+    Shift+Mouse (Center Click) - Panning
+    Drag Mouse - Selection box
+    G - Select object and press G to grab it to move around the plane, left click to set right click to cancel
+    S - Select object and press S to scale
+    G, S - Select object, press G and press Z to move object in Z axis    
+    N - Open hidden menu in Menu
+    Shift-A to add object
+            Objects will be added where the 3D cursor is sitting
+    Shift+RightClick to reposition 3D cursor
+    Shift+D - Duplicate
+    Editor Panel (Right Hand Side Panel) > Render Properties Tab (Camera Icon)
+            Eevee Render - Realtime render, this needs to fake alot of things
+            Cycle Render -  Realistic Renderer, Taxing on GPU and CPU, Simulates real life properties
+            Ambient Occlusion - Crevices lightings
+            Screen Space reflections - Material reflections between 2 objects
+    NumPad 0 - Toggle Cameraview
+    Saving view as Images
+        Menu > Render > RenderImage, 
+            Menu > Image > save Image
+    Lightings
+        Shift + D = Duplicaate
+        You can view the effects in > Viewport Modes > Render
+    Properties Panel > Render Properties Tab (Eevee) >
+        Activate Ambient Occlusion 
+            Distance: 16.8m //This is for the shadow in crevices
+        Activate ScreenSpace Reflections
+    
+    Layout Tab            
+    Shading tab        
+        Add Material Shading Node (BSDF Shader) >                   //Every object has its own shading nodes
+            Highlight an object and at the bottom panel, click on 'New'
+            Material Output Node = Surface of selected object
+            Principal BSDF Node >
+                Base Color = Change color of surface
+        Sharing Material Properties between objects
+            Select target object
+            In Node Panel, click on sphere icon and select the material
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//                
