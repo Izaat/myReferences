@@ -406,13 +406,13 @@ CONTENTS
                     MoveJ Target_Push_10, v500, z15, PyramidToolData\WObj:=Workobject_1
                     
                     !Push
-                    ConfL \On;                                                                                                                                                 //This activates Linear Configuration
+                    ConfL \On;                                                                                   //This activates Linear Configuration
                     MoveL Reltool (Target_Push_10, 10, 0, 0, 25) v20, fine, PyramidToolData\WObj:=Workobject_1;                     
                     WaitRob \InPos;                                          
                     
                     !Retracting after push
                     MoveL Reltool (Target_Push_10, 10, 0, 0, -50) v500, z50, PyramidToolData\WObj:=Workobject_1;       
-                    ConfL \Off;                                                                                                                                                  //This deactivatesLinear Configuration
+                    ConfL \Off;                                                                                  //This deactivatesLinear Configuration
                     
                     !Return Home
                     MoveJ Target_10, v1000, z100, PyramidToolData\WObj:=wobj0;
@@ -478,9 +478,9 @@ CONTENTS
                     
                     MoveJ Target_30, v1000, z100, PyramidToolData\WObj:=wobj0;      //01. This line is the new workobject
                     
-                    !Start robot to Workobject 20                                                               //05. Add this line. Remember to change to Workobject_2           
+                    !Start robot to Workobject 20                                          //05. Add this line. Remember to change to Workobject_2           
                     
-                    !Move to position                                                                                 //02. Copy and paste the entire path movements here
+                    !Move to position                                                      //02. Copy and paste the entire path movements here
                     MoveJ Target_Push_10, v500, z15, PyramidToolData\WObj:=Workobject_2;
                     
                     !Push                    
