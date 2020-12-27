@@ -33,6 +33,7 @@ CONTENTS
 24. World Time App #4 - Make getData() reusable, and Future <void>
 25. Error Handling - Try & Catch
 26. World Time App #5 - Passing Route Data (ModalRoute)
+27. World Time App #6 - Formatting and Showing Dates, Intl.dart package
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Shurtcuts/Tips
