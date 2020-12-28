@@ -34,6 +34,7 @@ CONTENTS
 25. Error Handling - Try & Catch
 26. World Time App #5 - Passing Route Data (ModalRoute)
 27. World Time App #6 - Formatting and Showing Dates, Intl.dart package
+28. World Time App #7 - Loading Screen
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Shurtcuts/Tips
@@ -1194,7 +1195,58 @@ Structures
                                 style: TextStyle(), > fontSize: 66.0,
 
 
+28. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////28
+//World Time App #7 - Loading Screen
+    //https://pub.dev/packages/flutter_spinkit
+    //pubspec.yaml    
+        dependencies: 
+            flutter_spinkit: ^4.0.0
+    //Structure
+        SpinKitRotatingCircle(); >      //RotatingCircle | Wave | Circle | Pulse | CubeGrid
+            color: Colors.white,
+            size: 50.0,
 
+    //../lib/pages/loading.dart
+        import 'package:flutter/material.dart';
+        import 'package:projectName/services/world_time.dart';
+        import 'package:flutter_spinkit/flutter_spinkit.dart';                        //01. Add this line 
+        
+        class Loading extends StatefulWidget {} > 
+            @override
+            _LoadingState createState() => _LoadingState();
+            
+        class _LoadingState extends State<Loading> {} >      
+
+            void setupWorldTime() async {}                                                                             
+                {} >
+                    WorldTime instance = WorldTime(); >    
+                        location: 'Berlin',
+                        flag: 'germany.png',
+                        url: 'Europe/Berlin'
+                    await instance.getTime(); 
+                    Navigator.pushReplacementNamed(context, '/home', arguments: {} );   //06. Remove The entire paragraph to preview the spinner
+                        arguments{} >                        
+                            'location': instance.location,
+                            'flag' : instance.flag,
+                            'time': instance.time,
+                        
+            @override
+            void initState() {} >
+                {} >
+                    super.intiState();
+                    setupWorldTime();
+            
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                //body: Padding(), >                                                    //02. Remove this line
+                //    padding: EdgeInsets.all(50.0),
+                //    child: Text('loading'), 
+                backgroundColor: Colors.blue[900],                                     //05. Add background color since the Spinner is white 
+                body: Center(), >                                                      //03. Add this line.
+                    child: SpinKitRotatingCircle(), >                                 //04. When a widget is under a child, it doesn't need semicolon
+                        color: Colors.white,
+                        size: 50.0,
+    
 
 
 
