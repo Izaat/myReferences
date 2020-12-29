@@ -36,6 +36,7 @@ CONTENTS
 27. World Time App #6 - Formatting and Showing Dates, Intl.dart package
 28. World Time App #7 - Loading Screen
 29. World Time App #8 - Ternary Operators - Change background to Day/Night according to time
+30. World Time App #9 - List View Builder 
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Shurtcuts/Tips
@@ -1390,7 +1391,49 @@ Structures
                                 style: TextStyle(), > fontSize: 66.0,
                                 color: Colors.white,                                           //16. Change text (Time) color to white
 
+30. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////29
+//World Time App #9 - List View Builder 
+    //choose_location.dart
+    //Creating a list of locations
+    
+    //../lib/pages/choose_location.dart
+        import 'package:flutter/material.dart';
+        import 'package:world_time/services/world_time.dart'        
+        
+        class ChooseLocation extends StatefulWidget {} > 
+            @override
+            _ChooseLocationState createState() => _ChooseLocationState();
+            
+        class _ChooseLocationState extends State<ChooseLocation> {} >        
+            
+            List <WorldTime> locations = []; >                                                  //01. Add the entire list
+                WorldTime(url: 'Europe/London', location: 'London', flag: 'uk.png'),
+                WorldTime(url: 'Europe/Berlin', location: 'Athens', flag: 'greece.png'),
+                WorldTime(url: 'Africa/Cairo', location: 'Cairo', flag: 'egypt.png'),
+                WorldTime(url: 'Africa/Nairobi', location: 'Nairobi', flag: 'kenya.png'),
+                WorldTime(url: 'Asia/Jakarta', location: 'Jakarta', flag: 'Indonesia.png'),
+                WorldTime(url: 'Asia/Singapore', location: 'Singapore', flag: 'Singapore.png'),
 
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                backgroundColor: Colors.grey[200],                                     
+                appBar: AppBar(), >                                          
+                    backgroundColor: Colors.blue[900],
+                    title: Text('Choose Location'),
+                    centerTitle: true,
+                    elevation: 0,        
+                body: ListView.builder(), >                                                       //02. Add listview
+                    itemCount: locations.length,                                                  //03. Count the number of items inside the list
+                    itemBuilder: (context, index) {} >                                            //04. This builds every single item inside the list and return a widget tree
+                        return Padding();                                                         //07. Add Padding
+                            padding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 4.0),
+                            child: Card(), > child: ListTile(), > 
+                                onTap: () {}, >                                                    //05. onTap() is similar to onPressed()
+                                    //print(locations[index.location]);                            //08. For testing and prints out location in the console
+                                    
+                                title: Text(), > locations[index].location
+                                leading: CircleAvatar(),
+                                    backgroundImage: AssetImage('assets/${locations[index].flag}'),      //06. Curly braces ${} being used here because the flag variable is inside [] notation
 
 
 
