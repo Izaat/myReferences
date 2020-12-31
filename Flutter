@@ -37,6 +37,7 @@ CONTENTS
 28. World Time App #7 - Loading Screen
 29. World Time App #8 - Ternary Operators - Change background to Day/Night according to time
 30. World Time App #9 - List View Builder 
+31. World Time App #10 - Updating the Time
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Shurtcuts/Tips
@@ -1391,7 +1392,7 @@ Structures
                                 style: TextStyle(), > fontSize: 66.0,
                                 color: Colors.white,                                           //16. Change text (Time) color to white
 
-30. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////29
+30. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////30
 //World Time App #9 - List View Builder 
     //choose_location.dart
     //Creating a list of locations
@@ -1436,8 +1437,130 @@ Structures
                                     backgroundImage: AssetImage('assets/${locations[index].flag}'),      //06. Curly braces ${} being used here because the flag variable is inside [] notation
 
 
+31. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////31
+//World Time App #10 - Updating the Time - 12 points
+    //Updates time shown whenever another location being selected
+    //Retrieve data and reroute to the home screen
+    
+    ////////////////////////////////////////////////////////////////
+    //../lib/pages/choose_location.dart
+        import 'package:flutter/material.dart';
+        import 'package:world_time/services/world_time.dart'        
+        
+        class ChooseLocation extends StatefulWidget {} > 
+            @override
+            _ChooseLocationState createState() => _ChooseLocationState();
+            
+        class _ChooseLocationState extends State<ChooseLocation> {} >        
+            
+            List <WorldTime> locations = []; >                    
+                WorldTime(url: 'Europe/London', location: 'London', flag: 'uk.png'),
+                WorldTime(url: 'Europe/Berlin', location: 'Athens', flag: 'greece.png'),
+                WorldTime(url: 'Africa/Cairo', location: 'Cairo', flag: 'egypt.png'),
+                WorldTime(url: 'Africa/Nairobi', location: 'Nairobi', flag: 'kenya.png'),
+                WorldTime(url: 'Asia/Jakarta', location: 'Jakarta', flag: 'Indonesia.png'),
+                WorldTime(url: 'Asia/Singapore', location: 'Singapore', flag: 'Singapore.png'),
 
+            void updateTime(index) async {} >                                        //01. Add this code section
+                WorldTime instance = locations[index];                              //03. This calls the index from the locations list and store into 'instance' variable
+                await instance.getTime();                                            //04. Waiting for getTime() to complete
+                
+                //navigate to home screen
+                //Navigator.pop();                                                   //05. This line autmatically pops back to home screen when the location is selected
+                Navigator.pop(); > context, {} >                                    //06a. The data below are the same with the one in loading.dart. Just copied over.
+                    'location': instance.location,                                  //06b. Once a location being selected, the list will be pushed into line 08.
+                    'flag' : instance.flag,
+                    'time': instance.time,
+                    'isDaytime': instance.isDaytime, 
 
+            @override
+            Widget build(BuildContext context) {} > return Scaffold(); >
+                backgroundColor: Colors.grey[200],                                     
+                appBar: AppBar(), >                                          
+                    backgroundColor: Colors.blue[900],
+                    title: Text('Choose Location'),
+                    centerTitle: true,
+                    elevation: 0,        
+                body: ListView.builder(), >           
+                    itemCount: locations.length,               
+                    itemBuilder: (context, index) {} >   
+                        return Padding();                             
+                            padding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 4.0),
+                            child: Card(), > child: ListTile(), > 
+                                onTap: () {}, >                               
+                                    //print(locations[index.location]);   
+                                    updateTime(index);                               //02. The button to launch the updateTime() whenever being tapped
+                                    
+                                title: Text(), > locations[index].location
+                                leading: CircleAvatar(),
+                                    backgroundImage: AssetImage('assets/${locations[index].flag}'), 
+
+    /////////////////////////////////////////////////////////////////////////
+    //../lib/pages/home.dart
+    import 'package:flutter/material.dart';
+    class Home extends StatefulWidget {} > 
+        @override
+        _HomeState createState() => _HomeState();
+        
+    class _HomeState extends State<Home> {} >
+    
+        Map data {};   
+    
+        @override
+        Widget build(BuildContext context) {} >                                         //11a. This function will retrigger whenever the "Map data{}" is being updated. 
+            //data = ModalRoute.of(context).settings.arguments;                         //11b. But we do not want it to be retriggered. Use ternary operator to solve.
+            data = data.isNotEmpty ? data : ModalRoute.of(context).settings.arguments;  //12a. If "Map data {}" is not empty, then return true (returns the new data)
+            //                                                                          //12b. If it is empty, return false (run the ModalRoute() argument)
+            //set background
+            String bgImage = data['isDaytime'] ? 'day.png' : 'night.png';    
+            Color bgColor = data['isDaytime'] ? Colors.blue : Colors.indigo[700];                                                                                                        
+            
+            return Scaffold(); >
+                backgroundColor: bgColor,                                                 
+                body: SafeArea(), > child: Container() >             
+                    decoration: BoxDecoration(), > image: DecorationImage() > 
+                        image: AssetImage(), > 'assets/$bgImage'       
+                        fit: BoxFit.cover,                                          
+                    child: Padding(), >                                 
+                        padding: const EdgeInsets.fromLTRB(0, 120.0, 0, 0),  
+                        child: Column(), > children: <Widget>[], >
+                            FlatButton.icon(), > 
+                                //onPressed: () {}, > 
+                                onPressed: () async {}, >                                 //07. To use async function so we can make the pushNamed() function wait for 06.
+                                    //Navigator.pushNamed(context, '/location');   
+                                    //await Navigator.pushNamed(context, '/location');     //08.  Adding the 'await' keyword so this will wait for line 06. to complete
+                                    dynamic result = await Navigator.pushNamed(context, '/location');   //09. Once complete, this will store into the 'result' variable, a dynamic type variable
+                                    setState(); > () {} >                                  //10. This overrides(updates) the data listed below into the "Map data {}" 
+                                        {} >                                               //10b. which currently has "ModalRoute.of()" argument. But this will trigger line 11.
+                                            data = {}; >
+                                                'time': result['time'],
+                                                'location': result['location'];
+                                                'isDaytime': result['isDaytime'];
+                                                'flag': result['flag']
+                                icon: Icon(), > 
+                                    Icons.edit_location,
+                                    color: Colors.grey[300],               
+                                label: Text(), > 
+                                    'Edit Location', 
+                                    style: TextStyle(),                              
+                                        color: Colors.grey[300],        
+                            SizedBox (), >                                       
+                                height: 20.0,
+                            Row(), > 
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget> [], > Text(), > 
+                                    data['location'],
+                                    style: TextStyle() >
+                                        fontSize: 28.0,
+                                        letterSpacing: 2.0
+                                        color: Colors.white,            
+                            SizedBox (), > height: 20.0                            
+                            Text(), >                                                          
+                                data['time'],
+                                style: TextStyle(), > fontSize: 66.0,
+                                color: Colors.white,                                 
+//
+https://flutter.dev/docs/cookbook
 
 
 
