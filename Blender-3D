@@ -2,7 +2,9 @@ Blender 3D Animation
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
 01 - Interface
-
+02 - Modelling
+03 - Coloring/Shading
+04 - Environment and Touching up
 
 
 
@@ -15,7 +17,8 @@ CONTENTS
         Modes (View) - Object Mode, Draw Mode (GreasePencil), Edit Mode (GreasePencil) 
         Viewport Modes (Toolbar Top Right Hand Side), - Mesh, Solid, Color, Render
         Properties Panel (Right Hand Side) - Settings, Render, Output, View Layer, Scene, World, Object, Physics, Object Constraints, Object Data, Texture
-        
+    
+    Alt + "Any of the buttons below" : This will do the opposite. Example: Alt+S = Undo Scale
     Shift+Mouse (Center Click) - Panning
     Drag Mouse - Selection box
     G - Select object and press G to grab it to move around the plane, left click to set right click to cancel
@@ -42,6 +45,9 @@ CONTENTS
         Activate Ambient Occlusion 
             Distance: 16.8m //This is for the shadow in crevices
         Activate ScreenSpace Reflections
+        Bloom = For Light glow effect
+    Area View Options
+        Between the Main viewport and the timeline panel (bottom), Right Click to join both view areas
     
     Layout Tab            
     Shading tab        
@@ -53,11 +59,96 @@ CONTENTS
         Sharing Material Properties between objects
             Select target object
             In Node Panel, click on sphere icon and select the material
-//
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02  Modelling - 3:28 - Creating Blocky Character
+    //Editing a block in its own axis and not world axis
+        G, X     - This will grab the solid to move along the world's X axis 
+        G, X, X - This will grab the solid to move along the local X axis of the solid's axis
+    //Shaping a block
+        //Layout > Edit Mode > Select Vertices | Edge | Face
+            In the viewport, select the vertices(point)/edges(line)/face points of the object
+                G - Grab
+                R - Rotate
+                S - Scale
+        //Loopcut 
+            Layout > Edit Mode > Right Side Toolbar > Loopcut
+                This slices the block according to the selected plane
+                Just click on Select Tool to accept the cut
+                NOTE: There will be a menu at the bottom right hand corner of the screen  after the cut has been made
+                Alt+A : Deselect everything
+                A        : Select everything
+                Click and hold onto the cut - This can reposition your cut area within the solid
+        //Extrude
+            Select the face with selection tool. Click on the extrusion tool
+            You can also combine shapes i.e Cylinder + conical end
+                Create a cylinder and in edit mode, select the face to extrude. 
+                Reselect the face again and use scale to resize.
+        //Extrude Cut - Opposite of extrude        
+            To do this, you need to use Insets to select the region area to cut
+            Then Use extrude to extrude cut the solid
+        //Merge - In wirecut view + edit mode > vertices mode
+            Removing any unwanted or hidden faces in a solid
+                Alt+M       : Select vertices and press Alt+M to merge solids 'By Distance'
+            Removing and overlapping solids
+                Select only the 2 overlapping vertices using Shift key
+                Alt + M and select Merge by 'At Last', where 'At Last' means the vertices you selected last
+                Select the remaining face, press Delete and select Face
+    //Mirror Modifier
+        In Object Mode, make sure the Object Cursor is at the center of the model you are going to build
+        Create an object
+        Right Hand Panel, Modifier Property tab, Create new Modifier, Select Mirror Modifier
+            This creates a mirror along the object's center axis
+        
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03  Materials
+    //Assign Object face to different color/shade than the solid body. Example, Face of a torchlight
+        In Main Menu > Shading Tab > Edit Mode > Face Selection Mode > 
+            Select the face of the object
+            On the right hand side panel, open Material Properties Tab
+                Create another Material Layer
+                Change Emission color in BSDF
+    //Mirror clipping
+        Create an object and go to Edit Mode
+        In Properties Panel, open Modifier Properties Tab (Spanner Icon)
+        Add new modifier and select Mirror
+        Grab object and move - this will create another object (mirror)
+        Slice the object in half (Loop Cut)
+        Select the faces of the other half, press delete and select faces
+        Select the remaining the faces (Select A with Ctrl + A)
+        Check the 'Clipping' on Modifier properties
+        Grab and move both objects into each other, when it squeezes, left click on mouse
+    //Move the edges (turn 90 degree cube into slopes)
+        In edit mode, select Edges mode click on the edge and press G twice
+    //Relocate pivot point of an object
+        Edit Mode > Object Button > Set Origin > Origin to 3D Cursor
+    //If 3D cursor is not at World Origin
+        Shift + S and select Cursor to World Origin / Grid / Selected / etc
+        OR open the hidden tab, 
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04 Environment, Touch up and Lightings
+    //Split Screen Mode
+        Open the shading tab
+        Hover over to the to right hand corner of the viewpoert until you see a crossair
+        Drag to the left to open a split screen viewport
+        Center click and hold on the horizontal toolbar of the new window to scroll through 
+        Change to Solid Mode
+    //Lightings
+        BSDF > Emission - Increase to maximum
+        Add Emission Shader
+            In Node Panel, Shift+A to open add list box
+            Select Shader > Emission
+                Link Emission to Material Surface
+                Increase the emission strength
+                If 'No Output Node' appears, make sure that in the Material Output, one of the item in the list is reselected
 
-
+        Add Fog
+            In Shading Tab > Node Panel > World Mode >
+                Shift + A to add Shader > Principled Volume
+                Link 'Volume Node' in Principled Volume to 'Volume' in World Output
 
 
 
