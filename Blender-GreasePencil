@@ -5,6 +5,8 @@ CONTENTS
 02 - Grease Pencil Animations
 03 - Working with multiple scenes
 04 - Exporting
+05 - Head Rigging
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Tips
@@ -42,6 +44,7 @@ CONTENTS
             Z     : Z-Axis
             Tab : Edit Mode / Object Mode Toggle
             Shift+D: Duplicate
+            CTRL + M : Mirror copy to the 3D cursor
 
         Sculpt Mode                  
             Sculpting the strokes
@@ -185,3 +188,81 @@ CONTENTS
             File Format: FFmpeg video
             Encoding: Mpeg4
             Video Codec : H.264
+            
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. Head Rigging
+    //Sketching
+        Start a new 2D Drawing
+            Sketch a head
+        Create a sub folder under Collection folder and name it Sketch
+            Move the sketches into this folder
+        Create another subfolder under collection and name this GP
+            In Object Mode, Add a new GP (Blank) and name it headbase file.
+            Outline your sketches into separate layers (Headbase, etc) in the headbase under layer section 
+            Adding another drawing in the same layer - Head Outline, Fill Coloring and Mouth will be in the same layer.
+                In Object Mode, select the head layer. 
+                    In Properties Panel, Open the Layer Properties Tab
+                    Under Layer Section, Add a new layer and name it Fill Color
+                        Open the Draw Mode and draw the fill color      
+            Masking Mouthbase
+                In Object Mode, select the head layer. 
+                    In Properties Panel, Open the Layer Properties Tab
+                    Under Layer Section, Add a new layer and name it Mouth for the mouth winkle line
+                        Open the Draw Mode and draw the line                        
+                    In Layer Properties Tab, check the Mask Checkbox and add a mask layer.
+                        Select the head layer (Fill Color)
+                        Open the edit mode. Grab mouth layer and now you can move the mouth without the head moving
+                
+    //Rigging
+        //Add Lattices
+            In Object Mode menu, click on Add button and select Lattices
+                Move the lattice to the object, resize the bounding box to wrap all the layers of the object in 3D space
+                NOTE: Head lattice for the head, Brows lattice for the individual brows
+                In the properties tab > lattice properties,
+                    Increase the resolution
+                    U = X axis
+                    V  = Y axis
+                    W = Z axis
+                Select the object (inside the bounding lattices)
+                    Open the settings properties > Add Modifier > Select Lattice
+                        In the Object Text box, select the object name
+                Go to Edit mode and select the lattice, grab and move. You'll see it bend.
+        //Add Single bone to assign to the lattice
+            NOTE: All ends of sub bones will follow the Parent bones. Create Parent-sub-sub-n bones for more flexible look
+            In Object Mode menu, click on Add button and select Single Bone
+            In Properties Panel, 3 new property tabs will appear
+                Object Data properties, Bone Properties and Bone Constraints Properties
+                In Object Data Properties, open 'Motion Paths Section'
+                    Check 'Infront' Check box so your skeleton will always appear infront of the object
+                In 'Viewport Display' section, change 'Display As' to Stick instead of the default 'Octahedral'
+            NOTE: Add Root bone first (the central bone) 
+                Once you've aligned the bone, open the Bone Properties Tab and rename it to Root
+                Adding Bone Layer under Root Bone
+                    Open Object Data Properties and under the Skeleton Section > Layers, click on another box
+            Add another bone
+                https://www.youtube.com/watch?v=MVl7FQw-x6M
+                In Edit Mode
+                    Click on the circular orb at the end of the bone and press E. Move mouse to the desired position
+                        OR: HOLD SHIFT+A
+                    Change Layers of the bone
+                        Highlight the bone, change to Pose Mode, click on the Pose button and select "Change Bone Layers"
+                        -OR- Press M
+            Assigning to the Lattice Group   
+                Open Object Mode and select the Lattice
+                    Open Modifier Properties Tab and Add Modifier
+                        In Object Text Box, select Armature
+                Open Object Data Properties Tab
+                    In Vertex Group Section, add Vertex Groups by clicking on the + button
+                    Name the group to the exact name of the bone assigned to the Lattice
+                Open Object Mode and Select Lattice
+                    Open Edit Mode and box select the lattices and the corresponding bone
+                    In Object Data Properties Tab, in Vertex Group Section, select the group name and click on 'Assign'
+            Open Pose Mode (Select Bone first and open Pose Mode)
+                Now you can move the assigned bone and see the object move along with it.
+            Bendy Bone Option
+                This option make the lattices of your assigned object have hose-like texture when it bends
+                In Pose Mode, go to Bone Properties Tab and open up the Bendy Bones section
+                    Change the number of the Segment
+            Mirroring        
+                CTRL + M : Mirror copy to the 3D cursor
