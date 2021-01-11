@@ -38,6 +38,7 @@ CONTENTS
 29. World Time App #8 - Ternary Operators - Change background to Day/Night according to time
 30. World Time App #9 - List View Builder 
 31. World Time App #10 - Updating the Time
+32. Augmented Reality - ARKit App - Introduction
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Shurtcuts/Tips
@@ -1563,7 +1564,73 @@ Structures
 https://flutter.dev/docs/cookbook
 
 
+32. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////32
+//Augmented Reality - ARKit App - Introduction
+    
+    Augmented Reality
+        Unity is a more stable option for Augmented Reality
+            Mixed and Augmented Reality Studios (MARS)
+            AR Foundation
+            ARKit (Apple) / ARCore (Google)
+            XR Interaction Toolkit
+        Native AR in Flutter
+            ARKit/ARCore
+            No other widget yet
+    
+    AR Guide
+        MaterialApp -> Scene
+        Widget -> Node
+        Theme -> Material
 
+    /////////////////////////////////////
+    //Settings
+        //../ios/Runner/Base.lproj/Info.plist
+            <dict>
+                <false/>
+                <key>NSCameraUsageDescription</key>
+                <string>AR is one touch away</string>
+                <key>io.flutter.embedded_views_preview</key>
+                <string>YES</string>
+            </dict>
+
+    /////////////////////////////////////            
+    //pubspec.yaml  
+        dependencies:
+            flutter:
+                sdk: flutter
+            arkit_plugin: ^0.3.00
+
+    /////////////////////////////////////            
+    //../lib/main.dart
+        import 'package:flutter/material.dart';
+        import 'package:arkit_plugin/widget/arkit_scene_view.dart';
+        import 'package:arkit_plugin/arkit_plugin.dart';
+        import 'package:vector_math/vector_math_64.dart';
+        
+        void main() => runApp(MyApp());
+        class MyApp extends StatelessWidget {} >
+            @override
+            Widget build(BuildContext context) {} >
+                return MaterialApp(); >
+                    title: 'Demo',                    
+                    home: ARCube(),
+                    
+        class ARCube extends StatelessWidget {} >
+            @override
+            Widget build(BuildContext context) {} >
+                return Scaffold(); >
+                    body: ARKitSceneVeiw(), >
+                        onARKitViewCreated: (c) {}, >        //where (c) is the controller
+                            final node = ARKitNode(); >
+                                geometry: ARKitBox(), >          //shape of the 3D object
+                                    width: 0.06,
+                                    height: 0.06,
+                                    length: 0.06,
+                                    materials: [] >                     //Additional -> This turns 3D shape into wireframe
+                                        ARKitMaterial() >
+                                            fillMode: ARKitFillMode.lines,
+                                position: Vector3(0,0,-0.5),  //position of the 3D object infront of camera
+                            c.add(node);
 
 
 
