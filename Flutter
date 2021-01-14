@@ -39,6 +39,7 @@ CONTENTS
 30. World Time App #9 - List View Builder 
 31. World Time App #10 - Updating the Time
 32. Augmented Reality - ARKit App - Introduction
+33. Advanced Physics Based Animation - Fluid Control
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Shurtcuts/Tips
@@ -1632,7 +1633,176 @@ https://flutter.dev/docs/cookbook
                                 position: Vector3(0,0,-0.5),  //position of the 3D object infront of camera
                             c.add(node);
 
+33. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////33
+//Advanced Physics Based Animation - Fluid Control
+    //main.dart
+        import 'package:flutter/material.dart';
+        import 'package:flutter/physics.dart';
+        import 'dart:math';
+        
+        const BOX_COLOR = Colors.cyan;
+        
+        void main() => runApp(new MyApp());
+        
+        class MyApp extends StatelessWidget {} >
+            @override
+            Widget build(BuildContext context) {} >
+                return MaterialApp(); >
+                    title: "Spring Box",
+                    theme: ThemeData(), >
+                        primaryColor: Colors.red,
+                    home: HomePage(),
 
+        class HomePage extends StatelessWidget {} > 
+            @override
+            Widget build(BuildContext context) {} >
+                return Scaffold(); > body: Container(), child: Padding(),
+                    child: PhysicsBox(), >
+                        boxPosition: 0.5,
+                    padding: EdgeInsets.only(), >
+                        left: 10.0,
+                        right: 10.0,
+                        top: 20.0,
+                        bottom: 20.0,                    
+
+        class PhysicsBox extends StatefulWidget {} >
+            final boxPosition;
+            PhysicsBox(); > {} >
+                this.boxPosition = 0.0,
+            
+            @override
+            BoxState createState() => BoxState(); 
+
+        class BoxState extends State <PhysicsBox> with TickerProviderStateMixin {} >
+            double boxPosition;
+            double boxPositionOnStart;      //This holds the box position
+            Offset start;                              //Where user tap on the box
+            Offset point;                             //Position where user drags the box to
+            
+            AnimationController controller;
+            ScrollSpringSimulation simulation;  //The springing Animation
+
+            @override
+            void initState() {} >
+                {} >
+                    super.initState();
+                    boxPosition = Widget.boxPosition;       //Allows to get info from PhysicsBox class
+                    simulation = ScrollSpringSimulation(); >    //spring, start, end, velocity
+                        SpringDescription(), >          //spring
+                            mass: 1.0,
+                            stiffness: 1.0,
+                            damping: 1.0,
+                        0.0,                                        //start
+                        1.0,                                        //end
+                        0.0,                                        //velocity
+
+                    controller = AnimationController(vsync: this);
+                        .. addListener(); > () {} >
+                            {} > 
+                                print('${simulation.x(controller.value)}');     //Print out position of object at given time
+
+            @override
+            Widget build(BuildContext context) {} >
+                return GestureDetector(); >
+                    onPanStart: startDrag,
+                    onPanUpdate: onDrag,
+                    onPanEnd: endDrag,
+                    child: CustomPaint(), >
+                        //child: Container(), //use painter as child
+                        painter: BoxPainter(), >
+                            color: BOX_COLOR,
+                            boxPosition: boxPosition,
+                            boxPositionOnStart: boxPositionOnStart ?? boxPosition,
+                            touchPoint: point,
+ 
+            void startDrag(DragStartDetails details) {} >
+                start = (context.findRenderObject() as RenderBox).globalToLocal(details.globalPosition);   
+                    //Takes context and run findRenderObject() which will find CustomPaint() and then cast this widget as RenderBox
+                    //Basically taking a widget and convert it into something that can be rendered on a coordinate plane
+                    //Converts coordinates to local set of coordinates by calling globalToLocal and then pass DragStartDetails into globalPosition variable
+                boxPositionOnStart = boxPosition;
+
+            void onDrag(DragUpdateDetails details) {} >
+                setState(); > () {} >
+                    {} >
+                        point = (context.findRenderObject() as RenderBox).globalToLocal(details.globalPosition)
+                        final dragVec = start.dy - point.dy;    //Drag Velocity
+                        //final normDragVec = (dragVec / context.size.height) //normalize the dragVec where context.size.height is the widget size
+                        final normDragVec = (dragVec / context.size.height).clamp(-1.0, 1.0); //Limit
+                        boxPosition = (boxPositionOnStart + normDragVec).clamp(0.0, 1.0); 
+
+            void endDrag(DragEndDetails details) {} >   //when user lets go of the box
+                setState() > () {} >
+                    {} >
+                        start = null;
+                        point = null;
+                        boxPositionOnStart = null;
+
+        class BoxPainter extends CustomPainter {} >
+            final double boxPosition;
+            final double boxpositionOnStart;
+            final Color color;
+            final Offset touchPoint;
+            final Paint boxPaint;
+            final Paint dropPaint;
+
+            BoxPainter() > {} > 
+                this.boxPosition = 0.0,                 //default value
+                this.boxPositionOnStart = 0.0,     //default value
+                this.color = Colors.grey,              //default value
+                this.touchPoint,                           //default value
+            : boxPaint = Paint(),
+            dropPaint = Paint() {} >
+                {} >
+                    boxPaint.color = this.color;
+                    boxPaint.style = PaintingStyle.fill;        //Fill the entire box
+                    dropPaint.color = Colors.grey;
+                    dropPaint.style = PaintingStyle.fill;       //Fill the entire box
+
+            @override
+            void paint(Canvas canvas, Size size) {} >
+                //canvas.clipRect() //Call canvas to paint within a set of parameters
+                canvas.clipRect() > Rect.fromLTWH(); > 0.0, 0.0, size.width, size.height        //left, top, width, height
+                
+                final boxValueY = size.height - (size.height * boxPosition);                             //Y coordinate of the box
+                final prevBoxValueY = size.height - (size.height * boxPositionOnStart);
+                final midPointY = ((boxValueY - prevBoxValueY) * 1.2 + prevBoxBalueY).clamp(0.0, size.height)
+                
+                Point left, mid, right;
+                left = Point(-100.0, prevBoxValueY);    //top left corner of box
+                right = Point(size.width + 50.0, prevBoxValueY);    //top right corner of box
+                
+                if (null != touchPoint) {} >    //Check if touchPoint has been moved
+                    mid = Point(touchPoint.dx, midPointY);
+                else {} >
+                    mid = Point(size.width /2, midPointY);      //Middle top point of the box
+
+                final path = Path(); //One dimensional subset of the plane, a branch of sub paths and current point. Just the edge of the box when user moves around
+                path.moveTo(mid.x, mid.y);  //Draws line from mid top to Left side of the box
+                path.quadraticBezierTo(); > //Curves that start on mid and end  at right on left side of the box
+                    mid.x - 100.0,  //control point
+                    mid.y,
+                    left.x,
+                    left.y,
+                path.lineTo(0.0, size.height); //marks the corner on the left side (left marker)
+                
+                path.moveTo(mid.x, mid.y); //Draws line from mid top to Right side of the box
+                path.quadraticBezierTo(); > //Curves that start on mid and end  at right on the right side of the box
+                    mid.x + 100.0,     //control point
+                    mid.y,
+                    right.x,
+                    right.y,
+                path.lineTo(size.width, size.height);   //Starts line from right corner
+                
+                path.lineTo(0.0, size.height);  //draws line to left marker
+                path.close();
+                
+                canvas.drawPath(path, boxPaint);                                                //If this does not work, then run line below
+                canvas.drawCircle(Offset(right.x, right.y), 10.0, dropPaint);       //10.0 is the radius, dropPaint is the debug paint
+
+            @override
+            bool shouldRepaint(CustomPainter oldDelegate) {} >
+                return true;        //Will always repaint object no matter what
 
 
 
