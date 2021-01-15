@@ -1,0 +1,138 @@
+////////////////////////////////////////////////////////////////
+CONTENTS
+01. LoopOut
+
+
+////////////////////////////////////////////////////////////////
+01. LoopOut
+
+    //Create new Composition
+        Basic:
+            Preset/FrameRate: 29.97
+    //ColorControl Layer
+        Menu > Layer > New Adjustment Layer 
+            Name this layer Color Control
+        Add 4x Color Control Effect to this layer    
+            Menu > Effect > Expression Control > Color Control
+            You'll get COLOR01, COLOR02, COLOR03, COLOR04 - Note the names
+    //Ball Layer - CIRCLE GROUP        
+        On timeline, right click and add shape layer
+        Bring this layer below Color Control Layer and rename to "Ball"
+        Under 3D control button, 'Contents' row, click on 'Add' 
+            Select 'Group' and name this to Circle                
+            Add Ellipse Path
+                Size: 800.0, 800.0
+            Add Stroke Path
+            At top bar menu
+                Stroke: 15px
+            Add Trim Path
+                Offset: 0x90deg
+                Add Start and End Keyframes
+                    Begin: 
+                        Start: 0%
+                        End: 0.1%
+                    01:00f / 1sec mark
+                        Start: 49.9%
+                        End: 50%
+                Highlight all keyframes (Start Layer and End Layer) and add 'Easy Ease'        
+                Move Start layer keyframes forward by 4 frames
+                Select the Start keyframes of Start layer and End layer and open graph editor
+                    Pull both graph left points to the right to 100% and Speed: 0.0&/sec
+                Select the End keyframes of Start layer and End layer and open graph editor
+                    Pull both graph right points to the left to 100% and Speed: 0.0&/sec    
+                Loop Timeline to 2 seconds
+                ALT+Click on Start Layer Clock
+                    Add: loopOut("pingpong") - There are continue, cycle, offset, pingpong loopOut Cycles
+                Copy and paste Expression of Start Layer    
+                    RightClick on Start Layer and select "Copy Expression Only"
+                    Highlight End Layer and Ctrl+V to paste expression
+        //ViewPort
+            CTRL+R to open Ruler
+            Press " to open center guide
+            Bring ruler lines to the center of the crossair
+        //Ball Layer - STRING GROUP
+            Highlight Contents Layer
+            Under 3D control button, 'Contents' row, click on 'Add' 
+                Select 'Group' and name this to String
+                Add Path Path            
+        //Viewport
+            Add path/line spanning from crossair to the animation white line on the right
+            At top bar menu
+                Add Stroke Path
+                Stroke: 15px
+        //Ball Layer - STRING GROUP
+            Open Transform Layer Properties
+                Rotation Layer
+                    Add Rotation keyframe to the beginnning of the timeline
+                        Rotation: 0x+0.0deg 
+                    Go to 1:00f / 1 second frames
+                        Rotation: 0x180.0deg
+                    Add Easy Ease to both keyframes
+                        Right click on keyframe, select Keyframe Assistant, Easy Ease
+                    Open Graph Editor
+                        Pull the graph handle (Left to Right, Right to Left)
+                    ALT+Click on Start Layer Clock
+                        Add: loopOut("pingpong") - There are continue, cycle, offset, pingpong loopOut Cycles
+        //Play to watch the animation
+            //Ball Layer - Circle 
+                To reset the features of keyframes, select the keyframes and
+                    CTRL + Click
+                Add Easy Ease
+                End of Timeline 
+                    Select Start and End keyframes and redo the graph                    
+                Start of Timeline
+                    Select Start and End keyframes and redo the graph
+        //Ball Layer - Circle (Highlighted)
+            Under 3D control button, 'Contents' row, click on 'Add' 
+                Select 'Offset path' 
+                    Amount: 30
+                    Line Join: Round Join
+            Under 3D control button, 'Contents' row, click on 'Add' 
+                Select 'Fill' 
+        //ColorControl Layer
+            Left Hand Panel, lock the tab
+        //Ball Layer - Circle
+            Timeline Panel
+                Stroke Layer
+                    Parent Color Layer to COLOR01
+                Fill Layer
+                    Parent Color Layer to COLOR02
+        //Ball Layer - String
+            Timeline Panel
+                Stroke Layer
+                    Parent Color Layer to COLOR03
+        //Ball Layer - Trail 01 Layer
+            Timeline Layer
+                Duplicate Circle Layer and Name this to Trail1
+                    Bring this Duplicated Layer to below the String Layer
+                    Delete Fill Layer and Offset Layer
+                    Stroke Layer
+                        Line Cap: Round Cap
+                        Line Join: Round Join
+                    Dashand Gap Layer
+                        Add 2 Dash layers
+                        Add 2 Gap layers
+                            Dash: 10                        
+                            Gap: 30
+                            Dash2: 60 
+                            Gap2: 70
+                    Ellipse Layer
+                        Size: 650, 650
+        //Ball Layer - Trail 02 Layer
+            Duplicate Trail 01 Layer and name this Trail 02
+            Bring this layer to below Trail 01
+            Highlight this layer and Press U to bring up the keyframe
+                Move the Start-End Keyframes and move by 2 frames
+            Ellipse Layer
+                Size: 400
+            At top bar menu
+                Stroke: 8px
+        //Ball Layer - Trail 03 Layer
+            Duplicate Trail 02 Layer and name this Trail 03
+            Bring this layer to below Trail 02
+            Ellipse Layer
+                Size: 250
+            At top bar menu
+                Stroke: 4px
+            Highlight this layer and Press U to bring up the keyframe
+                Move the Start-End Keyframes and move by 2 frames
