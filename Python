@@ -1,0 +1,433 @@
+Python 3 in Jupyter Notebook
+///////////////////////////////////////////////////////////////////////
+CONTENTS
+01. Structure, Variables and Data Types
+02. Working with Strings and Numbers
+03. Input from users
+04. Basic Calculator
+05. Lists, List Functions and Tuples
+06. Functions
+07. Return Statement
+08. Statements  (If, While, For)
+09. Comparison Statements
+10. Better Calculator
+11. Dictionaries
+12. Guessing game with While loop
+13. Exponent Power Function
+14. 2D List and Nested Loops
+15. Build Translator
+
+////////////////////////////////////////////////////////////////////////
+01. Strings, Structure, Variables and Data Types
+    //Just type in 
+        print("Just type anything here")
+        Shift+Enter in Jupyter   
+        
+    //Program
+        character_name = "Name01"
+        character_age = 35
+        print("The name is " + character_name + " and he is " + character_age + " years old.")
+        character_name = "Name02"    //Reassigning another value to the variable
+        print("He has a brother named " + character_name + ".")
+        
+    //Data types
+        string_name = "Tom"              //string
+        int_num_double = 35.123123 //the variable will recognize if it is a float, num, int, or double unlike C language
+        is_Male = True | False             //boolean
+
+////////////////////////////////////////////////////////////////////////
+02. Working with Strings and Numbers
+
+    //Strings
+        //Adding new line
+            print ("First line \n Second Line")
+            
+        //Print out Quotation Mark
+            print("Print this \"Quotation Mark\" ")
+            
+        //Print out variable
+            variable = "Hello"
+            print(variable)
+            
+        //Concatenate
+            variable = "Hello"
+            print(variable + " there!")
+            
+        //Convert entire string to lower case
+            variable = "HELLO"
+            print(variable.lower())
+            
+        //Convert entire string to upper case
+            variable = "hello"
+            print(variable.upper())
+            
+        //Check strings in lower or upper and returns true or false
+            variable = "hello"
+            print(variable.isupper())   //Output: False
+        
+        //Converts to Uppercase and then check strings in lower or upper and returns true or false
+            variable = "hello"
+            print(variable.upper().isupper())   //Output: True
+        
+        //Length            
+            variable = "hello"
+            print(len(variable))   //Output: 5
+            
+        //Grab Character via Index  
+            variable = "hello"
+            print(variable[1])   //Output: e    
+        
+        //Grab Index Number via Character  
+            variable = "hello"
+            print(variable.index("h"))   //Output: 0   
+            
+        //Replace String  
+            variable = "hello there"
+            print(variable.replace("hello", "hi"))   //Output: hi there   
+
+    //Numbers
+        //Basic Arithemetics
+            print(3 * 4 + 5)    //Output: 17
+            print(3 * (4 + 5))    //Output: 27
+
+        //Modulus (Remainder)
+            print(10%3) //Output: 1
+
+        //Convert number into String
+            my_num = 23
+            print(str(my_num) + "is my favourite number") //Output: 23 is my favourite number
+            NOTE: You can't print out number within a sentence, calling the variable name is required
+        
+        //Absolute value
+            my_num = -5
+            print(abs(my_num)) //Output: 5
+        
+        //Exponent - See topic 13
+            print(2**3) //2 to the power of 3 = 8
+        
+        //Squared
+            print(pow(5, 2)) //Output: 25
+
+        //Which number is higher (max, min)
+            print(max(4, 6)) //Output: 6
+
+        //Rounding numbers to whole numbers
+            print(round(3.2123)) //Output: 3
+
+        //Import other math functions
+            from math import *
+
+            //Floor - To erase the decimals
+                print(floor(3.1234))    //Output: 3
+                
+            //Ceiling - To erase the decimals but add 1
+                print(ceil(3.1234))    //Output: 4
+
+            //Square Root
+                print(sqrt(4)) //Output: 2
+
+////////////////////////////////////////////////////////////////////////
+03. Input from Users
+    //Program
+        name = input ("Enter your name: ")
+        age = input("Enter your age: ")
+        print ("Hello " + name + " and you are " + age + " years old!")
+
+////////////////////////////////////////////////////////////////////////
+04. Basic Calculator
+    //Program
+        num1 = input("Enter a number: ")
+        num2 = input("Enter another number: ")
+        result = int(num1) + int(num2)  //The "int" converts string to whole number. Use "float" for decimal
+        print(result)
+
+////////////////////////////////////////////////////////////////////////
+05. Lists, List Functions and Tuples
+    //Lists
+        friends = ["Friend01", "Friend02", "Friend03", 20, "Friend04"]  //You can add number and strings in the list
+        print(friends[0]) //Output: Friend01
+        print(friends[-1]) //Output: 20
+        print(friends[-2]) //Output: Friend03
+        print(friends[1]) //Output: Friend02
+        print(friends[1:]) //Output: Friend02, Friend03, 20 
+        print(friends[1:3]) //Output: Friend02, Friend03 
+        //Change list value
+        friends[1] = "Mike"
+        print(friends[1])   //Output: "Mike"
+
+    //List Functions
+        lucky_numbers = [4, 8, 15, 16, 23, 42]
+        friends = ["Kevin", "Karen", "Jim", "Oscar", "Toby"]
+        
+        friends.extend(lucky_numbers)
+        print(friends)  //Output: Concatenate friends with lucky_numbers
+
+        friends.append("Creed")
+        print(friends) //Output: Adds  Creed to the friends list
+
+        friends.insert(1, "Kelly")
+        print(friends) //Output: Inserts Kelly to the friends list between Kevin and Karen
+
+        friends.remove("Jim")
+        print(friends) //Output: Removes Jim from the friends list
+
+        friends.clear()
+        print(friends) //Output: Clear the entire friends list
+
+        friends.pop()
+        print(friends) //Output: Removes the last element from the list
+
+        print(friends.index("Kevin")) //Output: Shows the index number of Kevin in the list
+        print(friends.count("Jim")) //Output: Counts the number of occurrences of Jim in the list  
+
+        friends.sort()
+        print(friends) //Output: Alphabetical order
+
+        friends.reverse()
+        print(friends) //Output: Reverse sort the list
+        
+        friends2 = friends.copy()
+        print(friends2) //Output: Copies friends list to friend2 list
+        
+    //Tuples - Unlike list, tuples can't be changed or modified
+        coordinates = (4, 5, 6)
+        print(coordinates[0])   //Output: 4
+
+        //Can also be used as list of tuples
+        coordinates = [(1, 2), (3, 4), (5, 6)]
+        print(coordinates)
+
+////////////////////////////////////////////////////////////////////////
+06. Functions (Similar to Class)
+    //Program Structure
+        def sayHi():
+            print("Hello")        
+        sayHi()
+
+    //Program with Parameters
+        def sayHi(name, age):
+            print("Hello " + name + " and you are " + str(age) + " years old")   
+            //Remember that numbers can't share with string within a sentence therefore needs to convert to string hende str(age)
+        sayHi("Mike", 23)   //Output: Hello Mike and you are 23 years old
+
+////////////////////////////////////////////////////////////////////////
+07. Return Statement
+    //Program
+        def cube(num):
+            return num*num*num          //Without "return", it prints out none or null
+            print("Hello")                        //All codes that are below the return keyword, it wont run (the return keyword breaks the function)
+        result = cube(4)
+        print(result)                             //Output: 64
+
+////////////////////////////////////////////////////////////////////////
+08. Statements (If, While, For)
+    //If Statement
+        is_male = True
+        is_tall = True
+        
+        if is_male or is_tall:                                  //You can use "or", "and", 
+            print("You are male and tall or both")   //If is_male is true, then print the string
+        elif is_male and not(is_tall):                      //else if statement
+            print("You are a short male")
+        elif not(is_male) and is_tall:
+            print("You are not male but is tall")
+        else:
+            print("You are either  not male or not tall")
+            
+    //While Loop
+        i = 1
+        while i <= 10:
+            print(i)
+            i += 1
+        print("Loop complete")
+        
+    //For Loop #1
+        for letter in "Hello":
+            print(letter) //Output: Prints out every single letter in each line
+    
+    //For Loop #2
+        friends = ["Bob", "Jim", "Karen"]
+        for friend in friends:
+            print(friend) //Output: Prints out each item in each line
+            
+    //For Loop #3
+        for index in range(10):
+            print(index) //Output: Prints out each number (0-9) in each line
+            
+    //For Loop #4
+        for index in range(3, 10):
+            print(index) //Output: Prints out each number (3-9) in each line
+            
+    //For Loop #5
+        friends = ["Bob", "Jim", "Karen"]
+        for index in range(len(friends)):
+            print(friends[index]) //Output: Prints out each name in each line
+           
+    //For Loop #6
+        for index in range(5):
+            if index == 0:
+                print("First Iteration") 
+            else:
+                print("Not First")  //Output: Prints out not first in each line    
+
+////////////////////////////////////////////////////////////////////////
+09. Comparison Statements
+    //Program ('>=', '<=', '==', '!=', '>', '<')
+        def max_num(num1, num2, num3):
+            if num1 >= num2 and num1 >= num3:
+                return num1
+            elif num2 >= num1 and num2 >= num3:
+                return num2
+            else:
+                return num3
+        
+        print(max_num(3, 4, 5)) //Output: 5
+
+////////////////////////////////////////////////////////////////////////
+10. Better Calculator
+    //Program
+        num1 = float(input("Enter first number: ")) //turn numbers into float
+        op = input("Enter operator: ")
+        num2 = float(input("Enter second number: "))
+
+        if op == "+":
+            print(num1 + num2)
+        elif op == "-":
+            print(num1 - num2)
+        elif op == "/":
+            print(num1 / num2)
+        elif op == "*":
+            print(num1 * num2)
+        else:
+            print("Invalid operator")
+
+////////////////////////////////////////////////////////////////////////
+11. Dictionaries
+    //Program that converts shortform Month name to longform
+        monthConversions = {
+            "Jan": "January",
+            "Feb": "February",
+            "Mar": "March",
+            "Apr": "April",
+            "May": "May",
+            "Jun": "Jun",
+            "Jul": "July",
+            "Aug": "August",
+            "Sep": "September",
+            10: "October",
+            "Nov": "November",
+            12: "December",
+        }
+
+        print(mothConversions["Nov"])   //Output: November
+        print(mothConversions.get("Nov"))   //Output: November
+        print(mothConversions.get("Lov"))   //Output: None
+        print(mothConversions.get("Lov", "Not a valid key"))   //Output: Not a valid key
+        print(mothConversions.get(12))   //Output: December
+
+////////////////////////////////////////////////////////////////////////
+12. Guessing game with While Loop
+    //Program
+        secret_word = "secret"  //Secret word storage
+        guess = ""
+        guess_count = 0
+        guess_limit = 3
+        out_of_guesses = False
+        
+        while guess != secret_word and not(out_of_guesses):
+            if guess_count < guess_limit:
+                guess = input("Enter secret word: ")
+                guess_count += 1
+            else:
+                out_of_guesses = True
+        if out_of_guesses:
+            print("You're out of guesses")
+        else:
+            print("You Win!")
+
+////////////////////////////////////////////////////////////////////////
+13. Exponent Function
+    //Program
+        def raiseToPower(base_num, pow_num):
+            result = 1
+            for index in range(pow_num):
+                result = result * base_num
+            return result
+        print(raiseToPower(2, 3)) //Output: 8
+    
+////////////////////////////////////////////////////////////////////////
+14. 2D Lists and Nested Loops
+    //2D List Program
+        number_grid = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9],
+            [0]
+        ]
+        print(number_grid[0][0]) //Row, Column, Output: 1
+
+    //Nested For Loop Program
+        number_grid = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9],
+            [0]
+        ]
+        
+        for row in number_grid:
+            for col in row:
+                print(col)      //Output: Prints out numbers in each line starting 1 to 9 to 0
+
+////////////////////////////////////////////////////////////////////////
+15. Build Translator
+    //Program - Turn any vowels to letter G
+        def translate(phrase):
+            translation = ""
+            for letter in phrase:
+                if letter.lower() in "aeiou":
+                    if letter.isupper():
+                        translation = translation + "G"
+                    else:
+                        translation = translation + "g"
+                else:
+                    translation = translation + letter
+            return translation
+
+        print(translate(input("Enter a phrase: ")))
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
