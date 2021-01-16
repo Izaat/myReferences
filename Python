@@ -719,6 +719,9 @@ CONTENTS
         
     //Resize Image
        resized = cv.resize(img, (500,  500))
+       resized = cv.resize(img, (500,  500), interpolation=cv.INTER_AREA) 
+       resized = cv.resize(img, (500,  500), interpolation=cv.INTER_LINEAR) //Enlarge
+       resized = cv.resize(img, (500,  500), interpolation=cv.INTER_CUBIC) //Enlarge, slowest
 
 ////////////////////////////////////////////////////////////////////////
 30. Resizing/Rescaling Videos in OpenCV 
