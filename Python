@@ -33,6 +33,8 @@ CONTENTS
 30. Resizing/Rescaling Videos in OpenCV 
 31. Drawing shapes and Adding Texts in OpenCV
 32. 5 Essential Functions (Grayscale, Blur, Edge Cascade, Combination, Resize, Cropping)
+33. Image Transformation (Shift, Rotate, Flip Image)
+34. Contour Detection
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -831,7 +833,66 @@ CONTENTS
         
         cv.waitKey(0)
 
+////////////////////////////////////////////////////////////////////////
+33. Image Transformation (Shift, Rotate, Flip Images)
+    //Program - Shifting Image
+        import cv2 as cv
+        import numpy as np
+        img = cv.imread('Images/cat.jpg')
 
+        //Translation
+        def translate(img, x, y):
+            transMat = np.float32([[1,0,x], [0,1,y]])
+            dimensions = (img.shape[1], img.shape[1],) //(img.shape[width], img.shape[height])
+            return cv.warpAffine(mig, transMat, dimensions)
+
+        // -x --> Shift Image Left
+        // -y --> Shift Image Up
+        // x --> Shift Image Right
+        // y --> Shift Image Down
+        //translate(img, x, y)
+        translated = translate(img, 50, 100)
+
+        cv.imshow('Translated', translated)
+        cv.waitKey(0)
+
+    //Program - Rotate Image CCW
+        import cv2 as cv
+        import numpy as np
+        img = cv.imread('Images/cat.jpg')
+
+        //Rotation
+        def rotate(img, angle, rotPoint=None):
+            (height, width) = img.shape[:2]
+            
+            if rotPoint is None:
+                rotPoint = (width//2, height//2)
+        
+            //rotMat = cv.getRotationMatrix2D(rotPoint, angle, scale)
+            rotMat = cv.getRotationMatrix2D(rotPoint, angle, 1.0)
+            dimensions = (width, height)
+            
+            return cv.warpAffine(img, rotMat, dimensions)
+    
+        //rotate(img, angle)
+        rotated = rotate(img, 45)   //-45deg for clockwise rotation
+        cv.imshow('Rotated', rotated)
+        
+        //To rotate twice
+        rotated_rotated = rotate(rotate, 45) //This will rotate the rotated image by another 45deg, but take note together with black background
+        cv.imshow('Rotated2', rotated_rotated)
+
+    //Program
+        import...
+        img = cv.imread(...)
+        
+        //Flip
+        flip = cv.flip(img, 0) 
+            // 0 = Flip Image Vertically
+            // 1 = Flip Image Horizontally
+            // -1 = Flip Image Vertically and Horizontally
+        cv.imshow(...)
+        cv.waitKey(0)
 
 
 
