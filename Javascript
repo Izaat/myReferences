@@ -1,97 +1,100 @@
 //CONTENTS
-//Data types
-//Declarations
-//Concatenate
-//Float decimal double
-//Calculation shortcute
-//String handling
-//Length
-//Indexing and zero based index
-//Indexing and getting the last letter of a word
-//Mad lib game
-//Arrays
-//Nested arrays
-//Acessing array datas with indexes
-//Modify array datas with indexes
-//Accessing multidimensional arrays with indexes
-//Manipulate arrays with push()
-//Manipulate arrays with pop()
-//Manipulate arrays with shift()
-//Manipulate arrays with unshift()
-//Functions basics
-//Passing values to functions with arguments
-//Global scope and functions
-//Local scope and function
-//Global vs local scope in functions
-//Return a value from a function with return statement
-//Understanding undefined value returned from a function
-//Stand in line
-//Use conditional logic with if statements
-//Comparison with the equality (==) and the strict equality(===) operator
-//Comparison with the inequality (!=) and the strict inequality(!==) operator
-//Coding using && statement
-//Coding using || statement
-//Logical order in if-alse statement
-//Switch statements
-//Multiple identical function in switch statements
-//Returning Boolean Values from Functions
-//Returning early pattern from functions
-//Counting cards
-//Javascript objects, handling object datas
-//Using objects for lookups
-//Testing objects for properties
-//Manipulating complex objects
-//Accessing nested objects
-//Accessing nested arrays
-//Iterate with while loops in arrays
-//Iterate even numbers with a for loop
-//Iterate odd numbers with a for loop
-//Counting down numbers with a for loop
-//iterate through an array with a for loop
-//Nesting for loops
-//Profile lookup
+//01. Data types
+//02. Declarations
+//03. Concatenate
+//04. Float decimal double
+//05. Calculation shortcute
+//06. String handling
+//07. Length
+//08. Indexing and zero based index
+//09. Indexing and getting the last letter of a word
+//10. Mad lib game
+//11. Arrays
+//12. Nested arrays
+//13. Acessing array datas with indexes
+//14. Modify array datas with indexes
+//15. Accessing multidimensional arrays with indexes
+//16. Manipulate arrays with push()
+//17. Manipulate arrays with pop()
+//18. Manipulate arrays with shift()
+//19. Manipulate arrays with unshift()
+//20. Functions basics
+//21. Passing values to functions with arguments
+//22. Global scope and functions
+//23. Local scope and function
+//24. Global vs local scope in functions
+//25. Return a value from a function with return statement
+//26. Understanding undefined value returned from a function
+//27. Stand in line
+//28. Use conditional logic with if statements
+//29. Comparison with the equality (==) and the strict equality(===) operator
+//30. Comparison with the inequality (!=) and the strict inequality(!==) operator
+//31. Coding using && statement
+//32. Coding using || statement
+//33. Logical order in if-alse statement
+//34. Switch statements
+//35. Multiple identical function in switch statements
+//36. Returning Boolean Values from Functions
+//37. Returning early pattern from functions
+//38. Counting cards
+//39. Javascript objects, handling object datas
+//40. Using objects for lookups
+//41. Testing objects for properties
+//42. Manipulating complex objects
+//43. Accessing nested objects
+//44. Accessing nested arrays
+//45. Record Collection
+//46. Iterate with while loops in arrays
+//47. Iterate with For Loops in arrays
+//48. Iterate even numbers with a For loop
+//49. Iterate odd numbers with a for loop
+//50. Counting down numbers with a for loop
+//51. Iterate through an array with a for loop
+//52. Nesting for loops
+//53. Iterate with Do While Loops
+//54. Profile lookup
 
-//Generate random fractions
-//Generate random whole numbers
-//Generate random whole number within a range
-//Use the parseInt function (convert string to integer)
-//Use the parseInt function with a Radix
-//Use conditional ternary operator
-//Use multiple conditional ternary operator
-//Differences betwee the var, let and const keywords
-//Mutate and array declared in const
-//Prevent object mutation
-//Use arrow functions to write concise anonymous functions
-//Write arrow functions with parameters
-//Write higher order arrow functions part 1
-//Write higher order arrow functions part 2
-//Using the rest operator with the function parameter
-//Use the Spread Operator to Evaluate Arrays In-Place
-//Use Destructing Assignment to Assign Variables from Objects
-//Use destructuring to obtain temperature
-//Use destructuring in nested objects
-//Use destructuring to assign variables from arrays
-//Use destructuring with rest operators 
-//Use destructuring to pass an object as a function's parameters (Commonly used as API calls)
-//Create strings using template literals (using backticks NOT single quotes)
-//Write concise object literal declarations using simple fields
-//Write concise declarative functions
-//Use class syntax to define a constructor function
-//Use getters and setters to control access to an object
-//Understanding the differences between import and require
-//Use export to reuse a code block
-//Use * to import everything from a file
-//Create an export fallback with export default
-//Importing an export default
+//55. Generate random fractions
+//56. Generate random whole numbers
+//57. Generate random whole number within a range
+//58. Use the parseInt function (convert string to integer)
+//59. Use the parseInt function with a Radix
+//60. Use conditional ternary operator
+//61. Use multiple conditional ternary operator
+//62. Differences betwee the var, let and const keywords
+//63. Mutate and array declared in const
+//64. Prevent object mutation
+//65. Use arrow functions to write concise anonymous functions
+//66. Write arrow functions with parameters
+//67. Write higher order arrow functions part 1
+//68. Write higher order arrow functions part 2
+//69. Using the rest operator with the function parameter
+//70. Use the Spread Operator to Evaluate Arrays In-Place
+//71. Use Destructing Assignment to Assign Variables from Objects
+//72. Use destructuring to obtain temperature
+//73. Use destructuring in nested objects
+//74. Use destructuring to assign variables from arrays
+//75. Use destructuring with rest operators 
+//76. Use destructuring to pass an object as a function's parameters (Commonly used as API calls)
+//77. Create strings using template literals (using backticks NOT single quotes)
+//78. Write concise object literal declarations using simple fields
+//79. Write concise declarative functions
+//80. Use class syntax to define a constructor function
+//81. Use getters and setters to control access to an object
+//82. Understanding the differences between import and require
+//83. Use export to reuse a code block
+//84. Use * to import everything from a file
+//85. Create an export fallback with export default
+//86. Importing an export default
 
 
 ////////////////////////////////////////////////////////////////
-/*DATA TYPES
+//01. /*DATA TYPES
     undefined, null boolean, string, symbol, nuber, object*/
 
 
 ////////////////////////////////////////////////////////////////
-//DECLARATIONS
+//02. DECLARATIONS
     var varName1 //public
     let varName2 //private
     const pi = 3.14 //value will never change
@@ -99,7 +102,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//CONCATENATE
+//03. CONCATENATE
     var a = 1;
     var b = a + "String";
     console.log(b) //1String
@@ -108,19 +111,19 @@
 
 
 ////////////////////////////////////////////////////////////////
-//FLOAT DECIMAL DOUBLE
+//04. FLOAT DECIMAL DOUBLE
     var a1 = 2.0;
 
 
 ////////////////////////////////////////////////////////////////
-//CALCULATION SHORTCUTS
+//05. CALCULATION SHORTCUTS
     var a2 = 11;
     a2 += 9; //Answer is 20 and can do all calculation operations like this
     //Exponent: 2 ** 3 = 8
 
 
 ////////////////////////////////////////////////////////////////
-//STRING HANDLING
+//06. STRING HANDLING
     var stringZero = "Hello";
     var stringOne = "\"I will blow your house down\" he said"; //adding quote inside string
     var stringTwo = `<a href="http://link.com"></a>`;
@@ -139,7 +142,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//LENGTH
+//07. LENGTH
 //adding ".length" to a variable name will find the indexing length of a string
     var lastNameLength = 0;
     var lastName = "Hello";
@@ -148,7 +151,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//INDEXING and ZERO BASED INDEX
+//08. INDEXING and ZERO BASED INDEX
     var firstLetter = ""
     var lastName = "Erlich"
     firstLetter = lastName[2] //will output letter L
@@ -156,14 +159,14 @@
 
 
 ////////////////////////////////////////////////////////////////
-//INDEXING GETTING LAST LETTER OF WORD
+//09. INDEXING GETTING LAST LETTER OF WORD
     var firstName = "Hello"
     var lastLetter = firstName[firstName.length = 1];
     console.log(lastLetter) //output letter o
 
 
 ////////////////////////////////////////////////////////////////
-//MAD LIB GAME
+//10. MAD LIB GAME
     function wordBlanks(myNoun, myAdjective, myVerb, myAdverb){
         var result = "";
         result += "The " + myAdjective + " " + myNoun + " " + myVerb + " to the store" + myAdverb + ".";
@@ -174,45 +177,45 @@
 
 
 ////////////////////////////////////////////////////////////////
-//ARRAYS
+//11. ARRAYS
     var ourArray = ["John", 23];
 
 
 ////////////////////////////////////////////////////////////////
-//NESTED ARRAYS
+//12. NESTED ARRAYS
     var ourArray = [["universe, 42"], ["everything", 101010]];
 
 
 ////////////////////////////////////////////////////////////////
-//ACCESSING ARRAY DATAS WITH INDEXES
+//13. ACCESSING ARRAY DATAS WITH INDEXES
     var ourArray = [50, 60, 70]; 
     var ourData = ourArray[0]; 
     console.log(ourData); //output 50 where index 0 is 50
 
 
 ////////////////////////////////////////////////////////////////
-//MODIFY ARRAY DATA WITH INDEXES
+//14. MODIFY ARRAY DATA WITH INDEXES
     var ourArray = [18,64,99];
     ourArray[1]=45;
     console.log(ourArray); //outputs [18, 45, 99]
 
 
 ////////////////////////////////////////////////////////////////
-//ACCESS MULTIDIMENSIONAL ARRAYS WITH INDEXES
+//15. ACCESS MULTIDIMENSIONAL ARRAYS WITH INDEXES
     var myArray = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [[10, 11, 12], 13, 14,]] //Note: 10, 11, 12, 13, 14 are in 3 layers deep array
     var myData = myArray[0][0];  //[2][1] will give you number 8
     console.log(myData);
 
 
 ////////////////////////////////////////////////////////////////
-//MANIPULATE ARRAYS WITH push()
+//16. MANIPULATE ARRAYS WITH push()
     var ourArray = ["Stimpson", "J", "cat"];
     ourArray.push(["happy", "joy"]);
     //ourArray now equals ["Simpson", "J", "cat", ["happy", "joy"]]
 
 
 ////////////////////////////////////////////////////////////////
-//MANIPULATE ARRAYS WITH pop() //extracting the last value from an array and move it into a variable
+//17. MANIPULATE ARRAYS WITH pop() //extracting the last value from an array and move it into a variable
     var ourArray = [1, 2, 3];
     var removedFromOurArray = ourArray.pop();
     //removedFromOurArray now contains 3, and ourArray variable is now [1, 2]
@@ -220,14 +223,14 @@
 
 
 ////////////////////////////////////////////////////////////////
-//MANIPULATE ARRAYS WITH shift() //extracting the first value from an array and move it into a variable
+//18. MANIPULATE ARRAYS WITH shift() //extracting the first value from an array and move it into a variable
     var ourArray = ["Stimpson", "J", ["cat"]];
     var removedFromOurArray = ourArray.shift();
     // removedFromOurArray now equals "Stimpson" and ourArray now equals ["J", ["cat"]]
 
 
 ////////////////////////////////////////////////////////////////
-//MANIPULATE ARRAYS WITH unshift() //adding value into the beginning of an array
+//19. MANIPULATE ARRAYS WITH unshift() //adding value into the beginning of an array
     var ourArray = ["Stimpson", "J", "cat"];
     ourArray.shift(); //ourArray now equals ["J", "cat"]
     ourArray.unshift("Happy");
@@ -235,7 +238,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//FUNCTIONS BASICS
+//20. FUNCTIONS BASICS
     function ourReusableFunction(){
         console.lof("Hey");
     }
@@ -245,7 +248,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//PASSING VALUES TO FUNCTIONS WITH ARGUMENTS
+//21. PASSING VALUES TO FUNCTIONS WITH ARGUMENTS
     function ourFunctionWithArgs(a, b){
         console.log(a - b);
     }
@@ -253,7 +256,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//GLOBAL SCOPE AND FUNCTIONS
+//22. GLOBAL SCOPE AND FUNCTIONS
     var myGlobal = 10;
     function fun1(){
         oopsGlobal = 5; //if declared with "var" inside a function, the variable becomes private and cannot be used in function fun2
@@ -273,7 +276,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//LOCAL SCOPE AND FUNCTIONS
+//23. LOCAL SCOPE AND FUNCTIONS
     function myLocalScope(){
         var myVar = 5; //Note that this will be private to this function
         console.log(myVar); //will output 5 on console
@@ -283,7 +286,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//GLOBAL VS LOCAL SCOPE in FUNCTIONS
+//24. GLOBAL VS LOCAL SCOPE in FUNCTIONS
     var outerWear = "Tshirts";
     function myOutfit(){
         var outerWear = "sweater";
@@ -294,7 +297,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//RETURN A VALUE FROM A FUNCTION WITH A RETURN STATEMENT
+//25. RETURN A VALUE FROM A FUNCTION WITH A RETURN STATEMENT
     function minusSeven(num){
         return num - 7;
     }
@@ -302,7 +305,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//UNDERSTANDING UNDEFINED VALUE RETURNED FROM A FUNCTION
+//26. UNDERSTANDING UNDEFINED VALUE RETURNED FROM A FUNCTION
     var sum = 0;
     function addThree(){
         sum = sum + 3;
@@ -311,7 +314,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//ASSIGNMENT WITH A RETURNED VALUE
+//27. ASSIGNMENT WITH A RETURNED VALUE
 //Example#1
     var changed = 0;
     function change(num){
@@ -328,7 +331,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//STAND IN LINE
+//28. STAND IN LINE
     function nextInLine(arr, time){
         arr.push(num); //3. the code to insert a value into the variable
         return arr.shift(); //4. remove first item and returns the first item in the array
@@ -344,7 +347,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//USE CONDITIONAL LOGIC WITH IF STATEMENTS
+//29. USE CONDITIONAL LOGIC WITH IF STATEMENTS
     function ourTrueOrFalse(isTrue){
         if (isItTrue){
             return "Yes, it is true";
@@ -355,7 +358,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//COMPARISON WITH THE EQUALITY & STRICT EQUALITY OPERATOR
+//30. COMPARISON WITH THE EQUALITY & STRICT EQUALITY OPERATOR
 //Equality
     function testEqual(val){
         if(val == 12){
@@ -381,7 +384,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//COMPARISON WITH THE INEQUALITY & STRICT INEQUALITY OPERATOR
+//31. COMPARISON WITH THE INEQUALITY & STRICT INEQUALITY OPERATOR
 //Inequality
     function testEqual(val){
         if(val != 12){
@@ -407,7 +410,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//CODE USING && (AND STATEMENT)
+//32. CODE USING && (AND STATEMENT)
     function andStatement(){
         if (val < 10){
             if (val > 8){
@@ -423,7 +426,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//CODE USING || (OR STATEMENT)
+//33. CODE USING || (OR STATEMENT)
     function andStatement(){
         if (val > 20){
             return "Outside";
@@ -442,7 +445,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//LOGICAL ORDER IN IF-ELSE STATEMENTS
+//34. LOGICAL ORDER IN IF-ELSE STATEMENTS
     function orderMyLogic(val){
         if (val < 10){
             return "Less than 10";
@@ -458,7 +461,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//SWITCH STATEMENTS
+//35. SWITCH STATEMENTS
     https://www.youtube.com/watch?v=PkZNo7MFNFg&t=5776s
     var names = ["Hole-in-one", "Eagle", "Birdie", "Par", "Bogey", "Double Bogey", "Go Home!"];
     function golfScore(par, strokes){
@@ -515,7 +518,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//MULTIPLE IDENTICAL OPTIONS IN SWITCH STATEMENTS
+//36. MULTIPLE IDENTICAL OPTIONS IN SWITCH STATEMENTS
     function sequentialSizes(val){
         var answer = "";
         switch(val){
@@ -542,7 +545,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//RETURNING BOOLEAN VALUES FROM FUNCTIONS
+//37. RETURNING BOOLEAN VALUES FROM FUNCTIONS
 //All comparison operators return true or false values
     function isLess(a, b){
         if (a < b){
@@ -572,7 +575,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//COUNTING CARDS
+//38. COUNTING CARDS
 //Black jack card counting function
     var count = 0;
     function cc(card){
@@ -607,7 +610,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//JAVASCRIPT OBJECTS, HANDLING OBJECT DATAS
+//39. JAVASCRIPT OBJECTS, HANDLING OBJECT DATAS
 //Objects are like arrays, but instead of using indexes to access datas you use properties
     var ourDog = {
         "name": "Camper",
@@ -645,7 +648,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//USING OBJECTS FOR LOOKUPS
+//40. USING OBJECTS FOR LOOKUPS
     function phoneticLookup(val){
         var result = "";
         switch (val){ 
@@ -672,7 +675,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//TESTING OBJECTS FOR PROPERTIES
+//41. TESTING OBJECTS FOR PROPERTIES
     //using hasOwnProperty function
     //checkProp only returns true or false
     var myObj = {
@@ -692,7 +695,7 @@
 
 
 ////////////////////////////////////////////////////////////////
-//MANIPULATING COMPLEX OBJECTS (Very similar to JSON)
+//42. MANIPULATING COMPLEX OBJECTS (Very similar to JSON)
 //arrays=>[], objects{}
 //Therefore the items below is a list of objects inside an array
 //You can have another array within an object eg formats
@@ -716,7 +719,7 @@ var myMusic = [ //main array
 
 
 ////////////////////////////////////////////////////////////////
-//ACCESSING NESTED OBJECTS
+//43. ACCESSING NESTED OBJECTS
 var myStorage = {
     "car":  {
         "inside": {
@@ -733,7 +736,7 @@ console.log(gloveBoxContents) //outputs "maps"
 
 
 ////////////////////////////////////////////////////////////////
-//ACCESSING NESTED ARRAYS
+//44. ACCESSING NESTED ARRAYS
 var myPlants = [
     {
         type: "flowers",
@@ -756,7 +759,7 @@ var secondTree = "myPlants[1].list[1]"; //outputs pine
 
 
 ////////////////////////////////////////////////////////////////
-//RECORD COLLECTION
+//45. RECORD COLLECTION
 var collection = {
     "2548": { //the numbers represent the ID
         "album": "Slippery When Wet", //album, artist and tracks are the properties/prop
@@ -803,7 +806,7 @@ console.log(updateRecords(2468, "tracks", "test")); //adds in "test" to "tracks"
 
 
 ////////////////////////////////////////////////////////////////
-//ITERATE WITH WHILE LOOPS IN ARRAYS
+//46. ITERATE WITH WHILE LOOPS IN ARRAYS
 var myArray = [];
 
 var i = 0;
@@ -815,7 +818,7 @@ console.log(myArray); //Outputs [0, 1, 2, 3, 4]
 
 
 ////////////////////////////////////////////////////////////////
-//ITERATE WITH FOR LOOPS IN ARRAYS
+//47. ITERATE WITH FOR LOOPS IN ARRAYS
 //var i = 0 //declaration for the variable "i"
 //i<5         //if less than 5, then repeat the loops NOTE: it will stop at 4.
 //i++         //increment the variable i by 1
@@ -827,7 +830,7 @@ var myArray = [];
 
 
 ////////////////////////////////////////////////////////////////
-//ITERATE EVEN NUMBERS WITH A FOR LOOP
+//48. ITERATE EVEN NUMBERS WITH A FOR LOOP
 var ourArray = [];
 for (var i = 0; i < 10; i += 2){
     ourArray.push(i);
@@ -836,7 +839,7 @@ console.log(ourArray); // Output [0, 2, 4, 6, 8]
 
 
 ////////////////////////////////////////////////////////////////
-//ITERATE ODD NUMBERS WITH A FOR LOOP
+//49. ITERATE ODD NUMBERS WITH A FOR LOOP
 var ourArray = [];
 for (var i = 1; i < 10; i += 2){ //Since it starts at 1 instead of 0, it gives you the odd numbers
     ourArray.push(i);
@@ -845,7 +848,7 @@ console.log(ourArray); // Output [1, 3, 5, 7, 9]
 
 
 ////////////////////////////////////////////////////////////////
-//COUNTING DOWN NUMBERS WITH A FOR LOOP
+//50. COUNTING DOWN NUMBERS WITH A FOR LOOP
 var ourArray = [];
 for (var i = 10; i > 0; i -= 2){ //var i = 9 for odd numbers
     ourArray.push(i);
@@ -854,7 +857,7 @@ console.log(ourArray); // Output [10, 8, 6, 4, 2]
 
 
 ////////////////////////////////////////////////////////////////
-//ITERATE THROUGH AN ARRAY WITH A FOR LOOP
+//51. ITERATE THROUGH AN ARRAY WITH A FOR LOOP
 var ourArr = [9, 10, 11, 12];
 var ourTotal = 0;
 
@@ -865,7 +868,7 @@ for (var i = 0; i < ourArr.length; i++){
 console.log(ourTotal); //output 42
 
 ////////////////////////////////////////////////////////////////
-//NESTING FOR LOOPS
+//52. NESTING FOR LOOPS
 function multiplyAll(arr){
     var product = 1;
     
@@ -882,7 +885,7 @@ var product = multiplyAll([[1, 2], [3, 4], [5, 6, 7]]);
 console.log(product); //Answer 5040
 
 ////////////////////////////////////////////////////////////////
-//ITERATE WITH DO... WHILE LOOPS
+//53. ITERATE WITH DO... WHILE LOOPS
 //Example 1
 var myArray = [];
 var i = 10;
@@ -904,7 +907,7 @@ console.log(i, myArray); //Output 11,[10]
 
 
 ////////////////////////////////////////////////////////////////
-//PROFILE LOOKUP
+//54. PROFILE LOOKUP
 var contacts = [
     {
         "firstNname": "Akira",
@@ -932,7 +935,7 @@ console.log(data); //output Laine
 
 
 ////////////////////////////////////////////////////////////////
-//GENERATE RANDON FRACTIONS
+//55. GENERATE RANDOM FRACTIONS
 function randomFraction(){
     //return 0;
     return Math.random(); //will generate random decimal numbers
@@ -940,7 +943,7 @@ function randomFraction(){
 console.log(randomFraction());
 
 ////////////////////////////////////////////////////////////////
-//GENERATE RANDOM WHOLE NUMBERS
+//56. GENERATE RANDOM WHOLE NUMBERS
 var randomNumberBetween0and19 = Math.floor(Math.random() * 20); 
 //Math.floor rounds down to the nearest whole number
 //Math.random will never give you whole number
@@ -951,7 +954,7 @@ function randomWholeNum(){
 console.log(randomWholeNum());
 
 ////////////////////////////////////////////////////////////////
-//GENERATE RANDOM WHOLE NUMBERS WITHIN A RANGE
+//57. GENERATE RANDOM WHOLE NUMBERS WITHIN A RANGE
 function ourRandomRange(ourMin, ourMax){
     return Math.floor(Math.random() * (ourMax - ourMin + 1)) + ourMin;
 }
@@ -961,7 +964,7 @@ console.log(ourRandom);
 
 
 ////////////////////////////////////////////////////////////////
-//USE THE parseInt Function
+//58. USE THE parseInt Function
 function convertToInteger(str){
     return parseInt(str);
 }
@@ -969,7 +972,7 @@ convertToInteger("56"); //This will convert the string 56 to integer 56
 
 
 ////////////////////////////////////////////////////////////////
-//USE THE parseInt FUNCTION WITH A RADIX
+//59. USE THE parseInt FUNCTION WITH A RADIX
 //Radix base 2 is binary
 //Radix base 10 is normal integer
 function convertToInteger(str){ //convert binary to integer
@@ -979,7 +982,7 @@ convertToInteger("10011");
 
 
 ////////////////////////////////////////////////////////////////
-//USE THE CONDITIONAL (TERNARY) OPERATOR
+//60. USE THE CONDITIONAL (TERNARY) OPERATOR
 //condition ? statement-if-true : statement-if-false;
 //One line if-else expression
 function checkEqual(a, b){
@@ -995,7 +998,7 @@ function checkEqual(a, b){
 checkEqual(1, 2);
 
 ////////////////////////////////////////////////////////////////
-//USE MULTIPLE CONDITIONAL (TERNARY) OPERATORS
+//61. USE MULTIPLE CONDITIONAL (TERNARY) OPERATORS
 function checkSign(num){
     return num > 0 ? "positive" : num < 0 ? "negative" : "zero" //if false/0 will return zero
 }
@@ -1004,7 +1007,7 @@ console.log(checkSign(-10)); //negative
 console.log(checkSign(0));    //zero
 
 ////////////////////////////////////////////////////////////////
-//DIFFERENCES BETWEEN THE VAR, LET AND CONST KEYWORDS
+//62. DIFFERENCES BETWEEN THE VAR, LET AND CONST KEYWORDS
 //var = variables can be declared many times / public
 //let = variables can be declared only once / private
 //const = variables that cannot be modified, it is common to declare a variable like this const VARIABLE = A; //use all caps
@@ -1014,7 +1017,7 @@ function abc(){
 }
 
 ////////////////////////////////////////////////////////////////
-//MUTATE AN ARRAY DECLARED IN CONST
+//63. MUTATE AN ARRAY DECLARED IN CONST
 const s = [5, 7, 2];
 function editInPlace(){
     "use strict";
@@ -1028,7 +1031,7 @@ editInPlace();
 console.log(s);
 
 ////////////////////////////////////////////////////////////////
-//PREVENT OBJECT MUTATION
+//64. PREVENT OBJECT MUTATION
 function freezeObj(){
     "use strict";
     const MATH_CONSTANTS = { //1. declaring math_constants variable with Pi and uses try-catch block to test variable
@@ -1050,7 +1053,7 @@ console.log(PI);
 
 
 ////////////////////////////////////////////////////////////////
-//USE ARROW FUNCTIONS TO WRITE CONCISE ANONYMOUS FUNCTIONS
+//65. USE ARROW FUNCTIONS TO WRITE CONCISE ANONYMOUS FUNCTIONS
 //A function without a name
 //nameless function can be converted into arrow function
 
@@ -1070,7 +1073,7 @@ var magic = () => new Date();
 
 
 ////////////////////////////////////////////////////////////////
-//WRITE ARROW FUNCTIONS WITH PARAMETERS
+//66. WRITE ARROW FUNCTIONS WITH PARAMETERS
 
 //Convert this to arrow function
 var myConcat = function(arr1, arr2){
@@ -1084,7 +1087,7 @@ console.log(myConcat([1, 2], [3, 4, 5])); //Outputs [1, 2, 3, 4, 5]
 
 
 ////////////////////////////////////////////////////////////////
-//WRITE HIGHER ORDER ARROW FUNCTIONS PART 1
+//67. WRITE HIGHER ORDER ARROW FUNCTIONS PART 1
 //Map, filter and reduce
 //Whenever on function takes another function as an argument, hat's a good time for arrow function
     const realNumberArray = [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2];
@@ -1126,7 +1129,7 @@ console.log(myConcat([1, 2], [3, 4, 5])); //Outputs [1, 2, 3, 4, 5]
                     
                     
 ////////////////////////////////////////////////////////////////
-//WRITE HIGHER ORDER ARROW FUNCTIONS PART 2
+//68. WRITE HIGHER ORDER ARROW FUNCTIONS PART 2
 const increment = (function(){
     return function increment(number, value = 1){ //value = 1 means  the value will increment by 1 by default if not set in the console.log
         return number + value;        
@@ -1137,7 +1140,7 @@ console.log(increment(5));     //increment by 1
 
 
 ////////////////////////////////////////////////////////////////
-//USING THE REST OPERATOR WITH FUNCTION PARAMETERS
+//69. USING THE REST OPERATOR WITH FUNCTION PARAMETERS
 //Without the rest operator
     const sum = (function(){
         return function sum(x, y, z){ //1. summing x, y and z
@@ -1157,7 +1160,7 @@ console.log(increment(5));     //increment by 1
 
 
 ////////////////////////////////////////////////////////////////
-//USE THE SPREAD OPERATOR TO EVALUATE ARRAYS IN-PLACE
+//70. USE THE SPREAD OPERATOR TO EVALUATE ARRAYS IN-PLACE
 //Without spread operator
 const arr1 = ['JAN', 'FEB', 'MAR', 'APR', 'MAY'];
 let arr2;
@@ -1178,7 +1181,7 @@ console.log(arr2); //Outputs ['JAN', 'FEB', 'MAR', 'APR', 'MAY']
 
 
 ////////////////////////////////////////////////////////////////
-//USE DESTRUCTING ASSIGNMENT TO ASSIGN VARIABLES FROM OBJECTS
+//71. USE DESTRUCTING ASSIGNMENT TO ASSIGN VARIABLES FROM OBJECTS
     var voxel = {x: 3.6, y: 7.4, z: 6.54};
 
     //old method of destructuring syntax
@@ -1191,7 +1194,7 @@ console.log(arr2); //Outputs ['JAN', 'FEB', 'MAR', 'APR', 'MAY']
 
 
 ////////////////////////////////////////////////////////////////
-//USE DESTRUCTING TO OBTAIN TEMPERATURE
+//72. USE DESTRUCTING TO OBTAIN TEMPERATURE
 const AVG_TEMPERATURES = {
     today: 77.5,
     tomorrow: 79
@@ -1206,7 +1209,7 @@ console.log(getTempOfTmrw(AVG_TEMPERATURES)); //Outputs 79
 
 
 ////////////////////////////////////////////////////////////////
-//USE DESTRUCTING IN NESTED OBJECTS
+//73. USE DESTRUCTING IN NESTED OBJECTS
 //the LOCAL_FORECAST attributes will be used to run getMaxOfTmrw function as "forecast"
 //forecast equals to maxOfTomorrow variable
 //maxOfTomorrow = max>tomorrow>LOCAL_FORECAST
@@ -1231,7 +1234,7 @@ console.log(getMaxOfTmrw(LOCAL_FORECAST)); //Outputs 84.6
 
 
 ////////////////////////////////////////////////////////////////
-//USE DESTRUCTING TO ASSIGN VARIABLES FROM ARRAYS
+//74. USE DESTRUCTING TO ASSIGN VARIABLES FROM ARRAYS
 //Part1
     cont [z, x, , y] = [1, 2, 3, 4, 5, 6]; //use space to skip the value 3
     console.log(z, x, y); //output 1,2,4
@@ -1247,7 +1250,7 @@ console.log(getMaxOfTmrw(LOCAL_FORECAST)); //Outputs 84.6
     
     
 ////////////////////////////////////////////////////////////////
-//USE DESTRUCTURING WITH THE REST OPERATOR
+//75. USE DESTRUCTURING WITH THE REST OPERATOR
 const source = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 function removeFirstTwo(list){
     const [ , , ...arr] = list; //to remove the first 2 elements in the array
@@ -1261,7 +1264,7 @@ console.log(source); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     
 
 ////////////////////////////////////////////////////////////////
-//USE DESTRUCTURING TO PASS AN OBJECT AS A FUNCTION'S PARAMETERS
+//76. USE DESTRUCTURING TO PASS AN OBJECT AS A FUNCTION'S PARAMETERS
 //Returning only the elements we need instead of the entire list of elements
 //Commonly use with API calls
 const stats = {
@@ -1288,7 +1291,7 @@ console.log(half(stats)); //28.015
 
 
 ////////////////////////////////////////////////////////////////
-//CREATE STRINGS USING TEMPLATE LITERALS
+//77. CREATE STRINGS USING TEMPLATE LITERALS
     //Part 1
     //Using backtick, NOT single quote
     const person = {
@@ -1326,7 +1329,7 @@ console.log(half(stats)); //28.015
 
 
 ////////////////////////////////////////////////////////////////
-//WRITE CONCISE OBJECT LITERAL DECLARATIONS USING SIMPLE FIELDS
+//78. WRITE CONCISE OBJECT LITERAL DECLARATIONS USING SIMPLE FIELDS
     //Part 1 - we can make the code below een simpler
     const createPerson = (name, age, gender) => {
         return { //too many repetition here
@@ -1342,7 +1345,7 @@ console.log(half(stats)); //28.015
     console.log(createPerson("Person1", 56, "male"));
 
 ////////////////////////////////////////////////////////////////
-//WRITE CONCISE DECLARATIE FUNCTIONS
+//79. WRITE CONCISE DECLARATIE FUNCTIONS
     //Part 1 - The long way
     const bicycle = {
         gear: 2,
@@ -1367,7 +1370,7 @@ console.log(half(stats)); //28.015
 
 
 ////////////////////////////////////////////////////////////////
-//USE CLASS SYNTAX TO DEFINE A CONSTRUCTOR FUNCTION
+//80. USE CLASS SYNTAX TO DEFINE A CONSTRUCTOR FUNCTION
     //Part1 - older way to create an object
     var SpaceShuttle = function(targetPlanet){
         this.targetPlanet = targetPlanet;
@@ -1408,7 +1411,7 @@ console.log(half(stats)); //28.015
 
 
 ////////////////////////////////////////////////////////////////
-//USE GETTERS AND SETTERS TO CONTROL ACCESS TO AN OBJECT
+//81. USE GETTERS AND SETTERS TO CONTROL ACCESS TO AN OBJECT
         //Part 1
         class Book {
             constructor(author){
@@ -1451,7 +1454,7 @@ console.log(half(stats)); //28.015
 
 
 ////////////////////////////////////////////////////////////////
-//UNDERSTANDING THE DIFFERENCES BETWEEN IMPORT AND REQUIRE
+//82. UNDERSTANDING THE DIFFERENCES BETWEEN IMPORT AND REQUIRE
 //In the past we use require function to retrieve function from another file, now we have import and export
     //string_function.js
         export const capitalizeString = str => str.toUpperCase() //toUpperCase makes every letter uppercase
@@ -1464,7 +1467,7 @@ console.log(half(stats)); //28.015
         
 
 ////////////////////////////////////////////////////////////////
-//USE EXPORT TO REUSE A CODE BLOCK
+//83. USE EXPORT TO REUSE A CODE BLOCK
 //Now we export in a different way, by adding export at the very begining of the code
 const capitalizeString = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -1474,7 +1477,7 @@ export const foo = "bar";
 export const bar = "foo";
 
 ////////////////////////////////////////////////////////////////
-//USE * TO IMPORT EVERYTHING FROM A FILE
+//84. USE * TO IMPORT EVERYTHING FROM A FILE
 import * as capitalizeStrings from "capitalize_strings";
 
 //* represents "everything"
@@ -1483,14 +1486,13 @@ import * as capitalizeStrings from "capitalize_strings";
 
 
 ////////////////////////////////////////////////////////////////
-//CREATE AN EXPORT FALLBACK WITH EXPORT DEFAULT
+//85. CREATE AN EXPORT FALLBACK WITH EXPORT DEFAULT
 export default function subtract(x, y) {return x - y;} //"export default" is the fallback
 
-//IMPORTING AN EXPORT DEFAULT
+////////////////////////////////////////////////////////////////
+//86. IMPORTING AN EXPORT DEFAULT
 import subtract from "math_functions"; //if not a default export, you put curly braces around "subtract"
 subtract(7,4); //this line from a file called math_functions
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
