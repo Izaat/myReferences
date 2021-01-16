@@ -32,6 +32,7 @@ CONTENTS
 29. Resizing/Rescaling Images in OpenCV
 30. Resizing/Rescaling Videos in OpenCV 
 31. Drawing shapes and Adding Texts in OpenCV
+32. 5 Essential Functions (Grayscale, Blur, Edge Cascade, Combination, Resize, Cropping)
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -789,7 +790,46 @@ CONTENTS
 
         cv.waitKey(0)
 
-
+////////////////////////////////////////////////////////////////////////
+32. 5 Essential Functions (Grayscale, Blur, Edge Cascade, Combination, Resize, Cropping)
+    //Program
+        import cv2 as cv
+        img = cv.imread('Images/cat.jpg')
+    
+        //Converting Image to greyscale
+        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        cv.imshow('blank', gray)
+        
+        //Blur an image
+        //cv.GaussianBlur(img, (kernel), border)
+        blur = cv.GaussianBlur(img, (3, 3), cv.BORDER_DEFAULT)
+        
+        //Edge Cascade
+        //cv.Canny(img, threshold, threshold)
+        canny = cv.Canny(img, 125, 175)
+        
+        //Combination
+            //Blur + Edge Cascade
+            canny = cv.Canny(blur, 125, 175)
+            
+            //Dilating an image
+            //cv.dilate(canny, kernel size, iteration)
+            dilated = cv.dilate(canny, (3,3), iterations=1)
+            
+            //Eroding
+            eroded = cv.erode(dilated, (3,3), iterations=1)
+            
+        //Resize Image
+        resized = cv.resize(img, (500,  500)) - Stretches
+        resized = cv.resize(img, (500,  500), interpolation=cv.INTER_AREA) 
+        resized = cv.resize(img, (500,  500), interpolation=cv.INTER_LINEAR) //Enlarge
+        resized = cv.resize(img, (500,  500), interpolation=cv.INTER_CUBIC) //Enlarge, slowest
+        
+        //Cropping
+        //img[top left corner, bottom right corner]
+        cropped = img[50:200, 200:400]
+        
+        cv.waitKey(0)
 
 
 
