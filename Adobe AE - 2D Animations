@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////
 CONTENTS
 01. LoopOut
-
+02. Rigging
 
 ////////////////////////////////////////////////////////////////
 01. LoopOut
@@ -136,3 +136,81 @@ CONTENTS
                 Stroke: 4px
             Highlight this layer and Press U to bring up the keyframe
                 Move the Start-End Keyframes and move by 2 frames
+
+////////////////////////////////////////////////////////////////
+02. 2D Rigging
+
+    //Install Duik Bassel
+        https://www.youtube.com/watch?v=tA2itBzm0t8
+        Copy ..\ScriptUI Panels\Duik Bassel.2 to ..\Program Files\Adobe\Adobe After Effects CC 2015\Support Files\Scripts\ScriptUI Panels
+        Create DUIK Folder in ..\Program Files\Adobe\Adobe After Effects CC 2015\Support Files\Scripts\
+            Copy Help, Optional Panels, Tools, LICENCE.md, LICENSE.txt to DUIK Folder
+        Open AE
+            Menu > Edit > Preference > General
+                In General Tab, Enable "Allow Scripts" and "JavaScript"
+            Menu > Window > Duik Bassel
+            New window will pop up
+            Click on Robot icon and move tab to your desired panel
+
+    //Import Illustrator Files
+        Left Panel > Project Tab > Right Click > Import > File > Choos File > Double Click on Composition
+
+    //Grouping/Parenting Layers        
+        //Body1
+            Body 2
+            Body 3
+            //Face Layer
+                R Eyebrows
+                L Eyebrows
+                R Eye
+                L Eye
+                Mouth
+                R Hair
+                L Hair
+                B Hair
+                B Hair
+                B Hair
+                B Hair
+                Ears
+            //Belt 1
+                R Belt
+                L Belt            
+            //R arm Up
+                R Arm Down
+                    R Hand
+            //L arm Up
+                L Arm Down
+                    L Hand
+            //R Leg Up
+                R Leg Down
+                    R Foot
+            //L Leg Up
+                L Leg Down
+                    L Foot
+
+    //Anchor Positioning
+        Select Layers and reposition the anchors to their Parents
+        Press Y or Pan-Behind Tool located at the top tool bar
+
+    //Rigging
+        //Auto Rig
+            Highlight R Arm Up, R Arm Down and R Hand layers
+            In Duik Bassel 2 Tab, Open Links and Constraints Tab
+            Select Auto Rig
+        //Get rid of layers from breaking up after auto rig
+            Under IK | Hand, Open Stratch Menu
+                Uncheck Auto Stretch
+        //Do the same to all joints according to the parents
+        //Rename #C Foot to #Left Leg and do the same to other rigs
+
+    //Keyframing
+        Select Body 1 Layer
+        Open Transform > Positioning
+        Move Body 1 and add keyframes (click on clock of Position Layer)
+        Move few frames in the timeline and add the end keyframe
+        ALT+Click on the clock of Position layer
+            Type in: loopOut("pingpong") 
+
+
+
+
