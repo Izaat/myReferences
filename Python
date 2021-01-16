@@ -716,6 +716,9 @@ CONTENTS
         resized_image = rescaleFrame(img)
         cv.imshow('Image', resized_image)  //cv.imshow() is like console.out() in C#
         cv.waitKey(0)  
+        
+    //Resize Image
+       resized = cv.resize(img, (500,  500))
 
 ////////////////////////////////////////////////////////////////////////
 30. Resizing/Rescaling Videos in OpenCV 
