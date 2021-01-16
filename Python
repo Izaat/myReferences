@@ -26,6 +26,12 @@ CONTENTS
 23. Object Functions
 24. Inheritence
 25. Interpreter
+26. OpenCV Installations
+27. Read Images in OpenCV
+28. Read videos in OpenCV
+29. Resizing/Rescaling Images in OpenCV
+30. Resizing/Rescaling Videos in OpenCV 
+31. Drawing shapes and Adding Texts in OpenCV
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -649,7 +655,133 @@ CONTENTS
     //You will see ">>>" in command prompt
 
 
+////////////////////////////////////////////////////////////////////////
+26. OpenCV Installations
+    //Installation
+        //Code Runner for VS Code
+            Run Code - CTRL+ALT+N
+            Stop Code - CTRL+ALT+M
+        //OpenCV
+            pip install opencv-contrib-python
+        //Caer
+            pip install caer
+    //Run Python in VS Code
+        Create new file and Save as Python File
 
+////////////////////////////////////////////////////////////////////////
+27. Read Images in OpenCV 
+    //Program
+        import cv2 as cv
+        img = cv.imread('Images/cat.jpg')
+        cv.imshow('Cat', img) //Opens image in new window
+        cv.waitKey(0)               //Wait for key to be pressed, therefore 0 means wait infinitely
+
+////////////////////////////////////////////////////////////////////////
+28. Read Videos in OpenCV 
+    //Program
+        import cv2 as cv
+        //capture = cv.VideoCapture('$path')
+            //0 = webcam
+            //1 = first camera
+            //'$path' = path of file
+        capture = cv.VideoCapture('Videos/Cat.mp4')
+        while True:
+            isTrue, frame = capture.read()          //reads frame by frame and returns to frame variable
+            cv.imshow('Video', frame)               //Display the video and pass into frame variable
+            if cv.waitKey(20) & 0xFF==ord('d'):  //Stops video from playing continuously, breaks out of while loop
+                break                                           //0xFF==ord('d') means press d to break out of video
+        capture.release()                                 //Release capture pointer after loop
+        cv.destroyAllWindows()                      //Or destroy all windows after loop
+    
+    //-215:Assertion failed: OpenCv cannot find the file location specified, video ran out of frames
+
+////////////////////////////////////////////////////////////////////////
+29. Resizing/Rescaling Images in OpenCV 
+    //If the image is larger than the monitor screen, image will bleed offscreen
+    //In this case, resizing need to be done.
+    //OpenCV
+    //Program
+        import cv2 as cv
+
+        img = cv.imread('Images/cat.jpg')
+        
+        def rescaleFrame(frame, scale=0.75):    #rescale to 0.75 where 1 is original size
+            //width = frame.shape[1] * scale          #frame.shape is the original width of image
+            //height = frame.shape[0] * scale
+            width = int(frame.shape[1] * scale)          #converts into integer
+            height = int(frame.shape[0] * scale)
+            dimensions = (width, height)
+            return cv.resize(frame, dimensions, interpolation=cv.INTER_AREA)
+        
+        resized_image = rescaleFrame(img)
+        cv.imshow('Image', resized_image)  //cv.imshow() is like console.out() in C#
+        cv.waitKey(0)  
+
+////////////////////////////////////////////////////////////////////////
+30. Resizing/Rescaling Videos in OpenCV 
+    //Program
+        import cv2 as cv
+
+        def rescaleFrame(frame, scale=2.00):
+            width = int(frame.shape[1] * scale)
+            height = int(frame.shape[0] * scale)
+            dimensions = (width, height)
+            return cv.resize(frame, dimensions, interpolation=cv.INTER_AREA)
+
+        capture = cv.VideoCapture('Videos/Cat.mp4')
+        
+        def changeRes(width, height):   //This change the resolution (Only works with cameras, not video/image files)
+            capture.set(3, width)
+            capture.set(4, height)
+        
+        while True:
+            isTrue, frame = capture.read()  
+            frame_resized = rescaleFrame(frame)
+
+            cv.imshow('Video', frame)   
+            cv.imshow('Video Resized', frame_resized)
+
+            if cv.waitKey(20) & 0xFF==ord('d'): 
+                break   
+        capture.release()         
+        cv.destroyAllWindows()
+
+////////////////////////////////////////////////////////////////////////
+31. Drawing shapes and Adding Texts
+    //Draw on blank image
+        import cv2 as cv
+        import numpy as np
+
+        blank = np.zeros((500, 500, 3), dtype='uint8') //Uint8 is datatype of an image, np.zeros(width, height, colorchannels)
+        //cv.imshow('blank', blank)  //Output: Black image
+
+            //This Paints entire image green, paint in rgb
+            //blank[:] = 0, 255, 0    
+            
+            //This shrinks the green image
+            blank[200:300, 300:400] = 0, 255, 0  
+            
+            //Draws a rectangle, 
+            //rectangle(img, pt1, pt2, color, thickness=None, lintType=None, shift=None, /)
+            cv.rectangle(blank, (0,0), (250,250), (0,255,0), thickness=2)
+            
+            //Filled up rectangle with color
+            cv.rectangle(blank, (0,0), (250,250), (0,255,0), thickness=cv.FILLED)
+            
+            //Divide rectangle to half
+            cv.rectangle(blank, (0,0), (blank.shape[1]//2, blank.shape[0]//2), (0,255,0), thickness=-1) //-1 means fill
+            
+            //Draw a circle
+            cv.circle(blank, (blank.shape[1]//2, blank.shape[0]//2), 40, (0,0,255), thickness=3)
+            
+            //Draw a line
+            cv.line(blank, (0,0), (blank.shape[1]//2, blank.shape[0]//2), (0,0,255), thickness=3)
+
+            //Write text on image
+            //cv.putText(blank, 'String', (Position), cv.font, fontscale, color, thickness)
+            cv.putText(blank, 'Hello', (255,255), cv.FONT_HERSHEY_TRIPLEX, 1.0, (0,255,0), 2)
+
+        cv.waitKey(0)
 
 
 
