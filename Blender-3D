@@ -5,6 +5,11 @@ CONTENTS
 02 - Modelling
 03 - Coloring/Shading
 04 - Environment and Touching up
+05 - Animation Tab
+06 - Ball Bounce
+07 - Bones and Armature
+08 - Toon Style Animation
+09 - Character Base Mesh
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Interface
@@ -148,6 +153,99 @@ CONTENTS
                 Link 'Volume Node' in Principled Volume to 'Volume' in World Output
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//05. Animation Tab
+    There are 3 Animation Panels located below the screen
+        Graph Editor
+        Dope Sheet
+        Timeline
+    Bring the foot of object to the plane
+        Grab Object, Press Z, Press 1
+    Animating a cube
+        Move Solid to it's starting position
+        Press I or (Animation Panel > Dope Sheet > Key > Insert keyframes) and Select 'Location'
+            This will insert all the initial location of the solid (initialization phase)
+        Move the solid to another location in the X-Axis.
+        Move the Dope Sheet timeline to 24th frame and insert keyframe again
+            Press I or (Animation Panel > Dope Sheet > Key > Insert keyframes) and Select 'Location'
+            NOTE: This time, it will change all the updated path instead of updating the entire location list
+            The bar in the timeline represents (value unchanged)
+            To keyframe only the path that is affected
+                Dope Sheet > Highlight the affected Axis, Select Key > Insert Keyfram and click on 'Only Selected Channels'
+        Duplicating keyframes in case of adjustments to the solid
+            In Dope Sheet, select the keyframe affected and duplicate (Shift+D).
+            Move the duplicated keyframes to the target keyframe
+            NOTE: In Animation, Object movement in 3D space won't affect the keyframes therefore duplication of keyframes is required
+        Deleting an unused keyframe Channels
+            In Dope Sheet, select the keyframe with the bar and presss Delete
+        Adding rotation keyframes
+            In Dope Sheet, move the timeline to the initial keyframe and click on the record button            
+            In 3D view, highlight the object, Press R and left click without rotating to insert the rotational keyframe
+            You'll see Euler Rotation andscale in the channels
+            In Dope sheet, move timeline to the next keyframe.
+            Rotate the object and this will automatically update the Dope Sheet by adding keyframes to all attributes
+            You can also edit in the View Tab > Transform Section in the Right Hand side hidden panel. This records the angles individually
+        NOTE: Try not to have keyframes close to each other as this might cause the object to glitch round.
+    Euler Rotation
+        The displacement of the Yaw Pitch Roll angles relative to the last object orientation in 3D space
+        Link for more information https://www.youtube.com/watch?v=3Zjf95Jw2UE
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//06. Ball Bounce
+    Create Sphere and animate (Press I to insert keyframe) OR hit the record button
+    Click on object to view the keyframes
+    Editor Type
+        Dope Sheet - The specific frames
+        Timeline - Overall frames
+        Graph Editor - Speed
+            Press T on sheet to bring up Interpolation section (Easing Styles - Boolean, Continuous, Triangular)
+            Press V for keyframe handle type menu
+        Drivers - Motion control
+        Nonlinear Animation
+            - When you combine or blend running cycles and motion cycles in a single timeline
+            - Breaks down actions into segments
+    Animate Ball Bounce
+        Within Graph Editor, there should be 3 semicircle graphs where one is smaller than the other
+        To extend, Open Output Tab and change end frame from 20 to 60
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//07. Bones and Armature
+    Procedures similar to Head Turn Animation. Read BlenderGP.txt
+    CTRL+P - Add Parent
+    ALT+P - Remove Parent
+    Animation
+        Press I to insert keyframes.
+        The rest is similar to ball bounce
+    Alt+R - Remove rotations
+    Bone set with Forward Kinematics (FK)
+        The entire set will move according to the position of the root (backbone)
+        Walking cycle is difficult since the feet will always go under the plane as the root does not adapt to the feet
+    Bone set with inverse kinematics (IK) - Control bone shown outside the bone set
+        The entire set will move according to the position of the root
+        Instead of a single bone (backbone) being the root, it uses the hands as the root
+        This will be easier to animate roller blading cycles as the feet sticks to the plane
+    Import bone
+        Menu > File > Append
+        This adds an object to your project
+    Usual bone rigs have both IK and FK built into them and base will be shown as arrows underneath the characters
+    Forward Kinematics (FK) - Parent controls the children / Move elbows to control the hand
+    Inverse Kinematics (IK) - Children control the parent / Hand control the elbows
+    TIPS: 
+        IK locks in 3D space. FK locks to body
+        IK stretches, FK swings
+        FK for body, IK for hands. 
+        Dont use IK Controls for arc movements
+        Swinging motions use FK (Walking, Punching, etc)
+        Interacting with another object use IK
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//08. Toon Style Animation
+https://www.youtube.com/watch?v=71WnmX1UrEk
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//08. Character Base Mesh
 
 
 
