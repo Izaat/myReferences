@@ -9,7 +9,6 @@ CONTENTS
 06 - Ball Bounce
 07 - Bones and Armature
 08 - Toon Style Animation
-09 - Character Base Mesh
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Interface
@@ -240,7 +239,165 @@ CONTENTS
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //08. Toon Style Animation
-https://www.youtube.com/watch?v=71WnmX1UrEk
+
+    //Modelling
+        //Paddle
+            Object Mode > Add > Mesh > Circle
+            Open Add Circle Property Tab > 
+                Vertices: 62
+            Object Mode > View > Viewpoint > Top (Y vertical, X Horizontal)
+            //Make the vertices does not align to the vertical axis
+                Rotate > Angle: (360/62)/2
+            Edit Mode > Edge Select
+                Select 4 sections and delete them
+                    Shift select both the intersections of the Y axis
+                    Shift select the sides of the bottom intersections
+                    Press Del and select Edges
+            Edit Mode > Vertex Select   
+                Highlight all Vertices
+                Edge > Bridge Edge Loops
+            Edit Mode > Edge  Select   
+                Select the former bottom intersection
+                Extrude to form a pingpong bat
+                Scale the bottom to taper the handle
+            //Add subdivisions to the handle
+                CTRL+R+Mouse Scroll
+                Click and a tab pops up
+                    Subdivision: 10
+                    Factor: 0
+            Extrude
+                Edit Mode > Face Select > Select All
+                Press E to extrude
+                    Z: -0.15
+            Rename the Circle Layer to Paddle
+            Smoothening Edges
+                In Edit Mode, Select all faces, Right Click on Highlighted Object and select shade smooth 
+            //Make only the sides smooth without affecting the face of the Paddle
+                In Object Mode, Highlight object, 
+                    Open Modifier Properties Tab, Add Modifier, Select Edge Split
+                    -OR-
+                    Open Object Data Properties Tab, Normals Section, Check Auto Smooth
+        //Ball
+            Object Mode > Add > Mesh > UV Sphere
+                Radius: 0.2
+            Move ball away from the Paddle (Press G)
+            Right Click, Shade Smooth
+            Rename Layer to Ball
+
+    //Coloring
+        Open Split screen
+            Move Mouse cursor to the top right corner of viewport and drag out
+        Open Image Editor   
+            Top Left Side of Viewport, click on the Editor Type icon 
+            Open Image Editor 
+            Click on Open and select Palette.jpg (An image of color palette)
+        Create new Material
+            In Object Mode, Select Paddle, Open Material Tab, Add New Material
+                Rename the Material Layer to the Colors or Part name of object
+                Surface: Emission (Emission gives one solid color)
+                Change color using the eyedropper
+        Assign color to object
+            Go to edit mode
+            Top view
+            Viewport Shading > 
+                Wireframe Mode - To select the hidden faces
+                Render Mode - To select only the visible faces
+                In Material Properties Tab, Select the color layer and click assign
+                Assign colors for all objects
+            Change view color
+                In Render Properties Tab > Color Management
+                    View Transform: Standard
+
+    //Setting Up
+        //Activate Freestyle Line Art
+            Render Properties Tab > Freestyle Section
+                Check Tickbox
+                NOTE: You won't see the effect. Render Image to see result
+                    Main Menu > Render > Render Image 
+         //Edit Lines - Make outline pass through materials
+            View Layer Properties Tab
+                Freestyle Line Set Section
+                    Activate Material Boundary under Edge Types Section
+
+    //Rigging - Make Objects Bend
+        Modifier Properties Tab > Add Modifier > Deform Column > Simple Deform
+            Select Bend
+            Change Angle to 0deg
+            Move 3D Cursor
+                Enter Edit Mode > Face Select Mode
+                Select the face of object (In this case the bottom face of paddle)
+                Shift+S to open Snap Menu
+                    Select Cursor to Selected
+            Move Object Origin to 3D Cursor
+                Enter Object Mode > Object > Set Origin >
+                    Select Origin to 3D Cursor
+            See result
+                Modifier Properties Tab > Simple Deform
+                    Move Angle and you'll see the Paddle bends at origin
+            Rotate Entire Object
+                Object Properties Tab > Transform
+                    Rotation X: -90
+            CTRL+A and Select Rotation
+            Rotate Entire Object AGAIN
+                Object Properties Tab > Transform
+                    Rotation X: 90
+
+    //Animation
+        //Workspace > Animation Tab
+        //Output Option Tab
+            Resolution X: 500px
+            Resolution Y: 500px
+            Frame Start: 0
+            Frame End: 40
+            Frame Rate: 30fps
+        //Go to side view to animate
+        //Insert keyframes
+            //Animate Paddle Bending
+                Move current timeline to frame 0
+                Open Modifier Properties Tab
+                Change Angleto -45deg
+                Hover Mouse cursor over the angle and press I to insert keyframe
+                Move current timeline to frame 10 and change anle to +45
+            //Animate Paddle Rotation
+                Move current timeline to frame 10
+                Open Object Properties Tab
+                    Frame 10 = Rotation Y: 0
+                    Frame 20 = Rotation Y: -180
+                    Frame 30 = Rotation Y: -180
+                    Frame 40 = Rotation Y: -360
+        //Graph Editor
+            Timeline > Editor Type > Graph Editor
+                Hide Euler Rotation
+                Shift Select the starting point of Angle Deform and the 3rd point of Angle Deform
+                Top Hand Corner of Timeline, open Pivot Point Menu and select Individual Center
+        //Animate Ball
+            Add keyframe start point (touching the paddle)
+            Add keyframe at mid point (mid-air)
+            Add keyframe at end point (touching the paddle)
+            Head back to graph editor
+                Select Z-Location Layer
+                Open the Timeline's Hidden Tab
+                    Open Modifiers Tab
+                    Add Modifier > Select Cycles
+                    Adjust the speed
+                    
+        //Camera
+            Open Camera View
+            Open Hidden Panel
+                Open View Tab
+                Select Lock Camera to View //This snaps your camera to your view
+                NOTE: Remember to uncheck if you do not want to animate your camera
+        
+        //Change Background
+            Open World properties Tab
+            Change Color
+            You can also animate the world color by hovering over the color and Press I
+        
+        //Export to Video
+            Output Properties Tab
+            Change Settings to Video
+            Main Menu > Render > Select Render Animation
+
 
 
 
