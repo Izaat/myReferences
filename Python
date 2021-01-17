@@ -37,6 +37,7 @@ CONTENTS
 34. Contour Detection
 35. Color Spaces (Color Conversion)
 36. Color Channels (Splitting and Merging)
+37. Smoothing and Blurring Techniques
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -1024,7 +1025,26 @@ CONTENTS
     //Merging Color Channels as an image 
         merged = cv.merge([b,g,r])
 
+////////////////////////////////////////////////////////////////////////
+37. Smoothing and Blurring Techniques
+    //Imagine a 2D box of pixels subdivided to 9 sections (3 columns and 3 rows)
+    //The center pixel will be computed based on the surrounding pixels
 
+    //Averaging - Average of the sum of surrounding pixel's intensity values
+        average = cv.blur(img, (7,7), average)   //Kernal Size (7,7) The higher the number, more blur it is
+
+    //Gaussian - Average of the sum of surrounding pixel's weight values
+        gauss = cv.GaussianBlur(img, (7,7), 0) //0 is SigmaX
+        //SigmaX = standard deviation in X direction
+
+    //Median (Smudging) - To reduce image noise
+        median = cv.medianBlur(img, 7) //value should be below 5, not 7
+
+    //Bilateral Blur - Applies blurring but retains edges
+        bilateral = cv.bilateralFilter(img, 5, 15, 15)
+        //d = diameter of pixel input
+        //sigmaColor = number of colors to be computed
+        //sigmaSpace = the color values used that are away from the target pixel 
 
 
 
