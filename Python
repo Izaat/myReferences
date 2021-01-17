@@ -39,6 +39,7 @@ CONTENTS
 36. Color Channels (Splitting and Merging)
 37. Smoothing and Blurring Techniques
 38. Bitwise Operations
+39. Masking
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -1080,6 +1081,47 @@ CONTENTS
     //NOT - invert
         bitwise_not = cv.bitwise_not(rectangle)
 
+////////////////////////////////////////////////////////////////////////
+39. Masking
+    //Program
+        import cv2 as cv
+        import numpy as np
+
+        //Target Image
+        img = cv.imread('Images/cat.jpg')
+
+        //Setup for mask
+        blank = np.zeros(img.shape[:2], dtype='uint8') 
+            //where in [:2]is the dimension of the mask
+            //mask dimension value must be the same with the blank image
+        mask = cv.circle(blank, (img.shape[1]//2, img.shape[0]//2), 100, 255, -1)
+
+        //Masked Image
+        masked = cv.bitwise_and(img, img, mask=mask)
+
+        cv.waitKey(0)
+
+    //Reposition mask
+        mask = cv.circle(blank, (img.shape[1]//2, img.shape[0]//2) + 90, 100, 255, -1)
+
+    //Use Rectangle
+        mask = cv.rectangle(blank, (img.shape[1]//2, img.shape[0]//2), (img.shape[1]//2 +100, img.shape[0]//2 + 100), 255, -1)
+
+    //Combination of Shapes as mask
+        [import...]
+        //Target Image
+        img = cv.imread('Images/cat.jpg')
+        blank = np.zeros(img.shape[:2], dtype='uint8') 
+        circle = cv.circle(blank.copy(), (img.shape[1]//2, img.shape[0]//2), 100, 255, -1)
+        rectangle = cv.rectangle(blank.copy(), (30,30), (370,370), 255, -1)
+        
+        //Combine both shapes
+        weird_shape = cv.bitwise_and(circle, rectangle)
+
+        //Masked Image
+        masked = cv.bitwise_and(img, img, mask=weird_shape)
+        cv.imshow('Masked', masked)
+        cv.waitKey(0)
 
 
 
