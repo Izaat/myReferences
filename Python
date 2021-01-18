@@ -1,4 +1,4 @@
-Python 3 in Jupyter Notebook
+Python 3 in Jupyter Notebook and VSCode
 ///////////////////////////////////////////////////////////////////////
 CONTENTS
 01. Structure, Variables and Data Types
@@ -674,6 +674,8 @@ CONTENTS
             pip install opencv-contrib-python
         //Caer
             pip install caer
+        //Matplotlib
+            python -m install -U matplotlib
     //Run Python in VS Code
         Create new file and Save as Python File
 
@@ -1226,6 +1228,11 @@ CONTENTS
             plt.xlim([0,256])
         plt.show()
         cv.waitKey(0)
+
+
+
+
+
 
 
 
