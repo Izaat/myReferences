@@ -44,6 +44,7 @@ CONTENTS
 41. Thresholding/Binarizing Images (Basic, Inverse, Adaptive, Adaptive Inverse, Gaussian Adaptive)
 42. Gradient and Edge Detection
 43. Face Detection with Haarcascade
+44. Face Recognition with HaarCascade
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -1368,7 +1369,117 @@ CONTENTS
 
         cv.waitKey(0)
 
+////////////////////////////////////////////////////////////////////////
+44. Face Recognition with HaarCascade
+    //Create 5 folders with each contains 20 images 
 
+    //The Program to Train the Face Recognizer
+        import os 
+        import cv2 as cv 
+        import numpy as np 
+
+        #Creating a list (Manual and Auto)
+            #Manual
+            people = ['Ariana Grande', 'Lisa BlackPink']
+            DIR = r'C:\Users\admin\Desktop\Python\OpenCV\Images\Faces'
+
+            #Auto        
+            p = []
+            for i in os.listdir(r'C:\Users\admin\Desktop\Python\OpenCV\Images\Faces'):
+                p.append(i)
+            print(p)
+            DIR = r'C:\Users\admin\Desktop\Python\OpenCV\Images\Faces'
+
+        #Initialize Training Set Arrays
+        haarVar = cv.CascadeClassifier('haar_face.xml')
+        features = []
+        labels = []
+
+        #Create Training Set
+        def create_train():
+            #Loop for folder
+            for person in people:
+                path = os.path.join(DIR, person)
+                label = people.index(person)
+
+            #Loop for images in folder
+            for img in os.listdir(path):
+                img_path = os.path.join(path, img) //Join path to the image
+
+                img_array = cv.imread(img_path) //Take path and put onto array
+                gray = cv.cvtColor(img_array, cv.COLOR_BGR2GRAY)   //Convert to greyscale
+
+                #Detection
+                faces_rect = haarVar.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=4)
+                for (x,y,w,h) in faces_rect:
+                    facesRegionOfInterest = gray[y:y+h, x:x+w] //Grab faces from y to y+h and from x to x+w
+                    features.append(facesRegionOfInterest)
+                    labels.append(label)
+
+        #Run
+        create_train()
+        print('Training Done')
+        #print(f'Length of features = {len(features)}')
+        #print(f'Length of labels = {len(labels)}')
+
+        #Convert features arrays and labels arrays to numpy format 
+        features = np.array(features, dtype='object')
+        labels = np.array(labels)
+
+        #Initialize the Recognizer
+        face _recognizer = cv.face.LBPHFaceRecognizer_create()
+
+        #Train the Recognizer on features and label list
+        face_recognizer.train(features, labels)
+
+        #Saving the numpy arrays to Yaml source file so it can be used on another program
+        #Also saving arrays to numpy files
+        face_recognizer.save('face_trained.yml')
+        np.save('features.npy', features)
+        np.save('labels.npy', labels)
+
+    //The Program That Recognizes Faces
+        import numpy as np
+        import cv2 as cv
+
+        haarVar = cv.CascadeClassifier('haar_face.xml')
+
+        #Mapping
+        people = ['Ariana Grande', 'Lisa BlackPink']
+
+        #Loading the arrays
+        #features = np.load('features.npy')
+        #labels = np.load('labels.npy')
+
+        #Read YAML file
+        face_recognizer = cv.face.LBPHFaceRecognizer_create()
+        face_recognizer.read('face_trained.yml')
+
+        #Target Image
+        img = cv.imread(r'C:\Users\admin\Desktop\Python\OpenCV\Images\Validate.jpg')
+        cv.imshow('Person', img)
+
+        #Convert to Grayscale
+        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        
+        #Detection
+        faces_rect = haarVar.detectMultiScale(gray, 1.1, 4)
+        for (x,y,w,h) in faces_rect:
+            facesRegionOfInterest = gray[y:y+h, x:x+h]
+
+            #Show result on Console
+            label, confidence = face_recognizer.predict(facesRegionOfInterest)
+            print(f'Label = {people[label]} with a confidence of {confidence}')
+
+            #Put text on image containing the face
+            cv.putText(img, str(people[label]), (20,20), cv.FONT_HERSHEY_COMPLEX, 1.0, (0,255,0), thickness=2)
+                #cv.putText(img, text, origin, fontFace, fontScale, color, thickness)
+
+            #Draw rectangle over image
+            cv.rectangle(img, (x,y), (x+w,y+h), (0,255,0), thickness=2)
+
+        cv.imshow('Detected Face', img)
+        cv.waitKey(0)
 
 
 
