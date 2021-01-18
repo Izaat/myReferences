@@ -41,7 +41,7 @@ CONTENTS
 38. Bitwise Operations
 39. Masking
 40. Computing Histograms in OpenCV
-41 Thresholding/Binarizing Images (Basic, Inverse, Adaptive, Adaptive Inverse, Gaussian Adaptive)
+41. Thresholding/Binarizing Images (Basic, Inverse, Adaptive, Adaptive Inverse, Gaussian Adaptive)
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
