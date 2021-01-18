@@ -40,6 +40,7 @@ CONTENTS
 37. Smoothing and Blurring Techniques
 38. Bitwise Operations
 39. Masking
+40. Computing Histograms in OpenCV
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -1123,6 +1124,108 @@ CONTENTS
         cv.imshow('Masked', masked)
         cv.waitKey(0)
 
+////////////////////////////////////////////////////////////////////////
+40 Computing Histograms in OpenCV
+    //Allows you to visualize the pixel intensity distribution of an image (Grayscale/RGB)
+    //Shows graph or plot form
+
+    //Program - Grayscale
+        import cv2 as cv
+        import matplotlib.pyplot as plt
+
+        img = cv.imread('Images/cat.jpg')
+        cv.imshow('Cats', img)
+
+        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        cv.imshow('Gray', gray)
+        //gray_hist = cv.calcHist(image, channels, mask, histSize, range)
+        gray_hist = cv.calcHist([gray], [0], None, [256], [0,256])        
+
+        plt.figure()
+        plt.title('Grayscale Histogram')
+        plt.xlabel('Bins') //Intensity label across X axis (The higher the number, the whiter it is)
+        plt.ylabel('Pixels') //Pixel amount label across Y axis
+        plt.plot(gray_hist)
+        plt.xlim([0,256]) //limit across X axis
+        plt.show()
+        cv.waitKey(0)
+
+    //Program - Grayscale with Masking
+        import cv2 as cv
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        img = cv.imread('Images/cat.jpg')
+        cv.imshow('Cats', img)
+
+        blank = np.zeros(img.shape[:2], dtype='uint8')
+        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        circle = cv.circle(blank, (img.shape[1]//2, img.shape[0]//2), 100, 255, -1)        
+
+        mask = cv.bitwise_and(gray,gray,mask=circle)
+        cv.imshow('Mask', mask)
+        gray_hist = cv.calcHist([gray], [0], mask, [256], [0,256])        
+
+        plt.figure()
+        plt.title('Grayscale Histogram')
+        plt.xlabel('Bins') //Intensity label across X axis (The higher the number, the whiter it is)
+        plt.ylabel('Pixels') //Pixel amount label across Y axis
+        plt.plot(gray_hist)
+        plt.xlim([0,256]) //limit across X axis
+        plt.show()
+        cv.waitKey(0)
+
+    //Program - Histogram for Color Image
+        import cv2 as cv
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        img = cv.imread('Images/cat.jpg')
+        cv.imshow('Cats', img)
+
+        blank = np.zeros(img.shape[:2], dtype='uint8')
+        circle = cv.circle(blank, (img.shape[1]//2, img.shape[0]//2), 100, 255, -1)  
+        mask = cv.bitwise_and(img,img,mask=circle)
+        
+        plt.figure()
+        plt.title('Color Histogram')
+        plt.xlabel('Bins') 
+        plt.ylabel('Pixels') 
+
+        colors = ('b', 'g', 'r')
+        for i,col in enumerate(colors):
+            //calcHist(images, channels, mask, histsize, ranges)
+            hist = cv.calcHist([img], [i], None, [256], [0,256])
+            plt.plot(hist, color=col)
+            plt.xlim([0,256])
+        plt.show()
+        cv.waitKey(0)
+
+    //Program - Histogram for Color Image with mask
+        import cv2 as cv
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        img = cv.imread('Images/cat.jpg')
+        cv.imshow('Cats', img)
+
+        blank = np.zeros(img.shape[:2], dtype='uint8')
+        mask = cv.circle(blank, (img.shape[1]//2, img.shape[0]//2), 100, 255, -1)  
+        masked = cv.bitwise_and(img,img,mask=mask)
+        
+        plt.figure()
+        plt.title('Color Histogram')
+        plt.xlabel('Bins') 
+        plt.ylabel('Pixels') 
+
+        colors = ('b', 'g', 'r')
+        for i,col in enumerate(colors):
+            //calcHist(images, channels, mask, histsize, ranges)
+            hist = cv.calcHist([masked], [i], mask, [256], [0,256])
+            plt.plot(hist, color=col)
+            plt.xlim([0,256])
+        plt.show()
+        cv.waitKey(0)
 
 
 
