@@ -41,7 +41,7 @@ CONTENTS
 38. Bitwise Operations
 39. Masking
 40. Computing Histograms in OpenCV
-41 Thresholding/Binarizing Images
+41 Thresholding/Binarizing Images (Basic, Inverse, Adaptive, Adaptive Inverse, Gaussian Adaptive)
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -1230,6 +1230,53 @@ CONTENTS
         plt.show()
         cv.waitKey(0)
 
+////////////////////////////////////////////////////////////////////////
+41 Thresholding/Binarizing Images (Basic, Inverse, Adaptive, Adaptive Inverse, Gaussian Adaptive)
+    //Thresholding is binarization of an image
+    //Core pixel calculation principle similar to Bluring
+    //0 = Black(0), 1 = White(255)
+    //If intensity is below threshold, then 0, else 1
+    //2 types of thresholdings: Simple and Adaptive
+
+    //Standard Threshold
+        import cv2 as cv
+        img = cv.imread('Images/cat.jpg')
+        
+        #convert to grayscale
+        grayimg = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+
+        #thresholding              
+        threshold, thresh = cv.threshold(grayimg, 150, 255, cv.THRESH_BINARY)
+            #cv.threshold(src, thresh, maxval, type)
+                #src = source image
+                #thresh = threshold value
+                #maxval = color, if above 150(thresh), then set to 255(white)
+                #thresholdtype = cv.THRESH_BINARY
+        cv.imshow('Thresh', thresh)
+        cv.waitKey(0)
+
+    //Inverse Threshold       
+        #thresholding inverse         
+        threshold, thresh_inv = cv.threshold(grayimg, 150, 255, cv.THRESH_BINARY_INV)
+        cv.imshow('Threshold Inverse', thresh_inv)
+
+    //Adaptive Thresholding
+        #Thresholding value automatically adjusts itself
+        adaptive_thresh = cv.adaptiveThreshold(grayimg, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 11, 3)
+            #cv.adaptiveThreshold(src, maxval, adaptivemethod, thresholdtype, blocksize, C)
+                #maxval = if true, set to 255(white)
+                #adaptivemethod = neighboring method, cv.ADAPTIVE_THRESH_MEAN_C
+                #thresholdtype = cv.THRESH_BINARY
+                #blocksize = the window area size for calculation, refer to Topic 37 (Blurring)
+                #C (0-9) = integer value subtracted from the mean, to fine tune the threshold value 
+        cv.imshow('Adaptive Threshold', adaptive_thresh)
+
+    //Inverse Adaptive Thresholding
+        adaptive_thresh = cv.adaptiveThreshold(grayimg, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY_INV, 11, 3)
+        cv.imshow('Adaptive Threshold', adaptive_thresh)
+
+    //Gaussian Adaptive Thresholding
+        adaptive_thresh = cv.adaptiveThreshold(grayimg, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 11, 3)
 
 
 
