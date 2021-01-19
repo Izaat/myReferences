@@ -45,6 +45,7 @@ CONTENTS
 42. Gradient and Edge Detection
 43. Face Detection with Haarcascade
 44. Face Recognition with HaarCascade
+45. Deep Computer Vision with Kaggle
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -1481,6 +1482,147 @@ CONTENTS
         cv.imshow('Detected Face', img)
         cv.waitKey(0)
 
+////////////////////////////////////////////////////////////////////////
+45. Deep Computer Vision with Kaggle
+
+    //Setting up Kaggle Account
+    //Use Simpsons dataset
+        https://www.kaggle.com/alexattia/the-simpsons-characters-dataset
+        Right hand panel, click on Add Data and a window will appear
+        In Search Box, search for "Simpsons"
+        Add alexattia's The Simpsons Characters Data
+        Now you can use the dataset inside your Kaggle notebook
+        //Install Caer and Canaro
+            In Text Cell, type in this line:
+                !pip install caer canaro
+                Shift + Enter to Run
+
+    //Program
+        import os
+        import caer
+        import canaro
+        import numpy as np
+        import cv2 as cv
+        import gc
+
+        #Resize image before feeding to network
+        IMG_SIZE = (80,80)
+        channels = 1                //1 channel means grayscale
+        
+        #Add the path of image storage (simpsons_dataset)
+        #Right Hand Panel > Data Section > Input > the-simpsons-characters-data > simpsons_dataset
+        #Click on Copy file path
+        char_path = r'../input/the-simpsons-characters-dataset/simpsons_dataset'
+
+        #Finding top 10 character with the most number of images
+        #The code will go through every single folder and outputs the number
+        #Then store the information into variable/dictionary, one dictionary for each parent folder 
+        char_dict = {}  //Create Dictionary
+        for char in os.listdir(char_path):
+            char_dict[char] = len(os.listdir(os.path.join(char_path, char)))
+
+        #Sort the list in descending order to grab the top 10 folder
+        char_dict = caer.sort_dict(char_dict, descending=True)
+        char_dict
+
+        #Grabbing the names of the first 10 elements to store in characters list
+        characters = []
+        count = 0
+        for i in char_dict:
+            characters.append(i[0])
+            count += 1
+            if count >= 10:
+                break
+        characters //This prints out the list
+        
+        #Create the training data
+        #The code the grab images from the folder and add to the training set
+        train = caer.preprocess_from_dir(char_path, characters, channels=channels, IMG_SIZE=IMG_SIZE, isShuffle=True)
+            #caer.preprocess_from_dir(DIR, classes, IMG_SIZE=, channels=, per_class_size, normalize_train, mean_subtraction, isShuffle, save_data, destination_filename, verbose)
+
+        #See how many images in the training set
+        len(train)
+
+        #Visualize the images that are present in the dataset
+        import matplotlib.pyplot as plt
+        plt.figure(figsize=(30,30))
+        plt.imshow(train[0][0], cmap='gray')    //cmap is colormap
+        plt.show()
+
+        #Seperating training sets into features list and labels list
+        #Currently, the trainingset is a list of 13k sublist where each sublist contains array and label
+        #This also reshape the featureSet into a 4 dimensional tensor so it can be fed into a 4x4 model
+        featureSet, labels = caer.sep_train(train, IMG_SIZE=IMG_SIZE)
+            #featureSet, labels = caer.sep_train(trainset variable, IMG_SIZE=IMG_SIZE)
+            
+        
+        #Normalize the featureSet to be in the shape of (0,1) for faster processing
+        //featureSet = caer.normalize(featureSet)
+
+        #But before normalizing, we need to Convert integers of labels into binary class vectors
+        from tensorflow.keras.utils import to_categorical
+        featureSet = caer.normalize(featureSet)
+        labels = to_categorical(labels, len(characters))
+
+        #Create training and validation data
+        #The models will train on training data and test itself on validation data
+        #Splitting/Distributing feature and labels into training sets and validation sets with validation ratio
+        #80% to training set, 20% to validation set
+        x_train, x_val, y_train, y_val = caer.train_val_split(featureSet, labels, val_ratio=.2)
+
+        #Saving on memorey to remove unused variables
+        del train
+        del featureSet
+        del labels
+        gc.collect()  //Collecting garbages
+
+        #Variables for the neural network
+        BATCH_SIZE = 32
+        EPOCHS = 10
+
+        #Create image data generator
+        #This generator will ynthesize new images ccording to existing images to help introduce randomness into the neural network
+        #It uses the keras library to build
+        datagen = canaro.generators.imageDataGenerator()
+        train_gen = datagen.flow(x_train, y_train, batch_size=BATCH_SIZE)
+
+        #Creating the model
+        model = canaro.models.createSimpsonsModel(IMG_SIZE=IMG_SIZE, channels=channels, output_dim=len(characters), loss='binary_crossentropy', decay=1e-6, learning_rate=0.001, momentum=0.9, nesterov=True)
+
+        #Print summary of the model
+        model.summary()
+
+        #Create callback list - a learning rate scheduler
+        #Control the learning rate at specific interval
+        from tensorflow.keras.callbacks import LearningRateScheduler
+        callbacks_list = [LearningRateScheduler(canaro.lr_schedule)]
+
+        #Training the model
+        training = model.fit(train_gen, steps_per_epoch=len(x_train)//BATCH_SIZE, epochs=EPOCHS, validation_date=(x_val, y_val), validation_steps=len(y_val)//BATCH_SIZE, callbacks = callbacks_list)
+
+        #Use openCV to test model
+            #So OpenCV will read the image at particular file path and then pass to the network and see what the model returns
+            #Copy the image filepath of bart_simpson.jpg under the simpson_testset folder
+        test_path = r'../input/the-simpsons-characters-dataset/kaggle_simpson_testset/kaggle_simpson_testset/bart_simpson_0.jpg'
+        img = cv.imread(test_path)               
+        plt.imshow(img, cmap='gray') //to show image
+        plt.show()
+            
+        #Preparing the image to be the same size, shape and the dimension
+        def prepare(img):
+            img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+            img = cv.resize(img, IMG_SIZE)
+            img = caer.reshape(img, IMG_SIZE, 1)
+            return img
+        
+        #Run Predictions
+        predictions = model.predict(prepare(img))
+        
+        #View Predictions
+        predictions
+
+        #Print actual cost
+        print(characters[np.argmax(predictions[0])])
 
 
 
