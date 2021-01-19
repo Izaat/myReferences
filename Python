@@ -677,8 +677,6 @@ CONTENTS
             Stop Code - CTRL+ALT+M
         //OpenCV
             pip install opencv-contrib-python
-        //Caer
-            pip install caer
         //Matplotlib
             python -m install -U matplotlib
     //Run Python in VS Code
