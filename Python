@@ -238,13 +238,85 @@ CONTENTS
         a = mylist[::-1]
         print(a)    //Output: [9, 8, 7, 6, 5, 4, 3, 2, 1]
         
-    //Tuples - Unlike list, tuples can't be changed or modified
+    //Tuples - Similar to list, but tuples can't be changed or modified
+        //Syntax to differentiate strings from tuples
+        mytuple = ("String",)
+        print(type(mytuple))    //Output: Tuple. Note the comma. 
+        
+        //Call by index
         coordinates = (4, 5, 6)
         print(coordinates[0])   //Output: 4
+        
+        //Call by index
+        mytuple = tuple(["String1", 10, "String2"])
+        item = mytuple[0]
+        print(item) //Output: String1
 
         //Can also be used as list of tuples
         coordinates = [(1, 2), (3, 4), (5, 6)]
         print(coordinates)
+        
+        //Tuple function
+        mytuple = tuple(["String1", 10, "String2"])
+        print(mytuple)
+        
+        //Using For Loop
+        mytuple = tuple(["String1", 10, "String2"])
+        for i in mytuple:
+            print(i)        //Output: List element in new line
+            
+        //Using If statement
+        mytuple = tuple(["String1", 10, "String2"])
+        if "String1" in mytuple:
+            print("yes")
+        else:
+            print("no")     //Output: Yes
+            
+        //Get number of elements
+        mytuple = tuple(["String1", 10, "String2"])
+        print(len(mytuple))     //Output: 3
+            
+        //Count the tuples
+        mytuple = ('a', 'b', 'b', 'b', 'c', 'd')
+        print(mytuple.count('b'))   //Output: 3
+        
+        //Find index number
+        mytuple = ('a', 'b', 'b', 'b', 'c', 'd')
+        print(mytuple.index('d')) //Output: 5
+        
+        //Convert tuple into a list and vice versa for reverse
+        mytuple = ('a', 'b', 'b', 'b', 'c', 'd')
+        mylist = list(mytuple)
+        print(mylist)  //Output: ['a', 'b', 'b', 'b', 'c', 'd']
+        
+        //Slicing with tuple - All slicing methods used in list are similar for tuples
+        mytuple = ('a', 'b', 'b', 'b', 'c', 'd')
+        slicedTuple = mytuple[2:5]
+        print(slicedTuple)      //Output: b, b, c where index 5 is not included (similar to list)
+        
+        //Unpacking tuples
+        mytuple = ("Max", 28, "City")
+        name, age, city = mytuple
+        print(name) //Output: Max
+        
+        //Unpacking tuples using stars
+        mytuple = ("Max", 28, 29, 30, "Dog", "City")
+        i1, *i2, i3 = mytuple
+        print(i1)
+        print(i2)   //Output: [28, 29, 39, Dog] //Note tuples converted to list
+        print(i3)   //Output: City
+        
+        //List is larger than tuples
+        import sys
+        mylist = [0, 1, 2, 3, "String", True]
+        mytuple = (0, 1, 2, 3, "String", True)
+        print(sys.getsizeof(mylist), "bytes")
+        print(sys.getsizeof(mytuple), "bytes")
+        
+        //Faster to process tuples than list
+        import timeit
+        print(timeit.timeit(stmt="[0, 1, 2, 3, 4, 5, 6]", number=1000000))
+        print(timeit.timeit(stmt="(0, 1, 2, 3, 4, 5, 6)", number=1000000))
         
      //Using for, if, while statements
         friends = ["Friend01", "Friend02", "Friend03", 20, "Friend04"]
