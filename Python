@@ -26,7 +26,6 @@ CONTENTS
 23. Object Functions
 24. Inheritence
 25. Interpreter
-
 26. 
 
 ////////////////////////////////////////////////////////////////////////
@@ -445,6 +444,8 @@ CONTENTS
 
 ////////////////////////////////////////////////////////////////////////
 11. Dictionaries
+    //A collection data type and mutable
+    //To make dictionary immutable(can't be modified like in tuples), you have to build frozenset
     //Program that converts shortform Month name to longform
         monthConversions = {
             "Jan": "January",
@@ -466,7 +467,88 @@ CONTENTS
         print(mothConversions.get("Lov"))   //Output: None
         print(mothConversions.get("Lov", "Not a valid key"))   //Output: Not a valid key
         print(mothConversions.get(12))   //Output: December
+        
+    //Basic 
+        mydict = {"name": "Max", "age": 28, "city": "New York"}
+        print(mydict)       //Output: {'name': 'Max', 'age': 28, 'city': 'New York'}
+        
+        mydict = dict(name="Max, age=28, city="New York")
+        print(mydict)       //Output: {'name': 'Max', 'age': 28, 'city': 'New York'}
 
+    //Accessing
+        value = mydict["name"]
+        print(value)        //Output: Max
+
+    //Add value to the dictionary
+        mydict = {"name": "Max", "age": 28, "city": "New York"}
+        mydict["email"] = "max@xyz.com"         //To rewrite, just do the same with different email address
+        print(mydict)       //Output: {'name': 'Max', 'age': 28, 'city': 'New York', 'email': 'max@xyz.com'}
+
+    //Delete Dictionary element
+        mydict = {"name": "Max", "age": 28, "city": "New York", "email": "max@xyz.com"}
+        del mydict["email"]
+        print(mydict)       //Output: {'name': 'Max', 'age': 28, 'city': 'New York'}
+
+        mydict.pop("email")
+        print(mydict)       //Output: {'name': 'Max', 'age': 28, 'city': 'New York'}    //Same as del
+
+        mydict.popitem()
+        print(mydict)       //Output: {'name': 'Max', 'age': 28, 'city': 'New York'}    //Removes the last item (email)
+
+    //Check Key in dictionary
+        mydict = {"name": "Max", "age": 28, "city": "New York", "email": "max@xyz.com"}
+        if "name" in mydict:
+            print(mydict["name"])       //Output: Max
+
+    //Check with Try Except statement
+        mydict = {"name": "Max", "age": 28, "city": "New York", "email": "max@xyz.com"}
+        try:
+            print(mydict["name"])
+        except:
+            print("Error")      //Output: Max
+
+    //Using For Loop in dictionary
+        mydict = {"name": "Max", "age": 28, "city": "New York", "email": "max@xyz.com"}
+        for key in mydict:
+        #for key in mydict.keys():   //Same as above
+            print(key)      //Output: prints name, age, city and email in every line
+
+        for value in mydict:
+        #for value in mydict.values():   //Same as above
+            print(value)      //Output: prints Max, 28, New York, max@xyz.com in every line
+
+        for key, value in mydict.items()  
+            print(key, value)      
+
+    //Copying
+        mydict = {"name": "Max", "age": 28, "city": "New York"}
+        mydict_copy = mydict
+        print(mydict_copy)      //Note that if you modify one, you'll also modify the other
+
+    //Copy/Duplicate
+        mydict = {"name": "Max", "age": 28, "city": "New York"}
+        mydict_copy = mydict.copy()
+        print(mydict_copy)      //Output: Copy of mydict
+
+        mydict_copy = dict(mydict)
+        print(mydict_copy)      //Output: Copy of mydict
+
+    //Merging
+        mydict1 = {"name": "Max", "age": 28, "city": "New York"}
+        mydict2 = {"name": "Max", "age": 28, "email": "max@xyz.com"}
+        mydict.update(mydict2)
+        print(mydict)       //Output: 'name': 'Max', 'age': 28, 'email': 'max@xyz.com', 'city': 'New York'
+
+    //Using Keys
+        mydict = {3: 9, 6: 36, 9: 81}
+        value = mydict[3]
+        print(value)        //Output: 9
+
+    //Use tuples    - Cant use this method on List
+        mytuple = (5, 6)
+        mydict = {mytuple: 11}
+        print(mydict)   //Output: {(5, 6): 11}
+        
 ////////////////////////////////////////////////////////////////////////
 12. Guessing game with While Loop
     //Program
