@@ -26,7 +26,7 @@ CONTENTS
 23. Object Functions
 24. Inheritence
 25. Interpreter
-26. 
+26. Sets
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -864,7 +864,153 @@ CONTENTS
 
 
 ////////////////////////////////////////////////////////////////////////
-26.
+26. Sets
+    //Functions, String, Add, Remove, Discard, Clear, Pop, For, If, 
+    //Union, Intersections, Differences, Update, Superset, Subset, Disjoint, 
+    //Copying, Frozenset
+    
+    //Unordered, mutable like list and no duplicates
+    
+    //Basic
+        myset = {1, 2, 3, 1, 2, 4}
+        print(myset)        //Output: {1, 2, 3, 4}
+    
+    //Set Function
+        myset = set([1, 2, 3])
+        print(myset)        //Output: {1, 2, 3}
+
+    //String - Find out how many characters in a word
+        myset = set("Hello")
+        print(myset)        //Output: {'o', 'l', 'H', 'e'}
+
+    //Careful between sets and dictionaries
+        myset = {}
+        print(type(myset))  //Output : Class 'dict'
+        
+    //Create Empty Set
+        myset = set()
+        print(type(myset))  //Output : Class 'set'
+
+    //Add elements
+        myset = set()
+        myset.add(1)
+        myset.add(2)
+        myset.add(3)
+        print(myset)  //Output : {1, 2, 3}
+
+    //Remove Elements  - Error if you try to remove non existing element
+        myset = {1, 2, 3}
+        myset.remove(3)
+        print(myset)  //Output : {1, 2}
+
+    //Discard Elements - No error if you try discarding non existing element
+        myset = {1, 2, 3}
+        myset.discard(3)
+        print(myset)  //Output : {1, 2}
+
+    //Empty out the set
+        myset.clear()
+        
+    //Pop
+        myset = {1, 2, 3}
+        print(myset.pop())      //Output: 1 
+        print(myset)            //Output : {2, 3}
+        
+    //For Loop
+        myset = {1, 2, 3}
+        for i in myset:
+            print(i)        //Output: Prints out element in every line
+
+    //IF ELSE Statement
+        myset = {1, 2, 3}
+        if 2 in myset:
+            print("Yes")
+        else:
+            print("No")         //Output: Yes
+
+    //Union 
+        odds = {1, 3, 5, 7, 9}
+        evens = {2, 4, 6, 8}
+        primes = {2, 3, 5, 7}
+
+        Union = odds.union(evens)
+        print(Union)        //Output: {1,2,3,4,5,6,7,8,9}
+   
+    //Intersection (Commons)
+        odds = {1, 3, 5, 7, 9}
+        evens = {2, 4, 6, 8}
+        primes = {2, 3, 5, 7}
+    
+        intersection = odds.intersection(primes)
+        print(intersection)     //Output: {3, 5, 7} - Returns only the commons
+        
+    //Differences
+        setA = {1,2,3,4,5,6,7,8,9}
+        setB = {1,2,3,10,11,12}
+        
+        diff1 = setA.difference(setB)
+        print(diff1)         //Output: {4,5,6,7,8,9}
+
+        diff2 = setB.difference(setA)
+        print(diff2)         //Output: {10,11,12}
+
+        diff3 = setB.symmetric_difference(setA)     -- Combines differences of both sets into a new set
+        print(diff3)         //Output: {4,5,6,7,8,9,10,11,12}
+
+    //Update
+        setA = {1,2,3,4,5,6,7,8,9}
+        setB = {1,2,3,10,11,12}
+        
+        setA.update(setB)       --Combines and updates without duplication
+        print(setA)         //Output: {1,2,3,4,5,6,7,8,9,10,11,12}
+
+        setA.intersection_update(setB)       --Remove the differences between both sets and updates in setA
+        print(setA)         //Output: {1,2,3}
+
+        setA.difference_update(setB)       --Remove the similarirites between both sets and updates in setA
+        print(setA)         //Output: {4,5,6,7,8,9}
+        
+        setA.symmetric_difference_update(setB)       --Remove the similarirites between both sets and combines the differences in setA
+        print(setA)         //Output: {4,5,6,7,8,9,10,11,12}
+
+    //Superset and Subset
+        setA = {1,2,3,4,5,6}
+        setB = {1,2,3}
+        
+        #subset - Are all elements in setA inside setB? Is setA the child of setB
+        print(setA.issubset(setB))  //Output: False
+
+        #subset - Are all elements in setB inside setA? Is setB the child of setA
+        print(setB.issubset(setA))  //Output: True
+        
+        #superset - Are all elements in setB inside setA? Is setA the parent of setB
+        print(setA.issuperset(setB))  //Output: True
+        
+        #superset - Are all elements in setA inside setB? Is setB the parent of setA
+        print(setB.issuperset(setA))  //Output: False
+
+    //Disjoint
+        setA = {1,2,3,4,5,6}
+        setB = {1,2,3}
+        setC = {7,8}
+        
+        #Is setA and setB totally different?
+        print(setA.isdisjoint(setB))     //Output: False
+        
+        #Is setA and setC totally different?
+        print(setA.isdisjoint(setC))    //Output: True
+        
+    //Copying - Rules from List still applies
+        setA = {1,2,3,4,5,6}
+        setB = set(setA)
+        print(setB)     //Output: {1,2,3,4,5,6}
+
+    //Frozenset - Cannot change or modified after creation
+        a = frozenset([1, 2, 3, 4])
+        print(a)        //Output: frozenset([1, 2, 3, 4])
+
+
+
 
 
 
