@@ -1,0 +1,1011 @@
+Python 3 in Jupyter Notebook and VSCode
+///////////////////////////////////////////////////////////////////////
+
+01. OpenCV Installations
+02. Read Images in OpenCV
+03. Read videos in OpenCV
+04. Resizing/Rescaling Images in OpenCV
+05. Resizing/Rescaling Videos in OpenCV 
+06. Drawing shapes and Adding Texts in OpenCV
+07. 5 Essential Functions (Grayscale, Blur, Edge Cascade, Combination, Resize, Cropping)
+08. Image Transformation (Shift, Rotate, Flip Image)
+09. Contour Detection
+10. Color Spaces (Color Conversion)
+11. Color Channels (Splitting and Merging)
+12. Smoothing and Blurring Techniques
+13. BITWISE Operations
+14. Masking
+15. Computing Histograms in OpenCV
+16. Thresholding/Binarizing Images
+17. Gradient and Edge Detection
+18. Face Detection with Haarcascade
+19. Face Recognition
+20. Deep Computer Vision with Kaggle
+
+////////////////////////////////////////////////////////////////////////
+01. OpenCV Installations
+    //Installation
+        //Code Runner for VS Code
+            Run Code - CTRL+ALT+N
+            Stop Code - CTRL+ALT+M
+        //OpenCV
+            pip install opencv-contrib-python
+        //Caer
+            pip install caer
+        //Matplotlib
+            python -m install -U matplotlib
+    //Run Python in VS Code
+        Create new file and Save as Python File
+
+////////////////////////////////////////////////////////////////////////
+02. Read Images in OpenCV 
+    //Program
+        import cv2 as cv
+        img = cv.imread('Images/cat.jpg')
+        cv.imshow('Cat', img) //Opens image in new window
+        cv.waitKey(0)               //Wait for key to be pressed, therefore 0 means wait infinitely
+
+////////////////////////////////////////////////////////////////////////
+03. Read Videos in OpenCV 
+    //Program
+        import cv2 as cv
+        //capture = cv.VideoCapture('$path')
+            //0 = webcam
+            //1 = first camera
+            //'$path' = path of file
+        capture = cv.VideoCapture('Videos/Cat.mp4')
+        while True:
+            isTrue, frame = capture.read()          //reads frame by frame and returns to frame variable
+            cv.imshow('Video', frame)               //Display the video and pass into frame variable
+            if cv.waitKey(20) & 0xFF==ord('d'):  //Stops video from playing continuously, breaks out of while loop
+                break                                           //0xFF==ord('d') means press d to break out of video
+        capture.release()                                 //Release capture pointer after loop
+        cv.destroyAllWindows()                      //Or destroy all windows after loop
+    
+    //-215:Assertion failed: OpenCv cannot find the file location specified, video ran out of frames
+
+////////////////////////////////////////////////////////////////////////
+04. Resizing/Rescaling Images in OpenCV 
+    //If the image is larger than the monitor screen, image will bleed offscreen
+    //In this case, resizing need to be done.
+    //OpenCV
+    //Program
+        import cv2 as cv
+
+        img = cv.imread('Images/cat.jpg')
+        
+        def rescaleFrame(frame, scale=0.75):    #rescale to 0.75 where 1 is original size
+            //width = frame.shape[1] * scale          #frame.shape is the original width of image
+            //height = frame.shape[0] * scale
+            width = int(frame.shape[1] * scale)          #converts into integer
+            height = int(frame.shape[0] * scale)
+            dimensions = (width, height)
+            return cv.resize(frame, dimensions, interpolation=cv.INTER_AREA)
+        
+        resized_image = rescaleFrame(img)
+        cv.imshow('Image', resized_image)  //cv.imshow() is like console.out() in C#
+        cv.waitKey(0)  
+        
+    //Resize Image
+        resized = cv.resize(img, (500,  500))
+        resized = cv.resize(img, (500,  500), interpolation=cv.INTER_AREA) 
+        resized = cv.resize(img, (500,  500), interpolation=cv.INTER_LINEAR) //Enlarge
+        resized = cv.resize(img, (500,  500), interpolation=cv.INTER_CUBIC) //Enlarge, slowest
+
+////////////////////////////////////////////////////////////////////////
+05. Resizing/Rescaling Videos in OpenCV 
+    //Program
+        import cv2 as cv
+
+        def rescaleFrame(frame, scale=2.00):
+            width = int(frame.shape[1] * scale)
+            height = int(frame.shape[0] * scale)
+            dimensions = (width, height)
+            return cv.resize(frame, dimensions, interpolation=cv.INTER_AREA)
+
+        capture = cv.VideoCapture('Videos/Cat.mp4')
+        
+        def changeRes(width, height):   //This change the resolution (Only works with cameras, not video/image files)
+            capture.set(3, width)
+            capture.set(4, height)
+        
+        while True:
+            isTrue, frame = capture.read()  
+            frame_resized = rescaleFrame(frame)
+
+            cv.imshow('Video', frame)   
+            cv.imshow('Video Resized', frame_resized)
+
+            if cv.waitKey(20) & 0xFF==ord('d'): 
+                break   
+        capture.release()         
+        cv.destroyAllWindows()
+
+////////////////////////////////////////////////////////////////////////
+06. Drawing shapes and Adding Texts
+    //Draw on blank image
+        import cv2 as cv
+        import numpy as np
+
+        blank = np.zeros((500, 500, 3), dtype='uint8') //Uint8 is datatype of an image, np.zeros(width, height, colorchannels)
+        //cv.imshow('blank', blank)  //Output: Black image
+
+            //This Paints entire image green, paint in rgb
+            //blank[:] = 0, 255, 0    
+            
+            //This shrinks the green image
+            blank[200:300, 300:400] = 0, 255, 0  
+            
+            //Draws a rectangle, 
+            //rectangle(img, pt1, pt2, color, thickness=None, lintType=None, shift=None, /)
+            cv.rectangle(blank, (0,0), (250,250), (0,255,0), thickness=2)
+            
+            //Filled up rectangle with color
+            cv.rectangle(blank, (0,0), (250,250), (0,255,0), thickness=cv.FILLED)
+            
+            //Divide rectangle to half
+            cv.rectangle(blank, (0,0), (blank.shape[1]//2, blank.shape[0]//2), (0,255,0), thickness=-1) //-1 means fill
+            
+            //Draw a circle
+            cv.circle(blank, (blank.shape[1]//2, blank.shape[0]//2), 40, (0,0,255), thickness=3)
+            
+            //Draw a line
+            cv.line(blank, (0,0), (blank.shape[1]//2, blank.shape[0]//2), (0,0,255), thickness=3)
+
+            //Write text on image
+            //cv.putText(blank, 'String', (Position), cv.font, fontscale, color, thickness)
+            cv.putText(blank, 'Hello', (255,255), cv.FONT_HERSHEY_TRIPLEX, 1.0, (0,255,0), 2)
+
+        cv.waitKey(0)
+
+////////////////////////////////////////////////////////////////////////
+07. 5 Essential Functions (Grayscale, Blur, Edge Cascade, Combination, Resize, Cropping)
+    //Program
+        import cv2 as cv
+        img = cv.imread('Images/cat.jpg')
+    
+        //Converting Image to greyscale
+        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        cv.imshow('blank', gray)
+        
+        //Blur an image
+        //cv.GaussianBlur(img, (kernel), border)
+        blur = cv.GaussianBlur(img, (3, 3), cv.BORDER_DEFAULT)
+        
+        //Edge Cascade
+        //cv.Canny(img, threshold, threshold)
+        canny = cv.Canny(img, 125, 175)
+        
+        //Combination
+            //Blur + Edge Cascade
+            canny = cv.Canny(blur, 125, 175)
+            
+            //Dilating an image
+            //cv.dilate(canny, kernel size, iteration)
+            dilated = cv.dilate(canny, (3,3), iterations=1)
+            
+            //Eroding
+            eroded = cv.erode(dilated, (3,3), iterations=1)
+            
+        //Resize Image
+        resized = cv.resize(img, (500,  500)) - Stretches
+        resized = cv.resize(img, (500,  500), interpolation=cv.INTER_AREA) 
+        resized = cv.resize(img, (500,  500), interpolation=cv.INTER_LINEAR) //Enlarge
+        resized = cv.resize(img, (500,  500), interpolation=cv.INTER_CUBIC) //Enlarge, Higher Quality (Slowest)
+        
+        //Cropping
+        //img[top left corner, bottom right corner]
+        cropped = img[50:200, 200:400]
+        
+        cv.waitKey(0)
+
+////////////////////////////////////////////////////////////////////////
+08. Image Transformation (Shift, Rotate, Flip Images)
+    //Program - Shifting Image
+        import cv2 as cv
+        import numpy as np
+        img = cv.imread('Images/cat.jpg')
+
+        //Translation
+        def translate(img, x, y):
+            transMat = np.float32([[1,0,x], [0,1,y]])
+            dimensions = (img.shape[1], img.shape[1],) //(img.shape[width], img.shape[height])
+            return cv.warpAffine(mig, transMat, dimensions)
+
+        // -x --> Shift Image Left
+        // -y --> Shift Image Up
+        // x --> Shift Image Right
+        // y --> Shift Image Down
+        //translate(img, x, y)
+        translated = translate(img, 50, 100)
+
+        cv.imshow('Translated', translated)
+        cv.waitKey(0)
+
+    //Program - Rotate Image CCW
+        import cv2 as cv
+        import numpy as np
+        img = cv.imread('Images/cat.jpg')
+
+        //Rotation
+        def rotate(img, angle, rotPoint=None):
+            (height, width) = img.shape[:2]
+            
+            if rotPoint is None:
+                rotPoint = (width//2, height//2)
+        
+            //rotMat = cv.getRotationMatrix2D(rotPoint, angle, scale)
+            rotMat = cv.getRotationMatrix2D(rotPoint, angle, 1.0)
+            dimensions = (width, height)
+            
+            return cv.warpAffine(img, rotMat, dimensions)
+    
+        //rotate(img, angle)
+        rotated = rotate(img, 45)   //-45deg for clockwise rotation
+        cv.imshow('Rotated', rotated)
+        
+        //To rotate twice
+        rotated_rotated = rotate(rotate, 45) //This will rotate the rotated image by another 45deg, but take note together with black background
+        cv.imshow('Rotated2', rotated_rotated)
+
+    //Program
+        import...
+        img = cv.imread(...)
+        
+        //Flip
+        flip = cv.flip(img, 0) 
+            // 0 = Flip Image Vertically
+            // 1 = Flip Image Horizontally
+            // -1 = Flip Image Vertically and Horizontally
+        cv.imshow(...)
+        cv.waitKey(0)
+
+////////////////////////////////////////////////////////////////////////
+09. Contour Detection
+    //Boundaries of an object/face/image
+    //Not similar to Edges
+    //Program using Canny
+        import cv2 as cv
+        img = cv.imread('Images/cat.jpg')
+        
+        //First, you need to convert image to Grayscale
+        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        
+        //Secondly, grab Edges of image (Canny)
+        canny = cv.Canny(img, 125, 175)
+        
+        //Contour process
+        contours, hierarchies = cv.findContours(canny, cv.RETR_LIST, cv.CHAIN_APPROX_NONE)
+            //RETR
+                cv.RETR_TREE for hierarchical contours
+                cv.RETR_EXTERNAL for external contours
+                cv.RETR_LIST for all contours in image
+            //Approximation Method
+                cv.CHAIN_APPROX_NONE - returns all contours
+                cv.CHAIN_APPROX_SIMPLE - compress contours to 2 end points
+                //But not much difference between None and Simple
+        
+        //Find Length of the list
+        print(f'{len(contours)} contours found!')
+        
+        cv.imshow('Contours', contours)
+        cv.waitKey(0)
+
+    //Program using Threshold
+        import cv2 as cv
+        img = cv.imread('Images/cat.jpg')
+        
+        //First, you need to convert image to Grayscale
+        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        
+        //Secondly, grab Edges of image (Threshold), It's like increasing the contrast
+        //cv.threshold(src, thresh, maxval, type)
+        ret, thresh = cv.threshold(gray, 125, 255, cv.THRESH_BINARY)
+        
+        //Contour process
+        contours, hierarchies = cv.findContours(thresh, cv.RETR_LIST, cv.CHAIN_APPROX_NONE)
+        
+        cv.imshow('Contours', contours)
+        cv.waitKey(0)
+
+    //Program - Drawing over the image
+        import cv2 as cv
+        import numpy as np
+        
+        img = cv.imread('Images/cat.jpg')
+        blank = np.zeros(img.shape, dtype='uint8')
+        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        ret, thresh = cv.threshold(gray, 125, 255, cv.THRESH_BINARY)
+        contours, hierarchies = cv.findContours(thresh, cv.RETR_LIST, cv.CHAIN_APPROX_NONE)
+        
+        //Draw Contours
+        //drawContours(image, contours, contourIndex, color, line thickness)
+        cv.drawContours(blank, contours, -1, (0,0,255), 2)
+        cv.imshow('Contours', blank)
+        
+        cv.imshow('Contours', contours)
+        cv.waitKey(0)
+
+////////////////////////////////////////////////////////////////////////
+10. Color Spaces
+    //Switch between Color Spaces
+    //Greyscale, RGB, HSV, LAB
+    
+    //Convert to Grayscale
+        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+
+    //Convert to HSV
+        hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
+
+    //Convert to Lab 
+        lab = cv.cvtColor(img, cv.COOR_BGR2LAB)
+
+    //BGR image when converted to RGB will be color inversed
+        import cv2 as cv
+        import matplotlib.pyplot as plt
+        img = cv.imread('Images/cat.jpg')
+        cv.imshow('Cat', img)
+        plt.imshow(img)
+        plt.show()
+
+    //To show RGB properly in Matplotlib
+        import cv2 as cv
+        import matplotlib.pyplot as plt
+        img = cv.imread('Images/cat.jpg')
+        cv.imshow('Cat', img)
+        rgb = cv.cvtColor(img, cv.COLOR_BGR2RGB)    //This will inverse
+        plt.imshow(rgb)                             //And this will inverse the inversed image
+        plt.show()
+        cv.waitKey(0)
+
+    //NOTE: You cannot convert Grayscale to LAB.
+    //      Convert Grayscale to BGR and then to LAB
+
+
+////////////////////////////////////////////////////////////////////////
+11. Color Channels
+    //Splitting image to Blue, Green and Red 
+    //Shows intensity in Grayscale (The lighter the color, the higher the intensity)
+        b,g,r = cv.split(img)
+        cv.imshow('Blue', b)
+        cv.imshow('Blue', g)
+        cv.imshow('Blue', r)
+
+    //Splitting image to Blue, Green and Red and show in its own color 
+        import cv2 as cv
+        import numpy as np 
+        img = cv.imread('Images/cat.jpg')
+        blank = np.zeros(img.shape[:2], dtype='uint8')
+        b,g,r = cv.split(img)
+        blue = cv.merge([b,blank,blank])
+        green = cv.merge([blank,g,blank])
+        red = cv.merge([blank,blank,r])
+        cv.imshow('Blue', blue)
+        cv.imshow('Green', green)
+        cv.imshow('Red', red)
+        cv.waitKey(0)
+
+    //Merging Color Channels as an image 
+        merged = cv.merge([b,g,r])
+
+    
+////////////////////////////////////////////////////////////////////////
+12. Smoothing and Blurring Techniques
+    //Imagine a 2D box of pixels subdivided to 9 sections (3 columns and 3 rows)
+    //The center pixel will be computed based on the surrounding pixels
+
+    //Averaging - Average of the sum of surrounding pixel's intensity values
+        average = cv.blur(img, (7,7), average)   //Kernal Size (7,7) The higher the number, more blur it is
+
+    //Gaussian - Average of the sum of surrounding pixel's weight values
+        gauss = cv.GaussianBlur(img, (7,7), 0) //0 is SigmaX
+        //SigmaX = standard deviation in X direction
+
+    //Median (Smudging) - To reduce image noise
+        median = cv.medianBlur(img, 7) //value should be below 5, not 7
+
+    //Bilateral Blur - Applies blurring but retains edges
+        bilateral = cv.bilateralFilter(img, 5, 15, 15)
+        //d = diameter of pixel input
+        //sigmaColor = number of colors to be computed
+        //sigmaSpace = the color values used that are away from the target pixel 
+
+
+////////////////////////////////////////////////////////////////////////
+13. BITWISE Operations
+    //AND, OR, XOR, NOT
+
+    //Program
+        import cv2 as cv
+        import numpy as np
+
+        blank = np.zeros((400,400), dtype='uint8')
+        rectangle = cv.rectangle(blank.copy(), (30,30), (370,370), 255, -1)
+        circle = cv.circle(blank.copy(), (200,200), 200, 255, -1)
+        cv.imshow('Rectangle', Rectangle)
+        cv.imshow('Circle', circle)
+
+        #AND
+        #OR
+        #XOR
+        #NOT
+
+        cv.waitKey(0)
+
+    //AND - without intersecting edges
+        bitwise_and = cv.bitwise_and(rectangle, circle)
+
+    //OR - with intersecting edges
+        bitwise_or = cv.bitwise_or(rectangle, circle)
+
+    //XOR - combine intersecting edges without fill
+        bitwise_xor = cv.bitwise_xor(rectangle, circle)
+
+    //NOT - invert
+        bitwise_not = cv.bitwise_not(rectangle)
+
+
+////////////////////////////////////////////////////////////////////////
+14. Masking
+    //Program
+        import cv2 as cv
+        import numpy as np
+
+        //Target Image
+        img = cv.imread('Images/cat.jpg')
+
+        //Setup for mask
+        blank = np.zeros(img.shape[:2], dtype='uint8') 
+            //where in [:2]is the dimension of the mask
+            //mask dimension value must be the same with the blank image
+        mask = cv.circle(blank, (img.shape[1]//2, img.shape[0]//2), 100, 255, -1)
+
+        //Masked Image
+        masked = cv.bitwise_and(img, img, mask=mask)
+
+        cv.waitKey(0)
+
+    //Reposition mask
+        mask = cv.circle(blank, (img.shape[1]//2, img.shape[0]//2) + 90, 100, 255, -1)
+
+    //Use Rectangle
+        mask = cv.rectangle(blank, (img.shape[1]//2, img.shape[0]//2), (img.shape[1]//2 +100, img.shape[0]//2 + 100), 255, -1)
+
+    //Combination of Shapes as mask
+        [import...]
+        //Target Image
+        img = cv.imread('Images/cat.jpg')
+        blank = np.zeros(img.shape[:2], dtype='uint8') 
+        circle = cv.circle(blank.copy(), (img.shape[1]//2, img.shape[0]//2), 100, 255, -1)
+        rectangle = cv.rectangle(blank.copy(), (30,30), (370,370), 255, -1)
+        
+        //Combine both shapes
+        weird_shape = cv.bitwise_and(circle, rectangle)
+
+        //Masked Image
+        masked = cv.bitwise_and(img, img, mask=weird_shape)
+        cv.imshow('Masked', masked)
+        cv.waitKey(0)
+
+////////////////////////////////////////////////////////////////////////
+15. Computing Histograms in OpenCV
+    //Allows you to visualize the pixel intensity distribution of an image (Grayscale/RGB)
+    //Shows graph or plot form
+
+    //Program - Grayscale
+        import cv2 as cv
+        import matplotlib.pyplot as plt
+
+        img = cv.imread('Images/cat.jpg')
+        cv.imshow('Cats', img)
+
+        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        cv.imshow('Gray', gray)
+        //gray_hist = cv.calcHist(image, channels, mask, histSize, range)
+        gray_hist = cv.calcHist([gray], [0], None, [256], [0,256])        
+
+        plt.figure()
+        plt.title('Grayscale Histogram')
+        plt.xlabel('Bins') //Intensity label across X axis (The higher the number, the whiter it is)
+        plt.ylabel('Pixels') //Pixel amount label across Y axis
+        plt.plot(gray_hist)
+        plt.xlim([0,256]) //limit across X axis
+        plt.show()
+        cv.waitKey(0)
+
+    //Program - Grayscale with Masking
+        import cv2 as cv
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        img = cv.imread('Images/cat.jpg')
+        cv.imshow('Cats', img)
+
+        blank = np.zeros(img.shape[:2], dtype='uint8')
+        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        circle = cv.circle(blank, (img.shape[1]//2, img.shape[0]//2), 100, 255, -1)        
+
+        mask = cv.bitwise_and(gray,gray,mask=circle)
+        cv.imshow('Mask', mask)
+        gray_hist = cv.calcHist([gray], [0], mask, [256], [0,256])        
+
+        plt.figure()
+        plt.title('Grayscale Histogram')
+        plt.xlabel('Bins') //Intensity label across X axis (The higher the number, the whiter it is)
+        plt.ylabel('Pixels') //Pixel amount label across Y axis
+        plt.plot(gray_hist)
+        plt.xlim([0,256]) //limit across X axis
+        plt.show()
+        cv.waitKey(0)
+
+    //Program - Histogram for Color Image
+        import cv2 as cv
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        img = cv.imread('Images/cat.jpg')
+        cv.imshow('Cats', img)
+
+        blank = np.zeros(img.shape[:2], dtype='uint8')
+        circle = cv.circle(blank, (img.shape[1]//2, img.shape[0]//2), 100, 255, -1)  
+        mask = cv.bitwise_and(img,img,mask=circle)
+        
+        plt.figure()
+        plt.title('Color Histogram')
+        plt.xlabel('Bins') 
+        plt.ylabel('Pixels') 
+
+        colors = ('b', 'g', 'r')
+        for i,col in enumerate(colors):
+            //calcHist(images, channels, mask, histsize, ranges)
+            hist = cv.calcHist([img], [i], None, [256], [0,256])
+            plt.plot(hist, color=col)
+            plt.xlim([0,256])
+        plt.show()
+        cv.waitKey(0)
+
+    //Program - Histogram for Color Image with mask
+        import cv2 as cv
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        img = cv.imread('Images/cat.jpg')
+        cv.imshow('Cats', img)
+
+        blank = np.zeros(img.shape[:2], dtype='uint8')
+        mask = cv.circle(blank, (img.shape[1]//2, img.shape[0]//2), 100, 255, -1)  
+        masked = cv.bitwise_and(img,img,mask=mask)
+        
+        plt.figure()
+        plt.title('Color Histogram')
+        plt.xlabel('Bins') 
+        plt.ylabel('Pixels') 
+
+        colors = ('b', 'g', 'r')
+        for i,col in enumerate(colors):
+            //calcHist(images, channels, mask, histsize, ranges)
+            hist = cv.calcHist([masked], [i], mask, [256], [0,256])
+            plt.plot(hist, color=col)
+            plt.xlim([0,256])
+        plt.show()
+        cv.waitKey(0)
+
+////////////////////////////////////////////////////////////////////////
+16. Thresholding/Binarizing Images (Basic, Inverse, Adaptive, Adaptive Inverse, Gaussian Adaptive)
+    //Thresholding is binarization of an image
+    //Core pixel calculation principle similar to Bluring
+    //0 = Black(0), 1 = White(255)
+    //If intensity is below threshold, then 0, else 1
+    //2 types of thresholdings: Simple and Adaptive
+
+    //Standard Threshold
+        import cv2 as cv
+        img = cv.imread('Images/cat.jpg')
+        
+        #convert to grayscale
+        grayimg = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+
+        #thresholding              
+        threshold, thresh = cv.threshold(grayimg, 150, 255, cv.THRESH_BINARY)
+            #cv.threshold(src, thresh, maxval, type)
+                #src = source image
+                #thresh = threshold value
+                #maxval = color, if above 150(thresh), then set to 255(white)
+                #thresholdtype = cv.THRESH_BINARY
+        cv.imshow('Thresh', thresh)
+        cv.waitKey(0)
+
+    //Inverse Threshold       
+        #thresholding inverse         
+        threshold, thresh_inv = cv.threshold(grayimg, 150, 255, cv.THRESH_BINARY_INV)
+        cv.imshow('Threshold Inverse', thresh_inv)
+
+    //Adaptive Thresholding
+        #Thresholding value automatically adjusts itself
+        adaptive_thresh = cv.adaptiveThreshold(grayimg, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 11, 3)
+            #cv.adaptiveThreshold(src, maxval, adaptivemethod, thresholdtype, blocksize, C)
+                #maxval = if true, set to 255(white)
+                #adaptivemethod = neighboring method, cv.ADAPTIVE_THRESH_MEAN_C
+                #thresholdtype = cv.THRESH_BINARY
+                #blocksize = the window area size for calculation, refer to Topic 37 (Blurring)
+                #C (0-9) = integer value subtracted from the mean, to fine tune the threshold value 
+        cv.imshow('Adaptive Threshold', adaptive_thresh)
+
+    //Inverse Adaptive Thresholding
+        adaptive_thresh = cv.adaptiveThreshold(grayimg, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY_INV, 11, 3)
+        cv.imshow('Adaptive Threshold', adaptive_thresh)
+
+    //Gaussian Adaptive Thresholding
+        adaptive_thresh = cv.adaptiveThreshold(grayimg, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 11, 3)
+
+////////////////////////////////////////////////////////////////////////
+17. Gradient and Edge Detection
+    //Gradients and Edges are completely different things
+
+    //Laplacian
+        import cv2 as cv
+        import numpy as np
+
+        img = cv.imread('Images/cat.jpg')
+        cv.imshow('Original', img)
+
+        #convert to grayscale
+        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+
+        #Laplacian
+        lap1 = cv.Laplacian(gray, cv.CV_64F)
+            #cv.Laplacian(src, ddepth)
+                #src = image
+                #ddepth = datadepth, cv.CV_64F
+        lap2 = np.uint8(np.absolute(lap1))
+
+        cv.imshow('Laplacian', lap2)
+        cv.waitKey(0)
+
+    //Sobel
+        #Sobel computes gradient in 2 directions, X and Y
+        #Y = horizontal gradients
+        #X = vertical gradients
+        sobelx = cv.Sobel(gray, cv.CV_64F, 1, 0)
+            #cv.Sobel(src, ddepth, dx, dy)
+                #src = image
+                #ddepth = datadepth
+                #dx = derivative of X (X direction)
+                #dy = derivative of y (Y direction)
+        sobely = cv.Sobel(gray, cv.CV_64F, 0, 1)
+        cv.imshow('SobelX', sobelx)
+        cv.imshow('SobelY', sobely)
+
+    //Combined Sobel X and Y
+        sobelx = cv.Sobel(gray, cv.CV_64F, 1, 0)
+        sobely = cv.Sobel(gray, cv.CV_64F, 0, 1)
+        combined = cv.bitwise_or(sobelx, sobely)
+        cv.imshow('Combined', combined)
+
+    //Canny - Refer to Topic 34, Contouring
+        //Canny edge detection is a multistage process
+        //And one of those stages uses Sobel
+        canny = cv.Canny(gray, 150,175)
+
+////////////////////////////////////////////////////////////////////////
+18. Face Detection with Haarcascade
+    //Uses classifier algorithm
+    //Classifier needs to be trained with tens of images
+    //OpenCV's classifiers already done that for you
+    //2 types of classifiers: Haarcascades and Local Binary Pattern
+    //github.com/opencv/opencv/tree/master/data/haarcascades
+    //Copy haarcascade_frontalface_default.xml into the folder
+    //Haarcascade uses edges to determine faces, therefore color not required
+    //Note that Haarcascade is sensitive to image noise
+    //To solve sensitivity, increase minNeigbors
+
+    //Program
+        import cv2 as cv
+        img = cv.imread('Images/ariana.jpg')
+        cv.imshow('Original', img)
+
+        #You can convert the image to grayscale in this line and use grayimg instead of img
+        #grayimg = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+
+        #read file and store to haarVar variable
+        haarVar = cv.CascadeClassifier('haar_face.xml')
+
+        #detection
+        faces_rect = haarVar.detectMultiScale(img,scaleFactor=1.1, minNeighbors=3)
+            #haarVar.detectMultiScale(image, scaleFactor, minNeighbors, flags, minSize, maxSize)
+                #scaleFactor
+                #minNeighbor = Parameter that specify the minimum number of neighboring pixels to be called a face
+        
+        #Print number of faces found
+        print(f'Number of faces found = {len(faces_rect)}')
+
+        #Draw a rectangle over the face
+        for (x, y, w, h) in faces_rect:
+            cv.rectangle(img, (x,y), (x+w, y+h), (0,0,255), thickness=2)
+        cv.imshow('Detected Faces', img)
+
+        cv.waitKey(0)
+
+////////////////////////////////////////////////////////////////////////
+19. Face Recognition with Haarcascade
+    //Create 5 folders with each contains 20 images 
+
+    //The Program to Train the Face Recognizer
+        import os 
+        import cv2 as cv 
+        import numpy as np 
+
+        #Creating a list (Manual and Auto)
+            #Manual
+            people = ['Ariana Grande', 'Lisa BlackPink']
+            DIR = r'C:\Users\admin\Desktop\Python\OpenCV\Images\Faces'
+
+            #Auto        
+            p = []
+            for i in os.listdir(r'C:\Users\admin\Desktop\Python\OpenCV\Images\Faces'):
+                p.append(i)
+            print(p)
+            DIR = r'C:\Users\admin\Desktop\Python\OpenCV\Images\Faces'
+
+        #Initialize Training Set Arrays
+        haarVar = cv.CascadeClassifier('haar_face.xml')
+        features = []
+        labels = []
+
+        #Create Training Set
+        def create_train():
+            #Loop for folder
+            for person in people:
+                path = os.path.join(DIR, person)
+                label = people.index(person)
+
+            #Loop for images in folder
+            for img in os.listdir(path):
+                img_path = os.path.join(path, img) //Join path to the image
+
+                img_array = cv.imread(img_path) //Take path and put onto array
+                gray = cv.cvtColor(img_array, cv.COLOR_BGR2GRAY)   //Convert to greyscale
+
+                #Detection
+                faces_rect = haarVar.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=4)
+                for (x,y,w,h) in faces_rect:
+                    facesRegionOfInterest = gray[y:y+h, x:x+w] //Grab faces from y to y+h and from x to x+w
+                    features.append(facesRegionOfInterest)
+                    labels.append(label)
+
+        #Run
+        create_train()
+        print('Training Done')
+        #print(f'Length of features = {len(features)}')
+        #print(f'Length of labels = {len(labels)}')
+
+        #Convert features arrays and labels arrays to numpy format 
+        features = np.array(features, dtype='object')
+        labels = np.array(labels)
+
+        #Initialize the Recognizer
+        face _recognizer = cv.face.LBPHFaceRecognizer_create()
+
+        #Train the Recognizer on features and label list
+        face_recognizer.train(features, labels)
+
+        #Saving the numpy arrays to Yaml source file so it can be used on another program
+        #Also saving arrays to numpy files
+        face_recognizer.save('face_trained.yml')
+        np.save('features.npy', features)
+        np.save('labels.npy', labels)
+
+    //The Program That Recognizes Faces
+        import numpy as np
+        import cv2 as cv
+
+        haarVar = cv.CascadeClassifier('haar_face.xml')
+
+        #Mapping
+        people = ['Ariana Grande', 'Lisa BlackPink']
+
+        #Loading the arrays
+        #features = np.load('features.npy')
+        #labels = np.load('labels.npy')
+
+        #Read YAML file
+        face_recognizer = cv.face.LBPHFaceRecognizer_create()
+        face_recognizer.read('face_trained.yml')
+
+        #Target Image
+        img = cv.imread(r'C:\Users\admin\Desktop\Python\OpenCV\Images\Validate.jpg')
+        cv.imshow('Person', img)
+
+        #Convert to Grayscale
+        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        
+        #Detection
+        faces_rect = haarVar.detectMultiScale(gray, 1.1, 4)
+        for (x,y,w,h) in faces_rect:
+            facesRegionOfInterest = gray[y:y+h, x:x+h]
+
+            #Show result on Console
+            label, confidence = face_recognizer.predict(facesRegionOfInterest)
+            print(f'Label = {people[label]} with a confidence of {confidence}')
+
+            #Put text on image containing the face
+            cv.putText(img, str(people[label]), (20,20), cv.FONT_HERSHEY_COMPLEX, 1.0, (0,255,0), thickness=2)
+                #cv.putText(img, text, origin, fontFace, fontScale, color, thickness)
+
+            #Draw rectangle over image
+            cv.rectangle(img, (x,y), (x+w,y+h), (0,255,0), thickness=2)
+
+        cv.imshow('Detected Face', img)
+        cv.waitKey(0)
+
+////////////////////////////////////////////////////////////////////////
+20. Deep Computer Vision with Kaggle
+
+    //Setting up Kaggle Account
+    //Use Simpsons dataset
+        https://www.kaggle.com/alexattia/the-simpsons-characters-dataset
+        Right hand panel, click on Add Data and a window will appear
+        In Search Box, search for "Simpsons"
+        Add alexattia's The Simpsons Characters Data
+        Now you can use the dataset inside your Kaggle notebook
+        //Install Caer and Canaro
+            In Text Cell, type in this line:
+                !pip install caer canaro
+                Shift + Enter to Run
+
+    //Program
+        import os
+        import caer
+        import canaro
+        import numpy as np
+        import cv2 as cv
+        import gc
+
+        #Resize image before feeding to network
+        IMG_SIZE = (80,80)
+        channels = 1                //1 channel means grayscale
+        
+        #Add the path of image storage (simpsons_dataset)
+        #Right Hand Panel > Data Section > Input > the-simpsons-characters-data > simpsons_dataset
+        #Click on Copy file path
+        char_path = r'../input/the-simpsons-characters-dataset/simpsons_dataset'
+
+        #Finding top 10 character with the most number of images
+        #The code will go through every single folder and outputs the number
+        #Then store the information into variable/dictionary, one dictionary for each parent folder 
+        char_dict = {}  //Create Dictionary
+        for char in os.listdir(char_path):
+            char_dict[char] = len(os.listdir(os.path.join(char_path, char)))
+
+        #Sort the list in descending order to grab the top 10 folder
+        char_dict = caer.sort_dict(char_dict, descending=True)
+        char_dict
+
+        #Grabbing the names of the first 10 elements to store in characters list
+        characters = []
+        count = 0
+        for i in char_dict:
+            characters.append(i[0])
+            count += 1
+            if count >= 10:
+                break
+        characters //This prints out the list
+        
+        #Create the training data
+        #The code the grab images from the folder and add to the training set
+        train = caer.preprocess_from_dir(char_path, characters, channels=channels, IMG_SIZE=IMG_SIZE, isShuffle=True)
+            #caer.preprocess_from_dir(DIR, classes, IMG_SIZE=, channels=, per_class_size, normalize_train, mean_subtraction, isShuffle, save_data, destination_filename, verbose)
+
+        #See how many images in the training set
+        len(train)
+
+        #Visualize the images that are present in the dataset
+        import matplotlib.pyplot as plt
+        plt.figure(figsize=(30,30))
+        plt.imshow(train[0][0], cmap='gray')    //cmap is colormap
+        plt.show()
+
+        #Seperating training sets into features list and labels list
+        #Currently, the trainingset is a list of 13k sublist where each sublist contains array and label
+        #This also reshape the featureSet into a 4 dimensional tensor so it can be fed into a 4x4 model
+        featureSet, labels = caer.sep_train(train, IMG_SIZE=IMG_SIZE)
+            #featureSet, labels = caer.sep_train(trainset variable, IMG_SIZE=IMG_SIZE)
+            
+        
+        #Normalize the featureSet to be in the shape of (0,1) for faster processing
+        //featureSet = caer.normalize(featureSet)
+
+        #But before normalizing, we need to Convert integers of labels into binary class vectors
+        from tensorflow.keras.utils import to_categorical
+        featureSet = caer.normalize(featureSet)
+        labels = to_categorical(labels, len(characters))
+
+        #Create training and validation data
+        #The models will train on training data and test itself on validation data
+        #Splitting/Distributing feature and labels into training sets and validation sets with validation ratio
+        #80% to training set, 20% to validation set
+        x_train, x_val, y_train, y_val = caer.train_val_split(featureSet, labels, val_ratio=.2)
+
+        #Saving on memorey to remove unused variables
+        del train
+        del featureSet
+        del labels
+        gc.collect()  //Collecting garbages
+
+        #Variables for the neural network
+        BATCH_SIZE = 32
+        EPOCHS = 10
+
+        #Create image data generator
+        #This generator will ynthesize new images ccording to existing images to help introduce randomness into the neural network
+        #It uses the keras library to build
+        datagen = canaro.generators.imageDataGenerator()
+        train_gen = datagen.flow(x_train, y_train, batch_size=BATCH_SIZE)
+
+        #Creating the model
+        model = canaro.models.createSimpsonsModel(IMG_SIZE=IMG_SIZE, channels=channels, output_dim=len(characters), loss='binary_crossentropy', decay=1e-6, learning_rate=0.001, momentum=0.9, nesterov=True)
+
+        #Print summary of the model
+        model.summary()
+
+        #Create callback list - a learning rate scheduler
+        #Control the learning rate at specific interval
+        from tensorflow.keras.callbacks import LearningRateScheduler
+        callbacks_list = [LearningRateScheduler(canaro.lr_schedule)]
+
+        #Training the model
+        training = model.fit(train_gen, steps_per_epoch=len(x_train)//BATCH_SIZE, epochs=EPOCHS, validation_date=(x_val, y_val), validation_steps=len(y_val)//BATCH_SIZE, callbacks = callbacks_list)
+
+        #Use openCV to test model
+            #So OpenCV will read the image at particular file path and then pass to the network and see what the model returns
+            #Copy the image filepath of bart_simpson.jpg under the simpson_testset folder
+        test_path = r'../input/the-simpsons-characters-dataset/kaggle_simpson_testset/kaggle_simpson_testset/bart_simpson_0.jpg'
+        img = cv.imread(test_path)               
+        plt.imshow(img, cmap='gray') //to show image
+        plt.show()
+            
+        #Preparing the image to be the same size, shape and the dimension
+        def prepare(img):
+            img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+            img = cv.resize(img, IMG_SIZE)
+            img = caer.reshape(img, IMG_SIZE, 1)
+            return img
+        
+        #Run Predictions
+        predictions = model.predict(prepare(img))
+        
+        #View Predictions
+        predictions
+
+        #Print actual cost
+        print(characters[np.argmax(predictions[0])])
+
+
+https://www.youtube.com/watch?v=oXlwWbU8l2o
+https://www.github/jasmcaus/opencv-course
+
+//Canaro - Installs Tensorflow by default
+pip install canaro
+
+//Kaggle
+
+////////////////////////////////////////////////////////////////////////
+//Matplot Lib
+    //Program
+        import cv2 as cv
+        import numpy as np
+        import matplotlib.pyplot as plt
+        import scipy as sp
+        
+        img = cv.imread('Images/cat.jpg')
+        cv.imshow('Cat', img)
+
+        plt.imshow(img)
+        plt.show()
+        #cv.waitKey(0)
+
+//Pylint Errors
+On VScode: CTRL + Shift + P
+Choose "Preferences: Open Settings (JSON)"
+Add this line into JSON file:
+"python.linting.pylintArgs": ["--generate-members"]
