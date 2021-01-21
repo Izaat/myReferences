@@ -102,12 +102,37 @@ CONTENTS
             variable = "hello"
             print(variable.index("h"))   //Output: 0   
             
+        //Check substring present in string
+            variable = "hello world"
+            print(variable.startswith('hello'))     //Output: True      //.endswith() = False
+            
         //Replace String  
             variable = "hello there"
             print(variable.replace("hello", "hi"))   //Output: hi there   
             
-        //Slicing Method
-            Rules similar to Slicing. See Topic 5, Slicing Section.
+        //White Space
+            variable = "       Hello       "
+            variable = variable.strip()
+            print(variable)         //Output: Hello     //Without white space
+            
+        //For Loop
+            variable = "Hello"
+            for variable2 in variable:
+                print(variable2)    //Output: Types in character on every line
+                
+       //IF ELSE
+            variable = "Hello"
+            if 'e' in greeting:
+                print('yes')
+            else:
+                print('no')
+                
+       //Find index
+            variable = "Hello"
+            print(variable.find('o'))   //Output: 4
+            
+        //Other Method - Slicing, Stepping, Reverse
+            Rules similar. See Topic 5, Slicing, Stepping and Reverse Section.
 
     //Numbers
         //Basic Arithemetics
