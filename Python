@@ -60,6 +60,16 @@ CONTENTS
             variable = "Hello"
             print(variable)
             
+        //Print on multiple lines
+            variable = """Hello
+            World"""
+            print(variable)     //Output: Prints Hello on one line and World on another line
+            
+        //Print on single line
+            variable = """Hello \
+            World"""
+            print(variable)     //Output: Prints Hello World on single line due to existence of "\" 
+            
         //Concatenate
             variable = "Hello"
             print(variable + " there!")
@@ -84,17 +94,20 @@ CONTENTS
             variable = "hello"
             print(len(variable))   //Output: 5
             
-        //Grab Character via Index  
+        //Indexing - Grab Character    
             variable = "hello"
-            print(variable[1])   //Output: e    
+            print(variable[1])   //Output: e    //Negative numbers can also be used
         
-        //Grab Index Number via Character  
+        //Indexing - Find index number of a character  
             variable = "hello"
             print(variable.index("h"))   //Output: 0   
             
         //Replace String  
             variable = "hello there"
             print(variable.replace("hello", "hi"))   //Output: hi there   
+            
+        //Slicing Method
+            Rules similar to Slicing. See Topic 5, Slicing Section.
 
     //Numbers
         //Basic Arithemetics
