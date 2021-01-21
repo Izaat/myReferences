@@ -106,6 +106,10 @@ CONTENTS
             variable = "hello world"
             print(variable.startswith('hello'))     //Output: True      //.endswith() = False
             
+        //Count characters
+            variable = "hello world"
+            print(variable.count(o))     //Output: 2
+            
         //Replace String  
             variable = "hello there"
             print(variable.replace("hello", "hi"))   //Output: hi there   
@@ -114,6 +118,20 @@ CONTENTS
             variable = "       Hello       "
             variable = variable.strip()
             print(variable)         //Output: Hello     //Without white space
+            
+        //Splitting  string into list
+            variable = "how,are,you,there"
+            mylist = variable.split(",")    //Use space for space delimiter and comma if comma is the demilitier
+            print(mylist)       //Output: ['how', 'are', 'you', 'there']
+            new_string = ','.join(mylist)    //This combines back list into string
+            print(new_string)   //Output: how,are,you,there
+            
+        //List to String
+            mylist = ['a'] * 6
+            print(variable)     //Output: ['a', 'a', 'a', 'a', 'a', 'a']
+            
+            mystring = ' '.join(mylist)
+            print(mystring)     //Output:   a a a a a a
             
         //For Loop
             variable = "Hello"
@@ -133,6 +151,34 @@ CONTENTS
             
         //Other Method - Slicing, Stepping, Reverse
             Rules similar. See Topic 5, Slicing, Stepping and Reverse Section.
+            
+        //Formatting - %
+            var = "Tom"
+            mystring = "The variable is %s" % var       //%s for string, "%d" for decimal, %f for float, %.2f for 2 decimal places
+            print(mystring) //Output: The variable is Tom
+            
+        //Formatting - dot formatting
+            var = 3.123415
+            var2 = 6
+            mystring = "The variable is {} and {}".format(var, var2)         //Add {:.2f} for 2 decimal places
+            print(mystring)     //Output: The variable is 3.123415 and 6
+            
+        //Formatting - F String
+            var = 3.123415
+            var2 = 6
+            mystring = f"The variable is {var} and {var2*2}" 
+            print(mystring)     //Output: The variable is 3.123415 and 12
+            
+        //Timer
+            from timeit import default_timer as timer
+            mylist = ['a'] * 1000000
+            print(mylist)
+            
+            start = timer()
+            mystring = ' '.join(mylist)
+            stop = timer()
+            
+            print(stop-start)       //Output: 0.016s
 
     //Numbers
         //Basic Arithemetics
