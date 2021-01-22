@@ -27,6 +27,7 @@ CONTENTS
 24. Inheritence
 25. Interpreter
 26. Sets
+27. Collections (Counter, named Tuple, OrderDict, defaultdict, deque)
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -1093,7 +1094,92 @@ CONTENTS
         a = frozenset([1, 2, 3, 4])
         print(a)        //Output: frozenset([1, 2, 3, 4])
 
+////////////////////////////////////////////////////////////////////////
+27. Collections
+    //Counter, named Tuple, OrderDict, defaultdict, deque
+    
+    //Counter is a container for elements as dictionary keys and count the dictionary values
+    //Counter
+        from collections import Counter
+        variable = "aaaabbbccccc"
+        
+        mycounter = Counter(variable)
+        
+        print(mycounter)        //Output: Counter({'a':4, 'b':3, 'c':5})
+        print(mycounter.items())    //Output: dict_items([('a':4), ('b':,3), ('c':5)])
+        print(mycounter.keys())       //Output: dict_keys(['a', 'b', 'c'])
+        print(mycounter.values)       //Output: dict_keys([4, 3, 5])
+        
+        print(mycounter.most_common(1))       //Output: [('c':5)] -- Where 1 is the most common
+        print(mycounter.most_common(2))       //Output: [('c':5), ('a':4)] -- Where 1 is the most common
+        
+        print(mycounter.most_common(1)[0][0])       //Output: c
+        print(mycounter.most_common(1)[0][1])       //Output: 5
 
+        print(list(mycounter.elements()))       //Output: ['a','a','a','a','b','b','b','c','c','c','c','c']
+    
+    //Named Tuple is an object type similar to struct
+    //Named Tuple
+        from collections import namedtuple
+        variablePoint01 = namedtuple('variablePoint01', 'x,y')
+        pt = variablePoint01(1, -4)
+        print(pt)       //Output:   variablePoint01(x=1, y=-4)
+        print(pt.x, pt.y)       //Output:   1 -4
+
+    //Ordered Dictionary is the same as Normal Dictionary only that it follows the time the elements being added
+    //This is ONLY for the older version of Python as Python 3.7 and above can do the same thing with Normal Dictionary
+    //Ordered  Dictionary
+        from collections import OrderedDict
+        ordered_dict = OrderedDict()        //Replace 'OrderedDict()' with '{}' for Normal Dictionary
+        ordered_dict ['c'] = 3
+        ordered_dict ['b'] = 2        
+        ordered_dict ['a'] = 1
+        ordered_dict ['d'] = 4
+        print(ordered_dict)     //Output: OrderedDict([('c',3), ('b',2), ('a', 1), ('d',4)])
+
+    //Default Dictionary has a default value of the keys if they are not being set
+    //KeyError will be triggered if its Normal Dictionary being used
+    //Default Dictionary
+        from collections import defaultdict
+        //Replace 'defaultdict()' with '{}' for normal dictionary
+        varA = defaultdict(int)     //Default type. 'Int' to return '0', 'float' to return '0.0', 'list' to return '[]'
+        varA['a'] = 1
+        varA['b'] = 2
+        print(varA)         //Output: defaultdict(<class 'int'>, {'a':1, 'b':2})
+        print(varA['a'])         //Output: 1
+        print(varA['c'])         //Output: 0    //By default, the value is 0
+
+    //Deque is double ended. Can remove elements from both ends.
+    //Deque
+        from collections import deque
+        varA = deque()
+        varA.append(1)
+        varA.append(2)
+        varA.append(3)
+        print(varA)     //Output: deque([1, 2, 3])
+        
+        #add elements to the left
+        varA.appendleft(4)      //.appendright for right side
+        print(varA)     //Output: deque([4, 1, 2, 3])
+        
+        #remove element on the left
+        varA.popleft()          //.pop() to remove element on the right
+        print(varA)     //Output: deque([1, 2, 3])
+        
+        #remove ALL elements
+        varA.clear()
+        print(varA)     //Output: deque([ ])
+
+        #extend multiple elements at a time
+        varA.extend([4,5,6])      //.extendleft([ ]) to extend on the left => 6,5,4,1,2,3   //Note the reverse order
+        print(varA)     //Output: deque([1, 2, 3, 4, 5, 6])
+        
+        #rotate deque   - move right side element to the left, and negative numbers for opposite
+        varA.rotate(1)
+        print(varA)     //Output: deque([6, 1, 2, 3, 4, 5])
+        
+        varA.rotate(2)
+        print(varA)     //Output: deque([5, 6, 1, 2, 3, 4])
 
 
 
