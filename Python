@@ -28,6 +28,7 @@ CONTENTS
 25. Interpreter
 26. Sets
 27. Collections (Counter, named Tuple, OrderDict, defaultdict, deque)
+28. Iter Tools (Product, Permutations, Combinations, Accumulate, GroupBy, Infinite Iterators)
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -1181,7 +1182,121 @@ CONTENTS
         varA.rotate(2)
         print(varA)     //Output: deque([5, 6, 1, 2, 3, 4])
 
+////////////////////////////////////////////////////////////////////////
+28. Iter Tools (Product, Permutations, Combinations, Accumulate, GroupBy, Infinite Iterators)
+    //Iterators are data dtypes that can be used in for loops
+    
+    //Products
+        from itertools import product
+        a = [1,2]
+        b = [3,4]
+        prod = product(a,b)     //Reiterate the process twice -- product(a,b, repeat=2)
+        print(list(prod))   //Output: [(1, 3), (1, 4), (2, 3), (2, 4)]
 
+    //Permutations - Basic
+        from itertools import permutations
+        a = [1,2,3]
+        perm = permutations(a)
+        print(list(perm))       //Output: [(1, 2, 3), (1, 3, 2), (2, 1, 3), (2, 3, 1), (3, 1, 2), (3, 2, 1)]
+
+    //Permutations - Sorting with Length
+        from itertools import permutations
+        a = [1,2,3]
+        perm = permutations(a, 2)
+        print(list(perm))       //Output: [(1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)]
+
+    //Combinations
+        from itertools import combinations
+        a = [1,2,3]
+        comb = combinations(a, 2)
+        print(list(comb))       //Output: [(1, 2), (1, 3), (2, 3)]
+
+    //Combinations with replacement
+        from itertools import combinations, combinations_with_replacement
+        a = [1,2,3]
+        comb_wr = combinations_with_replacement(a, 2)
+        print(list(comb_wr))       //Output: [(1, 1), (1, 2), (1, 3), (2, 2), (2, 3), (3, 3)]
+
+    //Accumulate - Returns by adding
+        from itertools import accumulate
+        a = [1,2,3,4]
+        acc = accumulate(a)
+        print(list(acc))       //Output: [1, 3, 6, 10]
+
+    //Accumulate - Returns by multiplication
+        from itertools import accumulate
+        import operator
+        a = [1,2,3,4]
+        acc = accumulate(a, func=operator.mul)
+        print(list(acc))       //Output: [1, 2, 6, 24]
+
+    //Accumulate - Returns by max number
+        from itertools import accumulate
+        a = [1,2,5,3,4,6]
+        acc = accumulate(a, func=max)
+        print(list(acc))       //Output: [1, 2, 5, 5, 5, 6]     //(1,1=1) (1,2=2) (2,5=5) (5,3=5) (5,4=5) (5,6=6)
+        //This finds the max number between a group of 2 numbers
+        
+    //Groupby
+        //To group together if value is smaller than 4
+        from itertools import groupby
+        def smallerThan4Variable(x):
+            return x < 4
+        
+        a = [1, 2, 3, 4, 5, 6]
+        group_obj = groupby(a, key=smallerThan4Variable)
+        print(group_obj)        //Output1: <itertools.groupby object at 0x000000000239A288>
+        
+        for key, value in group_obj:
+            print(key, value)   //Output2: True<Output1> && False<Output1>
+            print(key, list(value))     Output3: True [1, 2, 3] && False [4, 5, 6]
+            
+    //Groupby VS Lambda Functions - Only shorter code than Groupby
+        from itertools import groupby        
+        a = [1, 2, 3, 4, 5, 6]
+        group_obj = groupby(a, key=lambda x: x<4)
+        print(group_obj) 
+        for key, value in group_obj:
+            print(key, list(value))  //Output: Similar with GroupBy
+            
+    //Groupby VS Lambda Functions (Extensive) - Only shorter code than Groupby
+        from itertools import groupby        
+        
+        persons = [{'name': 'Tim', 'age': 25}, {'name': 'Dan', 'age': 25}, {'name': 'Lisa', 'age': 28}, {'name': 'Claire', 'age': 23}]
+        
+        group_obj = groupby(a, key=lambda x: x['age'])
+        print(group_obj) 
+        for key, value in group_obj:
+            print(key, list(value))  
+        //Output: """
+            25 [{'name': 'Tim', 'age': 25}, {'name': 'Dan', 'age': 25}]
+            28 [{'name': 'Lisa', 'age': 28}]
+            23 [{'name': 'Claire', 'age': 23}]
+        """
+
+    //Infinite Iterators
+        from itertools import count, cycle, repeat
+
+        #count function
+        for i in count(10):         //10 is the start value
+            print(i)        //Output: An infinite loop that starts at 10
+            if i == 15:     //This only stops the loop cycle
+                break
+
+        #cycle
+        a = [1,2,3]
+        for i in cycle(a)
+            print(i)        //Output: Cycles 123 123 123 continuously
+
+        #repeat
+        a = [1,2,3]
+        for i in repeat(1)
+            print(i)        //Output: Cycles 1111111 continuously
+            
+        #repeat 4 times
+        a = [1,2,3]
+        for i in repeat(1, 4)   //4 means repeat 4 times
+            print(i)        //Output: 1111
 
 
 
