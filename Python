@@ -29,6 +29,7 @@ CONTENTS
 26. Sets
 27. Collections (Counter, named Tuple, OrderDict, defaultdict, deque)
 28. Iter Tools (Product, Permutations, Combinations, Accumulate, GroupBy, Infinite Iterators)
+29. Lambda Functions
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -1298,7 +1299,79 @@ CONTENTS
         for i in repeat(1, 4)   //4 means repeat 4 times
             print(i)        //Output: 1111
 
+////////////////////////////////////////////////////////////////////////
+29. Lambda Functions
+    //A small one line anonymous function defined without a name
+    //Lambda argument: expression
+    //Creates a function with an argument and this will evaluate the expression to return a result
+    
+    //Basic
+        var10 = lambda varX: varX + 10
+        print(var10(5))     //Output: 15 (If varX = 5, then 5+10 = 15)
 
+    //The basic is similar to:
+        def var10_func(var20):
+            return var20 + 10
+        print(var10_func(5))        //Output: 15
+
+    //Multiplication
+        varA = lambda varX, varY: varX * varY   
+        print(varA(5,3))        //Output: 15
+
+    //Function that take in another function
+        //Sorted - Without Lambda
+            varA = [(1,2),(15,1),(5,-1),(10,4)]
+            varA_sorted = sorted(varA)
+            
+            print(varA)
+            print(varA_sorted)  
+                //Outputs:
+                //[(1, 2), (15, 1), (5, -1), (10, 4)]      -- varA
+                //[(1, 2), (5, -1), (10, 4), (15, 1)]      -- varA_sorted
+
+        //Sorted - Another method without Lambda
+            varA = [(1,2),(15,1),(5,-1),(10,4)]
+            def sort_by_A(x):
+                return x[0]                 //(0 = x-index), (1=y-index)
+            varA_sorted = sorted(varA, key=sort_by_A)  
+            
+            print(varA)
+            print(varA_sorted)  
+                //Outputs:
+                //[(1, 2), (15, 1), (5, -1), (10, 4)]      -- varA
+                //[(1, 2), (5, -1), (10, 4), (15, 1)]      -- varA_sorted
+                        
+        //Sorted - With Lambda by index 0
+            varA = [(1,2),(15,1),(5,-1),(10,4)]
+            varA_sorted = sorted(varA, key=lambda varX: varX[0])  //(0 = x-index), (1=y-index)
+            
+            print(varA)
+            print(varA_sorted)  
+                //Outputs:
+                //[(1, 2), (15, 1), (5, -1), (10, 4)]      -- varA
+                //[(1, 2), (5, -1), (10, 4), (15, 1)]      -- varA_sorted
+
+        //Sorted - With Lambda by sum of index 0 and index 1
+            varA = [(1,2),(15,1),(5,-1),(10,4)]
+            varA_sorted = sorted(varA, key=lambda varX: varX[0] + varX[1])  //(0 = x-index), (1=y-index)
+            
+            print(varA)
+            print(varA_sorted)  
+                //Outputs:
+                //[(1, 2), (15, 1), (5, -1), (10, 4)]      -- varA
+                //[(1, 2), (5, -1), (10, 4), (15, 1)]      -- varA_sorted
+
+    //Map Function
+        #map(func, seq)
+        //Multiply by 2 without Lambda bu twith List Comprehension
+        a = [1, 2, 3, 4, 5]
+        b =[x*2 for x in a]
+        print(b)        
+        
+        //Multiply by 2 with Lambda function
+        a = [1, 2, 3, 4, 5]
+        b = map(lambda x: x*2, a)
+        print(b)
 
 
 
