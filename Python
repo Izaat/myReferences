@@ -31,6 +31,7 @@ CONTENTS
 28. Iter Tools (Product, Permutations, Combinations, Accumulate, GroupBy, Infinite Iterators)
 29. Lambda Functions
 30. Logging - Error Messages (Ctd from Topic 17) - Logging to different levels
+31. JSON
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -1484,7 +1485,7 @@ CONTENTS
             import logging
             logging.basicConfig(
                 level=logging.DEBUG, 
-                formt='%(asctime)s - %(name)s - %(levelname)s - %(message)s, 
+                format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', 
                 datefmt='%m/%d/%Y %H:%M:%S'
             )
             logging.debug('This is a debug message')
@@ -1498,7 +1499,7 @@ CONTENTS
                 import logging
                 logging.basicConfig(
                     level=logging.DEBUG, 
-                    formt='%(asctime)s - %(name)s - %(levelname)s - %(message)s, 
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', 
                     datefmt='%m/%d/%Y %H:%M:%S'
                 )
                 import logger
@@ -1508,12 +1509,12 @@ CONTENTS
                 logger = logging.getlogger(__name__)    //Where __name__ is a global variable
                 logger.info('hello from logger')
             
-        //Creating your own logger - Without error message being shown at start(Propagate Off)
+        //Creating your own logger - Without error message being shown at start (Propagate Off)
             //main.py
                 import logging
                 logging.basicConfig(
                     level=logging.DEBUG, 
-                    formt='%(asctime)s - %(name)s - %(levelname)s - %(message)s, 
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s, 
                     datefmt='%m/%d/%Y %H:%M:%S'
                 )
                 import logger
@@ -1523,9 +1524,148 @@ CONTENTS
                 logger = logging.getlogger(__name__)    //Where __name__ is a global variable
                 logger.propagate = False
                 logger.info('hello from logger')
+    
+        //Log Handlers
+            //Save messages to a log handler file (file.log)
+            
+            import logging
+            logger = logging.getlogger(__name__)
+            
+            #create handler
+            stream_h = logging.StreamHandler()
+            file_h = logging.FileHandler('file.log')
+            
+            #Set level and format
+            stream_h.setLevel(logging.WARNING)
+            file_h.setLevel(logging.ERROR)
+            
+            formatterVar = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
+            
+            #set formatter to handler
+            stream_h.setFormatter(formatterVar)
+            file_h.setFormatter(formatterVar)
+            
+            #set handler to logger
+            logger.addHandler(stream_h)
+            logger.addHandler(file_h)
+            
+            #Text
+            logger.warning('this is a warning')
+            logger.error('this is an error')
+                
+        //Using Logging Config files
+            //logging.conf
+                [loggers]
+                keys=root,simpleExample
+                
+                [handlers]
+                keys=consoleHandler
+                
+                [formatters]
+                keys=simpleFormatter
+                
+                [logger_root]
+                level=DEBUG
+                handlers=consoleHandler
+                
+                [logger_simpleExample]
+                level=DEBUG
+                handlers=consoleHandler
+                qualname=simpleExample
+                propagate=0
+                
+                [handler_consoleHandler]
+                class=StreamHandler
+                level=DEBUG
+                formatter=simpleFormatter
+                args=(sys.stdout,)
+                
+                [formatter_simpleFormatter]
+                format=%(asctime)s - %(name)s - %(levelname)s - %(message)s
+            
+            //main.py
+                import logging
+                import logging.config
+                
+                #Set logging.conf as the file
+                logging.config.fileConfig('logging.conf')
+                
+                logger = logging.getlogger('simpleExample')     //Use qualname
+                logger.debug('this is a debug message')
+                
+        //Dictionary Config
+            #https://docs.python.org/3/library/logging.config.html#logging.config.dictConfig
+            #Similar to above but use .dictConfig() instead of .fileConfig()
+            #follow the link for the logging.conf formatting
 
+        //Capture StackTraces - Good for troubleshooting
+            import logging
+            try:
+                a = [1,2,3]
+                val = a[4]      //Note that the value is too large
+            except IndexError as e:
+                //logging.error(e)    //Output: ERROR root list index out of range
+                logging.error(e, exc_info=True) //Output: Includes the stack trace in the logger
 
+        //Capture everything in Traceback
+            import logging
+            import traceback
+            
+            try:
+                a = [1,2,3]
+                val = a[4]    
+            except IndexError as e:
+                logging.error("The error is %s", traceback.format_exc()) 
 
+        //Rotating file handler - 
+            //To recording error messages for large application with alot of preset log messages
+            import logging
+            from logging.handlers import RotatingFileHandler
+            
+            #Create Logger
+            logger = logging.getLogger(__name__)
+            
+            #Set Log Level
+            logger.setLevel(logging.INFO)
 
+            #Create file handling system that rotates over after 2kb, 
+            #Keep backup logs as app.log.1, app.log.2, etc           
+            handler = RotatingFileHandler('app.log', maxBytes=2000, backupCount=5)
+            
+            #Add handler to Logger
+            logger.addHandler(handler)
+            
+            for _ in range(10000)
+                logger.info('Hello')
+
+        //Time based rotating file handler
+            //Similar to Rotating file handler
+            import logging
+            import time
+            from logging.handlers import TimedRotatingFileHandler
+            
+            #Create Logger
+            logger = logging.getLogger(__name__)
+            
+            #Set Log Level
+            logger.setLevel(logging.INFO)
+
+            #Create file handling system that rotates over after 2kb, 
+            #Keep backup logs as app.log.1, app.log.2, etc        
+            #when = '(s=seconds, m=mins, h=hours, d=day, midnight, w0=monday, w1=tuesday, wn=etc)'     
+                when=s, interval=5 means every 5 seconds
+            handler = TimedRotatingFileHandler('timed_test.log', when='s', interval=5, backupCount=5)
+            
+            #Add handler to Logger
+            logger.addHandler(handler)
+            
+            for _ in range(6)
+                logger.info('Hello')
+                
+                #To wait specific amount of time
+                time.sleep(5)   //Sleep 5 seconds
+
+        //JSON Logger
+            https://github.com/madzak/python-json-logger
 
 
