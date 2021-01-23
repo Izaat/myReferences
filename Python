@@ -1482,7 +1482,11 @@ CONTENTS
                 #https://docs.python.org/3/library/logging.html#logercord-attributes
                 #https://docs.python.org/3/library/logging.html#time.strftime
             import logging
-            logging.basicConfig(level=logging.DEBUG, formt='%(asctime)s - %(name)s - %(levelname)s - %(message)s, datefmt='%m/%d/%Y %H:%M:%S')
+            logging.basicConfig(
+                level=logging.DEBUG, 
+                formt='%(asctime)s - %(name)s - %(levelname)s - %(message)s, 
+                datefmt='%m/%d/%Y %H:%M:%S'
+            )
             logging.debug('This is a debug message')
             logging.info('This is an info message')
             logging.warning('This is a warning message')
@@ -1492,7 +1496,11 @@ CONTENTS
         //Creating your own logger
             //main.py
                 import logging
-                logging.basicConfig(level=logging.DEBUG, formt='%(asctime)s - %(name)s - %(levelname)s - %(message)s, datefmt='%m/%d/%Y %H:%M:%S')
+                logging.basicConfig(
+                    level=logging.DEBUG, 
+                    formt='%(asctime)s - %(name)s - %(levelname)s - %(message)s, 
+                    datefmt='%m/%d/%Y %H:%M:%S'
+                )
                 import logger
                 
             //logger.py
