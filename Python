@@ -1493,7 +1493,7 @@ CONTENTS
             logging.error('This is an error message')
             logging.critical('This is a critical message')
 
-        //Creating your own logger
+        //Creating your own logger - But Message will show at start
             //main.py
                 import logging
                 logging.basicConfig(
@@ -1506,6 +1506,22 @@ CONTENTS
             //logger.py
                 import logging
                 logger = logging.getlogger(__name__)    //Where __name__ is a global variable
+                logger.info('hello from logger')
+            
+        //Creating your own logger - Without error message being shown at start
+            //main.py
+                import logging
+                logging.basicConfig(
+                    level=logging.DEBUG, 
+                    formt='%(asctime)s - %(name)s - %(levelname)s - %(message)s, 
+                    datefmt='%m/%d/%Y %H:%M:%S'
+                )
+                import logger
+                
+            //logger.py
+                import logging
+                logger = logging.getlogger(__name__)    //Where __name__ is a global variable
+                logger.propagate = False
                 logger.info('hello from logger')
 
 
