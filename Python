@@ -1668,4 +1668,158 @@ CONTENTS
         //JSON Logger
             https://github.com/madzak/python-json-logger
 
+////////////////////////////////////////////////////////////////////////
+31 JSON
+    //Looks similar to Python Dictionay
+    //Entire conversion table: https://www.python-engineer.com/learn/advancedpython11_json    
+    //Conversion Python to JSON
+        Python              JSON
+        dict                   object
+        list, tuple          array
+        str                     string
+        int, long, float   number
+        True, False        true, false
+        None                 null        
+    
+    //example.json
+        {
+            "firstName": "Jane"
+            "lastName": "Doe"
+            "hobbies": ["running", "swimming", "singing"],
+            "age": 28,
+            "hasChildren": true,
+            "children": [
+                {
+                    "firstName": "Alex"
+                    "age": 5
+                },
+                {
+                    "firstName": "Bob"
+                    "age": 7
+                }
+            ]
+        }
 
+    //Convert Python to JSON aka Serialization
+        //main.py
+            import json
+            person = {
+                "name": "John",
+                "age": 30,
+                "city": "New York",
+                "hasChildren": False,
+                "titles": ["engineer", "programmer"]
+            }
+            personJSONVariable = json.dumps(person) //dumps = string, dump = save
+            print(personJSONVariable)
+
+            #For better view layout
+            personJSONVariable = json.dumps(person, indent=4)
+
+            #To replace the seperators in JSON
+            personJSONVariable = json.dumps(person, indent=4, separators=('; ', '= '))
+
+            #Sort alphabetically
+            personJSONVariable = json.dumps(person, indent=4, separators=('; ', '= '), sort_keys=True)
+
+            #Save into a file,  dumps = string, dump = save
+            with open('person.json', 'w') as file:
+                json.dump(person, file, indent=4)
+
+    //Convert JSON to Python aka Deserialization, via Variable
+        //main.py
+            import json
+            person = {
+                "name": "John",
+                "age": 30,
+                "city": "New York",
+                "hasChildren": False,
+                "titles": ["engineer", "programmer"]
+            }
+            personJSONVariable = json.dumps(person) //dumps = string, dump = save
+            #print(personJSONVariable)
+
+            person = json.loads(personJSON)
+            print(person)
+
+    //Convert JSON to Python, via JSON File
+        //person.json
+            #file have to be available in the folder
+            
+        //main.py
+            import json
+            person = {
+                "name": "John",
+                "age": 30,
+                "city": "New York",
+                "hasChildren": False,
+                "titles": ["engineer", "programmer"]
+            }
+            personJSONVariable = json.dumps(person)
+            #print(personJSONVariable)
+            
+            with open('person.json', 'r') as file:
+                person = json.load(file)
+                print(person)
+
+    //Working with dictionary - Encode (Dict to JSON) and Decode (JSON to Dict)
+        //main.py   - This will cause Type Error
+            import json
+            class User:
+                def __init__(self, name, age):
+                    self.name = name
+                    self.age = age
+            user = User('Max', 27)
+            userJSON = json.dumps(user)
+
+        //main.py   - Solution #1
+            import json
+            class User:
+                def __init__(self, name, age):
+                    self.name = name
+                    self.age = age
+            user = User('Max', 27)
+            
+            def encode_user(o):
+                if isinstance(o, User):
+                    return {'name': o.name, 'age': o.age, o.__class__.__name__: True}
+                else:
+                    raise TypeError('Object of type User is not JSON serializable')
+            userJSON = json.dumps(user, default=encode_user)
+            print(userJSON)
+    
+        //main.py   - Solution #2
+            import json
+            class User:
+                def __init__(self, name, age):
+                    self.name = name
+                    self.age = age
+            user = User('Max', 27)
+            
+            //Encoding
+            def encode_user(o):
+                if isinstance(o, User):
+                    return {'name': o.name, 'age': o.age, o.__class__.__name__: True}
+                else:
+                    raise TypeError('Object of type User is not JSON serializable')
+
+            from json import JSONEncoder
+            class UserEncoder(JSONEncoder):
+                def default(self, o):
+                    if isinstance(o, User):
+                        return {'name': o.name, 'age': o.age, o.__class__.__name__: True}
+                    return JSONEncoder.default(self, o)
+            
+            userJSON = json.dumps(user, cls=UserEncoder)
+            #Alternative, userJSON = UserEncoder().encode(user)
+            print(userJSON)
+            
+            //Decoding            
+            def decode_user(dct):
+                if User.__name__ in dct:
+                    return User(name=dct['name'], age=dct['age'])
+                return dct
+                
+            #user = json.loads(userJSON)
+            user = json.loads(userJSON, object_hook=decode_user)
+            print(user.name)
