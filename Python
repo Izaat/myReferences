@@ -1508,7 +1508,7 @@ CONTENTS
                 logger = logging.getlogger(__name__)    //Where __name__ is a global variable
                 logger.info('hello from logger')
             
-        //Creating your own logger - Without error message being shown at start
+        //Creating your own logger - Without error message being shown at start(Propagate Off)
             //main.py
                 import logging
                 logging.basicConfig(
