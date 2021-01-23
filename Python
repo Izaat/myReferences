@@ -17,7 +17,7 @@ CONTENTS
 14. 2D List and Nested Loops
 15. Build Translator
 16. Comments
-17. Try Except - Catching Errors
+17. Catching Errors, Exceptions, Try-Catch Block
 18. Reading Files
 19. Writing Files
 20. Modules and Pip
@@ -715,7 +715,7 @@ CONTENTS
     '''
 
 ////////////////////////////////////////////////////////////////////////
-17. Try-Except - Catching Errors
+17. Catching Errors, Exceptions, Try-Catch Block
     //Program
         number = int(input("Enter a number: "))
             print(number)
@@ -754,6 +754,80 @@ CONTENTS
             print(err)
         except ValueError:
             print("Invalid Input")
+            
+    //Catch Exceptions
+        try:
+            a = 5/0 
+        except Exception as e:
+            print(e)        //Output: division by zero
+            
+    //Raise Exceptions
+        x = -5
+        if x < 0:
+            raise Exception('x should be positive number')
+
+    //Assert Statement
+        x = -5 
+        assert (x>=0), 'x is not positive
+        
+    //Catch ZeroDivision Error, TypeError, Else Clause (if no error occurs), and Finally Clause
+        try:
+            a = 5 /1 
+            b = a + '10'
+        except ZeroDivisionError as e:
+            print(e)    //Output: Division by Zero
+        except TypeError as e:
+            print(e)        //Output: unsupported operand type(s) for +: 'float' and 'str'
+        else:
+            print('Everything is fine')
+        finally:
+            print('this message runs with or without errors')
+            
+    //Define own errors by subclassing the base exception class
+        class ValueTooHighError(Exception):
+            pass
+        
+        def test_value(x):
+            if x > 100:
+                raise ValueTooHighError('value too high')
+        
+        test_value(200) //Output: If Mmore than 100, value too high printed out
+
+    //Define with cleaner error code
+        class ValueTooHighError(Exception):
+            pass
+        
+        def test_value(x):
+            if x > 100:
+                raise ValueTooHighError('value too high')
+        
+        try:
+            test_value(200) 
+        except ValueTooHighError as e:
+            print(e)
+    
+
+    //Add error code
+        class ValueTooHighError(Exception):
+            pass
+        
+        class ValueTooSmall(Exception):
+            def __init__(self, message, value):
+                self.message = message
+                self.value = value
+        
+        def test_value(x):
+            if x > 100:
+                raise ValueTooHighError('value too high')
+            if x <5:
+                raise ValueTooSmallError('value is too small', x)
+        
+        try:
+            test_value(1) 
+        except ValueTooHighError as e:          //Use test_value(200)
+            print(e)
+        except ValueTooSmallError as e:         //Use test_value(1)
+            print(e.message, e.value)
 
 ////////////////////////////////////////////////////////////////////////
 18. Reading Files
