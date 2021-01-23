@@ -17,7 +17,7 @@ CONTENTS
 14. 2D List and Nested Loops
 15. Build Translator
 16. Comments
-17. Catching Errors, Exceptions, Try-Catch Block
+17. Catching Errors, Exceptions, Try-Catch Block - Topic 30 for more
 18. Reading Files
 19. Writing Files
 20. Modules and Pip
@@ -30,6 +30,7 @@ CONTENTS
 27. Collections (Counter, named Tuple, OrderDict, defaultdict, deque)
 28. Iter Tools (Product, Permutations, Combinations, Accumulate, GroupBy, Infinite Iterators)
 29. Lambda Functions
+30. Logging - Error Messages (Ctd from Topic 17) - Logging to different levels
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -1465,7 +1466,39 @@ CONTENTS
         product_a = reduce(labda x,y: x*y, a)
         print(product_a) //Output: 24  (Multiply all the numbers in the list)
 
+////////////////////////////////////////////////////////////////////////
+30. Logging - Error Messages (Ctd from Topic 17) - Logging to different levels
 
+        //Basic Only Warning, Error and critical gets printed out
+            import logging
+            logging.debug('This is a debug message')
+            logging.info('This is an info message')
+            logging.warning('This is a warning message')
+            logging.error('This is an error message')
+            logging.critical('This is a critical message')
+
+        //Printing all levels - Root Logger
+                #https://docs.python.org/3/library/logging.html#logging.basicConfig
+                #https://docs.python.org/3/library/logging.html#logercord-attributes
+                #https://docs.python.org/3/library/logging.html#time.strftime
+            import logging
+            logging.basicConfig(level=logging.DEBUG, formt='%(asctime)s - %(name)s - %(levelname)s - %(message)s, datefmt='%m/%d/%Y %H:%M:%S')
+            logging.debug('This is a debug message')
+            logging.info('This is an info message')
+            logging.warning('This is a warning message')
+            logging.error('This is an error message')
+            logging.critical('This is a critical message')
+
+        //Creating your own logger
+            //main.py
+                import logging
+                logging.basicConfig(level=logging.DEBUG, formt='%(asctime)s - %(name)s - %(levelname)s - %(message)s, datefmt='%m/%d/%Y %H:%M:%S')
+                import logger
+                
+            //logger.py
+                import logging
+                logger = logging.getlogger(__name__)    //Where __name__ is a global variable
+                logger.info('hello from logger')
 
 
 
