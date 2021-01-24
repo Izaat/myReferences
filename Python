@@ -32,6 +32,7 @@ CONTENTS
 29. Lambda Functions
 30. Logging - Error Messages (Ctd from Topic 17) - Logging to different levels
 31. JSON
+32. Random Numbers
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -1823,3 +1824,97 @@ CONTENTS
             #user = json.loads(userJSON)
             user = json.loads(userJSON, object_hook=decode_user)
             print(user.name)
+
+////////////////////////////////////////////////////////////////////////
+32 Random Numbers
+    //main.py - Random
+        import random
+        
+        #random float in the range of 0 to 1
+            a = random.random()
+
+        #uniform float in specific range, upper range not included
+            a = random.uniform(1, 10)   //Float range 1 to 10 and 10 is not included
+        
+        #Random integers - exclude upper range
+            a = random.randrange(1, 10)
+
+        #Random integers - includes upper range
+            a = random.randint(1, 10) 
+
+        #Normal Variate (mu, sigma) - for statistics, float number
+            a = random.normalvariate(0, 1)
+
+        #random choice
+            mylist = list("ABCDEFGH")
+            a = random.choice(mylist)
+
+        #More choices
+            mylist = list("ABCDEFGH")
+            a = random.sample(mylist, 3)    //picks 3 elements
+
+        #For elements to be picked multiple times
+            mylist = list("ABCDEFGH")
+            a = random.choices(mylist, k=3) 
+
+        #Random shuffle
+            mylist = list("ABCDEFGH")
+            random.shuffle(mylist)
+            print(mylist)
+
+            #Reusing the same random number 
+            random.seed(1)
+            print(random.random())
+            print(random.randint(1,10))
+            
+            random.seed(2)
+            print(random.random())
+            print(random.randint(1,10))
+            
+            random.seed(1)
+            print(random.random())
+            print(random.randint(1,10))
+            
+            random.seed(2)
+            print(random.random())
+            print(random.randint(1,10))
+
+    //main.py - Secrets
+        //Random number with security (passwords, authentication, tokens)
+        import secrets
+        
+        #Random Below - Excludes upper range
+        a = secrets.randbelow(10)
+
+        #Random Bits
+        a = secrets.randbits(4) //4 bits, 0000(0) to 1111(15)
+
+        #Secret Choice
+        mylist = list("ABCDEFGH")
+        a = secrets.choice(mylist)
+
+    //main.py - Secrets with Numpy
+        import numpy as np
+
+        #array with random floats
+        a = np.random.rand(3)    //3 elements(columns) with 1 dimension(row)
+        a = np.random.rand(3, 3) //3 columns, 3 rows
+
+        #array with random int
+        a = np.random.randint(0, 10, 3) //Where 3 is the column
+        
+        #array with random int (tuple)
+        a = np.random.randint(0, 10, (3,4)) //Where 3 is column and 4 is number in each column
+
+        #random shuffle with secrets and numpy
+        arr = np.array([[1,2,3], [4,5,6], [7,8,9]])
+        print(arr)      //Before shuffle
+        np.random.shuffle(arr)
+        print(arr)      //After shuffle
+
+        #numpy seed function
+        np.random.seed(1)
+        print(np.random.rand(3,3)) 
+        np.random.seed(1)
+        print(np.random.rand(3,3)) 
+
