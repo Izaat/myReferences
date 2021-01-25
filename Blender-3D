@@ -9,6 +9,7 @@ CONTENTS
 06 - Ball Bounce
 07 - Bones and Armature
 08 - Toon Style Animation
+09 - FunkoPop Animation
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Interface
@@ -399,10 +400,77 @@ CONTENTS
             Main Menu > Render > Select Render Animation
 
 
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//08. Character Base Mesh
+//09. FunkoPop Animation
+
+    //Drag and drop image into Blender Viewport
+        #The placement of the image will be based on the camera angle
+        #ALT + R to remove the angle and follow the plane
+        #ALT + G to remove the height
+        #R + X: 90 to rotate image to 90 degrees (make it stand), then press enter.
+        #Enter wireframe mode and press G to move image to align with the 3D cursor
+        #Open object data properties tab to adjust the transparency
+    //Sculpting
+        //Head
+            #Grab 3D mesh cube and move the cube to cover the head in the image
+            #CTRL + 3 to convert Cube into a sphere
+            #Open Modifier properties tab
+                Style: Catmull-Clark
+                Levels: 3
+                Render: 2
+                Quality: 3
+                UV Smooth: Keep corners
+                Optimal Display: Checked
+                Use Creases: Checked
+            #Main Menu > Edit > Preferences > Add-Ons > Search > Mesh: Auto Mirror = ON
+            #Open Viewport Hidden Panel > Edit Tab > Auto Mirror Menu >  Activate Auto Miror
+            #Go to Edit mode
+            #Open Modifier properties tab
+            #CTRL + R to cut the mirror block into half horizontally
+            #CTRL + R again to cut the mirror block again vertically
+            #Open Wire frame and box select the top vertices
+            #Grab the vertices and move to align with the the top of the head in image
+            #Do the same with the other vertices to wrap around the head image
+            #Change to side view, select all vertices and Scale down the Y axis
+            #To turn 90deg box to slopes, select the edges in wireframe (Shift + ALT + Left Click) and Scale
+        //Eyes 
+            #Go to front view
+            #Enter Object mode
+            #Relocate 3D cursor to the center of the eye location
+            #Add Mesh UV Sphere            
+            #Flatten the sphere by scaling it in Y direction if you are not animating, otherwise, leave it spherical
+            #Move sphere inwards into the head
+            #In object Mode, select the head and open the Modifier Properties Tab > Subdivision Modifier
+            #Adjust Viewport from 3 to 2 and in the Subdivision dropdown menu, select apply
+            #Enter Edit mode, Go to front view
+            #Select the faces near the eyes, right click and select subdivide
+            #Move vertices to wrap around the eye to form eye socket
+            #While still in Edit mode, Open Modifier Properties Tab and Add Subdivision Surface Modifier
+                Style: Catmull
+                Render: 1
+                Viewport: 1
+                Quality: 3
+                Optimal: Checked
+                Creases: Checked
+            #Select faces and press E to extrude inwards
+            #In Modifier Properties Tab, Subdivision Modifier, Activate On Cage View (Triangle Button)
+            #Fine tune the eye socket
+                #Edit Mode, 
+                #Press K to add vertices by cutting across.
+                #ALT + Left to select the entire row of vertices around the object
+                #CTRL + R to add a row of vertices around the object
+                #Merge Vertices
+                    #Disable On Cage View in Subdivision Modifier
+                    #Top Right Hand Corner of Screen, Enable Merge Vertices
+                    #Select Vertices and move the vertices to another vertex, it will auto merge
+            #Open Object Mode, Select the head and Right Click
+            #Select Shade Smooth - Readjust the vertices or increase the Render in Subdivision Modifier
+            #Mirroring the Eyes
+                #Enter Object Mode
+                #Select Eye Sphere
+                #Add Modifier
+                #Select Mirror Modifier
+                #Select the Eyedropper and click anywhere on the face of the head
 
 
 
