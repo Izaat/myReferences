@@ -33,6 +33,7 @@ CONTENTS
 30. Logging - Error Messages (Ctd from Topic 17) - Logging to different levels
 31. JSON
 32. Random Numbers
+33. Decorators - Basic, Arguments, Function Identities, Repeating, Nested, Class
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -1917,4 +1918,193 @@ CONTENTS
         print(np.random.rand(3,3)) 
         np.random.seed(1)
         print(np.random.rand(3,3)) 
+
+
+////////////////////////////////////////////////////////////////////////
+33. Decorators  - Basic, Arguments, Function Identities, Repeating, Nested, Class
+    //Inner function within inner function
+    
+    //No Decorator
+        def startEndDecorator(func):
+            def wrapper():
+                print('Start')
+                func()
+                print('End')
+            return wrapper
+        
+        def printName1():
+            print('Alex')
+        
+        printName = startEndDecorator(printName1)
+        printName()     //Output: Prints Start, Alex and End
+        printName1()     //Output: Prints Alex
+
+    //Basic Decorator
+        def startEndDecorator(func):
+            def wrapper():
+                print('Start')
+                func()
+                print('End')
+            return wrapper
+        
+        @startEndDecorator
+        def printName1():
+            print('Alex')
+        
+        printName1()     //Output: Prints Start, Alex and End
+
+    //Decorator with argument initialization
+        //wrapper nd function needs the argument initialization
+        
+        def startEndDecorator(func):
+            def wrapper(*args, **kwargs):
+                print('Start')
+                result = func(*args, **kwargs)
+                print('End')
+                return result
+            return wrapper
+        
+        @startEndDecorator
+        def add5(x):
+            return x + 5
+        
+        result1 = add5(10)
+        print(result1)
+
+    //Decorators without Function Identities
+        def startEndDecorator(func):
+            def wrapper(*args, **kwargs):
+                print('Start')
+                result = func(*args, **kwargs)
+                print('End')
+                return result
+            return wrapper
+        
+        @startEndDecorator
+        def add5(x):
+            return x + 5
+        
+        print(help(add5))
+        print(add5.__name__)    //Outputs the wrapper function
+
+    //Decorators with Function Identities
+        import functools                
+        def startEndDecorator(func):            
+            @functools.wraps(func)
+            def wrapper(*args, **kwargs):
+                print('Start')
+                result = func(*args, **kwargs)
+                print('End')
+                return result
+            return wrapper
+        
+        @startEndDecorator
+        def add5(x):
+            return x + 5
+        
+        print(help(add5))
+        print(add5.__name__)    //Outputs the add5 function
+
+    //Repeating decorators
+        import functools
+        def repeat(numTimes):
+            def repeatingDecorator(func):
+                @functools.wraps(func)
+                def wrapper(*args, **kwargs):
+                    for _ in range(numTimes):
+                        result = func(*args, **kwargs)
+                    return result
+                return wrapper
+            return repeatingDecorator
+            
+        @repeat(numTimes=3)
+        def greet(name):
+            print(f'Hello {name}')
+        greet('Izaat')
+
+    //Nested Decorators
+        //Stack decorators on top of each other
+        //Executes in the order they were listed
+        
+        import functools
+        
+        def startEndDecorator(func):            
+            @functools.wraps(func)
+            def wrapper(*args, **kwargs):
+                print('startEndDecorator - Start')
+                result = func(*args, **kwargs)
+                print('startEndDecorator - End')
+                return result
+            return wrapper
+        
+        def debug(func):
+            #extracts the name, arguments and keyword arguments
+            #prints the calling function
+            #executes the function
+            #prints out the return information
+            @functools.wraps(func)                            
+            def wrapper(*args, **kwargs):   
+                args_repr = [repr(a) for a in args]
+                kwargs_repr = [f"{k}={v!r}" for k, v in kwargs.items()]
+                signature = ", ".join(args_repr + kwargs_repr)
+                print(f"Calling {func.__name__}({signature})")      #Prints out Calling sayHello('Izaat')
+                result = func(*args, **kwargs)
+                print(f"{func.__name__!r} returned {result!r}")     #Prints out 'sayHello returned Izaat'
+                return result                
+            return wrapper
+        
+        @debug
+        @startEndDecorator
+        def sayHello(name):
+            greeting = f'Hello {name}'
+            print(greeting)
+            return greeting
+        sayHello('Izaat')
+
+    //Class Decorators
+        //Keep track of how many times its being executed
+        //Basic Structure
+            class CountCalls:
+                def __init__(self, func):
+                    self.func = func
+                    self.num_calls = 0
+                    
+                def __call__(self, *args, **kwargs):
+                    print('Hi there')
+                
+            cc = CountCalls(None)
+            cc()
+
+            @CountCalls
+            def sayHello():
+                print('Hello')
+
+        //Updating the state
+            class CountCalls:
+                def __init__(self, func):
+                    self.func = func
+                    self.num_calls = 0
+                    
+                def __call__(self, *args, **kwargs):
+                    self.num_calls += 1
+                    print(f'This is executed {self.num_calls} times')
+                    return self.func(*args, **kwargs)
+                
+            @CountCalls
+            def sayHello():
+                print('Hello')
+
+            sayHello()  //Output: This is executed 1 time
+            sayHello()  //Output: This is executed 2 times
+
+
+
+
+
+
+
+
+
+
+
 
