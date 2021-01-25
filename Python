@@ -34,6 +34,7 @@ CONTENTS
 31. JSON
 32. Random Numbers
 33. Decorators - Basic, Arguments, Function Identities, Repeating, Nested, Class
+34. Generators
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -2097,7 +2098,121 @@ CONTENTS
             sayHello()  //Output: This is executed 1 time
             sayHello()  //Output: This is executed 2 times
 
+////////////////////////////////////////////////////////////////////////
+34. Generators
+    //Memory efficient when you work with large data
+    
+    //Basic
+        def mygen():
+            yield 1
+            yield 2
+            yield 3
+        g = mygen()
+        
+        #get all values
+        for i in g:
+            print(i)
+            
+        #get one value at a time
+        value = next(g)
+        print(value)    //Output: 1
+        
+        value = next(g)
+        print(value)    //Output: 2
 
+    //Iterations - Basics
+        def mygen():
+            yield 1
+            yield 2
+            yield 3
+        g = mygen()
+        
+        #Calculation
+        print(sum(g))
+        
+        #Sorting
+        print(sorted(g))
+
+    //Iterations - Counting down
+        def countdown(num):
+            print('Start')  #note that this line will not be printed
+            while num > 0:
+                yield num
+                num -= 1
+        cd = countdown(4)
+        value = next(cd)
+        print(value)            #Output: 4
+
+        #activates the loop
+        print(next(cd))         #Output: 3
+        print(next(cd))         #Output: 2
+
+    //Working with data - Without Generator
+        import sys
+        def firstn(n):
+            numList = []
+            numInt = 0
+            while numInt < n:
+                numList.append(numInt)
+                numInt += 1
+            return numList
+
+        print(firstn(10))               #Print numbers 0 to 9 in a list
+        print(sum(firstn(10)))      #Print 45
+        print(sys.getsizeof(firstn(1000000)))    #Output: 8,697,464 bytes
+
+    //Working with data - With Generator
+        //numList not included
+        //numList not being used here to save memory
+        import sys
+        def firstn_generator(n):
+            numInt = 0
+            while numInt < n:
+                yield numInt
+                numInt += 1
+
+        print(firstn_generator(10))               #Print numbers 0 to 9 in a list
+        print(sum(firstn_generator(10)))      #Print 45
+        print(sys.getsizeof(firstn_generator(1000000))) #Output: 120 bytes
+
+    //Fibonacci Sequence
+        #Adding up all numbers in ascending order
+        def fibonacci(limit):            
+            
+            #Storage
+            a, b = 0, 1
+            
+            while a < limit:
+                yield a
+                a, b = b, a+b
+                    #Sequence
+                    #a becomes b, b becomes a+b
+
+        fib = fibonacci(30)
+            #30 is the limit
+        
+        for i in fib:
+            print(i)
+
+
+    //Generator Expression
+        //Works like list comprehension but with parentheses instead of square brackets
+        
+        #List version
+        import sys
+        mylist = [i for i in range(10) if i % 2 == 0]
+        print(mylist)
+        print(sys.getsizeof(mylist))  #Change range to 100,000 to get 406496 bytes
+        
+        #Generator version
+        import sys
+        mygen = (i for i in range(10) if i % 2 == 0)
+        print(mygen)
+        print(sys.getsizeof(mygen))   #Change range to 100,000 to get 120 bytes
+
+        #Convert Generator to List
+        mygen = (i for i in range(10) if i % 2 == 0)
+        print(list(mygen))
 
 
 
