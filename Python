@@ -37,7 +37,7 @@ CONTENTS
 34. Generators
 35. Threading & Processing
 36. Multithreading - Sharing, Locking, Queueing, Daemon
-37. Multiprocessing
+37. Multiprocessing - Sharing, Locking, Queueing, Process Pool
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -2551,6 +2551,184 @@ CONTENTS
                 print('end main')
 
 
+////////////////////////////////////////////////////////////////////////
+37. Multiprocessing - Sharing, Locking, Queueing, Process Pool
+    //Basic
+        from multiprocessing import Process
+        import os        
+        
+        #Dummy function
+        def square_numbers():
+            for i in range(100):
+                i * i                
+        
+        if __name__ == "__main__":
+            processesList = []    #Place to store the processes
+            processesVar =  os.cpu_count() 
 
+            #Create processes
+            for i in range(processesVar):
+                p = Process(target=square_numbers)      #target is for the function            
+                processesList.append(t)
+
+            #Start the processes
+            for p in processesList:
+                p.start()
+
+            #Join the processes
+            for p in processesList:
+                p.join()            #This will wait for the processes to finish while blocking the program to continue. 
+                
+            print('end main')
+
+    //Share data between processes WITHOUT LOCK
+        from multiprocessing import Process, Value, Array
+        import time   
+        
+        #Dummy function
+        def add_100(number):
+            for i in range(100):
+                time.sleep(0.01)
+                number.value += 1           
+        
+        if __name__ == "__main__":
+            #Shared memory
+            shared_number = Value('i', 0)
+            print('Number at the beginning is ', shared_number.value)
+            
+            p1 = Process(target=add_100, args=(shared_number,))
+            p2 = Process(target=add_100, args=(shared_number,))
+            
+            p1.start()
+            p2.start()
+            
+            p1.join()
+            p2.join()
+            
+            print('number at the end in ', shared_number.value)               
+            print('end main')
+
+    //Share data between processes WITH LOCK
+        from multiprocessing import Process, Value, Array, Lock
+        import time   
+        
+        #Dummy function
+        def add_100(number, lock):
+            for i in range(100):
+                time.sleep(0.01)
+                with lock:                    
+                    number.value += 1                          
+        
+        if __name__ == "__main__":
+        
+            #Create lock object
+            lock = Lock()
+        
+            #Shared memory
+            shared_number = Value('i', 0)
+            print('Number at the beginning is ', shared_number.value)
+            
+            p1 = Process(target=add_100, args=(shared_number, lock))
+            p2 = Process(target=add_100, args=(shared_number, lock))
+            
+            p1.start()
+            p2.start()
+            
+            p1.join()
+            p2.join()
+            
+            print('number at the end in ', shared_number.value)               
+            print('end main')
+
+    //Share and ARRAY of data between processes WITH LOCK
+        from multiprocessing import Process, Value, Array, Lock
+        import time   
+        
+        #Dummy function
+        def add_100(numbers, lock):
+            for i in range(100):
+                time.sleep(0.01)
+                for i in range(len(numbers)):
+                    with lock:
+                        numbers[i] += 1
+        
+        if __name__ == "__main__":
+        
+            #Create lock object
+            lock = Lock()
+        
+            #Shared memory
+            shared_array = Array('d', [0.0, 100.0, 200.0])
+            print('Array at the beginning is ', shared_array[:])
+            
+            p1 = Process(target=add_100, args=(shared_array, lock))
+            p2 = Process(target=add_100, args=(shared_array, lock))
+            
+            p1.start()
+            p2.start()
+            
+            p1.join()
+            p2.join()
+            
+            print('Array at the end is ', shared_array[:])           
+            print('end main')
+
+    //Queue
+        from multiprocessing import Process, Value, Array, Lock, Queue
+        import time   
+        
+        #Dummy function
+        def square(numbers, queue):
+            for i in numbers:
+                queue.put(i*i)
+                
+        def make_negative(numbers, queue):
+            for i in numbers:
+                queue.put(-1*i)
+        
+        if __name__ == "__main__":
+            
+            numbers = range(1, 6)
+            q = Queue()
+            
+            p1 = Process(target=square, args=(numbers, q))
+            p2 = Process(target=make_negative, args=(numbers, q))
+
+            p1.start()
+            p2.start()
+            
+            p1.join()
+            p2.join()
+
+            #there is no such thing as q.join
+            while not q.empty():
+                print(q.get())
+
+    //Process Pool
+        #Can be used to manage multiple processes
+        #Can split large data into smaller chunks and then be processed in parallel processes
+        #METHODS: map, apply, join, close
+        
+        from multiprocessing import Pool
+
+        #Dummy function
+        def cube(number):
+            return number * number * number                
+        
+        if __name__ == "__main__":
+            numbers = range(10)
+            pool = Pool()
+            
+            #Map - This allocates and creates the max number of processes, then, split numbers into equal sized chunks 
+            #Then it will send the chunks to the function. Function is running in parallel in multiple processes
+            result = pool.map(cube, numbers)
+            
+            #Close the pool
+            pool.close()
+            
+            #Join
+            pool.join()
+            
+            print(result)       //Output: [0, 1, 8, 27, 64, 125, 216, 343, 512, 729]
 
 
