@@ -35,6 +35,7 @@ CONTENTS
 32. Random Numbers
 33. Decorators - Basic, Arguments, Function Identities, Repeating, Nested, Class
 34. Generators
+35. Threading & Processing
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -2215,7 +2216,9 @@ CONTENTS
         print(list(mygen))
 
 
-
+////////////////////////////////////////////////////////////////////////
+35. Threading & Processing
+    //Run code in parallel to speed up code
 
 
 
