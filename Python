@@ -2218,7 +2218,91 @@ CONTENTS
 
 ////////////////////////////////////////////////////////////////////////
 35. Threading & Processing
-    //Run code in parallel to speed up code
+    //Run codes in parallel to speed up code
+        #Process:
+            #Python Interpreter
+            #+Takes advantage of multiple CPU and cores
+            #+Memory is not shared between processes
+            #+Processes can start independently from other processes
+            #+Processes are interruptable/killable
+            #+Avoids the GIL Limitations
+            #-Starting a process is slower than starting a thread
+            #-Inter Process Communication (sharing memory between processes) is complicated
+            #-Despite seperate memory, it requires alot of memory collectively            
+
+        #Threads:
+            #+An entity or entities within a process that can be scheduled
+            #+All threads within a process share the same memory
+            #+Starting a thread is faster than starting a process
+            #+Good for I/O bound task - Communicating with hardware drivers and other devices
+            #-Not interruptable/killable
+            #-The GIL Limits one thread at a time
+
+    //Processing
+        from multiprocessing import Process
+        import os
+        import time
+        
+        #Dummy function
+        def square_numbers():
+            for i in range(100):
+                i * i
+                time.sleep(0.1)
+        
+        processesList = []    #Place to store the processes
+        processesVar =  os.cpu_count()         #Number of CPUs in your machine
+
+        #Create processes
+        for i in range(processesVar):
+            p = Process(target=square_numbers)      #target is for the function            
+            processesList.append(p)
+
+        #Start the process
+        for p in processesList:
+            p.start()
+
+        #Join the process. 
+        for p in processesList:
+            p.join()            #This will wait for the processes to finish. And while waiting, it will block the main thread
+        print('end main')
+
+        #Before running the code, check task manager and look for 'python' to see the current activity
+            #There will be 2 Python process running, each with different Process ID (PID)
+        #Run the code and check the task manager again
+            #There will be about extra 5 processes with single thread running after execution
+
+    //Threading
+        from threading import Thread
+        import os
+        import time
+        
+        #Dummy function
+        def square_numbers():
+            for i in range(100):
+                i * i
+                time.sleep(0.1)
+        
+        threadsList = []    #Place to store the threads
+        threadsVar =  10 
+
+        #Create processes
+        for i in range(threadsVar):
+            t = Thread(target=square_numbers)      #target is for the function            
+            threadsList.append(t)
+
+        #Start the process
+        for t in threadsList:
+            t.start()
+
+        #Join the process. 
+        for t in threadsList:
+            t.join()            #This will wait for the processes to finish. And while waiting, it will block the main thread
+        print('end main')
+
+        #Before running the code, check task manager and look for 'python' to see the current activity
+            #There will be 2 Python process running, each with different Process ID (PID)
+        #Run the code and check the task manager again
+            #There will be about extra 1 process with 11 threads running after execution
 
 
 
