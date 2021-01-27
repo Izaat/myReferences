@@ -38,6 +38,8 @@ CONTENTS
 35. Threading & Processing
 36. Multithreading - Sharing, Locking, Queueing, Daemon
 37. Multiprocessing - Sharing, Locking, Queueing, Process Pool
+38. Function Arguments 
+39. Asterisk Operator
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -2730,5 +2732,145 @@ CONTENTS
             pool.join()
             
             print(result)       //Output: [0, 1, 8, 27, 64, 125, 216, 343, 512, 729]
+
+////////////////////////////////////////////////////////////////////////
+38. Function Arguments 
+    #Differences between arguments and parameters, 
+    #Positional and keywords arguments, 
+    #Default arguments
+    #Variable length arguments
+    #Forced keyword arguments
+    #Forced keyword parameters
+    #Container unpacking into function arguments  - List
+    #Container unpacking into function arguments  - Tuple
+    #Container unpacking into function arguments - Dictionary
+    #Local and Global variables
+    #Parameter passing (by value or by reference)
+    
+    
+    //Difference between arguments and parameters
+        def print_name(name)
+            print(name) #name is the parameter
+        print_name('Izaat') #Izaat is the argument   
+
+    //Positional and keyword arguments
+        def foo(a, b, c)
+            print(a, b, c)
+        foo(1, 2, 3)                //1,2,3 are the positional arguments
+        foo(c=3, a=1, b=2)    //a,b,c are the keyword arguments, position doesn't matter
+        //Note: You can mix the two arguments but you cant put positional (3) after keyword (b) as shown below
+        //Example: (1, b=2, 3)
+    
+    //Default Arguments
+        def foo(a, b, c, d=4)   //d=4 is the default value
+            print(a, b, c, d)
+        print(1, 2, 3)  //Output: 1 2 3 4
+        print(1,2,3,7)  //Output: 1 2 3 7 - This reassigns d=4 to d=7
+        //Note: Default arguments must be at the end of the parameters
+        
+    //Variable length arguments (*args and **kwargs)
+        //Note: * => you can pass any positional argument to the function
+        //Note: ** => you can pass any keyword argument to the function
+        //Note: You can also name them *izaat for *args and **hello for **kwargs
+        foo(a, b, *args, **kwargs): 
+            print(a, b)                                 //Tuple
+            for arg in args:
+                print(arg)
+            for key in kwargs:                     //Dictionary entry
+                print(key, kwargs[key])
+        foo(1, 2, 3, 4, 5, six=6, seven=7) 
+        //Note: Where "3,4,5" are args and "six" and "seven" are kwargs
+        //Note: Every args and kwargs element will be printed on a new line except "1,2" (positional)
+        //Note: you can also use positional arguments for args and kwargs
+        
+    //Forced keyword argument
+        def foo(a, b, *, c, d):     //Every argument after the star must be keyword argument
+            print(a, b, c, d)
+        foo(1, 2, 3, 4)             //This will produce error
+        foo(1, 2, c=3, d=4)     //Do this instead  
+    
+    //Forced keyword parameters
+        def foo(*args, last):
+            for arg in args:
+                print(arg)
+            print(last)
+        foo(1,2,3)                    //This will only recognize 1,2,3 as args and missing 1 keyword argument 'last'
+        foo(1,2,3, last=100)    //Do this instead
+        
+    //Container unpacking into function arguments - List
+        def foo(a, b, c):
+            print(a, b, c)
+        mylist = [1, 2, 3]
+        foo(*mylist)        //This line will unpack mylist and pass 1 to a, 2 to b, and 3 to c
+    
+    //Container unpacking into function arguments - Tuple
+        def foo(a, b, c):
+            print(a, b, c)
+        mytuple = (1, 2, 3)
+        foo(*mytuple)        //This line will unpack mytuple and pass 1 to a, 2 to b, and 3 to c
+        
+    //Container unpacking into function arguments - Dictionary
+        def foo(a, b, c):
+            print(a, b, c)
+        mydict = {'a': 1, 'b': 2, 'c': 3}
+        foo(**mydict)        //This line will unpack mydict and pass 1 to a, 2 to b, and 3 to c
+    
+    //Local and Global variables
+        def foo():
+            global number   //this must be called in the function to modify the 'number' variable (global variable)
+            number = 3
+        number = 0  
+        foo()
+        print (number)  //Output: 3
+
+        //NOTE: Local variable and global variable may share the same name but has nothing to do with each other
+        def foo():
+            number = 3      //This number(local) variable only lives within this function and has nothing to do with number (global)
+        number = 0          //This is the global variable
+        foo()
+        print(number)   //Output: 0
+    
+    //Parameter passing (by value or by reference)
+        #Immutable objects can't be modified
+        #Mutable objects can be modified
+        #Mutable objects can rebind into immutable object 
+        
+        //Immutable
+            def foo(x):
+                x = 5
+            var = 10    //Immutable 
+            foo(var)
+            print(var)  //Output:10
+
+        //Mutable
+            def foo(a_list):
+                a_list.append(4)
+                a_list[0] = -100
+            my_list = [1, 2, 3]
+            foo(my_list)
+            print(my_list)  //Output:[-100, 2, 3, 4]
+
+        //Immutable - Rebind
+            def foo(a_list):
+                a_list = [100, 200, 300]    //Adding this line turns my_list immutable as a_list becomes a local variable
+                a_list.append(4)
+                a_list[0] = -100
+            my_list = [1, 2, 3]
+            foo(my_list)
+            print(my_list)  //Output:[1, 2, 3]
+
+        //Mutable
+            def foo(a_list):
+                a_list += [100, 200, 300]
+            my_list = [1, 2, 3]
+            foo(my_list)
+            print(my_list)  //Output:[1, 2, 3, 100, 200, 300]
+
+        //Immutable - Rebind
+            def foo(a_list):
+                a_list = a_list + [100, 200, 300]
+            my_list = [1, 2, 3]
+            foo(my_list)
+            print(my_list)  //Output:[1, 2, 3]
 
 
