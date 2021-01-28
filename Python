@@ -883,7 +883,10 @@ CONTENTS
     //Rewrite the entire file
         variable_file = open("text.txt", "w")   //Note: The "w" will turn your file to blank and write the line below
         variable_file.write("\nThis is the line to be added to the text file") 
-        variable_file.close()            
+        variable_file.close()       
+    //Advanced method - See Topic 41, Context manager
+        with open('text.txt', 'w') as file:
+            file.write('action statement')
 
 ////////////////////////////////////////////////////////////////////////
 20. Modules and Pip
