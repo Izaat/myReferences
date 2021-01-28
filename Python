@@ -1932,7 +1932,7 @@ CONTENTS
 
 
 ////////////////////////////////////////////////////////////////////////
-33. Decorators  - Basic, Arguments, Function Identities, Repeating, Nested, Class
+33. Decorators  - Basic, Arguments, Function Identities, Repeating, Nested, Class, Decorator with Timer
     //Inner function within inner function
     
     //No Decorator
@@ -2107,6 +2107,23 @@ CONTENTS
 
             sayHello()  //Output: This is executed 1 time
             sayHello()  //Output: This is executed 2 times
+          
+    //Decorator with Timer (Debugging tool to check time)
+        import time
+        def timer(func):
+            def wrapper(*args, **kwargs):
+                start = time.time()
+                rv = func()
+                total = time.time() - start
+                print("Time:", total)
+                return rv
+            return wrapper
+        
+        @timer          //you can just paste this line into any function without modifying the code
+        def test():
+            for _ in range(1000):
+                pass
+        test()
 
 ////////////////////////////////////////////////////////////////////////
 34. Generators
