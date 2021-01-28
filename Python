@@ -38,7 +38,7 @@ CONTENTS
 35. Threading & Processing
 36. Multithreading - Sharing, Locking, Queueing, Daemon
 37. Multiprocessing - Sharing, Locking, Queueing, Process Pool
-38. Function Arguments 
+38. Function Arguments (Args, Kwargs, Unpacking, Local, Global, Mutable, Immutable)
 39. Asterisk Operator
 
 ////////////////////////////////////////////////////////////////////////
@@ -2734,7 +2734,7 @@ CONTENTS
             print(result)       //Output: [0, 1, 8, 27, 64, 125, 216, 343, 512, 729]
 
 ////////////////////////////////////////////////////////////////////////
-38. Function Arguments 
+38. Function Arguments (Args, Kwargs, Unpacking, Local, Global, Mutable, Immutable)
     #Differences between arguments and parameters, 
     #Positional and keywords arguments, 
     #Default arguments
