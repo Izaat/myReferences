@@ -39,7 +39,7 @@ CONTENTS
 36. Multithreading - Sharing, Locking, Queueing, Daemon
 37. Multiprocessing - Sharing, Locking, Queueing, Process Pool
 38. Function Arguments (Args, Kwargs, Unpacking, Local, Global, Mutable, Immutable)
-39. Asterisk Operator
+39. Asterisk (*) Operator
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -2872,5 +2872,58 @@ CONTENTS
             my_list = [1, 2, 3]
             foo(my_list)
             print(my_list)  //Output:[1, 2, 3]
+
+////////////////////////////////////////////////////////////////////////
+39. Asterisk (*) Operator
+    //Multiplication
+        result = 2 * 4
+        print(result)   //Output: 8
+
+    //Power
+        result = 2 ** 4
+        print(result)   //Output: 16
+    
+    //Create List, Tuples and Strings with *
+        //Substitute [] with () for Tuples
+        //Substitute [] with " "" for Strings
+        //List with 5 elements
+            zeros = [0] * 6
+            print(zeros)    //Output:   [0, 0, 0, 0, 0, 0]
+
+        //List with pattern elements
+            zeros = [0, 1] * 6
+            print(zeros)    //Output:   [0, 1, 0, 1, 0, 1]
+
+    //Args and Kwargs
+        #See Topic 38. Function Arguments
+
+    //Packing-Unpacking
+        numbers = [1, 2, 3, 4, 5, 6] 
+            #using tuples, (1, 2, 3, 4, 5, 6) will return the same result
+        
+        *beginning, last = numbers  //This will create beginning list and exclude the last number into the new list
+            #beginning, *last = numbers //This will create last list and exclude the first number into the new list
+            #beginning, *middle, last = numbers //This will create middle list and exclude the first and last number into the new list
+            #beginning, *middle, secondlast, last = numbers //This will create middle list and exclude the first, secondlast and last number into the new list
+            
+        print(beginning)
+        #print(middle)
+        #print(secondlast)
+        print(last)
+        //NOTE: If the numbers variable is a tuple, the beginning output will still be a list
+
+    //Merging into a list
+        mytuple = (1,2,3)
+        mylist = [4,5,6]
+        myset = {7,8,9}
+        
+        newList = [*mytuple, *mylist, *myset]
+        print(newList)      //Output: [1,2,3,4,5,6,7,8,9]
+
+    //Merging dictionaries
+        dictA = {'a': 1, 'b': 2, 'c': 3}
+        dictB = {'d': 4, 'e': 5, 'f': 6}
+        myDict = {**dictA, **dictB}
+        print(myDict)       //Output: {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6}
 
 
