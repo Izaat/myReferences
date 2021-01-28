@@ -3024,6 +3024,140 @@ CONTENTS
 
 ////////////////////////////////////////////////////////////////////////
 41. Context Managers
+    #Great tool for resource management
+    #Allows allocate and release resources precisely when you want to
+    
+    //////////////////////
+    //Writing
+        #Example code
+        with open('notes.txt', 'w') as file:
+            file.write('Action')
+        
+        #The example code is similar to this full code
+        file = open('text.txt', 'w')
+        try:
+            file.write('Action Statement')
+        finally:
+            file.close()
+
+    //////////////////////
+    //Lock
+        from threading import Lock
+        lock = Lock()
+        
+        with lock:
+            #....code
+
+    //////////////////////
+    //Basic Context Manager
+        #Using class as Context Manager
+        class ManagedFile:
+            #Initialize
+            def __init__(self, filename):
+                self.filename = filename
+            
+            #Open File
+            def __enter__(self):
+                print('enter')
+                self.file = open(self.filename, 'w')
+                return self.file
+            
+            #Close File
+            def __exit__(self, exc_type, exc_value, exc_traceback):
+                if self.file:
+                    self.file.close()
+                print('exit')
+
+        with ManagedFile('notes.txt') as file:
+            print('Action statement')
+            file.write('Write a string')
+    
+    //////////////////////
+    //Context Manager with Exception Error
+        #Simulating the error
+        
+        #Using class as Context Manager
+        class ManagedFile:
+            #Initialize
+            def __init__(self, filename):
+                self.filename = filename
+            
+            #Open File
+            def __enter__(self):
+                print('enter')
+                self.file = open(self.filename, 'w')
+                return self.file
+            
+            #Close File
+            def __exit__(self, exc_type, exc_value, exc_traceback):
+                if self.file:
+                    self.file.close()
+                print('exc:', exc_type, exc_value)  #exc: None None
+                print('exit')
+
+        with ManagedFile('notes.txt') as file:
+            print('Action statement')
+            file.write('Write a string')
+            file.somemethod()   #This will simulate error trigger
+        print('Continue...')
+        
+        #NOTE: Despite the program closes, it  didnt print out continue
+
+    //////////////////////
+    //Context Manager with Exception Handler
+        #To make sure the file still closes and exits the program when there is an error
+        
+        #Using class as Context Manager
+        class ManagedFile:
+            #Initialize
+            def __init__(self, filename):
+                self.filename = filename
+            
+            #Open File
+            def __enter__(self):
+                print('enter')
+                self.file = open(self.filename, 'w')
+                return self.file
+            
+            #Close File
+            def __exit__(self, exc_type, exc_value, exc_traceback):
+                if self.file:
+                    self.file.close()
+                if exc_type is not None:
+                    print('Exception has been handled')
+                #print('exc:', exc_type, exc_value)  #exc: None None
+                print('exit')
+                return True
+
+        with ManagedFile('notes.txt') as file:
+            print('Action statement')
+            file.write('Write a string')
+            file.somemethod()   #This will simulate error trigger
+        print('Continue...')
+        
+        #NOTE: By handling the exception, the Continue gets printed out
+
+    //////////////////////
+    //Context Manager Library
+        from contextlib import contextmanager
+        
+        #Decorator
+        @contextmanager
+        
+        #Create Generator
+        def open_managed_file(filename):
+            fileVar = open(filename, 'w')
+            try:
+                yield fileVar   #This suspends the execution temporarily to write into the file
+                #Exception handlers can be inserted here...
+            finally:
+                f.close()
+
+        with open_managed_file('notes.txt') as fileVar:
+            fileVar.write('Write a string')
+
+
+
 
 
 
