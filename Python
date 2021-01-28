@@ -40,6 +40,8 @@ CONTENTS
 37. Multiprocessing - Sharing, Locking, Queueing, Process Pool
 38. Function Arguments (Args, Kwargs, Unpacking, Local, Global, Mutable, Immutable)
 39. Asterisk (*) Operator
+40. Shallow & Deep Copying
+41. Context Managers
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -2925,5 +2927,112 @@ CONTENTS
         dictB = {'d': 4, 'e': 5, 'f': 6}
         myDict = {**dictA, **dictB}
         print(myDict)       //Output: {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6}
+
+////////////////////////////////////////////////////////////////////////
+40. Shallow & Deep Copying
+    #Copying mutable elements with built in module
+    #Difference between shallow and deep copies
+        #Shallow: one level deep, only references of child object
+        #Deep: Full independent copy
+    #Create copies of custom objects
+
+    //Referencing - Not copies
+        //Modifying copyVar will also modify originVar
+        
+        #Example with numbers
+        originVar = 5
+        copyVar = originVar //This only points copyVar to originVar and doesn't do anything
+        copyVar = 6             //This only creates another variable independent from the one linked to originVar
+        print(originVar)    //Output: 5
+        print(copyVar)      //Output: 6
+        
+        #Example with list
+        originVar = [1, 2, 3, 4, 5]
+        copyVar = originVar
+        copyVar[0] = -10
+        print(originVar)        //Output: [-10, 2, 3, 4, 5]
+        print(copyVar)          //Output: [-10, 2, 3, 4, 5]
+
+    //Shallow copy
+        #Only works with single level list
+        import copy
+        originVar = [1, 2, 3, 4, 5] //One level deep list
+        
+        copyVar = copy.copy(originVar)
+            #Alternatives - produces same result
+            #copyVar = originVar.copy()
+            #copyVar = list(originVar)
+            #copyVar = originVar[:] //Slicing
+            
+        copyVar[0] = -10
+            
+        print(originVar)        //Output: [1, 2, 3, 4, 5]
+        print(copyVar)          //Output: [-10, 2, 3, 4, 5]
+
+    //Deep Copy
+        #Can be applied to tuples and dictionaries
+        import copy
+        originVar = [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9]] //Two levels deep list
+        
+        copyVar = copy.deepcopy(originVar)
+            
+        copyVar[0] [1] = -10
+        print(originVar)        //Output: [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9]]
+        print(copyVar)          //Output: [[0, -10, 2, 3, 4], [5, 6, 7, 8, 9]]
+
+    //Copy custom objects - Shallow structure
+        import copy
+        class Person:
+            def __init__(self, name, age):
+                self.name = name
+                self.age = age
+                
+        p1 = Person('Ahmad', 25)
+        p2 = copy.copy(p1)        
+        p2.age = 28
+        
+        print(p1.age)   //Output: 25
+        print(p2.age)   //Output: 28
+        
+    //Copy custom objects - Deep structure
+        import copy
+        
+        class Person:
+            def __init__(self, name, age):
+                self.name = name
+                self.age = age
+                
+        class Company:
+            def __init__(self, boss, employee):
+                self.boss = boss
+                self.employee = employee
+                
+        p1 = Person('Ahmad', 55)    //Boss
+        p2 = Person('Ali', 25)          //Employee
+        
+        companyVar1 = Company(p1, p2)
+        companyVar2 = copy.deepcopy(companyVar1)
+        
+        companyVar2.boss.age = 56
+        
+        print(companyVar1.boss.age)   //Output: 55
+        print(companyVar2.boss.age)   //Output: 56
+
+
+////////////////////////////////////////////////////////////////////////
+41. Context Managers
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
