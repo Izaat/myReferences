@@ -81,7 +81,7 @@ dynamic
             print('${myint.abs}');         //Convert number to absolute
             print(myint.toString());        //Convert Integer to String
         
-    //DOUBLE
+    //DOUBLE - also check out 'num' data types
         #Basics
             main(List<String> args) {}  >
                 double mydouble = 45.454545;
