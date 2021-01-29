@@ -129,7 +129,18 @@ dynamic
             print(mystring1.compareTo(mystring5));  //Output:  1 (Match = 1, Not matched = -1)
             print(mystring1.substring(6, 12)); //Prints out string starting at index and ends at index. This is similar to [:] in Python
 
-
+    //DYNAMIC   - See Topic 20 Function
+        //Dynamic data types can read any type of number value (float, int, double, num)
+        void main() {} > 
+            dynamic mynum = 6;
+            dynamic mybool = true;
+            dynamic mydouble = 45.4545;
+            dynamic mystring = 'dart';
+            
+            print(mynum);
+            print(mybool);
+            print(mydouble);
+            print(mystring);
 
 
 06 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
