@@ -1037,7 +1037,7 @@ CONTENTS
 25. Interpreter
     //Type python in command prompt
     //You will see ">>>" in command prompt
-
+    //Interpreter translates, compiler converts
 
 ////////////////////////////////////////////////////////////////////////
 26. Sets
