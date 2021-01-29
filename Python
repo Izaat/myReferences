@@ -6,7 +6,7 @@ CONTENTS
 03. Input from users
 04. Basic Calculator
 05. Lists, List Functions and Tuples
-06. Functions
+06. Functions - Structure, Parameter
 07. Return Statement
 08. Statements  (If, While, For)
 09. Comparison Statements
@@ -42,6 +42,7 @@ CONTENTS
 39. Asterisk (*) Operator
 40. Shallow & Deep Copying
 41. Context Managers
+42. Cool Things in Python - Classes in Functions, Functions in For-Loops, Function-Statement-Function, Inspect Module
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -448,7 +449,7 @@ CONTENTS
         def sayHi(name, age):
             print("Hello " + name + " and you are " + str(age) + " years old")   
             //Remember that numbers can't share with string within a sentence therefore needs to convert to string hende str(age)
-        sayHi("Mike", 23)   //Output: Hello Mike and you are 23 years old
+        sayHi("Mike", 23)   //Output: Hello Mike and you are 23 years old        
 
 ////////////////////////////////////////////////////////////////////////
 07. Return Statement
@@ -3174,12 +3175,75 @@ CONTENTS
             fileVar.write('Write a string')
 
 
+////////////////////////////////////////////////////////////////////////
+42. Cool Things in Python
+        
+    /////////////////////
+    //Class in functions
+        def makeClass(x):
+            class Dog:
+                def __init__(self, name):
+                    self.name  = name
+                
+                def printValue(self):
+                    print(x)
+            return Dog
+        
+        cls = makeClass(10)
+        print(cls)                              //Output: <class '__main__.makeClass.<locals>.Dog'>
+        
+        d = cls("Izaat")
+        print(d.name)
+        d.printValue()
+    
+    /////////////////////
+    //Function in For Loops
+        for i in range(10):
+            def show():     //You can have multiple functions in for loop
+                print(i*2)
+            show()          //Output: Numbers in multiplication of 2 - (0,2,4,6... ...16,18)
+        //NOTE: if show() being called outside of the function, it outputs 18
+    
+    /////////////////////
+    //Functions in a statement under a function
+        def func(x):
+            if x == 1:
+                def rv():
+                    print("X is equal to 1")
+            else:
+                def rv():
+                    print("X is not 1")
+            return rv
+        
+        new_func() = func() 
+            #OR new_func() = func(2)
+        
+       new_func()
+       
+       #shows memory address
+       print(id(new_func))
 
-
-
-
-
-
+    /////////////////////
+    //Inspect Module
+    
+        #getmembers() and getsource()
+            import inspect    
+            def func(x):
+                if x == 1:
+                    def rv():
+                        print("X is equal to 1")
+                else:
+                    def rv():
+                        print("X is not 1")
+                return rv        
+            new_func() = func()         
+           print(inspect.getmembers(new_func))
+           print(inspect.getsource(new_func))       //Shows source code
+           
+        #Queue
+            import inspect    
+            from queue import Queue
+            print(inspect.getsource(Queue))       //Shows object list
 
 
 
