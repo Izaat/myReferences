@@ -542,8 +542,9 @@ dynamic
 
 20 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //FUNCTIONS
+
     /////////////
-    //Example 1
+    //Dynamic Functions
         void main() {
             showOutput(square(2.5));
         }
@@ -553,8 +554,9 @@ dynamic
         void showOutput(var msg) {
             print msg;
         }   //Output: 4
+        
     ///////////////
-    //Anonymous function
+    //Anonymous Functions
         /////
         //Without anonymous
         main() {
@@ -577,39 +579,76 @@ dynamic
         Output: var1, var2, var3
 
     /////////////////
-    //Positional parameter argument
-        void main() {
-            print(sum(10, 20));
-        }
-        dynamic sum(var num1, var num2) => num1 + num2;     //Where num1 is 10 and num2 is 20           
+    //Positional Parameter
+        //Example 1
+            void main() {
+                print(sum(10, 20));
+            }
+            dynamic sum(var num1, var num2) => num1 + num2;     //Where num1 is 10 and num2 is 20
+        
+        //Example 2
+            String posParam(String name, int age, int year) {} >
+                return "name: $name - age: $age - year: $year";
+            
+            main (List<String> args) {} >
+                var res = posParam("dart", 10, 2000);
+                print(res);
     
     /////////////////
-    //Named parameter argument
-        void main() {
-            print(sum (num1: 10, num2: 20) );
-        }
-        dynamic sum({var num1, var num2}) => num1 + num2;
+    //Named Parameter
+        //Example 1
+            void main() {
+                print(sum (num1: 10, num2: 20) );
+            }
+            dynamic sum({var num1, var num2}) => num1 + num2;
+            
+        //Example 2
+            String namedParam({String name, int age, int year}) {} >
+                return "name: $name - age: $age - year: $year";
+            
+            main (List<String> args) {} >
+                var res = namedParam(age: 20, year: 3000, name:"dart");
+                print(res);
 
      /////////////////
-     //Hybrid of Positional and Named parameter
-        void main() {
-            print(sum (10, num2: 20) );
-        }
-        dynamic sum(var num1, {var num2}) => num1 + num2;
+     //Hybrid of Positional and Named Parameters
+        //Example 1
+            void main() {
+                print(sum (10, num2: 20) );
+            }
+            dynamic sum(var num1, {var num2}) => num1 + num2;
+            
+        //Example 2
+            String hybridParam(String name, int age, {int year = 2000} ) {} >
+                return "name: $name - age: $age - year: $year";
+            
+            main (List<String> args) {} >
+                var res = hybridParam("dart", 20);                      //Note: If the year has no input, by default it will be 2000 
+                //var res = hybridParam("dart", 20, year:4000); //To input value to the year
+                print(res);                                                            //Output: Dart, 20, 2000
 
     /////////////////
-     //Positional and Named parameter shortcut
+     //Hybrid of Positional and Named Parameter shortcut
         void main() {
             print(sum (10) );
             print(sum(10, num2: 20));
         }
         dynamic sum(var num1, {var num2}) => num1 + (num2 ?? 0);         //OR
-        dynamic sum(var num1, {var num2=0}) => num1 + num2;              //Provides same function as the line above
+        dynamic sum(var num1, {var num2=0}) => num1 + num2;                //Provides same function as the line above
         //Output: 10
         //Output: 30
-
+    
     /////////////////
-     //Make Positional as Optional parameter
+     //Optional Parameter
+        String optionalParam(String name, int age, [int year]) {} >
+            return "name: $name - age: $age - year: $year";
+            
+        main (List<String> args) {} >
+            var res = optionalParam("dart", 30);    //Note: Without providing value for the year, the year will return null as default
+            print(res);
+    
+    /////////////////
+     //Make Positional as Optional Parameter
         void main() {
             print(sum (10, 20) );
             print(sum(20));
@@ -617,6 +656,7 @@ dynamic
         dynamic sum(var num1, [var num2]) => num1 + ( num2 ?? 0 );   
         //Output: 30
         //Output: 20
+        
 
 21 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //CLASSES
