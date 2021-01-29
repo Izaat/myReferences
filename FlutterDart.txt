@@ -71,7 +71,7 @@ dynamic
 
 05 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //DATA TYPES
-    //Note: main() and main(List<String> args) provide the same function
+    //Note:  main() and main(List<String> args) provide the same function
     //INTEGER
         main(List<String> args) {} >
             int myint = 5000;
@@ -82,15 +82,21 @@ dynamic
             print(myint.toString());        //Convert Integer to String
         
     //DOUBLE
-        #List
+        #Basics
             main(List<String> args) {}  >
                 double mydouble = 45.454545;
+                double mydouble2 = 45.454545;
                 print('$mydouble');                    //Output:45.454545
                 print('${mydouble.sign}');         //Output: 1
                 print(mydouble.round());        //Output: 45
                 print(mydouble.round().runtimeType)     //Output: int
                 print(mydouble.toString());        //Convert Integer to String
                 print(mydouble.truncate());        //Output: 45
+                
+                #Compare - Returns a negative number if this is less than the number in bracket, 
+                #zero if they are equal, and a positive number if this is greater than  in the bracket.
+                #Can also be used on strings to compare length
+                print(mydouble.compareTo(mydouble2));  //Output:  1 (Match = 1, Not matched = -1)
             
         #integer to Double
             main(List<String> args) {}  >
@@ -114,7 +120,16 @@ dynamic
             String mystring4 = """This is another multiline string
                 This is another multiline string
                 This is another multiline string""";
+            String mystring5 = 'This is a single quote string';
+                
             print('$mystring3');
+            print(mystring3.length);        //Output: 51
+            print(mystring1.codeUnitAt(0));      //Output:   84 (Returns the 16-bit UTF-16 code unit at the given index.)
+            print(mystring1.hashCode);        //Output: 338476741
+            print(mystring1.compareTo(mystring5));  //Output:  1 (Match = 1, Not matched = -1)
+            print(mystring1.substring(6, 12)); //Prints out string starting at index and ends at index. This is similar to [:] in Python
+
+
 
 
 06 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
