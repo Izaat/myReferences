@@ -9,7 +9,7 @@ Run dart file by typing in "dart filename.dart" in the console
 02. OUTPUT, STRINGS AND PRINTING
 03. COMMENTING
 04. DECLARATIONS
-05. MULTILINE STRINGS
+05. DATA TYPES
 06. CONVERTING STRING TO INTEGER AND BACK
 07. DEFINING A CONSTANT
 08. STANDARD OPERATORS
@@ -38,11 +38,15 @@ void main(){
 
 02 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //OUTPUT, STRINGS AND PRINTING
-main(){
-    stdout.writeIn('What is your name: ');
-    String name = stdin.readLineSync(); //box to type in your name
-    print('My name is $name'); //Outputs my name is whatever
-}
+    //main.dart
+        main(){
+            stdout.writeIn('What is your name: ');
+            String name = stdin.readLineSync(); //box to type in your name
+            print('My name is $name'); //Outputs my name is whatever
+        }
+        
+    //Note
+        //main() and main(List<String> args) provide the same function
 
 03 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //COMMENTING
@@ -66,12 +70,51 @@ dynamic
 
 
 05 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-//MULTILINE STRINGS
-    main(){
-        var s2 = """This is also
-        multiline-sting.""";
-        print(s2);
-    } //Outputs the multiline. Shortcut to writing a string without using <br>
+//DATA TYPES
+    //Note: main() and main(List<String> args) provide the same function
+    //INTEGER
+        main(List<String> args) {} >
+            int myint = 5000;
+            print('$myint');                    //Output:5000
+            print('${myint.sign}');         //Output: 1
+            print('${myint.isOdd}');        //Output: False (True if Odd )
+            print('${myint.abs}');         //Convert number to absolute
+            print(myint.toString());        //Convert Integer to String
+        
+    //DOUBLE
+        #List
+            main(List<String> args) {}  >
+                double mydouble = 45.454545;
+                print('$mydouble');                    //Output:45.454545
+                print('${mydouble.sign}');         //Output: 1
+                print(mydouble.round());        //Output: 45
+                print(mydouble.round().runtimeType)     //Output: int
+                print(mydouble.toString());        //Convert Integer to String
+                print(mydouble.truncate());        //Output: 45
+            
+        #integer to Double
+            main(List<String> args) {}  >
+                double mydouble = 45.454545;
+                int myint = 599;
+                var res = mydouble + myint;
+                print(res.tuntimeType);     //Output: All integers will return as double after calculation
+                
+    //BOOLEAN
+        main(List<String> args) {}  >
+            bool mybool = false;
+            print(mybool.toString());       //'false'
+            print(mybool.hashCode);     //1237
+            
+    //STRING
+        main(List<String> args) {}  >
+            String mystring1 = 'This is a single quote string';
+            String mystring2 = "This is a double quote string";
+            String mystring3 = '''This is multiline 
+                text for testing''';
+            String mystring4 = """This is another multiline string
+                This is another multiline string
+                This is another multiline string""";
+            print('$mystring3');
 
 
 06 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
