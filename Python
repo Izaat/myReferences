@@ -42,7 +42,7 @@ CONTENTS
 39. Asterisk (*) Operator
 40. Shallow & Deep Copying
 41. Context Managers
-42. Cool Things in Python - Classes in Functions, Functions in For-Loops, Function-Statement-Function, Inspect Module
+42. Python Unique Features - Classes in Functions, Functions in For-Loops, Function-Statement-Function, Inspect Module
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
@@ -3176,7 +3176,7 @@ CONTENTS
 
 
 ////////////////////////////////////////////////////////////////////////
-42. Cool Things in Python
+42. Python Unique Features
         
     /////////////////////
     //Class in functions
