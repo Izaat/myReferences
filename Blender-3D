@@ -471,6 +471,67 @@ CONTENTS
                 #Add Modifier
                 #Select Mirror Modifier
                 #Select the Eyedropper and click anywhere on the face of the head
+        //Torso
+            #Go to front view and Return 3D Cursor to World Origin (Shift+S, Select 3DCursor to World Origin) 
+            #Add cube and reposition to body of image
+            #Add subdivision surface modifier
+                Viewport: 2
+                Render: 2
+            #Activate auto mirror, Hidden panel > Edit Tab > Auto Mirror
+            #Mirror Modifier MUST be on top of the Subdivision Modifier (Good practice)
+            #Enter Edit Mode
+            #Add Funkopop Side view image as reference to get body thickness
+            #Adjust torso accordingly using Loop Cut tools, scaling, etc
+            #Create Arm Hole, delete the face of around the arm hole, simply by selecting the faces and delete face
+            #Adjust shape accordingly and this includes the neck
+            #Always check polygons without Realtime enabled in subdivision modifier
+        //Legs
+            #Select Faces and Extrude to Knees level
+            #With the faces still selected, Rotate and then extrude again to ankle level
+            #Rotate again and extrude to heel
+            #Select front facing faces between the heel and the ankle and extrude out to form the feet
+            #Adjust the the shapes of the legs accordingly
+            #CTRL+R, Double Click to add Loop Cut
+            #Smoothing Vertices - Edit Mode > Vertex > Smooth Vertices
+            #Always check polygons without Realtime enabled in subdivision modifier
+        //Arms and Hands
+            #In Edit Mode, Open Modifier Tab and under subdivision modifier, activate 'OnCage'
+            #ALT + Left Click to select all vertices around the arm hole
+            #Shift + S and select 'Cursor to Selected' to move 3D cursor to the center of the arm hole
+            #While still in Edit Mode, Add Mesh > Cylinder
+                #Vertices: 8
+                #Modifier Properties Tab > Mirror Modifier > Clipping: OFF
+                #Scale down to about the size smaller than the hole
+                #Rotate the cylinder 90deg (The end-face crown facing away from the torso)
+                #Resize again until it touches the edges of the arm hole
+                #Select the end faces (both sides) and delete faces, this creates a cylinder
+            #ALT + Left Click on the face (this selects the entire cylinder)
+                #Grab and move the cylinder out of the arm hole, Line the edges up but they don't have to be touching 
+            #Still in Edit mode, select edge mode and press ALT + Left Click to select the outer ring of the cylinder
+            #In Modifier Properties Tab > Subdivision Modifier, Disable Realtime to edit with polygons
+            #Modify according to the image to form the deltoids of the arm
+            #Attach arm to body
+                #At the toolbar located at top-center of viewport, enable 'Snap' and select Vertex
+                #select vertices and move the vertices of arm towards the nearby vertices of the arm hole
+                #This will auto merge the vertices
+            #Select the ring again and extrude again to form the biceps
+            #Same process applies with forearm
+            #Hands
+                #At the wrist area, rotate the geomettries in such a way that there are 4 sections (For Index, Middle, Ring and Pinky Finger)
+                #And these sections should be about parallel to the x axis
+                #Edge select the wrist hole and press F to fill the hole
+                #Flatten the 4 sections to form the cross sectional dimension of the hands and extrude
+            #Fingers
+                #For the fingers, Press ALT + E and select 'Individual Faces', this creates the fingers sections
+                #Extrude to form to top section of fingers (Fingers subdivided by 3 sections)
+                #Center-Top toolbar, click on Transform Pivot Point and select Median Point
+                #Extrude again to form the mid joints and then again for the finger tips
+            #Thumbs
+                #Select the forward facing face and extrude (This forms part of the main thumb section inside the hand)
+                #Select the bottom facing face and extrude to form the mid section of thumb and extrude again for the tip of the thumb
+                #Adjust the geometry accordingly
+            #Adjusting the entire hand
+                Select all the hand faces and press Shift + H to hide the torso, arms, legs and head. ALT + H to Unhide
 
 
 
