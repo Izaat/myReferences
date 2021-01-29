@@ -9,7 +9,8 @@ CONTENTS
 06 - Ball Bounce
 07 - Bones and Armature
 08 - Toon Style Animation
-09 - FunkoPop Animation
+09 - Camera Tracking and Stabilization
+10 - FunkoPop Animation
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Interface
@@ -399,9 +400,17 @@ CONTENTS
             Change Settings to Video
             Main Menu > Render > Select Render Animation
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+09. Camera - Add tracker for camera to lock on to
+    #Object Mode > Add > Empty > Plain Axes
+    #In the scene collection, name this layer to 'Empty Axis'
+    #Select Camera, open Object Constraints Tab, Add object, Select Tracking Column > Track To
+        Target: Select Empty Axis
+        To: -Z
+        Up: Y
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//09. FunkoPop Animation
+//10. FunkoPop Animation
 
     //Drag and drop image into Blender Viewport
         #The placement of the image will be based on the camera angle
