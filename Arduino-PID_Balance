@@ -58,7 +58,7 @@ float pid_d=0;
 //////You'll eventually get kd=2
 //Step 3. Find kd//////////////////
 
-////Electronoob's best
+////Best Test Result
 //kp=3.44
 //ki=0.048
 //kd=1.92
