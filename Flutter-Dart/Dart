@@ -32,6 +32,7 @@ Run dart file by typing in "dart filename.dart" in the console (similar to Pytho
 21. CLASSES (Basic Structure, Constructors, Inheritence, Override, Getters and Setters)
 22. EXCEPTION HANDLING (throw, try, catch)
 23. POLYMORPHISM
+24. MIXIN
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ORIENTATE VIRTUAL PHONE TO LANDSCAPE
@@ -1115,7 +1116,48 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
             void printMember() {} >
                 print("${this.name}");
 
+24 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MIXIN
+//Reusing an existing class
+    //Structure - Without Mixin
+        main(){} >
+            Animal dog = Dog();
+            Dog dog = Dog();
+            dog.printName();
+            
+        class Animal{}  >
+            String name = 'Animal';
+            Animal(){}  >
+                print('Animal constructor');
+            void printName(){}  >
+                print(this.name);
 
+        class Dog extends Animal{ }
+            String name = 'Dog';    
+            Dog():super(){}
+            
+        //No Cat Class//
+    
+    //Structure - With Mixin
+        main(){} >
+            Dog dog = Dog();    //Change 'Animal' to 'Dog' since the Mixin is in Dog Class
+            dog.printName();
+            dog.Run();
+
+        class Animal{}  >
+            String name = 'Animal';
+            Animal(){}  >
+                print('Animal constructor');
+            void printName(){}  >
+                print(this.name);
+
+        class Dog extends Animal with Cat {} >     //'with cat' is the Mixin Method 
+            String name = 'Dog';    
+            Dog():super(){}
+
+        class Cat {} >
+            void Run(){}  >
+                print('The animal is runningon 4 legs');
 
 
 
