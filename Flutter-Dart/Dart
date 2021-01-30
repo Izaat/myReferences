@@ -935,7 +935,7 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
                 People person = People("John", 1990, false);                
                     print(person);
 
-                People person2 = People.birthYear(2000);
+                People person2 = People.birthYear(2000);   //If birthYear is null instead of 2000, remove person2.setYear
                     person2.setYear = 2001;
                     print(person2.getYear);
             }
