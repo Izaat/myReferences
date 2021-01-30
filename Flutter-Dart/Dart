@@ -31,7 +31,7 @@ Run dart file by typing in "dart filename.dart" in the console (similar to Pytho
 20. FUNCTIONS [Anonymous, Positional, Named, Hybrid, Optional]
 21. CLASSES (Basic Structure, Constructors, Inheritence, Override, Getters and Setters)
 22. EXCEPTION HANDLING (throw, try, catch)
-
+23. POLYMORPHISM
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ORIENTATE VIRTUAL PHONE TO LANDSCAPE
@@ -1073,7 +1073,47 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
         print('Something really unknown: $e');
     }
 
-
+23 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//POLYMORPHISM
+    //Classes and objects that morphs
+    //Structure
+        main() {}   >
+            Animal animal1 = Dog();
+            Animal animal2 = Cow();
+            
+            animal1.printMember();  //Output: Dog
+            animal2.printMember();  //Output: Cow
+            
+            animal1.move(); //Output:  Animal is walking
+            animal2.move(); //Output:  Animal is walking
+            
+        class Animal {}
+            String name = 'Animal';
+            
+            Animal() {}
+                print("Animal constructor");
+                
+            void printMember() {}
+                print("${this.name}");
+            
+            void move() {} >
+                print('Animal is walking');
+                
+        class Dog extends Animal {}   >
+            String name = 'Dog';
+            Dog():super(){}
+            
+            @override
+            void printMember() {} >
+                print("${this.name}");
+                
+        class Cow extends Animal {}   >
+            String name = 'Cow';
+            Cow():super(){}
+            
+            @override
+            void printMember() {} >
+                print("${this.name}");
 
 
 
