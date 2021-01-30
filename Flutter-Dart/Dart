@@ -923,13 +923,11 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
                bool status;
 
                People(this.name, this.birthYear, this.status);
-               People.name(this.name);
                People.birthYear1(this.birthYear);
                
                @override
                 String toString(){} >
-                    return "${this.name}, ${this.birthYear}, ${this.status}";
-                
+                    return "${this.name}, ${this.birthYear}, ${this.status}";                
             
             //Output: null, 2000, null
         
