@@ -929,7 +929,7 @@ CONTENTS
 21. Classes & Objects
     //student_file.py
         class studentClass:
-            def __init__(self, name, major, gpa, probation):
+            def __init__(self, name, major, gpa, probation):       //__init__ is called Dunder/Magic Method. See Topic 43.
                 self.name = name
                 self.major = major
                 self.gpa = gpa
