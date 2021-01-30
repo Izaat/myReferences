@@ -950,17 +950,24 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
                People.birthYear(this.birthYear);
                People.status(this.status);
                
-                int get getYear{
+               #Basic Get
+               #int get getYear => birthYear;
+               
+               int get getYear{
                     if(birthYear == null)
                         return 1990;
                     return birthYear;
                 }
-
+                
+                #Basic Set
+                #set setYear(int sYear) => birthYear = sYear
+                
                 set setYear(int sYear){
                     if(sYear < 2001){
                         birthYear = 2000;
                         return;
                     }
+                    birthYear = sYear       //This line works like 'else' in 'if-else' statement
                 }
                
                 @override
