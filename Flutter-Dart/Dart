@@ -25,7 +25,7 @@ Run dart file by typing in "dart filename.dart" in the console (similar to Pytho
 18. LOOP STATEMENT
 19. COLLECTION CLASSES [LIST, SET, MAP]
 20. FUNCTIONS [Anonymous, Positional, Named, Hybrid, Optional]
-21. CONSTRUCTOR [Default Constructor, Named Constructor, Class Inheritence, @override, getters and setters]
+21. CLASSES (Basic Structure, Constructors, Inheritence, Override, Getters and Setters)
 22. EXCEPTION HANDLING (throw, try, catch)
 
 
@@ -659,9 +659,16 @@ dynamic
         
 
 21 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
 //CLASSES
-    
-    //Normal Method//////////////////////////////
+    a. Basic Structure
+    b. Constructors (Default, Named, Defined)
+    c. Inheritence
+    d. Override (Basic Structure, Override a Defined Constructor)
+    e. Getters and Setters
+
+    //////////////////////////////
+    //Basic Structure
         class Person {
             String name;
             int age;
@@ -680,173 +687,200 @@ dynamic
             person1.showOutput();
         }
         Output: Name, 35
-
-    //Constructor (Default)//////////////////////////
-        class Person {
-            String name;
-            int age;
-            
-            Person(String name, [int age = 18]) {
-                this.name = name;
-                this.age = age;
-            }
-            
-            //method
-            void showOutput() {
-                print(name);
-                print(age);
-            }
-        }
-        void main() {
-            Person person1 = Person('Name'); //if adds the age value it will overwrite the age of 18
-            person1.showOutput();
-        }
-        Output: Name, 18
-
-    //Constructor (Default) Shortcut/////////////////
-        class Person {
-            String name;
-            int age;
-            
-            Person(this.name, [this.age = 18]);
-            
-            //method
-            void showOutput() {
-                print(name);
-                print(age);
-            }
-        }
-        void main() {
-            Person person1 = Person('Name1'); //if adds the age value it will overwrite the age of 18
-            person1.showOutput();
-            
-            Person person2 = Person('Name2', 25)
-            person2.showOutput();
-        }
-        Output: Name1, 18, Name2, 25
-    
-    //Named Constructor #1///////////////////////////
-        class Person {
-            String name;
-            int age;
-            
-            Person(this.name, [this.age = 18]);
-            
-            //named constructor
-            Person.guest() {                            //className.constructorName()
-                name = 'Guest';
-                age  = 18;
-            }
-            
-            //method
-            void showOutput() {
-                print(name);
-                print(age);
-            }
-        }
-        void main() {
-            Person person1 = Person('Name1'); //if adds the age value it will overwrite the age of 18
-            person1.showOutput();
-            
-            Person person2 = Person('Name2', 25)
-            person2.showOutput();
-            
-            var person3 = Person guest();
-            person3.showOutput();
-        }
-        Output: Name1, 18, Name2, 25, Guest, 18
-
-    //Named Constructor #2///////////////////////////
-        class X {
-            final name;                         
-            static const int age = 10;   
-            X(this.name);
-        }
-        main() {
-            var x = X('Jack');
-            print(x.name);
-            
-            //x.name = 'Jill';     //Changes name to Jill but "name" must be defined as "var" instead of "final". Or it will cause an error.
-            //print(x.name);
-            
-            //print(x.age);       //can't call age because it is static, the only way to access 'age' is by calling the class
-            print(X.age);          //Outputs 10
-            
-            var y = X('Jill');       //Outputs Jill
-            print(y.name);
-        }
-
-    //Named Constructor #3///////////////////////////
         
-        main() {
-            final name = 'Jack';        //the name value can't be changed
-            const age = 30;             //age value cant be changed
+    //////////////////////////
+    //Constructors
+        
+        //Constructor (Default)//////////
+            class Person {} >
+                String name;
+                int age;
+                
+                Person(String name, [int age = 18]) {} >
+                    this.name = name;
+                    this.age = age;                
+                
+                //method
+                void showOutput() {} >
+                    print(name);
+                    print(age);                
             
-            print(name);
-            print(age);
-        }
+            void main() {} >
+                Person person1 = Person('Name'); //if adds the age value it will overwrite the age of 18
+                person1.showOutput();
+            
+            Output: Name, 18
+    
+        //Constructor (Default) Shortcut//////////
+            class Person {} >
+                String name;
+                int age;
+                
+                Person(this.name, [this.age = 18]);
+                
+                //method
+                void showOutput() {} >
+                    print(name);
+                    print(age);                
+            
+            void main() {} >
+                Person person1 = Person('Name1'); //if adds the age value it will overwrite the age of 18
+                person1.showOutput();                
+                Person person2 = Person('Name2', 25)
+                person2.showOutput();
+            
+            Output: Name1, 18, Name2, 25
+    
+        //Named Constructor #1//////////
+            class Person {} >
+                String name;
+                int age;
+                
+                Person(this.name, [this.age = 18]);
+                
+                //named constructor
+                Person.guest() {} >                            //className.constructorName()
+                    name = 'Guest';
+                    age  = 18;                
+                
+                //method
+                void showOutput() {} >
+                    print(name);
+                    print(age);
+                
+            
+            void main() {} >
+                Person person1 = Person('Name1'); //if adds the age value it will overwrite the age of 18
+                person1.showOutput();
+                
+                Person person2 = Person('Name2', 25)
+                person2.showOutput();
+                
+                var person3 = Person guest();
+                person3.showOutput();
+            
+            Output: Name1, 18, Name2, 25, Guest, 18
 
-    //Class Inheritence///////////////////////////////
-        class Vehicle {
+        //Named Constructor #2//////////
+            class X {} >
+                final name;                         
+                static const int age = 10;   
+                X(this.name);
+            
+            main() {} >
+                var x = X('Jack');
+                print(x.name);
+                
+                //x.name = 'Jill';     //Changes name to Jill but "name" must be defined as "var" instead of "final". Or it will cause an error.
+                //print(x.name);
+                
+                //print(x.age);       //can't call age because it is static, the only way to access 'age' is by calling the class
+                print(X.age);          //Outputs 10
+                
+                var y = X('Jill');       //Outputs Jill
+                print(y.name);            
+
+        //Named Constructor #3//////////  
+            main() {} >
+                final name = 'Jack';        //the name value can't be changed
+                const age = 30;             //age value cant be changed
+                
+                print(name);
+                print(age);            
+        
+        //Defined Constructor//////////
+            main() {}   >
+                People person = People("John", 1990, false);
+                person.printPersonProperties();
+            
+            class People{}  >
+                String name;
+                int birthYear;
+                bool status;
+                
+                People(this.name, this.birthYear, this.status);
+                #This code above is the shorter version of the code below
+                #People(name, birthYear, status) {}  >   
+                #    this.name = name;
+                #    this.birthYear = birthYear;
+                #    this.status = status;
+                
+                void printPersonProperties() {} >
+                    print("${this.name}, ${this.birthYear}, ${this.status}");
+    
+    //////////////////////////
+    //Class Inheritence
+    
+        class Vehicle {} >
             String model;
             int year;
             
-            Vehicle(this.model, this.year) {
+            Vehicle(this.model, this.year) {} >
                 print(this.model);
-                print(this.year);
-            }
+                print(this.year);                
             
-            void showOutput() {
-                print(model);                                                   //this.model can also be used here
-                print(year);
-            }
-        }
+            void showOutput() {} >
+                print(model);       //this.model can also be used here
+                print(year);                    
 
-        class Car extends Vehicle {
+        class Car extends Vehicle {} >
             double price;
             
             Car(String model, int year, this.price) : super(model, year);       //'super' calls the Vehicle Class for the value of model and year
             
-            void showOutput() {
-                super.showOutput();                                             //'super' calls the showOutput() from the Vehicle Class
-                print(this.price);
-            }
-        }
+            void showOutput() {} >
+                super.showOutput();             //'super' calls the showOutput() from the Vehicle Class
+                print(this.price);              
 
-        void main() {
-            var car1 = Car('Accord', 2014, 150000);
+        void main() {} >
+            var car1 = Car('Accord', 2014, 150000);     //injects value into Car class
             car1.showOutput();
-        }
-        //OUTPUT: Accord, 2014, Accord, 2014, 150000.0
-
-    //Method @override////////////////////////////////////
-        also read Topic7 in flutter.txt (@override)
-
-        class X {
-            String name;            
-            X(this.name);
-            
-            void showOutput() {
-                print(this.name);
-            }
-            
-            dynamic square(dynamic val) {
-                return val * val;
-            }
-        }
         
-        class Y extends X {
-            Y(String name) : super(name);
+        //OUTPUT: Accord, 2014, Accord, 2014, 150000.0
+    
+    //////////////////////////
+    //Override 
+        also read Topic7 in flutter.txt (@override)
+        
+        //Basic Structure//////////
+            class X {} >
+                String name;            
+                X(this.name);
+                
+                void showOutput() {} >
+                    print(this.name);
+                
+                dynamic square(dynamic val) {} >
+                    return val * val;                
             
-            @override                       //so this enables the showOutput() of Y instead of the one in X
-            void showOutput() {
-                print(this.name);
-                print('Hello');
-            }
-        }
-
-    //Getters and Setters////////////////////////////////////
+            class Y extends X {} >
+                Y(String name) : super(name);
+                
+                @override                       //so this enables the showOutput() of Y instead of the one in X
+                void showOutput() {} >
+                    print(this.name);
+                    print('Hello');                
+    
+        //Override a Defined Constructor//////////
+            main() {}   >
+                People person = People("John", 1990, false);
+                print(person);
+            
+            class People{}  >
+                String name;
+                int birthYear;
+                bool status;
+                
+                People(this.name, this.birthYear, this.status);
+                
+                @override
+                String toString(){} >       //Coverts values to strings
+                    return "${this.name}, ${this.birthYear}, ${this.status}";
+    
+    //////////////////////////
+    //Getters and Setters    
         //Similar to Javascript
+        
         class Rectangle {
             num left, top, width, height;   //num can be int or double
             
