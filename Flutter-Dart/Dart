@@ -834,33 +834,73 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
     
     //////////////////////////
     //Class Inheritence
-    
-        class Vehicle {} >
-            String model;
-            int year;
-            
-            Vehicle(this.model, this.year) {} >
-                print(this.model);
-                print(this.year);                
-            
-            void showOutput() {} >
-                print(model);       //this.model can also be used here
-                print(year);                    
-
-        class Car extends Vehicle {} >
-            double price;
-            
-            Car(String model, int year, this.price) : super(model, year);       //'super' calls the Vehicle Class for the value of model and year
-            
-            void showOutput() {} >
-                super.showOutput();             //'super' calls the showOutput() from the Vehicle Class
-                print(this.price);              
-
-        void main() {} >
-            var car1 = Car('Accord', 2014, 150000);     //injects value into Car class
-            car1.showOutput();
         
-        //OUTPUT: Accord, 2014, Accord, 2014, 150000.0
+        //Structure 1
+            class Vehicle {} >
+                String model;
+                int year;
+                
+                Vehicle(this.model, this.year) {} >
+                    print(this.model);
+                    print(this.year);                
+                
+                void showOutput() {} >
+                    print(model);       //this.model can also be used here
+                    print(year);                    
+
+            class Car extends Vehicle {} >
+                double price;
+                
+                //'super' calls the Vehicle Class for the value of model and year
+                Car(String model, int year, this.price) : super(model, year);       
+                
+                void showOutput() {} >
+                    super.showOutput();             //'super' calls the showOutput() from the Vehicle Class
+                    print(this.price);              
+
+            void main() {} >
+                var car1 = Car('Accord', 2014, 150000);     //injects value into Car class
+                car1.showOutput();
+            
+            //OUTPUT: Accord, 2014, Accord, 2014, 150000.0
+            
+        //Structure 2
+            main()  {}  >
+                var car = Car();
+                Car.name = 'Bugatti';
+                Car.printType();
+                Car.wheels();
+                
+                var car2 = Car.myCarClass(); 
+                
+            class Vehicle{} >
+                String name = 'Vehicle';
+                
+                Vehicle(){}>
+                    print('Vehicle Class');
+                    
+                Vehicle.myBaseClass(){} >
+                    print('Constructor');
+                    
+                void printType(){}>
+                    print(this.name);
+                
+                void wheels(){}>
+                    print('4 wheels');
+                
+            class Car extends Vehicle{}>
+                Car():super(){}>
+                    print('Car class constructor');
+                Car.myCarClass():super.myBaseClass(){}>
+                    print('Car class Named Constructor');
+                    
+                @override
+                void printType(){}>
+                    print('Dog name: ${this.name}');
+                
+                @override
+                void wheels(){}>
+                    print('4 wheels 2');
     
     //////////////////////////
     //Override 
