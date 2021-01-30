@@ -1,6 +1,6 @@
 import 'dart:io'; //something like iostream
 
-NOTE: everything in dart is object, the sub of class
+NOTE: everything in dart is object, the instance of class
 Run dart file by typing in "dart filename.dart" in the console (similar to Python)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
