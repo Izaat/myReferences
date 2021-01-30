@@ -790,7 +790,27 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
                 const age = 30;             //age value cant be changed
                 
                 print(name);
-                print(age);            
+                print(age);    
+                
+        //Named Constructor #4 //////////  
+            main() {} >
+                People person = People("John", 1990, false);                
+                    print(person);
+
+                People person2 = People.birthYear1(2000);
+                    print(person2);         //Output: null, 2000, null      
+            
+            class People{}  >
+               String name;
+               int birthYear;
+               bool status;
+
+               People(this.name, this.birthYear, this.status);
+               People.birthYear1(this.birthYear);
+               
+               @override
+                String toString(){} >
+                    return "${this.name}, ${this.birthYear}, ${this.status}";                  
         
         //Defined Constructor//////////
             main() {}   >
@@ -908,30 +928,9 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
                 print(rect.left);                                                           //Output 3
                 rect.right = 12;                                                           //How Getter being used
                 print(rect.left);                                                          //Output -8             
-
-        //Structure 2 //////////  
-            main() {} >
-                People person = People("John", 1990, false);                
-                    print(person);
-
-                People person2 = People.birthYear1(2000);
-                    print(person2);
-            
-            class People{}  >
-               String name;
-               int birthYear;
-               bool status;
-
-               People(this.name, this.birthYear, this.status);
-               People.birthYear1(this.birthYear);
-               
-               @override
-                String toString(){} >
-                    return "${this.name}, ${this.birthYear}, ${this.status}";                
-            
-            //Output: null, 2000, null
         
         //Get-Set on Named Constructor //////////  
+            //See Named Constructor #4
             main() {
                 People person = People("John", 1990, false);                
                     print(person);
