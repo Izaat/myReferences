@@ -33,6 +33,7 @@ Run dart file by typing in "dart filename.dart" in the console (similar to Pytho
 22. EXCEPTION HANDLING (throw, try, catch)
 23. POLYMORPHISM
 24. MIXINS
+25. ABSTRACT CLASS
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ORIENTATE VIRTUAL PHONE TO LANDSCAPE
@@ -1159,7 +1160,39 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
             void Run(){}  >
                 print('The animal is runningon 4 legs');
 
+25 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ABSTRACT CLASS    
+    //Structure
+        main() {} >
+            TvRemoteControl tv = TvRemoteControl();
+            
+            tv.decrease();
+            tv.increase();
+            
+            print(tv.volume);
+            tv.info();
+            tv.tvInfo();
 
+        abstract class RemoteControl {} >
+            int volume = 0;
+            void increase();
+            void decrease();
+            void info() {} >
+                print('this is a remote controller class');
+
+        class TvRemoteControl extends RemoteControl {} >
+            @override
+            void decrease() {} >
+                volume--;
+                print('decrease volume');
+            
+            @override
+            void increase() {} >
+                volume++;
+                print('increase volume');
+            
+            void tvInfo(){} >
+                print('this is tv info class');
 
 
 
