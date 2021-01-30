@@ -34,6 +34,7 @@ Run dart file by typing in "dart filename.dart" in the console (similar to Pytho
 23. POLYMORPHISM
 24. MIXINS
 25. ABSTRACT CLASS
+26. INTERFACE CLASS
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ORIENTATE VIRTUAL PHONE TO LANDSCAPE
@@ -1194,7 +1195,41 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
             void tvInfo(){} >
                 print('this is tv info class');
 
+26 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//INTERFACE CLASS    
+//Referencing many classes at the same time
+    //Structure
+        main(){} >
+            Order ord = PizzaOrder();
+            ord.takeOrder();
 
+        class Order {} >
+            void takeOrder() {} >
+                //print('take order'); 
+            
+            void updateOrder() {} >
+                //print('update order');
+            
+            void acceptPayment() {} >
+                //print('accept payment');
+
+        class Payments{} >
+            void acceptPayment() {}
+                print('accepting payment');
+
+        //With 'implement', you can add as many classes
+        class PizzaOrder implements Order, Payments {} >
+            @override
+            void acceptPayment(){} >
+                print('pizza order accepting payment');
+                
+            @override
+            void takeOrder(){} >
+                print('pizza order taking order');
+                
+            @override
+            void updateOrder(){} >
+                print('pizza order updating order');
 
 
 
