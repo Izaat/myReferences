@@ -1118,7 +1118,7 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
 
 24 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //MIXIN
-//Reusing an existing class
+//Reusing an existing class to avoid duplicating classes
     //Structure - Without Mixin
         main(){} >
             Animal dog = Dog();
