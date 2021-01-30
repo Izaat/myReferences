@@ -32,7 +32,7 @@ Run dart file by typing in "dart filename.dart" in the console (similar to Pytho
 21. CLASSES (Basic Structure, Constructors, Inheritence, Override, Getters and Setters)
 22. EXCEPTION HANDLING (throw, try, catch)
 23. POLYMORPHISM
-24. MIXIN
+24. MIXINS
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ORIENTATE VIRTUAL PHONE TO LANDSCAPE
@@ -1117,9 +1117,9 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
                 print("${this.name}");
 
 24 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-//MIXIN
+//MIXINS
 //Reusing an existing class to avoid duplicating classes
-    //Structure - Without Mixin
+    //Structure - Without Mixins
         main(){} >
             Animal dog = Dog();
             Dog dog = Dog();
@@ -1138,9 +1138,9 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
             
         //No Cat Class//
     
-    //Structure - With Mixin
+    //Structure - With Mixins
         main(){} >
-            Dog dog = Dog();    //Change 'Animal' to 'Dog' since the Mixin is in Dog Class
+            Dog dog = Dog();    //Change 'Animal' to 'Dog' since the Mixins is in Dog Class
             dog.printName();
             dog.Run();
 
@@ -1151,7 +1151,7 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
             void printName(){}  >
                 print(this.name);
 
-        class Dog extends Animal with Cat {} >     //'with cat' is the Mixin Method 
+        class Dog extends Animal with Cat {} >     //'with cat' is the Mixins Method 
             String name = 'Dog';    
             Dog():super(){}
 
