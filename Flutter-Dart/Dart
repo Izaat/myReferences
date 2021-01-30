@@ -884,9 +884,9 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
     //////////////////////////
     //Getters and Setters    
         //Similar to Javascript
-        
-        //Structure //////////  
-            class Rectangle {
+
+        //Structure 1 //////////  
+            class Rectangle {}  >
                 num left, top, width, height;   //num can be int or double
                 
                 Rectangle(this.left, this.top, this.width, this.height);
@@ -895,22 +895,43 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
                 num get right => left + width;                                      
                 set right(num value) => left = value - width;               //How Setter being used
                 num get bottom => top + height;
-                set bottom(num value) => top = value - height;
-            }
+                set bottom(num value) => top = value - height;            
             
-            void main() {
+            void main() {} >
                 var rect = Rectangle(3, 4, 20, 15);
                 assert(rect.left == 3);
                 rect.right = 12;
                 assert(rect.left == -8);
-            }
 
-            void main() {
+            void main() {}  >
                 var rect = Rectangle(3, 4, 20, 15);
                 print(rect.left);                                                           //Output 3
                 rect.right = 12;                                                           //How Getter being used
-                print(rect.left);                                                          //Output -8 
-            }
+                print(rect.left);                                                          //Output -8             
+
+        //Structure 2 //////////  
+            main() {} >
+                People person = People("John", 1990, false);                
+                    print(person);
+
+                People person2 = People.birthYear1(2000);
+                    print(person2);
+            
+            class People{}  >
+               String name;
+               int birthYear;
+               bool status;
+
+               People(this.name, this.birthYear, this.status);
+               People.name(this.name);
+               People.birthYear1(this.birthYear);
+               
+               @override
+                String toString(){} >
+                    return "${this.name}, ${this.birthYear}, ${this.status}";
+                
+            
+            //Output: null, 2000, null
         
         //Get-Set on Named Constructor //////////  
             main() {
