@@ -885,31 +885,71 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
     //Getters and Setters    
         //Similar to Javascript
         
-        class Rectangle {
-            num left, top, width, height;   //num can be int or double
+        //Structure //////////  
+            class Rectangle {
+                num left, top, width, height;   //num can be int or double
+                
+                Rectangle(this.left, this.top, this.width, this.height);
+                
+                //Define 2 calculated properties: right and bottom.
+                num get right => left + width;                                      
+                set right(num value) => left = value - width;               //How Setter being used
+                num get bottom => top + height;
+                set bottom(num value) => top = value - height;
+            }
             
-            Rectangle(this.left, this.top, this.width, this.height);
-            
-            //Define 2 calculated properties: right and bottom.
-            num get right => left + width;                                      
-            set right(num value) => left = value - width;               //How Setter being used
-            num get bottom => top + height;
-            set bottom(num value) => top = value - height;
-        }
-        
-        void main() {
-            var rect = Rectangle(3, 4, 20, 15);
-            assert(rect.left == 3);
-            rect.right = 12;
-            assert(rect.left == -8);
-        }
+            void main() {
+                var rect = Rectangle(3, 4, 20, 15);
+                assert(rect.left == 3);
+                rect.right = 12;
+                assert(rect.left == -8);
+            }
 
-        void main() {
-            var rect = Rectangle(3, 4, 20, 15);
-            print(rect.left);                                                           //Output 3
-            rect.right = 12;                                                           //How Getter being used
-            print(rect.left);                                                          //Output -8 
-        }
+            void main() {
+                var rect = Rectangle(3, 4, 20, 15);
+                print(rect.left);                                                           //Output 3
+                rect.right = 12;                                                           //How Getter being used
+                print(rect.left);                                                          //Output -8 
+            }
+        
+        //Get-Set on Named Constructor //////////  
+            main() {
+                People person = People("John", 1990, false);                
+                    print(person);
+
+                People person2 = People.birthYear(2000);
+                    person2.setYear = 2001;
+                    print(person2.getYear);
+            }
+
+            class People{
+               String name;
+               int birthYear;
+               bool status;
+
+               People(this.name, this.birthYear, this.status);
+               People.name(this.name);
+               People.birthYear(this.birthYear);
+               People.status(this.status);
+               
+                int get getYear{
+                    if(birthYear == null)
+                        return 1990;
+                    return birthYear;
+                }
+
+                set setYear(int sYear){
+                    if(sYear < 2001){
+                        birthYear = 2000;
+                        return;
+                    }
+                }
+               
+                @override
+                String toString(){
+                    return "${this.name}, ${this.birthYear}, ${this.status}";
+                }
+            }
 
 
 22 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
