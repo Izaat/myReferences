@@ -1,5 +1,9 @@
 import 'dart:io'; //something like iostream
 
+Whenever you see '>' it means that it has to be inside the bracket.
+Example: Class1(); > Class2() > function1, function2 
+Meaning: Class1(Class2(function1, function2));
+
 NOTE: everything in dart is object, the instance of class
 Run dart file by typing in "dart filename.dart" in the console (similar to Python)
 
