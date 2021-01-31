@@ -36,6 +36,12 @@ Run dart file by typing in "dart filename.dart" in the console (similar to Pytho
 25. ABSTRACT CLASS
 26. INTERFACE CLASS
 
+27. STATIC CLASS MEMBERS AND METHODS
+28. ACCESS MODIFIERS
+29. DART UNIQUE FEATURES
+30. ACCEPTING COMMAND LINE ARGUMENTS
+31. ANONYMOUS FUNCTIONS
+
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ORIENTATE VIRTUAL PHONE TO LANDSCAPE
 //main.dart//
@@ -1232,6 +1238,290 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
                 print('pizza order updating order');
 
 
+27 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//STATIC CLASS MEMBERS AND METHODS
+    //Consume less memory
+    
+    //Structure - Static Class
+        main() {}   >
+            Circle circle = Circle(4); 
+            Circle circle2 = Circle(6);
+            
+            #ClassName.functionName(varName.constructorName) 
+            var res = Circle.Area(circle.radius);
+            var res2 = Circle.Area(circle2.radius);
+            
+            print(res);     //Output: 6.28
+            print(res2);     //Output: 9.24
+            print(Circle.PI);   //Output: 3.14
+
+        class Circle{}  >
+            #static variable
+            static const PI = 3.14;
+            
+            int radius = 0;
+            
+            #constructor
+            Circle(this.radius);
+            
+            #static function
+            static double Area(radius){}  >
+                return 0.5 * PI * radius;
+
+28 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ACCESS MODIFIERS 
+    //Making Classes and Functions private
+    //Unlike Java/C++, Dart doesnt support Public/Protected keywords
+    //Uses underscore instead '_variableName'
+
+    //mymath.dart
+        class MyMath{} >
+            int num1;
+            int _num2;            
+            MyMath(this.num1, this._num2);            
+            int _add(){} >
+                return this.num1 + this._num2;
+                
+    //main.dart
+        import 'mymath.dart';
+        main() {} >
+            MyMath m = MyMath(3, 4);            
+            m.num1;
+            m.add();    //Cant call add because add() is private
+        
+
+29 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//DART UNIQUE FEATURES
+    //String Interpolation within a string
+        main() {}   >
+            int myvar = 5;            
+            print("value: $myvar");
+            print("add: ${6+5}");   //Printing Expressions
+            print("cap: ${"name".toUpperCase()}");  //Call a method
+    
+    //Null aware operator
+        main(){}    >
+            int myInt;
+            
+            #Check if value is null. If null, then assign a value
+            myInt ?? = 7;   //Assign if null
+            print(myInt);   //Check null or not
+
+    //Conditional Property Access
+        //Check if the object exist. If exist, then access the object
+        //Null value will be returned instead of returning errors
+        main(){} >
+            String myString;             //String wasn't assigned, so its a null object
+            print(myString?.length);    //? being added for the Cond. Property Access
+            
+            //Alternative code
+            print((myString != null) ? myString.length : null); //Output: Null
+
+    //Collections
+        main(){} >
+            
+            final mylist = [1, 2, 3];   //List is an array
+            final myset = {2,3,4,5};    //Set is a ection of elements and each element needs to be unique
+            final mymap = {'a':1, 'b':2};
+            
+            final mylist2 = <int>{};
+            final myset2 = <int>{};
+            final mymap2 = <String, int>{};
+    
+    //The Dart Arrow (=>)
+        String retString() => "This is dart language";
+        main(){
+            print(retString());
+        }
+            
+    //Cascade
+        //A way to perform sequence of operations on the same object
+        main() {}   >
+            //Cascade
+            car mycar = car(2000, "honda")
+                ..year = 1999
+                ..drive();
+            
+            //Similar to:
+            car mycar2 = (2000, "honda");
+            mycar2.eyar = 2001;
+            mycar2.drive();
+        
+        class car {}   >
+            int year;
+            String name;
+            
+            car(this.year, this.name);
+            car.madeYear(this.year);
+            
+            void drive(){} >
+                print("Drive the car");
+
+30 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ACCEPTING COMMAND LINE ARGUMENTS
+    //Provide argument to the main function
+    //Making use of the "List<String> args"
+    
+    //Basic
+        //Program - main.dart
+            main(List<String> args){} >
+                print("$args");
+            
+        //Console
+            //Providing "4 and dart" as argument and add to list
+            dart main.dart 4 dart
+            
+    //Accessing each element 
+        //Program - main.dart
+            main(List<String> args){} >
+                print("${args[0]}");    //This will output 4 for index position 0
+        //Console
+            //Still Providing "4 and dart" as argument and add to list
+            dart main.dart 4 dart
+
+31 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ANONYMOUS FUNCTIONS
+    //Declare a function without the function's name
+    //Anonymous function can be passed into another function
+    //Can be stored as a variable
+    //Can be used as a parameter for another function
+    //Disavantage: Can only be used once
+
+    //Nameless Function Structure
+        main() {
+            myanonymousFunc();
+        }
+        var myanonymousFunc = () {
+            print('anonymous function');
+        };
+
+    //With Dart Arrow Syntax
+        main() => myanonymousFunc();
+        var myanonymousFunc = () => print('anonymous function');
+
+    //Anonymous Function
+        main() {
+            MyMath mymath = MyMath();
+            var res = mymath.add(3,4);
+            print(res);         //Output: 7
+        }
+        class MyMath{
+            //Anonymous function stored in a function called 'add'
+            Function add = (int a, int b) {
+                return a+b;
+            };
+        }
+
+    //Higher Order Function
+        //Good for using with higher order functions
+        //Higher order functions are functions that accepts functions as parameters
+        //Can also return functions
+        
+        main() {
+            var res = addNumbers();
+            print(res(4,5));    //Output: 9
+        }
+
+        Function addNumbers() {
+            Function add = (int a, int b) => a + b;
+            return add;
+        }
+
+    //Lexical Scoping
+        var globalVar = 'This variable is global';
+        main() {
+            print(globalVar);
+            
+            String insideMain(){            //This is the lexical scoping. Functions inside cannot be accessed
+                var insideMainVar = 'This variable is insideMain function;
+                print('invoking inside main function.');
+                print(insideMainVar);
+            }
+            
+            insideMain();
+        }
+
+    //Closure
+        //A type of function that have access to parent scope even after the scope is closed
+        main(){
+            print(myString);
+            myFunc();
+            
+            String myString2 = 'Main function';
+            var res = myFunc2();
+            res();
+        }
+
+        String myString = 'This is global variable';
+
+        Function myFunc = () {
+            String myString = 'This is inside myFun function';
+            print(myString);
+        };
+
+        Function myFunc2 = () {
+            Function my2ndFunc(){
+                String myString2 = '2nd function';
+                print(myString2);
+            }
+            return my2ndFunc;
+        };
+
+    //Higher Order Functions in Class
+        main() {
+            MyMath mymath = MyMath();
+            
+            //Lambda output
+            print(mymath.add(4, 6));
+            
+            //Higher Order
+            print(mymath.computeAdd(mymath.add, 7, 8));
+            
+            //Dart Arrow
+            print(mymath.PIvalue(MyMath.PI));
+            
+            //Instance Variable
+            print(mymath.myString);
+            
+            //Closure - Simple
+            print(mymath.printString());
+            
+            //Closure into a function
+            var res = mymath.printString();
+            print(res());
+        }
+
+        class MyMath {
+
+            //Static expression for dart arrow function
+            static final PI = 3.14;           
+
+            //Lambda expression aka anonymous function
+            Function add = (int a, int b){      
+                return a + b;
+            };
+            
+            //Dart arrow on anonymous function
+            Function PIvalue = (double pi) => pi;
+            
+            //Higher order function
+            int computeAdd(Function myfun, int a, int b){
+                print(myfun(a, b));
+            }
+            
+            //Instance Variable
+            String myString = 'Property of myMath class';
+            
+            //Closure
+            Function printString = () {
+                Function insidePrintString(){                
+                    String myString = 'This is a closure function';
+                    print(myString);
+                }
+                return insidePrintString;
+            };
+            
+        }
 
 
 
