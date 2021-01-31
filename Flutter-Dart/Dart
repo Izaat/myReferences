@@ -27,7 +27,7 @@ Run dart file by typing in "dart filename.dart" in the console (similar to Pytho
 16. TYPE TEST OPERATOR
 17. CONDITIONAL STATEMENT
 18. LOOP STATEMENT
-19. COLLECTION CLASSES [LIST, SET, MAP]
+19. COLLECTION CLASSES - List, Set, Map, Queue
 20. FUNCTIONS [Anonymous, Positional, Named, Hybrid, Optional]
 21. CLASSES (Basic Structure, Constructors, Inheritence, Override, Getters and Setters)
 22. EXCEPTION HANDLING (throw, try, catch)
@@ -471,10 +471,33 @@ dynamic
 
 
 19 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-//COLLECTION CLASSES
+//COLLECTION CLASSES - List, Set Map Queue
 
-    LIST //See Flutter topic 14.
+    LIST 
+        //2 types of List (Fixed List and Growing List)
+        //Also See Flutter topic 14.      
         ///////////
+        //Growable List
+        void main(){
+            var mylist = List();
+            mylist. add(5);
+            mylist. add(8);
+            mylist. add(4);
+            print(mylist);
+        }
+        
+        ///////////
+        //Fixed List
+        void main() {
+            List<int> mylist = List(4);
+            mylist[0] = 5;
+            mylist[1] = 3;
+            mylist[2] = 1;
+            print(mylist); 
+        }
+    
+        ///////////
+        //Structure
         void main() {
             List names = ['Name01', 'Name02'];  //If 'List <String> names', then no other data types other than String can be used
             print (names[0]);       //Outputs Name01
@@ -482,6 +505,16 @@ dynamic
         }
         
         ///////////
+        //Looping thorough the list
+        void main() {
+            List names = ['Name01', 'Name02', 'Name03', 'Name04'];
+            for (var n in names) {
+                print(n);       //Name01, Name02, Name03, Name04
+            } 
+        }        
+        
+        ///////////
+        //Convert
         void main() {
             var names = ['Name01', 'Name02'];   //This automatically turns into String. If add in 10 and 10.01, it changes from String into object
             for (var n in names) {
@@ -489,6 +522,7 @@ dynamic
             }
         }
         ///////////
+        //Fixed list - changing elements
         void main() {
             List <String> names = ['Name01', 'Name02'];     //if "const ['Name01', 'Name02']" is used, nothing can be changed
             names[1] = 'Name03';        
@@ -497,6 +531,7 @@ dynamic
             }
         }
         ///////////
+        //Triple dots
         void main() {
             List <String> names = ['Name01', 'Name02'];
             var names2 = [...names]; //the triple dots uses the original array, similar to javascript
@@ -505,25 +540,108 @@ dynamic
                 print(n);       //Name01, Name02
             }
         }
-    SET
+        
         ///////////
+        //Anonymous Function
+        void main() {
+            List names = ['Name01', 'Name02', 'Name03', 'Name04'];
+            
+            //names.forEach((elem) => print("${elem}"));      
+            names.forEach((elem) => print("Element print: ${elem}"));
+        }                
+        
+        ///////////
+        //Anonymous Function - Old method using for loop
+        void main() {
+            List names = ['Name01', 'Name02', 'Name03', 'Name04'];
+            
+            for(var i = 0; i < names.length; i++){
+                print('Old method calling anonymous function: ${names[i]}');
+            }
+        }         
+        
+        ///////////
+        //Remove an element
+        void main() {
+            List names = ['Name01', 'Name02', 'Name03', 'Name04'];
+            
+            print(names.removeAt(1)); //Removes Name02 from names list and prints it out
+            print(names);       //Output: [Name01, Name03, Name04]
+        }       
+        
+        ///////////
+        //Clear list
+        void main() {
+            List names = ['Name01', 'Name02', 'Name03', 'Name04'];
+            
+            names.clear();
+            print(names);       //Output: []
+        }  
+        
+        ///////////
+        //Takes 2 elements from list 
+        void main() {
+            List names = ['Name01', 'Name02', 'Name03', 'Name04'];            
+            print(names.take(2).toList());       //Output: [Name01, Name02]
+        }  
+        
+        ///////////
+        //Skipping by index
+        void main() {
+            List names = ['Name01', 'Name02', 'Name03', 'Name04'];            
+            //skip 2 elements
+            print(names.skip(2).toList());       //Output: [Name03, Name04]
+        }  
+        
+        ///////////
+        //Check list contains specific element
+        void main() {
+            List names = ['Name01', 'Name02', 'Name03', 'Name04'];   
+            print(names.contains('Name02'));       //Output: true
+        }  
+        
+    SET        
+        ///////////
+        //Sets ignore duplicate items
+        void main() {
+            var variable1 = {'value1', 'value2', 'value1'};     //Ignores duplicates
+            for (var x in variable1) {
+                print (x);              //Output value1 and value2
+            }
+            print(variable1.runtimeType);   //Output _CompactLinkedHashSet<String>
+        }
+        
+        ///////////
+        //Without <String>, it becomes a Map 
         void main() {
             var variable1 = {};
             print(variable1.runtimeType);   //Output _InternalLinkedHashMap<dynamic, dynamic>
         }
+        
         ///////////
         void main() {
             var variable1 = <String> {};
             print(variable1.runtimeType);   //Output _CompactLinkedHashSet<String>
         }
+        
         ///////////
         void main() {
             Set <String> variable1 = {};
             print(variable1.runtimeType);   //Output _CompactLinkedHashSet<String>
         }
+        
+        ///////////
+        //Convert List into a Set
+        void main() {
+            Set <String> variable1 = Set.from(['value1', 'value2', 'value3', 'value4']);
+            print(variable1);   //Output: {value1, value2, value3, value4}
+        }
 
     MAP
+        A Map is known as Dictionary in Python
+        
         ///////////
+        //Structure 1
         void main() {
             var variable1 = {
                 //Key       :   Value
@@ -535,23 +653,125 @@ dynamic
             print (variable1['third']);      //Output: variable3
             print (variable1[4]);              //Output: variable4
         }
+        
         ///////////
+        //Structure 2
+        void main() {
+            Map<int, int> variable1 = {1:0, 2:50, 3:100};
+            variable1[4] = 200;      //This adds an element into the map
+            print (variable1);      //Output: {1: 0, 2: 50, 3: 100, 4: 200}
+        }        
+        
+        ///////////  
+        //Structure 3 with int
+        void main() {
+            Map <String, int> grades = Map();
+            
+            grades['pass'] = 50;
+            grades['pass'] = 0;
+            grades['pass'] = 100;
+            
+            print(grades['pass']);
+        }        
+        
+        ///////////
+        //Structure 3 with string
         void main() {
             var variable1 = Map();
             variable1 ['first'] = 'Number1';
             print (variable1['first']);      //Output: Number1
         }
+        
         ///////////
+        //Simple Print by keys
         void main() {
             var variable1 = {'first': 'Number1', 'second': 'Number2'};
             print (variable1['second']);      //Output: Number2
         }
-        ///////////                                         -----Use for routing
+        
+        ///////////                                                             -----Use for routing
+        //Simple Print by values
         void main() {
             Map student = {'name': 'name01', 'age': 25};
-            print (student['name']); //Outputs name01
+            print (student['name']); //Output: name01
+        }     
+        
+        ///////////
+        //For loop - keys
+        void main() {
+            var variable1 = {'first': 'Number1', 'second': 'Number2'};
+            for(var i in variable1.keys){      
+                print(i);        //Output: first, second
+            }
         }
+        
+        ///////////
+        //For loop - values
+        void main() {
+            var variable1 = {'first': 'Number1', 'second': 'Number2'};
+            for(var i in variable1.values){      
+                print(i);        //Output: Number1, Number2
+            }
+        }        
+        
+        ///////////
+        //For each - keys and values
+        void main() {
+            var variable1 = {'first': 'Number1', 'second': 'Number2'};
+            variable1.forEach((key, value) => print("${key} : ${value}"));
+        }        
+       
+        ///////////
+        //Scrubs through map to check whether a key exist
+        void main() {
+            var variable1 = {'first': 'Number1', 'second': 'Number2', 'third': 'Number3', 'fourth': 'Number4'};
+            print(variable1.containsKey('second'));      //Output: true
+        }        
 
+    QUEUE 
+        ///////////
+        //Structure
+        import 'dart:collection';
+        void main() {
+            Queue variable1 = Queue();
+            variable1.add('Dart');
+            variable1.add('10');
+            variable1.add('Statement');
+            variable1.add('Hello');
+            
+            for(var var2 in variable1){
+                print(var2);        //Output: Dart, 10, Statement, Hello
+            }            
+            variable1.forEach((elem) => print(elem));   //Output: Dart, 10, Statement, Hello          
+        }        
+
+        ///////////
+        //Remove last in queue
+        import 'dart:collection';
+        void main() {
+            Queue variable1 = Queue();
+            variable1.add('Dart');
+            variable1.add('10');
+            variable1.add('Statement');
+            variable1.add('Hello');
+            
+            variable1.removeLast();
+            print(variable1);            //Output: {Dart, 10, Statement}
+        }                
+        
+        ///////////
+        //Print by index position
+        import 'dart:collection';
+        void main() {
+            Queue variable1 = Queue();
+            variable1.add('Dart');
+            variable1.add('10');
+            variable1.add('Statement');
+            variable1.add('Hello');
+            
+            print(variable1.elementAt(0));            //Output: Dart
+        }         
+        
 
 20 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //FUNCTIONS
