@@ -35,13 +35,13 @@ Run dart file by typing in "dart filename.dart" in the console (similar to Pytho
 24. MIXINS
 25. ABSTRACT CLASS
 26. INTERFACE CLASS
-
 27. STATIC CLASS MEMBERS AND METHODS
 28. ACCESS MODIFIERS
 29. DART UNIQUE FEATURES
 30. ACCEPTING COMMAND LINE ARGUMENTS
 31. ANONYMOUS FUNCTIONS
 32. GENERIC PROGRAMMING
+33. CORE LIBRARIES AND COMMUNITY PACKAGES
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ORIENTATE VIRTUAL PHONE TO LANDSCAPE
@@ -1794,7 +1794,31 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
             T sub() => (this.a - this.b);            
         }
 
+33 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//CORE LIBRARIES AND COMMUNITY PACKAGES
+    Core libraries
+        //dart.dev/guides/libraries
+        //api.dart.dev/stable/2.7.2/
+    Community packages
+        //pub.dev
+        //Configure dart/flutter
+            create pubspec.yaml in the same folder as main.dart
+            import and install the package using the following code
+            //pubspec.yaml
+                name:project_folder_name
+                #environment:
+                dependencies: 
+                    http:      //where the blank in  http:'blank' stands for the most recent version
+            //Save file and the package will download automatically
+            //main.dart
+                import 'package:http/http.dart as http;
+                //NOTE: 'as' shortens the entire line to http. Also since http pkg is not a valid class, 'as' will validate it
+                main() async {
+                    var res = await http.get('https://www.google.com');
+                    print(res);         //Output: Instance of 'Response'
+                }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
