@@ -41,6 +41,7 @@ Run dart file by typing in "dart filename.dart" in the console (similar to Pytho
 29. DART UNIQUE FEATURES
 30. ACCEPTING COMMAND LINE ARGUMENTS
 31. ANONYMOUS FUNCTIONS
+32. GENERIC PROGRAMMING
 
 01 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ORIENTATE VIRTUAL PHONE TO LANDSCAPE
@@ -1739,8 +1740,58 @@ https://www.youtube.com/watch?v=afXXvBOWq14         -- 32:32
                     print(myString);
                 }
                 return insidePrintString;
-            };
+            };            
+        }
+        
+
+32 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//GENERIC PROGRAMMING
+    //Without Generic Programming
+        //Structure1 - double
+            main(){
+                var ret = add(4.5, 5.2);
+                print(ret);
+            }            
+            double add(double a, double b) {
+                return a+b;
+            }
+
+        //Structure2 - int
+            main(){
+                var ret = add(4, 5);
+                print(ret);
+            }
+            int add(int a, int b) => a+b;
             
+        //Structure3 - int
+            main(){
+                var ret = add(4, 5);
+                print(ret);
+            }
+            add(var a, var b) => a+b;    
+                
+    //With Generic Programming
+            main(){
+                var ret = add(4.2, 5.8, 2);
+                print(ret);
+            }
+            //num can be int or double
+            Var1 add<Var1 extends num>(Var1 a, Var1 b, Var1 c) => a+b+c;        //Output: 12
+
+    //Others
+        main() {
+            MyMath<double> m = MyMath(4.5, 6.7);
+            var res = m.add();
+            print(res);     //Output: 11.2
+        }
+        
+        class MyMath <T extends num>{
+            T a;
+            T b;
+            
+            MyMath(this.a, this.b);            
+            T add() => (this.a + this.b);            
+            T sub() => (this.a - this.b);            
         }
 
 
