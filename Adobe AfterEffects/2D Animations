@@ -1,7 +1,8 @@
 ////////////////////////////////////////////////////////////////
 CONTENTS
 01. LoopOut
-02. Rigging
+02. Rigging (DUIK Bassel 2)
+03. Rigging (Rubberhose 2)
 
 ////////////////////////////////////////////////////////////////
 01. LoopOut
@@ -138,9 +139,9 @@ CONTENTS
                 Move the Start-End Keyframes and move by 2 frames
 
 ////////////////////////////////////////////////////////////////
-02. 2D Rigging
+02. 2D Rigging (DUIK 2)
 
-    //Install Duik Bassel
+    //Install Duik Bassel 2
         https://www.youtube.com/watch?v=tA2itBzm0t8
         Copy ..\ScriptUI Panels\Duik Bassel.2 to ..\Program Files\Adobe\Adobe After Effects CC 2015\Support Files\Scripts\ScriptUI Panels
         Create DUIK Folder in ..\Program Files\Adobe\Adobe After Effects CC 2015\Support Files\Scripts\
@@ -210,6 +211,252 @@ CONTENTS
         Move few frames in the timeline and add the end keyframe
         ALT+Click on the clock of Position layer
             Type in: loopOut("pingpong") 
+
+
+////////////////////////////////////////////////////////////////
+03. Rigging (Rubberhose 2)
+https://www.youtube.com/watch?v=9C0n5FZRtJw
+
+    //Install Rubberhose 2
+        Copy Rubberhose2.02.jsxbin to ..\Program Files\Adobe\Adobe After Effects CC 2015\Support Files\Scripts\ScriptUI Panels
+        Create DUIK Folder in ..\Program Files\Adobe\Adobe After Effects CC 2015\Support Files\Scripts\
+            Copy Help, Optional Panels, Tools, LICENCE.md, LICENSE.txt to DUIK Folder
+        Open AE
+            Menu > Edit > Preference > General
+                In General Tab, Enable "Allow Scripts" and "JavaScript"
+            Menu > Window > Duik Bassel
+            New window will pop up
+            Small Rubberhose 2 window will pop up
+    
+    //Import Character
+        Main Menu > File > Import > File > your_file.ai (C: > Youtube > Libraries > AE Template > Cowboy)
+        
+    //Pre Animation Setup
+        #Tree-Hide the Background Layer and the Shadow Layer - Not the Eye Icon
+        In the timeline panel, click on the tree icon of the 'bg' layer and enable the ''hide layer" icon, (tree logo icon) next to draft 3D icon next to timeline search box
+        
+        #Delete arms and legs to create arms and legs in Rubberhose
+        Select "Back A&L" and "Front A&L", press delete
+ 
+        #Create the 5 Markers - 2 Left, 1 Right, Marker 1 and Marker 2
+        In timeline panel, bring the marker located on the right hand side of the panel and move it to the 1 second mark
+        The marker will show '1'
+        Double click on that marker and rename 1 to Left - This process will start on the left hand side of the character
+        Add another marker on the 20f mark and name this marker as Left as well
+        Add right marker on 10f mark and name it 'Right'
+        Add a marker at 05f mark and name it '1'
+        Add a marker at 15f mark and name it '2'
+
+        #Adjust timeline looping length
+        Adjust the horizontal loop scrollbar (below the time ruler) to wrap all the markers (from 1secon mark to 20f mark)
+
+        #Create Body Pre Composition
+        Select Gun, Face, H Line, Body and Ears
+        Right Click and Select Pre-Comp
+        Name this to 'Body'
+        Select OK
+        Enter the Body PreComp
+        
+        #Move Gun Layer Anchor Point
+        Highlight the Gun Layer and in the Main Toolbar, select the 'Pan Behind Tool' (Box with 3 arrows icon)
+        Move the anchor point to 12 o'clock of the highligted box in the viewport
+    
+    //AE Animation  Left-right motion
+        Main Comp > Body PreComp > 
+        #Add Position Keyframes
+            Highlight Gun, Face and HLine layers and Press P
+            Right - 10f marker
+                Move the vertical time line to 10f mark ('Right' Marker)
+                Click on the stopwatch icon to add keyframe
+                Reposition the layers a tiny bit to the right
+            Left - 1 sec marker
+                Move the vertical time line to 1sec mark ('Left' Marker)
+                Click on the stopwatch icon to add keyframe
+                Reposition the layers a tiny bit to the left
+            Left - 20f marker
+                Copy over marker from the 1 sec Left marker over
+                NOTE: You can copy paste 1 keyframe at a time
+
+        #Add Rotation keyframe for the Gun Layer
+            Select Gun Layer an Press R
+            Move vertical time line to Right Marker and click on the stopwatch to add keyframe
+                Rotation: 0x10deg
+            Move vertical time line to Left Marker and click on the stopwatch to add keyframe
+                Rotation: 0x-10
+                Apply the same for the other Left Marker
+
+        #Show all keyframe
+            Highlight the Gun Layer and press U 2x
+            This will show positional keyframe and rotational keyframe layer
+        
+        #Add Easy-Ease
+            Box Select all keyframes
+            Hover over the keyframe and right click
+            Select keyframe assistant and select Easy Easy
+
+        #Add Position keyframe for Ear Layer
+            Similar to Body keyframe but in the opposite direction.
+            Left Keyframe = Move Right
+            Right keyframe = Move Left
+
+    //AE Animation - Bending Motion
+        Main Comp >
+        Highlight Body ProComp Layer and Right Click
+        Select Effect > Distort > CC Bend It
+        Click on the Bend It layer in the effects control panel
+        2 anchor points will show up in the viewport (bottom and top)
+        Move the bottom to the body and the top anchor point higher than the original position
+        In the timeline panel, open the Body proComp dropdown menu
+        Open Effects > CC Bend It
+        Move vertical time line to the 1 second marker (Left)
+        Click on the stopwatch icon of the Bend Layer to add keyframe
+            Bend (Left 1 sec Mark) : -10
+            Bend (Right 10f Mark): 10
+            Bend (Left 20f Mark) : -10
+        Add Easy-easy to all 3 keyframes
+
+    //Rubberhose - Legs
+        Open Rubberhose 2 panel and open Build Tab
+        Select Hip/Ankle and rename to 'R Leg'
+        Click on the New Rubberhose button (bone icon)
+        A new leg will show up in the viewport together with 3 new layers (R Leg-Ankle, R Leg-Hip and R Leg)
+        #Resize
+            Select R Leg layer and in the main toolbar, go to the stroke section and bring down to 25px
+            Change the stroke color, use eyedropper tool
+        Move the vertical time line to the 10f keyframe
+        Select the R Leg-Ankle layer and move the lower anchor point to your character's ankle position 
+        Select the R Leg-Hip layer and move the upper anchor point to character's hip position
+        Select the R Leg-Ankle Layer and in the Effects panel, open Effects Control (R Leg)
+            Hose Length: 100
+            Bend Direction: -100
+        #Bending Angle    
+            In Timeline panel, open Dropdown menu of R Leg
+                Contents > Style > BaseHose > Stroke 1 >
+                    Line Cap: Butt Cap
+        #Boots
+            Open Dropdown menu for the R Leg layer
+                Contents > Style
+                Select basehose layer
+                Duplicate Basehose layer and press CTRL + D and name it BaseHose 2
+            Change Color
+                Contents > Style > BaseHose 2 > Stroke 1 > Color
+            Modify Height
+                Click on 'Add:' in Content layer and select Trim Paths
+            Trim Paths
+                Start: 0%
+                End: 35%                
+        #Repositioning Layers
+            In timeline layer panel, bring the Body PreComp layer to the top
+        #Duplicate Leg for L Leg
+            In timeline layer panel, select R Leg layer
+            Open Rubberhose 2 main control panel and open Manage menu
+            Select the second icon (Duplicate selected hose group)
+            3 new layers will appear. Move these layers to the bottom of the timeline panel
+        #Rename the duplicated hose group
+            Highlight all the 3 leg layers and in the rubberhose main control > manage tab, select the ername hose group icon
+        #Move/Reposition the layers
+            Select all 3 layers and move
+            
+    //Rubberhose - Legs
+        Open Rubberhose 2 panel and open build tab
+        Select Shoulder/Wrist and rename to 'R Arm'
+        Click on the New Rubberhose button (bone icon)
+        A new arm will show up in the viewport together with 3 new layers (R Arm-Wrist, R Arm-Shoulder and R Arm)
+        #Resize
+            Select R Arm layer and in the main toolbar, go to the stroke section and bring down to 25px
+            Change the stroke color, use eyedropper tool          
+        Reposition the 2 anchorpoints of the R Arm
+        Select the R Arm-Wrist Layer and in the Effects panel, open Effects Control (R Arm)
+            Hose Length: 70
+            Bend Direction: -100
+        #Wrist
+            Open Dropdown menu for the R Arm layer
+                Contents > Style
+                Select basehose layer
+                Duplicate Basehose layer and press CTRL + D and name it BaseHose 2
+            Change Color
+                Contents > Style > BaseHose 2 > Stroke 1 > Color
+            Modify Height
+                Click on 'Add:' in Content layer and select Trim Paths
+            Trim Paths
+                Start: 0%
+                End: 10%              
+        #Repositioning Layers
+            In timeline layer panel, bring the 3 R Arm layers to the top                
+        #Duplicate Arm for L Arm
+            In timeline layer panel, select L Arm layer
+            Open Rubberhose 2 main control panel and open Manage menu
+            Select the second icon (Duplicate selected hose group)
+            3 new layers will appear. Move these layers to the bottom of the timeline panel
+
+    //Rubberhose - Parenting
+        In timeline, Ctrl+ Click (highlight) the layers below
+            R Arm Shoulder
+            L Arm Shoulder
+            R Arm Wrist
+            L Arm Wrist
+            R Leg Hip
+            L Leg Hip            
+        Parent the 4 layers to the Body PreComp Layer
+        Move the body to make sure all the 4 layers are attached
+    
+    //Animation - Rubberhose Motions
+        #Hide layers
+            #E = Disable the eye icon 
+            #T = Hide tree
+                R Arm Shoulder  E + T
+                R Leg Hip           E + T
+                L Leg hip            E + T
+                L Arm Shoulder  E + T
+                L Arm                 T
+                R Arm                T
+                L Leg                  T
+                R Leg                  T
+
+        #Motion - Body
+            Select Body PreComp layer in the timeline panel
+            Move Vertical Time Line to the 05f marker 1
+            Press P to open Position layer
+            Insert keyframe
+            Insert keyframe in 15f marker 2 as well
+            
+            Move Vertical Time Line to the 1 second marker Left and insert a keyframe
+                Lower the body position 
+                Copy and paste keyframe to 10f marker Right and 20f marker Left
+                Select all keyframes and insert easy ease
+                    Select, Hoveer mouse on keyframe, Right Click, Keyframe assistant, easy-ease
+
+        #Motion - Legs
+            Select L Leg Ankle Layer and open the position layer by pressing P
+            Move the Vertical Time Line to 1 second marker Left
+                Move the anchor forward
+            Move the Vertical Time Line to 10f marker Right
+                Move the anchor to where the other foot is
+            Move the Vertical Time Line to 20f marker Left
+                Copy-Paste Keyframe from the 1 second marker
+            Move the Vertical Time Line to 15f marker 2
+                Move the anchor upwards but forward (For right leg, do the same on 05f marker 1)            
+            Do the same on the other leg but in the opposite direction
+            Move the Vertical Time Line to 05f marker 2
+                Move the anchor upwards but forward
+            Add easy ease on the keyframes
+            #Add Velocity
+                Shift select the 2 leg keyframes at marker 1 and 2
+                Hover over keyframe and right click
+                Select keyframe velocity - To look like stomping
+                    Incoming Velocity, Influence: 66%
+                    Outgoing Velocity, Influence: 66%                    
+            Hide layer, eye icon and tree
+
+        #Motion - Arms
+            Select R Arm Wrist Layer and open the position layer by pressing P
+            Add keyframe
+            Move the Vertical Time Line to 1 second marker Left
+                Move the anchor forward
+                Motion should be at an angle
+            Add easy ease
+            Do the same for the other arm
+                
 
 
 
