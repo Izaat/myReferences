@@ -2131,39 +2131,81 @@ CONTENTS
 ////////////////////////////////////////////////////////////////////////
 34. Generators
     //Memory efficient when you work with large data
+    //Yield pauses the code instead of stopping - StopIteration(), See Subtopic 07
+    //Also: 'yield' = pauses the function execution, and 'return' = stops a function execution
     
-    //Basic
+    //Content
+        #00. Generator Concept - Code without generator 
+        #01. Basic Structures
+        #02. Iterations
+        #03. Iterations - Counting down
+        #04a. Working with data - Without Generator
+        #04b. Working with data - With Generator
+        #05. Fibonacci Sequence
+        #06. Generator Expressions
+        #07a. Generator without generator patttern
+        #07b. Generator with generator patttern
+        #08. Generator with List
+
+    //00. Generator Concept - Code without generator 
+        #Without generator and if written like this, memory will be too large, triggering error
+        #Refer to 08, if written like this, it will output Memory Error
+        x = [1**2 for i in range(1000000)]
+        for el in x:
+            print(el)        
+    
+    //01a. Basic Structure 1
         def mygen():
             yield 1
             yield 2
+            yield 2
             yield 3
-        g = mygen()
-        
+        g = mygen()        
         #get all values
         for i in g:
-            print(i)
-            
+            print(i)            
         #get one value at a time
         value = next(g)
-        print(value)    //Output: 1
-        
+        print(value)    //Output: 1        
         value = next(g)
         print(value)    //Output: 2
+        
+    //01b. Basic Structure 2
+        def gen(n):
+            for i in range(n):
+                yield i**2
+        g = gen(1000000)
+        print(next(g))  #Try printing this line few times
+        print(next(g))
+        print(next(g))
+        
+    //01c. Basic Structure 3
+        def gen(n):
+            yield 1
+            yield 10 
+            yield 100
+            yield 1000
+            yield 10000 
+        g = gen(1000000)
+        print(next(g))  #Output: 1
+        print(next(g))  #Output: 10
+        print(next(g))  #Output: 100
+        print(next(g))  #Output: 1000
+        print(next(g))  #Output: 10000
+        print(next(g))  #Output: Error - StopIteration(), because gen(n) runs out of 'yield'
 
-    //Iterations - Basics
+    //02. Iterations - Basics
         def mygen():
             yield 1
             yield 2
             yield 3
-        g = mygen()
-        
+        g = mygen()        
         #Calculation
-        print(sum(g))
-        
+        print(sum(g))        
         #Sorting
         print(sorted(g))
 
-    //Iterations - Counting down
+    //03. Iterations - Counting down
         def countdown(num):
             print('Start')  #note that this line will not be printed
             while num > 0:
@@ -2177,7 +2219,7 @@ CONTENTS
         print(next(cd))         #Output: 3
         print(next(cd))         #Output: 2
 
-    //Working with data - Without Generator
+    //04a. Working with data - Without Generator
         import sys
         def firstn(n):
             numList = []
@@ -2191,7 +2233,7 @@ CONTENTS
         print(sum(firstn(10)))      #Print 45
         print(sys.getsizeof(firstn(1000000)))    #Output: 8,697,464 bytes
 
-    //Working with data - With Generator
+    //04b. Working with data - With Generator
         //numList not included
         //numList not being used here to save memory
         import sys
@@ -2200,33 +2242,28 @@ CONTENTS
             while numInt < n:
                 yield numInt
                 numInt += 1
-
         print(firstn_generator(10))               #Print numbers 0 to 9 in a list
         print(sum(firstn_generator(10)))      #Print 45
         print(sys.getsizeof(firstn_generator(1000000))) #Output: 120 bytes
 
-    //Fibonacci Sequence
+    //05. Fibonacci Sequence
         #Adding up all numbers in ascending order
-        def fibonacci(limit):            
-            
+        def fibonacci(limit):                        
             #Storage
-            a, b = 0, 1
-            
+            a, b = 0, 1            
             while a < limit:
                 yield a
                 a, b = b, a+b
                     #Sequence
                     #a becomes b, b becomes a+b
-
         fib = fibonacci(30)
-            #30 is the limit
-        
+            #30 is the limit        
         for i in fib:
             print(i)
 
-
-    //Generator Expression
+    //06. Generator Expressions
         //Works like list comprehension but with parentheses instead of square brackets
+        //Uses yield
         
         #List version
         import sys
@@ -2244,6 +2281,44 @@ CONTENTS
         mygen = (i for i in range(10) if i % 2 == 0)
         print(list(mygen))
 
+    //07a. Generator without generator patttern
+        class Gen:
+            def __init__(self, n):
+                self.n = n
+                self.last = 0
+            def __next__(self):
+                return self.next()                
+            def next(self):
+                if self.last == self.n:
+                    raise StopIteration()     #StopIteration() means to stop and show error 
+                rv = self.last ** 2
+                self.last += 1
+                return rv
+        g = Gen(1000000)        
+        while True:
+            try:
+                print(next(g))
+            except Stop iteration:
+                break
+
+    //07b. Generator with generator patttern
+        import sys        
+        def gen(n):
+            for i in range(n):
+                yield i ** 2    
+        g = gen(1000000)        
+        for i in g:
+            print(i)
+
+    //08a. Generator (Advanced)
+        import sys
+         def gen(n):
+            for i in range(n):
+                yield i ** 2        
+        x = [i ** 2 for i in range(1000000)]
+        g = gen(1000000)        
+        print(sys.getsizeof(x))     //Output: 43816 bytes
+        print(sys.getsizeof(g))     //Output: 64 bytes
 
 ////////////////////////////////////////////////////////////////////////
 35. Threading & Processing
