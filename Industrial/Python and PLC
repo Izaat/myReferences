@@ -1,0 +1,201 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#Connections
+    Siemens TIA > S1200, 1212C AC/DC/Rly
+    SSH > Rapberry Pi
+    Connections via ethernet switch
+
+#Setup
+    #Connecting
+        Open SIMATIC Automation Tool Shortcut
+            This will start a new project with a new table
+            In Main Toolbar, click on "Scan Device on network" icon
+            Open IP Address Tab
+                Mode: Blank
+                Ops State: Blank
+                Slot: 0
+                Device Type: Blank
+                Article Number: Blank
+                IP: 0.0.0.0     (Leave this as it is, it will change to the new IP address automatically)
+                Gateway: 0.0.0.0
+                New IP: 10.10.54.2
+                New Gateway: 10.10.54.1
+                Comment: S7-1200 Pi PLC
+            In IP Address Tab, click on device, "New Subnet Mask" Column will appear
+                New Subnet: 255.255.255.0
+            Click on "Download checked items" icon (Icon with down arrow)
+        If connection failed, 
+            Open Control panel > Network & Internet > Network Connections >
+                Right Click on Ethernet0 and open Properties
+                Select "Internet Protocol Version 4 (TCP/IPv4)" from the list and open its properties
+                Check "Use the following IP Address:"
+                    IP Address: 10.10.54.124
+                    Click OK
+            Head back to TIA IP Address Tab
+                Right Click on Device and select Refresh
+                Firmware version will appear if connection is successful
+        In Main Menu Toolbar, Click on Run
+    #Configuring
+        In TIA Portal, Create a new project
+            Start > Create new project
+        First Steps:
+            Configure a device:
+                Add new device:
+                    Controllers > CPU > Unspecified > Click on 6ES7-2XX-XXXXX
+                    Version: V3.0
+                    Click Add, This will lead you to the project programming window
+        Project Window:
+            Open Device view table
+            Double Click on the PLC drawing to open the "Hardware Detection" window
+            Start Search
+            Accessible Device S7-1200 will appear (Found accessible device on [IP address])
+            Click on "Detect"
+            A Colored PLC module will appear in the Device View Tab
+            Double Click on the Ethernet Portal
+                PROFINET Interface Module Panel will appear
+                    Open Properties Tab > General Sub Tab > Ethernet Address Sub Tab:
+                        Take note of the IP Address, Subnet mask and Router Address
+                            IP Add: 10.10.54.2
+                            Subnet Mask: 255.255.255.0
+                            Router Address: 10.10.54.1
+    #RaspberryPI SSH: Install Python Snap 7 and ipython
+        $ ssh pi@10.10.55.107
+        $ wget http://skylineservers.dl.sourceforge.net/project/snap7/1.4.0/snap-7-full-1.4.0.tar.gz
+        $ tar -zxvf snap7-full-1.4.0.tar.gz
+        $ cd snap7-full-1.4.0/build/unix/
+        $ sudo make -f arm_v7_linux.mk
+        Install Python Snap 7 and ipython
+        Start iPython
+
+    #Code:
+        import snap7
+        plc = snap7.client.Client()
+        plc.connect('10.10.54.2',0,1)
+
+        OR
+        
+        import snap7.client as S7
+        plc = S7.Client()
+
+
+//Using RPi to control PLC
+    //plc.py
+        import snap7.client as c
+        from snap7.util import *
+        
+        def WriteOutput01(dev, byte, bit, cmd):
+            data = dev.read_area(0x82, 0, byte, 1)  #Read data
+            set_bool(data, byte, bit, cmd)                 #Change Bit
+            dev.write_area(0x82, 0, byte, data)         #Rewrite
+            
+        def WriteOutput02(dev, bytebit, cmd):
+            byte, bit = bytebit.split('.')
+            byte, bit = int(byte), int(bit)
+            data = dev.read_area(0x82, 0, byte, 1)  #Read data
+            set_bool(data, byte, bit, cmd)                 #Change Bit
+            dev.write_area(0x82, 0, byte, data)         #Rewrite
+
+    //iPython (write boolean)
+        import snap7
+        import plc as PLC
+        
+        myplc = snap7.client.Client()
+        myplc.connect('10.10.54.2', 0, 1)
+        myplc.get   #contains myplc.get_connected, myplc.get_param
+        myplc.get_connected     #Check status. True = Connected. False = not connected
+        PLC.WriteOutput01(myplc,0,0,True) #This sets the %Q0.0 to true
+        PLC.WriteOutput01(myplc,0,0,False) #This sets the %Q0.0 to false
+
+    //iPython (blink %Q0.0 with 1 second delay)
+        import snap7
+        import plc as PLC
+        from time import sleep
+        
+        myplc = snap7.client.Client()
+        myplc.connect('10.10.54.2', 0, 1)
+        for x in range(10):
+            PLC.WriteOutput02(myplc, '0.0', x%2==0) #if even number
+            sleep(1)
+
+    //iPython (Read Analog signal)
+        import snap7.client
+        from snap7.snap7types import *
+        from snap7.util import *
+        
+        class DBObject(object):
+            pass
+            
+        db=\
+        """
+        #Tag\tBool\tOffset
+        #Example1\tBool\t0.0
+        #To be keyed into get_db_size.lastByte
+        #In TIA Portal
+            Enter: Devices Tab > Project Tree > PLC_1 > Program blocks > Data_block_1 [DB10]
+            #Make sure your datablock (CPU1214>ProgramBlocks>Data_block_1) contains the following in the columns
+            #Value will follow 'Monitor value column'
+            Static:                         | Data Types:| Offset:
+            Temperature              | Real            | 0.0
+            Cold                            | Bool            | 4.0
+            RPis_to_Buy               | Int               | 6.0
+            Db_test_String           | String          | 8.0
+        
+        """
+        
+        def DBRead(plc, db_num, length, dbitems):
+            data = plc.read_area(areas['DB'], db_num, 0, length)
+            obj = DBObject
+            for item in dbitems:
+                value = None
+                offset = int(item['bytebit'].split('.')[0])
+                
+                if item['datatype']=='Real':
+                    value = get_real(data, offset)
+                    
+                if item['datatype']=='Bool':
+                    bit = int(item['bytebit'].split('.')[1])
+                    value = get_bool(data, offset, bit)
+                    
+                if item['datatype']=='Int':
+                    value = get_int(data, offset)
+                    
+                if item['datatype']=='String':
+                    value = get_string(data, offset, 256)
+                
+                obj.__setattr__(item['name'], value)
+        
+        def get_db_size(array, bytekey, datatypekey):
+            seq, length = [x[bytekey] for x in array], [x[datatypekey] for x in array]
+            idx = seq.index(max(seq))
+            lastByte = int(max(seq).split('.')[0]) + (offsets[length[idx]])
+            return lastByte
+        
+        if __name__ == "__main__":
+            plc = snap7.client.Client()
+            plc.connect('10.10.55.109', 0, 0)
+            itemlist = filter(lambda a: a!='', db.split('\n'))
+            deliminator = '\t'
+            items = [
+                {
+                    "name":x.split(deliminator)[0]
+                    "datatype":x.split(deliminator)[1]
+                    "bytebit":x.split(deliminator)[2]
+                    
+                } for x in itemlist
+            ]
+            #get length of data block
+            #length = 0
+            length = get_db_size(items, 'bytebit', 'datatype')
+            Example2 =  DBRead(plc, 10, length, items)  #10 means datablock number 10
+
+            print """
+            Cold:\t\t\t{}
+            Temperature:\t\t{}
+            RPis_toBuy:\t{}
+            Db_test_String:\t{}
+            """.format(Example2.Cold, Example2.Temperature, Example2.RPis_to_Buy, Example2.Db_test_String)
+            plc.disconnect();
+
+        #When you run python DB.py in raspberry pi, it will retrieve the 4 values
+        #It will update whenever you rerun again
+
+
