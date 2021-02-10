@@ -1,4 +1,4 @@
-Python 3.7 in Google Colab
+Python in Google Colab
 Guide - https://www.tensorflow.org/guide/tensor
 Tensorflow Methods - https://www.tensorflow.org/api_docs/python/tf/
 pip install tensorflow
