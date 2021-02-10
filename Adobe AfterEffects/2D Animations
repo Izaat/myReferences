@@ -3,6 +3,7 @@ CONTENTS
 01. LoopOut
 02. Rigging (DUIK Bassel 2)
 03. Rigging (Rubberhose 2)
+04. Lipsync Mouth Rigging
 
 ////////////////////////////////////////////////////////////////
 01. LoopOut
@@ -458,6 +459,62 @@ https://www.youtube.com/watch?v=9C0n5FZRtJw
             Do the same for the other arm
                 
 
+////////////////////////////////////////////////////////////////
+04. Lipsync Mouth Rigging
 
+    //Setup Layers
+        Create new Composition
+        Create new Solid Layer and change the color (This will be the background color for inside of the mouth) and name this layer to BG Layer (choose dark colors)
+        Create "Top Teeth" Layer - Single layer to contain teeth and gumline
+            Use the Pen tool to create the Top Teeth (Just a semi circle) - This automatically creates a new layer, name this layer "Top Teeth"
+            Select "Top Teeth" Layer and use the Pen tool to create the gum line (series of semicircles)
+                You may do zigzag lines and use roundcorners in the timeline 
+                Highlight the gumline layer and In the timeline, under dropdown menu > contents, highlight "Shape" layer and  Click on 'Add:' and select Roundcorners
+        Duplicate "Top Teeth Layer" and name it "Bottom Teeth Layer"
+        Create Mouth Layer
+            Create a rectangle with 6 points (3 points on horizontal lines, 2 point on vertical) 
+                Make sure that under the dropdown menu, there's "Rectangle Path" added to "Content" tree
+                The "Shape Path" subtree destoys your masking (Inability to reshape the lips without enlarging the lips thickness(scaling))
+                On the other hand, the rectangle layer cant make the curvy "F" lips pose
+            Increase the stroke width to 30px and change color
+            Remove the fill by clicking on the word "Fill" and select none
+            Add "Round Corners" to the shape layer (Same method with top teeth layer)
+            
+        Masking: Masking Teeth layers with Mouth Layer
+            Duplicate Mouth layer (name this as Mouth Mask Bottom) and bring this layer to above Bottom teeth layer
+            This means that every teeth layer, there's mouth mask layer on top of it
+            Remove the stroke for "Mouth Mask Bottom" layer
+            Add Fill for Mouth Mask Bottom Layer and change the color to black
+            Select Bottom Teeth Layer and in the timeline panel, under trackmat column,  add "Alpha Matte Mouth Mask Bottom"            
+            Duplicate Mouth Mask Bottom layer (rename this as Mouth Mask Top) and bring this layer to above Top teeth layer
+            Select Top Teeth Layer and in the timeline panel, under trackmat column,  add "Alpha Matte Mouth Mask Top"
+            Duplicate again and rename this layer to "BG Mask" move this layer over on top of BG layer
+            In BG Layer, Change Trackmat to "Alpha Matte BG Mask"
+            
+    //Setting up Mouth Poses Keyframes
+        Add Audio Layer and press LL to open audio wave view
+        PreComp All the mouth layers above and rename to "Lips Animation PreComp" 
+            Enter Lips Animation PreComp
+                Add Guide Layer
+                    Add Solid Layer and ranem this layer to "GUIDE"
+                    Under Main Menu > Layer, enable "Guide Layer"
+                    In Timeline Panel, Enable "Adjustment Layer" column (Circular black and white icon)
+                    In Timeline Panel, Disable "Comp Layer" column (Star Icon)                
+                Add mouth pose markers (A, O, E, LN, WR, TS, UQ, MBP, FV) - 1 pose per second frame
+                Animate mouth poses according to the markers 
+                    Timeline Panel > Dropdown Menu > Contents > Rectangle > Rectangle  Path > 
+                        Keyframe Roundness and Size layers
+                        Add Easy-Ease to all keyframes
+                Exit PreComp
+            Add Time Remap into this PreComp layer
+                Main Menu > Layer > Time > Enable Time Remap
+                Add keyframe for Time Remap layer at the very beginning of the clip
+                ALT + Left Click on Stopwatch Icon
+                Add Expression: a=effect("Slider Control")("Slider")
+                                            framesToTime(a)
+            Add Slider Control Effect to PreComp and add the Expression above to the Remap Layer
+                Open Slider Control Drop Down Menu, Add keyframes and adjust according to the soundfile by adjusting the slider
+                
+                
 
 
