@@ -1,0 +1,1180 @@
+Python 3.7 in Google Colab
+Guide - https://www.tensorflow.org/guide/tensor
+Tensorflow Methods - https://www.tensorflow.org/api_docs/python/tf/
+pip install tensorflow
+pip install tensorflow-gpu
+tensorflow.org/install/gpu
+
+Activate Tensorflow 2.x in Google Colab
+%tensorflow_version 2.x
+
+///////////////////////////////////////////////////////////////////////
+CONTENTS
+01. Introduction
+02. 4 Core Algorithms
+03. Linear Regression
+04. Classification
+05. Clustering
+06. Hidden Markov Models
+07. Neural Networks
+08. Deep Computer Vision
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+01. Introduction
+    //Tensorflow
+        Generalization of vectors and matrices to higher dimensions
+        Each tensor has a data type and a shape
+        Data Types: float32, int32, string, etc
+        Shape: [row, columns] matrices.
+    
+    //Creating Tensors
+        - Variable = tf.Variable(value, tf.datatypes) -
+        string = tf.Variable("this is a string", tf.string)
+        number = tf.Variable(324, tf.int16)
+        floating = tf.Variable(3.567, tf.float64)
+    
+    //Rank/Degrees of Tensors
+        Scalar = Shape that contains only 1 value
+        Vector = Single row/column of multiple values
+        Matrices = Multiple rows and columns
+        
+        #Number of dimensions involved in the tensor
+        #Scalar has a tensor rank 0
+        
+        rank0_tensor_scalar = tf.Variable("this is a string", tf.string)
+        rank1_tensor_vector = tf.Variable(["Test1", "Test2", "Test3"], tf.string)
+        rank2_tensor_matrices = tf.Variable([["Test1a", "Test2a", "Test3a"], ["Test1b", "Test2b", "Test3b"]], tf.string)
+
+        #Check rank of tensor
+        tf.rank(rank2_tensor_matrices) //"numpy=2" means "rank 2"
+    
+    //Calculating Elements of the Tensor
+        #Let's sat t0 = tf.zeros([5, 5, 5, 5])
+        #So at means 5*5*5*5 = 625 elements
+        
+        #You can use the number of elements to flatten the tensor into a single row of 625 elements
+        #t = tf.reshape(t, [625])
+        
+        #Reshaping
+        #t = tf.reshape(t, [125, 5]) is the same as t = tf. reshape(t, [125, -1])
+        #More about -1 below
+    
+    //Shapes and Reshaping Tensors
+    
+        #Check shape of tensor
+        rank2_tensor_matrices.shape     //Output: TensorShape([2, 3]), where 2 is number of list, and 3 is number of elements
+
+        #Changing shape (Reshaping)
+        tensor0 = tf.zeros([1,2,3])                      # tf.zeros() creates a shape [1,2,3] tensor full of ones
+        tensor1 = tf.ones([1,2,3])                      # tf.ones() creates a shape [1,2,3] tensor full of ones
+        tensor2 = tf.reshape(tensor1, [2,3,1])  # reshape existing data to shape [2,3,1]
+        tensor3 = tf.reshape(tensor2, [3, -1])   # -1 tells the tensor to automatically calculate the size of the dimension in that place
+        #                                                             #So you don't have to do the manual calculation
+        #                                                            # this will reshape the tensor to [3,2]  
+        #                                                              #This results in shape = (subList, element)
+        
+        print(tensor1)
+        #shape = (mainList, subList, elements) [1, 2, 3]
+        print(tensor2)
+        #shape = (mainList, subList, elements) [2, 3, 1]
+        print(tensor3)
+        #shape = (subList, elements) [3,2]
+    
+    //Slicing Tensors
+        #Each subsequent value refrences a different dimension of the tensor.
+        #tensor[dim1, dim2, dim3]
+        
+        //Example
+            # Creating a 2D tensor
+            matrix = [[1,2,3,4,5],
+                      [6,7,8,9,10],
+                      [11,12,13,14,15],
+                      [16,17,18,19,20]]
+
+            tensor = tf.Variable(matrix, dtype=tf.int32) 
+            print(tf.rank(tensor))
+            print(tensor.shape)         #Output: (4, 5)
+            
+            # Now lets select some different rows and columns from our tensor
+            three = tensor[0,2]  # selects the 3rd element from the 1st row
+            print(three)  # -> 3
+
+            row1 = tensor[0]  # selects the first row
+            print(row1)
+
+            column1 = tensor[:, 0]  # selects the first column
+            print(column1)
+
+            row_2_and_4 = tensor[1::2]  # selects second and fourth row
+            print(row2and4)
+
+            column_1_in_row_2_and_3 = tensor[1:3, 0]
+            print(column_1_in_row_2_and_3)                    
+    
+    //Types of Tensors
+        #Variable        - Mutable (Cant be modified)
+        #Constant       - Immutable (Cant be modified)
+        #Placeholder   - Immutable (Cant be modified)
+        #SparseTensor - Immutable (Cant be modified)
+
+    //Evaluating Tensors    --  No longer work on Tensorflow 2
+        #Evaluating tensors stored in the default graph
+        #Default graph holds all operations no specified to other graphs
+        #Graphs can be created
+        
+        with tf.Session() as sess:  #this creates a session using the default graph
+            tensor.eval()                   #tensor will be the name of your tensor
+    
+    //Visual Scatterplot with Datasets
+        #Plotted visual graphs using matplotlib
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+02. Core Algorithms
+
+    /////////////////////// 
+    //4 Fundamentals
+        #Linear Regression
+        #Classification
+        #Clustering
+        #Hidden Markov Models
+        
+    //Steps:
+        1. Setup - Import packages, Loading dataset, Formatting dataset
+        2. Modelling - Input Function, Creating model
+        3. Training - Training the model    (No training for Markov Model)
+        4. Evaluate - Evaluate and Predict (Not applicable for Linears)
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+03. Linear Regression
+
+    /////////////////////// 
+    //Linear Regression Structure
+        #Used to predict numeric values
+
+        #If data points are related linearly, we can generate a line of best fit for these points and use it to predict future values.
+            import matplotlib.pyplot as plt
+            import numpy as np
+            x = [1, 2, 2.5, 3, 4]
+            y = [1, 4, 7, 9, 15]
+            plt.plot(x, y, 'ro')
+            plt.axis([0, 6, 0, 20])
+
+        #NOTE: y (vert) = mx + c, where c is the where the slope line intercepts at y, and m is the gradient of the slope line (m = rise.vert / run.horz)
+        
+        #To form the "line of best fit":
+            plt.plot(x, y, 'ro')
+            plt.axis([0, 6, 0, 20])
+            plt.plot(np.unique(x), np.poly1d(np.polyfit(x, y, 1))(np.unique(x)))
+            plt.show()
+        
+        #Once we've generated this line for our dataset, we can use its equation to predict future values. 
+        #We just pass the features of the data point we would like to predict into the equation of the line and use the output as our prediction.
+
+        #Linear Regression in 3D
+            2D = Gradient Line. 3D = Slopping Plane
+            3D space requires X, Y and Z
+            To solve in 3D space, you need 2 to derive the answer. 
+            Example:
+                Having X, Y values will give you answer for Z
+                Having X, Z values will give you answer for Y
+                
+                
+    /////////////////////// 
+    //SETUP - Import, Load, Format, Check (Optional)
+        #Setup
+        !pip install -q sklearn
+        %tensorflow_version 2.x  # this line is not required unless you are in a notebook
+        
+        #IMPORT PACKAGES
+            from __future__ import absolute_import, division, print_function, unicode_literals
+            import numpy as np
+            import pandas as pd
+            import matplotlib.pyplot as plt
+            from IPython.display import clear_output
+            from six.moves import urllib
+            import tensorflow.compat.v2.feature_column as fc
+            import tensorflow as tf
+
+        #LOADING DATASETS - Using Titanic dataset, informatoin about the passangers
+            #The pd.read_csv() method will return to us a new pandas dataframe/table.
+            dftrain = pd.read_csv('https://storage.googleapis.com/tf-datasets/titanic/train.csv') # load training data into dftrain variable
+            dfeval = pd.read_csv('https://storage.googleapis.com/tf-datasets/titanic/eval.csv') # load testing data into dfeval variable
+            print(dftrain.head())           #This prints out all columns before ,pop() takes out the 'Survived' column from the table 
+            print(dfeval.head())            #This prints out all columns before ,pop() takes out the 'Survived' column from the table 
+            y_train = dftrain.pop('survived')   #extact 'survived dataset' from training data (dftrain variable) and store into y_train variable
+            y_eval = dfeval.pop('survived')     #extract 'survived dataset' from testing data (dfeval variable) and store into y_eval variable
+            
+        #CHECK - Printing with Pandas
+            #Matplotlib - https://www.machinelearningplus.com/plots/top-50-matplotlib-visualizations-the-master-plots-python/
+            #Pandas - https://towardsdatascience.com/a-quick-introduction-to-the-pandas-python-library-f1b678f34673
+            #Printing out the table
+            #Use the .head() method from pandas to printout the first 5 items in our dataframe.
+            dftrain.head()          #OR print(dftrain.head()) to show numbers of columns.
+            #                               #NOTE: Notice that the head is short of 1 column due to the pop() function 
+
+            #Printing out statistical analysis table
+            #Use .describe() method
+            dftrain.describe()
+            
+            #Printing out the shape of dftrain model
+            #The output means (entries, features)
+            dftrain.shape   #Output: (627, 9)
+
+            #Printing out the specific row based on indexing
+            print(dftrain.loc[0], y_train.loc[0])
+
+            #Printing out the specific column based on column name
+            print(dftrain.loc["age"])
+         
+            #Printing out VERTICAL bar graph (variable.columnName.graphType), where .hist refers to histogram
+            dftrain.age.hist(bins=1)    #Bins represents the width of the bar, rounding off to the highest point
+            
+            #Printing out HORIZONTAL bar graph (variable.columnName.graphType), 
+            dftrain.sex.value_counts().plot(kind='barh')
+            
+            #Printing out
+            dftrain['class'].value_counts().plot(kind='barh')
+            
+            #Printing out
+            pd.concat([dftrain, y_train], axis=1).groupby('sex').survived.mean().plot(kind='barh').set_xlabel('% survive')
+    
+        #FORMATTING
+            #Reformat entire dataframe from string based into numerical format
+        
+            #Categorical data is anything that is not numeric i.e gender, embark town, etc
+            #Numerical data is anything that has number as value i.e age, fare, etc
+            #The cryptic lines of code inside the append() create an object that our model can use to map string values like "male" and "female" to integers.
+        
+            CATEGORICAL_COLUMNS = ['sex', 'n_siblings_spouses', 'parch', 'class', 'deck',
+                           'embark_town', 'alone']
+            NUMERIC_COLUMNS = ['age', 'fare']
+            feature_columns = []
+            for feature_name in CATEGORICAL_COLUMNS:
+              vocabulary = dftrain[feature_name].unique()           # gets a list of all unique values from given feature column
+              feature_columns.append(tf.feature_column.categorical_column_with_vocabulary_list(feature_name, vocabulary))
+            for feature_name in NUMERIC_COLUMNS:
+              feature_columns.append(tf.feature_column.numeric_column(feature_name, dtype=tf.float32))
+            print(feature_columns)
+
+            dftrain["embark_town"].unique()                         #Output: array(['Southampton', 'Cherbourg', 'Queenstown', 'unknown'], dtype=object)
+                
+                
+    /////////////////////// 
+    //MODELLING
+        #Creating the Models
+    
+        //Structure/////////////////
+            #Note: A Batch is a portion of dataset BEFORE being fed into the model. An Epoch is a portion of dataset AFTER being fed into the model
+            #Data is going to be fed in smaller batches of 32 instead of feeding the entire table into the model
+            #Batches will be fed into the model multiple times according to the number of epochs.
+            #One epoch means one batch of our entire dataset. Every batch needs 'input function'
+            #Input function defines how dataset will be converted into batches at each epoch
+            #NOTE: Feeding same data causes the model to 'memorize' but when new data comes in, accuracy will be very low            
+            #Input function must be created to convert current pandas dataframe into objects.
+        
+        //INPUT FUNCTION/////////////////
+            #The model requires that the batches comes in as a tensorflow object (tf.data.Dataset)
+            #To do that, the input function will convert the data from panda's dataframe into the tensorflow object
+            def make_input_fn(data_df, label_df, num_epochs=10, shuffle=True, batch_size=32):
+                def input_function():                                                           # inner function, this will be returned
+                    ds = tf.data.Dataset.from_tensor_slices((dict(data_df), label_df))          # CREATE tf.data.Dataset object with data and its label
+                    if shuffle:
+                        ds = ds.shuffle(1000)                                                   # randomize order of data
+                    ds = ds.batch(batch_size).repeat(num_epochs)                                # SPLITS dataset into batches of 32 and repeat process for number of epochs
+                    return ds                                                                   # returns a batch of the dataset
+                return input_function                                                           # returns a function object for use
+
+            train_input_fn = make_input_fn(dftrain, y_train)                                    # Retrieves the input_function result dataset and stored as train_input_fn
+            eval_input_fn = make_input_fn(dfeval, y_eval, num_epochs=1, shuffle=False)
+            
+            #Meanings
+                #data_df = the panda's dataframe
+                #label_df = the extracted datafram (y_train, y_eval, etc)
+                #num_epochs = number of epochs             
+                #shuffle = shuffles the batch
+                #batch_size = size of the batch
+                #*.from_tensor_slices() = a method to get slices of an array and then return as objects
+                
+                
+        //CREATE MODEL /////////////////
+            #Using linear estimator to utilize linear regression algorithm
+            # We create a linear estimtor by passing the feature columns we created earlier
+            linear_est = tf.estimator.LinearClassifier(feature_columns=feature_columns)
+
+    /////////////////////// 
+    //TRAINING
+        #Training the Model
+        linear_est.train(train_input_fn)                              # training begins
+        result = linear_est.evaluate(eval_input_fn)                    # get model metrics/stats by testing on tetsing data
+
+        clear_output()                                                 # clears console output
+        print(result['accuracy'])                                      # the result variable is simply a dict of stats about our model
+
+
+        ##To see the result (optional)
+        result = list(linear_est.predict(eval_input_fn))
+        print(result[0])                                               #Show result of index 0, [survived, died]
+        print(result[0]['probabilities'])                              #Show result of index 0, probabilities column
+
+    /////////////////////// 
+    //EVALUATE
+        ##Evaluating
+        result = list(linear_est.predict(eval_input_fn))
+        clear_output()
+        print(dfeval.loc[3])
+        print(y_eval.loc[3])
+        print(result[3]['probability'][1])                            #Show result of index 1, probabilities column
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+04. Classification
+    
+    /////////////////////// 
+    //Classification Structure
+        #Used for separating data points into classes of different labels
+        #Tensorflow Estimator will be used
+
+    
+    /////////////////////// 
+    //SETUP - Import, Format, Load, Check
+    
+        #IMPORT PACKAGES
+            %tensorflow_version 2.x  # this line is not required unless you are in a notebook
+            from __future__ import absolute_import, division, print_function, unicode_literals
+            import tensorflow as tf
+            import pandas as pd
+
+            #The dataset separates flowers into 3 different classes of species (Setosa, Versicolor, Virginica)
+            #Info about each flower (sepal length, sepal width, petal length, petal width)
+                
+        #FORMATTING
+            CSV_COLUMN_NAMES = ['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Species']
+            SPECIES = ['Setosa', 'Versicolor', 'Virginica']
+            # Lets define some constants to help us later on
+
+        #LOADING DATASETS - Training and Test sets
+            # Using Keras to grab our datasets and read them into a pandas dataframe
+            train_path = tf.keras.utils.get_file("iris_training.csv", "https://storage.googleapis.com/download.tensorflow.org/data/iris_training.csv")
+            test_path = tf.keras.utils.get_file("iris_test.csv", "https://storage.googleapis.com/download.tensorflow.org/data/iris_test.csv")
+
+            train = pd.read_csv(train_path, names=CSV_COLUMN_NAMES, header=0)   #header=0 means row index 0
+            test = pd.read_csv(test_path, names=CSV_COLUMN_NAMES, header=0)
+
+            #Printing Head
+            train.head()
+            
+            #Extracting 'Species' Column
+            train_y = train.pop('Species')
+            test_y = test.pop('Species')
+            train.head() # the species column is now gone
+
+        #CHECK - Checking the shape of the entries
+            train.shape  # we have 120 entires with 4 features
+
+    /////////////////////// 
+    //MODELLING
+
+        //INPUT FUNCTION
+            def input_fn(features, labels, training=True, batch_size=256):
+                # Convert the inputs to a Dataset.
+                dataset = tf.data.Dataset.from_tensor_slices((dict(features), labels))
+
+                # Shuffle and repeat if you are in training mode.
+                if training:
+                    dataset = dataset.shuffle(1000).repeat()
+                
+                return dataset.batch(batch_size)
+
+            #Feature Columns
+            # Feature columns describe how to use the input.
+            my_feature_columns = []
+            for key in train.keys():    #train.keys means looping through the columns
+                my_feature_columns.append(tf.feature_column.numeric_column(key=key))
+            print(my_feature_columns)
+
+        //CREATE MODEL
+            #2 types of Classifiers
+                1. DNN Classifier
+                2. Linear Classifier
+
+            #DNN Classifier
+            # Build a DNN with 2 hidden layers with 30 and 10 hidden nodes each.
+            classifier = tf.estimator.DNNClassifier(
+                feature_columns=my_feature_columns,
+                # Two hidden layers of 30 and 10 nodes respectively.
+                hidden_units=[30, 10],
+                # The model must choose between 3 classes.
+                n_classes=3)    #n_clsses = number of classes
+
+    /////////////////////// 
+    //TRAINING
+        #Training the model - The more you train, the better the accuracy result
+        classifier.train(
+            input_fn=lambda: input_fn(train, train_y, training=True),
+            steps=5000) #This tells the classifier to run 5000 steps
+        # Included a lambda to avoid creating an inner function previously
+        #lambda works like anonymous function in python
+        
+        #Lambda Example
+        x = lambda: print("hi")
+        x()             #Output: Hi
+
+    /////////////////////// 
+    //EVALUATE
+        #Evaluate
+        eval_result = classifier.evaluate(
+            input_fn=lambda: input_fn(test, test_y, training=False))
+        print('\nTest set accuracy: {accuracy:0.3f}\n'.format(**eval_result))
+        //Accuracy: 93%
+        
+        #Predict 1
+        def input_fn(features, batch_size=256):
+            # Convert the inputs to a Dataset without labels.
+            return tf.data.Dataset.from_tensor_slices(dict(features)).batch(batch_size)
+
+        features = ['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth']
+        predict = {}
+
+        print("Please type numeric values as prompted.")
+        for feature in features:
+          valid = True
+          while valid: 
+            val = input(feature + ": ")
+            if not val.isdigit(): valid = False
+
+          predict[feature] = [float(val)]
+
+        predictions = classifier.predict(input_fn=lambda: input_fn(predict))
+        for pred_dict in predictions:
+            print(pred_dict)
+            class_id = pred_dict['class_ids'][0]
+            probability = pred_dict['probabilities'][class_id]
+
+            print('Prediction is "{}" ({:.1f}%)'.format(
+                SPECIES[class_id], 100 * probability))
+
+        #Input Box: Type in > 
+            SepalLength: 1.4
+            SepalWidth: 2.3
+            PetalLength: 4.5
+            PetalWidth: 4.7
+            //Prediction is "Virginica" @ 77.1% accuracy
+
+        #Other Input Box Values
+        #Below are example inputs and expected answers you can try
+        expected => ['Setosa', 'Versicolor', 'Virginica']
+        predict_x => (Column1 = Setosa, Column2 = Versicolor, Column3 = Virginice)
+            'SepalLength':  [5.1, 5.9, 6.9],
+            'SepalWidth':   [3.3, 3.0, 3.1],
+            'PetalLength':  [1.7, 4.2, 5.4],
+            'PetalWidth':   [0.5, 1.5, 2.1],
+            
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+05. Clustering - KMeans
+    #https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68
+    #Clustering only works for a certain type of problems.
+    #It involves the grouping of data points with similar properties and features that are in the same group
+    #NOTE: There are issues implementing KMeans in the current version of TensorFlow
+
+    #Basic Algorithm for K-Means.
+        Step 1: Randomly generate 'K points' (number of center points) and place them randomly across a scatterplot as centroids ('K point' means the number of center point for clustering, 2 K point = 2 clusters)
+        Step 2: Assign all the clustered data points to the centroids by distance. The closest centroid to a data point is assigned to that particular centroid. (Centroid means the center of cluster)
+        Step 3: Average all the points belonging to each centroid and then find the middle of those clusters.
+        Step 4: The K points will move reposition but this time, towards the center of the pre-determined cluster, to get its accuracy
+        Step 5: Reassign every data point once again to the closest centroid. But this time, the data points that was once assigned to one centroid may be reassigned to another closer centroid after centroid reposition 
+        Step 6: Repeat until no data point reassignment takes place.
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+04. Hidden Markov Models
+    #https://www.tensorflow.org/probability/api_docs/python/tfp/distributions/HiddenMarkovModel
+    #A finite set of states where each state is associated with multidimensional distribution.
+    #State transitions are governed by a set of probabilities called transition probabilities
+    #Works with probabilities to predict future events or states i.e weather prediction
+    #All 3 components are needed to create a Hidden markov Model
+        States: 
+            Each markov model contains a finite set of states. 
+            These states could be something like ("warm" and "cold") or ("high" and "low") or even ("red", "green" and "blue") or ("1" and "0")
+            These states are "hidden" within the model, which means we do not direcly observe them.
+        Observations: 
+            Each state has a particular outcome associated with it based on a probability distribution. 
+            Example: @State 1,  80% chance true, 20% chance false. @State 2, 40% chance true, 60% chance false
+        Transitions: 
+            Each state will have a probability defining the likelihood of transitioning to a different state. 
+            Example: @State 1, 30% chance  State 1 will transition into State 0 and 70% chance that State 1 will stay as State 1.    
+    #Each 'STATE' has its own set of 'OBSERVATIONS' and 'STATES' can 'TRANSITION' into another 'STATE'
+    
+    #Tolerance vs Standard Deviation
+    #Tolerance = Allowable differences between 2 limits
+    #Standard Deviation = Added/Subtracted differences between 2 limits
+    
+    #This Model
+        Cold day = 0, Hot day = 1
+        Firstday in the sequence has 80% chance of being cold
+        Cold day has 30% chance transitioning to hot day
+        Hot day has 20% chance transitioning to cold day 
+        Temperature is normally distributed on each day
+            Cold Day:
+                Mean Average: 0
+                Standard Deviation: 5
+                Range: -5 to 5
+            Hot Day:
+                Mean Average: 15
+                Standard Deviation: 10
+                Range: 5 to 25
+    
+    
+    /////////////////////// 
+    //Installation
+        #For notebook
+        %tensorflow_version 2.x  # this line is not required unless you are in a notebook
+        !pip install tensorflow_probability==0.8.0rc0 --user --upgrade
+    
+    /////////////////////// 
+    //SETUP 
+        
+        #Import
+        import tensorflow_probability as tfp  # We are using a different module from tensorflow this time
+        import tensorflow as tf
+
+        #Loading        
+        tfd = tfp.distributions  # making a shortcut for later
+        initial_distribution = tfd.Categorical(probs=[0.8, 0.2])    #probability = [20%, 80%]
+        transition_distribution = tfd.Categorical(probs=[[0.7, 0.3], [0.2, 0.8]])  #Since we have 2 states, so we have 2 probabilities
+        observation_distribution = tfd.Normal(loc=[0., 15.], scale=[5., 10.])    
+        
+        #loc = mean [0deg, 15deg], where the bracket means [cold day, hot day]
+        #scale = standard deviation [5 deg, 10deg], where the bracket means [cold day, hot day]
+        #The loc argument represents the mean and the scale is the standard devitation
+        #The scale and loc values must be in float data type hence the decimal '0.' and '15.'
+
+    /////////////////////// 
+    //MODELLING
+        #Create distribution variables
+        #Number of steps = number of days
+        #1 week = 7 days = 7 steps
+        model = tfd.HiddenMarkovModel(
+            initial_distribution=initial_distribution,
+            transition_distribution=transition_distribution,
+            observation_distribution=observation_distribution,
+            num_steps=7)
+
+    /////////////////////// 
+    //EVALUATE
+        #Evaluate
+        mean = model.mean()
+
+        # due to the way TensorFlow works on a lower level we need to evaluate part of the graph
+        # from within a session to see the value of this tensor
+
+        # in the new version of tensorflow we need to use tf.compat.v1.Session() rather than just tf.Session()
+        with tf.compat.v1.Session() as sess:  
+          print(mean.numpy())
+
+
+        #Output:
+        Steps => [Day1  Day2   Day3  Day4   Day5  Day6   Day7]
+        Temp => [2.99   5.99    7.49    8.25    8.63    8.81    8.91]
+        The more days you add, the least accurate the answers will be
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+07. Neural Networks with Tensorflow
+    //Keras Models
+    #https://keras.io/api/models/
+        Sequential Model - Left to Right
+        Arbitrary Models - Functional API
+        Customized Models (Research Based) - Model Subclassing
+    
+    //STRUCTURE - 3 layers NN
+    
+        #Nodes:
+            Input 
+            Hidden
+            Output
+            Bias (b)
+        #Weights (W)
+        
+        #Types of data neural network uses
+            Vectors (2D)
+            Timeseries or Sequence (3D)
+            Image Data (4D)
+            Video Data (5D)
+            Many others...
+        
+        #Equation: 
+            #Every layer has the value of 1
+            Weighted Sum Equation:  (For input layer)
+                Weight at every node in the next layer = Sum[WiXi]+b
+                Node value of the next layer = [Sum of all nodes in the same first layer (Weight * Value)] + bias
+            Activation Function: (For hidden Layer and Output)
+                Y = F(Weighted Equation)
+                Output node = sum of weighted sum * node weight] + b
+                
+        #Terms: 
+            #Activation Function
+                Relu: Rectified Linear Unit - (eliminates negative numbers)
+                Tanh: Hyerbolic Tangent - Sharp S graph     (Forces any numbers that are near to -1 (<0) to relabel as -1 and numbers near +1 (>0) to relabel as +1)
+                Sigmoid: Rounded S graph    (Forces numbers extremely close to 0 (<0.05) to relabel as 0, and numbers that are extremely close to +1 (>0.95) to relabel as +1)
+                
+            #Backpropagation
+                Fundamental algorithm behind training neural network
+                Changes the weights and biases of the network
+                
+            #Cost/Loss function
+                #https://www.tensorflow.org/api_docs/python/tf/keras/losses
+                Determines network performance
+                Training data contains features like input and expected output
+                Types (Too Many and here are the few) :
+                    Mean Squared Error
+                    Mean Absolut Error
+                        The [sum of abs(yi - lambda(xi))]/n
+                    Hinge Loss
+              
+            #Gradient Descent
+                #ml-cheatsheet.readthedocs.io/en/latest/gradient_descent.html
+                Similar to Backpropagation
+                An algorithm to find the optimal parameters (weight and biases) for the network by moving in the direction of steepest descent (3d graph)                
+                Backpropagation is the process of calculating the gradient in gradient descent step
+                
+            #Optimization functions
+                #tutorialspoint.com/tensorflow/tensorflow_optimizers.htm
+                #medium.com/@sdoshi579/optimizers-for-training-neural-network-59450d71caf6
+                Gradient Descent
+                Stochastic Gradient descent
+                Stochastic Gradient descent with gradient clipping
+                Mini-Batch Gradient Descent
+                Momentum
+                Nesterov Accelerated Gradient
+                Adagrad
+                Adadelta
+                RMSProp
+                Adam
+                Adamax
+                SMORMS3              
+    
+    //CREATING NEURAL NETWORK        
+        #Importing
+            %tensorflow_version 2.x  # this line is not required unless you are in a notebook
+            import tensorflow as tf
+            from tensorflow import keras
+            import numpy as np
+            import matplotlib.pyplot as plt        
+
+        #Dataset
+            #MNIST Fashion Dataset (included in Keras)
+            #Contains 60k training images, 10k validation/testing images 
+            fashion_mnist = keras.datasets.fashion_mnist  # load dataset
+            (train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()  # split into tetsing and training
+
+            #Check
+                #shape of data
+                train_images.shape      #Output: (60000, 28, 28) = 60k images, 28x28 pixels (784 in total)
+                
+                #Check each pixel
+                train_images[0,23,23]       #Output: 194
+                    #Pixel values between 0 - 255, 0 = black, 255 = white
+                    #Grayscale image as there is no color
+
+                #Check first 10 training labels
+                train_labels[:10]           #Output: array([9, 0, 0, 3, 0, 2, 7, 2, 5, 5], dtype=uint8)
+                    #integers range 0-9. Each int represents specific article of clothing
+                    #An array of labels required
+                    
+                #Check Type
+                type(train_images)
+
+            #Create array of labels
+            class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+                
+            #Show image with matplotlib
+            plt.figure()
+            plt.imshow(train_images[1])
+            plt.colorbar()
+            #plt.grid(False)
+            plt.show()
+
+        #Pre-processing
+            #Applying some prior transformation to our data before feeding to the model
+            #Scaling all greyscale pixel values (0-255) to (0-1) by dividing each value in training set and test sets by 255
+            #Smaller values make easier for model to process
+            train_images = train_images / 255.0
+            test_images = test_images / 255.0
+
+        #Building Model
+            #Sequential model with 3 different values
+            #this represents feed-forward NN.
+            model = keras.Sequential([
+                keras.layers.Flatten(input_shape=(28, 28)),  # input layer (1)
+                keras.layers.Dense(128, activation='relu'),  # hidden layer (2)
+                keras.layers.Dense(10, activation='softmax') # output layer (3)
+            ])
+
+            #Input Layer
+                Contains 784 neurons
+                Using flatten layer with input shape of 28x28
+                Flatten means reshaping
+                
+            #Hidden Layer
+                Contains 128 neurons
+                uses rectify linear unit activation function (relu)
+
+            #Output Layer
+                Also a dense layer but an output node 
+                Contains 10 neurons
+                Each Node/neuron represents the probability of a given image being one of the 10 classes
+                Uses softmax activation function to calculate a probability distribution for each class
+                Value of any neuron will be between 0-1 where 1 = high probability
+
+        #Compile Model
+            #Define the loss function, optimizer and metrics
+            model.compile(
+                optimizer='adam',           #Adam is the method name
+                loss='sparse_categorical_crossentropy',
+                metrics=['accuracy'])
+
+        #Training the model 
+            model.fit(train_images, train_labels, epochs=10)  # we pass in the data, labels and epochs
+            #91% accuracy
+
+        #Evaluating
+            test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=1) 
+            print('Test accuracy:', test_acc)
+            #If resulting accuracy is lower than the result of 'Training the model', it means overfitting            
+
+        #Make Predictions
+            #Passing an array of data in the specified form to the input layer to .predict() method.
+            predictions = model.predict(test_images) #Entire array
+                #predictions = model.predict([test_images[0]]) #Using 1 image that resides in index 0               
+                #test_images.shape #Check the shape     #Check Predictions
+
+            #Return an array of prediction for each image
+            predictions[0]
+
+            #Get value with highest score
+                #Returns the index of the max value from numpy array
+                np.argmax(predictions[0])
+
+            #Verify Predicitons 1 (To manually cross check numpy's with the validation label)
+                #Printing out the test labels
+                test_labels[0]
+                
+            #Verify Predictions 2 (To print out the validation label assigned to the prediction)
+            print(class_names[np.argmax(predictions[0])])
+            
+            #Show the predicted image
+            plt.figure()
+            plt.imshow(train_images[0])
+            plt.colorbar()
+            plt.show()
+
+        #Verify Predictions
+            COLOR = 'white'
+            plt.rcParams['text.color'] = COLOR
+            plt.rcParams['axes.labelcolor'] = COLOR
+
+            def predict(model, image, correct_label):
+              class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
+                           'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+              prediction = model.predict(np.array([image]))
+              predicted_class = class_names[np.argmax(prediction)]
+
+              show_image(image, class_names[correct_label], predicted_class)
+
+
+            def show_image(img, label, guess):
+              plt.figure()
+              plt.imshow(img, cmap=plt.cm.binary)
+              plt.title("Excpected: " + label)
+              plt.xlabel("Guess: " + guess)
+              plt.colorbar()
+              plt.grid(False)
+              plt.show()
+
+
+            def get_number():
+              while True:
+                num = input("Pick a number: ")
+                if num.isdigit():
+                  num = int(num)
+                  if 0 <= num <= 1000:
+                    return int(num)
+                else:
+                  print("Try again...")
+
+            num = get_number()
+            image = test_images[num]
+            label = test_labels[num]
+            predict(model, image, label)
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+08. Deep Computer Vision
+    //CNN Layer Structure example
+        #Input > Conv > Pool > Conv > Pool > Flatten > Dense Input > Dense Output        
+        #Details:
+            Input Image (28x28x1) > 
+            Conv (5x5x32) > 
+            Image (24x24x32) > 
+            Pool (2x2) > 
+            Image (12x12x32) > 
+            Conv (5x5x64) > 
+            Image (8x8x64) > 
+            Pool (2x2) > 
+            Image (4x4x64) > 
+            Flatten Array > 
+            Dense Connections > 
+            input nodes (1024 nodes) > 
+            Dense Connections > 
+            Output nodes (10 nodes)
+        
+    //Concepts
+        #Image Data
+        #Convolution Layer
+        #Pooling Layer
+        #CNN Archtectures
+
+    //Image Data
+        #Contains 3 dimensions 
+            - image height in pixels
+            - image width in pixels
+            - image depth (color channels (R,G,B)) in intensity - 0-255
+    
+    //Convolution Layer
+        #Find patterns from within images that can be used to classify the image 
+            Finds eyes, beak and wing in an image to output a bird
+            Uses dense layers to train what eyes look like and convolution uses dense to search for eyes to scan the image
+        #Dense Layer vs Convolution Layer
+            Dense layers detect patterns globally while convolutional layers detect patterns locally
+                Global means entire image
+                Local means part/sections of the image
+            Dense Layer: 
+                Each node in that hidden layer sees all the data from the previous layer
+                Process the ENTIRE image and use all the pixel informations to generate an output
+            Convolution Layer: 
+                Not be densely connected. Detect local patterns using part of the input data to that layer
+                Process SPECIFIC parts of the image iand use that information to generate an output
+        #Common to have more than one convolution layers
+
+    //Multiple Convolutional Layers (This model)
+        Contains 3 convolution layers (Layers work together by increasing complexity and abstraction at each subsequent layer)
+        First layer picks up the edges and short lines
+        Second layer takes in the lines and start forming shapes/polygons
+        Third layer takes in the shapes/polygons and determine which combinations make up a specific image
+
+**//Feature Maps
+        This term simply stands for the output image after using filters on the input image
+        Each location of the filter applied to the input image coincides with post-filter locations in the feature map (Top left corner of image = top left corner of feature map)
+        Getting the size of feature map:
+            Size of Feature map = [ (Rows of Input image - Rows of filter) / Stride ] + 1
+            Example: [ [(7x7) - (3x3)] / 1 ] + 1 = 5x5 pixels feature map
+
+    //Layer Parameters
+        #Contains 3 key parameters
+            Input Image size
+            Filters (Number of filters, can be as many as 128)
+            Sample Size (Size of filters)
+            
+        #Filters/Feature Detector:
+            Filters look for pattern of pixels in an image
+            Number of filters in a convolutional layer represents how many patterns each layer is looking for and what the depth of the feature map will be
+            Example:
+                If 32 different patterns/filters, then the output feature map (aka the response map) will have a depth of 32
+                Each one of those 32 layers will be a matrix of pixels containing values that determines the presence of patterns at the location within an image
+
+        #Sample Size
+            The same size as the filter (usually 3x3 OR 5x5)
+            Layers work by sliding these filters over every possible position in an image
+            Populates a new feature map/response map indicating whether the filter is present at each location
+    
+    //Other Parameters
+        #Borders and Paddings (Optional feature)
+            Additional number of rows and columns added to the edges of the input image
+            This is to avoid filter from bleeding out of the input image while striding
+            Borders can be avoided by adjusting the stride value (if the filter frame size can fit the input image after striding)
+            Important for large images
+
+        #Stride (Filter movements)
+            Filter frames jump sideways by 1 pixel
+            By default CNN uses stride method to move the filters across the input image
+            Default for striding is 1 pixel but this can be modified to multiple  pixels (jumping over)
+            
+        #Pooling   
+            Downsizes the feature maps and reduce dimensions
+            Usually using window size of 2x2 with a stride of 2
+            Returns a new feature map that is 2x smaller
+            It subdivides the Output Feature Map into sub sections and outputs to another feature map
+                Example: Output Feature Map of 3x3 subdivides into 2x2 Pooling Feature Map
+                The Pooling Feature Map has the same process as filtering. Except that in filtering, it process the input image, whereas in pooling, it process the output feature map
+            Types of pooling:
+                Min: Output the lowest value in the matrix
+                Max: Output thehighest value in the matrix 
+                Avg: Averages all the values within the matrix
+                
+    //Creating a CNN
+        //Setup
+            # Input > Conv > Pool > Conv > Pool > Conv > Flatten > Dense Input > Dense Output
+            #tensorflow.org/tutorials/images/cnn
+            #Using Tensorflow's built in CIFAR Image Dataset (60 images, 32x32 pixels, 6k images per class)
+            #CIFAR: https://www.cs.toronto.edu/~kriz/cifar.html
+            #Labels: Airplane, Automobile, Bird, Cat, Deer, Dog, Frog, Horse, Ship, Truck
+            
+            #Load Dataset
+                %tensorflow_version 2.x  # this line is not required unless you are in a notebook
+                import tensorflow as tf
+                from tensorflow.keras import datasets, layers, models
+                import matplotlib.pyplot as plt
+
+            #Load and Split Dataset
+                (train_images, train_labels), (test_images, test_labels) = datasets.cifar10.load_data()
+
+            # Normalize pixel values to be between 0 and 1
+                train_images, test_images = train_images / 255.0, test_images / 255.0
+                class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+
+            #Checking one image
+                IMG_INDEX = 7  # change this to look at other images
+                plt.imshow(train_images[IMG_INDEX] ,cmap=plt.cm.binary)
+                plt.xlabel(class_names[train_labels[IMG_INDEX][0]])
+                plt.show()
+
+        //Architecture
+            #Refer to CNN Layer Structure at the top
+            #Convolution Base Layer
+                model = models.Sequential()
+                model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)))    #Input Shape: 32x32. Processes 32 filters with size of 3x3. The output is 30 instead of 32 because no border / padding
+                model.add(layers.MaxPooling2D((2, 2)))                                                                   #Max Pooling using 2x2 sample with stride of 2. Output 15x15. Half the size.
+                model.add(layers.Conv2D(64, (3, 3), activation='relu'))                                           #Increase frequency of filters from 32 to 64. Note: Data shrinks after pooling. Outputs 13x13 (No border) from 15x15 pool
+                model.add(layers.MaxPooling2D((2, 2)))                                                                  #Outputs half the size 6x6
+                model.add(layers.Conv2D(64, (3, 3), activation='relu'))                                             #Output 4x4 (No border)
+
+            #Check Model
+                model.summary()  #Note: Depth of image increases but spacial dimensions reduced drastically. See note above.
+
+            #Create Flatten and Dense Layer
+                model.add(layers.Flatten())                                                         #Flattens the data
+                model.add(layers.Dense(64, activation='relu'))                          #Dense input Layer
+                model.add(layers.Dense(10))                                                      #Dense output layer
+
+            #Check
+                #The flatten layer changes the shape of the data before feeding into 64 node dense layer
+                #Final Output Layer: 10 nodes
+                model.summary() 
+
+        //Training
+            #Train and compile model
+            model.compile(optimizer='adam',
+                          loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+                          metrics=['accuracy'])
+                          
+            #recommended to use 10 epochs instead of 4, but will take more time
+            history = model.fit(train_images, train_labels, epochs=4, 
+                                validation_data=(test_images, test_labels))        
+
+        //Evaluate////////////////
+            #Determine how well the model performs
+            test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
+            print(test_acc)     #Accuracy: 70% (for 10 epochs)
+
+    //Data Augmentation - Working with Small Dataset (When you have lesser than a few thousand images)
+        #Data Augmentation Technique    (Rotate, Transform, Compress, Stretch, Recoloring of images)
+            from keras.preprocessing import image
+            from keras.preprocessing.image import ImageDataGenerator
+
+        # creates a data generator object that transforms images
+            datagen = ImageDataGenerator(
+            rotation_range=40,
+            width_shift_range=0.2,
+            height_shift_range=0.2,
+            shear_range=0.2,
+            zoom_range=0.2,
+            horizontal_flip=True,
+            fill_mode='nearest')
+
+        # pick an image to transform
+            test_img = train_images[20]
+            img = image.img_to_array(test_img)  # convert image to numpy arry
+            img = img.reshape((1,) + img.shape)  # reshape image
+
+            i = 0
+
+            for batch in datagen.flow(img, save_prefix='test', save_format='jpeg'):  # this loops runs forever until we break, saving images to current directory with specified prefix
+                plt.figure(i)
+                plot = plt.imshow(image.img_to_array(batch[0]))
+                i += 1
+                if i > 4:  # show 4 images
+                    break
+
+            plt.show()        #See 4 transformations of a single image
+
+
+    //Pre-Trained Models
+        There are pre trained models available in the internet. Google provides these models as well
+        This saves alot of time since the supplied covnets already know the features of any images
+
+    //Fine Tuning
+        Tweaking only the final layers of the pre trained model
+
+    //Application
+        #Using PreTrained Model
+        #Classifying Dogs and Cats
+        #tensorflow.org/tutorials/images/transfer_learning
+        #Using the pre-trained model
+        
+        #Imports
+            import os
+            import numpy as np
+            import matplotlib.pyplot as plt
+            import tensorflow as tf
+            keras = tf.keras
+
+        #Load Dataset
+            import tensorflow_datasets as tfds
+            tfds.disable_progress_bar()
+
+            # split the data manually into 80% training, 10% testing, 10% validation
+            (raw_train, raw_validation, raw_test), metadata = tfds.load(
+                'cats_vs_dogs',
+                split=['train[:80%]', 'train[80%:90%]', 'train[90%:]'],
+                with_info=True,
+                as_supervised=True,
+            )        
+
+            get_label_name = metadata.features['label'].int2str  # creates a function object that we can use to get labels, integer to string (int2str)
+
+            # display 2 images from the dataset
+            for image, label in raw_train.take(5):  #The number 5 represents number of images to be shown
+              plt.figure()
+              plt.imshow(image)
+              plt.title(get_label_name(label))
+
+        #Data Preprocessing
+            #The data provided are of different sizes. Converting them to same sizes required (converts to 160x160)
+            IMG_SIZE = 160 # All images will be resized to 160x160
+
+            def format_example(image, label):
+              """
+              returns an image that is reshaped to IMG_SIZE
+              """
+              image = tf.cast(image, tf.float32)        #Cast = Convert
+              image = (image/127.5) - 1
+              image = tf.image.resize(image, (IMG_SIZE, IMG_SIZE))
+              return image, label
+
+            #use .map()
+            train = raw_train.map(format_example)
+            validation = raw_validation.map(format_example)
+            test = raw_test.map(format_example)            
+
+            #Check images
+            for image, label in train.take(2):
+              plt.figure()
+              plt.imshow(image)
+              plt.title(get_label_name(label))            
+
+            #Shuffle and batch the images
+            BATCH_SIZE = 32
+            SHUFFLE_BUFFER_SIZE = 1000
+
+            train_batches = train.shuffle(SHUFFLE_BUFFER_SIZE).batch(BATCH_SIZE)
+            validation_batches = validation.batch(BATCH_SIZE)
+            test_batches = test.batch(BATCH_SIZE)
+
+            #Check image (Old vs new)
+            for img, label in raw_train.take(2):
+              print("Original shape:", img.shape)
+
+            for img, label in train.take(2):
+              print("New shape:", img.shape)            
+
+        #Picking Pre Trained Model    
+            #Picking the convolution base of the pre trained model
+            #Using the model "Mobile v2" by Google
+            #Model trained on 1.4 million images and has 1000 different classes
+            #Need to specify that the top classification layer not required while loading the google model
+            #Need to define the input shape and using the predetermined weights from imagenet (Google dataset)
+
+            IMG_SHAPE = (IMG_SIZE, IMG_SIZE, 3)
+            # Create the base model from the pre-trained model MobileNet V2
+            base_model = tf.keras.applications.MobileNetV2(input_shape=IMG_SHAPE,
+                                                           include_top=False,       #Excludes the top classifications
+                                                           weights='imagenet')            #From Google imagenet
+
+            #Check
+            #Output shape of (5, 5, 1280), a feature extraction from our original (160, 160, 3)
+            #The 32 means that we have 32 layers of differnt filters/features.
+            base_model.summary()        #Output: (32, 5, 5, 1280)
+
+            for image, _ in train_batches.take(1):
+               pass
+
+            feature_batch = base_model(image)
+            print(feature_batch.shape)
+
+
+        #Freezing the Base
+            #Simply means locking the properties of a layer.
+            #This way, the weights of any layers are locked and can't be changed during training
+            base_model.trainable = False
+            base_model.summary()    #Trainable Parameters: 0
+
+        #Adding our classifier
+            #Instead of flattening the feature map, global average pooling will be used
+            #Averages out 5x5 area of each 2D feature map and returns a single 1280 element vector per filter
+            global_average_layer = tf.keras.layers.GlobalAveragePooling2D()
+
+        #Add prediction Layer
+            #Only 1 single dense neuron since there are only 2 classes (Cats and Dogs) to predict
+            prediction_layer = keras.layers.Dense(1)
+
+        #Combine the layers in a model
+            model = tf.keras.Sequential([
+              base_model,
+              global_average_layer,
+              prediction_layer
+            ])
+
+            #Check
+            model.summary()     #Trainable Parameters: 1281
+
+        #Training the model
+            #Small learning rate will be used to ensure that the model does not have any major changes in the process
+            base_learning_rate = 0.0001
+            model.compile(optimizer=tf.keras.optimizers.RMSprop(lr=base_learning_rate),
+                          loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
+                          metrics=['accuracy'])            
+
+            # Evaluate the model before training it on new images
+            initial_epochs = 3
+            validation_steps=20
+
+            loss0,accuracy0 = model.evaluate(validation_batches, steps = validation_steps)
+
+            #Train it on the new images (Warning: Takes an hour to train)
+            history = model.fit(train_batches,
+                                epochs=initial_epochs,
+                                validation_data=validation_batches)
+
+            acc = history.history['accuracy']
+            print(acc)  #Accuracy: 93%
+
+            model.save("dogs_vs_cats.h5")  # we can save the model and reload it at anytime in the future where h5 is HDF extension file for models
+            new_model = tf.keras.models.load_model('dogs_vs_cats.h5')
+            #model.predict(x, batch_size=None, verbose=0, steps=None, callbacks=None, max_queue_size, ...)
+
+        #Object Detection
+            #github.com/tensorflow/models/tree/master/research/object_detection
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
