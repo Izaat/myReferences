@@ -18,6 +18,7 @@ CONTENTS
 06. Hidden Markov Models
 07. Neural Networks
 08. Deep Computer Vision
+09. Natural Language Processing (NLP) with RNNs
 
 
 
@@ -1202,6 +1203,458 @@ CONTENTS
 
         #Object Detection
             #github.com/tensorflow/models/tree/master/research/object_detection
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+09. Natural Language Processing (NLP) with RNNs
+    //NLP
+        #NLP deals with communications between natural (human) languages and computer languages
+        #Focuses on how computers can understand human languages
+        #Example: Spellcheck, Autocomplete, Translations, Chatbox, etc
+        
+    //The 2 NLP Models
+        #Sentiment Analysis Model - Determines how positive or negative a sentence is
+        #Text Generation Model - Predict the next character
+    
+    //Encoding Texts
+        #The 3 techniques for converting text data into numerical values prior to feeding into the Neural Network
+        
+        //Bag of words Technique (Simplified)
+            #A sentence may mean different things if words are not in correct order. The reason Bag of Words Technique is flawed
+            #Uses groupings for the words
+            #Code
+                vocab = {}  # maps word to integer representing it
+                word_encoding = 1
+                def bag_of_words(text):
+                  global word_encoding
+
+                  words = text.lower().split(" ")  # create a list of all of the words in the text, well assume there is no grammar in our text for this example
+                  bag = {}  # stores all of the encodings and their frequency
+
+                  for word in words:
+                    if word in vocab:
+                      encoding = vocab[word]  # get encoding from vocab
+                    else:
+                      vocab[word] = word_encoding
+                      encoding = word_encoding
+                      word_encoding += 1
+                    
+                    if encoding in bag:
+                      bag[encoding] += 1
+                    else:
+                      bag[encoding] = 1
+                  
+                  return bag
+
+                text = "this is a test to see if this test will work is is test a a"
+                bag = bag_of_words(text)
+                print(bag)
+                print(vocab)            
+                
+            #Check
+                positive_review = "I thought the movie was going to be bad but it was actually amazing"
+                negative_review = "I thought the movie was going to be amazing but it was actually bad"
+
+                pos_bag = bag_of_words(positive_review)
+                neg_bag = bag_of_words(negative_review)
+
+                print("Positive:", pos_bag)
+                print("Negative:", neg_bag)
+
+        //Integer Encoding Technique
+            #Uses a sequence of numbers for the words
+            #Representing each word or character in a sentence as a unique integer and maintains the order of these words
+            #Code
+                vocab = {}  
+                word_encoding = 1
+                def one_hot_encoding(text):
+                  global word_encoding
+
+                  words = text.lower().split(" ") 
+                  encoding = []  
+
+                  for word in words:
+                    if word in vocab:
+                      code = vocab[word]  
+                      encoding.append(code) 
+                    else:
+                      vocab[word] = word_encoding
+                      encoding.append(word_encoding)
+                      word_encoding += 1
+                  
+                  return encoding
+
+                text = "this is a test to see if this test will work is is test a a"
+                encoding = one_hot_encoding(text)
+                print(encoding)
+                print(vocab)
+
+            #Check
+                positive_review = "I thought the movie was going to be bad but it was actually amazing"
+                negative_review = "I thought the movie was going to be amazing but it was actually bad"
+
+                pos_encode = one_hot_encoding(positive_review)
+                neg_encode = one_hot_encoding(negative_review)
+
+                print("Positive:", pos_encode)
+                print("Negative:", neg_encode)            
+
+        //Word Embeddings
+            Using vectors (3D graph) for the words 
+            Word embeddings
+
+    //Recurrent Neural Network
+        #colah.github.io/posts/2015-08-Understanding-LSTMs/
+        #Simple RNN
+            #Terms 
+                ht - output at time t
+                xt - input at time t
+                A - Recurrent Layer (Loop)
+                
+            #Recurrent Layer
+                Feeds the entire sentence, but one word at a time, for RNN to process each word individually.
+                Every single recurrent Layer processes words or input in a combination of output from previous layer
+                As it progresses further in sequence, it understands more of what the word means as a whole
+                RNN contains xt, A and ht. Where A is a loop.
+                    xt -> A -> ht
+                    Breaking down this loop layer will show sublayers of smaller RNNs
+                    Example: A1 sublayer passes information to A2 node at the next layer and every sublayer contains ht and xt (ht1 feeds to A2) and xt receives the words of the sentence in sequence
+                    Assume the "I am king" sentence. The RNN will feed each word into 3 of its sublayers. Where the first sublayer will be "I", second is "I + am" and 3rd will be "I am + King"
+                    "+" means the output from the previous layer
+                Down side for Simple RNN is that the number of layers can't process long sentences due to memory contraint
+                Solution: Use LSTM (Long-Short term memory) in conjunction with the RNN
+
+    //Sentiment Analysis Model
+        #tensorflow.org/tutorials/text/text_classification_rnn
+        #Identify and categorizing expressions of a given sentence in order to determine its positivity, negativity, or neutrality
+        
+        #Dataset: 
+            Uses IMDB Dataset
+            25k reviews (already preprocessed with +/- labels)
+            Each review encoded by integers by frequency of usage where "1" is the most used word
+
+        #IMPORT
+            %tensorflow_version 2.x  # this line is not required unless you are in a notebook
+            from keras.datasets import imdb
+            from keras.preprocessing import sequence
+            import keras
+            import tensorflow as tf
+            import os
+            import numpy as np
+            
+        #LOADING
+            VOCAB_SIZE = 88584
+            MAXLEN = 250        #Max Length
+            BATCH_SIZE = 64
+            (train_data, train_labels), (test_data, test_labels) = imdb.load_data(num_words = VOCAB_SIZE)            
+
+            #Checking one review
+            train_data[1]
+            
+            #Check length of data
+            len(train_data[1])
+
+        #PREPROCESSING
+            #The loaded reviews are of different lengths and this will be an issue since NN only accepts uniformity
+            #To solve thise, Keras will be used. If Review > 250 words, then trim. Else, add zeros to fill to 250 words
+            train_data = sequence.pad_sequences(train_data, MAXLEN)
+            test_data = sequence.pad_sequences(test_data, MAXLEN)            
+            
+            #Check data
+            train_data[1]
+
+        #MODELLING
+            #Use word embedding layer as first layer
+            #Then add LSTM layer  afterwards that feeds into the dense layer for predicted sentiment
+            #"32" stands of the output dimension of the vectors generated by the embedding layer 
+            #The number can be modified to another value
+            model = tf.keras.Sequential([
+                tf.keras.layers.Embedding(VOCAB_SIZE, 32),
+                tf.keras.layers.LSTM(32),       #32 dimensions for every single word
+                tf.keras.layers.Dense(1, activation="sigmoid")
+            ])
+            
+            #Check
+            model.summary()
+            
+        #TRAINING
+            #Adam optimizer can be used instead of Rmsprop
+            model.compile(loss="binary_crossentropy",optimizer="rmsprop",metrics=['acc'])
+            history = model.fit(train_data, train_labels, epochs=10, validation_split=0.2) #Validation split of 0.2 means using 20% of training data for validation
+
+        #EVALUATE
+            results = model.evaluate(test_data, test_labels)
+            print(results)      #Accuracy: 85%
+
+        #PREDICT
+            #Encoding
+                word_index = imdb.get_word_index()      #Library of thousands of words
+                def encode_text(text):
+                  tokens = keras.preprocessing.text.text_to_word_sequence(text)     #Get text and convert into tokens (individual word per token)
+                  tokens = [word_index[word] if word in word_index else 0 for word in tokens]   #If the word in tokens exists in word_index, then replace the word. Else just add "0"
+                  return sequence.pad_sequences([tokens], MAXLEN)[0]        #Create list and add padding + token into index 0
+                text = "that movie was just amazing, so amazing"
+                encoded = encode_text(text)
+                print(encoded)
+
+            #Decode function (Reversing)
+                reverse_word_index = {value: key for (key, value) in word_index.items()}
+                def decode_integers(integers):
+                    PAD = 0         #If 0 then nothing is there
+                    text = ""           #Add text string
+                    for num in integers:
+                      if num != PAD:        #If number is not "0"
+                        text += reverse_word_index[num] + " "       #Add word into a string
+                    return text[:-1]              #Return everything except the last value
+                print(decode_integers(encoded))     #Output: "That movie is just amazing so amazing"
+
+            #Prediction
+                def predict(text):
+                  encoded_text = encode_text(text)      #Get preprocessed text by taking the text and then encode with encode_text() function
+                  pred = np.zeros((1,250))          #Create blank numpy array with the shape of 250
+                  pred[0] = encoded_text            #Insert preprocessed text into the numpy array at index 0
+                  result = model.predict(pred) 
+                  print(result[0])
+
+                positive_review = "That movie was! really loved it and would great watch it again because it was amazingly great"
+                predict(positive_review)        #Output: 72% positive
+
+                negative_review = "that movie really sucked. I hated it and wouldn't watch it again. Was one of the worst things I've ever watched"
+                predict(negative_review)        #Output: 23% positive
+
+    //Text Generation Model
+        #tensorflow.org/tutorials/text/text_generation
+        #Inputs a variable length sequence and predicts the next character
+        #Model can be used many times in a row with output from last prediction
+
+        #IMPORT
+            %tensorflow_version 2.x  # this line is not required unless you are in a notebook
+            from keras.preprocessing import sequence
+            import keras
+            import tensorflow as tf
+            import os
+            import numpy as np
+
+        #LOADING
+            #Download
+                #This model downloads a shakespeare play and saves as a text file
+                path_to_file = tf.keras.utils.get_file('shakespeare.txt', 'https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt')
+                
+                #Loading your own file instead of downloading
+                    from google.colab import files
+                    path_to_file = list(files.upload().keys())[0]
+
+            #Read file contents
+                # Read, then decode for py2 compat.
+                text = open(path_to_file, 'rb').read().decode(encoding='utf-8')
+                # length of text is the number of characters in it
+                print ('Length of text: {} characters'.format(len(text)))
+
+                #Checking the first 250 characters in text
+                print(text[:250])                
+
+            #Encoding
+                vocab = sorted(set(text))   #Sort unique character in a variable named "vocab"                
+                char2idx = {u:i for i, u in enumerate(vocab)}       #Creates a map of index for every unique characters
+                idx2char = np.array(vocab)      #Converts list into an array
+
+                def text_to_int(text):              #Converts every single character in text into integer
+                  return np.array([char2idx[c] for c in text]) #Takes character (c) and put into a list
+
+                text_as_int = text_to_int(text)            
+
+                #Check how part of the text is encoded
+                print("Text:", text[:13])
+                print("Encoded:", text_to_int(text[:13]))
+
+            #Decode
+                def int_to_text(ints):
+                  try:
+                    ints = ints.numpy()
+                  except:
+                    pass
+                  return ''.join(idx2char[ints])        #Joins all characters into text
+
+                print(int_to_text(text_as_int[:13]))
+
+        #TRAINING
+            #Required to split text data into many shorter sequences
+            #Using seq_length sequence as input and output, where the sequence is the original sequence shifted one letter to the right
+                input: Hell | ello
+
+            #Create a stream of characters from text data
+                seq_length = 100  # length of sequence for a training example
+                examples_per_epoch = len(text)//(seq_length+1)
+
+                # Create training examples / targets
+                char_dataset = tf.data.Dataset.from_tensor_slices(text_as_int)
+
+            #Using Batch method to turn the stream into batches of desired length
+                sequences = char_dataset.batch(seq_length+1, drop_remainder=True)
+
+            #Using the sequences of length 101 and split them into input and output
+                def split_input_target(chunk):  # for the example: hello
+                    input_text = chunk[:-1]  # hell
+                    target_text = chunk[1:]  # ello
+                    return input_text, target_text  # hell, ello
+
+                dataset = sequences.map(split_input_target)  #use map to apply the above function to every entry
+                for x, y in dataset.take(2):
+                    print("\n\nEXAMPLE\n")
+                    print("INPUT")
+                    print(int_to_text(x))
+                    print("\nOUTPUT")
+                    print(int_to_text(y))
+
+            #Build Training Batches
+                BATCH_SIZE = 64
+                VOCAB_SIZE = len(vocab)  # vocab is number of unique characters
+                EMBEDDING_DIM = 256
+                RNN_UNITS = 1024    #Memory units of each sequence in vertical manner
+
+                # Buffer size to shuffle the dataset
+                # (TF data is designed to work with possibly infinite sequences,
+                # so it doesn't attempt to shuffle the entire sequence in memory. Instead,
+                # it maintains a buffer in which it shuffles elements).
+                BUFFER_SIZE = 10000
+                
+                #Creates dataset that shuffles
+                data = dataset.shuffle(BUFFER_SIZE).batch(BATCH_SIZE, drop_remainder=True)
+
+        #MODELLING
+            #Using embedding layer, LSTM and a dense layer that contains a node for each unique character
+            #Dense layer will return a probabilitydistribution over all nodes
+                def build_model(vocab_size, embedding_dim, rnn_units, batch_size):  #Batch size = 64
+                  model = tf.keras.Sequential([
+                    tf.keras.layers.Embedding(vocab_size, embedding_dim,
+                                              batch_input_shape=[batch_size, None]),
+                    tf.keras.layers.LSTM(rnn_units,
+                                        return_sequences=True,  #For model to check at intermediate steps
+                                        stateful=True,
+                                        recurrent_initializer='glorot_uniform'),
+                    tf.keras.layers.Dense(vocab_size)
+                  ])
+                  return model
+
+                model = build_model(VOCAB_SIZE,EMBEDDING_DIM, RNN_UNITS, BATCH_SIZE)
+                model.summary()
+
+        #LOSS FUNCTION
+            #The model will output a (64, sequence_length, 65) shaped tensor that represents the probability distribution of each character at each timestep for every sequence in the batch
+            #Therefore, a loss function is required
+
+            #Check sample input and output from the untrained model
+                for input_example_batch, target_example_batch in data.take(1):
+                  example_batch_predictions = model(input_example_batch)  # ask the model for a prediction on the first batch of training data (64 entries)
+                  print(example_batch_predictions.shape, "# (batch_size, sequence_length, vocab_size)")  # print out the output shape
+
+                #The predicition is an array of 64 arrays, one for each entry in the batch
+                print(len(example_batch_predictions))
+                print(example_batch_predictions)
+
+                #Check for one prediction
+                pred = example_batch_predictions[0]
+                print(len(pred))
+                print(pred)
+                #this is a 2d array (1 training example) of length 100, where each interior array is the prediction for the next character at each time step
+
+                #Checking the prediction at the first timestep
+                time_pred = pred[0]
+                print(len(time_pred))
+                print(time_pred)
+                #Returns 65 values representing the probabillity of each character occuring next
+                #From 100 to 65 and this is why loss function is required for this model
+
+                #To determine the predicted character, sample the output distribution (pick a value based on probabillity)
+                sampled_indices = tf.random.categorical(pred, num_samples=1)
+
+                #Reshape the array and convert all the integers to numbers to see the actual characters
+                sampled_indices = np.reshape(sampled_indices, (1, -1))[0]
+                predicted_chars = int_to_text(sampled_indices)
+
+                predicted_chars  #Result of what the model predicted, for training sequence 1 (Just random characters). Each character represents each timestep
+
+            #Creating Loss Function
+                #Compares output to the expected output and returns some numeric value representing the similarities
+                def loss(labels, logits):
+                    return tf.keras.losses.sparse_categorical_crossentropy(labels, logits, from_logits=True)
+
+        #COMPILE
+            #Compiling the Model
+                model.compile(optimizer='adam', loss=loss)
+        
+            #Checkpoints
+                #This saves checkpoints as it trains and ability to load the model from checkpoint
+                # Directory where the checkpoints will be saved
+                checkpoint_dir = './training_checkpoints'
+                # Name of the checkpoint files
+                checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt_{epoch}")
+
+                checkpoint_callback=tf.keras.callbacks.ModelCheckpoint(
+                    filepath=checkpoint_prefix,
+                    save_weights_only=True)                
+
+            #Training
+                #Use GPU Power if this takes a long time
+                history = model.fit(data, epochs=50, callbacks=[checkpoint_callback])
+
+            #Reload model
+                #Rebuilds the model from a checkpoint using a batch_size of 1
+                model = build_model(VOCAB_SIZE, EMBEDDING_DIM, RNN_UNITS, batch_size=1)
+            
+            #Load latest checkpoint
+                model.load_weights(tf.train.latest_checkpoint(checkpoint_dir))
+                model.build(tf.TensorShape([1, None]))
+
+                checkpoint_num = 10
+                model.load_weights(tf.train.load_checkpoint("./training_checkpoints/ckpt_" + str(checkpoint_num)))
+                model.build(tf.TensorShape([1, None]))
+
+        #GENERATE TEXT
+            def generate_text(model, start_string):
+                # Evaluation step (generating text using the learned model)
+
+                # Number of characters to generate
+                num_generate = 800
+
+                # Converting our start string to numbers (vectorizing)
+                input_eval = [char2idx[s] for s in start_string]
+                input_eval = tf.expand_dims(input_eval, 0)
+
+                # Empty string to store our results
+                text_generated = []
+
+                # Low temperatures results in more predictable text.
+                # Higher temperatures results in more surprising text.
+                # Experiment to find the best setting.
+                temperature = 1.0
+
+                # Here batch size == 1
+                model.reset_states()
+                for i in range(num_generate):
+                    predictions = model(input_eval)
+                    # remove the batch dimension
+                    
+                    predictions = tf.squeeze(predictions, 0)
+
+                    # using a categorical distribution to predict the character returned by the model
+                    predictions = predictions / temperature
+                    predicted_id = tf.random.categorical(predictions, num_samples=1)[-1,0].numpy()
+
+                    # We pass the predicted character as the next input to the model
+                    # along with the previous hidden state
+                    input_eval = tf.expand_dims([predicted_id], 0)
+
+                    text_generated.append(idx2char[predicted_id])
+
+                return (start_string + ''.join(text_generated))
+
+            inp = input("Type a starting string: ")
+            print(generate_text(model, inp))
+
+
 
 
 ///////////////////////////////////////////////////////////////////////
