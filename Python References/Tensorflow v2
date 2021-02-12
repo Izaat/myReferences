@@ -69,13 +69,13 @@ CONTENTS
         rank2_tensor_matrices.shape     //Output: TensorShape([2, 3]), where 2 is number of list, and 3 is number of elements
 
         #Changing shape (Reshaping)
-        tensor0 = tf.zeros([1,2,3])                      # tf.zeros() creates a shape [1,2,3] tensor full of ones
+        tensor0 = tf.zeros([1,2,3])                     # tf.zeros() creates a shape [1,2,3] tensor full of ones
         tensor1 = tf.ones([1,2,3])                      # tf.ones() creates a shape [1,2,3] tensor full of ones
-        tensor2 = tf.reshape(tensor1, [2,3,1])  # reshape existing data to shape [2,3,1]
-        tensor3 = tf.reshape(tensor2, [3, -1])   # -1 tells the tensor to automatically calculate the size of the dimension in that place
-        #                                                             #So you don't have to do the manual calculation
-        #                                                            # this will reshape the tensor to [3,2]  
-        #                                                              #This results in shape = (subList, element)
+        tensor2 = tf.reshape(tensor1, [2,3,1])          # reshape existing data to shape [2,3,1]
+        tensor3 = tf.reshape(tensor2, [3, -1])          # -1 tells the tensor to automatically calculate the size of the dimension in that place
+        #                                               # So manual calculation is not required
+        #                                               # This will also reshape the tensor to [3,2]  
+        #                                               # This results in shape = (subList, element)
         
         print(tensor1)
         #shape = (mainList, subList, elements) [1, 2, 3]
@@ -146,9 +146,9 @@ CONTENTS
 
 
     //Types of Tensors
-        #Variable        - Mutable (Cant be modified)
-        #Constant       - Immutable (Cant be modified)
-        #Placeholder   - Immutable (Cant be modified)
+        #Variable     - Mutable (Cant be modified)
+        #Constant     - Immutable (Cant be modified)
+        #Placeholder  - Immutable (Cant be modified)
         #SparseTensor - Immutable (Cant be modified)
 
     //Evaluating Tensors    --  No longer work on Tensorflow 2
@@ -156,7 +156,7 @@ CONTENTS
         #Default graph holds all operations no specified to other graphs
         #Graphs can be created
         
-        with tf.Session() as sess:  #this creates a session using the default graph
+        with tf.Session() as sess:          #this creates a session using the default graph
             tensor.eval()                   #tensor will be the name of your tensor
     
     //Visual Scatterplot with Datasets
@@ -174,10 +174,10 @@ CONTENTS
         #Hidden Markov Models
         
     //Steps:
-        1. Setup - Import packages, Loading dataset, Formatting dataset
+        1. Setup     - Import packages, Loading dataset, Formatting dataset
         2. Modelling - Input Function, Creating model
-        3. Training - Training the model    (No training for Markov Model)
-        4. Evaluate - Evaluate and Predict (Not applicable for Linears)
+        3. Training  - Training the model    (No training for Markov Model)
+        4. Evaluate  - Evaluate and Predict (Not applicable for Linears)
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -235,8 +235,8 @@ CONTENTS
             #The pd.read_csv() method will return to us a new pandas dataframe/table.
             dftrain = pd.read_csv('https://storage.googleapis.com/tf-datasets/titanic/train.csv') # load training data into dftrain variable
             dfeval = pd.read_csv('https://storage.googleapis.com/tf-datasets/titanic/eval.csv') # load testing data into dfeval variable
-            print(dftrain.head())           #This prints out all columns before ,pop() takes out the 'Survived' column from the table 
-            print(dfeval.head())            #This prints out all columns before ,pop() takes out the 'Survived' column from the table 
+            print(dftrain.head())               #This prints out all columns before ,pop() takes out the 'Survived' column from the table 
+            print(dfeval.head())                #This prints out all columns before ,pop() takes out the 'Survived' column from the table 
             y_train = dftrain.pop('survived')   #extact 'survived dataset' from training data (dftrain variable) and store into y_train variable
             y_eval = dfeval.pop('survived')     #extract 'survived dataset' from testing data (dfeval variable) and store into y_eval variable
             
@@ -245,7 +245,7 @@ CONTENTS
             #Pandas - https://towardsdatascience.com/a-quick-introduction-to-the-pandas-python-library-f1b678f34673
             #Printing out the table
             #Use the .head() method from pandas to printout the first 5 items in our dataframe.
-            dftrain.head()          #OR print(dftrain.head()) to show numbers of columns.
+            dftrain.head()                  #OR print(dftrain.head()) to show numbers of columns.
             #                               #NOTE: Notice that the head is short of 1 column due to the pop() function 
 
             #Printing out statistical analysis table
@@ -340,7 +340,7 @@ CONTENTS
     /////////////////////// 
     //TRAINING
         #Training the Model
-        linear_est.train(train_input_fn)                              # training begins
+        linear_est.train(train_input_fn)                               # training begins
         result = linear_est.evaluate(eval_input_fn)                    # get model metrics/stats by testing on tetsing data
 
         clear_output()                                                 # clears console output
@@ -359,7 +359,7 @@ CONTENTS
         clear_output()
         print(dfeval.loc[3])
         print(y_eval.loc[3])
-        print(result[3]['probability'][1])                            #Show result of index 1, probabilities column
+        print(result[3]['probability'][1])                             #Show result of index 1, probabilities column
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -903,7 +903,8 @@ CONTENTS
 
 **//Feature Maps
         This term simply stands for the output image after using filters on the input image
-        Each location of the filter applied to the input image coincides with post-filter locations in the feature map (Top left corner of image = top left corner of feature map)
+        Each location of the filter applied to the input image coincides with post-filter locations in the feature map --
+            -- (Top left corner of image = top left corner of feature map)
         Getting the size of feature map:
             Size of Feature map = [ (Rows of Input image - Rows of filter) / Stride ] + 1
             Example: [ [(7x7) - (3x3)] / 1 ] + 1 = 5x5 pixels feature map
@@ -944,7 +945,8 @@ CONTENTS
             Returns a new feature map that is 2x smaller
             It subdivides the Output Feature Map into sub sections and outputs to another feature map
                 Example: Output Feature Map of 3x3 subdivides into 2x2 Pooling Feature Map
-                The Pooling Feature Map has the same process as filtering. Except that in filtering, it process the input image, whereas in pooling, it process the output feature map
+                The Pooling Feature Map has the same process as filtering. 
+                Except that in filtering, it process the input image, whereas in pooling, it process the output feature map
             Types of pooling:
                 Min: Output the lowest value in the matrix
                 Max: Output thehighest value in the matrix 
@@ -981,19 +983,19 @@ CONTENTS
             #Refer to CNN Layer Structure at the top
             #Convolution Base Layer
                 model = models.Sequential()
-                model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)))    #Input Shape: 32x32. Processes 32 filters with size of 3x3. The output is 30 instead of 32 because no border / padding
-                model.add(layers.MaxPooling2D((2, 2)))                                                                   #Max Pooling using 2x2 sample with stride of 2. Output 15x15. Half the size.
-                model.add(layers.Conv2D(64, (3, 3), activation='relu'))                                           #Increase frequency of filters from 32 to 64. Note: Data shrinks after pooling. Outputs 13x13 (No border) from 15x15 pool
-                model.add(layers.MaxPooling2D((2, 2)))                                                                  #Outputs half the size 6x6
-                model.add(layers.Conv2D(64, (3, 3), activation='relu'))                                             #Output 4x4 (No border)
+                model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3))) #Input Shape: 32x32. Processes 32 filters with size of 3x3. The output is 30 instead of 32 because no border / padding
+                model.add(layers.MaxPooling2D((2, 2)))                                           #Max Pooling using 2x2 sample with stride of 2. Output 15x15. Half the size.
+                model.add(layers.Conv2D(64, (3, 3), activation='relu'))                          #Increase frequency of filters from 32 to 64. Note: Data shrinks after pooling. Outputs 13x13 (No border) from 15x15 pool
+                model.add(layers.MaxPooling2D((2, 2)))                                           #Outputs half the size 6x6
+                model.add(layers.Conv2D(64, (3, 3), activation='relu'))                          #Output 4x4 (No border)
 
             #Check Model
                 model.summary()  #Note: Depth of image increases but spacial dimensions reduced drastically. See note above.
 
             #Create Flatten and Dense Layer
-                model.add(layers.Flatten())                                                         #Flattens the data
-                model.add(layers.Dense(64, activation='relu'))                          #Dense input Layer
-                model.add(layers.Dense(10))                                                      #Dense output layer
+                model.add(layers.Flatten())                                                       #Flattens the data
+                model.add(layers.Dense(64, activation='relu'))                                    #Dense input Layer
+                model.add(layers.Dense(10))                                                       #Dense output layer
 
             #Check
                 #The flatten layer changes the shape of the data before feeding into 64 node dense layer
@@ -1037,14 +1039,14 @@ CONTENTS
 
             i = 0
 
-            for batch in datagen.flow(img, save_prefix='test', save_format='jpeg'):  # this loops runs forever until we break, saving images to current directory with specified prefix
+            for batch in datagen.flow(img, save_prefix='test', save_format='jpeg'):  #This loops runs forever until we break, saving images to current directory with specified prefix
                 plt.figure(i)
                 plot = plt.imshow(image.img_to_array(batch[0]))
                 i += 1
                 if i > 4:  # show 4 images
                     break
 
-            plt.show()        #See 4 transformations of a single image
+            plt.show()     #See 4 transformations of a single image
 
 
     //Pre-Trained Models
@@ -1137,7 +1139,7 @@ CONTENTS
             # Create the base model from the pre-trained model MobileNet V2
             base_model = tf.keras.applications.MobileNetV2(input_shape=IMG_SHAPE,
                                                            include_top=False,       #Excludes the top classifications
-                                                           weights='imagenet')            #From Google imagenet
+                                                           weights='imagenet')      #From Google imagenet
 
             #Check
             #Output shape of (5, 5, 1280), a feature extraction from our original (160, 160, 3)
@@ -1231,11 +1233,11 @@ CONTENTS
                   global word_encoding
 
                   words = text.lower().split(" ")  # create a list of all of the words in the text, well assume there is no grammar in our text for this example
-                  bag = {}  # stores all of the encodings and their frequency
+                  bag = {}                         # stores all of the encodings and their frequency
 
                   for word in words:
                     if word in vocab:
-                      encoding = vocab[word]  # get encoding from vocab
+                      encoding = vocab[word]       # get encoding from vocab
                     else:
                       vocab[word] = word_encoding
                       encoding = word_encoding
@@ -1459,12 +1461,12 @@ CONTENTS
                 print(text[:250])                
 
             #Encoding
-                vocab = sorted(set(text))   #Sort unique character in a variable named "vocab"                
+                vocab = sorted(set(text))                           #Sort unique character in a variable named "vocab"                
                 char2idx = {u:i for i, u in enumerate(vocab)}       #Creates a map of index for every unique characters
-                idx2char = np.array(vocab)          #Converts list into an array
+                idx2char = np.array(vocab)                          #Converts list into an array
 
-                def text_to_int(text):              #Converts every single character in text into integer
-                  return np.array([char2idx[c] for c in text]) #Takes character (c) and put into a list
+                def text_to_int(text):                              #Converts every single character in text into integer
+                  return np.array([char2idx[c] for c in text])      #Takes character (c) and put into a list
 
                 text_as_int = text_to_int(text)            
 
@@ -1478,7 +1480,7 @@ CONTENTS
                     ints = ints.numpy()
                   except:
                     pass
-                  return ''.join(idx2char[ints])        #Joins all characters into text
+                  return ''.join(idx2char[ints])                    #Joins all characters into text
 
                 print(int_to_text(text_as_int[:13]))
 
