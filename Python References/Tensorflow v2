@@ -1747,7 +1747,7 @@ CONTENTS
             env.reset()  #reset enviornment to default state
             action = env.action_space.sample()  #get a random action 
             new_state, reward, done, info = env.step(action)  #take action and returns information about the action
-            env.render()   #render the GUI for the enviornment 
+            env.render()   #render the GUI for the enviornment (S=Start Point, F=Frozen, H=Hole, G=Gold)
 
         #Q-TABLE
             env = gym.make('FrozenLake-v0')
