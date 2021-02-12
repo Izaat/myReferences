@@ -19,7 +19,7 @@ CONTENTS
 07. Neural Networks
 08. Deep Computer Vision
 09. Natural Language Processing (NLP) with RNNs
-
+10. Reinforcement Learning
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -1654,6 +1654,167 @@ CONTENTS
             inp = input("Type a starting string: ")
             print(generate_text(model, inp))
 
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+10. Reinforcement Learning
+    #towardsdatascience.com/simple-reinforcement-learning-q-learning-fcddc4b6fe56
+    #OpenAI/Gym: github.com/openai/gym/wiki/FrozenLake-v0.
+    #Has many applications in training agents to interact with environments like games
+    #Instead of feeding the machine learning model millions of examples, the model comes up with its own examples by exploring an enviornment
+
+    #Terms:
+        #Having an "agent" to navigate the "environment" where it goes through many forms of "states" to determine which "actions" maximizes the positive "reward"
+        Enviornment: 
+            This is what the model will explore. 
+            Example: Training an AI to play a game (Mario), the model(agent) will be controlling the character itself
+        Agent: 
+            An entity that is exploring the enviornment. The model will interact and take different actions within the enviornment. 
+            In Mario example, the mario character within the game will be the agent.
+        State: 
+            The agent will have many states to choose. Each state simply tells us about the status of the agent. (Location, Health, Points, etc) 
+            Example: The location of the agent within an environment. Agent that moves (action) to another location that contains another state will change the agent's state.
+        Action: 
+            Any interaction between the agent and enviornment. 
+            Example: Moving to the left or jumping is an action. 
+            An action may or may not change the current state of the agent. 
+            Also note that the act of doing nothing is also an action. (The action of not pressing a key if we are using our mario example)
+        Reward: 
+            Every action that our agent takes will result in given a reward, (positive reward or negative reward). 
+            The goal of the agent is to maximize its positive reward in an enviornment. 
+            The reward will be cleared if an agent performs an action which results them to lose scores or possibly dying in the enviornment (Negative Reward).
+
+    #Q-Learning Technique
+        A technique that involves learning a matrix of action-reward values.
+        This matrix is often referred to as Q-Table or Q-Matrix
+        The matrix is in the shape of (number of possible states, number of possible actions) where each value at matrix[n, m] represents the agents expected reward given they are in state n and take action m
+        Q-learning algorithm defines the way the values in the matrix are being updated and decide what action to take at each state
+        After a successful training/learning of Q-Table/matrix, the action of an agent can be determined.
+
+    #Structure
+        #The 2 ways agents decide which action to take
+            1. Randomly picking valid action
+            2. Using Q-Table to find the best action
+
+        #Steps
+            The agent will usually start out by taking random actions in order to explore the environment and entering many different states.
+            After each new action, the agent will record its actions and the rewards received. This values will be used to update the Q-Table
+            The more it explores the environment, the more it will understand and knows which better paths to take
+            The more it understands the better paths, the more it will rely on it's learned values (Q-Table) to take actions.
+            The agent will stop taking new actions only when the time limit has reached or it has achieved the goal or reached the end of the environment
+            Note: The agent need to have a good balance (epsilon value) between taking random actions and using the learned values (Avoiding local maximum)
+            
+            #The Epsilon is the probability of selecting a random action
+            #This Epsilon value will start off high and then gradually decrease as the agent learns more about the environment           
+                
+        #Updating Q-Values
+            Q[state, action] = Q[state, action] + alpha (reward + gamma*max(Q[newState,:]) - Q[state, action])
+            alpha = Learning Rate
+            gamma = Discount Factor
+
+        #Learning Rate
+            How much change is permitted on each QTable update
+            Higher learning rate = Larger change to the current state-action value at every update
+            Modifying the learning rate will change how the agent explores the enviornment, and how quickly it determines the final values in the QTable
+
+        #Discount Factor
+            To balance how much focus is applied to the current and future rewards. 
+            A high discount factor means that future rewards will be considered more heavily
+
+    #PROGRAMMING
+        #Environment: gym.openai.com (Frozenlake-v0)
+        #Training an agent to navigate an environment (OpenAI Gym)
+        #Frozenlake-v0 Description
+            The agent is to navigate the environment (a frozen lake) and find the goal without falling into the ice 
+            Use env.render() to see the environment
+            Properties:
+                16 states (1 state per square)
+                4 possible actions (Left, Right, Up, Down)
+                4 different types of blocks (F: frozen, H: hole, S: start, G: goal)
+        
+        #IMPORT 
+            import gym
+            import numpy as np
+            import time
+
+        #LOADING
+            #Loading the environment using gym.make("environment")
+            env = gym.make('FrozenLake-v0')  #using the FrozenLake enviornment
+
+            #Get information about the environment
+            print(env.observation_space.n)   #get number of states
+            print(env.action_space.n)   #get number of actions
+            env.reset()  #reset enviornment to default state
+            action = env.action_space.sample()  #get a random action 
+            new_state, reward, done, info = env.step(action)  #take action and returns information about the action
+            env.render()   #render the GUI for the enviornment 
+
+        #Q-TABLE
+            env = gym.make('FrozenLake-v0')
+            STATES = env.observation_space.n
+            ACTIONS = env.action_space.n            
+
+            Q = np.zeros((STATES, ACTIONS))  # create a matrix with all 0 values 
+            Q
+
+        #CONSTANTS (alpha and gamma)
+            EPISODES = 2000 # how many times to run the enviornment from the beginning
+            MAX_STEPS = 100  # max number of steps allowed for each run of enviornment
+            LEARNING_RATE = 0.81  # learning rate
+            GAMMA = 0.96
+            
+        #WATCH TRAINING
+            RENDER = False #If you want to see training set to true
+
+        #DEFINE REWARDS, PICKING ACTIONS & UPDATE Q-TABLE
+            epsilon = 0.9  # start with a 90% chance of picking a random action 
+
+            rewards = []
+            for episode in range(EPISODES):
+
+              state = env.reset()
+              for _ in range(MAX_STEPS):
+                
+                if RENDER:
+                  env.render()
+                
+                #PICKING ACTION
+                if np.random.uniform(0, 1) < epsilon:    #check if a randomly selected value is less than epsilon.
+                  action = env.action_space.sample()    #take random action
+                else:
+                  action = np.argmax(Q[state, :])           #use Q table to pick best action based on current values          
+
+                next_state, reward, done, _ = env.step(action)
+                
+                #UPDATE Q VALUES
+                Q[state, action] = Q[state, action] + LEARNING_RATE * (reward + GAMMA * np.max(Q[next_state, :]) - Q[state, action])
+
+                state = next_state
+
+                if done: 
+                  rewards.append(reward)
+                  epsilon -= 0.001
+                  break  # reached goal
+
+            print(Q)
+            print(f"Average reward: {sum(rewards)/len(rewards)}:")
+                #Now we can see our Q values
+
+        #PLOTTING TRAINING PROGRESS
+            # we can plot the training progress and see how the agent improved
+            import matplotlib.pyplot as plt
+
+            def get_average(values):
+              return sum(values)/len(values)
+
+            avg_rewards = []
+            for i in range(0, len(rewards), 100):
+              avg_rewards.append(get_average(rewards[i:i+100])) 
+
+            plt.plot(avg_rewards)
+            plt.ylabel('average reward')
+            plt.xlabel('episodes (100\'s)')
+            plt.show()
 
 
 
