@@ -1320,8 +1320,10 @@ CONTENTS
                 RNN contains xt, A and ht. Where A is a loop.
                     xt -> A -> ht
                     Breaking down this loop layer will show sublayers of smaller RNNs
-                    Example: A1 sublayer passes information to A2 node at the next layer and every sublayer contains ht and xt (ht1 feeds to A2) and xt receives the words of the sentence in sequence
-                    Assume the "I am king" sentence. The RNN will feed each word into 3 of its sublayers. Where the first sublayer will be "I", second is "I + am" and 3rd will be "I am + King"
+                    Example: A1 sublayer passes information to A2 node at the next layer and every sublayer contains ht and xt (ht1 feeds to A2) and 
+                             xt receives the words of the sentence in sequence
+                    Assume the "I am king" sentence. The RNN will feed each word into 3 of its sublayers. 
+                    Where the first sublayer will be "I", second is "I + am" and 3rd will be "I am + King"
                     "+" means the output from the previous layer
                 Down side for Simple RNN is that the number of layers can't process long sentences due to memory contraint
                 Solution: Use LSTM (Long-Short term memory) in conjunction with the RNN
@@ -1390,11 +1392,12 @@ CONTENTS
 
         #PREDICT
             #Encoding
-                word_index = imdb.get_word_index()      #Library of thousands of words
+                word_index = imdb.get_word_index()                                              #Library of thousands of words
                 def encode_text(text):
-                  tokens = keras.preprocessing.text.text_to_word_sequence(text)     #Get text and convert into tokens (individual word per token)
-                  tokens = [word_index[word] if word in word_index else 0 for word in tokens]   #If the word in tokens exists in word_index, then replace the word. Else just add "0"
-                  return sequence.pad_sequences([tokens], MAXLEN)[0]        #Create list and add padding + token into index 0
+                  tokens = keras.preprocessing.text.text_to_word_sequence(text)                 #Get text and convert into tokens (individual word per token)
+                  tokens = [word_index[word] if word in word_index else 0 for word in tokens]   #If the word in tokens exists in word_index, then replace the word. 
+                                                                                                #Else just add "0"
+                  return sequence.pad_sequences([tokens], MAXLEN)[0]                            #Create list and add padding + token into index 0
                 text = "that movie was just amazing, so amazing"
                 encoded = encode_text(text)
                 print(encoded)
@@ -1402,19 +1405,19 @@ CONTENTS
             #Decode function (Reversing)
                 reverse_word_index = {value: key for (key, value) in word_index.items()}
                 def decode_integers(integers):
-                    PAD = 0         #If 0 then nothing is there
-                    text = ""           #Add text string
+                    PAD = 0                             #If 0 then nothing is there
+                    text = ""                           #Add text string
                     for num in integers:
-                      if num != PAD:        #If number is not "0"
+                      if num != PAD:                    #If number is not "0"
                         text += reverse_word_index[num] + " "       #Add word into a string
-                    return text[:-1]              #Return everything except the last value
-                print(decode_integers(encoded))     #Output: "That movie is just amazing so amazing"
+                    return text[:-1]                    #Return everything except the last value
+                print(decode_integers(encoded))         #Output: "That movie is just amazing so amazing"
 
             #Prediction
                 def predict(text):
                   encoded_text = encode_text(text)      #Get preprocessed text by taking the text and then encode with encode_text() function
-                  pred = np.zeros((1,250))          #Create blank numpy array with the shape of 250
-                  pred[0] = encoded_text            #Insert preprocessed text into the numpy array at index 0
+                  pred = np.zeros((1,250))              #Create blank numpy array with the shape of 250
+                  pred[0] = encoded_text                #Insert preprocessed text into the numpy array at index 0
                   result = model.predict(pred) 
                   print(result[0])
 
@@ -1458,7 +1461,7 @@ CONTENTS
             #Encoding
                 vocab = sorted(set(text))   #Sort unique character in a variable named "vocab"                
                 char2idx = {u:i for i, u in enumerate(vocab)}       #Creates a map of index for every unique characters
-                idx2char = np.array(vocab)      #Converts list into an array
+                idx2char = np.array(vocab)          #Converts list into an array
 
                 def text_to_int(text):              #Converts every single character in text into integer
                   return np.array([char2idx[c] for c in text]) #Takes character (c) and put into a list
@@ -1739,17 +1742,17 @@ CONTENTS
 
         #LOADING
             #Loading the environment using gym.make("environment")
-            env = gym.make('FrozenLake-v0')  #using the FrozenLake enviornment
+            env = gym.make('FrozenLake-v0')                    #using the FrozenLake enviornment
 
             #Get information about the environment
-            print(env.observation_space.n)   #get number of states
-            print(env.action_space.n)   #get number of actions
+            print(env.observation_space.n)                     #get number of states
+            print(env.action_space.n)                          #get number of actions
             
             #Other lines of codes that need to be implemented
-            #env.reset()  #reset enviornment to default state
-            #action = env.action_space.sample()  #get a random action 
-            #new_state, reward, done, info = env.step(action)  #take action and returns information about the action
-            #env.render()   #render the GUI for the enviornment (S=Start Point, F=Frozen, H=Hole, G=Gold)
+            #env.reset()                                        #reset enviornment to default state
+            #action = env.action_space.sample()                 #get a random action 
+            #new_state, reward, done, info = env.step(action)   #take action and returns information about the action
+            #env.render()                                       #render the GUI for the enviornment (S=Start Point, F=Frozen, H=Hole, G=Gold)
 
         #Q-TABLE
             env = gym.make('FrozenLake-v0')
@@ -1760,8 +1763,9 @@ CONTENTS
             Q
 
         #CONSTANTS (alpha and gamma)
-            EPISODES = 2000 # how many times to run the enviornment from the beginning
-            MAX_STEPS = 100  # max number of steps allowed for each run of enviornment
+            EPISODES = 2000 # How many times to run the enviornment from the beginning 
+                            # The higher the number the better it trains - but set the RENDER to False 
+            MAX_STEPS = 100 # max number of steps allowed for each run of enviornment
             LEARNING_RATE = 0.81  # learning rate
             GAMMA = 0.96
             
@@ -1781,8 +1785,8 @@ CONTENTS
                   env.render()
                 
                 #PICKING ACTION
-                if np.random.uniform(0, 1) < epsilon:    #check if a randomly selected value is less than epsilon.
-                  action = env.action_space.sample()    #take random action
+                if np.random.uniform(0, 1) < epsilon:       #check if a randomly selected value is less than epsilon.
+                  action = env.action_space.sample()        #take random action
                 else:
                   action = np.argmax(Q[state, :])           #use Q table to pick best action based on current values          
 
