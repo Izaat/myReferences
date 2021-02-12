@@ -412,6 +412,7 @@ CONTENTS
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //10. FunkoPop Animation
 
+    /////////////////////////////////////////////////////////////////////////////////////////////
     //Drag and drop image into Blender Viewport
         #The placement of the image will be based on the camera angle
         #ALT + R to remove the angle and follow the plane
@@ -419,6 +420,8 @@ CONTENTS
         #R + X: 90 to rotate image to 90 degrees (make it stand), then press enter.
         #Enter wireframe mode and press G to move image to align with the 3D cursor
         #Open object data properties tab to adjust the transparency
+        
+    /////////////////////////////////////////////////////////////////////////////////////////////    
     //Sculpting
         //Head
             #Grab 3D mesh cube and move the cube to cover the head in the image
@@ -531,7 +534,8 @@ CONTENTS
                 #Edge select the wrist hole and press F to fill the hole
                 #Flatten the 4 sections to form the cross sectional dimension of the hands and extrude
             #Fingers
-                #For the fingers, Press ALT + E and select 'Individual Faces', this creates the fingers sections
+                #or the fingers, Select the faces for the finger.
+                #Press ALT + E and Select 'Individual Faces', this creates the fingers sections
                 #Extrude to form to top section of fingers (Fingers subdivided by 3 sections)
                 #Center-Top toolbar, click on Transform Pivot Point and select Median Point
                 #Extrude again to form the mid joints and then again for the finger tips
@@ -541,9 +545,120 @@ CONTENTS
                 #Adjust the geometry accordingly
             #Adjusting the entire hand
                 Select all the hand faces and press Shift + H to hide the torso, arms, legs and head. ALT + H to Unhide
+        //Harnesses
+            #Wrist Bands
+                In Edit Mode > Select Face Selection Mode, ALT + Left Click on the face of the wrist and select another face to form a band
+                On top right hand of the screen, make sure the 'Auto Merge' is switched OFF
+                SHIFT + D to duplicate  the selected face and press S to scale up
+                Adjust the wrist band accordingly
+                To seperate wrist band from the body,
+                    #Go to Face Selection Mode, mouse over the wrist band and Press L (This will select all the faces on the wrist band)
+                    #Press P and select 'By Selection
+                    #Go to object mode, and select the wrist band and re-enter edit mode
+                    #Go to Modifier Properties Tab and add Modifier > Solidify
+                    #Adjust the thickness 
+                    #Move the Solidify subpanel to inbetween Mirror and Subdivision
+                    #Open the Edge Data Section in the Solidify subpanel
+                        Adjust the Crease Inner and Outer
+                    #Scaling wrist bands
+                        Notice that when you scale the bands, they move out of position (Wrist band mirror doesnt follow the body's center)
+                        To return mirrored objects to position, enter object mode
+                        Select object, right click and select 'set origin'
+                        Select 'origin to Geometry' (this will move the origin to the object's geometry position)
+                        Open Modifier tab and under Mirror Object section, click on the eye dropper.
+                        With the eyedropper tool, select the body.
+                        Now when you scale the wrist bands, they stay in their respective positions
+            #Feet
+                Do the same procedure as the wrist bands
+            #Belts
+                Same method as wrist bands
+            #Belt buckle
+                In Object Mode , Shift+Right Click to reposition the 3D cursor
+                Add Mesh > Cylinder
+                Scale and rotate cylinder
+                Select the adjusted cylinder and enter edit mode
+                Select cylinder face and Press I to insert inset geometries
+                Press E to extrude for the depth
+                GG to move according to the object's axis 
+                #Editing the logo (Extruding the middle vertical bar across the buckle) - See deadpool's belt
+                    Edit Mode > Vertice Selection Mode
+                    Open the hidden menu and open edit tab
+                    Auto Mirror drop down menu, enable auto-mirror
+                    Adjust the vertice angles and select the two inner vertices
+                    Press J (Right Click > Select Connect Vertex Path) to join the vertices (This will create a joining line between the two selected vertices)
+                    Go to face mode, select the face and delete
+                    Delete the 2 adjacent faces as well
+                    Go to edge mode and select the outer rim edges and press F to fill
+            #Belt Packs
+                Object mode, Add objects > Mesh > Cube
+                Scale, Resize and Reposition the object
+                Add Modifiers 
+                    Subdivision Modifier and Bevel. (Make sure bevel is on top of subdiv Mod.)
+                Press CTRL + A and select scale
+                In Bevel modifier, adjust Offset
+                Mirroring
+                    To duplicate accross the mirror, Add Mirror modifier, select the eyedropper and select body
+                Copy over modifier sets to another object
+                    Select both objects, press CTRL + L and select Modifiers
+
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    //Unwrapping / Flatten Objects
+        #Smart UV Unwrap
+        Box select the object in Object mode, Enter Edit Mode
+        Press U and select Smart UV Project
+            Island Margin: 0.03 (Space between flattened surfaces)
+        Open UV Editing Tab
+    
+        #Unwrapping to Scale
+        In Object Mode, Box select everything
+        CTRL+A and select Scale (To enable flatten to scale)
+        @Smart UV Unwrap
+        
+        #Unwrapping Mirrored Objects
+        Open Modifier Properties Tab and reapply the Mirror to all objects 
+        @Smart UV Unwrap
+        
+        #Mark Seams (Flatten by seams)
+        In Object Mode, select object and enter Edit mode
+        Edge Select the edges
+        CTRL+E (Edge Menu in Edit Mode) and select "Mark Seam"
+        Click on Object to highlight and Press U
+        Select Unwrap
+        
+        #Seaming the body
+        In Edit Mode:
+        NOTE: Reactivate the mirror
+        Edge select the boot lines and @Mark Seams
+        Edge select the Armpit-Shoulder line and @Mark Seams
+        Edge select the Waist line and @Mark Seams
+        Edge Select the Halfway Lines of Body (The side molding lines that appear in toys) and @Mark Seams
+            Note: Exclude the boots
+        Edge Select the Halfway Lines of Arms and @Mark Seams
+            Note: Exclude the hands
+        Edge Select the Wrist Line and @Mark Seams
+        Edge Select the Mirror Lines and @Mark Seams
+        Edge Select the Top Face Layers of the Hand and @Mark Seams
+        Edge Select the Boot Soles and @Mark Seams
+        Press U and Enable Live Unwrap
+        Press U again and Select Unwrap
+            Margin: 0.06
+
+        #Check Flattening Issues
+        In UV Editing Viewport, Open the hidden tabs
+        Open View Tab > Overlays Section > Enable Stretching 
+            Type: Area and Angle
+            Note: Those faces with no dark blue, then there's stretching. (Avoid Green)                
+        To Edit, Enable Syncing
+            In UV Editing Viewport, Click on Sync Button (Top Left Corner button - Double Arrow Icon)
+            Box select Flat Islands and it will highlight the surfaces in the 3D viewport
+        Use this method together with @Mark Seams, referencing back and forth to get rid of 'Greens' (both Angles and Areas)            
+        Once Flattening Process completes, Reapply Mirror Modifier
+        
+        NOTE: Try and make all objects to fit into a single UV map prior to texturing
+        If Blender keeps on crashing, hide the belt buckle before unwrapping
 
 
-
+    /////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
