@@ -1,0 +1,483 @@
+Minitab 19
+
+///////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01. Basics
+02. Basic Statistics using Minitab
+        Display Descriptive Statistics
+        Store Descriptive Statistics
+        Hypothesis Test (1-Sample t) 
+        Hypothesis Test (2-Sample t) 
+        Normality Test        
+        Proportions Test (Data testing using attribute data)
+03. Regression Testing (Linear, Quadratic, Cubic)
+04. ANOVA Testing
+05. DOE (Design of Experiments)
+06. Control Charts 
+        X-Bar and I-MR Control Chart
+        Attribute Defects P-Chart 
+07. Quality Tools
+        Pareto Charts        
+        FishBone Diagram using Minitab Ishikawa Analysis
+        
+22. Analyzing Non Normal Data (Individual Distribution Identification)
+23. Capability Analysis for non normal Data (Minitab)
+24. Gage R&R Minitab Measurement System Analysis MSA
+25. Attribute Agreement Analysis Minitab MSA Kappa Test
+26. Minitab Graphs Histogram
+27. Minitab BoxPlot
+28. Minitab Bar Chart
+29. Adding Reference Lines Changing Color Minitab Graphs
+30. Minitab Pie Chart
+
+
+
+///////////////////////////////////////////////////////////////////////////////////
+01. Basics
+    //Structure
+        Consists of 3 panels (Project Manager, Session and Worksheet)
+        A Minitab Project contains worksheet. Like Excel file contains multiple spreadsheet tabs
+        Therefore, *.mpj = *.xls
+        The worksheet panel is similar to the Spreadsheet Tabs in Excel
+        
+    //"Worksheet 1" Panel:
+        #Structure
+            Excel spreadsheet index starts with 1, Minitab worksheet index starts with 0 (nameless row)
+            The empty row (row without index) is reserved for column title
+            To copy over a column (with column title) from excel, paste it on index 0 of the minitab worksheet
+            If pasted over index 1, minitab will automatically formats the column as 'texts' even your data has numbers in them
+        
+        #Column Formats (The columns autoformat to text, date and numbers)
+            D - Date
+            T - Text
+            For numbers, no changes to the column name
+            Delete entire column and the column format disappears
+            
+        #Rename the worksheet        
+            Open Project Manager panel and under Tree viewer, rename "Worksheet 1" folder
+                Project Tree > Worksheet > Worksheet 1
+
+        #Adding Formulas
+            #Simple
+            Each section can contain formulas just like Excel
+            
+            #Complicated fomulas
+            Left Click on the column index to highlight the entire column
+            Right Click > Select Formulas > Assign Formula to Column
+            Example Expression: 'ColumnTitle01' + 'ColumnTitle02'
+            Symbol will appear in the Column index
+
+///////////////////////////////////////////////////////////////////////////////////
+02. Basic Statistics using Minitab
+    #Display Descriptive Statistics - Output result to session panel
+        Main Menu > Stat > Basic Statistics > Display Descriptive Statistics
+        A window will popup containing "Column" panel, "Variables:" panel and "By Variable (Optional)" panel
+        Double click on any column name and it will appear in "Variables:" panel
+        Click on Statistics button
+            Another popup menu will appear containing checkboxes.
+            This enables you to choose the statistical models you want to implement
+        The statistical results will show up in the "Session" panel 
+            The result correlates to the checkboxes you've selected
+
+    #Store Descriptive Statistics - Output result to worksheet panel
+        Similar to "Display Descriptive Statistics"
+        Main Menu > Stat > Basic Statistics > Store Descriptive Statistics
+    
+    #Hypothesis Test
+        # 1-Sample t
+            #Finding out whether your mean value and data's mean value is equal
+            Main Menu > Stat > Basic Statistics > 1-Sample t (Test and Confidence Interval)
+                Popup will appear with 4 sections "Column name list", "samples in columns", "Summarized data" and "Perform hypothesis test"
+                Select 1 of the column into "Samples in Columns"
+                Enable "Perform hypothesis Test" and input "Hypothesized mean"
+                Input the mean number that (Lets say "10" as example)
+                Click on Options button and another popup window will appear with "Confidence Level" and "Alternative"
+                    Confidence: 95%
+                    Alternative: Not Equal
+                    Click OK
+                Click on Graphs button and another window will appear with "Histogram", "Individual value Plot" and "Boxplot of Data"
+                    If no checkbox being selected, then no graph will appear
+                    Click OK
+                Click OK and result will appear in Session Panel
+            Session Panel
+                Results:  (Test of mu = 10 vs not = 10), N, Mean, StDev, SEMean, 95% CI, T, P
+                P is the percentage of being Equal
+                If P value is greater than 0.05, then mu = 10.
+                If P value is lower than 0.05, then mu != 10.
+
+        # 2-Sample t
+            #Finding out whether the mean value between 2 columns are equal
+            Main Menu > Stat > Basic Statistics > 2-Sample t (Test and Confidence Interval)
+                Popup will appear with 5 sections "Column name list", "Samples in one column", "Samples in different column", "Summarized data" and "Assume Equal Variance"                
+                Check the checkbox of "Samples in different columns"
+                    First: Column 1
+                    Second: Column 2
+                Click on Options button and another popup window will appear with "Confidence Level", "Test difference" and "Alternative"
+                    Confidence: 95%
+                    Test Difference: 0
+                    Alternative: Not Equal (less than, not equal, greater than)     #Is the mean of Column 1 "Not Equal" to the mean of Column 2?
+                    Click OK
+                Click on Graphs button and another window will appear with "Individual value Plot" and "Boxplot of Data"
+                    If no checkbox being selected, then no graph will appear
+                    Enable Boxplot of Data
+                    Click OK
+                Click OK and result will appear in Session Panel
+                Graph will appear in a new popup window
+            Session Panel
+                Results:   
+                2 sample T for Column 1 vs Column 2
+                Value for both columns in N, Mean, StDev, SEMean
+                
+                Difference = mu column 1 - mu Column 2
+                Estimate for difference: 1.78
+                95% CI for difference: (1, 2)
+                T-Test of difference = 0 (vs not=): T-Value = #, P-Value=0 DF=190 
+                
+                If P value is greater than 0.05, then Mean value of both columns are the same.
+                If P value is lower than 0.05, then Mean value of both columns are NOT the same.            
+
+    #Normality Test
+        #Finding out if your data follows a normal distribution
+        Main Menu > Stat > Basic Statistics > Normality Test
+            Popup will appear with 5 sections
+                Column List
+                Variable: Select the target Column from Column List
+                Percentile Lines: None
+                Tests for Normality: Anderson Darling 
+                Title: Empty
+                Click on OK and Probability Plot will appear
+            Probability Plot Diagram
+                Graph, Mean, StDev, N, AD, P-Value
+                Graph: 
+                    If the data is normal, then the plots will be plotted along the linear line
+                    If not normal, then the plot won't follow the linear line (U-shaped or Stepping)
+                P-Value
+                    If P value is greater than 0.05, then the data follows the normal distribution.
+                    If P value is lower than 0.05, then the data does not follow the normal distribution.
+
+
+    #Proportions Test (Data testing using attribute data)
+        #For data that contains only 2 data (good vs bad), or (go vs no go), or (1 vs 0), etc
+        #For this model, 2 columns = 2 batches
+        #For this Column 1, let's say 1 = bad and 0 = good (where 2 defects in a batch of 10, 20% defect rate)
+        #And for Column 2, let's say 1 = bad and 0 = good (where 3 defects in a batch of 10, 30% defect rate)
+        
+        #1 Proportion (Finding out the result of 1 column)
+            Main Menu > Stat > Basic Statistics > 1 Proportion
+                Popup will appear with 4 sections
+                    Column List
+                    Samples in columns: Select Column1 (Column that contains 1 and 0)
+                    Summarized data
+                    Perform hypothesis test
+                    Click OK
+                Session Panel
+                    Event = 1               #Defects has value of 1
+                    Variable = Column 1
+                    X = 2        #2 defects
+                    N = 10      #10 data points
+                    Sample P = 0.2   #20% defect rate
+                    95% CI (Confidence Interval)= (0.025, 0.556)     
+                            #2.5% to 55% defect rate
+                            #Rates gap will be nearer with more datapoints 
+
+        #2 Proportion (Finding out the result of 1 column)
+            #Check defect rates are the same for 2 columns
+            Main Menu > Stat > Basic Statistics > 2 Proportion
+                Popup will appear with 5 sections
+                    Column List
+                    Samples in one column
+                    Samples in different columns: 
+                        First: Select Column1
+                        Second: Select Column2
+                    Summarized data
+                    Options Button:
+                        Confidence Level: 95%
+                        Test Difference: 0
+                        Alternative: Not Equal
+                Session Panel
+                    Event = 1               #Defects has value of 1
+                    Variable = Column 1 and Column 2
+                    X = 2, 3            #2 defects in column 1 and 3 defects in column 2
+                    N = 10, 10       #10 data points for both columns
+                    Sample P = 0.2, 0.3   #20% defect rate in column 1 and 30% defect rate in column 2
+                    Difference = p (Column 1) - p (Column 2)
+                    Estimate for Difference: -0.1                    
+                    95% CI (Confidence Interval)= (-0.47, 0.27)     
+                        2.5% to 55% defect rate
+                        Rates gap will be nearer with more datapoints 
+                    Test for difference = 0 (vs not = 0):   
+                        Z = -0.52
+                        P-Value = 0.60          #Minitab is 60% confident that defect rate is equal for the 2 Columns
+                    Fisher's exact test: 
+                        P-Value = 1
+
+///////////////////////////////////////////////////////////////////////////////////
+03. Regression Testing
+    //Fitted Line Plot
+        #Finding out how one factor in Column1 influences the other column (Column2)
+        #Example: 
+            A shop with Customers(C1) and Sales(C2) and each row represents a business day
+        
+        Main Menu > Stat > Regression > Fitted Line Plot
+            Popup window will appear    
+                Column List
+                Response Y: Sales (Column 2)
+                Predictor X: Customers (What drives Column 2)
+                Type of Regression Model (Linear, Quadratic, Cubic)
+                    Fitted Line Plot Diagram will appear
+                    Linear: 
+                        Sales = - 1577 + 179 Customers
+                        Customer-Sales Graph appears
+                        Sales will be plotted against the linear line
+                        S: 1796
+                        R-Sq:   93% #Shows how adequate the model is to the data (Ideal = More than 80%)
+                        R-Sq(adj): 92%
+                    Quadratic
+                        Sales = - 0 - 0 Customers + 2 Customers * 2
+                        Sales will be plotted against the curve
+                        S: 0
+                        R-Sq:   100% #Shows how adequate the model is to the data (Ideal = More than 80%)
+                        R-Sq(adj): 100%
+                    Cubic
+                        Sales = - 0 - 0 Customers + 2 Customers * 2 - 0 Customes * 3
+                        Sales will be plotted against the curve
+                        S: 0
+                        R-Sq:   100% #Shows how adequate the model is to the data (Ideal = More than 80%)
+                        R-Sq(adj): 100%
+
+///////////////////////////////////////////////////////////////////////////////////
+04. ANOVA Testing
+    //One Way (Unstacked)
+        #Comparing multiple columns means
+        Main Menu > Stat > ANOVA > One Way (Unstacked)
+            This will open up One Way Analysis Variance window
+                Column List
+                Responses (In separate columns): C1, C2, C3
+                Store Residuals: Not selected
+                Store Fits: Not selected
+                Confidence Levels: 95%
+                
+                Comparison Button
+                Graphs (Select Three in one and Boxplots of data)
+                    Individual value Plots
+                    Boxplots of data
+                    Residual Plots
+                        Individual Plots
+                            HistoGram
+                            Normal Distribution
+                            Residuals versus fits
+                        Three in One                    
+                Press OK
+            Residual Plot Diagram will appear shiwing 4 graphs
+                Boxplot Diagram (Candlestick)
+                Normality Probability (Residual vs Percent)
+                Versus Fits (Fitted Value vs Residual)
+                Histogram (Residual vs Frequency)
+                
+        Results: All of the above are reflected in the Session Panel
+        Find out whether the mean is the same throught the columns via Boxplot diagram
+
+///////////////////////////////////////////////////////////////////////////////////
+05. DOE (Design of Experiments)
+    #To simulate a design or a system with graphs
+    #For the testing of a system, we'll use sigmazone.com/catapult/
+    //Setup        
+        Main Menu > Stat > DOE > Factorial > Create Factorial Design
+            Popup Box will appear
+                2 level factorial design (default generators)   - 2 to 15 factors
+                #2 level factorial design (specify generators)   - 2 to 15 factors
+                #2 level split-plot (hard to change factors)     - 2 to 7 factors
+                #Plackett-Burman design          - 2 to 47 factors
+                #General full factorial design   - 2 to 15 factors
+                Number of factors selection box
+                #Display Available Designs
+                Designs, 
+                #Factors, Options, Results (Thsese options will be selectable once the design is set)
+            Select Default generators, Factors = 2 
+            Click on Design button and another box will appear
+                Designs: Full Factorial (For Split Factorial, the option will appear automatically but we'll choose Full Factorial)
+                Runs: 4
+                Resolution: Full
+                2**(k-p): 2**2
+                Centerpoints per block: 0
+                Number of replicates for corner points: 1
+                Number of blocks: 1
+                Click OK
+            Now that Factors, Options and Results are selectable
+            Click on Factors
+                Options box will appear and Input all the factors 
+                A: Release Angle, Type=Numeric, LowLim=130, HighLim=180 
+                B: Pin Elevation, Type Numeric, LowLim=100, HighLim=200
+
+                Input the values into the Catapult(sigmazone.com/catapult/) 
+                And the result will be the distance the ball travelled
+            Click Options button
+                Do not fold - Selected
+                #Fold on all factors
+                #Fold just on factors
+                Randomize runs
+                Base for Random generator: Blank
+                Store design in worksheet
+            Click OK
+            Minitab will create a worksheet with 6 columns
+                StdOrder, RunOrder, CenterPt, Blocks, ReleaseAngle, PinElevation
+                Add 7th Column and name it "Result"
+                Record Catapult result into the Result Column
+    //Analyze
+        Main Menu > Stat > DOE > Factorial > Analyze Factorial Design
+            Add Result Column into the Responses box
+            Click OK
+            Effects Pareto Chart will appear in a new window
+        Main Menu > Stat > DOE > Factorial > Response Optimizer
+            Under "Selected" Highlight the result column
+            Click on "Setup" button
+            Optimizer Options Box will appear
+                Goal: Target
+                Lower: 240      #Lower specification value
+                Target: 260      #Target specification value
+                Upper: 280       #Upper specification
+                Weightage: 1
+                Importance: 1
+                Click OK
+            Click OK
+        Optimization Plot will appear
+            Under Release, there will be [155] between 180 and 130. This will be the optimized value
+            Under Pin Elevation, there will be [143.4343] between 200 and 100. This will be the optimized value for pin elevation
+            Analysis Result: In order to get the distance of 260, set Release at 155 with Pin Elevation of 143.4343
+
+            Under Result Section:
+                The vertical line in the graph can be moved around to simulate the Release and the Pin Elevation
+                The calculated result of this adjustments will be shown as (y=value)
+
+///////////////////////////////////////////////////////////////////////////////////
+06. Control Charts 
+    //I-MR & X Bar R Charts
+        Single sample per row: Use "Variables Charts for Individuals" (I-MR Chart)
+        Multiple samples / multiple row per category: Use "Variables Charts for Subgroups" (Size = Sample size) (Xbar-R Chart)
+        #Data: 
+            Idx. | C1/Time | C2/Val
+            1.    | 01:00      | 1.10
+            2.    | 01:00      | 1.22
+            3.    | 02:00      | 1.33
+            4.    | 02:00      | 1.44
+            5.    | 03:00      | 1.55
+            6.    | 03:00      | 1.66
+            7.    | 04:00      | 1.67
+            8.    | 04:00      | 1.88
+            #Here we see multiple samples per hour. Therefore, "Variables Charts for Subgroups" 
+            #4 categories will be plotted with sampling size of 2 (2 samples per hour)
+            #If "Variables Charts for Individuals" was used, 8 categories will be plotted
+        
+        #For sample size of 2:
+            Main Menu > Stat > Control Charts > Variables Charts for Subgroups > Xbar R
+                Xbar R Chart Popup box appears
+                    Column List
+                    Dropdown Menu: All observations for a chart are in one column
+                    Selected column box: Column2
+                    Subgroup sizes/Column Name: Column1 (Minitab will recognize the double entry hence sample size=2)
+                    
+                    Buttons:
+                        Scale
+                            Contains Tabs: Time, Axes and Ticks, Gridlines, Ref Lines
+                            Open Time tab
+                                Contains Column List, XScale (Index, Stamp)
+                                Enable Stamp and insert Column 2 as Time Stamp 
+                                    #This will add timestamp as your X-Axis (Horizontal) in the chart 
+                                    #If index was chosen, minitab will show the timestamps as index
+                        Labels
+                        Multiple Graphs
+                        Data Options
+                        Xbar R options
+                            Contains Tabs: Parameters, Estimate, S Limits, Test, Stages, Box-Cox, Display, Storage
+                            Open Tests:
+                                Dropdown Menu: Perform Selected tests for special causes
+                                Options:
+                                    1 point > K standard deviations from centreline (center horizontal line) #Any data more than the UCL/LCL will be flagged red
+                                    K points in a row on same side of center line
+                                    K points in a row, all increasing or all decreasing
+                                    K points in a row, alternating up and down
+                                    K out of K+1> 2 standard deviation from center line (same side)
+                                    K out of K+1> 1 standard deviation from center line (same side)
+                                    K points in a row within 1 standard deviation of center line (either side)
+                                    K points in a row > 1 standard deviation of center line (either side)
+
+    //Attribute Defects P-Chart 
+        #For data that contains only 2 data (good vs bad), or (go vs no go), or (1 vs 0), etc
+        #For this model, 2 columns = 2 batches
+        #For this Column 1, let's say 1 = bad and 0 = good (where 2 defects in a batch of 10, 20% defect rate)
+        #And for Column 2, let's say 1 = bad and 0 = good (where 3 defects in a batch of 10, 30% defect rate)        
+        
+        Main Menu > Stat > Control Charts > Attributes Charts > P
+            Contains:
+                Column List
+                Variables:  Add in Column 1
+                Subgroup Sizes: 1 (Because 1 sample being taken at a time)
+                
+                Buttons:
+                    Scale
+                        Change to stamp if you want timestamps on the horizontal axis of the graph
+                    Labels
+                    Multiple Graphs
+                    Data Options
+                    P Chart Options
+                    
+            Click on OK
+            This will show a graph that shows 2 defects in the graph
+
+///////////////////////////////////////////////////////////////////////////////////
+07. Quality Tools
+    //Pareto Charts 
+        #80/20 Analysis: where 80% of defects are caused by 20% of other possible categories
+        Data:
+            Idx. | C1/Time | C2/Val | C3/Comments
+            1.    | 01:00      | 1.10     | High oil
+            2.    | 01:00      | 1.22     | Temp Issues
+            3.    | 02:00      | 1.33     | Temp Issues
+            4.    | 02:00      | 1.44     | Calibration Issues
+            5.    | 03:00      | 1.55     | Temp Issues
+            6.    | 03:00      | 1.66     | High oil
+            7.    | 04:00      | 1.67     | Tool wear
+            8.    | 04:00      | 1.88     | Temp Issues
+            
+        Main Menu > Stat > Quality Tools > Pareto Chart
+        Popup box will appear:
+            Column List
+            Defects or Attribute data in: C3
+            #Frequencies in (optional):
+            #BY variable in (optional):
+            Checkboxes:
+                Combine remaining defects into one category after this percent: 95%
+                #Do not combine
+            #Options Button:
+            Click OK
+        A pareto chart will appear
+            4 bar graphs appear (Temp Issues, High Oil, Calibration Issues, Tooling Wear)
+            Left vertical lines represents the Count/Occurences, 0-8 scale
+            Right vertical line represents the Cumulative Percentage, 0-100 scale
+            The red line over the bars represents the calculated Cumulative %. 
+                #The lower this value is, the more likely is the cause
+        Result: Most defects are related to Temperature issues
+            
+    //Fishbone Diagram/Ishikawa Analysis
+        Plotting:
+            Create 6 columns where each column represents the features of a fishbone diagram
+                Personnel, Machines, Materials, Environments, Measurements, Methods
+            Listdown all the values under the respective columns
+        
+        Analyze    
+            Highlight all the columns
+            Main Menu > Stat > Quality Tools > Cause and Effect
+                Cause and Effect options window will appear:
+                    Column List
+                    Table viewport with 3 columns
+                        Branch, Causes, Label
+                        The Label Column will be generated automatically according to the columns highlighted
+                        Fill up the causes column accordingly by linking the label column to the column
+                    Effect: [Title] Temperature Issues #This will be the label for the fish head
+                    Title: The title of your fishbone diagram
+                Click ok
+                Fishbone Diagram will appear
+
+
+
+
