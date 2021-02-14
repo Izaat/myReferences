@@ -53,6 +53,9 @@ CONTENTS
             For numbers, no changes to the column name
             Delete entire column and the column format disappears
             
+            Change format manually
+                Right Click on column and select Format Column
+            
         #Rename the worksheet        
             Open Project Manager panel and under Tree viewer, rename "Worksheet 1" folder
                 Project Tree > Worksheet > Worksheet 1
