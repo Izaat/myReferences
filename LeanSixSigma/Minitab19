@@ -24,11 +24,10 @@ CONTENTS
         Kappa Test - Attribute Agreement Analysis
 08. Graphs
         Histogram
-        
-27. Minitab BoxPlot
-28. Minitab Bar Chart
-29. Adding Reference Lines Changing Color Minitab Graphs
-30. Minitab Pie Chart
+        BoxPlot
+        Bar Chart
+        Reference Lines
+        Pie Chart
 
 
 
@@ -780,6 +779,64 @@ CONTENTS
 08. Graphs
     //Histogram
         Main Menu > Graph > Histogram
+            Option box will appear containing 4 options:
+                Simple, 
+                With Fit, 
+                With Outline and Groups, 
+                With Fit and Groups
+            Select the columns and click OK
+                
+    //Boxplot
+        Main Menu > Graph > Boxplot
+            Option box will appear containing 4 options:
+                One Y:      #Seperate boxplots in seperate graphs
+                    Simple,
+                    With Groups,
+                Multiple Ys:    #Multiple Boxplots in the same graph
+                    Simple
+                    With Groups
+            Select the columns and click OK
+
+    //BarChart
+        Main Menu > Graph > BarChart
+            Option box will appear 
+                Bar Represents: Dropdown Menu (Count ofunique values)
+                Simple,
+                Cluster,
+                Stack
+            Select the columns and click OK
+        
+        A window will appear with the Bar Chart
+            Add Reference Lines
+                Hover mouse over the vertical line of the graph and right click
+                Select Add > Reference Lines
+                    Show Reference lines at Y values: 2 8       #Note the space between 2 and 8. This will create 2 horizontal reference lines at 2 and 8              
+                    Show reference lines at category scale positions: Leave Blank
+            Change color of reference lines:
+                Double click on the reference lines
+                Edit Reference Line popup box will appear
+            Change color of Bars:
+                Double click on the bars
+                Edit Bars popup box will appear
+
+    //Pie Chart
+        Main Menu > Graph > PieChart
+            Option box will appear:
+                Column List
+                Chart Counts of unique values
+                Chart values from table
+                Categorical variable input box
+                Buttons:
+                    Pie otions
+                    Labels
+                    Multiple Graphs
+                    Data Options
+
+            Create a simple Pie Chart with options below
+                Chart Counts of Unique values
+                Add in a column with values into the input box
+                Click Ok
+
 
 
 
