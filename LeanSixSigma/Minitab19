@@ -48,7 +48,7 @@ CONTENTS
             If pasted over index 1, minitab will automatically formats the column as 'texts' even your data has numbers in them
         
         #Column Formats (The columns autoformat to text, date and numbers)
-            D - Date
+            D - Date (#/#/##, ##:##:##, #-###-####, am/pm)
             T - Text
             For numbers, no changes to the column name
             Delete entire column and the column format disappears
