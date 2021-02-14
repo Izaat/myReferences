@@ -640,7 +640,7 @@ CONTENTS
                     Conf Int
                     Storage
 
-            Options Box Parameters:
+            Analysis Options Box Parameters will be as follows:
                 Part Numbers: Part Number Column
                 Operators: Operators name column
                 Measurement data: Result Column
