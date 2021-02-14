@@ -68,6 +68,7 @@ CONTENTS
             Symbol will appear in the Column index
 
     //Show worksheet Folder
+        A project may contain multiple worksheet and to see all of them, you can open the worksheet tree
         Main Menu > Toolbar > Window Icon (Show worksheet Folder)
 
 ///////////////////////////////////////////////////////////////////////////////////
