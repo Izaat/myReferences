@@ -814,10 +814,22 @@ CONTENTS
         Main Menu > Graph > Histogram
             Option box will appear containing 4 options:
                 Simple, 
+                    Column List
+                    Graph Variables
+                    Buttons:
+                        Scale
+                        Labels
+                        Data View
+                        Multiple Graphs
+                        Data Options
                 With Fit, 
                 With Outline and Groups, 
                 With Fit and Groups
-            Select the columns and click OK
+                
+            Set the options as followings:    
+                Select Simple and click OK
+                    Graph Variables: Target Column Title
+                    Click OK
                 
     //Boxplot
         Main Menu > Graph > Boxplot
