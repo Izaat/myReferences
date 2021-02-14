@@ -688,6 +688,86 @@ CONTENTS
 
     //Kappa Test - Attribute Agreement Analysis
         #Analysis for Attribute Data
+        #Create Attribute Agreement Worksheet (Similar to Gage R&R Study)
+            Main Menu > Stat > Quality Tools > Attribute Agreement Analysis
+            Popup Worksheet Options Box:
+                Dropdown list
+                Number of samples: 
+                    Sample Name Column                
+                Number of appraisers: (How many operators doing the measurements)
+                    Appraiser Name Column
+                Number of Replicates (How many times 1 single sample being measured)
+                Options Button:
+                    Do Not randomize
+                    Randomize all runs
+                    Randomize runs within operators
+                        Randomize operator sequence
+                    Base for random data generator
+                    Store standard run order in worksheet
+        
+            Worksheet Option Parameters will be as follows:
+                Number of Samples: 10
+                Number of Appraisers: 3
+                Number of Replicates: 2
+                Options Button:
+                    Do not randomize
+                Click OK
+                    
+            Minitab will create a new worksheet based on the option parameters provided above 
+                Worksheet contains 3 columns, "C1/RunOrder", "C2/Samples", "C3/Appraisers"
+            Add a 2 new columns and name those columns "C4/Results" and "C5/Expert/Standard"
+            Expert/Standard Column will contain the actual results
+                Example: If Good Part, then input as "Good". But if Bad part, then input as "Bad"
+            Add in the measurement values into the Results column (Input "Good" / "Bad")           
+            
+        #Analyze    
+            Main Menu > Stat > Quality Tools > Attribute Agreement Analysis
+            Popup Option Box will appear:
+                Data are arranged as:
+                    Attribute Column:
+                    Samples:
+                    Appraisers:
+                Multiple Columns:
+                    Enter each trials for each appraiser together
+                    Number of Appraisers
+                    Number of trials
+                    Appraiser names (optional)
+                Known standard/attribute (optional)
+                Categories of the attribute data are ordered
+                Buttons:
+                    information
+                    Options
+                    Graphs
+                    Results
+
+            Analysis Options Box Parameters will be as follows:
+                    Attribute Column: C4/Results Column
+                    Samples: C2/Samples Column
+                    Appraisers: C3/Appraisers Column
+                    Known standard/attribute: C5/Expert/Standard
+                    Click on OK
+            
+            Attribute Agreement Analysis popup box will appear containing 2 graphs
+                Within Appraisers Graph
+                Appraiser vs Standard Graph
+                Each of them contains "X" representing Confidence and "BlueDot" representing the kappa value in percentage
+                
+                Analysis:
+                    Just look at the "BlueDot"  and usually, the industry standard for the Kappa value is more than 80%
+                    BlueDot = more than 80%
+                    This means that 80% of the time, they analyze a good part from the bad part
+
+            Session panel:
+                All Appraisers vs Standard
+                    Assessment Agreement
+                        Inspected: How many samples were inspected
+                        Matched: How many were matched
+                        Percent: How many were matched at what percentage
+
+                Each Appraiser vs Standard
+                    Note: The table below will be inside of your analysis
+                    Assessment Agreement:
+                        Analyze the percentage
 
 
 
