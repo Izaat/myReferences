@@ -22,8 +22,9 @@ CONTENTS
         Capability Analysis for non normal Data (Cp/Cpk)
         Gage R&R Study - Measurement System Analysis
         Kappa Test - Attribute Agreement Analysis
+08. Graphs
+        Histogram
         
-26. Minitab Graphs Histogram
 27. Minitab BoxPlot
 28. Minitab Bar Chart
 29. Adding Reference Lines Changing Color Minitab Graphs
@@ -65,6 +66,9 @@ CONTENTS
             Right Click > Select Formulas > Assign Formula to Column
             Example Expression: 'ColumnTitle01' + 'ColumnTitle02'
             Symbol will appear in the Column index
+
+    //Show worksheet Folder
+        Main Menu > Toolbar > Window Icon (Show worksheet Folder)
 
 ///////////////////////////////////////////////////////////////////////////////////
 02. Basic Statistics using Minitab
@@ -770,7 +774,10 @@ CONTENTS
                         Analyze the percentage
 
 
-
+///////////////////////////////////////////////////////////////////////////////////
+08. Graphs
+    //Histogram
+        Main Menu > Graph > Histogram
 
 
 
