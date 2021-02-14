@@ -33,6 +33,31 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////
 01. Basics
+    //Overview
+        Basic Statistics
+            Descriptive statistics, statistical test, correlation, covariance
+        Graphics
+            Create and export different types of graphs: Scatterplots, Matrixplots, Boxplots, Probability plots
+        Regression
+            Estimate relationships between variables. Linear, Non-Linear, Binary, Nominal, Ordinal, etc
+        Analysis of Variance(ANOVA)
+            Differences between 2 or more means. Enables analysing data with ANOVA, Multivariate ANOVA, General Linear Model
+        Statistical Process Control (SPC)
+            Cause and Effect diagrams, 
+            Variables and Attribute control charts,
+            Time weighted and Multivariate control charts,
+            Acceptance sampling, 
+            Measure process capability
+        Measurement System Analysis
+            Type 1 - Gauge Study Analysis
+            Gage R&R: Expanded, Crossed, Nested
+        Design of Experiments
+            Identify the acuse and effects relationships
+            Create and manage different experiment designs. Entering values and record corresponding output
+        Reliability/Survival
+            Selecting the best distribution for modelling life data
+            Tool to estimate functions that describes the distribution
+            
     //Structure
         Consists of 3 panels (Project Manager, Session and Worksheet)
         A Minitab Project contains worksheet. Like Excel file contains multiple spreadsheet tabs
