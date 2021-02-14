@@ -75,6 +75,9 @@ CONTENTS
         Main Menu > Toolbar > Multiple window Icon (Show worksheet Folder)
                 Located below the "Assistant" menu
 
+    //Exporting
+        Right Click on Graph and select "Send to MS Word" or "Send to MS Powerpoint"
+
 ///////////////////////////////////////////////////////////////////////////////////
 02. Basic Statistics using Minitab
     #Display Descriptive Statistics - Output result to session panel
