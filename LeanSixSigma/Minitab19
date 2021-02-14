@@ -76,7 +76,12 @@ CONTENTS
                 Located below the "Assistant" menu
 
     //Exporting
-        Right Click on Graph and select "Send to MS Word" or "Send to MS Powerpoint"
+        #Export Graphs
+            Right Click on Graph and select "Send to MS Word" or "Send to MS Powerpoint"
+        #Export Data Tables to MS Words
+            Main Menu > Data > Display Data, and select the columns    #This will transfer worksheet data into the session panel
+            Right click on Session panel, Send Section to MS Words or MS Powerpoint
+            #Note: In the session panel, you can export highlighted lines into Words and Powerpoint
 
 ///////////////////////////////////////////////////////////////////////////////////
 02. Basic Statistics using Minitab
