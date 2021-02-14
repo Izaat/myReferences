@@ -21,8 +21,8 @@ CONTENTS
         FishBone Diagram using Minitab Ishikawa Analysis
         Analyzing Non Normal Data (Individual Distribution Identification)
         Capability Analysis for non normal Data (Cp/Cpk)
+        Gage R&R Minitab Measurement System Analysis MSA
         
-24. Gage R&R Minitab Measurement System Analysis MSA
 25. Attribute Agreement Analysis Minitab MSA Kappa Test
 26. Minitab Graphs Histogram
 27. Minitab BoxPlot
@@ -153,8 +153,10 @@ CONTENTS
                     If not normal, then the plot won't follow the linear line (U-shaped or Stepping)
                 P-Value
                     If P value is greater than 0.05, then the data follows the normal distribution.
+                        #Now you may continue with Process Capability (Topic 07)
                     If P value is lower than 0.05, then the data does not follow the normal distribution. 
-                        #If this is the case, then use Non Normal data Analysis in Quality Tools, Topic 07.
+                        #If this is the case, then use Non Normal Data Analysis in Quality Tools, Topic 07.
+                        #After Non Normal Data Analysis you may continue with Process Capability (Topic 07)
 
     #Proportions Test (Data testing using attribute data)
         #For data that contains only 2 data (good vs bad), or (go vs no go), or (1 vs 0), etc
@@ -527,3 +529,73 @@ CONTENTS
                     Exponential has neither Shape Parameter nor Location Parameter (Hence the 2-Parameter)
             With the category identified, take note of the parameters
 
+    //Capability Analysis
+        #Continued from Topic 2 > Normality Test: 
+            For Normal Distribution, use Capability Test > Normal
+            For Non Normal Distribution, use Capability Test > Non Normal
+        #For this example, we'll continue with he Non-Normal Data, after Nonnormal data Analysis     
+        Main  Menu > Stats > Quality Tools > Capability Analysis > Nonnormal
+            Popup Options Box:
+                Column List
+                Data are arranged as:
+                    Single Column (Subgroup size will be shown if Capability Analysis > Normal being selected)
+                    Subgroups across rows of
+                Fit distributions
+                Lower Spec
+                Upper Spec
+                (Historical Mean and Historical Std Dev input boxes will be shown if Capability Analysis > Normal being selected)
+                
+                Buttons:
+                    Estimate, Options, Storage       
+                    (Transform Button will be shown if Capability Analysis > Normal being selected)
+
+            Use parameters below for the Popup box:
+                Single Column: The column being used for "NonNormal Data Analysis"
+                Fit distribution: The category identified during "NonNormal Data Analysis"
+                Lower Spec: (Target LSL) - leave boundary checkbox unchecked
+                Upper Spec: (Target USL) - leave boundary checkbox unchecked
+
+        Process Capability of Non-Normal Samples window will be created
+            #For Non-Normal Data, Only Ppk is shown
+            #Cpk will be shown if Capability Analysis > Normal being selected
+            Process Data:
+                LSL, Target, USL, SampleMean, SampleN, Location, Scale
+            Observed Performance:
+                PPM<LSL, PPM>USL, PPM Total
+            Overall Capability:
+                Pp, PPL, PPU, Ppk
+            Exp. Overall Performance:
+                PPM<LSL, PPM>USL, PPM Total
+
+        For Process Capability of Normal Samples
+            Within and Overall Lines will be shown on the graph
+            Process Data:
+                LSL, Target, USL, SampleMean, SampleN, StDev(Within), StDev(Overall)
+            Observed Performance:
+                PPM<LSL, PPM>USL, PPM Total
+            Exp. Within Performance:
+                PPM<LSL, PPM>USL, PPM Total
+            Exp. Overall Performance:
+                PPM<LSL, PPM>USL, PPM Total
+            Potential (Within) Capability
+                Cp, CPL, CPU, Cpk
+            Overall Capability:
+                Pp, PPL, PPU, Ppk, Cpm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
