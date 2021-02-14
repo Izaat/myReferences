@@ -19,9 +19,9 @@ CONTENTS
 07. Quality Tools
         Pareto Charts        
         FishBone Diagram using Minitab Ishikawa Analysis
+        Analyzing Non Normal Data (Individual Distribution Identification)
+        Capability Analysis for non normal Data (Cp/Cpk)
         
-22. Analyzing Non Normal Data (Individual Distribution Identification)
-23. Capability Analysis for non normal Data (Minitab)
 24. Gage R&R Minitab Measurement System Analysis MSA
 25. Attribute Agreement Analysis Minitab MSA Kappa Test
 26. Minitab Graphs Histogram
@@ -153,8 +153,8 @@ CONTENTS
                     If not normal, then the plot won't follow the linear line (U-shaped or Stepping)
                 P-Value
                     If P value is greater than 0.05, then the data follows the normal distribution.
-                    If P value is lower than 0.05, then the data does not follow the normal distribution.
-
+                    If P value is lower than 0.05, then the data does not follow the normal distribution. 
+                        #If this is the case, then use Non Normal data Analysis in Quality Tools, Topic 07.
 
     #Proportions Test (Data testing using attribute data)
         #For data that contains only 2 data (good vs bad), or (go vs no go), or (1 vs 0), etc
@@ -478,6 +478,52 @@ CONTENTS
                 Click ok
                 Fishbone Diagram will appear
 
-
-
+    //Analyzing NonNormal Data (Individual Distribution Identification)
+        #Continuation for Basic Statistics > Normality Testing (Topic 01)
+        #Finding out what type of distribution the Non-normal Data follows
+        Main  Menu > Stats > Quality Tools > Individual Distribution Identification
+            Popup Options Box:
+                Column List
+                Data are arranged as:
+                    Single Column
+                        Single Column, Subgroup size
+                    Subgroups across rows of
+                    Use all distributions and transformations
+                    Specify:
+                        List of distributions
+                Buttons:
+                    Box-Cox, Johnson, Options, Results
+                    
+            Set the options as followings:
+                Single Column
+                    Single Column: Target Column Title
+                    Subgroup size: 1    #Sample sizing (Took 1 sample per category)
+                Use all distributions and transformations
+                Click OK
+            Minitab will create 4 windows, where each window contains 4 graphs (But you can close these windows)
+            Instead, enter the session window 
+            Under the Goodness of Fit Test, identify one of the categories below with the highest P-Value (Except Transformations)   
+                Normal
+                Box-Cox Transformation (Not used in this analysis)
+                Lognormal
+                3-parameter Lognormal
+                Exponential
+                2 parameter Exponential
+                Weibull
+                3-parameter Weibull
+                Smallest Extreme Value
+                Largest Extreme Value
+                Gamma
+                Logistic
+                Loglogistic
+                3-Parameter Loglogistic
+                Johnson Transformation (Not used in this analysis)
+                
+            Once the category is identified, find that category under "ML Estimates of Distribution Parameters"
+                All the categories listed under Goodness of Fit Table above contains 4 columns of parameters (Location, Shape, Scale, Threshold)
+                    All categories contain Scale Parameter
+                    The "3-Parameter" / "2-Parameter" contains Threshold Parameter
+                    Weibull and Gamma contains Shape Parameter
+                    Exponential has neither Shape Parameter nor Location Parameter (Hence the 2-Parameter)
+            With the category identified, take note of the parameters
 
