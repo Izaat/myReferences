@@ -16,7 +16,8 @@ CONTENTS
         X-Bar and I-MR Control Chart
         Attribute Defects P-Chart 
 07. Quality Tools 
-        Pareto Charts        
+        Pareto Charts   
+        Run Chart
         FishBone Diagram using Minitab Ishikawa Analysis
         Analyzing Non Normal Data (Individual Distribution Identification)
         Capability Analysis for non normal Data (Cp/Cpk)
@@ -443,7 +444,7 @@ CONTENTS
             This will show a graph that shows 2 defects in the graph
 
 ///////////////////////////////////////////////////////////////////////////////////
-07. Quality Tools (Pareto Charts, Process Capability [Cp/Cpk], Gage R&R)
+07. Quality Tools (Pareto Charts, Run Chart, Process Capability [Cp/Cpk], Gage R&R)
     //Pareto Charts 
         #80/20 Analysis: where 80% of defects are caused by 20% of other possible categories
         Data:
@@ -475,7 +476,27 @@ CONTENTS
             The red line over the bars represents the calculated Cumulative %. 
                 #The lower this value is, the more likely is the cause
         Result: Most defects are related to Temperature issues
-            
+
+    //Run Charts
+        #Understanding the variance that exists in the data if the data is a non normal distribution
+        Main Menu > Stat > Quality Tools > Run Chart 
+        Popup Box will appear:
+            Column List
+                Data are arranged as:
+                    Single Column
+                        Single Column, Subgroup size
+                    Subgroups across rows of
+                    For data in subgroups:
+                        Plot subgroup means
+                        Plot subgroup medians
+                Options Button
+        
+        Set the options as followings:
+            Single Column: Column1
+            Subgroup Size: 1  (Sampling Rate)
+            Options:
+                Title: Run Chart Example
+
     //Fishbone Diagram/Ishikawa Analysis
         Plotting:
             Create 6 columns where each column represents the features of a fishbone diagram
