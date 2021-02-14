@@ -16,7 +16,7 @@ CONTENTS
 06. Control Charts 
         X-Bar and I-MR Control Chart
         Attribute Defects P-Chart 
-07. Quality Tools
+07. Quality Tools 
         Pareto Charts        
         FishBone Diagram using Minitab Ishikawa Analysis
         Analyzing Non Normal Data (Individual Distribution Identification)
@@ -427,7 +427,7 @@ CONTENTS
             This will show a graph that shows 2 defects in the graph
 
 ///////////////////////////////////////////////////////////////////////////////////
-07. Quality Tools
+07. Quality Tools (Pareto Charts, Process Capability [Cp/Cpk], Gage R&R)
     //Pareto Charts 
         #80/20 Analysis: where 80% of defects are caused by 20% of other possible categories
         Data:
