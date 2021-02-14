@@ -21,9 +21,9 @@ CONTENTS
         FishBone Diagram using Minitab Ishikawa Analysis
         Analyzing Non Normal Data (Individual Distribution Identification)
         Capability Analysis for non normal Data (Cp/Cpk)
-        Gage R&R Minitab Measurement System Analysis MSA
+        Gage R&R Study - Measurement System Analysis
+        Kappa Test - Attribute Agreement Analysis
         
-25. Attribute Agreement Analysis Minitab MSA Kappa Test
 26. Minitab Graphs Histogram
 27. Minitab BoxPlot
 28. Minitab Bar Chart
@@ -582,6 +582,113 @@ CONTENTS
             Overall Capability:
                 Pp, PPL, PPU, Ppk, Cpm
 
+
+    //Gage R&R Study
+        #For this example, the data contains 5 parts, each part is measured 2x, 3 different operators
+        Main  Menu > Stats > Quality Tools > Gage Study > Create Gage R&R Study Worksheet
+            Popup Worksheet Options Box:
+                Number of Parts: 
+                    Part Name Column                
+                Number of Operators:
+                    Operator Name Column
+                Number of Replicates (How many times 1 single part being measured)
+                Options Button:
+                    Do Not randomize
+                    Randomize all runs
+                    Randomize runs within operators
+                        Randomize operator sequence
+                    Base for random data generator
+                    Store standard run order in worksheet
+            
+            Worksheet Option Parameters will be as follows:
+                Number of Parts: 5
+                Number of Operators: 3
+                Number of Replicates: 2
+                Options Button:
+                    Do not randomize
+                Click OK
+            
+            Minitab will create a new worksheet based on the option parameters provided above 
+            Add a new column and name this column Result
+            Add in the measurement values into the column
+
+        #After Gage R&R Worksheet is complete
+        Crossed: Cross Occasion
+        Nested: Destructive based gauge R&R study
+        Main  Menu > Stats > Quality Tools > Gage Study > Gage R&R Study (Crossed)
+            Popup Worksheet Options Box:
+                Colulmn List
+                Part Numbers
+                Operators
+                Measurement data
+                Method of Analysis:
+                    ANOVA
+                    Xbar R
+                Buttons:
+                    Gage Info
+                    Options
+                        Study variation, 
+                        Enter at least on specification limit,
+                            Lower, Upper
+                        Upper Spec - Lower Spec
+                        Historical Std Dev, 
+                        Alpha to remove interaction term
+                        Display probabilities of misclassification
+                        Do not display percent contribution
+                        Do not display percent study variation
+                        Draw graphs on separate graphs, one graph per page
+                        Title                        
+                    Conf Int
+                    Storage
+
+            Options Box Parameters:
+                Part Numbers: Part Number Column
+                Operators: Operators name column
+                Measurement data: Result Column
+                Method of Analysis: ANOVA
+                Buttons: 
+                    Options:
+                        Study variation: Automatically generated (How many measurement variations per part) - Operators * Replicates
+                        Enter at least on specification limit,
+                            Lower, Upper: Based on parts specification
+                        Click on OK
+                Click on OK
+
+            Gage R&R popup box will appear containing 6 graphs
+                Components of Variation
+                Results by parts
+                R Chart by operators
+                Results by operators
+                Xbar Chart by Operators
+                Part * Operators Interaction
+
+            Session window:
+                Gage R&R Study Result
+                    Parts: 5
+                    Replicates: 2
+                    Operators: 3 
+                    Total Runs: 30
+
+                Gage R&R
+                    A table with 3 columns, 
+                        Source, VarComp, %Contribution of VarComp, Study Var (stdDev SD, 6*SD), %Study Var(%SV), %Tolerance(SV/Tolerance)             
+                        Total Gage R&R 
+                            Repeatability
+                            Reproducibility
+                                Operators
+                                Operators& Parts
+                        Part to Part
+                        Total Variation
+                        Process tolerance = 0.3
+                        Number of Distinct Categories = 16
+                    
+                    But from the table above, we'll identify Repeatability and Reproducibility under %SV Column
+                    A corporate guideline document will tell you: 
+                        How much Total Gage R&R (%SV) variation is acceptable (Usually less than 30%)
+                        What is the minimum number of distinct categories needed (Usually at least 5)
+
+    //Kappa Test - Attribute Agreement Analysis
+        #Analysis for Attribute Data
 
 
 
