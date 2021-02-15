@@ -1465,6 +1465,52 @@ CONTENTS
 
 
 
+    #The team then wanted to analyze the spread of their data so they generated a dot plot
+    #They had data for both modules x and y for completing their analysis
+    
+    //Dot Plot
+        #Data: 4 columns (S/N, Date, Module, Debug Time)
+        Main Menu > Graph > Dotplot > 
+            Dialog box will appear:
+                OneY:
+                    Simple
+                    With Groups 
+                        Column List
+                        Graph Variables:
+                        Categorical variables for grouping:
+                        Button:
+                            Scale
+                            Labels
+                            Data View
+                            Multiple Graphs
+                                Multiple Variabes Tab:
+                                    Show graph variables
+                                        In seperate panels
+                                        On seperate graphs
+                                    Same scales for Graphs
+                                        Same number of data values per dot
+                                        Same X including same bins
+                                By Variables Tab: 
+                                    By variables with group in seperate panels:
+                                    By variables with groups on seperate graphs
+                            Data options
+                    Stack Groups
+                MultipleYs:
+                    Simple
+                    Stack Ys 
+                    With Groups
+                    Stack Groups
+
+            Generate Dotplot with the folloing parameters:
+                OneY:
+                    With Groups: #There were 2 modules, each containing debug time, therefore "With Groups" was chosen 
+                        Graph Variables: Debug Time Column
+                        Categorical variables for grouping: Module Column
+                        Button > Multiple Graphs > 
+                                Multiple Variables Tab > Show Graph Variables > In seperate panels  #To view modules next to each other
+                                By Variables Tab > By variables with group in seperate panels: Module #This will provide module Y's data
+
+
 
 
 
