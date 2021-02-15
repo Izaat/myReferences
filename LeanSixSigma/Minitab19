@@ -42,7 +42,8 @@ CONTENTS
         Display Descriptive Statistics
         Sample Size Determination
         Control Charts for Continuous Data (I-MR)
-      
+12. Green Belt Case Study 02 (Fibinacci Tech Data)
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 01. Basics
@@ -1332,8 +1333,33 @@ CONTENTS
                 This means that patient 20's excessive waiting time affected patient 21 waiting time 
 
 
-
 ///////////////////////////////////////////////////////////////////////////////////
+12. Green Belt Case Study 02 (Fibonacci Technologies)
+    //Data
+        #Developed  a banking software with multiple modules
+        #Module X and Module Y were critical for performance
+        #These 2 modules were to be tested and debug
+        #Fibonacci hired 3rd party company (Caliper) to handle the project
+        #Caliper's team (1 project manager, 2 consultants) - all trained in Lean Six Sigma
+        #Their 5 steps method for improvements: DMAIC
+            Define:
+                Two modules were documented in detail after getting the requirements for
+                the various functionalities and their criticality
+                Project manager assigned Modules X and Y to both his consultants individually
+                Both are measure based upon their suitability to the work requirements
+            Measure:
+                The team measured the data of all the debugging activities throughout the day
+                And was compiled at the end of the day by the project manager
+            Analyze:
+                They then analyzed the 3 weeks worth of data with Minitab
+            Improvement:
+                They then improve the uneven distribution of work between the 2 consultants
+                This was achieved by relocating a part of the work containing higher 
+                debugging time to the consultant who has lower debugging time during the day
+            Control:
+                The debugging time was managed closely over a period
+                
+        #The team was able to complete the work 10 days before the estimated completion time
  
 
 
