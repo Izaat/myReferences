@@ -55,9 +55,10 @@ CONTENTS
         Interval Plot    
         Scatter Plot    
         Calculate Z value (Hypothesis testing - 1 Sample Z)
-        Identify Distributions
-        Transforming  Data to Normal Distributions
-        Interpret Control Charts for Discrete data     
+        Control Charts (C Chart)
+                Identify Distributions
+                Transforming  Data to Normal Distributions
+                Interpret Control Charts for Discrete data     
         
 ///////////////////////////////////////////////////////////////////////////////////
 01. Basics
@@ -215,9 +216,10 @@ CONTENTS
     Interval Plot
     Scatter Plot    
     Calculate Z value Hypothesis - (Hypothesis testing - 1 Sample Z)
-    Identify Distributions
-    Describe transforming  Data to Normal Distributions
-    Interpret Control Charts for Discrete data
+    Control Chart (C Chart)
+            Identify Distributions
+            Describe transforming  Data to Normal Distributions
+            Interpret Control Charts for Discrete data
 
 ///////////////////////////////////////////////////////////////////////////////////
 03. Basic Statistics using Minitab
@@ -1728,7 +1730,41 @@ CONTENTS
                 Therefore we can reject the null hypothesis
                 More than 30 observation needed to get better understanding of Z-Test and distributions
 
+    #The team were reaching the end of their testing
+    #And now they are studying and analyzing the defects and a number of bugs in the lines of code
+    #So they decided to generate Control Charts (C Chart) because each day would have multiple defects
+    //Control Charts for Discrete Data
+        #Use the same data used in Process Capability
+        #Data: 3 columns (Date, Total Debug Time, Debugged), 21 samples
+        Main Menu > Stat > Control Charts > Attribute Charts > C 
+            Dialog box will appear:
+                Column List
+                Variables: Debugged Column
+                Buttons:
+                    Scale
+                    Labels
+                        Title: C Chart for Debugged
+                    Multiple Graphs
+                    Data Options
+                    C Chart Options
+                        Tabs:
+                            Parameters
+                                Mean:
+                            Estimate
+                            Limits
+                            Tests
+                                Dropdown Menu: Perform selected test for special causes
+                                1 point > K standard deviations from centreline
+                                K points in a row on same side of center line
+                                K points in a row, all increasing or all decreasing
+                                K points in a row, alternating up and down
+                            Stages
+                            Display
+                            Storage
 
+            Interpretation:
+                The plots should be within the UCL and LCL with very little variation
+                Therefore, the process is stable
 
 
 
