@@ -1723,7 +1723,10 @@ CONTENTS
                         Graphs
                             Histogram
 
-
+            Interpretation:
+                From the Session window, the P-Value = 0.00 which is lower than 0.05
+                Therefore we can reject the null hypothesis
+                More than 30 observation needed to get better understanding of Z-Test and distributions
 
 
 
