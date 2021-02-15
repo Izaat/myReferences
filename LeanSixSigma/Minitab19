@@ -166,8 +166,11 @@ CONTENTS
         Monitors process data
         
     Sorting Data
-    Apply Formulas to Columns
-    Define Changing Data Types
+        #Sort data in one column or more, in increasing or decreasing order
+        Estimation calculation
+        Apply Formulas to Columns
+        Changing Data Types for a column
+        
     Process Capability Indices
     Produce Dot Plot
     Operate Individual Value Plot
@@ -1362,7 +1365,40 @@ CONTENTS
         #The team was able to complete the work 10 days before the estimated completion time
  
 
+///////////////////////////////////////////////////////////////////////////////////
+12. Green Belt Case Study 02 (Analysis)
 
+    //Sorting
+        #Sort data in one column or more, in increasing or decreasing order
+        #Sorted data can be stored in original columns or in new worksheet
+        #Columns that are sorted together must be of the same length
+        #Data:
+            S/N  | Role                         |  Estimated Hours | Cost_Per_Hr ($)
+            1      | Project manager      |  200                      | 100
+            2      | Consultant 1            |  500                      | 70
+            3      | Consultant 2            |   500                     | 70
+        #Add a new colulmn and name this column as "Total Cost"
+        
+        #Estimation based on entered data
+            #Calculate total cost
+            Main Menu > Calc >
+                Store result in variable: Total Cost
+                Expression: Hour * Cost_Per_Hr
+                Click OK
+            Calculated result will appear in the Total Cost column
+
+        #Apply formulas to new Column
+            Right Click on column title and select Formulas > Assign Formulas to Column
+            The calculator will appear but without the "Store Result in" input box
+                Expression: Hour * Cost_Per_Hr
+            The result will be displayed in the selected column
+
+        #Change data type for a column
+            Avoiding the serial number column from being used for any calculation
+            Changing numerical value column to a string
+            Main Menu > Data > Change Data type > Numeric to Text
+                Change Numeric Columns: S/N Column
+                Store text Columns: S/N Column (This will be stored into the same column)
 
 
 
