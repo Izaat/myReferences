@@ -734,6 +734,9 @@ CONTENTS
             Overall Capability:
                 Pp, PPL, PPU, Ppk, Cpm
 
+        Interpretation:
+        https://support.minitab.com/en-us/minitab/20/help-and-how-to/quality-and-process-improvement/capability-analysis/how-to/capability-analysis/normal-capability-analysis/interpret-the-results/key-results/
+
     //Gage R&R Study
         #For this example, the data contains 5 parts, each part is measured 2x, 3 different operators
         Main  Menu > Stats > Quality Tools > Gage Study > Create Gage R&R Study Worksheet
@@ -1417,7 +1420,27 @@ CONTENTS
                 Change Numeric Columns: S/N Column
                 Store text Columns: S/N Column (This will be stored into the same column)
 
-
+    //Process Capability Indices (Capability Analysis for Normal Distribution)
+        #Data: 3 columns (Date, Total Debugging Time, Debugged), 21 samples
+        Main Menu > Quality Tools > Capability Analysis > Normal
+            Single Column: Debugged Column
+            Subgroup size: 1
+            Lower Spec: 14
+            Upper Spec: 22
+            Options Button:
+                Within subgroup analysis
+                Overall analysis
+                Display:
+                    Parts per million
+                    Benchmark Z's (sigma level)
+        Click OK and a chart will appear
+        
+        #Interpretation:
+            https://support.minitab.com/en-us/minitab/20/help-and-how-to/quality-and-process-improvement/capability-analysis/how-to/capability-analysis/normal-capability-analysis/interpret-the-results/key-results/
+            Cpk = 0.54  #Since it's low value, it's operating between 1sigma and 2sigma
+            USL:22
+            LSL:14 #Productivity may fall below 14 bugs per day (as shown by the overall line) which is below the LSL
+            Data needs to be collected more than 30 days for better interpretation
 
 
 
