@@ -170,8 +170,9 @@ CONTENTS
         Estimation calculation
         Apply Formulas to Columns
         Changing Data Types for a column
-        
     Process Capability Indices
+        Capability Analysis for Normal Distribution
+        
     Produce Dot Plot
     Operate Individual Value Plot
     Interval Plot
@@ -681,8 +682,24 @@ CONTENTS
                 (Historical Mean and Historical Std Dev input boxes will be shown if Capability Analysis > Normal being selected)
                 
                 Buttons:
-                    Estimate, Options, Storage       
                     (Transform Button will be shown if Capability Analysis > Normal being selected)
+                    Estimate, 
+                    Storage
+                    Options:
+                        Target (adds Cpm to table):
+                        Use tolerance of K x sigma for capability statistics K=___
+                        Perform Analysis
+                            Within subgroup analysis
+                            Overall analysis
+                        Display:
+                            Parts Per million
+                            Percent
+                            Capability stats (Cp, Pp)
+                            Benchmark Z'z (sigma level)
+                            Include confidence interval
+                                Confidence level: Default 95%
+                                Confidence intervals: Default Two sided
+                            Title:    
 
             Use parameters below for the Popup box:
                 Single Column: The column being used for "NonNormal Data Analysis"
