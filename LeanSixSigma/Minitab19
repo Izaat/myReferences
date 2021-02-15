@@ -1511,9 +1511,64 @@ CONTENTS
                                 By Variables Tab > By variables with group in seperate panels: Module #This will provide module Y's data
 
 
+    #The team then decided to further investigate the debug data collected on various dates to see their spread
+    //Individual Value Plot
+        #Use the same data for Dot Plot
+        #Data: 4 columns (S/N, Date, Module, Debug Time)
+        Main Menu > Graph > Individual Value Plot
+            Dialog box will appear:
+                OneY
+                    Simple
+                        Column List
+                        Graph Variables: Date Column, Debug Time Column
+                        Categorical variables for grouping:
+                        Button:
+                            Scale
+                            Labels
+                                Titles Tab > Titles:
+                                Data Labels Tab > Label Drop Down Menu: >
+                                    Individual data
+                                        Use y-value labels
+                                        Use row numbers
+                                        Use labels from Column
+                            Data View
+                            Multiple Graphs                    
+                    With Groups 
+                MultipleYs:
+                    Simple
+                    With Groups 
+
+            Generate Dotplot with the folloing parameters:
+                OneY > Simple
+                        Graph Variables: Date Column, Debug Time Column                
+                        Button: > Labels
+                                Titles Tab > Titles: Individual value plot - Debug Time
+                                Data Labels Tab > Label Drop Down Menu: > Individual data                                    
+                                        Use y-value labels    
 
 
 
 
 
-                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
