@@ -54,7 +54,7 @@ CONTENTS
         Individual Value Plot    
         Interval Plot    
         Scatter Plot    
-        Calculate Z value
+        Calculate Z value (Hypothesis testing - 1 Sample Z)
         Identify Distributions
         Transforming  Data to Normal Distributions
         Interpret Control Charts for Discrete data     
@@ -213,9 +213,8 @@ CONTENTS
     Dot Plot    
     Operate Individual Value Plot
     Interval Plot
-    Scatter Plot
-    
-    Calculate Z value
+    Scatter Plot    
+    Calculate Z value Hypothesis - (Hypothesis testing - 1 Sample Z)
     Identify Distributions
     Describe transforming  Data to Normal Distributions
     Interpret Control Charts for Discrete data
@@ -1682,7 +1681,47 @@ CONTENTS
                                 Same X
 
 
+    #The department had taken more time to complete a task than any experienced banking employee
+    #They knew that the same amount of work could be done in less time by experienced resources
+    #They hypothesized that more experienced resources would take less time than hypothesized mean value of 60 hours 
+    //Calculate Z Value Hypothesis - (Hypothesis testing - 1 Sample Z)
+        #Use the same data used in Process Capability
+        #Data: 3 columns (Date, Total Debug Time, Debugged), 21 samples
+        Main Menu > Stat > Basic statistics > 1-Sample Z
+            Dialog box will appear:
+                Column List
+                Dropdown menu:
+                    One or more samples, each in a column
+                    Input box:
+                    Known standard deviation:
+                    Perform Hypothesis test:
+                        Hypothesized Mean: 
+                    Button:
+                        Options
+                            Confidence Level: 95%
+                            Alternative hypothesis dropdown:
+                                Mean < hypothesized mean
+                                Mean != hypothesized mean
+                                Mean > hypothesized mean
+                        Graphs
+                            Histogram
+                            Individual Value Plot
+                            Boxplot
 
+            Generate Z Value Hypothesis Histogram with the folloing parameters:        
+                Dropdown menu:
+                    One or more samples, each in a column
+                    Input box: Total debug time column
+                    Known standard deviation: 5
+                    Perform Hypothesis test: (Check the checkbox)
+                        Hypothesized Mean: 60
+                    Button > 
+                        Options >
+                            Confidence Level: 95%
+                            Alternative hypothesis dropdown:
+                                Mean < hypothesized mean
+                        Graphs
+                            Histogram
 
 
 
