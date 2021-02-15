@@ -1436,11 +1436,7 @@ CONTENTS
         Click OK and a chart will appear
         
         #Interpretation:
-            https://support.minitab.com/en-us/minitab/20/help-and-how-to/quality-and-process-improvement/capability-analysis/how-to/capability-analysis/normal-capability-analysis/interpret-the-results/key-results/
-            Cpk = 0.54  #Since it's low value, it's operating between 1sigma and 2sigma
-            USL:22
-            LSL:14 #Productivity may fall below 14 bugs per day (as shown by the overall line) which is below the LSL
-            Data needs to be collected more than 30 days for better interpretation
+        https://support.minitab.com/en-us/minitab/20/help-and-how-to/quality-and-process-improvement/capability-analysis/how-to/capability-analysis/normal-capability-analysis/interpret-the-results/key-results/
 
 
 
