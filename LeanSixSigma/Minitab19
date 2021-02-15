@@ -2,36 +2,85 @@ Minitab 19
 ///////////////////////////////////////////////////////////////////////////////////
 CONTENTS
 01. Basics
-02. Basic Statistics using Minitab
+02. Tools every Green Belt must know
+03. Basic Statistics using Minitab
         Display Descriptive Statistics
         Store Descriptive Statistics
         Hypothesis Test (1-Sample t) 
         Hypothesis Test (2-Sample t) 
         Normality Test        
         Proportions Test (Data testing using attribute data)
-03. Regression Testing (Linear, Quadratic, Cubic)
-04. ANOVA Testing
-05. DOE (Design of Experiments)
-06. Control Charts 
+04. Regression Testing (Linear, Quadratic, Cubic)
+05. ANOVA Testing
+06. DOE (Design of Experiments)
+07. Control Charts 
         X-Bar and I-MR Control Chart
         Attribute Defects P-Chart 
-07. Quality Tools 
-        Pareto Charts   
+08. Quality Tools
+        Pareto Charts
         Run Chart
         FishBone Diagram using Minitab Ishikawa Analysis
         Analyzing Non Normal Data (Individual Distribution Identification)
         Capability Analysis for non normal Data (Cp/Cpk)
         Gage R&R Study - Measurement System Analysis
         Kappa Test - Attribute Agreement Analysis
-08. Graphs
+09. Graphs
         Histogram
         BoxPlot
         Bar Chart
         Reference Lines
         Pie Chart
+10. Green Belt Case Study 01 (Hospital Data)
+11. Green Belt Case Study 01 (Analysis)
+12. Green Belt Case Study 02 (Fibinacci Tech Data)
+13. Green Belt Case Study 02 (Analysis)        
 
 ///////////////////////////////////////////////////////////////////////////////////
 01. Basics
+    //Overview
+        Basic Statistics
+            Descriptive statistics, statistical test, correlation, covariance
+        Regression
+            Estimate relationships between variables. Linear, Non-Linear, Binary, Nominal, Ordinal, etc
+        Analysis of Variance (ANOVA)
+            Differences between 2 or more means. Enables analysing data with ANOVA, Multivariate ANOVA, General Linear Model         
+        Design of Experiments (DOE)
+            Identify the cause and effects relationships
+            Create and manage different experiment designs. Entering values and record corresponding output
+        Control Charts - Statistical Process Control (SPC)
+            Cause and Effect diagrams, 
+            Variables and Attribute control charts,
+            Time weighted and Multivariate control charts,
+            Acceptance sampling, 
+            Measure process capability
+        Quality Tools - Measurement System Analysis (MSA)
+            Type 1 - Gauge Study Analysis
+            Gage R&R: Expanded, Crossed, Nested            
+        Reliability/Survival
+            Selecting the best distribution for modelling live data
+            Tool to estimate functions that describes the distribution            
+        Multivariate
+            Analyze data when multiple measurements are made on items or subjects
+            Different tests such as factor analysis, Discrimination analysis, Cluster K-Means
+        Time series and Forecasting
+            Analyze data that is collected over a period of time
+            And provide output such as Simple Forecasting, Correlation Analysis, ARIMA Modelling
+
+        Non Parametrics test
+            Sign Test, Kruskal-Wallis, Mann-Whitney Test
+        Equivalence tests
+            To determine whether the mean values for any product or process measurements are equivalent
+        Power and Sampling Size
+            Probability of correctly rejecting a null hypothesis (H0), when it is false
+            Power size id directly proportional to sample size            
+            
+        Graphics
+            Create and export different types of graphs: Scatterplots, Matrixplots, Boxplots, Probability plots
+        Simulations and Distributions
+            Randomly generate number, identify density, perform different cumulative distribution functions, random samplings
+        Macros and Customisation
+            Customize menus and toolbars and use macro capabilities
+            Supports COM-enabled automation
             
     //Structure
         Consists of 3 panels (Project Manager, Session and Worksheet)
@@ -68,12 +117,12 @@ CONTENTS
             Right Click > Select Formulas > Assign Formula to Column
             Example Expression: 'ColumnTitle01' + 'ColumnTitle02'
             Symbol will appear in the Column index
-
+            
     //Show worksheet Folder
-        A project may contain multiple worksheet and to see all of them, you can open the worksheet tree
+        A project may contain multiple worksheet and to see all of them, you can open he worksheet tree
         Main Menu > Toolbar > Multiple window Icon (Show worksheet Folder)
-                Located below the "Assistant" menu
-
+            Located below the "Assistant" menu
+            
     //Exporting
         #Export Graphs
             Right Click on Graph and select "Send to MS Word" or "Send to MS Powerpoint"
@@ -81,9 +130,46 @@ CONTENTS
             Main Menu > Data > Display Data, and select the columns    #This will transfer worksheet data into the session panel
             Right click on Session panel, Send Section to MS Words or MS Powerpoint
             #Note: In the session panel, you can export highlighted lines into Words and Powerpoint
+            
+///////////////////////////////////////////////////////////////////////////////////
+02. Tools Every Green Belt Must Know
+
+    Bar Chart
+        Classifies data into Nominal and Ordinal Categories
+    Pie Chart
+        Examines data in percentage or proportional data
+    Pareto Chart
+        Practices 80/20 theory aka 'vital few and trivial many' principle
+    Normality Test
+        To test whether the data comes from normal distribution
+    Run Chart
+        Finds out the variations in the dataset
+    Histogram
+        Check data for its symmetry and skewness
+    Box Plot
+        Check data for its symmetry and skewness
+    Display Descriptive Statistics
+        Describes variability in a data by calculating the mean, median and mode
+    Sample Size Determination
+        Evaluates a specific margin of error for confidence interval
+    Control Charts for Continuous Data (I-MR)
+        Monitors process data
+        
+    Sorting Data
+    Apply Formulas to Columns
+    Define Changing Data Types
+    Process Capability Indices
+    Produce Dot Plot
+    Operate Individual Value Plot
+    Interval Plot
+    Scatter Plot
+    Calculate Z value
+    Identify Distributions
+    Describe transforming  Data to Normal Distributions
+    Interpret Control Charts for Discrete data
 
 ///////////////////////////////////////////////////////////////////////////////////
-02. Basic Statistics using Minitab
+03. Basic Statistics using Minitab
     #Display Descriptive Statistics - Output result to session panel
         Main Menu > Stat > Basic Statistics > Display Descriptive Statistics
         A window will popup containing "Column" panel, "Variables:" panel and "By Variable (Optional)" panel
@@ -229,7 +315,7 @@ CONTENTS
                         P-Value = 1
 
 ///////////////////////////////////////////////////////////////////////////////////
-03. Regression Testing
+04. Regression Testing
     //Fitted Line Plot
         #Finding out how one factor in Column1 influences the other column (Column2)
         #Example: 
@@ -263,7 +349,8 @@ CONTENTS
                         R-Sq(adj): 100%
 
 ///////////////////////////////////////////////////////////////////////////////////
-04. ANOVA Testing
+05. ANOVA Testing
+    //ANalysis Of VAriance
     //One Way (Unstacked)
         #Comparing multiple columns means
         Main Menu > Stat > ANOVA > One Way (Unstacked)
@@ -295,7 +382,7 @@ CONTENTS
         Find out whether the mean is the same throught the columns via Boxplot diagram
 
 ///////////////////////////////////////////////////////////////////////////////////
-05. DOE (Design of Experiments)
+06. DOE (Design of Experiments)
     #To simulate a design or a system with graphs
     #For the testing of a system, we'll use sigmazone.com/catapult/
     //Setup        
@@ -367,12 +454,12 @@ CONTENTS
                 The calculated result of this adjustments will be shown as (y=value)
 
 ///////////////////////////////////////////////////////////////////////////////////
-06. Control Charts 
+07. Control Charts 
     //I-MR & X Bar R Charts
         Single sample per row: Use "Variables Charts for Individuals" (I-MR Chart)
         Multiple samples / multiple row per category: Use "Variables Charts for Subgroups" (Size = Sample size) (Xbar-R Chart)
         #Data: 
-            Idx. | C1/Time | C2/Val
+            Idx.  | C1/Time    | C2/Val
             1.    | 01:00      | 1.10
             2.    | 01:00      | 1.22
             3.    | 02:00      | 1.33
@@ -442,11 +529,11 @@ CONTENTS
             This will show a graph that shows 2 defects in the graph
 
 ///////////////////////////////////////////////////////////////////////////////////
-07. Quality Tools (Pareto Charts, Run Chart, Process Capability [Cp/Cpk], Gage R&R)
+08. Quality Tools (Pareto Charts, Run Charts, Process Capability [Cp/Cpk], Gage R&R)
     //Pareto Charts 
         #80/20 Analysis: where 80% of defects are caused by 20% of other possible categories
         Data:
-            Idx. | C1/Time | C2/Val | C3/Comments
+            Idx.  | C1/Time    | C2/Val   | C3/Comments
             1.    | 01:00      | 1.10     | High oil
             2.    | 01:00      | 1.22     | Temp Issues
             3.    | 02:00      | 1.33     | Temp Issues
@@ -476,7 +563,7 @@ CONTENTS
         Result: Most defects are related to Temperature issues
 
     //Run Charts
-        #Understanding the variance that exists in the data if the data is a non normal distribution
+        #Understanding the variance that exists in the data if the data is not normal
         Main Menu > Stat > Quality Tools > Run Chart 
         Popup Box will appear:
             Column List
@@ -494,7 +581,7 @@ CONTENTS
             Subgroup Size: 1  (Sampling Rate)
             Options:
                 Title: Run Chart Example
-
+            
     //Fishbone Diagram/Ishikawa Analysis
         Plotting:
             Create 6 columns where each column represents the features of a fishbone diagram
@@ -616,7 +703,6 @@ CONTENTS
                 Cp, CPL, CPU, Cpk
             Overall Capability:
                 Pp, PPL, PPU, Ppk, Cpm
-
 
     //Gage R&R Study
         #For this example, the data contains 5 parts, each part is measured 2x, 3 different operators
@@ -805,9 +891,8 @@ CONTENTS
                     Assessment Agreement:
                         Analyze the percentage
 
-
 ///////////////////////////////////////////////////////////////////////////////////
-08. Graphs
+09. Graphs
     //Histogram
         Main Menu > Graph > Histogram
             Option box will appear containing 4 options:
@@ -853,8 +938,8 @@ CONTENTS
                     Graph variables: Column1 Title
                     Labels Button > 
                         Titles Tab > Titles: Box Plot example
-                Click OK to generate Boxplot                
-
+                Click OK to generate Boxplot
+                        
     //BarChart
         Main Menu > Graph > BarChart
             Option box will appear 
@@ -896,6 +981,351 @@ CONTENTS
                 Click Ok
 
 
+///////////////////////////////////////////////////////////////////////////////////
+10. Green Belt Case Study 01 (Hospital Data)
+    //Data
+        #4 storeyed hospital in New York
+        #Areas
+            Casualty Ward: 250 beds
+            ICU: 55 beds
+            General Ward: 450 beds
+            Pathology Lab
+            Pharmacy Services
+        #Hospital seeing revenue decline during last 2 years
+        #Other hospitals have more admission of patients and generating more revenues
+        #Finding out the sudden decline in patient preference and revenue
+        #Created Healthcare Excellence Department to find the root cause using daily surveys and interviews
+            Target includes Patient, Doctors, Nurses, Support Staff
+            Data gathered were entered into MiniTab worksheet and subject to analysis
+
+        #Data:
+            Limited Infrastucture - 86 compliants
+            Noisy environment - 94 complaints
+            Overpriced - 43 complaints
+            Few specialist doctors - 723 complaints
+            Lack of hygiene - 68 complaints
+            Unfriendly staff - 89 complaints
+            High wait time - 689 complaints
+                #The department recorded the wait time of each patient before they were being seen by the doctor
+                #Data captured was entered in a worksheet
+
+    //Sequence 
+        Bar Chart
+            Classifies data into Nominal and Ordinal Categories
+        Pie Chart
+            Examines data in percentage or proportional data
+        Pareto Chart
+            Practices 80/20 theory aka 'vital few and trivial many' principle
+        Normality Test
+            To test whether the data comes from normal distribution
+        Run Chart
+            Finds out the variations in the dataset
+        Histogram
+            Check data for its symmetry and skewness
+        Box Plot
+            Check data for its symmetry and skewness
+        Display Descriptive Statistics
+            Describes variability in a data by calculating the mean, median and mode
+        Sample Size Determination
+            Evaluates a specific margin of error for confidence interval
+        Control Charts for Continuous Data (I-MR)
+            Monitors process data
+        
+///////////////////////////////////////////////////////////////////////////////////
+11. Green Belt Case Study 01 (Analysis)
+
+    //The Department wanted to Classify the data into Nominal and Ordinal Categories   
+    //Nominal data is categorized according to descriptive or qualitative information
+            This indicates the relative importance of parameters under consideration            
+
+    #Bar Chart
+        Main Menu > Graph > Bar Chart 
+            Bar Represents: Values from a Table
+                Dropdown Menu: 
+                    Counts of Unique values
+                    A function of variable
+                    Values from a Table
+            One Column of Values: Simple
+        Graph Variables: Complaint Counts
+        Categorical variable: Hospital Services
+        Labels Button:
+            Title: Bar chart for Complaint Counts    
+            
+        Bar Chart generated:        #Number of complaints is the nominal data against different parameters or services
+            Vertical Axis (Complain Counts)
+            Horizontal Axis (Hospital Services)            
+    
+    #Pie Chart
+        #To examine the number of complaint in percentage or proportional data
+        Main Menu > Graph > Pie Chart
+            Option box will appear:
+                Column List
+                Chart Counts of unique values
+                Chart values from table
+                Categorical variable input box
+                Buttons:
+                    Pie otions
+                    Labels
+                    Multiple Graphs
+                    Data Options
+
+            Create a simple Pie Chart with options below            
+                Chart values from a table
+                Categorical variable: Hospital Services
+                Summary Variable: Complaint counts
+                Click on Label Button:
+                    Titles/Foot Tab:
+                        Title: Pie Chart for Complaint Counts
+                    Slice Labels Tab:
+                        Check Category Name and Percent
+
+    #Pareto Chart  
+        #Used for selection of problems and initiating the improvement projects
+        #Pareto practices 80/20 theory
+        Main Menu > Stat > Quality Tools > Pareto Chart
+            Defects/Attribute Data in: Hospital Services
+            Frequencies in: Complaint Count
+            Click OK
+
+    #Normality Testing
+        #To examine the raw data to understand if gathered data is retrieved from normal distribution
+        #Purpose is to check if data is from the Normal distribution
+        #Test result will confirm whether to reject the hypothesis as non-normal data will produce misleading results
+        
+        #First step is to enter complaint details for any one service (High wait time is used for this example)
+        #Data should be in ascending order according to time being recorded
+        #Data should include a column with waiting time provided by 689 patients
+        Main Menu > Stats > Basic Statistics > Normality Test
+            Variable: High Wait Time Column
+            Percentile Lines: None
+            Tests for Normality: Anderson Darling
+            
+        #P-Value is below 0.05 therefore the distribution is not normal
+
+    #Prepare Run Chart
+        #Understanding the variance that exists in the data since the data is not normal
+        #Run Chart displays how your process data changes over time.
+        #It reveals evidence of special cause variation that creates recognizable patterns
+        #Run Chart aids in analyzing the variations
+
+        #Enter complaint details (Similar to Normality Test)
+        #In this case, High Wait Time
+        Main Menu > Stat > Quality Tools > Run Chart 
+        Popup Box will appear:
+            Column List
+                Data are arranged as:
+                    Single Column
+                        Single Column, Subgroup size
+                    Subgroups across rows of
+                    For data in subgroups:
+                        Plot subgroup means
+                        Plot subgroup medians
+                Options Button
+        
+        Set the options as followings:
+            Single Column: High Wait Time Column
+            Subgroup Size: 1  (Sampling Rate)
+            Options:
+                Title: Run Chart Example
+        
+        Run Chart will appear in a new window with each blue dot representing the waiting time
+        From first dot to 300th, the wait time is about 45 to 80
+        But from 300th to 400th dots, there is a jump to 180 to 200 in waiting time
+        At 400th to 500th, wait time drops to 120-ish
+        500th to 680th, Wait time variation is 50 to 180
+        
+        From the data above, we conclude that there is alot of variance in the data before improvement
+        After realizing the variances, assess the data for its symmetry/skewness.
+        This can be done with Histogram
+            
+    #Histogram
+        Assessing symmetry/skewness of data
+        Created with a column of measurement data and column of frequency data
+        Use the same ascending data as Run Chart and Normality test data (High Wait Time)
+        Main Menu > Graph > Histogram
+            Option box will appear containing 4 options:
+                Simple, 
+                    Column List
+                    Graph Variables
+                    Buttons:
+                        Scale
+                        Labels
+                        Data View
+                        Multiple Graphs
+                        Data Options
+                With Fit, 
+                With Outline and Groups, 
+                With Fit and Groups
+                
+            Set the options as followings:    
+                Select Simple and click OK
+                    Graph Variables: High Wait Tima
+                    Click OK
+
+        A window with Histogram will appear
+        Interpretation:
+            Horizontal axis represents wait time duration
+            Vertical axis (Frequency) represents the number of patients
+            The highest peak in the graph shows 80 patients waited for 60 minutes
+            The distribution is positively skewed since the peak is on the left side of the graph
+            
+    #Box Plot Diagram
+        #To show the distribution of numerical data and skewness by displaying the data percentiles and averages
+        #Use the High Wait Time Data
+        Main Menu > Graph > Boxplot
+            Option box will appear containing 4 options:
+                One Y:      #Seperate boxplots in seperate graphs
+                    Simple,
+                        Graph Variables:
+                        Buttons:
+                            Scale:
+                            Labels: 
+                                Titles Tab > Titles:
+                                Data Labels Tab > Label: 
+                                    Outliers
+                                        Use Y-Value Labels
+                                        Use Row Numbers
+                                        Use labels from Column
+                                    Individual Data
+                                    Medians
+                                    Means
+                            Data View Button:
+                                Checkboxes
+                                    Median confidence interval box
+                                    Interquartile range box
+                                    Range Box
+                                    Outlier Symbols
+                                    Individual Symbols
+                                    Median symbols
+                                    Median Connect Line
+                                    Mean Symbol
+                                    Mean Connect Line
+                            Multiple Graphs
+                            Data Options
+                    With Groups,
+                Multiple Ys:    #Multiple Boxplots in the same graph
+                    Simple
+                    With Groups
+            Click OK to Generate Boxplot
+            
+            Create Boxplot with the following parameters:
+                OneY > Simple 
+                    Graph variables: Box Plot for Wait Time
+                    Labels Button > 
+                        Titles Tab > Titles: Box Plot example
+                        Data Labels Tab > Outliers
+                            Check "Use Y-Value Labels" checkbox
+                    Data View >
+                        Interquartile
+                        Range Box
+                        Outlier Symbols
+                        Median Connect Line
+                        Mean Connect Line
+                Click OK To generate boxplot
+                
+    //By now, Team-A successfully explored the frequency of data, and data symmetry/skewness 
+    //Now the Mean, Median, Mode, Standard Deviation, Variation, Range and Variance in the values of age and weight need to be identified
+    
+    #Display Descriptive Statistics - Categorizing Measuring Central Tendency and Spread
+        The details of the patients participated in the High Wait Time survey is needed 
+        Columns will be Age, Gender and Weight of the patients
+        Main Menu > Stat > Basic Statistics > Display Descriptive Statistics
+            Variables: Age Column, Weight Column
+            Click Statistics Button
+                Select > Mean, SE of mean, Standard Deviation, Coefficient of variation, Minimum, Maximum, Range, Median, Mode
+                Check Statistics: Default
+            Click OK and all the values will be printed in the Session Panel
+    
+    //The department now wanted to know the approximate number of patients for their investigation based on the margin of error
+    
+    #Sample Size determination
+        #Generally used for appraising a specific margin of error for confidence intervals or tolerance intervals
+        Main Menu > Stat > Power and Sample Size > Sample Size for Estimation
+            Sample Size Estimation Box:
+                Parameter:
+                    Mean (Normal)
+                    Standard Deviation (Normal)
+                    Variance (Normal)
+                    Proportion (Binomial) - This will be chosen
+                    Rate (Poisson)
+                    Mean (Poisson)
+                Planning Value Proportion: 0.5 (First time conducting survey, but ideal value will be the value of previous survey)
+                Dropdown Box: Estimate sample sizes
+                Margins of error for CI: 0.05 (Corresponds to the 5%)
+                Options:
+                    Confidence Level: 95%
+                    Confidence Interval: Two sided
+            
+            Results:
+                Margin of Error: 0.05
+                Sample Size: 680
+            #As margin of error reduces, sample size increase
+    
+    //The department was able to derive the specific margin of error for CI by determining the sample size
+    //Now they want to analyze the distribution of Wait Time
+    
+    #Control Charts for Continuous Data (I-MR)
+        To generate individual chart and moving range chart
+        Data contains 4 columns (Date, Department, In Time, Wait Time Duration), 24 samples
+        Main Menu > Stat > Control Charts > Variables Charts for Individuals > I-MR
+            Options Box will appear:
+                Column List
+                Variables:
+                Button:
+                    Scale
+                    Labels: Input title
+                    Data options
+                        I-MR Options > Tabs
+                            Parameters > 
+                                Mean
+                                Standard Deviation
+                            Estimate
+                                Dropdown box:
+                                    Omit the following subgroups when estimating parameters
+                                Method for estimating standard deviation
+                                    Subgroup
+                                        Average Moving Range
+                                        Median Moving Range
+                                    Length of moving range: 2
+                                    Use Nelson estimate
+                            Limits
+                            Tests                                
+                                1 point > K standard deviations from centreline (center horizontal line) #Any data more than the UCL/LCL will be flagged red
+                                K points in a row on same side of center line
+                                K points in a row, all increasing or all decreasing
+                                K points in a row, alternating up and down
+                                K out of K+1> 2 standard deviation from center line (same side)
+                                K out of K+1> 1 standard deviation from center line (same side)
+                                K points in a row within 1 standard deviation of center line (either side)
+                                K points in a row > 1 standard deviation of center line (either side) 
+                            Stages
+                            Box-Cox
+                            Display
+                            Storage
+            
+            Use the following parameters to generate I-MR Chart
+                Variables: Wait Time Column
+                Button:
+                    Labels: I-MR Wait Time
+                    Data options > Tabs > 
+                        Estimate: 
+                            Dropdown Box: Omit the following subgroups when estimating parameters
+                            Method for estimating standard deviation
+                                Subgroup: Tick Average Moving Range Checkbox
+                        Tests: 1 point > K standard deviations from centreline (center horizontal line)
+
+        Interpretation of Continuous Data Chart
+            2 charts generated, Individual Value and Moving Range
+            Vertical Axis is the Wait Time, Horizontal Axis is the patient by index number
+            Under Individual Value Chart, Patient 20 hits the upper limit (UCL) of wait time
+            Under Moving Range Chart, the vertical axis is the excess time (Note the 0-3 on the vertical axis)
+                Patient 20 and 21 is beyond the UCL but under individual chart, patient 21 wait time is around the Xbar
+                This means that patient 20's excessive waiting time affected patient 21 waiting time 
+
+
+
+///////////////////////////////////////////////////////////////////////////////////
+ 
 
 
 
