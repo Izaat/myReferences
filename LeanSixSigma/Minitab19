@@ -196,11 +196,11 @@ CONTENTS
         Changing Data Types for a column
     Process Capability Indices
         Capability Analysis for Normal Distribution  
-    Dot Plot
-    
+    Dot Plot    
     Operate Individual Value Plot
     Interval Plot
     Scatter Plot
+    
     Calculate Z value
     Identify Distributions
     Describe transforming  Data to Normal Distributions
@@ -1590,7 +1590,7 @@ CONTENTS
                     Simple
                     With Groups 
 
-            Generate Inerval Plot with the folloing parameters:
+            Generate Interval Plot with the folloing parameters:
                 OneY > Simple
                         Graph Variables: Debug Time Column         
                         Categorical variables for grouping: Module Column                        
@@ -1606,7 +1606,66 @@ CONTENTS
                                     Same Y
 
 
+    #The department's next action was to examine the relationship between the 2 variables
+    #They wanted to see whether the time to debug is gradually reducing
+    //Scatter Plot
+        #Use the same data for Dot Plot
+        #Data: 4 columns (S/N, Date, Module, Debug Time)
+        Main Menu > Graph > Scatter Plot
+            Dialog box will appear:
+                Simple
+                With Groups
+                    Column List
+                    Table:
+                        Y variable Column:
+                        X Variable Column:
+                    Categorical variables for grouping: Module Column
+                    X-Y pairs form groups
+                    Buttons:
+                        Scale
+                        Labels
+                            Titles Tab > Titles: Scatter Plot - Debug Time
+                            Data Labels Tab > Label Drop Down Menu: >
+                                Individual data
+                                    Use y-value labels
+                                    Use row numbers
+                                    Use labels from Column
+                                Interval Endpoints
+                                    Use y-value labels
+                                    Use labels from Column                                        
+                        Data View
+                        Multiple Graphs                 
+                            Multiple Variabes Tab:
+                                Show pairs graph variables
+                                    Overlaid on the same graph
+                                    In seperate panels
+                                    On seperate graphs
+                                Same scales for Graphs
+                                    Same Y
+                                    Same X
+                            By Variables Tab: 
+                                By variables with group in seperate panels:
+                                By variables with groups on seperate graphs   
+                With Regression
+                With Regression and Groups
+                With Connect Line
+                With Connect and Groups
 
+            Generate Scatter Plot with the folloing parameters:
+                OneY > With Groups
+                    Table:
+                        Y variable Column: Debug Time Column
+                        X Variable Column: Date Column   
+                    Categorical variables for grouping: Module Column                        
+                    Button: > 
+                        Labels
+                            Titles Tab > Titles: Scatter Plot - Debug Time
+                        Multiple Graphs > Multiple Variabes Tab:
+                            Show pairs graph variables
+                                In seperate panels
+                            Same scales for Graphs
+                                Same Y
+                                Same X
 
 
 
