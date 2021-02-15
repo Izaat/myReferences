@@ -468,7 +468,8 @@ CONTENTS
                 The calculated result of this adjustments will be shown as (y=value)
 
 ///////////////////////////////////////////////////////////////////////////////////
-07. Control Charts 
+07. Control Charts
+    #https://www.youtube.com/watch?v=e5g2NmIUdck
     //I-MR & X Bar R Charts
         Single sample per row: Use "Variables Charts for Individuals" (I-MR Chart)
         Multiple samples / multiple row per category: Use "Variables Charts for Subgroups" (Size = Sample size) (Xbar-R Chart)
