@@ -141,6 +141,30 @@ CONTENTS
             Right click on Session panel, Send Section to MS Words or MS Powerpoint
             #Note: In the session panel, you can export highlighted lines into Words and Powerpoint
             
+    //Process Capability VS Process Control
+        #Do not confuse Process Capability and Process Control
+        #Process Capability:
+            Process Capability looks at whether or not the output of the process is capable of satisfying requirements.
+            It is measured using either the Capability Ratio (Cp) or the Capability Index (Cpk)
+            A value of 1.0 for either Cp or Cpk implies that the spread of the process output is equal to the specifications
+            Process spread is defined as six standard deviations.
+            A minimum of 1.33 for Cp and Cpk is desired. The larger the value, the better.
+            Cpk consider how well the output of the process is centered within specification. Cp does not.
+            To calculate Cp or Cpk, 3 conditions must be met:
+                1. Output of process must be a continuous variable
+                2. Output of the process must be normally distributed
+                3. Output must be in a state of statistical Control
+        #Process Control:
+            Process Control looks at whether or not the output of the process is in a state of statistical control 
+            There will always be variation in  the output of all processes due to common causes or special causes
+                Common Causes: Inherent
+                Special Causes: Assignable to a person or event
+            Both Common and Special causes may or may not result in defects
+            If a process exhibits special cause variation, then it is out of statistical control, therefore output is not stable or not predictable
+            If a process exhibits common cause variation, then it is in a state of statistical control, therefore output is stable and predictable 
+            A process that is in control does not mean that the output of the process is normally distributed
+            To determine whether or not a process is in control is by using a run chart or control chart, where control chart is a preferred method    
+            
 ///////////////////////////////////////////////////////////////////////////////////
 02. Tools Every Green Belt Must Know
 
