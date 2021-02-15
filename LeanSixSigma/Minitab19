@@ -836,11 +836,26 @@ CONTENTS
             Option box will appear containing 4 options:
                 One Y:      #Seperate boxplots in seperate graphs
                     Simple,
+                        Graph Variables:
+                        Scale:
+                        Labels: 
+                            Titles Tab > Titles:
+                            Data Labels Tab > Label Drop Down Menu
+                        Data View Button:
+                        Multiple Graphs
+                        Data Options
                     With Groups,
                 Multiple Ys:    #Multiple Boxplots in the same graph
                     Simple
                     With Groups
-            Select the columns and click OK
+            Click OK to Generate Boxplot
+            
+            Create Boxplot with the following parameters:
+                OneY > Simple 
+                    Graph variables: Column1 Title
+                    Labels Button > 
+                        Titles Tab > Titles: Box Plot example
+                Click OK to generate Boxplot                
 
     //BarChart
         Main Menu > Graph > BarChart
