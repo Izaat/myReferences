@@ -2,6 +2,9 @@
 #References:
     github.com/gijzelaerr/python-snap7
     http://simplyautomationized.blogspot.com/p/industrial-automation.html
+    https://www.youtube.com/watch?v=yJNEsI5KJxs&t=0s
+    https://www.youtube.com/watch?v=wG4tzttX-Bc
+    https://www.youtube.com/watch?v=BKnK4AT_WKs
     
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 CONTENTS
@@ -9,7 +12,7 @@ CONTENTS
 02. Siemens-RaspberryPi Link
 03. Using RaspberryPi to Control PLC
 04. Python-SiemensTIA v15.1 (Setup to Control)
-
+05. Python-SiemensTIA v15.1 (Program)
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
@@ -253,7 +256,13 @@ CONTENTS
                     Subnet Mask: 255.255.255.0
                 Use Router (Checkbox checked)
                     Router Addr: 192.168.100.1
+            Under General sub-tab > Protection&Security tree > Protection & Security viewport > 
+                Access Level Section >
+                    Make sure the "Full access" checkbox is checked  (default setting)
+                Connection Mechanisms >
+                    Make sure the Permit access with PUTIGET from remote partner is checked
             Minimize panel
+            
         Under Project Tree > Device Tab > Rightclick on Main Project Folder > Select Properties 
             Window will appear and open Protection Tab
                 Under Protection section, check the checkbox (Support simulation during block compilation)
@@ -286,7 +295,7 @@ CONTENTS
                 "Interface".product_status := true;
         Under Projcet Tree > PLC_1 > Program Blocks > Double Click on Main
             Drag and drop Controller FB into the Rung of the Main file
-        Under Projcet Tree > Right Click on PLC_1 > Select "Download to Device" > Select "Hardware and software (only changes)"
+        Under Project Tree > Right Click on PLC_1 > Select "Download to Device" > Select "Hardware and software (only changes)"
             "Extended download to device" options box will appear
             Select target device: Show devices with the same address                
             Click on "Start Search" button
@@ -336,4 +345,34 @@ CONTENTS
             #S7CpuStatusRun
             
         #You can run this program in the command (python test.py) while the PLC is connected
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. Python-SiemensTIA v15.1 (Program)
+    //test.py
+        import snap7
+        IP = '192.168.100.100'
+        RACK = 0
+        SLOT = 1
+        
+        #In TIA, under the Devices tab > Interface block > add a new boolean variable and name this "db_end"
+        #In the main tool bar, click on download (arrow down)
+        #In preview window, reinitialize, load and check the offset value 
+            product_value: 256.0
+            product_status: 258.0
+            db_end: 258.1
+            
+        DB_NUMBER = 100
+        START_ADDRESS = 0
+        SIZE = 260
+        
+        plc = snap7.client.Client()
+        plc.connect(IP, RACK, SLOT)
+        
+        plc_info = plc.get_cpu_info()
+        print(f'Module type: {plc_info.ModuleTypeName}')      #Module Type: b'CPU 1510XX-X XX'        
+        state = plc.get_cpu_state()
+        print(f'State: {state})                                                     #State: S7CpuStatusRun        
+
+        db = plc.db_read(DB_NUMBER, START_ADDRESS, SIZE)
+        print(db)
 
