@@ -376,6 +376,8 @@ CONTENTS
         product_name = db[2:256].decode('UTF-8').strip('\x00')      #for x\00, he one with the most printed, see the code above "print(db)"
         print(f'Product Name: {product_name}')                    #This prints out the project name
 
+        product_value = int.from_bytes(db[256:258], byteorder='big')
+        print(f'Product Value: {product_value}')
 
 
 
