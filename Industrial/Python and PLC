@@ -237,7 +237,7 @@ CONTENTS
             #It will update whenever you rerun again
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-04. Python-Siemens S7 (Setup to Control)
+04. Python-SiemensTIA v15.1 (Setup to Control)
     //Setup (TIA Portal v15.1)
         Create New Project (This project folder has to share the same location as the python file created later)
         Project Tree > Devices Tab > Snap7 Folder Tree > Add new Device
