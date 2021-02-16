@@ -371,5 +371,13 @@ CONTENTS
         print(f'State: {state})                                                     #State: S7CpuStatusRun        
 
         db = plc.db_read(DB_NUMBER, START_ADDRESS, SIZE)
-        print(db)
+        print(db)       #This prints out the value (x\00)
+
+        product_name = db[2:256].decode('UTF-8').strip('\x00')      #for x\00, he one with the most printed, see the code above "print(db)"
+        print(f'{product_name}')                    #This prints out the project name
+
+
+
+
+
 
