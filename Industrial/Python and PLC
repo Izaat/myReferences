@@ -380,7 +380,7 @@ CONTENTS
         print(product_value)    #Prints out 1337
 
         product_status = bool(db[258])
-        print(product_status)
+        print(product_status)   #Prints out True
 
 
 
