@@ -373,11 +373,14 @@ CONTENTS
         db = plc.db_read(DB_NUMBER, START_ADDRESS, SIZE)
         print(db)       #This prints out the value (x\00)
 
-        product_name = db[2:256].decode('UTF-8').strip('\x00')      #for x\00, he one with the most printed, see the code above "print(db)"
+        product_name = db[2:256].decode('UTF-8').strip('\x00')      #for byte x\00, the one with the most printed, see the code above "print(db)"
         print(f'Product Name: {product_name}')                    #This prints out the project name
 
         product_value = int.from_bytes(db[256:258], byteorder='big')
-        print(f'Product Value: {product_value}')
+        print(product_value)    #Prints out 1337
+
+        product_status = bool(db[258])
+        print(product_status)
 
 
 
