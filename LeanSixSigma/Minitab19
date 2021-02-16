@@ -43,7 +43,7 @@ CONTENTS
         Sample Size Determination
         Control Charts for Continuous Data (I-MR)
 12. Green Belt Case Study 02 (Fibinacci Tech Data)
-13. Green Belt Case Study 02 (Analysis)
+13. Green Belt Case Study 02 (Analysis)        
         Sorting Data
             Estimation calculation
             Apply Formulas to Columns
@@ -54,11 +54,11 @@ CONTENTS
         Individual Value Plot    
         Interval Plot    
         Scatter Plot    
-        Calculate Z value (Hypothesis testing - 1 Sample Z)
-        Control Charts (C Chart)
-                Identify Distributions
-                Transforming  Data to Normal Distributions
-                Interpret Control Charts for Discrete data     
+        Calculate Z value hypothesis (Hypothesis testing - 1 Sample Z)
+        Control Charts
+            Identify Distributions
+            Transforming  Data to Normal Distributions
+            Control Charts for Discrete data    
         
 ///////////////////////////////////////////////////////////////////////////////////
 01. Basics
@@ -208,18 +208,24 @@ CONTENTS
         #Sort data in one column or more, in increasing or decreasing order
         Estimation calculation
         Apply Formulas to Columns
-        Changing Data Types for a column
+        Changing Data Types for a column        
     Process Capability Indices
-        Capability Analysis for Normal Distribution  
+        Capability Analysis for Normal Distribution       
+        Checking efficiency in the process
     Dot Plot    
-    Operate Individual Value Plot
-    Interval Plot
+        Analyzes shape and spread of data        
+    Individual Value Plot
+        Analyzes spread of data
+    Interval Plot    
+        Shows the sample's central tendency and variability
     Scatter Plot    
+        Examines the relationship between 2 variables
     Calculate Z value Hypothesis - (Hypothesis testing - 1 Sample Z)
-    Control Chart (C Chart)
-            Identify Distributions
-            Describe transforming  Data to Normal Distributions
-            Interpret Control Charts for Discrete data
+        Measures the difference between 2 or more data
+    Control Charts
+        Identify Distributions: Analyzes data for different type pf distributinos
+        Transforming  Data to Normal Distributions
+        Control Charts for Discrete data: Analyzes if the collected data continuous or attribute
 
 ///////////////////////////////////////////////////////////////////////////////////
 03. Basic Statistics using Minitab
