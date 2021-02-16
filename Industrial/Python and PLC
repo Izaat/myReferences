@@ -288,7 +288,7 @@ CONTENTS
             //Under Controller > Function Block Editor Viewport, add in the codes
             //Controller
                 "Interface".product_name := 'Snap7 PLC toApp';
-                "Interface".product_value := 1337;
+                "Interface".product_value := 1337; #Just a random4 digit number
                 "Interface".product_status := true;
         Under Projcet Tree > PLC_1 > Program Blocks > Double Click on Main
             Drag and drop Controller FB into the Rung of the Main file
