@@ -1,0 +1,298 @@
+Simulators - https://www.anylogic.com/manufacturing/
+            https://store.steampowered.com/app/591370/Production_Line__Car_factory_simulation/
+///////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01. Lean Manufacturing vs Six Sigma
+02. Define Phase
+03. Measure Phase
+04. Analyze Phase
+05. Improve Phase
+
+///////////////////////////////////////////////////////////////////////////////////
+01. Lean Manufacturing vs Six Sigma
+    //Lean manufacturing (Eliminates Wastes)
+        Lean believes any process can be optimized by eliminating the 8 main wastes (TIMWOOD)
+            Transport
+            Inventory
+            Motion
+            Waiting
+            Over Processing
+            Over Production
+            Defects
+    
+    //Six Sigma (Eliminates Process Variation)
+        SixSigma believes you can optimize a process by eliminating process variation
+        A structured approach is used (DMAIC)
+            Define
+            Measure
+            Analyze
+            Improve
+            Control
+    
+    //Similarities
+        Improve Quality Improve Service and Reduce Costs
+        
+    //LeanSixSigma
+        Using DMAIC process to reduce process variations and at the same time eliminate wastes
+        This is usually done in what is known as a Kaizen Event
+            4-5 weeks before Kaizen Event     => Define and Measure Phase
+            Kaizen Week                       => Analyze and Improve Phase
+            90 days after Kaizen event        => Control Phase
+            
+    //DMAIC Approach
+        Define:
+            Cost of poor quality
+            Critical Matrix
+            Pareto Chart
+            SIPOC
+            Voice of the Customer
+            Kano Analysis
+            Survey Design
+        Measure
+            SIPOC
+            Stakeholder Analysis
+            Spaghetti Chart
+            Check Sheet
+            5S Analysis
+            Process Capability Analysis
+        Analyze
+            Ishikawa Diagram
+            Cause and Effect Matrix
+            FMEA
+            Correlation and Regression
+            Hypothesis Testing
+        Improve
+            Regression Analysis
+            Design of Experiments
+            Mistake Proofing
+            5S & Visual Management
+            FMEA
+        Control 
+            Control Plan and Chart
+            Audit Plan
+            TPM
+            New Process Capability Analysis
+            FMEA
+            
+    //DMAIC Flow
+        Map the process - Measure Phase
+        Calculate Takt Time - Analyze Phase
+        Measure Work Load - Analyze Phase
+        Reduce Waste and Simplify Steps - Analyze Phase
+        Re-sequence or Re-assign work - Analyze Phase
+        Establish new Standard Work - Analyze Phase
+
+///////////////////////////////////////////////////////////////////////////////////
+02. Define Phase
+    #Create a Project Charter 
+    #Groundwork for the creation of A3
+    
+    #What problem needs to be solved
+    #What problem is the customer/process is experiencing
+    #How is this aligned to business strategy
+    #What is the goal (Specific, Measure, Achievable, Realistic, Timely)
+
+    //Project Charter - Contains the following elements
+        #Project Info
+            Project name: [Improvement name for the problem] - Output increase
+            Project Sponsor:
+            Project Manager
+            Process Impacted
+            Expected Start Date
+            Expected Completion Date
+            Expected Savings
+            Estimated Cost
+        
+        #Problem Description
+            Definition of Problem/Issue: [Unable to meet demand]
+            Purpose of Project: [Increase output from ... to ...]
+            Business case: According to market analysis, current process output results in ...
+            Goals: Output to increase from ... to ... by mentioned date
+            Expected deliverables
+
+        #Project Scope and Schedule
+            Within Scope:
+            Outside Scope:
+            Schedule: Milestones (Form team, finalize and charter, dmaic phases, summary report and close)
+            
+        #Project Resources and Cost
+            Team Members
+            Supporting members
+
+        #Project benefits and customers
+            Process owner: Commonly manufacturing or Production manager
+            Key stakeholder: People who are very interested in process success. And those who assign resources for execution. Approvals
+            Final customer: Receives the result at the end
+            Expected benefit: Example, increased production resulting in increased profit
+
+    //A3 document
+        After Project Charter is created, an A3 document is generated
+        A one page project summary that allows team members, project managers and stakeholders to communicate about the milestones, advances and roadblocks
+        Usually the information created during the project charter phase is used to fill out the A3 document
+
+        Common Format:
+            Define Stage
+                Project background
+                    What is happening and why is it important
+                    What prompted this project
+                Current process Conditions
+                    Current defect rate
+                    Current scrap rate
+                    Graphs and sketches
+                SMART Goals
+            Measure, Analyze and Improve Stage
+                Root Cause Analysis:
+                    To communicate the root cause of the problem
+                    Examples: 5 whys, fishbone, etc                
+                Proposal
+                    Proposed action to solve root cause
+                Implementation Plan
+                    Timeline for action implementation with who what when where how
+            Control Stage        
+                Follow up Control Phase
+                    How will the process be monitored
+
+    //Steps
+        Fill out project Charter
+        Fill out A3 document
+        Identify key stakeholders
+        Create SMART Goal
+        Define the project scope and team members
+
+///////////////////////////////////////////////////////////////////////////////////
+03. Measure Phase
+    //Objective:
+        Understanding the process, 
+        Evaluate the measurement system 
+        Establish the baseline process capability
+
+    //Create
+        Process flow map
+        Measurement System Analysis (MSA) with Gage R&R and Kappa Test
+        Graphs and Charts:
+            Balance Charts
+            Pareto Charts
+            Graphical Summaries
+            Boxplots
+            Takt Time Analysis
+            
+    //Steps
+        #Create Process flow diagram - Production Line
+            Chassis Assy > Fit Body > Paint > Fit Engine > Fit Accessories > Fit Electronics > Quality > Export
+            Run the line and understand the process
+                Observed bottle neck: Between the Chassis Assy and Fit Body
+                Observed underutilized stations: Fit Electronics, Quality and Export 
+                Take the timing of every station
+                
+        #Baseline process capability
+            Find out current efficiency (Includes Flow time, waste output, workload balance)
+            What are the defect categories
+            What is the current output using historical patterns and stability
+            Example Table: 
+            |   Efficiency         |  Flow: 8 process steps
+            |                      |  Wastes: Waiting between operations Chassis assembly and Fit body
+            |                      |  Waiting between Fit Body and Paint Operation
+            |                      |  Workload Balance: Bottle Neck observed between Chassis Assy, Fit Body and Paint Ops
+            | Defect Categories    |  No current manufacturing defects
+            | Current Output       |  2 cars/hour. Stability lasts 5 hours
+
+        #Workload Balance Diagram:
+            Record the time of each inindividual manufacturing steps
+            Create a bar chart and a table
+            Then create a Pareto Chart
+            
+        #Pareto Chart
+            The bars will shuffle according to ascending order, from the highest time taken to the lowest
+            The dots indicating over the bars indicate the importance in percentage
+            For this example, Paint and Fit Assy indicates 50% contribution to the time wastage
+            
+    //Charts that you should have in Measure stage:
+        Bar Chart
+        Process Flow Diagram
+        Spaghetti Diagram
+        Pareto Chart
+
+
+///////////////////////////////////////////////////////////////////////////////////
+04. Analyze Phase
+    //Objective:
+        Understand the root cause of the process problems
+        Eliminate:
+            Gap difference between current level and desired level of performance
+            Wastes
+            Non Value Added Activities
+        Methods:
+            Elimination: Flow concepts and Pull Systems to eliminate waste
+            Root Cause: RCA, Cause and Effect Analysis, 5 Why's
+            Evaluation: Scatter Plots, Correlation and Regression Studies, ANOVA
+
+    //Value Added/Non Value Added/Business Value Added
+        Value Added: Activities that directly contributes to stisfy the customer (Time, Quality)
+        Non Value Added: Things that customers will not be happy to pay for
+        Business value added: Activities that customers will not be happy to pay for but are required legally (ISO Standards, Audits, International regulations)
+
+    //Calculate Takt Time (Desired Time)
+        Find out the desired output value (Example: 4 car every hour)
+        Takt Time = Time(seconds)/Demand = 3600/4 = 1 car every 900 seconds
+        
+    //Measure Current Work Load (Work Load)
+        Current Time:
+            Find out how much time in total taken for 1 output 
+            Record the time for each process step and each sub process step in the operation
+            
+        Create Bar Chart with Minitab:
+            Menu > Graph > Bar Chart > 
+                Bar Represents (Dropdown Menu): Values from Table
+                    Simple > 
+                        Graph Variables: Time Taken (Vertical Axis)
+                        Categorical variable: Process Steps (Horizontal Axis)
+            Add Reference Lines:
+                Rigth Click on Graph > Add > Reference Line
+                    Show Ref. lines at Y: 900 seconds (Takt Time)
+            Change Color of the bars above the ref. line
+                Right Click on the bar > Edit bars > Attributes Tab > Fill pattern: Custom >
+                    Background Color: Select any color
+                    
+        Now we'll see the Fit Body, Paint and Fit Engine Operations are above this 900sec reference line
+        Split the identified operations into its sub processes and update the main Pareto Chart
+            Identify Operation > Split into subprocesses > Categoize subprocesses and Update main Pareto > RCA
+
+    //Fit Body Operation (Identify Operation > Split operation into subprocesses > Categoize subprocesses and Update main Pareto)
+        Under this operation, there are 13 sub processes
+        The total time taken for the entire operation is about 32 min but we have to subdivide the total time to 13 subprocesses
+        For the 13 sub processes, group them into categories and we'll find Body Frame, Roof and Doors
+            Body Frame: 1256 seconds
+            Roof: 276 seconds
+            Doors: 388 seconds
+        From here, we create another bar chart again and add the Takt Time reference line
+        Find the bar that is over this reference line (900second) and you'll get the body frame
+        From here, we'll create another time table for the sub processes under the bodyframe category with another bar chart
+            Body Shell: 190s
+            Hood: 123
+            Trunk: 138
+            Bumpers: 289
+            Bottom Trim: 132
+            252: Arches
+            Vent: 130
+        Now you can remove the Fit Body Operation from the main Pareto Chart and update it with Fit Body SubProcesses
+        The the same with other Operations that exceeded the 900s thershold
+
+    //RCA Steps
+        Find out the slow subprocesses from the Pareto
+        Cause & Effect, 5 Whys, Fishbone
+        Here we found out the Chassis Assy, Drying undercoat, Dry Finish, Fit Accessories are the subprocesses that are slow processes
+        Example: Multiple slow operations are executd in Paint, fitbody and fit engine operations
+
+///////////////////////////////////////////////////////////////////////////////////
+05. Improve Phase
+
+
+
+
+
+
+
+
+
+
+
