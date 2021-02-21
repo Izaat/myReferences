@@ -285,6 +285,28 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////
 05. Improve Phase
+    #Optimize the solutions
+    #Implement a pilot system
+    #Evaluate risks
+    #Mistake proofing the new process
+
+    #Create: 
+        FMEA
+        Visual Process Control 
+        Action plan and Execution
+    
+    #Requirements
+        Defined Ideal future goal set in Defined Phase (4 cars per hour)
+        Process Flow Map (Spaghetti Map and Process Flow chart)
+        Balance Chart (Bar Chart with subprocess break downs)
+        Re-balance Line study with proposed work stations
+
+    #Mistake Proofing
+        To avoid mistakes from happening when the new process being implemented, we'll use FMEA
+        FMEA - General Use
+        PFMEA - Process FMEA (Manufacturing)
+        DFMEA - Design FMEA (R&D)
+            RPN = S*O || S*O*D
 
 
 
