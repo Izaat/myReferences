@@ -659,6 +659,60 @@ CONTENTS
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////
+    //Texturing
+        In Main Menu > Open "Texturing Paint Tab"
+            Under Texture Paint Mode, Open "Active Tool and Settings" Properties Tab in Right hand Side Properties panel 
+            In Texture Slots section, add Texture, Select Base Color
+                Name: Base Color
+                Alpha: OFF
+                Width: 2048 (1024*2)
+                Height: 2048 (Drag down from Width)
+                Color: Red
+                Press OK
+        In Left Hand Viewport, drag down another viewport, 
+            Hover mouse to top right hand corner of viewport until crossair appears and drag downwards
+            Left hand corner, select Editor Type to Shader Editor
+            Press N to get rid of toolbar
+            Rename Material.001 to Deadpool Shader
+        Linking Materials
+            In 3D viewport, Change Texture Paint Mode to Object Mode
+            Press CTRL+L and select Materials
+            Change Viewport Shading Display (Top Right Corner Toolbar) to Material Mode
+        In Top Right Hand Panel (Above Properties Panel), Change view from Tree view (Data > Outliner) to (General > Image Editor)
+            Next to New Button, open dropdown menu, select the funkopop reference image
+            Enable Pin (Top right Hand corner pin icon)
+        In 3D viewport, Change to Texture Paint Mode
+            #This opens up the color in the lower left hand panel. Change Brush to Fill
+            #This will change to Fill Properties Tab in the Properties Tab Panel
+                Scroll down to Color Picker
+                Click on the colour bar below the color palette circle
+                Use eyedropper to select the color in the reference image
+                Save Color palette (Color Palette > New Palette > Click on "+")
+                Add Black to the Palette
+        Coloring
+            Main Menu > Edit > Switch off "Lock Object Mode"
+            In 3D viewport > Texture Mode > ALT + Left Click on Object
+            OR
+            Go back and Forth Object Mode andTexture Mode to apply color
+        Adjusting Color Glitches
+            In Texture Painting Tab, Go to Object Mode
+            Select the object with the color glitch
+            Enter Texture Mode
+            In the 2D map Panel (Lower Left hand panel), select brush 
+            You will see the activated geometry on the map referencing the object you've chosen
+            Press F to resize the brush
+            Choose the color on Right Hand Panel Color Palette
+            Brush over the highlighted geometries on the 2D map panel
+        Add mirror for coloring
+            In Texture Paint Tab, enter Object mode in the 3D viewport
+            Open Modifier Properties Tab 
+            Add Mirror modifier
+                Axis: X-Axis
+                Bisect: X-Axis
+            Select object, enter Texture Paint mode and paint
+            
+
+    /////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
