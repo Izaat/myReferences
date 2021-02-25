@@ -15,6 +15,7 @@ CONTENTS
        Unwrapping/Flatten Objects
        Texturing
        Swords and Eyelids
+       Rigging
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Interface
@@ -714,7 +715,33 @@ CONTENTS
                 Axis: X-Axis
                 Bisect: X-Axis
             Select object, enter Texture Paint mode and paint
-            
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    //Swords and Eyelids
+        #Sword
+            In Object mode, add Mesh > Cube
+            Scale down cube size to about the size for the hand grip size
+            Add Modifier > Subdivision
+            Enter edit mode
+            Select the top face and extrude in upwards in Z axis, height should be about the width of hands
+            Add edge loops near the 2 end faces of the objects
+            Select the end face and scale up to make the sword's hand guard
+            Flatten and Color the sword
+            Duplicate
+        #Eyelide
+            Duplicate eye sphere
+            Increase the sphere size to encase over the white eyeballs
+            Delete sphere face into half vertically
+            Press U to unwrap and enter UV Spehere Tab to align in Base color
+            Enter Texture Painting Tab and color the eyelid to black
+            Add mirror modifier and set head as mirrir object (If required)
+
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    //Rigging
+
+
+
 
     /////////////////////////////////////////////////////////////////////////////////////////////
 
