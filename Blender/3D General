@@ -739,6 +739,48 @@ CONTENTS
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     //Rigging
+        In Object Mode, select body
+        Shift+A to add Armature > Human (Meta-Rig)
+        If there is no Rigify, 
+            Edit > Preferences > Add Ons > Rigify > Make sure Rigify is ticked
+        View to Armature to Front of object
+            Object Data Properties Tab > Viewport display > Enable "In-Front"
+        Select Armature and enter edit mode
+        Apply mirror
+            At the top right hand corner of the viewport next to mirror icon, click on "X" (Apply mirror)
+        Reposition the bones (All bones have been linked to parents)
+        Delete Ear bones and Bones for the face (includes the parent face bone inside another bone)
+            Press H to hide the bigger bone
+        Use Spine06 as the head, the bottom tip rest on the neck
+        Spine04 and Spine05 will be the neck    
+        Shoulder bone will take place of collarbones
+        Breast bone will take place of nipples/chest
+        Pelvis bone will be the hip bone 
+            Top pelvis bone joint is where the leg joints meet
+            Bottom pelvis bone will be the crotch
+        Spine00/MainSpine bone will be the bone for cratch to waist
+        Spine01 to 03 will be the backbone to the neck
+        The heel bones will be the width of the heels
+        
+        In Object Mode, select the bone right
+        Open Object Data Properties > Rigify Buttons > Generate Rig
+        Check for errors
+            Timeline Panel > Top left corner > Script Info
+        
+        After generating the Rig, hide the bones
+            Select the bones and press M > Collection > New Collection > Name to "Bone Spares"
+            Metarig will be moved to the collection
+            Hide the collection
+
+        In Object Mode, select the everything except the eyelids, the eyes and the swords
+        Select object and select the rigs last (The rig must be the last thing being selected))
+        CTRL+P
+        Armature Deform > With Automatic Weights
+        Enter Pose Mode
+        Object Data Properties Tab > Viewport Display > Enable "In front"
+        Flat face rigs = Grab
+        Arrow = Rotation
+        Fingers = Scale
 
 
 
