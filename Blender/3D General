@@ -16,6 +16,7 @@ CONTENTS
        Texturing
        Swords and Eyelids
        Rigging
+       Eye and eyelids Rigging
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Interface
@@ -783,9 +784,52 @@ CONTENTS
         Fingers = Scale
 
 
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    //Eye and Eyelids Rigging
+        //Eyes
+            In Object Mode, select the Eye (Not eyelids)        
+            Disable Lock Object Modes
+                Main Menu > Edit > Lock Object Modes
+            Hide Eyelids
+            Select rig
+            Open Object Data Properties Tab
+                Layers: SHIFT+Click the armature, 2nd row, 14th column
+            In Object mode, select the eye and shift select the armature
+            Go to Pose Mode
+            Select Head Bone
+            CTRL+P > Select Bone
+                NOTE: If mirror is being used on the object, it may cause mirroring instead of parenting
+                NOTE: Use a Marker to solve
+            Create marker
+                In Object mode, select object
+                Shift+S > select "Cursor to Selected"
+                Add Empty > Plain Axes
+                Go to wireframe mode and enable transparency
+                From side view, reposition Plain Axes to the middle of the eye
+                With the "Plain Axis" selected, Shift select Rig
+                Select Head Bone and CTRL + P > Select Bone            
+            In Collection Panel, Open rig tree, Select Eye layer
+            Open Modifier Properties Tab        
+            Under Mirror Modifier > remove Mirror Object
+            Use eyedropper and choose the "Plain Axes"
+        //Eyelids
+            Do the same method as the eyes
+            Once the eyelids parented to the "Plain Axes", setup rotaional contraints
+            In Object mode, select Eyelid, open Object Constraint Properties Tab
+            Add Constraint > Select Copy Rotation (Transform Column)
+                Target: Use eyedropper to select "Plain Axes"
+                Now when you select "Plain Axes" and rotate, the eyelids will rotate together
+            IMPORTANT NOTE: 
+                To rotate the Plain Axes, Press X twice (to choose local axis). 
+                This is for when the head is not aligned to the world axis
+                
+                
+
+
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 
