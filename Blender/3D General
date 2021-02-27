@@ -16,7 +16,7 @@ CONTENTS
        Texturing
        Swords and Eyelids
        Rigging
-       Eye and eyelids Rigging
+       Eyes, Eyelids, Swords Rigging and Rigging Corrections
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Interface
@@ -785,7 +785,8 @@ CONTENTS
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////
-    //Eye and Eyelids Rigging
+    //Eyes, Eyelids, Swords Rigging and Rigging Corrections
+    
         //Eyes
             In Object Mode, select the Eye (Not eyelids)        
             Disable Lock Object Modes
@@ -812,6 +813,7 @@ CONTENTS
             Open Modifier Properties Tab        
             Under Mirror Modifier > remove Mirror Object
             Use eyedropper and choose the "Plain Axes"
+            
         //Eyelids
             Do the same method as the eyes
             Once the eyelids parented to the "Plain Axes", setup rotaional contraints
@@ -822,7 +824,28 @@ CONTENTS
             IMPORTANT NOTE: 
                 To rotate the Plain Axes, Press X twice (to choose local axis). 
                 This is for when the head is not aligned to the world axis
-                
+
+        //In the case Rigging Correction has to be made:
+            Make Object Transparent
+            Hide the existing Rig
+            In Collection Panel, make "Bone Rig Spare" Collection visible 
+            Select the Bone rig and enter Edit Mode
+            Adjust the bones
+            Open Object Mode 
+            Unhide the Existing Bone Rig
+            Open Object Data properties tab
+            In Rigify Button section > Advanced Options > Ensure "Overwrite" is enabled 
+            Generate Rig
+            In collection, Hide the Bone Spares collection
+
+        //Sword Rigging
+            In Object Data Properties Tab > Skeleton > Layers > Shift+Select the 14th column to make the skeleton visible
+            Adjust the skeleton accordingly
+            In Object Mode, Highlight the sword, and then Shift Select the Rig
+            Enter Pose Mode, Shift select the Hand Bone
+            CTRL+P > Select Bone
+
+
                 
 
 
