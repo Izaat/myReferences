@@ -846,6 +846,44 @@ CONTENTS
             CTRL+P > Select Bone
 
 
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    //Weight Painting
+        Weight painting is to correct distortions while moving the character
+        Unhide the rig
+        In Object Mode, Select the head and go to weight paint mode
+        Change 3D viewport view to Solid mode view
+        In Weight mode, Shift Click on the rig and this will automatically bring to ObjectMode
+        Enter Pose Mode
+        From Collection Panel, under rig collection, select the object
+        CTRL+Left Click on the bone to see the influence of the bone to the object (Blue means good)
+        
+        Undo All Selections
+            Go to Object Mode
+            ALT+A
+
+        In Object Mode, Highlight the Rig and go to Pose mode
+        Make sure the Lock Objects Mode is OFF
+            Main Menu > Edit > Lock Objects Mode
+        In Collection Panel > rig layer > click on object layer
+        Enter weight Painting Mode
+        In Properties Panel, open Active Tools and Workspace Settings Tab (Good for touching up and adjustments)
+            Brush Settings sections, set Weight to 1 and enable the brush icon
+            Resize brush and paint over the object
+            Once Done, CTRL+Left click on head rig controller
+            Head wont be warping like before (but to a certain degree)
+                This is because another bone is influencing on the object 
+                To solve this, activate "Auto normalize"
+        In Properties Panel, open Active Tools and Workspace Settings Tab
+            Options section > enable Auto Normalize
+
+        Removing influence of an object from another object (Moving hand and it warps the foot)
+            Select the affected object in object mode
+            ALT+P > Remove parent   
+            NOTE: But the object must have a new parent.
+        Removing a group of parent bones of an object
+            In object mode, select theobject
+            Open Object Data Properties Tab
+                Under Vertex Groups section, remove all bones, leaving the bone you want the object to parent to 
                 
 
 
