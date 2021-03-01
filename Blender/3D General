@@ -18,6 +18,7 @@ CONTENTS
        Rigging
        Eyes, Eyelids, Swords Rigging and Rigging Corrections
        Weight Painting
+       Animation
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Interface
@@ -888,7 +889,21 @@ CONTENTS
                 Under Vertex Groups section, remove all bones, leaving the bone you want the object to parent to 
                 
 
-
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    //Animation
+        In Main Menu, Open Animation Workspace
+        Add Mesh > Plane
+        In Camera Panel, Open hidden menu > Open View Tab
+            View Lock Section > Enable Lock Camera to View
+        In 3D viewport, select Rig and enter pose mode
+        In Timeline panel, Change end frame to 50
+        Timeline marker should be at the start of the frame
+        In 3D viewport, Pose the object - Use the IK controls to pose (The one with lines)
+        Add Keyframe to the first frame
+            Select all rig, and Press I
+            Select LocRot
+            Press A to view all keyframes mode
+        Export Animation
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////
