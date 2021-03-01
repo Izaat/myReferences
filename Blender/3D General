@@ -38,6 +38,7 @@ CONTENTS
     Shift-A to add object
             Objects will be added where the 3D cursor is sitting
     Shift+RightClick to reposition 3D cursor
+    Shift+S - 3D cursor reposition menu
     Shift+D - Duplicate
     Editor Panel (Right Hand Side Panel) > Render Properties Tab (Camera Icon)
             Eevee Render - Realtime render, this needs to fake alot of things
