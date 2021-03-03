@@ -19,6 +19,7 @@ CONTENTS
        Eyes, Eyelids, Swords Rigging and Rigging Corrections
        Weight Painting
        Animation
+11 - Hair Creation       
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Interface
@@ -905,8 +906,35 @@ CONTENTS
             Press A to view all keyframes mode
         Export Animation
 
-
-    /////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+11. Hair Creation
+    Hair
+        In Object Mode, add UV Sphere 
+           Add > Mesh > UV Sphere
+        Open Particles Properties Tab > Add Particle System
+            Select Hair
+            Enable "Advanced"
+            Emission:
+                Number: 1500
+                Seed: 0
+                Length: 1m
+                Segments: 5 (The lower the number, the stiffer the hair)
+                    3 for fur, 6 for male hair, 12 for ladies hair
+            Hair Dynamics: ON
+            Press Play
+    Hair Physics (To avoid hair from falling through another hair strand) - Thickness
+        Open Physics Properties Tab
+        Select Collision
+    Rotating the object in animation
+        Hidden Menu > Item Tab > Rotation:
+            Y: Type in "#frame/10"
+            
+            
+            
+            
+            
+            
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
