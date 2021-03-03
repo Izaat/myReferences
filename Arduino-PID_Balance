@@ -228,12 +228,11 @@ The maximum value that could substracted is 1000
 And with a value of 1000us for the PWM signal, the maximum value that can be added is 1000 to reach the maximum of 2000us
 */
 
-if(PID < -1000)
-{
+if(PID < -1000){
   PID=-1000;
 }
-if(PID > 1000)
-{
+
+if(PID > 1000){
   PID=1000;
 }
 
@@ -249,21 +248,20 @@ that will mess up the ESC. The reason to map again.
 */
 
 //Right
-if(pwmRight < 1000)
-{
+if(pwmRight < 1000){
   pwmRight= 1000;
 }
-if(pwmRight > 2000)
-{
+
+if(pwmRight > 2000){
   pwmRight=2000;
 }
+
 //Left
-if(pwmLeft < 1000)
-{
+if(pwmLeft < 1000){
   pwmLeft= 1000;
 }
-if(pwmLeft > 2000)
-{
+
+if(pwmLeft > 2000){
   pwmLeft=2000;
 }
 
