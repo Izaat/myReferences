@@ -859,7 +859,10 @@ CONTENTS
         In Weight mode, Shift Click on the rig and this will automatically bring to ObjectMode
         Enter Pose Mode
         From Collection Panel, under rig collection, select the object
-        CTRL+Left Click on the bone to see the influence of the bone to the object (Blue means good)
+        CTRL+Left Click on the bone to see the influence of the bone to the object
+            Blue = No influence from the bone
+            Green = Partial influence from bone
+            Red = Full influence from bone
         
         Undo All Selections
             Go to Object Mode
