@@ -19,7 +19,8 @@ CONTENTS
        Eyes, Eyelids, Swords Rigging and Rigging Corrections
        Weight Painting
        Animation
-11 - Hair Creation       
+11 - Hair Creation
+12 - Explosion Effects
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Interface
@@ -933,7 +934,86 @@ CONTENTS
             Y: Type in "#frame/10"
             
             
-            
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+12. Explosion Effects
+    
+    Add Plane
+        In Object Mode, add Mesh > Plane
+        Physics Properties Tab > Add Collision
+            Damping: 0.8
+            Randomize: 0.3
+            Friction: 0.8
+            Randomize: 0.3
+        Resize    
+    Chang End Frame to 50
+    Add Iconosphere
+        In Object Mode, add Mesh > Iconosphere
+        Scale down and reposition to above plane
+        Particle Properties Tab > Add Particles > Emitter
+            Emission >
+                Frame Start: 10
+                End Frame: 15
+                Lifetime: 5
+            Velocity >
+                Normal: 6 m/s
+                Randomize: 6
+    Add another plane (Plane2) above the first iconosphere
+        Particle Properties Tab > Add Particle
+            Emission:
+                Frame Start: 10
+                End: 14
+                Lifetime: 7
+            Velocity >
+                Normal: 8 m/s
+                Randomize: 3
+    Duplicate Plane2 and this will be Plane3
+    Rotate both Plane 2 and 3 90 degree and reposition them at the side of the sphere
+    
+    Add Smoke
+        In Object Mode, Highlight the Iconosphere
+        Click the Object Button (Next to Add Button)
+            Object > Quick Effects > Quick Smoke
+        Move the box to above plane
+        Press Period (.) and select 3D Cursor
+        Rescale and Resize (Press Shift + C to reposition the 3D Cursor to World Coordinate)
+        Smoke Domain Layer:
+            Physics Properties Tab
+                Fluid:
+                    Type: Domain
+                    Domain Type: Gas
+                    Resolution: 64
+                Adaptive Domain: Enabled
+                Gas:
+                    Vorticity: 0.1
+                Cache: -- 
+                    #Change the diretory since the folder will be very big
+                    #Delete this directory after simulation
+                    End Frame: 100
+                    Type: Modular
+                Press Spacebar
+        In Object mode, select the Sphere, Open Physics Properties Tab
+            Fluid Type: Flow
+            Flow Type: Fire + Smoke
+            Flow Behavior: Inflow
+            Flow Source:
+                Flow Source: Particle System
+                Particle System: Particle Settings                
+            Initial Velocity: Enabled
+        In Object mode, select Plane2/3, Open Physics Properties Tab and Add Fluid 
+            Fluid Type: Flow
+            Flow Type: Fire + Smoke
+            Flow Behavior: Inflow
+            Flow Source:
+                Flow Source: Particle System
+                Particle System: Particle Settings
+            Initial Velocity: Enabled
+        In Collection Panel, Select Smoke Domain
+            Settings > Bake Data
+            Press ESC when timeline hits 80
+            Hit Spacebar to Play
+    Add Cube and resize into a plane
+        Physics Properties Tab > Add Fluid
+        Type: Effector            
             
             
             
