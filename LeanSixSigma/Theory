@@ -1,0 +1,820 @@
+///////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01. Overview
+    6sigma and Organizational Goals
+    Lean Principles
+    Design for 6sigma
+02. Define Phase
+    Project Identification
+    Customer
+    Project Management Basics
+    Management and Planning Tools
+    Business Results for Projects
+    Team Dynamics and Performance
+03. Measure Phase
+    Process Analysis and Documentation
+    Probability and Statistics
+    Statistical Distribution
+    Collecting and Summarizing Data
+    Measurement System Analysis
+04. Analysis Phase
+    Exploratory Data Analysis
+    Hypothesis Testing
+05. Improve Phase
+    Designof Experiments
+    Root Cause Analysis
+    Lean Tools
+06. Control
+    Statistical Process Control
+    Control Planning
+    Lean Tools for Process Control
+
+
+///////////////////////////////////////////////////////////////////////////////////
+01. Overview
+    
+    /////////////////////////////////////////////////////
+    #6sigma and Organizational Goals
+        Process:    Input (x) / Cause  >   Process f(x)    > Output(y) / Effect
+        Any change in input causes change in the output [ y=f(x) ]
+        Uses DMAIC method of problem solving
+        Increases customer satisfaction
+        Increases Quality of product and services
+        Requires statistical methods
+    
+    /////////////////////////////////////////////////////
+    #Organizational Benefits
+        Eliminates root cause of problems and defects in a process
+        Creates robust products and services 
+        Reduces wastes and process variations
+        Ensures customer satisfaction
+        Provides process standardization
+        Reduces rework by getting right first time
+        Addresses key business requirement
+        Gain competitive advantage
+
+        #Quality    
+            The degree of excellence of a product or service and conformance to customer requirement
+            ISO9000
+
+        #Business System
+            Six Sigma improves the system by continuously removing defets in process and sustaining the changes
+            To implement a process or a set of processes
+            It ensures process inputs are at the right place and at the right time so eah process has required resources
+            Collects and Analyzes data to ensure improvement of processes, products and services
+            
+        #The 5 levels of Six Sigma Team
+            Top Executives: 
+                Lead change and provide direction
+                Owns the Six Sigma initiatives
+            Champions:
+                Identify and scope projects, and develop strategy
+                Supports cultural change
+                Identify and coach Master Black Belts
+                3-4 Master Black Belts work under every champion
+            Master Black Belts:
+                Train and coach Blak Belts, Green Belts and various functional leaders
+                3-4 Black Belts work under every Master Black Belts
+            Black Belts:
+                Applies strategies to specific projects
+                Lead and direct teams to execute projects
+            Green Belts:
+                Supports the Black Belts by working on the project
+                Dual role with performing designated day-to-day jobs
+
+        #Organizational Drivers and Metrics
+            Balanced Scorecard (BSC) offers strategic implementation and performance measurement
+            BSC translates organizational strategy into actionable objectives
+            BSC provides a framework for performance measurement
+
+        #Balanced Scorecard:
+            Helps clarify organizational vision and mission
+            Provides feedback on business processes and external outcomes
+            Enables continuous improvement with respect to organizational goals
+            Integrates organizational strategy with key metrics from 4 major areas of performance (Four Box Model)
+                Finance, 
+                Customer Relations, 
+                Internal Processes 
+                Learning and growing
+
+        #Developing BSC:
+            Interactions between perspectives or business units have to onsidered to prevent uneven optimization.
+                Strategic Objectives: 3 or 4 objectives have to be agreed upon >
+                Measures to access progress (Should be closely related to performance drivers) >
+                Targets for each measure > 
+                Initiatives requires to achieve each target
+
+        #Four box Model of BSC  
+            Financial > Learning & Growth > Internal Processes > Customer > Repeat
+
+        #Strategy Maps
+            A chain of cause and effect relationships between the perspectives are represented by interlinked objectives in strategy map
+            A one page view of how the organization can create value
+            Function is to outline what the organization wants to accomplish and how it plans to accomplish
+
+            Example Table:
+            # Financial        | Lower cost     >  Increase Profitability   <     Increase Revenue
+            #                  |      ^                                                 ^
+            # Customer         |      ^            Lower wait Time          >     Improve Customer Retention
+            #                  |      ^                                                 ^
+            # Internal Process | Increase Process Efficiency                >     Lower Cycle Time
+            #                  |      ^
+            # Learn & Growth   |  Improve Knowledge, Tools and Technology
+
+        #Impact on Organization
+            BSC and strategy map forces managers to consider cause and effect relationships leading to >
+                Better identification of drivers
+                Well rounded approach to strategic planning
+            BSC improves:
+                Communications and understandings at all levels of organization
+                Quality of decision making by managing information
+                Structured approach to reporting progress by creating performance reports against a balanced scorecard
+                Enables organization to communicate performance transparently and meaningfully
+                BSCs can be cascaded into each business unit enabling direction to work towards the common organizational goal
+
+    /////////////////////////////////////////////////////
+    #Lean Principles
+        #The 3 Focuses
+            Muda: Non-value added work
+            Mura: UnevennessVariations
+            Muri: Overburden
+
+        #Muda - The 7 types of Wastes
+            Transport
+            Inventory
+            Motion
+            People: 
+            Waiting            
+            Overprocessing
+            Overproduction            
+            Defects/Repairs/Rejects
+            
+            Other wastes:
+                Underutilization of skills and manpower
+                    Not assigning right people for the right task
+                    Below optimum use of workforce capabilities
+                Underperforming processes
+                    Automation of poorly performing processes
+                    Improving a process that should be eliminated
+                    Asymmetry in processes that should be eliminated
+
+        #Lean Process Steps:
+            Identify what customers wants
+            Understand what the process should have to meet customer requirements
+
+        #Pull vs Push Process
+            Push Method (Pharmacy)
+                Forecast demand
+                Build stock
+                Wait for customers to buy
+            Pull Method (Tesla Motors)
+                Get customer demand
+                Start production
+                Deliver to customer
+
+        #Theory of Constraints
+            Question:
+                The 3 subprocess of packing process: Print > Filling > Sealing
+                Data for 3 subprocesses measured and collected as number of units produced per hour
+                    Print: 900 pc/hr
+                    Fill: 720 pc/hr
+                    Seal: 780 pc/hr
+                How to implement TOC Method?
+                
+            Answer:
+                TOC Map: 5 steps pie
+                    Step 1: Filling is the constraint since it's the lowest number
+                    Step 2: Performance of constaint is then analyzed by data 
+                        Assigning repair and maintenance labor force monitor
+                    Step 3: Carry out the maintenance of filling machine
+                    Step 4: Remove defects from filling machine
+                    Step 5: Repeat to step one and identify system constraint
+
+                Before TOC
+                    Print: 900 pc/hr
+                    Fill : 720 pc/hr
+                    Seal : 780 pc/hr
+                    
+                After TOC
+                    Print: 900 pc/hr
+                    Fill : 840 pc/hr
+                    Seal : 780 pc/hr
+
+    /////////////////////////////////////////////////////
+    #Design For Six Sigma (DFSS)
+        For introducing a new product/category/service OR
+        For redesigning the existing process for product/category/service
+        Ensures that new product meets customer requirements
+        Ensures the process for the new product is at 6sigma levels
+        Uses tools such as QFD and FMEA
+
+        #The 2 major Process for DFSS
+            IDOV:
+                Identify:
+                    Identify customer needs to design the product/service
+                Design
+                    Design alternative concepts by identifying functional requirements
+                    Select best fit and predict sigma capability
+                    FMEA
+                Optimize
+                    Calculate tolerance using statistics
+                    Helps in developing detailed design elements
+                    Predict performances
+                Verify
+                    Testing, validating and hek conformance to standards
+            DMADV
+                Define
+                    Define customer requirements and goals for the process/product/service
+                Measure
+                    Measure performance to customer requirements
+                Analyze
+                    Analyze the design for the process/process/product/service
+                Design
+                    Design and implement new process
+                Verify
+                    Verify results and maintain performance
+
+        #IDOV VS DMADV
+            IDOV
+                Used for designing new product/service
+                Design new process
+            DMADV
+                Used for designing new or existing product/service
+                Redesign existing process
+
+        #QFD (Quality Function Deployment) / VOC (Voice of Customer) / HOQ (House of Quality)
+            A predefined method of identifyingcustomerrequirements
+            A systematic process to understand the needs of customer and convert them into a set of design and manufactureing requirements
+            Motivates businesses to focus on customers 
+            Helps design products that are competitive in lesser time and cost
+            Identifies which customer's needs are the most important
+            Identifies strangths and weaknesses of the system
+            
+            Necessary to ask customers relevant questions and tabulate a set of parameters critical to the product design as data
+            Required to understand the effects of failures to ensure preventive actions are taken to be able to answer to the customer
+        
+        #FMEA
+            Helps focus attention on critical areas in a system
+            Drawbacks of FMEA is that it does not give solutions to the identified problem
+            Applied on the output of root cause analysis
+            Tool for focus or prioritization
+            
+            #PFMEA
+                Used onnew orexisting process to uncover potential failures
+                Done in the quality planning phase to act as an aid during production
+                Involves fabrication, assembly, transactions or services
+                
+            #DFMEA
+                Used in design of a new product to uncover potential failures
+                Aimed at identifying failures and reduce them
+                Done before product is sent to manufacturing
+                All design deficiencies would be resolved at the end of this process
+
+            #RPN (Risk priority Number)
+                The higher the number, the higher the criticality
+                RPN = Severity x Occurences x Detectability
+                Max value = 1000
+                
+            #Severity
+                How severe the failure is to the customer
+
+            #Occurence 
+                The probability that a cause will result in the particular failure mode
+
+            #Detection
+                The probability that a particular symptom to failure will be found 
+                Max value = 10 = Undetectable/Uncertainty
+
+///////////////////////////////////////////////////////////////////////////////////
+02. Define Phase
+
+    /////////////////////////////////////////////////////
+    #Project Identification
+        #Prerequisites of a project
+            01. Is there an existing process
+            02. Is there a problem in the process
+            03. Is the problem measureable: 
+                This is needed since data is needed to assess the root cause
+                And the impact of the problem
+            04. Does the problem impact customer satisfaction
+            05. Does working on the problem impact the profits of the company
+            06. Is the root cause of the problem unknown
+                IF the root cause is visible, it is not required to do a six sigma project
+            07. Is the solution unknown
+                If the solution is know, there is no need for the project
+
+        #Define Phase Objectives
+            Define problem statement through customer Analysis
+            Define the objectives of the Project
+            Plan time, budget and resource requirements for the project
+            Define roles and responsibilities in the team structure
+
+        #Benchmarking
+            A process of comparing an organization's business processes, practices and performance metrics with industry leaders
+            Types of benchmarking
+                Process benchmark: Compare with a leading company
+                Financial benchmark: Detailed financial analysis and compare on overall competitiveness and produtivity
+                Performance benchmark: Compare products and services with the competitors
+                Product benchmark: Designing new or upgrading existing product/services. Involves reverse engineering of their products.
+                Strategic benchmark: Studying strategies and problem solving approaches in other industries
+                Functional benchmark: Focused analysis of a single function with the aim of improving it
+                Competitive benchmark: Standardizing organizational strategies, process, products, services, procedures with competitors
+                Collaborative benchmark: Standards carried out by a group of companies where information is shared
+            Best Practices
+                A method that ensures continuous improvement, leading to exceptional performance
+                Increase the objectives or scope of benchmarking
+                Set standards and path to be followed at the initial stage
+                Reduce unnecessary effort and comply with scope
+                Recognize the best in the industry to set a benchmark
+                Share the information derived from benchmarking
+
+            Business System > Business Process > Process
+                Business System:
+                    Value added chain of various business processes
+                    Example: The company
+                Business Process:
+                    Systematic organization of objects into work activities to produce service/product
+                    The manufacturing department under a company
+                Process:
+                    Series of steps to produce a service or product
+                    Consists of input, process, and output
+                    Manufacturing Cell Team under the manufacturing department 
+
+            Challenges of Business Process Improvement
+                The traditional business system structure causes challenges on business process improvement
+                Product or service has to go through various functions and their functional elements to reach the customer
+                Management of the flow of products or services across various functional elements is difficult
+
+            Hierarchy:
+                Process Owner > Stakeholder > 
+                    Stockholders
+                    Customers
+                    Suppliers
+                    Management
+                    Employees
+                    Society
+                    
+                Process Owner   
+                    Responsible for the performance and execution of the process
+                
+                Stakeholder:
+                    People who are affected by the organization's actions
+
+            Effects of Process Failure on Stakeholders
+                Failure to meet one or more process objectives results in negative effects on stakeholders
+                Stockholders:   Reduction in perceived value for the company
+                Customers:      May seek competitor's product and find legal recourse
+                Suppliers:         May face delay in receiving their pay or non-payment issues
+                Management:  May require cost cut-down
+                Employees:      Will receive diminishing wages
+                Society:            May experience pollution due to the organization
+
+            Stakeholder Analysis
+                An important task to be completed before doing a Six Sigma project
+                A business has many stakeholders and anny change to a business process affects some or all of them
+                When a process does not meet its objectives, it results in a stakeholders being negatively affected, 
+                    which in turn impacts the organization's performance
+                The Six Sigma team must factor in the reasons why a stakeholder may oppose the change effort
+
+    /////////////////////////////////////////////////////
+    #Customers: 2 types of customers
+        Internal
+        External
+        
+        Internal Customers
+            Anyone within the business system who is affected by the product or services while it is being developed
+            Activities that directly impact final customers
+            Activities that directly affect the next process in the system
+            Activities that affects the quality of the end product
+
+        Collecting customer data/feedback
+            Data/Feedbacks is collected from internal and external customers
+            It fills the gaps and improve the various business processes in the organization
+            Helps to define a good quality product as perceived by the customer
+            Identifies what qualities make the competitior's products or service better
+            Identifies the factors that provide a competitive edge to the product or service
+            
+            Method:
+                Surveys
+                Focus Groups
+                Individual interviews
+                Direct feedback (emails, forms, call centre data, etc)
+
+            Feedback table example 
+            Factors             |   Weightage       |   Surveys     |   Web Surveys         |   Interview
+            Lead data           |   6               |   8           |   8                   |   2
+            Cost                |   20              |   7           |   8                   |   2
+            Features            |   15              |   6           |   8                   |   1
+            TOTAL               |   100             |   278         |   328
+            (To use the full list below)
+            
+            Each row will be rated between 1-10
+            10 is the most important
+            0 is used when the feature is not required (Example: Visual feature is not required for telephone surveys)
+            Adding up the column:   Sum of [Column*Weightage] 
+            Survey Total Value: (8 * 6) + (7*20) + (6*15) = 278
+            Do the same on every column
+            The column with the highest value will the best method to be used for data collection
+            
+            Factors List:
+                Respondents availibility
+                Lead Data
+                Cost involved
+                Time consumption (Org perspective)
+                Availability of time from customer (for survey)
+                Response rate of the customer
+                Judging the quality of data
+                Clarification
+                Visualizing feature
+                Compiling and analyzing data
+                Resource requirement
+                Preparation time
+                Accessibility to customer
+
+        Product Complaint VS Expedited Service Request
+            Product Complaint:
+                This arises when customer is dissatisfied
+                Product is not meeting customer specification
+                Product has to be improved
+                Customer needs for product are not completely identified
+            Expedited Service Request
+                Arises when customer is in a hurry
+                Service timelines are not meeting customer requirements
+                Service has to beimproved
+                Customer timings need to be recalculated
+
+            Table:
+                Same table and calculation method applies as Feedback table example above
+                Factors List:
+                    Identify Customer needs
+                    Cost involved
+                    Time consumption (org perspective)
+                    Probing the customer
+                    Availability of time from customer
+                    Response rate of the customer
+                    Clarification from customer
+                    Retaining customer
+                    Compiling & analysing data
+                    Resource requirement
+                    Handling customer
+
+        Key elements of data collection
+            Directly collected from primary source to reduce miscomm or loss of information
+            Collected exclusively for the stated purpose
+            Capture data after understanding the organizational purpose, making  the data relevant
+            Collected instantaneously when there is a requirement, data need to be up to date
+            Customer requirement is accurately defined with the data
+            
+        VOC (Voice of Customer)
+            A technique to organize, analyze and profile the customer's requirements
+            Table Example:
+            |                      |                          |                                                             What the customer Meant                                                   |                  
+            | Who is the customer  |  What the customer said  |  What is the need  |  When is the need  |  Where is the need  |  Why is the need              |  How is the situation now             |
+            | Household memeber    |  AC should be silent     |  Sound a sleep     |  At night          |  In the bedroom     |  To be fresh in the morning   |  Uses ceiling fan also alot of noise  | 
+
+        Translate Customer Requirements
+            Data collected from customers that gives information on what they need or want from the process
+            Are often high level, vague and non-specific. But a reflection of their experience
+            When translated into critical process requirements that are specific and measureable, they are called Critical To Quality (CTQ) factors
+            
+        The 4 elements of CTQ (Critical To Quality)
+            Output characteristis
+            Y metrics
+            Targets
+            Specification/tolerance limits
+
+        QFD (Quality Function deployment)
+            A process to understand the customer's needs
+            Translates customer's needs into a set of design and manufacturing reuirements
+            Motivates businesses to focus on customers
+            Helps to design and build more competitive products in lesser time at lower cost
+            Helps recognize strength and weaknesses of the organization
+            Helps understand areas where most of the work is to be done
+            Helps to understand where the focus should be
+            
+        QFD Phases:
+            #Phase 1 :  Customer requirements     >         Product Planning        >           Technical requirements
+            #Phase 2 :  Key parts characteristics <         Product design          <                      <
+            #                   V                                 V
+            #Phase 3 :          >                 >         Process Planning        >          Key Process Operations
+            #                                                     V                                        V
+            #Phase 4 :                                      Process control         <                      <
+            #                                                     V
+            #           Establish Process control plans, training plans, and training plans to control operations
+
+        HOQ Matric 
+            The first HOQ matrix can be the first stage of the second QFD phase
+            
+            Customer requirements >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Customer satisfaction
+            Customer Requirements > Technical Requirements > Key Parts Characteristics > Key Process Operations > Establish Control Plans 
+
+    /////////////////////////////////////////////////////
+    #Project Management
+        
+        #Initiation
+            Define the problem statement
+                Problem should be clear and concise description of the problem
+                Identify and specify the observed gap in performance measuring the gap between current baseline and targeted baseline (required state)
+                Statement should be quantifiable with metrics
+                Problem statement cannot contain solutions or causes for the problem
+                
+            IS/ISNOT template
+                Rows: What, Where, When, To what Extent
+                Columns: IS, ISNOT
+                In the analysis phase, if a cause cannot describe the IS and ISNOT data, then it's not the main cause
+            
+            Project Objectives Criteria (SMARTS)
+                Specific, Measureable, Attainable, Relevant, Time-based, Stretch
+
+            Project Documentation
+                Helps to gain better understanding of the project
+                Prevent/resolve conflict among stakeholders
+                Share plans and status for the project
+                
+                Benefits:
+                    Helps team achieve common understanding of the requirements and the status of the project
+                    Removes personal bias as there is a documented history of discussions and decisions made
+                
+                Projcet Charter
+                Project Plan
+                Key Milestones Report
+                Risk items List
+                Pending Actions List
+                Final Project Report
+
+            Project Charter
+                Project Name and Description
+                Business Need (Problem statement)
+                Project manager's name
+                Project purpose or justification, including ROI
+                Stakeholder and his requirements
+                Broad timelines
+                Major deliverables
+                Constraints and assumptions
+                Budget Summary
+
+            Project Plan
+                The final approved document which is used to manage and control the various processes within a project
+                Ensures seamless execution
+                Uses project charter as an input to create a detailed project planning
+                Major Sections:
+                    Project management approach and scope statement
+                    WBS (Work breakdown structure)
+                    Cost estimates and schedule
+                    Performance baselines and major milestones
+                    Key or required staff
+                    Open or pending decisions
+                    Key risks
+
+            Project Scope
+                Interpreted from problem statement and project charter
+                Tools used for interpretation of project scope:
+                    Pareto Chart:
+                        Assists to narrow the scope of the project by indentifying the causes that have major impact on the outcomes
+                    SIPOC:
+                        A high level process map which helps to understand the process functions at the supplier, input, process, output and customer level
+
+        #Process Maps
+            A micro level flow chart that provides an in-depth detail of a process
+            The process map covers details at all levels 
+            Provides a walk through experience (From supplier to eternal customer)
+            Used as a blueprint while drawing a process map
+            Final process map drills further into details
+
+            Process/Consequential Metrics
+                Measures the negative effects of improving the primary or the key metrics
+                Used for measuring indemnity triggered by any damage in the project
+                Inconsistent use of  consequential metrics can lead to a loss of opportunity and rework after project ends
+                Helps to understand the cause and effect relationship between the primary and the secondary metrics and the impact on organization
+
+            Consequential Metrics - Best Practices
+                Using consequential metrics during measure phase  and monitor after project finalization
+                    Helps to analyze whether the link between previous primary and secondary metrics has been established
+                Consequential metrics + Primary metrics + Secondary metrics = Provides clarity  
+                Assessing and evaluating the cause and effect relationship between these metrics helps the organization
+
+            Project Planning Tools
+                Pareto Chart
+                Network Diagrams
+                CPM - Critical Path Method
+                PERT - Program Evaluationn and Review Technique
+                Gantt Charts
+                WBS - Work Breakdown Structure
+
+            Pareto Chart (80/20 Rule)
+                A histogram depicting the frequency of occurences
+                Plots all causes for defets in a product or service
+                80% of effects comes from 20% of causes
+                Narrows the scope of the project/problem solving by identifying the major causes
+
+            Network Diagrams/Arrow Diagram
+                A diagram that uses arrows to connect activities and represent precedence and interdependencies between activities of a project
+                Assumptions made while drawing the Network Diagram:
+                    Before new activity begines, all pending activities have been completed
+                    The direction of arrow represents teh sequence that activities need to follow
+                    Must start from a single evene and end with a single event
+                
+                Terms
+                To calculate the total duration of the project, four dates for each task must be defined
+                    Early Start: Earliest start date of task
+                    Late Start: Last date by when the task should start
+                    Early Finish: Earliest date the task can be completed
+                    Late Finish: Last date the task should be completed
+
+                Duration of Task
+                    Difference between the early start and early finish of the task
+                    Slack Start Time = Late Start - Early start
+                    Slack Finish Time = Late Finish - Early Finish
+
+                CPM - Critical Path Method
+                    Used to monitor the progress of a project and ensure that the project is on schedule
+                    The longest sequence of tasks on the network diagram
+                    Tasks on the critical path have zero slack
+                    Resources from tasks that are not on critical path can be diverted to critical task path (To prevent delay)
+
+        #Project Evaluation and Review Techniques - Risks
+            An uncertain event or consequence that will probably occur during a project
+            Impacts at least one of 4 main objectives (Time, Cost, Quality, Scope)
+            Positive risks enhance the success of the project
+            Negative risks pose a threat to a project's success
+            
+            Terms:
+                Risk Probability       : Likelihood that a risk will occur. Assessing risk is assessing probability and impact of the risk
+                Issue                       : The occurence of risk
+                Risk Consequences: Effects on project objectives if there is an occurence of a risk or issue
+
+            #Elements
+                Qualitative method - Interviews, checklists, brainstrming - used to identify risks
+                Quantitative method - Evaluate the cost, time and probabilisti combination of individual uncertainties
+                Feasibility - The study of project risk
+                Potential Impact - Determining the impact of potential risks on a project
+                RPN - Probability of occurence, severity and detectability
+                Avoiding Risk - If the potential impact is huge, then avoiding is the best option
+                Mitigating risk - Loss from mitigating a risk is much less than loss from temporarily avoiding the risk
+                Accepting risk - If risk cannot be avoided or mitigated, then it has to be accepted (If it doesnt greatly impact cost, time and product objective)
+
+            #Risk assessment matrix
+                Table Example: https://vertassets.blob.core.windows.net/download/80e438c9/80e438c9-81d8-4445-9e0d-ca3d6f99861b/marinelli_watersampling_table1.pdf
+
+            #Project Closure
+                Without formal closure process, project team can fail to recognize the end and the project will drag on at great expense
+                Each phase of the project must have closure process
+                Outcomes:
+                    Outcomes match the stated goals of the project
+                    Customers and stakeholders are happy with the results
+                    Critical knowledge is captured
+                    Team feels a sense of completion
+                    Project resources are released for new projects
+                Closure Report Goals:
+                    Review and validate the success of the project
+                    Confirm outstanding issues, limitations and recommendations
+                    Outline tasks and activities accompanied to complete the activity
+                    Highlight the best practices for future projects
+                    Provide the project report/summary
+                    Provide project background overview
+                    Summarize the planned activities of the project
+                    Evaluate project performance
+                    Provide synopsis of the process
+                    Generate discussions, recommendations and project closure recommendations
+                Project Closure Activities
+                    Finalize the project documents
+                    Capture the project knowledge
+                    Setup a project library
+                    Document the project learnings
+                    Provide knowledge transfer
+                    Get final sign-off
+                    Close the project office
+                    Reognize and reward
+                    Celebrate
+                    Make a public announcement
+                    Conclude
+
+    /////////////////////////////////////////////////////
+    #Management and Planning Tools
+        #Affinity Diagram
+            A method to solve unfamiliar problems. Consensus decision is necessary
+            Each member writes down ideas and opinions on sticky notes (Each note contains single idea)
+            Then subdivide/group the sticky notes into groups and form categories/columns around them
+            Column Category Title Examples:
+                Compensation
+                Work Environment
+                Relationships
+                Lack of Motivation
+
+        #Interrelationship Diagram  
+            A technique developed to identify the relationship between problems and ideas in complex situatioins
+            Each member writes down ideas and opinions on stiky notes (1 idea per note)
+            All notes are pasted on a table or wall
+            A cause-effect arrangement is then constructed around the notes by drawing arrows
+            Complete only when all notes are assigned to an arrow
+            The most number of outgoing arrows indicates the root cause
+            The most number of incoming arrows indicates the effect
+
+        #Tree Diagram
+            A systematic approach to outline and identify the tasks and methods needed to solve a problem
+            The objective is noted in Requirements (Req)
+            Drivers are the solutions furnish to achieve the goal
+            Example:
+                Need (Delighted with Coffee)
+                    Driver 1: Hot but not too hot
+                        Req A1: Espresso temperature
+                        Req A2: Steamed milk temperature
+                    Driver 2: Strong coffee flavor
+                        Req B1: Fitness of grind of coffee beans
+                        Req B2: Amount of ground coffee
+                    Driver 3: Correct amount of sweetness
+                        Req C1: Type of sweetener
+                        Req C2: Amount of sweetener
+
+        #Matrix Diagram
+            Shows the relationship between objectives and methods, results and causes, tasks and people
+            Provides information about the relationship
+            Provides the importance of task and method elements of the subject
+            Helps determine the strrength of relationships between a grid of rows and columns
+            Helps organizing a large amount of inter-process related activities
+
+        #PDPC - Process Decision Program Chart
+            Used for charting the course of events from the beginning of a process to the final goal
+            Used before implementing a plan
+            Used in case the plan must be completed on schedule
+            Used when the price of failure is high
+            
+        #Activity Network Diagram
+            To show the time required for solving a problem
+            To identify items that can be done in parallel
+            Used for scheduling and monitor tasks with complex project OR process with interrelated tasks and resources
+            The diagram defines: 
+                the amount of time for each operation
+                the relation of work without time for each operation
+                each specific operation
+            Diagram:
+                Contains nodes where each node represents the steps of sub operation
+                Arrows between nodes represents the time taken
+                
+                |                                                       6d       Wall    10d
+                |                                                  >>>>>>>>> 4  >>>>>>>>> 5 >>>>      Assemble
+                |                                                  ^                                                  >>>>>>> 7
+                | Foundation    2d   Framework  ^    3d    Scaffold      1d               ^             ^
+                | 1 >>>>>>>>>>>>>>>> 2 >>>>>>>>>>>>>> 3 >>>>>>>>>>>>>>>>             |
+                |                           V                                                                                        |
+                |                           V     2d    Electrical                                                            |
+                |                           >>>>>>>>>>  6  ----------------------------------------------------
+                |
+                |  Amount of time for each operation   =  >>>>>
+                |  Relation of work without time of ops = ----->
+
+
+    /////////////////////////////////////////////////////
+    #Business Results for Projects
+        #Throughput Yield (TPY)
+            Only be used to measure single process
+            The number of acceptable pieces at the end of a process divided by the number of start pieces
+            The start pieces excludes scrap and rework
+
+        #If DPU (Defects pr unit) is known, TPY can be calculated
+            TPY = e^-DPU    (e to the power of -DPU)
+            DPU = -loge (TPY), where e = 2.7183
+
+        #Rolled Throughput Yield (RTY)
+            Probability of the entire process producing zero defects
+            Important as a metric when a process has excessive rework
+            A measure of efficency
+        
+            TDPU (Total Defects per Unit) defined for a set of processes
+                RTY = e^-TDPU (e to the power of -TDPU)
+                TDPU = -loge(RTY)
+            
+            RTY is the product of FPY (First Pass Yield) when the defects are known
+            FPY is the number of products which pass without any reork over total number of units 
+                FPY = (Total Units - Defects) / Total Units
+                       = Total Quality Unit / Total Units
+                       
+                RTY = FPY1 * FPY2 * FPY3 * ... * FPYn
+
+        #Cp - Process Capability
+            Inherent variability of a characteristic of a process or product
+            An indicator of the capability of a process
+            Sigma is the standard deviation of a process
+            Cp = (USL-LSL) / 6sigma
+            Difference between USL and LSL is called Specification width or Tolerance
+
+        #Cpk - Process Capability Indices
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
