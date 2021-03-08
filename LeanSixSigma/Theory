@@ -799,6 +799,18 @@ CONTENTS
             Difference between USL and LSL is called Specification width or Tolerance
 
         #Cpk - Process Capability Indices
+            To objectively measure the degree to which a process meets or does not meet customer rquirements
+            To calculate Cpk, first is to determine if the process mean is closer to LSL or USL
+            If closer to LSL, then Cpkl is determined
+                Cpkl = (Xbar - LSL) / (3 * sigma), 
+                    Xbar = Process Average
+                    Sigma = Standard Deviation
+            If closer to USL, then Cpku is determined
+                Cpku = (USL - Xbar) / (3 * sigma), 
+                    Xbar = Process Average
+                    Sigma = Standard Deviation
+            If the process mean is equidistant, either one of the limit (USL or LSL) can be chosen
+            Cpk takes up the value of Cpku and Cpkl depending on whichever is the lower value
 
 
 
