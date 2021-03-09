@@ -802,15 +802,66 @@ CONTENTS
             To objectively measure the degree to which a process meets or does not meet customer rquirements
             To calculate Cpk, first is to determine if the process mean is closer to LSL or USL
             If closer to LSL, then Cpkl is determined
-                Cpkl = (Xbar - LSL) / (3 * sigma), 
+                Cpkl = (Xbar - LSL) / (k * sigma), //The k value is usually 3 but depends on industry standards Sigma value is std dev.
                     Xbar = Process Average
                     Sigma = Standard Deviation
             If closer to USL, then Cpku is determined
-                Cpku = (USL - Xbar) / (3 * sigma), 
+                Cpku = (USL - Xbar) / (3 * sigma), //The k value is usually 3 but depends on industry standards. Sigma value is std dev.
                     Xbar = Process Average
                     Sigma = Standard Deviation
             If the process mean is equidistant, either one of the limit (USL or LSL) can be chosen
             Cpk takes up the value of Cpku and Cpkl depending on whichever is the lower value
+            
+            Calculation Example 01:
+                A normal distibution curve where the ends bleeds out from the LSL and USL
+                Xbar = 10, sigma = 0.5, k=3
+                LSL = 9, USL = 11
+                
+                Cpk = { [(Xbar-LSL) / (k*sigma) ], [(USL-Xbar) / (k*sigma)]
+                Cpk = { [(10-9) / (3*0.5)], [(11-10) / (3*0.5)] }  = 0.667
+                Therefore, process is not capable
+                
+            Calculation Example 02:
+                Consider the capability process that puts pressurized grease in an aerosol can.
+                Design spec calls for 60psi for each can with USL of 65psi and LSL of 55psi.
+                A sample is taken from production and found average  pressure at 61psi (Xbar=61) with std dev of 2psi
+                Since Std Dev is 2, therefore, Sigma value is at 2.
+                1. Is the Process capable at 3 sigma level?
+                        Cpk = { [(Xbar-LSL) / (k*sigma) ], [(USL-Xbar) / (k*sigma)]
+                        Cpk = { [(61-55) / (3*2)], [(65-61) / (3*2)] }  = 1, 0.667 (Take the lowest value among the 2)
+                        Therefore process is not capable at 3 sigma
+                2. What is the probability of producing defect?
+                        P(defect) = P(X<55) + P(X>65)
+                        =P(X<55) + 1 - P(X>65)  #The 1 here is the standard rule whole number
+                        = P(Z<(LSL-Xbar)/sigma) + 1 - P(Z<(USL-Xbar)/sigma)     #This converts X to Z
+                        =P(Z<(55-61)/2) + 1 - P(Z>(65-61)/2)
+                        =P(Z<-3) + 1 - P(Z<2)
+                        = G(-3) + 1 - G(2)
+                        = 0.0013 + 1 - 0.9772 (Taken from std normal probabilities table), https://castle.eiu.edu/~aalvarado2/z_table.pdf
+                        =0.0241
+                        Therefore, 2.4% of cans are defective
+                3. Another process has sample mean of 60.5 with std dev of 3. Which of these 2 process is more accurate?
+                        Cpk = { [(Xbar-LSL) / (k*sigma) ], [(USL-Xbar) / (k*sigma)]
+                        Cpk = { [(60.5-55) / (3*3)], [(65-60.5) / (3*3)] }  = 0.611, 0.5 (Take the lowest value among the 2)
+                        Therefore process is not capable at 3 sigma                        
+                4. Which of the Process is more consistent?
+                        P(Z<(55-60.5)/3) + 1 - P(Z>(65-60.5)/3)
+                        =P(Z<-1.83) + 1 - P(Z<1.5)
+                        =G(-1.83) + 1 - G(1.5)
+                        =0.0336 + 1 - 0.9332
+                        =0.1004
+                        Therefore, 10% of cans are defective
+                Conclusion, the smaller the sigma value, the better the process
+        
+        #Cpk and Cp Interpretations
+            **Memorize
+                If Cp < 1, then the process is not capable, to confirm the capability, check Cpk value
+                If Cpk < 1, then the process is confirmed not capable
+                If Cpk < 1 but with Cp > 1, process might be capable. 
+                Cpk will almost always be lesser than Cp when Xbar is at the center of range
+                If Cpk >= 1, then the process is capable
+                Non centering of Xbar can happen when the process has not understood customer expectations clearly
+                Non centering of Xbar can also happen when the process is complete as soon as the output reaches a specific limit
 
 
 
