@@ -11,7 +11,7 @@ CONTENTS
         OTE = Output  --( )--
 
     #OTL/OTU OR Set/Reset
-        Latch = Set          --(L)--
+        Latch = Set      --(L)--
         Unlatch = Reset  --(U)--
         
     #ONS - One Shot Instruction (Single Pulse)
