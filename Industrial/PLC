@@ -6,7 +6,7 @@ CONTENTS
 01. Basics
     #XIC/XIO/OTE
         Normal Inputs
-        XIC = NO/NC    --] [-- Triggered by External Signal
+        XIC = NO/NC   --] [-- Triggered by External Signal
         XIO = NO/NC   --] [-- Triggered by Internal Signal
         OTE = Output  --( )--
 
