@@ -171,33 +171,33 @@ CONTENTS
         |                                                                                       |  //This will then deactivates the EQU block since INT1 is no longer equals to 0    
         |----------------------------------------------------------------------------[END]------|
         |                                                                                       | 
-        |                                                                                                                StartMotor    |
-        |--------------|EQU               |----------------+-------------------------------------( )---------| //When Int0 and Int1 are both at 0, Motor starts
-        |              |SourceA, INT0 :0  |                |  Motor at Target                                | //After motor starts, it will wait until Motor is at target speed
-        |              |SourceB, INT2 :0  |                |       Speed                                     | //MOV block will activate when motor is at target speed
-        |                                                  +-------] [-----------|  MOV                |-----| //This will then change the destination value of MOV
-        |                                                                        |Source, INT1:1       |     | //When MOV destination value changes, it will also
-        |                                                                        |Destin, INT2: 1      |     | //change the value at EQU int2 as they both share the same output
-        |                                                                                                    | //This results the motor to stop
-        |----------------------------------------------------------------------------------------[END]-------|
-        |                                                                                                    |           
+        |                                                                         StartMotor    |
+        |--------------|EQU               |---+-------------------------------------( )---------| //When Int0 and Int1 are both at 0, Motor starts
+        |              |SourceA, INT0 :0  |   |  Motor at Target                                | //After motor starts, it will wait until Motor is at target speed
+        |              |SourceB, INT2 :0  |   |       Speed                                     | //MOV block will activate when motor is at target speed
+        |                                     +-------] [-----------|  MOV                |-----| //This will then change the destination value of MOV
+        |                                                           |Source, INT1:1       |     | //When MOV destination value changes, it will also
+        |                                                           |Destin, INT2: 1      |     | //change the value at EQU int2 as they both share the same output
+        |                                                                                       | //This results the motor to stop
+        |---------------------------------------------------------------------------[END]-------|
+        |                                                                                       |           
         
         //Fault-Reset
-        |                                                                 Systemrun                         |
-        |--------------|EQU                |---------------------------------( )----------------------------| //When EQU SourceB is 0 system starts
-        |              |SourceA, INT0 :0   |                                                                | 
-        |              |SourceB, INT2:99   |                                                                | 
-        |                                                                                                   | 
-        |    SystemFault                                                                                    |
-        |-------] [---------------------------------------------------------------|MOV               |------| //When fault, MOV will change to 99, stopping the system 
-        |                                                                         |Source, INT0 :99  |      |  
-        |                                                                         |Destin, INT2:99   |      |  
-        |    SystemRESET                                                                                    |
-        |-------] [---------------------------------------------------------------|MOV                |-----| //When reset, MOV will change to 0 and system starts again
-        |                                                                         |Source, INT0 :0    |     |  
-        |                                                                         |Destin, INT2:99    |     |  
-        |-----------------------------------------------------------------------------------------[END]-----|
-        |                                                                                                   |  
+        |                                                      Systemrun                        |
+        |--------------|EQU                |----------------------( )---------------------------| //When EQU SourceB is 0 system starts
+        |              |SourceA, INT0 :0   |                                                    | 
+        |              |SourceB, INT2:99   |                                                    | 
+        |                                                                                       | 
+        |    SystemFault                                                                        |
+        |-------] [---------------------------------------------------|MOV               |------| //When fault, MOV will change to 99, stopping the system 
+        |                                                             |Source, INT0 :99  |      |  
+        |                                                             |Destin, INT2:99   |      |  
+        |    SystemRESET                                                                        |
+        |-------] [---------------------------------------------------|MOV                |-----| //When reset, MOV will change to 0 and system starts again
+        |                                                             |Source, INT0 :0    |     |  
+        |                                                             |Destin, INT2:99    |     |  
+        |-----------------------------------------------------------------------------[END]-----|
+        |                                                                                       |  
 
 
 
