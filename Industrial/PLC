@@ -1,0 +1,211 @@
+///////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01. Basics
+
+///////////////////////////////////////////////////////////////////////////////////
+01. Basics
+    #XIC/XIO/OTE
+        Normal Inputs
+        XIC = NO/NC    --] [-- Triggered by External Signal
+        XIO = NO/NC   --] [-- Triggered by Internal Signal
+        OTE = Output  --( )--
+
+    #OTL/OTU OR Set/Reset
+        Latch = Set          --(L)--
+        Unlatch = Reset  --(U)--
+        
+    #ONS - One Shot Instruction (Single Pulse)
+        Works similar to set/reset
+        When PB1 is pressed/hold, GreenLight will switch to ON
+        When PB1 is pressed/hold again, GreenLight will switch to OFF
+        It works by storing the value into its binary
+        This will also work by storing value of analog values (temperature, etc)
+        
+        Program with Buttons:
+            | PB1:Input                B3:0                                     B3:0                        |
+            |-----] [-----------------[ONS]--------------------------------------( )------------------------| 
+            |    B3:0                GreenLight                                GreenLight                   |
+            |-----] [------------------]/[----------------------------------------( )-----------------------|
+            |                 |   |             |                                                           |
+            | GreenLight      |   |    B3:0     |                                                           |
+            |-----] [---------|   |----]/[------|                                                           |
+
+        Program with Values:
+            #MOV has been assigned to the Temp Sensor
+            |------------------------------------------------------[MOV]----------------------| //MOV here is connected to external sensor
+            |                                                                                 |
+            | Process Running                              ProcessTimer                       |
+            |-----] [-----------------------------+-----------[TON]---(EN)--------------------| 
+            |                                              |  [TON]---(DN)--------------------|
+            |                                              |                                  |
+            |                                              |    P_ONS:0                       |
+            |                                              +----[ONS]------------[MOV]--------|  //MOV here is the internal reading
+            |                                              |                                  |
+            |                                              |  ProcessTimer:DN     ProcessRun  |
+            |                                              +--------] [--------------(U)------| 
+            |  ProcessRun     P_ONS:1                                                         |
+            |-----]/[-------------[ONS]---------------------[MOV]-----------------------------|  //MOV here is the internal reading
+            
+    #OSR/ONF - One Shot Rising/Falling        
+        Similar to RisingEdge and FallingEdge
+            |                                                             |
+            | ProcessRun          P_ONS:1                      Sensor     |
+            |-------]/[------------[ONS]-----------------------[MOV1]-----|
+            |                                                             |            
+            |------------------------------| [OSR/OSF]   |----------------|
+            |                              | SB: P_ONS:2 |--(SB)---       |
+            |                              | OB: P_ONS:3 |--(OB)---       |
+            |                                                             |
+            |                           P_ONS:3           ProcessTemp2    |
+            |----------------------------] [-----------------[MOV1]-------|
+            |                                                             |
+            |                           P_ONS:3        ProcessMinSetpoint |
+            |----------------------------] [-----------------[MOV1]-------|
+            
+    #TON - Timer ON Delay
+        With pulse input signal, counter starts, sends output signal when it reaches the setpoint
+        Value resets to 0 once there is no signal
+    #TOF - Timer OFF Delay
+        With pulse input signal, counter starts, stops sending output signal when it reaches the setpoint
+        Value resets to 0 once there is no signal
+    #RTO - Retentive Timer ON/OFF
+        With input Signal, counter starts
+        Without input, counter stores the value
+        To reset to 0, use --(RES)--
+
+    #CTU/CTD
+        Count-up/Count-down counter
+        Counts up to setpoint / Counts down from setpoint
+
+    #Comparators
+        |---]*[----------------(set/rst)--| // =, !=, <, >,  <=, >=,
+        EQU/NQU - Equal/Not Equal
+        LES (A<B) - Less Than
+        GRT (B>A) - Greater Than
+        LEQ (A<=B) - Less than or Equal to
+        
+        Mitsubishi Equivalent:
+            To force ON/OFF for testing
+            *In GXDev, right click on M100 and select "device test"
+                WordDevie/Buffer > Device: d0
+                Setting value: (K2=1), 
+                    *Click on "set" to confirm value
+                    0 = M0 ON
+                    1 = M1 ON
+                    2 = M2 ON
+            Program:        
+            |                                                                   |
+            |      M100                                                         |
+            |-------] [-----------------------------------[INC   D0        ]----|
+            |                                                                   |            
+            |       M8000                                                       |            
+            |--------] [-----------------------------[ CMP   K2   D0   M0  ]----|
+            |                                                                   |
+            |  M0 on when d0 < k2                                               |
+            |--------| |--------------------------------------------(Y000 )-----|
+            |                                                                   |
+            |  M1 on when d0 = k2                                               |
+            |--------| |--------------------------------------------(Y001 )-----|
+            |                                                                   |
+            |  M2 on when d0 > k2                                               |
+            |--------| |--------------------------------------------(Y002 )-----|
+            |                                                                   |
+            |-------------------------------------------------------[END]-------|
+            |                                                                   |
+    
+    #MEQ - Mask Equal
+        INT Data type = DINT
+        Similar to "Equal" instruction but MEQ has a mask layer
+        This compares the value between "Source (INT0) " and "Compare (INT2)"
+        By default, MEQ will output as True
+        If Mask = 0, then comparison between INT0 and INT2 will be disabled
+        If Mask is set at 0001, then this will only compare the first bit between INT0 and INT2
+        Masks works in binary form and it enables which bit to compare between INT0 and INT2 
+        Example:
+            Source    = 0111 1111 (127)
+            Mask      = 0000 0001 (1)
+            Compare = 0000 1100 (13)
+            Hence Source INT0 = Compare (INT2), therefore MEQ Output = False
+    
+        |----|MEQ                 |---------------------(Bool0)-------|
+        |    |Source, INT0 : 0    |                                   |
+        |    |Mask, INT1: 0       |                                   |
+        |    |Compare, INT2: 0    |                                   |
+        |                                                             |
+        |-------------------------------------------------[END]-------|
+        |                                                             |
+
+    #MOD - Modulus (Remainder)
+        |--------------------------------------------|MOD               |----------|  //10 divides 3 = 1
+        |                                            |SourceA, DINT0 :10|          |
+        |                                            |SourceB, DINT1:3  |          |
+        |                                            |Dest, DINT2: 1    |          |
+        |                                                                          |
+        |--------------------------------------------|MOD                   |------| //Do not use real numbers for MOD
+        |                                            |SourceA, REAL0 :20.22 |      |
+        |                                            |SourceB, REAL1:10     |      |
+        |                                            |Dest, REAL2: 0.022    |      |
+        |                                                                          |
+        |-----|DIV                     |-------------|MOD                   |------| //Diffference between division and modulus
+        |     |SourceA, DINT0 :10      |             |SourceA, DINT0 :10    |      |
+        |     |SourceB, DINT1:3        |             |SourceB, DINT1:3      |      |
+        |     |Dest, DINT2: 3          |             |Dest, DINT2: 1        |      |
+        |                                                                          |        
+        |---------------------------------------------------------------[END]------|
+        |                                                                          |        
+
+    #MOV
+        |----------------------------------------------------------|MOV                 |-------|  //Move integer from source to destination
+        |                                                          |Source,  INT0 :10   |       |
+        |                                                          |Destin, INT1:10     |       |
+        |----------------------------------------------------------------------------[END]------|
+        |                                                                                       |
+        |----------------------------------------------------------|MOV                 |-------| //Move real numbers from source to destination
+        |                                                          |Source, REAL0 :20.22|       |
+        |                                                          |Destin, REAL1:20.22 |       |
+        |-----------------------------------------------------------------------------[END]-----|
+        |    SystemStart                                                                        |
+        |-------] [-----|EQU                 |---------------------|MOV                  |------| //When system starts, and if source a and source b equals to 0, 
+        |               |SourceA, INT0 :0    |                     |Source, INT0 :1      |      |  //it activates MOV block. The MOV block will change INT1 value
+        |               |SourceB, INT1:0     |                     |Destin, INT1:1       |      |  //that shares the same value as EQU INT1 to value of 1 (from MOV INT0)
+        |                                                                                       |  //This will then deactivates the EQU block since INT1 is no longer equals to 0    
+        |----------------------------------------------------------------------------[END]------|
+        |                                                                                       | 
+        |                                                                                                                StartMotor    |
+        |--------------|EQU               |----------------+-------------------------------------( )---------| //When Int0 and Int1 are both at 0, Motor starts
+        |              |SourceA, INT0 :0  |                |  Motor at Target                                | //After motor starts, it will wait until Motor is at target speed
+        |              |SourceB, INT2 :0  |                |       Speed                                     | //MOV block will activate when motor is at target speed
+        |                                                  +-------] [-----------|  MOV                |-----| //This will then change the destination value of MOV
+        |                                                                        |Source, INT1:1       |     | //When MOV destination value changes, it will also
+        |                                                                        |Destin, INT2: 1      |     | //change the value at EQU int2 as they both share the same output
+        |                                                                                                    | //This results the motor to stop
+        |----------------------------------------------------------------------------------------[END]-------|
+        |                                                                                                    |           
+        
+        //Fault-Reset
+        |                                                                 Systemrun                         |
+        |--------------|EQU                |---------------------------------( )----------------------------| //When EQU SourceB is 0 system starts
+        |              |SourceA, INT0 :0   |                                                                | 
+        |              |SourceB, INT2:99   |                                                                | 
+        |                                                                                                   | 
+        |    SystemFault                                                                                    |
+        |-------] [---------------------------------------------------------------|MOV               |------| //When fault, MOV will change to 99, stopping the system 
+        |                                                                         |Source, INT0 :99  |      |  
+        |                                                                         |Destin, INT2:99   |      |  
+        |    SystemRESET                                                                                    |
+        |-------] [---------------------------------------------------------------|MOV                |-----| //When reset, MOV will change to 0 and system starts again
+        |                                                                         |Source, INT0 :0    |     |  
+        |                                                                         |Destin, INT2:99    |     |  
+        |-----------------------------------------------------------------------------------------[END]-----|
+        |                                                                                                   |  
+
+
+
+
+
+
+
+
+
+
+
