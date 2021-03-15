@@ -1104,6 +1104,46 @@ CONTENTS
                     Tools: Hypothesis Testing, Scatter Diagram
 
 
+        Calculation:
+            Statistically proving the improvement of a team after recruiting a new coach
+            Ya = Efficiency of Coach A
+            Yb = Efficiency of Coach B
+            
+            Null Hypothesis: Assuming both A and B are effective
+                H0: Ya = Yb
+            
+            Alternate Hypothesis: Assuming efficiencies of both coaches differ
+                H1: Ya != Yb
+
+        Types of Errors
+            Two possible errors when collecting data
+            Type 1 Error:
+                Aka Producers Risk
+                When H0 is rejected when it is true
+                Chance of producing Type 1 error is known as Alpha
+                Max chance to commit Type 1 error is 5%
+            Type 2 Error:
+                Aka Consumers Risk
+                When null hypothesis is accepted when it is actually false
+                Chance of producing Type 2 error is known as Beta
+                Max chance to commit Type 2 error is 20%
+
+        Central Limit Theorem (CLT)
+            https://www.youtube.com/watch?v=JNm3M9cqWyc
+            For a sample size greater than 30, the plotted sample mean tends to look more like normal distribution
+            Standard Error Mean (SEM) = (Population Standard Deviation) / (Square Root of Sample Size)
+            Selecting a sample size also depends on "Power of Test"
+            Sampling distributions are helpful in dealing with non-normal data
+            If sample data points are taken, and the distribution of means of samples is plotted, it is called the sampling distribution of means
+            Sampling distribution will approach normality as the sample size increases
+            Mean of the sampling distribution equals to the population mean
+            Helps in making inferences from sample statistics about the population parameters irrespective of the distribution of the population
+            The basis for calculating the confidence interval for a hypothesis test as it allows the use of a standard normal table
+            
+    #Statistical Distribution
+
+
+
 
 
 
