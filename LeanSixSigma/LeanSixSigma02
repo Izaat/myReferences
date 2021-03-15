@@ -971,7 +971,128 @@ CONTENTS
                 Contributes to the performance of the team and actively partiipates to fulfil project objectives
 
 
+///////////////////////////////////////////////////////////////////////////////////
+03. Measure Phase
+    
+    #Foundation
+        Key Objectives
+            Create a detailed Process Map
+            Gathering baseline data
+            Summarize and Analyze data
+                
+        Process Modelling   
+            Refers to the visualization of a proposed system, layout or other change in the process
+            Helps determine the effectiveness or ineffectiveness od a new design or process
+            Done using process mapping and flow charts
 
+        Process Mapping
+            A workflow diagram which gives a clear understanding of the process or a series of parallel processes
+            Features:
+                First step in process improvement
+                Gives wider perspective of the problems and opportunities
+                Provides a systematic way of recording
+                Can be done by using flowcharts, written procedures or detailed work instructions
+            
+            Flowchart Symbol
+                Square/Rectangle - Process
+                Arrows - Flow direction
+                Diamond - Decision/Question
+                Circle - Link to another chart or page
+                Parallelogram - Input/Output
+                Rectangle with round corners - Start/End
+                
+        Procedures (Document)
+            A guide to direct the reader through task
+            Used when the process of a routine is lengthy/complex
+            Used when you want to know what is going on during product dev phase
+
+        Work Instructions
+            Define how one or more activities in a procedure should be written in details
+            Provides step by step details for a sequence of activities organized in a logical format
+            
+        Process Input and Output Variables (KPIV, KPOV)
+            To improve a process, Key Process Output Variable (KPOV) and KPIV must be first measured
+            Metrics include percent defective, operation cost, elapsed time, backlog quantity and documentation errors
+            Process owners are the best source for initial identification of the critical variables
+            Once identified, relationship between the variables is depicted, using tools such as SIPOC and Cause and Effect Matrix
+            Results for Process input variables are compared to determine which input variables have the greatest effect on output variables
+        
+    #Probability and Statistics
+        Probability:
+            Refers to the chance of something occurring or happening
+            Probability of an event = Total result / Total Outcomes
+            Coin Toss = Result / Outcome = 1/2
+            
+        3 basic properties of probability
+            Uncertain
+            Impossible
+            Certain
+    
+        Common Terms
+            Sample Space: Collection of all possible outcomes
+            Venn Diagram: Shows all hypothetically possible logical relations between a finite collection of sets
+            Event: A collection of outcomes, any subset of the sample space
+
+        Basic Properties
+            Independent Events
+                When the probability of an event does not affect the probability of another event
+            Dependent Events
+                When the probability of an event affects the probability of another event
+            Mutually Exclussive Events
+                When an outcome prevents another outcome from happening
+            Mutually Inclusive Events
+                When one outcome cannot occur without the other
+
+        Multiplication Rules of AND Rules
+            Depends on the event dependency:
+            
+            If events are independent (Events A, B, C, etc, are independent)
+                P(A & B & C & ... ) = P(A) * P(B) * P(C) * ...
+                Probability of Occurrence for flipping a coin to get a head, drawing a card to get Ace, and throwing a dice to get 1
+                P(A) * P(B) * P(C) = (1/2) * (1/13) * (1/6) = 0.0064 = 0.64%
+
+            If events are dependent (Events A and B are two dependent events)
+                P(A with B) = P(A) * P(B|A)
+                Probability of drawing 2 silver coins from a bag of 6 gold coins and 4 silver coins
+                P(A) = 4/10     //Event where first coin is silver
+                P(B|A) = 3/9    //Event where second coin is silver. 9 coins left in the bag inclusive of 3 silver coins
+                P(A) * P(B|A) = (4/10) * (3/9) = 12/90 = 0.1334 = 13.34%
+                P(A with B) = P(A) * P(B|A)
+                P(A with B) = 13.34%
+
+        Permutation and Combination
+            Permutation:
+                https://www.youtube.com/watch?v=DROZVHObeko
+                Total number of ways which a set, group, or number of things can be arranged
+                nPr = p(n, r) = (n!) / [(n-r)!]
+            Combination:
+                https://www.youtube.com/watch?v=p8vIcmr_Pqo
+                The unordered arrangement of a set, group, or number of things
+                nCr = c(n, r) = (n!) / [r!(n-r)!]
+
+        Calculation:
+            From a group of 10 employees, a company has to select 4 for a project.
+            How many ways can the selection happen when the arrangement of employees:
+                a. needs to be different
+                b. need not be different 
+                
+            Answer for (a):
+                nPr = p(n, r) = (n!) / [(n-r)!]
+                10 P 4 = (10!) / [(10-4)!] = 10! / 6! = 10x9x8x7 = 5040 ways
+            
+            Answer for (b):
+                nCr = c(n, r) = (n!) / [r!(n-r)!]   //Binomial coefficient
+                10 C 4 = c (10, 4) = (10!) / [4!(10-4)!] 
+                = (10x9x8x7x6x5x4x3x2x1) / [4! x 6!]
+                = (10x9x8x7x6x5x4x3x2x1) / [4x3x2x1 x 6x5x4x3x2x1]
+                = (10x9x8x7) / [4x3x2x1]  #6! have been cancelled with the numerator
+                = (10x9x8x7) / [4x3x2]  #Cancelled 1 from denominator
+                = (10x9x4x7) / [4x3]  #Cancelled 2 from denominator
+                = (10x3x4x7) / [4]  #Cancelled 3 from denominator
+                = (10x3x7)  #Cancelled 4 from denominator
+                = 210 ways
+ 
+        Types of Statistics
 
 
 
