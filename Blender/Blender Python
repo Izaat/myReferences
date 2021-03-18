@@ -5,6 +5,7 @@ CONTENTS
 03. Installing your own script
 04. Shader Library
 05. Keyframe and Modifier
+06. Popup Dialog Box
 
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -320,7 +321,163 @@ CONTENTS
     
 
 ///////////////////////////////////////////////////////////////////////////////////
-05. Keyframe and Modifier
+05. Keyframe and Modifier - 12:00
+    //Program
+
+        import bpy
+        
+        class MainPanel(bpy.types.Panel):
+            bl_label = "Main Panel"
+            bl_idname = "OBJECT_PT"
+            bl_space_type = 'VIEW_3D'
+            bl_region_type = 'UI'
+            bl_category = 'New Tab'
+            
+            def draw(self, context):
+                layout = self.layout
+                obj = context.object
+                row = layout.row()
+                row .operator('shader.neon_operator')           
+                
+        class SHADER_OT_NEON(bpy.types.Operator):
+            bl_label = "Add Neon Shader"
+            bl_idname = 'shader.neon_operator'            
+
+            def execute(self, context):                
+                cur_frame = bpy.context.scene.frame_current
+                
+                material_neon = bpy.data.materials.new(name="Neon")                                                                     #Create new shader neon
+                material_neon.use_nodes = True                                                                                                          #Enable Use Nodes
+                
+                tree =  material_neon.node_tree
+                
+                material_neon.node_tree.nodes.remove(material_neon.node_tree.nodes.get('Principled BSDF'))    #Remove Principled Node
+                material_output = material_neon.node_tree.nodes.get('Material Output')                                         #Add Material Output node                
+                material_output.location = (400,0)                                                                                                        #Set Node location inside Node Editor (Horizontal axis = 400, Vertical axis = 0)
+                
+                #Emission Modifier
+                emiss_node = material_neon.node_tree.nodes.new('ShaderNodeEmission')              #Add Emission
+                emiss_node = (200, 0)                                                                                                   #Set Node location
+                emiss_node.inputs[0].default_value = (0.59, 0.76, 1, 1)                                              #Set RGBA (Red, Green, Blue, Alpha) to the node
+                emiss_node.inputs[1].default_value = 2                                                                       #Set Strength Value
+                
+                emiss_node.inputs[1].keyframe_insert("default_value", frame=cur_frame)              #Keyframe
+                data_path = f'nodes["{emiss_node.name}"].inputs[1].default_value'                         #Add modifier
+                    #Similar to:
+                    #In Graph editor, Open modifier tab in hidden panel > Add modifier > Noise 
+                fcurves = tree.animation_data.action.fcurves
+                fc = fcurves.find(data_path)
+                if fc:
+                    new_mod = fc.modifiers.new('NOISE')
+                    new_mod.strength = 10
+                    new_mod.depth = 1
+                
+                
+                material_neon.node_tree.links.new(emiss_node.outputs[0], material_output.inputs[0])
+                bpy.context.object.active_material = material_neon
+                
+                return{'FINISHED'}
+
+        def register():
+            bpy.utils.register_class(MainPanel)
+            bpy.utils.register_class(SHADER_OT_NEON)
+        def unregister():
+            bpy.utils.unregister_class(MainPanel)
+            bpy.utils.unregister_class(SHADER_OT_NEON)
+        if __name__=="__main__":
+            register()        
+
+///////////////////////////////////////////////////////////////////////////////////
+06. Popup Dialog Box
+    //Program - Structure
+        import bpy
+        class WM_OT_myOp(bpy.types.Operator):
+            """Open the Add Cube Dialog box"""
+            bl_label = "Add Cube Dialog Box"
+            bl_idname = "wm.myop"   #TAKE NOTE OF THIS NAME ID FOR IMPLEMENTATION
+            
+            #Type in "bpy.ops." in console and entire list will appear
+            text = bpy.props.StringProperty(name="Enter Text", default="")
+            number = bpy.props.FloatProperty(name="scale Z Axis", default=1)
+            
+            def execute(self, context):
+                bpy.ops.mesh.primitive_cube_add() #Cube will be added when the button is pressed
+                return {'FINISHED'}
+
+            def invoke(self, context, event):
+                return context.window_manager.invoke_props_dialog(self)
+                
+        def register():
+            bpy.utils.register_class(WM_OT_myOp)
+        def unregister():
+            bpy.utils.unregister_class(WM_OT_myOp)
+            
+        if __name__=="__main__":
+            register()      
+            bpy.ops.wm.myop('INVOKE_DEFAULT')
+
+    //Program - Dialog Box That Affects the Cube
+        import bpy
+        class WM_OT_myOp(bpy.types.Operator):
+            """Open the Add Cube Dialog box"""
+            bl_label = "Add Cube Dialog Box"
+            bl_idname = "wm.myop"            #TAKE NOTE OF THIS NAME ID FOR IMPLEMENTATION
+            
+            #Type in "bpy.ops." in console and entire list will appear
+            text = bpy.props.StringProperty(name="Enter Text", default="")
+            #number = bpy.props.FloatProperty(name="scale Z Axis", default=1)  #If using number variable
+            scale = bpy.props.FloatProperty(name="Scale:", default=(1, 1, 1))       #Scale in Y
+            
+            def execute(self, context):
+                text1 = self.text
+                #n1 = self.number           #If using number variable
+                s1 = self.scale
+                
+                bpy.ops.mesh.primitive_cube_add() #Cube will be added when the button is pressed
+                obj = bpy.context.object
+                obj.name = text1
+                
+                #obj.scale[2] = n1  #Where 0=Xaxis, 1=Yaxis, 2=Zaxis #If using number variable
+                obj.scale[0] = s1[0] 
+                obj.scale[1] = s1[1] 
+                obj.scale[2] = s1[2] 
+                
+                return {'FINISHED'}
+
+            def invoke(self, context, event):
+                return context.window_manager.invoke_props_dialog(self)
+                
+        def register():
+            bpy.utils.register_class(WM_OT_myOp)
+        def unregister():
+            bpy.utils.unregister_class(WM_OT_myOp)
+            
+        if __name__=="__main__":
+            register()      
+            bpy.ops.wm.myop('INVOKE_DEFAULT')
+
+    //Implementation
+        #To add script above into another python file
+        #In another program, find the class and add into the function
+        
+        import bpy
+        class TestPanel(bpy.types.Panel):
+            bl_label = "Test Panel"
+            bl_idname = "PT_TestPanel"
+            bl_space_type = 'VIEW_3D' 
+            bl_region_type = 'UI' 
+            #bl_category = 'Tool' 
+            bl_category = 'New Tab'
+            
+            def draw(self, context):
+                layout = self.layout
+                
+                row = layout.row()  
+                row.label(text= "Add an object", icon='CUBE') 
+                row = layout.row()  
+                #row.operator("mesh.primitive_cube_add", icon='CUBE', text,'Cube')  //the example original line to be replaced
+                row.operator("wm.myop", icon='CUBE', text,'Cube')     //Replace "mesh.ube_add" to "wm.myop"
+
 
 
 
