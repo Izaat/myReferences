@@ -1141,6 +1141,56 @@ CONTENTS
             The basis for calculating the confidence interval for a hypothesis test as it allows the use of a standard normal table
             
     #Statistical Distribution
+        Discreet Probability Distribution
+            Binomial Distribution**
+            Poisson Distribution**
+            Negative Binomial Distribution
+            Geometric Distribution
+            Hyper Geometric Distribution
+        
+            These distributions help in predicting the sample behavior that has been observed in a population
+
+        Binomial Distribution
+            Predicts sample behavior
+            Describes the discreet data as a result of a particular process
+            Bernoulli's process where it has only 2 outcomes (Good or Reject, Pass or Fail, etc..)
+            Being used to deal with defects
+            Most suitable when sample size is less than 30 and less than 10% of population
+            P(R) = nCr * p to the power of r * [(1-p) to the power of n-r]  
+                where: p = probability of success, r = number of successes desired, n = sample size
+
+            Mean
+                u = np
+                where n = sample size
+                p = probability of success
+            Standard Deviation  
+                sigma = sqrt[np(1-p)]
+                where n = sample size,
+                p = probability of success
+            Factorial calculation
+                5! = 5x4x3x2x1 = 120
+            Binomial Dist. = nCr * p^r * (1-p)^n-r
+
+        Binomial Distribution Calculation
+            Question: Find probability of getting 5 heads in 8 coin tosses
+            Answer:
+                Outcomes are statistically independent (Head or Tail)
+                p = 0.5 or 50% chance
+                n = 8 (sample size)
+                r = 5 (number of success desired)
+                
+                P(R) = nCr * p^r * (1-p)^n-r
+                P(R) = 8C5 * 0.5^5 * (1-0.5)^8-5
+                = c(8,5) * 0.03125 * 0.125
+                = (8!) / [5!(8-5)!] * 0.03125 * 0.125
+                = (8x7x6x5x4x3x2x1) / [(5x4x3x2x1)(3x2x1)] * 0.03125 * 0.125
+                = (8x7x6) / [(3x2x1)] * 0.03125 * 0.125
+                = (8x7x6) / [(3x2)] * 0.03125 * 0.125
+                = (8x7x2) / [(2)] * 0.03125 * 0.125
+                = (8x7) * 0.03125 * 0.125
+                = 56 * 0.03125 * 0.125
+                = 0.2187
+                = 21.87%
 
 
 
