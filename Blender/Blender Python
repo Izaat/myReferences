@@ -6,7 +6,7 @@ CONTENTS
 04. Shader Library
 05. Keyframe and Modifier
 06. Popup Dialog Box
-
+07. Text Tool
 
 ///////////////////////////////////////////////////////////////////////////////////
 01. Basics
@@ -19,7 +19,44 @@ CONTENTS
         Save this file as *.py
     Set the another to info view
         Viewport > Top left hand corner > Scripting > Info
-    
+
+    //Program - Basic Structure    
+        bl_info = {
+            "name": "Add Mesh Cube",
+            "author": "Your Name"
+            "version": (1,0)
+            "blender": (2, 91, 0),
+            "location": "View3D > Toolshelf",
+            "description": "Adds new Mesh object",
+            "warning": "",
+            "wiki_url": "",
+            "category": "Add Mesh",
+        }
+
+        import bpy
+        
+        class addMesh(bpy.types.Panel):
+            bl_label = "Text Tool"
+            bl_idname = "OBJECT_PT_TextTool"
+            bl_space_type = 'VIEW_3D' 
+            bl_region_type = 'UI' 
+            bl_category = 'Text Tool' 
+            
+            def draw(self, context):
+                layout = self.layout
+                
+                row = layout.row()  
+                row.operator("mesh.primitive_cube_add")
+        
+        def register():
+            bpy.utils.register_class(addMesh)
+            
+        def unregister():
+            bpy.utils.unregister_class(addMesh)
+            
+        if __name__=="__main__":
+            register()    
+
     //Program - Add New Tab or New Category in a Tab
         import bpy
         
@@ -478,6 +515,84 @@ CONTENTS
                 #row.operator("mesh.primitive_cube_add", icon='CUBE', text,'Cube')  //the example original line to be replaced
                 row.operator("wm.myop", icon='CUBE', text,'Cube')     //Replace "mesh.ube_add" to "wm.myop"
 
+///////////////////////////////////////////////////////////////////////////////////
+07. Text Tool
+    //Program - TextTool.py
+        bl_info = {
+            "name": "Text Tool",
+            "author": "Your Name"
+            "version": (1,0)
+            "blender": (2, 91, 0),
+            "location": "View3D > Toolshelf",
+            "description": "Adds new Mesh object",
+            "warning": "",
+            "wiki_url": "",
+            "category": "Add Mesh",
+        }
+
+        import bpy
+        
+        class OBJECT_PT_TextTool(bpy.types.Panel):
+            bl_label = "Text Tool"
+            bl_idname = "OBJECT_PT_TextTool"
+            bl_space_type = 'VIEW_3D' 
+            bl_region_type = 'UI' 
+            bl_category = 'Text Tool' 
+            
+            def draw(self, context):
+                layout = self.layout
+                
+                row = layout.row()  
+                row.operator("wm.textop", text="Add Text", icon='')
+                
+        class WM_OT_textOP(bpy.types.Operator):       
+            bl_label = "Text Tool Operator"
+            bl_idname = "wm.textop"                
+            
+            text = bpy.props.StringProperty(name="Enter Text")
+            scale = bpy.props.FloatProperty(name="Scale:", default=1)
+            
+            center = bpy.props.BoolProperty(name="Center Origin", default=False)
+            extrude = bpy.props.BoolProperty(name="Extrude", default=False)
+            extrude_amout = bpy.props.FloatProperty(name="Extrude Amount:", default=0.06)
+            
+            def execute(self, context):
+                
+                t1 = self.text
+                s = self.scale
+                c = self.center
+                e = self.extrude
+                ea = self.extrude_amount
+                
+                #bpy.ops.object.text_add(enter_editmode=False, location=(0, 0, 0))
+                bpy.ops.object.text_add(enter_editmode=True, location=(0, 0, 0))    #Enter edit mode upon button press
+                #bpy.ops.font.delete(type='PREVIOUS_OR_SELECTION)   #Deletes letter
+                bpy.ops.font.delete(type='PREVIOUS_WORD)   #Deletes entire word
+                bpy.ops.font.tet_insert(text=t1)
+                bpy.ops.object.editmode_toggle()
+                
+                if e == True:
+                    bpy.context.object.data.extrude = ea
+                
+                if c == True:
+                    bpy. context.object.data.align_x = 'CENTER'
+                    bpy. context.object.data.align_y = 'CENTER'
+                
+                return {'FINISHED'}
+        
+            def invoke(self, context, event):
+                return context.window_manager.invoke_props_dialog(self)
+        
+        def register():
+            bpy.utils.register_class(OBJECT_PT_TextTool)
+            bpy.utils.register_class(WM_OT_textOP)
+            
+        def unregister():
+            bpy.utils.unregister_class(OBJECT_PT_TextTool)
+            bpy.utils.unregister_class(WM_OT_textOP)
+            
+        if __name__=="__main__":
+            register()    
 
 
 
