@@ -1191,7 +1191,36 @@ CONTENTS
                 = 56 * 0.03125 * 0.125
                 = 0.2187
                 = 21.87%
+                
+        Poisson Distribution
+            Describes the distribution of binary data from randomly occurring events (Undefined probability)
+            Used for analyzing situtations where the number of failure/defects is large or probability of success is undefined or very small
+            Widely used in insurance sector for calculating accidents (a randomly occuring event)
+            
+            P(x) = {Lambda^x * e^Lambda) / x!
+            where P(x) = probability of exactly (*) occurrences in Poisson Distribution (n)
+            Lambda = mean number of occurrences during interval
+            x = number of occurrences desired
+            e = base of the natural logarithm (equals 2.71828)
+            
+            Mean of PD (u) = Lambda
+            Std Dev of Poisson Distr. (sigma) = Sqrt of Lambda
 
+        Poisson Distribution Calculation
+            Past record shows the number of accidents every week = 5 junction related accidents in a week
+            Assume number of accidents follows Poisson Distribution.
+            Calculate probability any number of accidents in a week
+            
+            Lambda = 5 per week
+            Probability of 0 accidents per week
+                P(0) = [5^0 * e^-5] / 0! = 0.006
+            Probability of exactly 1 accident per week
+                P(1) = [5^1 * e^-5] / 1! = 0.03
+            Probability of more than 2 accidents per week
+                P(2) = [5^2 * e^-5] / 2! = 0.08
+                1 - [P(0) + P(1) + P(2)] = 1 - [0.006 + 0.03 + 0.08]
+                = 0.884
+                = 88.4%
 
 
 
