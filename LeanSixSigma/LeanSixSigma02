@@ -1222,7 +1222,106 @@ CONTENTS
                 = 0.884
                 = 88.4%
 
+        Normal/Gaussian Distribution
+            A continuous probability distribution
+            Illustrated as N (mu, sigma)
+            Higher frequency arounf the mean and fewer away from it (Bell curve and symmetrical)
+            Used as a first approximation to describe real valued random variables that cluster around the mean
+            Total area under normal curve: p(x) = 1
+            To standardize comparison of dispersion, a standard Z variable is used
+            
+            Uses of Z value:
+                Unique for each probability within normal distribution
+                Helps to find probabilities of data points anywhere within the distribution
+                Dimensionless (Not defined in S.I Units like mm, liters, etc)
+                
+                Z = (Y-mu) / sigma
+                where Z = number of standard deviation between Y and mu
+                Y = value of the data point in concern
+                mu = mean of population
+                sigma = standard deviation of population
 
+        Normal Distribution Calculation
+            #Calculation: https://www.youtube.com/watch?v=2tuBREK_mgE
+            #Z-Table: https://www.youtube.com/watch?v=lgwT6tDniko
+            Time taken to resolve customer problems follows normal distribution
+            Mean value of time = 250hours
+            Standard Deviation = 23hours
+            Find the probability that a problem resolution will take 300hours
+            
+            Y = 300
+            mu = 250 
+            sigma = 23 
+            Formula:
+                Z  = (Y-mu) / sigma
+                    = (300 - 250) / 23
+                    =2.17
+            Bell Curve Diagram: 
+                The Z table required
+                From Normal Distribution Table, Z value of 2.17 covers an area of 0.98499
+                Thus the probability that a problem can be resolved in less than 300 hours is 98.5%
+                The chances of a problem resolution taking more than 300 hours is 1.5%
+            
+        Z Table calculation:        
+            Find the p of (Z greater than 1.12)            
+                Opposite of event A occurrence is the event not occurring.
+                P(not A) = 1 - P(A)
+                P(Z greater than 1.12) = 1 - P(Z less than 1.12)
+                Using table:
+                P(Z<1.12) = 0.5 + P(0 < Z < 1.12) = 0.5 + 0.3686 = 0.8686
+                Hence P(Z>1.12) = 1 - 0.8686 = 0.1314
+                
+            Find value of p of (Z between 0 and 1.12)
+                Can be read straight from the table
+                Using Table:
+                P(Z between 0 and 1.12) = 0.3686
+
+        Chi Square Distribution (X^2 distribution)
+            https://www.youtube.com/watch?v=80ffqpZdKiA
+            A distribution of the sum of squares of k independent standard normal random variables
+            Widely used probability distribution in inferential statistics
+            Used in hypothesis tests
+            Degree of freedom (dof) = k - 1, where k is the sample size
+
+            Formula:
+                X^2 = Sum = [(f0 - fe)^2] / fe
+                where, X2 calculated (Sum) = chi-squared index
+                f0 = observed frequency
+                fe = expected frequency
+
+            Graph Shape:
+                Normal Distribution (Z1) = Bell shaped
+                Chi Squared (Xsq1) means Normal distribution (Z1) being squared (Zsq1), hence "Chi-Squared" and this will be 1 degree of freedom
+                Chi-squared with 1 dof (Xsq1) AKA Zsq1 = Steep descending slope from peak at 0, reversed exponential graph
+                Chi squared with 2 dof (Xsq2) OR, Zsq1 + Zsq2 = Gradual descending slope from peak at 0
+                Chi squared with 3 dof (Xsq3) OR, Zsq1 + Zsq2 + Zsq3 = Steep ascending slope from 0, peaks at 1 and then gradual descending slope
+                Chi squared with 4 dof (Xsq4) OR, Zsq1 + Zsq2 + Zsq3 + Zsq4 = Slight gradual ascending slope from 0, peaks at 2 and then gradual descending slope
+                Chi squared with 5 dof (Xsq5) = More gradual ascending slope from 0, peaks at 3 and then gradual descending slope
+
+        t-Distribution
+            Used in hypothesis testing
+            Symmetrical in shape (Bell curve)
+            Used when: 
+                The sample size is less than 30
+                The population standard deviation is not known
+                population is approximately normal
+            t-Distribution approaches Normal Distribution as sample size increases
+            In t-Distribution, when sample size is 15, 
+                the mean peak will be lower than Normal Distribution's peak but higher than the mean peak of t-Distribution's with sample size of 2
+                tails will be higher than Normal Distribution's tails but lower than the tails of t-Distribution's with sample size of 2
+            In t-Distribution, when sample size is 15,
+                the mean peak will be lower than Normal Distribution's peak and t-Distribution's with sample size of 15
+                tails will be higher than Normal Distribution's tails and t-Distribution's with sample size of 15
+
+        f-Distribution
+            A ratio of 2 Chi-squared distributions
+            Denoted by the degrees of freedom for the numerator Chi Squared and denominator Chi squared
+            Formula:
+                F = Ssq1 / Ssq2
+                where S is the standard deviation
+                If F = 1, there is no difference in the variance
+                Numerator should be greater than denominator, (df1 = n1, df2 = n2-1)
+            From f-Distribution table, critical fDistribution at alpha and dof of 2 different process samples (df1 and df2) can be determined
 
 
 
