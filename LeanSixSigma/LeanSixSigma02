@@ -1323,6 +1323,59 @@ CONTENTS
                 Numerator should be greater than denominator, (df1 = n1, df2 = n2-1)
             From f-Distribution table, critical fDistribution at alpha and dof of 2 different process samples (df1 and df2) can be determined
 
+    #Collecting and Summarizing Data    
+        Types of Data
+            Discrete Data OR Attribute Data
+                Data that can be counted: quantity, frequency
+                Examples:
+                    Number of defects,
+                    Percentage of defects
+                    Frequency of breakdowns
+                    Good vs Bad,
+                    etc
+                    
+            Continuous Data OR Variable Data
+                Data that can be measured on a continuous scale: Length, volume, distance
+                    Examples:
+                        Height,
+                        Weight,
+                        Time,
+                        Temperature,
+                        etc
+            
+            Assuring Data Accuracy
+                To ensure data is accurate, data sampling is carried out
+                Sampling is a texhnique of selecting appropriate sample from a group
+                Types of sampling:
+                    Random Sampling: Chosen data at random from larger group of subject 
+                    Sequential Sampling: Data chosen from larger group of subject for a period of time
+                    Stratified Sampling: Categorize the larger group into smaller sub group in accordance to population parameter and take data from this sub group
+
+        Simple Random Sampling VS Stratified Sampling
+            Simple:
+                Possibility of erroneous results is high 
+                Cannot indicate possible causes of variation
+            Stratified:
+                Minimized possibility of errors
+                Capable of showing the causes of variation
+
+        Data coding
+            A process of converting and condensing raw data into categories and sets so that it can be used for further analysis
+            Simplifies large quantities of data
+            Enables easy entry of process data into computers
+            Facilitates data analysis
+            Enables organized data representation
+            Eliminates data repetition
+
+        Descriptive Statistics - Measures of Central Tendency
+            A single value that indicates the central point in a set of data
+            Common measures of central tendency
+                Mean: Average 
+                Median: Middle number
+                Mode: Most frequent
+                Outlier: In a list of dataset, the outlier is the extreme number that is "off the scale" from the grouping. (Example: The billionaires in the middle income population)
+                    Mean result will be skewed due to the presence of outliers.
+                    Median result will be unchanged
 
 
 
