@@ -46,7 +46,7 @@ CONTENTS
             def draw(self, context):
                 layout = self.layout    #NOTE: layout works by adding object in a new row
                 
-                row = layout.row()  
+                row = layout.row()      #NOTE: row works by adding objects side by side
                 row.operator("mesh.primitive_cube_add")
         
         def register():
