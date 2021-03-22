@@ -44,7 +44,7 @@ CONTENTS
             bl_category = 'Text Tool' 
             
             def draw(self, context):
-                layout = self.layout
+                layout = self.layout    #NOTE: layout works by adding object in a new row
                 
                 row = layout.row()  
                 row.operator("mesh.primitive_cube_add")
