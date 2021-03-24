@@ -1444,7 +1444,39 @@ CONTENTS
                 | 80+   | 1, 1, 2, 2, 2, 2, 3, 7           |
 
 
+        Graphical Method - Boxplots
+            Based on medians and quartiles, is used to view the data points distribution easily
+            Example: 
+                Lengths of 13 fishes caught 
+                12, 13, 5, 8, 9, 20, 16, 14, 14, 6, 9, 12, 12
+                
+                Step 1: Rearrange
+                5, 6, 8, 9, 9, 12, 12, 12, 13, 14, 14, 16, 20
+                
+                Step 2: Find median
+                Median = 12 (7th number)
+                
+                Step 3: Find lower and upper quartile (Midpoint between median)
+                Lower Quartile = 8.5 (Since the midpoint is between 8 and 9, 8.5 will be the Lower Quartile)
+                Upper Quartile = 14 (Since the midpoint is between 14, the 14 will be the Upper Quartile)
 
+                Step 4: Draw number line to include all data points (A ruler indicating the points)
+                --+--+--+---+----+---+---+---+----+---+---
+                  4  6  8   10   12  14  16  18  20   22
+
+                Step 5: Draw a box of 2 sections over the ruler nidicating the quartiles and the median
+                #         ____________
+                #         |      |   |
+                #         ------------
+                --+--+--+---+----+---+---+---+---+---+---
+                  4  6  8   10   12  14  16  18  20   22
+
+                Step 6: Extend whiskers from ends of boxes from smallest number (5) to largest number (20)
+                #         ____________
+                #   o-----|      |   |-----------o
+                #         ------------
+                --+--+--+---+----+---+---+---+---+---+---
+                  4  6  8   10   12  14  16  18  20   22        
 
 
 
