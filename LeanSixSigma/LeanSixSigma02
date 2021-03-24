@@ -1479,7 +1479,38 @@ CONTENTS
                   4  6  8   10   12  14  16  18  20   22        
 
 
+        Graphical Method - Scatterplots
+            Used for analyzing the correlation between 2 variables
+            Used for examine cause and effect relationship
+            For identifying root cause
+            
+            5 types of correlations
+                Perfect positive
+                    As X (Horizontal value) increases, Y (Vertical value) increase proportionally
+                    Ascending Linear graph
+                Moderate positive
+                    As X increase, Y increases but not proportionally
+                No relation                    
+                Moderate Negative
+                    As X increase, Y decreases but not proportionally
+                Perfect Negative
+                    As X (Horizontal value) increases, Y (Vertical value) decrease proportionally
+                    Descending Linear graph
 
+        Graphical Method - Histogram
+            Similar to bar graphs but the bars represent intervals of subgroups in ascending/descending order
+            Best suited for continuous data
+            Example:
+            Data = 1, 2, 3, 3, 4, 4, 4, 5, 5, 5, 6
+
+            #6---------------------
+            #5---------___---------
+            #4---------| |---___---
+            #3---------| |---| |---
+            #2---___---| |---| |---
+            #1---| |---| |---| |---
+            #0---| |---| |---| |---
+            #    0-2   3-4   5-6
 
 
 
