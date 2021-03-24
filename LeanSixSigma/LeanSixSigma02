@@ -1377,6 +1377,71 @@ CONTENTS
                     Mean result will be skewed due to the presence of outliers.
                     Median result will be unchanged
 
+        Descriptive Statistics - Measures of Dispersion
+            Describes the spread of values.
+            The higher the variation of data points, the higher the spread of data
+            3 main measures of dispersion:
+                Range: The difference between the largest and smallest value of data
+                Variance (Symbol: Sigma Squared)
+                    Variance is a measure of variation and cannot be considered as variation in dataset
+                    Population variance is preferred over sample variance as it is a more accurate indicator of variation                     
+                    Variance = [Sum of (xi - xbar)^2] / (n - 1)
+                    Population Variance in Excel: VARP()
+                    Sample Variance in Excel: VARS()
+                    Example: 4,8,1,6,6,2,9,3,6,9
+                        Ans: Sample Variance = 8.04, Population Variance = 7.24
+                Standard Deviation (Symbol: Sigma)
+                    Standard Deviation = Square Root of  Variance
+                    Population standard deviation in Excel = STDEVP() 
+                    Sample Standard Deviation in Excel = STDEV()
+                    Example: 4,8,1,6,6,2,9,3,6,9
+                        Population Std Dev = 2.69
+                        Sample Std Dev = 2.83
+
+        Descriptive Statistics - Frequency Distribution
+            A grouping of data into categories showing the number of observation
+            Table:
+            No. of Cars | Freq.
+            0                 | 4
+            1                 | 6
+            2                 | 5
+            3                 | 3
+            4                 | 2
+            
+        Cumulative Frequency Table
+            Similar to Frequency Distribution Table)
+            The difference is that it has 3 more columns:
+                Cumulative Frequency,
+                Percentage,
+                Cumulative Percentage
+        
+        Dataset:
+            37, 49, 54, 91, 60, 62, 65, 77, 67, 81
+            LV = Lower Value
+            UV = Upper Value
+            F = Frequency
+            CF = Cumulative Frequency
+            % = Percentage
+            CP = Cumulative Percentage
+        
+        | LV | UV | F  | CF | %  | CP  |
+        | 35 | 44  | 1 | 1  | 10 | 10  | 
+        | 45 | 54  | 2 | 3  | 20 | 30  | 
+        | 55 | 64  | 2 | 5  | 20 | 50  | 
+        | 65 | 74  | 2 | 7  | 20 | 70  | 
+        | 75 | 84  | 2 | 9  | 20 | 90  | 
+        | 85 | 94  | 1 |10  | 10 |100  | 
+
+        Graphical Method - Stem and Leaf Plots
+            Used for representing data in a graphical format to visualize the shape of distribution
+            Example: Temp for a month:
+                78, 81, 82, 68, 65, 59, 62, 58, 51, 62, 62, 71, 69, 64, 67, 71, 62, 65, 65, 74, 76, 87, 82, 82, 83, 79, 79, 71, 82, 77, 81
+                Table:
+                | Stem | Leaf                              |
+                | 50+   | 1, 8, 9                          |   //51, 58, 59
+                | 60+   | 2, 2, 2, 2, 4, 5, 5, 5, 7, 8, 9  |
+                | 70+   | 1, 1, 1, 4, 6, 7, 8 9, 9         |
+                | 80+   | 1, 1, 2, 2, 2, 2, 3, 7           |
 
 
 
