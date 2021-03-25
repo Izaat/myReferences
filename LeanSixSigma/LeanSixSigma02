@@ -974,6 +974,7 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////
 03. Measure Phase
     
+    //////////////////////////////////////
     #Foundation
         Key Objectives
             Create a detailed Process Map
@@ -1016,7 +1017,8 @@ CONTENTS
             Process owners are the best source for initial identification of the critical variables
             Once identified, relationship between the variables is depicted, using tools such as SIPOC and Cause and Effect Matrix
             Results for Process input variables are compared to determine which input variables have the greatest effect on output variables
-        
+    
+    //////////////////////////////////////
     #Probability and Statistics
         Probability:
             Refers to the chance of something occurring or happening
@@ -1139,7 +1141,8 @@ CONTENTS
             Mean of the sampling distribution equals to the population mean
             Helps in making inferences from sample statistics about the population parameters irrespective of the distribution of the population
             The basis for calculating the confidence interval for a hypothesis test as it allows the use of a standard normal table
-            
+    
+    //////////////////////////////////////
     #Statistical Distribution
         Discreet Probability Distribution
             Binomial Distribution**
@@ -1322,7 +1325,8 @@ CONTENTS
                 If F = 1, there is no difference in the variance
                 Numerator should be greater than denominator, (df1 = n1, df2 = n2-1)
             From f-Distribution table, critical fDistribution at alpha and dof of 2 different process samples (df1 and df2) can be determined
-
+            
+    //////////////////////////////////////
     #Collecting and Summarizing Data    
         Types of Data
             Discrete Data OR Attribute Data
@@ -1550,4 +1554,23 @@ CONTENTS
                     5. Click OK
                     6. Double Click data column
                     7. Click OK
+
+    //////////////////////////////////////
+    #Measurement System Analysis
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
