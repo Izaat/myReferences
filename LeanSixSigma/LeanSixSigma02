@@ -1557,6 +1557,92 @@ CONTENTS
 
     //////////////////////////////////////
     #Measurement System Analysis
+        A technique that identifies measurement error (variation) and its sources to reduce variation
+        Used throughout the DMAIC process.
+        Error prone MSA leads to incorrect conclusions
+        The capability is calculated, analyzed and interpreted using Gage Repeatability and Reproducibility (GR&R) to determine:
+            -measurement correlation,
+            -bias,
+            -linearity,
+            -percent agreement,
+            -precision/tolerance
+
+        Objectives:
+            To obtain information about type of measurement variation of measurement system
+            Establish criteria to accept and release new measuring equipment
+            Compare one measure method with another
+            Form basis for evaluating a method suspected of being deficient
+            Variations must be resolved to ensure correct baselines
+        
+        Observed Value, Measurement Variability & Process Variability 
+            Observed Value = True Value +- Measurement Error
+            Measurement error is net effect of all sources of measurement variability causing observedvalue to deviate from true value
+            
+            True Variability = Process variability + Measurement variability
+            Measurement variable and process variable must be evaluated and improved together
+
+            If process variable is addressed while measurement variable continues to be significant, process improvement is invalid
+
+        Measurement Error types:
+            Bias
+                Involves calibration study
+                mu(total) = mu(process) +- mu(measurement)
+            Variations
+                Involves GR&R study
+                sigma^2(total) = sigma^2(process) +- sigma^2(measurement) 
+
+        Sources of variation
+            Observed Process Variation:-
+                Actual Process Variation (aka Part variation)
+                    Long term process variation
+                    Short Term process variation
+                    variation within a sample
+                Measurement Variation
+                    Variation due to operators: Reproducibility
+                    Variation due to Gage: Repeatability
+                    Variation within a sample
+
+        Gage Repeatability and Reproducibility
+            Repeatability:
+                Variation in measurement obtained when one operator measures repeatedly
+                Example: Getting variations for measuring the same hole 3 times with same calipers
+                It can be either operator error of equipment error (Equipment Variation - EV)
+            Reproducibility:
+                Average of measurements made by different operators performing Repeatability Operations
+                Example: Getting variations between operators for measuring the same hole 3 times with same calipers
+                Aka Appraiser Variation - AV
+            NOTE: It is important to resolve equipment variation before resolving appraiser variation
+
+        GR&R Guidelines
+            Should be performed over the range of expected observations
+            Actual equipment should be used
+            Written procedures or approved practices should be followed
+            Measurement variability should be presented as is
+            After GR&R, variables should be seperated into causal components, prioritized, and targeted for action
+
+        GR&R Concepts
+            Bias:
+                Distance between sample mean value and sample true value (aka accuracy)
+                Bias = Mean - Ref Val. Process Variation = 6 std dev
+                Bias% = Bias / Process Variation
+            Linearity:
+                Consistency of bias over the range of the gage
+                Linearity = Graph Slope * Process Variation
+            Precision:
+                Degree of repeatability or closeness of data
+                The smaller the dispersion, the better the precision
+                sigma^2(gage) = sigma^2(repeatability) + sigma^2(reproducibility)
+
+        GR&R Data Collection
+            Number of operators are usually 3
+            Number of units to measure is usually 10
+            General sampling techniques are used to represent population
+            Number of trials for each operator is 2 to 3
+            Gage is checked for calibration and resolution
+            Units are measured by the first operator in random order, same order followed by other operators
+            Each trial is repeated
+
+        ANOVA
     
 
 
