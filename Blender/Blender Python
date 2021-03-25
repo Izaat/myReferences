@@ -10,6 +10,7 @@ CONTENTS
 08. Custom Node Group
 09. Custom Drawing / Layout Improvements / Texts with Extrude
 10. Custom Keymap (3 Parts)
+11. Updated Registration Method
 
 ///////////////////////////////////////////////////////////////////////////////////
 01. Basics
@@ -1053,7 +1054,29 @@ CONTENTS
             #bpy.ops.wm.dialogop('INVOKE_DEFAULT') 
 
 
+///////////////////////////////////////////////////////////////////////////////////
+11. Updated Registration Method
 
+    //Program.py (Old method)
+        def register():
+            bpy.utils.register_class(YOUR_CLASS_NAME1)
+            bpy.utils.register_class(YOUR_CLASS_NAME2)
+        def unregister():
+            bpy.utils.unregister_class(YOUR_CLASS_NAME1)   
+            bpy.utils.unregister_class(YOUR_CLASS_NAME2)     
+        if __name__ == "__main__":
+            register()        
+            
+    //Program.py (New method)
+        classes = [YOUR_CLASS_NAME1, YOUR_CLASS_NAME2]
+        def register():
+            for cls in classes:
+                bpy.utils.register_class(cls)    
+        def unregister():
+            for cls in classes:
+                bpy.utils.unregister_class(cls)    
+        if __name__ == "__main__":
+            register()
 
 
 
