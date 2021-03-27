@@ -641,6 +641,10 @@ CONTENTS
             Subgroup Size: 1  (Sampling Rate)
             Options:
                 Title: Run Chart Example
+
+        Stability Study:
+            If p-value is less than 0.05, the process has special causes of variation. 
+            Chances of process going unstable is high
             
     //Fishbone Diagram/Ishikawa Analysis
         Plotting:
