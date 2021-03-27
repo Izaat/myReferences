@@ -1017,7 +1017,11 @@ CONTENTS
             Process owners are the best source for initial identification of the critical variables
             Once identified, relationship between the variables is depicted, using tools such as SIPOC and Cause and Effect Matrix
             Results for Process input variables are compared to determine which input variables have the greatest effect on output variables
-    
+
+        Activities under measure phase: 
+            MSA, Collection of Data, Statistical Calculation, Checking for Accuracy and Checking for Validity
+            This is followed by a test for stability under Process Stability Study
+
     //////////////////////////////////////
     #Probability and Statistics
         Probability:
