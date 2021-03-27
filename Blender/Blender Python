@@ -11,6 +11,7 @@ CONTENTS
 09. Custom Drawing / Layout Improvements / Texts with Extrude
 10. Custom Keymap (3 Parts)
 11. Updated Registration Method
+12. Scripting Tips
 
 ///////////////////////////////////////////////////////////////////////////////////
 01. Basics
@@ -1078,7 +1079,25 @@ CONTENTS
         if __name__ == "__main__":
             register()
 
+///////////////////////////////////////////////////////////////////////////////////
+12. Scripting Tips
+    Link: https://docs.blender.org/api/current/info_quickstart.html
+    
+    Using Autocomplete function in console panel
+        Type in "bpy.types.NodeSocket" and then click on Autocomplete to list down all the functions
+        
+    List down all objects in the scene
+        In Console, type in "list(bpy.data.objects)"
 
+    List down all materials in the scene
+        In Console, type in "list(bpy.data.materials)"
+
+    Test single line of code in console
+        Type in "bpy.data.materials['My Material'].use_nodes = True"
+        Check whether the new material is being added and is using node from properties tab
+
+    Open hidden Text Editor's tool menu
+        CTRL + T
 
 
 
