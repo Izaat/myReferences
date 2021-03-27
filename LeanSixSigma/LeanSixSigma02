@@ -1647,6 +1647,126 @@ CONTENTS
             Each trial is repeated
 
         ANOVA
+            Pro: 
+                The best method for analyzing GR&R studies
+                Separates equipment and operator variation
+                Provides insight on the combined effect of the two 
+                Uses standard deviation as a measure of variation for better estimates
+            Cons:
+                Time taken
+                Resources required
+                Cost
+
+        Interpretation of Measurement System Analysis (See GR&R Template)
+            MSA Result
+                Reproducibility Error > Repeatability Error
+                    Operators are not adequately trained using the gauge
+                    Calibrations on the gauge dial are not clear
+                Repeatability Error > Reproducibility Error
+                    Gauge needs maintenance
+                    Gauge needs to be redesigned to be more rigid
+                    Gauging location needs improvement
+                    Ambiguity is present in SOPs
+            Check value of %GRR. If result is less than 30%, then gauge is acceptable
+            If EV = 0, MS is reliable and gauge variation is contributed by operators, therefore provide operators with training to resolve AV
+            If AV = 0, MS is precise
+            The interaction between operators and parts can also be studied under GRR using Part Variation (PV)
+            Trueness and precision cannot be determined in a GRR if only one gauge or measurement method is evaluated as it may have inherent bias
+
+    //////////////////////////////////////
+    #Process and Performance Capabilities
+        Control Limits aka Natural Process Limits
+            Derived from data
+            Voice of the process
+            Realtime values
+            Based on past performance
+            Indicates variation in the process
+            Consist of UCL and LCL
+        Specification Limits
+            Based on customer requirements
+            Voice of customer
+            Targets set for the process
+            If not met, product is defective
+            Consist of USL and LSL
+            Difference between USL and LSL is tolerance
+        NOTE: 
+            If the limits lie within spec limits, process is under control. 
+            If spec limit lie within control limits, process will not meet customer requirements     
+
+        Process Perfomance Metrics (DPU and DPMO)
+            DPU (Defects per Unit)
+                DPU = Defects / Total Units
+            DPMO (Defects per Millionth Opportunities)
+                DPMO = Defects per opportunity * 1,000,000
+
+        Calculating Process Performance
+            Example:
+            QC checks quality of finished goods by sampling batch of 10 items from produced lot every hour
+            In 24 hours:
+                Defects: 2, 1, 0, 0, 2, 3, 1, 4, 5, 1, 2, 0, 0, 1, 2, 1, 1, 1, 4, 0, 0, 0, 1, 2
+                Total number of defects = 34
+                Subgroup size = 10
+            If the sample size is constant, pbar or DPU is used to calculate process capability
+                Total number of units = Subgroup Size * Total Groups = 10*24 = 240
+                DPU = Total Defects / Total Units = 34/240 = 0.0142
+                DPMO = DPU * 1,000,000 = 141666.66
+            Therefore, it can be observed that the process is currently working at 2.6sigma, which is 86.4% yield
+
+        Process Stability Studies
+            Activities under measure phase: 
+                MSA, Collection of Data, Statistical Calculation, Checking for Accuracy and Checking for Validity
+                This is followed by a test for stability under Process Stability Study            
+            Why a process becomes unstable:
+                Due to special cause of variation. 
+                    Multiple special cause leads to Instability. 
+                    Single special cause leads to Out-of-control Condition
+            Process instability can be checked using Run Charts in Minitab
+                If p-values is less than 0.05, process has special causes of variation
+                Chances of process going unstable is high
+                
+            Types of Causes of Variation
+                Common Causes of Variation
+                    Include the many sources of variation within a process
+                    Have a stable and repeatable distribution over a period
+                    Contribute to a state of statistical control where the output is predictable
+                Special Causes of Variation
+                    Include factors external to and not always acting on the process
+                    Irregular in nature
+                    Contribute to instability of a process output
+                    May result in defects and have to be eliminated
+                    If indicated by Run Charts, stop the process and perform root cause analysis
+
+            Verifying Process Stability and Normality
+                Causes of Variation existing in a process are used to verify its normaluty or stability
+                If special causes of variation are present, process distribution changes and output are not stable (Process is Not in Control)
+                If only common causes of variation are present, the output is stable and process is in control
+                NOTE: For stable process, Control Charts can be used to calculate the process capability.
+
+        Process Capability Study
+            An actual variation in the process specification
+            Steps:
+                Plan for Data Collection > Collect Data > Plot and Analyze Results
+            Appropriate sampling plan depends on the purpose and whether there are any customer requirements for the study
+            Pilot run may be used to estimate process capability for new processes
+
+            Objectives:
+                To establish a state control over a manufacturing process and then maintain control over time period
+
+            Objective tree:
+                Compare natural Process limits within specification limits >
+                    Process limits fall within specs > 
+                        No action required
+                    Process spread and specification spread are similar >
+                        Adjust process centering to bring the batch within specification limits
+                    Process limits fall outside specs
+                        Reduce variability by partitioning and targeting the largest offender
+
+            Identifying Characteristics for a process capability study
+                Requirements:
+                    Characteristics should indicate a key factor in the quality of the product or process
+                    It should be possible to influence the value of the characteristic through process adjustments
+                    The operating conditions that affect the characterisitcs should be defined and controlled
+                The characteristics to be measured may also be determined by customer purchase order requirements or industry standards
     
 
 
