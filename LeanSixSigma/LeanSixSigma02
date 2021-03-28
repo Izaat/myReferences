@@ -1768,6 +1768,175 @@ CONTENTS
                     The operating conditions that affect the characterisitcs should be defined and controlled
                 The characteristics to be measured may also be determined by customer purchase order requirements or industry standards
     
+            Identifying Specification and Tolerances
+                Defined by industry standards based on customer requirements
+                Defined by organization's engineering department in consultation with the customer
+
+            Process Performance Index
+                Defined as a statistical measure of the outcome from a process
+                Differs from Process Capability, since state of statistical control is not required in process performance
+                3 indexes:
+                    Pp: Process Performance
+                        Pp = (USL-LSL) / 6sigma
+                        where, 6sigma is the Natural process Variation
+                    Ppk: Process Performance Index
+                        Ppk = Min(Ppu, Ppl)
+                        Ppu (Upper process capability index) = (USL-xbar) / 3sigma
+                        Ppl (Lower process capability index) = (xbar-LSL) / 3sigma
+                        xbar = Process Average
+                    Ppm/Cpm: Process Capability Index
+                        Cpm = (USL-LSL) / 6 * [sqrt(sigma^2) + (mu-T)^2] = (USL-LSL) / 6 * sqrt[sum(Xi-T)^2 / (n-1)]
+                        where,
+                        mu = process average
+                        T = Target value (center of tolerance)
+                        Xi = sample reading
+                        n = number of sample readings
+
+            Key terms
+                Zst (Short term capability) : 
+                    Capability or the potential performance of the process in control at any point of time
+                    Based on the sample collected in the short term
+                Zlt (Long term performance) :
+                    Actual performance of the process over time
+                Subgroups :
+                    Several small sized samples collected consecutively
+                    Chosen so that data points are identical within a subgroup and different between subgroups
+                Process Shift (Zst-Zlt):
+                    Refllects how well a process is controlled, usually a factor of 1.5
+
+            Illustrations:
+                Short Term Capability:
+                    Imagine 3 bell curves with center means defined,  placed on top of each other according to time (vertical axis, "time 1" = lowest, "time 3" highest)
+                    LSL and USL on the horizontal axis where LSL is on the left, USL on the right
+                    With that said, the layered bell curves were shifted to the right from each other
+                    The means will look like a linear graph (ascending as it approaches USL)
+                    Now the differences between the means of all the bell curves are called "Sigma Shifts", an indicator of process control
+                    Typical sigma shift is approximately 1.5 standard deviations where sigma is the standard deviation
+                    Therefore, Time1 bell curve and time 2 bell curve is 1.5 sigma shift
+                    Time 2 bell curve and Time 3 bell curve is 1.5 sigma shift
+                    Shift could be due to different operators, raw materials, wear and tear, time, etc
+                Long Term:
+                    With Short Term capability graph above, add in a larger bell curve,
+                    Where the LSL and USL are aligned to the Short Term's LSL and USL
+                    This single bell curve overlaps all the short term capability bell curves 
+
+            Assumptions and Conventions
+                Short Term Variation:
+                    Attributed to common cause variation
+                    Variances are inherent in the process
+                    Shows variation within subgroup
+                    Small number of samples collected at short intervals
+                    Captures common cause variation
+                    Common causes are difficult to identify and correct 
+                    Process needs to redesign in order to remove common causes variation
+                Long Term Variation
+                    Attributed to both common and special cause variation and variations caused by external factors
+                    Aka overall variation
+                    Shows variation within subgroups, and between subgroups
+                    Includes special causes such as changes in operators, raw material, wear and tear
+                    Special causes have to be identified and corrected for process improvement
+            
+            Stability, Capability, Spread, and Defects, 
+                CCV: Common Cause Variation
+                SCV: Special Cause Variation
+                | Process                | Less CCV, No SCV    | Less CCV, SCV present     | High CCV, No SCV      | High CCV, SCV Present     |
+                | Variations             | Only CCV            | CCVand SCv                | CCV                   | CCV and SCV               |
+                | Variability            | Less                | High                      | Moderate to High      | Very High                 |
+                | Capability             | High                | Less                      | Very Less             |  Poor                     |
+                | Possibility of Defects | Less                | High                      | Very High             | Defective Process         |
+                | Process Condition      | In Control, Capable | Out of Control, Incapable | In Control, Incapable | Out of Control, Incapable |
+
+            Comparing Cpk and Cp
+                Compare Cpk and Cp :-
+                    Cpk < Cp  
+                        Mean is not centered, the shift in the mean results in a shift in long term sigma levels
+                    Cpk = Cp
+                        Mean is centered, process is considered capable if Cpk > 1, when variations are in control
+                    Cpk > Cp 
+                        Impossible by definition, calculations need to be rechecked
+
+            Calculation:
+                Subgroup Size = Nsg1 = 10
+                | Complaint Resolution Time (Hrs)               |
+                | Wk1           | Wk2      | Wk3                |
+                |   48          |  50      |   49               |
+                |   49          |  48      |   48               |
+                |   48          |  36      |   39               |
+                |   53          |  50      |   49               |
+                |   58          |  50      |   34               |
+                |   50          |  62      |   33               |
+                |   46          |  45      |   57               |
+                |   50          |  47      |   48               |
+                |   49          |  51      |   47               |
+                |   47          |  44      |   39               |
+
+                Formula:
+                    Average of Each Week = Total complaints per week / Subgroup Size
+                    Grand Average = Sum of per week average / 3
+                    Variation within subgroups for a week = Sum(Week Average - x)^2, where x is each reading per week
+                    Variation between subgroups per week = (Grand Average - Week 1 Average)^2 * Nsg1
+                    Total Variation within subgroups = Sum(Variation within subgroups for each week)
+                    Total Variation between subgroups = Sum(Variation between subgroups for each week)
+                    Overall variation = Total variation within subgroups + Total variation between subgroups
+                    St Dev Short Term = Sst = Sqrt[Total variation within subgroups / (Total sample size - number of subgroups)]
+                    St Dev Long Term = Slt = Sqrt[Overall Variation / (Total sample size - 1)]
+                
+                Result:
+                | Measure                           | Value   |
+                | Grand Average                     | 47.5    |
+                | Total Variation within Subgroups  | 1023.8  |
+                | Total variation between Subgroups | 161.67  |
+                | Overall variation                 | 1185.5  | //within sg + between sg
+                | Standard Deviation Short Term     | 6.2     |
+                | Standard Deviation Long Term      | 6.4     |
+
+                Note: Overall variation can also be calculated as the usual variance formula
+
+            Effect of Mean Shift:
+                Table summary of defect levels at different Sigma Multiple Values and mean shifts
+                |---------------------|---------------------------------|------------------------------|------------------------------|
+                | Sigma Multiple      | No Mean Shift                   | Mean Shift +- 1sigma         | Mean Shift +-1.5sigma        |
+                |---------------------|---------------------------------|------------------------------|------------------------------|
+                | +-3sigma            | 2700 DPMO                       | 22800 DPMO                   | 66810 DPMO                   |
+                |                     | 99.73% Good                     | 97.72% Good                  | 93.32% Good                  |
+                |---------------------|---------------------------------|------------------------------|------------------------------|
+                | +-4sigma            | 63     DPMO                     | 1350 DPMO                    | 6210 DPMO                    |
+                |                     | 99.9937% Good                   | 99.865% Good                 | 99.379% Good                 |
+                |---------------------|---------------------------------|------------------------------|------------------------------|
+                | +-5sigma            | 0.57 DPMO                       | 32 DPMO                      | 223 DPMO                     |
+                |                     | 99.999943% Good                 | 99.9968% Good                | 93.32% Good                  |
+                |---------------------|---------------------------------|------------------------------|------------------------------|
+                | +-6sigma            | 0.002     DPMO                  | 0.29 DPMO                    | 3.4 DPMO                     |
+                |                     | 99.9999998% Good                | 99.999971% Good              | 99.99966% Good               |
+                |---------------------|---------------------------------|------------------------------|------------------------------|
+
+                |---------------------------------|------------------------------------------------------------|
+                |---------------------------------|                            To Know                         |
+                |---------------------------------|------------------------------------------------------------|
+                |---------------------------------| Short Term Capability        | Long Term Capability        |
+                |---------------------------------|------------------------------|-----------------------------|
+                | With data   | Zst  | St Data    |                Y             |   Subtract 1.5              |
+                | collected   |------|------------|------------------------------|-----------------------------|
+                |             | Zlt  | Lt Data    |       Add 1.5                |                Y            |
+                |-------------|------|------------|------------------------------|-----------------------------|
+
+                From the table, it can be seen that the effects of a mean shift become more negligible as the process
+                capability increases. A 6Sigma process's level of defects is not affected much by long term variation
+
+        Process Capability for Attribute Data
+            For attribute data, process capability is determined by the mean rate of non-conformance and DPMO is the measure used
+            Mean and Standard Deviation must be defined
+            Defectives:
+                Pbar:
+                    Used for checking process capability for constant and variable sample sizes
+                    sqrt[Pbar(1-Pbar)/n]
+            Defects:
+                Cbar: Used when the sample size is constant
+                Ubar: Used when the sample size is variable
+                    sqrt(Ubar/a) ; sqrt(Cbar)
+            NOTE: Pbar, Ubar and Cbar are the equivalent of standard deviation for continuous data
+
+
 
 
 
