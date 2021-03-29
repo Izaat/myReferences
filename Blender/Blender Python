@@ -13,6 +13,7 @@ CONTENTS
 11. Updated Registration Method
 12. Scripting Tips
 13. Numerator / Drop Down Menu
+14. Class Name Convention
 
 ///////////////////////////////////////////////////////////////////////////////////
 01. Basics
@@ -1613,7 +1614,20 @@ CONTENTS
             register()
 
 
-
+///////////////////////////////////////////////////////////////////////////////////
+14. Class Name Convention
+    DO NOT >
+        class TextToolHelloWorld():
+        
+    DO >    
+        class TEXTTOOL_PT_hello_world():
+    
+    ADDONNAME_OT_your_operator_name()
+    OT = Operator Type
+    PT = Panel Type
+    MT = Mennu Type
+    HT = Header Type
+    UL = Ui List
 
 
 
