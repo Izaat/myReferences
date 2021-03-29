@@ -1958,7 +1958,54 @@ CONTENTS
                     sqrt(Ubar/a) ; sqrt(Cbar)
             NOTE: Pbar, Ubar and Cbar are the equivalent of standard deviation for continuous data
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. Analyze Phase
+    ///////////////////////////
+    //Patterns of Variation
+    #NOTE: See Statistical Distribution under Measure Phase (Line: 1155)
+    
+    ///////////////////////////
+    //Exploratory Data Analysis   
+        Multi-Vari Studies
+            Analyzes variation, 
+            Investigate Process Stability, 
+            Identify investigation areas and, 
+            Breaks down the variation
+            
+            Classifies variation sources into 3 major type
+                Positional
+                    Are variations within a single unit where variation is due to location
+                    Examples: Pallet stacking in a truck, temperature gradient in oven, region of a country, etc
+                Cyclical
+                    Variations among sequantial repetitions over a short time
+                    Example: Batch to batch variation, lot to lot variation, etc
+                Temporal
+                    Variations which occur over longer periods of time
+                    Similar to cyclical but only that the sampling time distance is longer (Analyzing monsoon season rainfall this year and last year)
+                    Examples: Process drift, performance before and after breaks, seasonal based differences, economic recessions 2008 vs 2020, etc
 
+            5 Steps to create Multi-Vari Chart
+                #Example: https://sixsigmastudyguide.com/wp-content/uploads/2019/08/Multi-Vari_Chart_for_Width_by_Oven_Location.png
+                #Minitab: Satt > Quality Tools > Multi-Vari Chart 
+                1. Select Process and Characteristics
+                        Select the process where the plate is being manufactured
+                        Measure its thickness within a specified range
+                        Any plate with thickness outside the specified range is a defect
+                2. Decide Sample Size
+                        Sample size is 5 pieces from each equipment
+                        Frequency of data collection is every 2 hours                        
+                3. Create Tabulation Sheet
+                        Tabulation sheet with data records contains the columns "time", "equipment number" and "thickness" as headers
+                4. Plot the Chart
+                        Chart is then plotted with time on X axis (Horizontal axis) and the plate thickness on Y axis (Vertical axis)
+                5. Link the Observed Values
+                        The observed values are linked by appropriate lines
+                Legends:
+                    Blue Dots: Positional Variations
+                    Black Continuous Lines: Cyclical Variations
+                    Red Dashed Lines: Temporal Variations
 
 
 
