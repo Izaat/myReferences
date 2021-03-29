@@ -1148,6 +1148,27 @@ CONTENTS
     
     //////////////////////////////////////
     #Statistical Distribution
+
+        Data obtained from measurement phase exhibits variety of distribution (depends on data type and source)
+        Methods to describe parameters for classes of distribution:
+            Probability
+                Based on assumed model of distribution
+                Used to find chances of certain outcome/event to occur
+            Statistics
+                Uses the measured data to determine a model to describe the data used
+            Inferential Statistics
+                Describes the population parameters based on the sample data using a particular model
+
+        2 Types of Distribution
+            Discrete Distribution
+                Binomial
+                Poisson
+            Continuous Distribution
+                Normal Distribution
+                Chi Squared
+                t-Distribution
+                F-Distribution    
+
         Discreet Probability Distribution
             Binomial Distribution**
             Poisson Distribution**
