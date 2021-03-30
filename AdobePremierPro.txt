@@ -172,7 +172,6 @@ Transitions
 09. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Audio Effects
     //Demon Voice
-        #https://www.youtube.com/watch?v=NHOCwBsRd-4
         Duplicate 3 audio sections into 3 tracks
             Track 1: Leave audio as original
             Track 2: Add Pitch Change Effect, increase pitch by 25%
