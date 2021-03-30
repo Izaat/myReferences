@@ -8,7 +8,9 @@ CONTENTS
 06 - Exporting
 07 - Video speed manipulation
 08 - Video Effects
-09 - J,K,L to speed up or slow down timeline play speed
+09 - Audio Effects
+
+TIPS - J,K,L to speed up or slow down timeline play speed
 
 01. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Color Grading & Correction
@@ -167,7 +169,17 @@ Transitions
                 Amount of Noise: 20%                
             Export    
 
-
+09. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Audio Effects
+    //Demon Voice
+        #https://www.youtube.com/watch?v=NHOCwBsRd-4
+        Duplicate 3 audio sections into 3 tracks
+            Track 1: Leave audio as original
+            Track 2: Add Pitch Change Effect, increase pitch by 25%
+            Track 3: Add Pitch Change Effect, decrease pitch by 25%
+        Reverse all 3 tracks
+        Add Reverb to all the 3 tracks (This will add 'Reverb Tail' to the track)
+        Re-reverse the 3 tracks (This will add in cool reverb effect at the beginning audio clip tail)
 
 
 
