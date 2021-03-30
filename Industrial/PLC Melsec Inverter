@@ -32,22 +32,22 @@ CONTENT
         Q Parameter Setting Window > 
             Program Tab > Program Tree Box > Highlight "MAIN" > Click on Insert button
             I/O Assignment Tab > I/O Assignment *1 Section > 
-                | No. | Slot     | Type            | Model Name |   Points   | Start XY |
-                |  0   | PLC      | PLC             | Q02HCPU      |        -       |      -       |
-                |  1   |  0(*-0) | Intelligent   | QJ61BT11N   | 32Points |   0000   |
-                |  2   |  1(*-1) | Intelligent   | QJ71E71-100 | 32Points |  0020    |
+                | No.  | Slot     | Type          | Model Name  |  Points  | Start XY |
+                |  0   | PLC      | PLC           | Q02HCPU     |    -     |    -     |
+                |  1   |  0(*-0)  | Intelligent   | QJ61BT11N   | 32Points |   0000   |
+                |  2   |  1(*-1)  | Intelligent   | QJ71E71-100 | 32Points |   0020   |
                 Click on Check to see any error messsage
                 Click on End of no error present
 
     Navigation Panel > Parameter > Network Parameter > Ethernet CC IE
         This will open a new 'Network Parameter' Tab in the main display
-        |                        |   Module 1 |
-        | Network Type |  Ethernet   |
-        | Start I/O No.   |  0020         |
-        | Network No.   |  1               |
-        | Group no.       |  0               |
-        | Station No.     |  1               |
-        | Mode              |  Online      |
+        |              |  Module 1  |
+        | Network Type |  Ethernet  |
+        | Start I/O No.|  0020      |
+        | Network No.  |  1         |
+        | Group no.    |  0         |
+        | Station No.  |  1         |
+        | Mode         |  Online    |
         
         Click on 'Operation Setting'
         In Operation Setting dialogue box > 
@@ -66,23 +66,23 @@ CONTENT
     Navigation Panel > Parameter > Network Parameter > CC-Link
         This will open a new 'Network Parameter' Tab in the main display
         Number of Modules: 1
-        |                                |  Module 1                         |        
-        | Start I/O No.           |  0000                                |
-        | Type                        |  Master Station                 |
-        | Master Stn Type     | PLC Parameter Auto Start |
-        | Mode                      | Remote Net                       |
-        | Module Connected | 1                                        |
-        | Rmote Input (RX)    | X100                                  |
-        | Rmote Output (RY) | Y100                                  |
-        | Rmote Reg (RWr)   | D100                                  |
-        | Rmote Reg (RWw) | D200                                  |
-        | Sp. Relay (SB)         | SBO                                   |
-        | Sp. Reg (SW)          | SW0                                   |
-        | Retry Count            | 3                                        |
-        | Auto Reconnect     | 1                                        |
-        | PLC Down Select    | Stop                                  |
-        | Scan Mode             | Async                                |
-        | Delay                     | 0                                        |
+        |                   |  Module 1                |        
+        | Start I/O No.     |  0000                    |
+        | Type              |  Master Station          |
+        | Master Stn Type   | PLC Parameter Auto Start |
+        | Mode              | Remote Net               |
+        | Module Connected  | 1                        |
+        | Rmote Input (RX)  | X100                     |
+        | Rmote Output (RY) | Y100                     |
+        | Rmote Reg (RWr)   | D100                     |
+        | Rmote Reg (RWw)   | D200                     |
+        | Sp. Relay (SB)    | SBO                      |
+        | Sp. Reg (SW)      | SW0                      |
+        | Retry Count       | 3                        |
+        | Auto Reconnect    | 1                        |
+        | PLC Down Select   | Stop                     |
+        | Scan Mode         | Async                    |
+        | Delay             | 0                        |
         
         Click on 'Station Information' > 
             Station Number: 1/1
@@ -101,31 +101,31 @@ CONTENT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 03. Program
     Ladder Diagram
-        |     M10                                                         |
+        |     M10                                          |
         |-----||-------------------------[RST M10]---------|
-        |                   |                                                |
-        |                   +----------------[RST M20]---------|
-        |     M1                                                           |
+        |                   |                              |
+        |                   +------------[RST M20]---------|
+        |     M1                                           |
         |-----||-------------------------[SET M10]---------|
-        |                   |                                                |
-        |                   +----------------[RST M20]---------|        
-        |     M2                                                           |
+        |                   |                              |
+        |                   +------------[RST M20]---------|        
+        |     M2                                           |
         |-----||-------------------------[SET M20]---------|
-        |                   |                                                |
-        |                   +----------------[RST M10]---------|
-        |    M10                                                          |
-        |-----||------------------------------(Y100)---------|
-        |    M20                                                          |
-        |-----||------------------------------(Y101)---------|
-        |   SM400                                                       |
-        |-----||----------------[* D0 K100 D300]---------|
-        |                   |                                                 |
-        |                   +----[WORD D300 D201]---------|
-        |    M10                                                          |
-        |-----||------------------------------(Y10D)---------|
-        |    M20          |                                              |
-        |-----||---------+                                              |
-        |--------------------------------------[END]----------|
+        |                   |                              |
+        |                   +------------[RST M10]---------|
+        |    M10                                           |
+        |-----||----------------------------(Y100)---------|
+        |    M20                                           |
+        |-----||----------------------------(Y101)---------|
+        |   SM400                                          |
+        |-----||------------------[* D0 K100 D300]---------|
+        |                   |                              |
+        |                   +-----[WORD D300 D201]---------|
+        |    M10                                           |
+        |-----||----------------------------(Y10D)---------|
+        |    M20         |                                 |
+        |-----||---------+                                 |
+        |-----------------------------------[END]----------|
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 04. Connections
@@ -309,3 +309,20 @@ CONTENT
         Press Stop : This stops the running motor
         Tap on Numerical Display to change motor speed Frequency (1 to 60Hz)
         Press Reverse: This will rotate motor in reverse direction continuously
+        
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+END
+
+
+
+
+
+
+
+
+
+
+
+
+
