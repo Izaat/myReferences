@@ -1,0 +1,311 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+PLC CC-Link Inverter with HMI
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENT
+01. Components
+02. Setup
+03. Program
+04. Connections
+05. HMI
+06. Setup Inverter
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Components
+    1. Inverter: Mitsubishi Freqrol E700, FR-A7NC_CC-Link, CCLink V2 (St.1)
+    2. PLC: Power, Q61P
+    3. PLC: CPU, Q02HCPU, Master Link Module
+    4. PLC: Q61BT11N (St.0)
+    5. PLC: QJ71E71-100 (192.168.1.11)
+    6. HMI: GOT2000, GT2710-STBD, 800x600, (192.168.1.21)
+    7. GGM Motor
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Setup
+    Main Menu > New > New Project Window > 
+        Series: QCPU (Q mode)
+        Type: Q20/Q02H 
+        Project Type: Simple Project
+        Language: Ladder
+
+    Navigation Panel > Parameter > PLC Parameter
+        Q Parameter Setting Window > 
+            Program Tab > Program Tree Box > Highlight "MAIN" > Click on Insert button
+            I/O Assignment Tab > I/O Assignment *1 Section > 
+                | No. | Slot     | Type            | Model Name |   Points   | Start XY |
+                |  0   | PLC      | PLC             | Q02HCPU      |        -       |      -       |
+                |  1   |  0(*-0) | Intelligent   | QJ61BT11N   | 32Points |   0000   |
+                |  2   |  1(*-1) | Intelligent   | QJ71E71-100 | 32Points |  0020    |
+                Click on Check to see any error messsage
+                Click on End of no error present
+
+    Navigation Panel > Parameter > Network Parameter > Ethernet CC IE
+        This will open a new 'Network Parameter' Tab in the main display
+        |                        |   Module 1 |
+        | Network Type |  Ethernet   |
+        | Start I/O No.   |  0020         |
+        | Network No.   |  1               |
+        | Group no.       |  0               |
+        | Station No.     |  1               |
+        | Mode              |  Online      |
+        
+        Click on 'Operation Setting'
+        In Operation Setting dialogue box > 
+            Comms Data code: Binary
+            Initial Timing: Always wait for Open
+            IP Setting >
+                Input Format: DEC
+                IP Address: 192.168.1.11
+            Send Frame Setting: Ethernet (V2)
+            TCP Existence: Use the KeepAlive
+            Enable Online Change: Ticked
+
+        Click on 'Check' button and make sure there is no error
+        Click 'End'
+
+    Navigation Panel > Parameter > Network Parameter > CC-Link
+        This will open a new 'Network Parameter' Tab in the main display
+        Number of Modules: 1
+        |                                |  Module 1                         |        
+        | Start I/O No.           |  0000                                |
+        | Type                        |  Master Station                 |
+        | Master Stn Type     | PLC Parameter Auto Start |
+        | Mode                      | Remote Net                       |
+        | Module Connected | 1                                        |
+        | Rmote Input (RX)    | X100                                  |
+        | Rmote Output (RY) | Y100                                  |
+        | Rmote Reg (RWr)   | D100                                  |
+        | Rmote Reg (RWw) | D200                                  |
+        | Sp. Relay (SB)         | SBO                                   |
+        | Sp. Reg (SW)          | SW0                                   |
+        | Retry Count            | 3                                        |
+        | Auto Reconnect     | 1                                        |
+        | PLC Down Select    | Stop                                  |
+        | Scan Mode             | Async                                |
+        | Delay                     | 0                                        |
+        
+        Click on 'Station Information' > 
+            Station Number: 1/1
+            Station Type: Remote Device Station
+            Expanded Cyclic Setting: Single
+            Occupied Stations: Occupied Station 1
+            Remote Station Points: 32 Points
+            Reserve/Invalid Station Select: No Setting
+            
+            Click on 'Check' button and make sure there is no error
+            Click 'End'
+
+        Click on 'Check' button and make sure there is no error
+        Click 'End'
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Program
+    Ladder Diagram
+        |     M10                                                         |
+        |-----||-------------------------[RST M10]---------|
+        |                   |                                                |
+        |                   +----------------[RST M20]---------|
+        |     M1                                                           |
+        |-----||-------------------------[SET M10]---------|
+        |                   |                                                |
+        |                   +----------------[RST M20]---------|        
+        |     M2                                                           |
+        |-----||-------------------------[SET M20]---------|
+        |                   |                                                |
+        |                   +----------------[RST M10]---------|
+        |    M10                                                          |
+        |-----||------------------------------(Y100)---------|
+        |    M20                                                          |
+        |-----||------------------------------(Y101)---------|
+        |   SM400                                                       |
+        |-----||----------------[* D0 K100 D300]---------|
+        |                   |                                                 |
+        |                   +----[WORD D300 D201]---------|
+        |    M10                                                          |
+        |-----||------------------------------(Y10D)---------|
+        |    M20          |                                              |
+        |-----||---------+                                              |
+        |--------------------------------------[END]----------|
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. Connections
+    In Navigation Panel, click on Connection Destination
+        Under 'All Connections', double click on 'Connection1',
+        'Transfer Setup' window will appear
+        Click on 'Connection Test' button, make sure it is connected
+        Click on 'System Image', take note of "PLC side I/F"
+            PC side I/F: USB
+            PLC side I/F: PLC Mode QCPU (Q mode)
+            Click OK
+        Click OK
+
+    In Main Toolbar, click on "Write to PLC" button, button with 'Red Arrow' next to undo/redo.
+        Online Data Operation window will appear
+        With "Write" checkbox ticked, in 'Edit Data' section, click on 'Select All'
+        Click on Execute
+        'Yes to All' and close window when done
+
+    In Main Toolbar, click on "Start Monitoring" button, button with 'Red Play Icon' next to undo/redo.
+    Enter CC-Link Diagnostics
+        Main Menu > Diagnostics > CC-Linnk Diagnostics
+        CC-Link Diagnostics will appear
+        Enter 'Loop Test' (Bottom of window) and Loop Test window will appear
+            Click on Execute
+            Close window when complete
+        Close window
+        
+    Minimize GXWorks2
+    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. HMI
+    Enter GT Designer 3
+    Select New and start new project wizard
+    Enter System Settings
+        New Project Wizard > System Setting
+            Series: GOT2000
+            GOT Type: GT27**-S (800x600)
+            Setup Direction: Horizontal
+            Use gesture function: Y
+                Enable Graphic Acc: N
+            Click Next
+            New Project Wizard > System Setting > Confirmation
+                Click Next
+        New Project Wizard > Communication
+            Manufacturer: Mitsubishi
+            Controller Type: MELSEC-QnA, MELDAS C6
+            Click Next
+            New Project Wizard > Communication > I/F
+                I/F: Standard I/F (Ethernet): Multi
+                Click Next
+            New Project Wizard > Communication > Com. Driver
+                Comm Driver: Ethernet(MELSEC), Q17nNC, CRnD-700, Gateway
+                Click Next
+            New Project Wizard > Communication > Comfirmation
+                Click Next
+        New Project Wizard > Screen Switch
+            Base Screen: GD100
+            Overlap Window: GD101
+            Click Next
+        Click Finish and the GOT2000 emulated screen will appear
+    
+    In System panel
+        Double Click on Controller Setting > CH1:MELSEC-QnA 
+            GOT Net No.: 1
+            GOT Station: 18 (Follow IP)
+            GOT Std Ethernet Setting: 192.168.1.21 
+                Click on GOT Standard Setting to edit addresses
+                Default Gateway: 192.168.1.1
+                Peripheral S/W comm Port: 5015
+                Transparent Port No.: 5014
+            GOT Comm Port No.: 5001
+            Retry(Times): 3 
+            Startup Time(Sec): 3 
+            Timeout Time(Sec): 3 
+            Delay(ms): 0 
+            Servo axis swtching device first: 10
+            Ethernet Setting
+                Net No.: 1 
+                Station: 1
+                Unit Type: QJ71E71
+                IP Address: 192.168.1.11
+            Click Apply and then OK
+            
+    In HMI Emulator
+        Create Rectangular Switch Buttons
+            Main Menu > Object > Switch
+            Draw a rectangle in the Emulator (10000)
+            Copy and paste 2 more time to create 3 switches in total (10001 and 10002)
+            
+            STOP Button:
+                Double Click on 10000 Button to open property window
+                    Basic Setting > Text  Tab >
+                        Text: Stop
+                    Basic Setting > Action  Tab >
+                        Action: Momentary
+                        Add Action > Bit >  Device: Click on edit button to open a window
+                            Device: M, 0
+                            Network: Host
+                            Click OK
+                        Click OK  
+                    Click OK
+                    
+            FORWARD Button:
+                Double Click on 10001 Button to open property window
+                    Basic Setting > Text  Tab >
+                        Text: Forward Rotation
+                    Basic Setting > Action  Tab >
+                        Action: Momentary
+                        Add Action > Bit >  Device: Click on edit button to open a window
+                            Device: M, 1
+                            Network: Host
+                            Click OK
+                        Click OK  
+                    Click OK
+
+            REVERSE Button:
+                Double Click on 10002 Button to open property window
+                    Basic Setting > Text  Tab >
+                        Text: Reverse Rotation
+                    Basic Setting > Action  Tab >
+                        Action: Momentary
+                        Add Action > Bit >  Device: Click on edit button to open a window
+                            Device: M, 2
+                            Network: Host
+                            Click OK
+                        Click OK  
+                    Click OK
+
+        Create Rectangular Numerical Value Display
+            Main Menu > Object > Numerical Display/Input
+            Draw a rectangle in the Emulator (10003)
+            Double click on 10003 to open properties window
+                Basic Setting > Device
+                    Type: Numerical Input
+                    Data Type: Unsigned BIN16
+                    Device: Click on edit button to open a window
+                        Device: D,0
+                        Click OK
+                    Number Size: 92
+                    Format: Unsigned Decimal
+                    Click OK
+
+        Create Text
+            Dobule click on any space within the emulator
+            Text Property Box
+                Text: Hz
+                Size: 60
+                Click OK
+
+        Write to GOT
+            Main Menu > Communication > Write to GOT
+                Click OK
+            GOT Wtite Tab   
+                Write Data: Package Data
+                Destination Drive: C:Built in Flash Memory
+                Click on GOT Write Button
+                Yes to All and wait until writing is completed
+            Click on Close
+    
+    Minimize entire GT Designer Window
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+06. Setup Inverter
+    Parameter Setting
+        Mode Button > P.0
+        Scroll Wheel to P340
+            Press Set and 1 will be displayed
+            Press Set again
+
+        Parameter 340: 1
+        Parameter 542: 1
+        Parameter 543: 0
+
+        Once complete, Press Mode Button to display "E-"
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07. Run Motor
+    In HMI, 
+        Press Forward : This will rotate motor in forward direction continuously
+        Press Stop : This stops the running motor
+        Tap on Numerical Display to change motor speed Frequency (1 to 60Hz)
+        Press Reverse: This will rotate motor in reverse direction continuously
