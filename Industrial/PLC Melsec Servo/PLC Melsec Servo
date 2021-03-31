@@ -9,7 +9,8 @@ CONTENT
 04. Setup
 05. Program
 06. HMI
-
+07. Signal and Buffer
+08. Run Program
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Components
@@ -296,8 +297,285 @@ CONTENT
         |                                                                                                       |
         |_______________________________________________________________________________________________________|
 
-    //
+    //Setup
+            Enter GT Designer 3
+            Select New and start new project wizard
+            Enter System Settings
+                New Project Wizard > System Setting
+                    Series: GOT2000
+                    GOT Type: GT27**-S (800x600)
+                    Setup Direction: Horizontal
+                    Use gesture function: Y
+                        Enable Graphic Acc: N
+                    Click Next
+                    New Project Wizard > System Setting > Confirmation
+                        Click Next
+                New Project Wizard > Communication
+                    Manufacturer: Mitsubishi
+                    Controller Type: MELSEC-QnA, MELDAS C6
+                    Click Next
+                    New Project Wizard > Communication > I/F
+                        I/F: Standard I/F (Ethernet): Multi
+                        Click Next
+                    New Project Wizard > Communication > Com. Driver
+                        Comm Driver: Ethernet(MELSEC), Q17nNC, CRnD-700, Gateway
+                        Click Next
+                    New Project Wizard > Communication > Comfirmation
+                        Click Next
+                New Project Wizard > Screen Switch
+                    Base Screen: GD100
+                    Overlap Window: GD101
+                    Click Next
+                Click Finish and the GOT2000 emulated screen will appear
+            
+            In System panel
+                Double Click on Controller Setting > CH1:MELSEC-QnA 
+                    GOT Net No.: 1
+                    GOT Station: 18 
+                    GOT Std Ethernet Setting: 192.168.1.21 
+                        Click on GOT Standard Setting to edit addresses
+                        Default Gateway: 192.168.1.1
+                        Peripheral S/W comm Port: 5015
+                        Transparent Port No.: 5014
+                    GOT Comm Port No.: 5001
+                    Retry(Times): 3 
+                    Startup Time(Sec): 3 
+                    Timeout Time(Sec): 3 
+                    Delay(ms): 0 
+                    Servo axis swtching device first: 10
+                    Ethernet Setting
+                        Net No.: 1 
+                        Station: 1
+                        Unit Type: QJ71E71
+                        IP Address: 192.168.1.11
+                    Click Apply and then OK
+            
+            In HMI Emulator
+                Create Rectangular Switch Buttons and Lamp
+                    Switch
+                        Main Menu > Object > Switch
+                        Draw a rectangle in the Emulator (10000)
+                        Copy and paste 6 more time to create 7 switches in total (10001 to 10006)
+                    Lamp
+                        Main Menu > Object > Lamp
+                        Draw a rectangle in the Emulator (10007)
+                    
+                    Machine OPR Button:
+                        Double Click on 10000 Button to open property window
+                            Basic Setting > Text  Tab >
+                                Text Size: 26
+                                Text: Machine OPR
+                            Basic Setting > Style  Tab >
+                                Shape Color: Orange
+                            Basic Setting > Action  Tab >
+                                Action: Momentary
+                                Add Action > Bit >  Device: Click on edit button to open a window
+                                    Device: M, 0
+                                    Network: Host
+                                    Click OK
+                                Click OK  
+                            Click OK
+                    
+                    JOG Forward Button:
+                        Double Click on 10001 Button to open property window
+                            Basic Setting > Text  Tab >
+                                Text Size: 26
+                                Text: JOG Forward
+                            Basic Setting > Action  Tab >
+                                Action: Momentary
+                                Add Action > Bit >  Device: Click on edit button to open a window
+                                    Device: M, 1
+                                    Network: Host
+                                    Click OK
+                                Click OK  
+                            Click OK
 
+                    JOG Reverse Button:
+                        Double Click on 10002 Button to open property window
+                            Basic Setting > Text  Tab >
+                                Text Size: 26
+                                Text: JOG Reverse
+                            Basic Setting > Action  Tab >
+                                Action: Momentary
+                                Add Action > Bit >  Device: Click on edit button to open a window
+                                    Device: M, 2
+                                    Network: Host
+                                    Click OK
+                                Click OK  
+                            Click OK
+
+                    Error Reset Button:
+                        Double Click on 10003 Button to open property window
+                            Basic Setting > Text  Tab >
+                                Text Size: 26
+                                Text: Error Reset
+                            Basic Setting > Style  Tab >
+                                Key Touch OFF > Shape Color: Red
+                            Basic Setting > Action  Tab >
+                                Action: Momentary
+                                Add Action > Bit >  Device: Click on edit button to open a window
+                                    Device: M, 3
+                                    Network: Host
+                                    Click OK
+                                Click OK  
+                            Click OK
+
+                    123456 um Mov Button:
+                        Double Click on 10004 Button to open property window
+                            Basic Setting > Text  Tab >
+                                Text Size: 26
+                                Text: 123456 um Mov
+                            Basic Setting > Action  Tab >
+                                Action: Momentary
+                                Add Action > Bit >  Device: Click on edit button to open a window
+                                    Device: M, 4
+                                    Network: Host
+                                    Click OK
+                                Click OK  
+                            Click OK
+
+                    234567 um Mov Button:
+                        Double Click on 10005 Button to open property window
+                            Basic Setting > Text  Tab >
+                                Text Size: 26
+                                Text: 234567 um Mov
+                            Basic Setting > Action  Tab >
+                                Action: Momentary
+                                Add Action > Bit >  Device: Click on edit button to open a window
+                                    Device: M, 5
+                                    Network: Host
+                                    Click OK
+                                Click OK  
+                            Click OK
+
+                    Process Scenario Button:
+                        Double Click on 10006 Button to open property window
+                            Basic Setting > Text  Tab >
+                                Text Size: 26
+                                Text: Process Scenario
+                            Basic Setting > Action  Tab >
+                                Action: Momentary
+                                Add Action > Bit >  Device: Click on edit button to open a window
+                                    Device: M, 6
+                                    Network: Host
+                                    Click OK
+                                Click OK  
+                            Click OK
+
+                    Process Scenario Lamp:
+                        Double Click on 10007 Button to open property window
+                            Basic Setting > Text  Tab >
+                                Text Size: 26
+                                OFF Text: OPR Complete
+                            Basic Setting > Device/Style Tab >
+                                Lamp Type: Bit
+                                Device: D, 0, .b=4 [D0.4]
+                                OFF > Shape Color: Red
+                                ON > Shape Color: Green
+                                Click OK  
+                            Click OK
+
+                    Current Feed Value Text
+                        Main Menu > Figure > Text
+                        Double click on any space within the emulator
+                        Text Property Box
+                            Text: Current Feed Value:
+                            Size: 36
+                            Click OK
+
+                    Machine Feed Value Text
+                        Main Menu > Figure > Text
+                        Double click on any space within the emulator
+                        Text Property Box
+                            Text: Machine Feed Value:
+                            Size: 36
+                            Click OK
+
+                    Speed Feedrate Text
+                        Main Menu > Figure > Text
+                        Double click on any space within the emulator
+                        Text Property Box
+                            Text: Speed Feedrate:
+                            Size: 36
+                            Click OK
+
+                    Error Code Text
+                        Main Menu > Figure > Text
+                        Double click on any space within the emulator
+                        Text Property Box
+                            Text: Error Code:
+                            Size: 36
+                            Click OK
+
+                    Current Feed Value Numerical Display (10012)
+                        Main Menu > Object > Numerical Display/Input
+                        Create a rectangle next to the “Current Feed Value” Text
+                        Double click on the Numerical Box
+                            Basic Settings > Device Tab
+                                Type: Numerical Display
+                                Data Type: Unsigned BIN32
+                                Device: D, 100
+                                Format: Signed Decimal
+                                Digits (Integral): 7
+                                Click OK to Accept
+
+                    Machine Feed Value Numerical Display (10013)
+                        Main Menu > Object > Numerical Display/Input
+                        Create a rectangle next to the “Machine Feed Value” Text
+                        Double click on the Numerical Box
+                            Basic Settings > Device Tab
+                                Type: Numerical Display
+                                Data Type: Unsigned BIN32
+                                Device: D, 102
+                                Format: Signed Decimal
+                                Digits (Integral): 7
+                                Click OK to Accept
+
+                    Speed Feedrate Numerical Display (10014)
+                        Main Menu > Object > Numerical Display/Input
+                        Create a rectangle next to the “Speed Feedrate” Text
+                        Double click on the Numerical Box
+                            Basic Settings > Device Tab
+                                Type: Numerical Display
+                                Data Type: Unsigned BIN32
+                                Device: D, 104
+                                Format: Signed Decimal
+                                Digits (Integral): 7
+                                Click OK to Accept
+
+                    Error Code Numerical Display (10015)
+                        Main Menu > Object > Numerical Display/Input
+                        Create a rectangle next to the “Error Code” Text
+                        Double click on the Numerical Box
+                            Basic Settings > Device Tab
+                                Type: Numerical Display
+                                Data Type: Unsigned BIN32
+                                Device: D, 106
+                                Format: Signed Decimal
+                                Digits (Integral): 7
+                                Click OK to Accept
+
+                Write to GOT
+                    Main Menu > Communication > Write to GOT
+                        Click OK
+                    GOT Write Tab   
+                        Write Data: Package Data
+                        Destination Drive: C:Built in Flash Memory
+                        Click on GOT Write Button
+                        Yes to All and wait until writing is completed
+                    Click on Close
+    
+            Minimize entire GT Designer Window
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07. Signal & Buffer
+
+	[Image: Signal]
+	[Image: Buffer]
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+08. Run Program
 
 
 
