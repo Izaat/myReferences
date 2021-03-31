@@ -576,7 +576,23 @@ CONTENT
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 08. Run Program
+	In HMI:
+		Jog Forward: Move Axis Forward, Note the Current Feed Value and the Machine Feed Value
+		Jog Reverse: Move Axis Reverse, Note the Current Feed Value and the Machine Feed Value
+		Machine OPR: Run Operation (Move axis to 0), OPR Complete Flag light up when complete
+		123456 um Mov: Move axis to 1234560 position
+		234567 um Mov: Move axis to 2345670 position
+		Error 105: Hardware Stroke Limit (-) direction
+			The Hardware stroke limit (Lower limit signal RLS) is turned OFF during operation
+			The start of an operation is requested when the hardware stroke limit (lower limit signal RLS) is OFF
+			Error Reset and Jog Forward
+		Error 104: Hardware Stroke Limit (+) direction
+			The Hardware stroke limit (Upper limit signal FLS) is turned OFF during operation
+			The start of an operation is requested when the hardware stroke limit (upper limit signal FLS) is OFF
+			Error Reset and Jog Reverse
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+END
 
 
 
