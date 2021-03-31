@@ -1,0 +1,315 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+PLC MELSEC Servo 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENT
+01. Components
+02. Wiring
+03. Parameter Overview
+04. Setup
+05. Program
+06. HMI
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Components
+    1. PLC: Q02HCPU
+    2. Positioning Module: QD75D4
+    3. Ethernet Module: QJ71E71-100 (192.168.1.11) - 0020 = StartXY & Start I/O No.
+    4. Servo Amplifier: MR-J3-10A (Incremental)
+    5. Servo Motor: Mitsubishi HF-KP13 262.144 [Pulse/rev]
+    6. Lead of Ball Screw: 10mm
+    7. HMI: GOT2000, GT2710-STBD, 800x600, (192.168.1.21) 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Wiring
+    [Image: MRJ3.jpg]
+    [Image: MRJ3b.jpg]
+  
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Parameters Overview
+    [Image: Parameters.jpg]
+    EDIT:
+        PA05: 32768
+        PA06: 8
+        PA07: 1
+        PA14: 1
+  
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. Setup
+        Main Menu > New Project
+            Series: QCPU(Q mode)
+            Type: Q02/Q02H
+            Project Type: Simple Project
+            Language: Ladder
+
+        Navigation Panel
+            Connection Destination > All Connections > Double Click on Connection1
+            Transfer Setup Connection will appear
+                PC side I/F: Serial USB
+                PLC side I/F: PLC Module
+                    PLC Mode: QCPU (Q Mode)
+                Other Station Setting: No Specification
+                    Check at Comms time: 30 sec
+                    Retry Times: 0                         
+                Click on "Connection Test"
+                    Make sure no errors
+                Click on "System Image"
+                    Double Check PC and PLC I/F
+                Click OK
+				
+        PLC Parameter Setup
+            Navigation Panel > Project View > Parameter Tree > Double Click on PLC Parameter
+                Q Parameter Setting Window will appear
+                    Program Tab
+                        Highlight "MAIN" under tree view and click on "Insert" button	
+                    I/O Assignment Tab
+                        | No. | Slot   | Type        | Model name  | Points    | Start XY |
+                        | 0   | PLC    | PLC         | Q02HCPU     |     -     |   -      |
+                        | 1   | 0(*-0) | Intelligent | QD75D4      | 32 Points | 0000     |
+                        | 2   | 1(*-1) | Intelligent | QJ71E71-100 | 32 Points | 0020     |
+
+                        Click on Check and make sure the is no error
+                        Click on End button to accept settings
+
+        Network Parameter Setup
+            Ethernet Setup
+                Navigation Panel > Project View > Parameter Tree > Network Parameter > Double click on "Ethernet" 
+                    Network Type: Ethernet
+                    Start I/O No.: 0020
+                    Network No.: 1
+                    Total Stations: N/A
+                    Group No.: 0
+                    Station No.: 1
+                    Mode: Online
+                    Operation Setting
+                        Communication Data Code: Binary
+                        Initial Timing: Always Wait for OPEN
+                        IP Address Setting
+                            Input Format: Dec
+                            IP Address: 192.168.1.11
+                        Enable Online Change: Ticked
+                        Send Frame Setting: Ethernet
+                        TCP Existence Confirmation Settings: Use KeepAlive
+                    Click on Check Button and make sure no error
+                    Click on End to accept changes
+
+                Navigation Panel > Project View > Double Click on Intelligent Function Module Tree 
+                    Select "New Module"
+                    New Module Window Appear
+                        Module Type: QD75 Type Positioning Module
+                        Module Name: QD75D4
+                        Mount Slot No.: 2
+                        Specify XY Address: Ticked, 0000
+                        Click on "Acknowledge I/O Assignment" and a window will appear
+                            Highlight "0000" on StartXY column
+                            Click on "Setting" and this will exit this window
+                        Click OK to accept changes and New tree "0000 QD75D4" will appear under Intelligent Function Module
+
+                Navigation Panel > Project View > Intelligent Function Module Tree > 0000 QD75D4 > Double click on Parameter
+                    A tab full of parameter listing will appear in main view
+
+                    Basic Parameter1:
+                        Unit Setting: 0mm
+                        No. of pulse per rotation: 32768 pulse
+                        Movement amount per rotation: 1000.0um
+                        Unit Magnification: 10:X10Times
+                        Pulse Output Mode: 1:CW/CCW Mode
+                        Rotation direction Setting: 0:Increase Present Value by Forward Pulse Output
+                        Bias Speed at Start: 0.00mm/min
+                        
+                    Basic Parameter2:
+                        Speed Limit Value: 3000 mm/min
+                        Acceleration time 0: 1000ms
+                        Deceleration time 0: 1000ms
+
+                    Detailed Parameter1:
+                        Backlash compensation amount: 0.0um
+                        Software stroke upper limit value: Default(+)
+                        Software stroke lower limit value: Default(-)
+                        Software stroke limit selection: 1-Set software Limit to Sending Machine Value
+                        Software stroke limit valid/invalid setting: 1-Invalid
+                        Command in-position width: 10um
+                        Torque limit: 300%
+                        M code ON signal timimg: 0-With Mode
+                        Speed Switching: 0-Standard Speed Switch
+                        Interpolation speed designation method: 0-Composite Speed
+                        Current Feed value during speed control: 0-Not update of sending current value
+                        Input signal logic selection-Lower Limit: 0-Negative Logic
+                        Input signal logic selection-Upper Limit: 0-Negative Logic
+                        Input signal logic selection-Drive Unit Ready: 0-Negative Logic
+                        Input signal logic selection-Stop Signal: 0-Negative Logic
+                        Input signal logic selection-External Command: 0-Negative Logic
+                        Input signal logic selection-Zero signal: 1-Positive Logic
+                        Input signal logic selection-point signal: 0-Negative Logic
+                        Input signal logic selection-Manual Pulse Generator input: 0-Negative Logic
+                        Output signal logic selection-Command pulse signal: 0-Negative Logic
+                        Output signal logic selection-Deviation Counter clear: 0-Negative Logic
+                        Manual pulse generator input selection: 0-A Phase / B Phase (4Multiply)
+                        Speed position function selection: 0-Speed position switching control (INC Mode)
+
+                    Detailed Parameter2:
+                        Acc time 1: 1000ms
+                        Acc time 2: 1000ms
+                        Acc time 3: 1000ms
+                        Dec time 1: 1000ms
+                        Dec time 2: 1000ms
+                        Dec time 3: 1000ms
+                        JOG speed limit value: 3000mm/min
+                        JOG operation acc time selection: 0-1000
+                        JOG operation dec time selection: 0-1000
+                        Acceleration/deceleration process selection: 0-Trapezoidal Acceleration/Deceleration Processing
+                        S-curve Ratio: 100%
+                        Sudden stop deceleration time: 1000ms
+                        Positioning complete signal output time: 300ms
+                        Allowable circular interpolation error width: 10um
+                        External command function selection: 0-External positioning start
+
+                    OPR basic Parameters
+                        OPR Method: Near Point Dog Method
+                        OPR direction: Reverse Direction (Address Decrease Direction)
+                        OP address: 0um
+                        OPR Speed: 1000mm/min
+                        Creep Speed: 100mm/min
+                        OPR Retry: Do not retry OPR with limit switch
+
+
+
+                Navigation Panel > Project View > Intelligent Function Module Tree > 0000 QD75D4 > Double click on Positioning Axis 1
+                    Table:
+                        #Positioning Axis #1 Data Setting No.1: 123456.0 -> End
+                        #Positioning Axis #1 Data Setting No.2: 234567.0 -> End
+                        #Positioning Axis #1 Data Setting No.3: 100000.0 -> Cont
+                        #Positioning Axis #1 Data Setting No.4: -50000.0 -> Cont
+                        #Positioning Axis #1 Data Setting No.5: 200000.0 -> Cont
+                        #Positioning Axis #1 Data Setting No.6: -100000.0 -> Cont
+                        #Positioning Axis #1 Data Setting No.7: 50000.0 -> Cont
+                        #Positioning Axis #1 Data Setting No.8: -50000.0 -> Cont
+
+                    |-----|-----------|---------------|--------------|--------------|--------------|-------------|----------|------------|-------|--------|
+                    | No. | Operation | Control       | Axis to be   | Acceleration | Deceleration | Positioning | Arc Addr | Command    | Dwell | M code |
+                    |     | pattern   | system        | interpolated | time No.     | time No.     | address     |          | Speed      | time  |        |
+                    |-----|-----------|---------------|--------------|--------------|--------------|-------------|----------|------------|-------|--------|
+                    | 1   | 0:End     | 02h:INC line1 |              | 0:1000       | 0:1000       | 123456.0um  | 0.0um    | 3000mm/min |----------------|
+                    | 2   | 0:End     | 02h:INC line1 |              | 0:1000       | 0:1000       | 234567.0um  | 0.0um    | 3000mm/min |----------------|
+                    | 3   | 1:CONT    | 02h:INC line1 |              | 0:1000       | 0:1000       | 100000.0um  | 0.0um    | 3000mm/min |----------------|
+                    | 4   | 1:CONT    | 02h:INC line1 |              | 0:1000       | 0:1000       | -50000.0um  | 0.0um    | 3000mm/min |----------------|
+                    | 5   | 1:CONT    | 02h:INC line1 |              | 0:1000       | 0:1000       | 200000.0um  | 0.0um    | 3000mm/min |----------------|
+                    | 6   | 1:CONT    | 02h:INC line1 |              | 0:1000       | 0:1000       | -100000.0um | 0.0um    | 3000mm/min |----------------|
+                    | 7   | 1:CONT    | 02h:INC line1 |              | 0:1000       | 0:1000       | 50000.0um   | 0.0um    | 3000mm/min |----------------|
+                    | 8   | 0:End     | 02h:INC line1 |              | 0:1000       | 0:1000       | -50000.0um  | 0.0um    | 3000mm/min |----------------|
+                    |-----|-----------|---------------|--------------|--------------|--------------|-------------|----------|------------|-------|--------|
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. Program
+        //MAIN
+            |  SM400                                                  |
+            |---||------------------------------------(Y0)------------|
+            |  SM400                                   U0W            |
+            |---||-------------------------------[MOV G817 D0 ]-------| //D0: Monitor Value      
+            |  SM400                                    U0W           |
+            |---||----+--------------------------[DMOV G800 D100]-----|   
+            |         |                                U0W            |
+            |         +--------------------------[DMOV G802 D102]-----| //D102: Machine Feed Value
+            |         |                                 U0W           |
+            |         +--------------------------[DMOV G804 D104]-----| //D104: Speed Feedrate
+            |         |                                 U0W           |
+            |         +--------------------------[DMOV G806 D106]-----| //D106: Error Code
+            |  M0    X0   X0C   X8                           U0W      | //M0: Machine OPR ON   
+            |--||----||---|/|---|/|-----+--------[MOV K9001 G1500]----|         
+            |                           |                             |
+            |                           +-----------------(M1000)-----|
+            |  M1    X0   X8    Y9                                    |
+            |--||----||---|/|---|/|-----+--------------(Y8)-----------| //M1: JOG Forward ON (1000mm/min)
+            |                           |                     U0W     |
+            |                           +-----[DMOV K100000 G1518]----|
+            |  M2    X0   X8    Y8                                    |
+            |--||----||---|/|---|/|-----+--------------(Y9)-----------| //M2: JOG Reverse ON (1000mm/min)
+            |                           |                     U0W     |
+            |                           +-----[DMOV K100000 G1518]----|
+            |  M3                                      U0W            |
+            |--||-----------------------------[MOV K1 G1502]----------| //M3: Error Reset
+            |                                                         |
+            |  M4    X0                                               |
+            |--||----||--------+--------------[TOP H0 K1500 K1 K1]----| //M4: 123456.0um Move
+            |                  |                                      |
+            |                  +------------------------(M1001)-------|
+            |  M5    X0                                               |
+            |--||----||--------+--------------[TOP H0 K1500 K2 K1]----| //M5: 234567.0um Move
+            |                  |                                      |
+            |                  +------------------------(M1002)-------|
+            |  M6    X0                                               |
+            |--||----||--------+--------------[TOP H0 K1500 K3 K1]----| //M6: 123456.0um Move
+            |                  |                                      |
+            |                  +------------------------(M1003)-------|
+            |  M1000                                                  |
+            |--||----------+---------------------------(Y10)----------|
+            |              |                                          |
+            |  M1001 D0.4  |                                          |
+            |---||----||---| //D0.4: OPR Complete Flag                |
+            |              |                                          |
+            |  M1002 D0.4  |                                          |
+            |---||----||---|                                          |
+            |              |                                          |
+            |  M1003 D0.4  |                                          |
+            |---||----||---+                                          |
+            |                                                         |
+            |  Y10      X10                                           |
+            |---||--+---||----+-------------------------[RST Y10]-----|
+            |       |   X8    |                                       |
+            |       +---||----+                                       |
+            |                                                         |
+            |-----------------------------------------------[END]-----|
+
+        //Write to PLC
+            Click on Write to PLC icon from the main toolbar and a window will appear
+            Online Data Operation Window
+                In “PLC Module Tab”, Under “Edit Data”, click on “Select All”
+                In “Intelligent Function Module Tab”, check the box under “Valid” column (0000:QD75D4 row)
+                    Click on “Execute”
+                Once complete, close window
+
+        //Run Program
+            Click on “Start Monitoring (Run)” icon from the main toolbar
+            Minimize GX Works to start HMI development
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+06. HMI
+
+    //HMI Screen
+         _______________________________________________________________________________________________________
+        |                                                                                                       |
+        |    |-------------------|  |-------------------|  |------------------------|  |----------------|       |
+        |    | Machine OPR       |  |  Jog Forward      |  |       Jog Reverse      |  | Error Reset    |       |
+        |    |-------------------|  |-------------------|  |------------------------|  |----------------|       |
+        |                                                                                                       |
+        |    |-------------------|  |-------------------|  |------------------------|  |----------------|       |
+        |    | 1234 um Mov       |  | 1234 um Mov       |  | Process Scenario       |  |  Complete      |       |
+        |    |-------------------|  |-------------------|  |------------------------|  |----------------|       |
+        |                                                                                                       |
+        |    Current Feed Value:   ##                                                                           |
+        |    Machine Feed Value:   ##                                                                           |
+        |    Speed Feedrate:       ##                                                                           |
+        |    Error Code:           ##                                                                           |
+        |                                                                                                       |
+        |_______________________________________________________________________________________________________|
+
+    //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
