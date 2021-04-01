@@ -1,0 +1,186 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Main
+    PROGRAM PLC_PRG
+    VAR
+        TimeOfDay:TOD;
+
+        (*Input*)
+        Start: BOOL;
+        LS2: BOOL;
+        LS1: BOOL;
+        heater_start: BOOL;
+        in_flow_value:REAL;
+        Heater:BOOL;
+        input_slider:REAL;
+        input_slider2:DINT;
+        drain_slider:REAL;
+        drain_slider2:DINT;
+        TankTemp_slider:REAL;
+        TankTemp_slider2:DINT;
+        Tank_Temp:DINT;
+
+        (*Output*)
+        heat_ton1: TON;
+        out_valve: BOOL;
+        in_valve: BOOL;
+
+        (*Water Height Calculation*)
+        tank_fill: REAL;
+        FreshWaterTemp:REAL;
+        TankArea: REAL;
+        Pi: REAL;
+        Radius: REAL;
+        WaterHeight: REAL;
+        WaterHeight2:DINT;
+
+        (*Water in tank Final Temp calculation*)
+        HeatedWaterV1:REAL;
+        HeatedWaterT1:REAL;
+        ChilledWaterV2:REAL;
+        ChilledWaterT2:REAL;
+        Water_Tfinal:REAL;
+
+        (*Heater*)
+        TimeToHeat: REAL;
+        CurrentWaterVolume: REAL; (*In Litres*)
+        TargetTempFreshTempDifference: REAL;
+        Numerator: REAL;
+        Numerator2: REAL;
+        heat_timer: BOOL;
+    END_VAR
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Program
+    (*---Water Height Calculation-----*)
+    (*1drum/200litres = 58cm*90cm*)
+    (*Let's say 200 litres tank, therefore 200000 millilitres*)
+    (*Flow rate = 1 litre per minute if value is set to 1*)
+    (*TankVolume=pi*radius*radius*height*)
+    Pi:=3.14;
+    Radius:=29; (*In centimeters*)
+    TankArea:=Pi*(Radius*Radius);
+    WaterHeight:=(tank_fill/TankArea); (*tank_fill is in cubic cm*)
+    WaterHeight2:=REAL_TO_DINT(WaterHeight);
+    (*--------------------------------*)
+
+    (*-----------Initialize-----------*)
+    IF Start=FALSE THEN
+        in_valve:=FALSE;
+        LS1:=FALSE;
+        LS2:=FALSE;
+        heater_start:=FALSE;
+        out_valve:=FALSE;
+    END_IF
+    (*--------------------------------*)
+
+    (*---------Filling Control--------*)
+    input_slider2:=REAL_TO_DINT(input_slider);
+
+    IF in_valve=TRUE THEN
+        tank_fill:=tank_fill+input_slider;
+    ELSE
+        tank_fill:=tank_fill+0;
+    END_IF
+
+    IF tank_fill>=200000 THEN
+        LS2:=TRUE;
+        in_valve:=FALSE;
+    ELSE
+        LS2:=FALSE;
+    END_IF
+    (*--------------------------------*)
+
+
+    (*--------Emptying Control--------*)
+    drain_slider2:=REAL_TO_DINT(drain_slider);
+
+    IF out_valve=TRUE THEN
+        tank_fill:=tank_fill-drain_slider;
+    ELSE
+        tank_fill:=tank_fill-0;
+    END_IF
+
+    IF tank_fill<=0 THEN
+        LS1:=FALSE;
+        out_valve:=FALSE;
+        (*in_valve:=TRUE;*)
+        heater_start:=FALSE;
+    ELSE
+        LS1:=TRUE;
+    END_IF
+    (*--------------------------------*)
+
+    (*-----Heating Control------------*)
+    TankTemp_slider2:=REAL_TO_DINT(TankTemp_slider);
+
+    IF heater_start=1 THEN
+        Tank_Temp:=TankTemp_slider2;
+    ELSE
+        Tank_Temp:=Tank_Temp-1;
+    END_IF
+
+    IF Tank_Temp<24 THEN
+        Tank_Temp:=24;
+    END_IF
+
+    IF heater_start=1 THEN
+        heat_ton1(IN:=TRUE, PT:=t#10000s);
+        heat_timer:=heat_ton1.Q;
+    END_IF
+
+    IF TankTemp_slider>=100 THEN
+        heater_start:=FALSE;
+    END_IF
+
+    (*--------------------------------*)
+
+
+    (*----Time to Heat Calculation-----
+    FreshWaterTemp:=24;(*In degree Celsius*)
+    (*TimeToHeat(hours):=((4.2*WaterVolume*(TargetTemp-FreshWaterTemp))/3600)*HeaterWattage(kW)*)
+    CurrentWaterVolume:=tank_fill/1000; (*Value in litres*)
+    TargetTempFreshTempDifference:=100-FreshWaterTemp;
+    Numerator:=4.2*CurrentWaterVolume*TargetTempFreshTempDifference;
+    Numerator2:=Numerator/3600;
+    TimeToHeat:=Numerator2/100;
+    TimeOfDay:=tod#00:00:00;
+    --------------------------------*)
+
+
+    (*---Tank Temp Calculation----*)
+    (*HeatCap:=(ThermalEnergyinJoules)/(MassInKG*TempInCelsius)*)
+    (*Tfinal=((V1*Thot)+(V2*Tcold))/(V1+V2)*)
+    (*Water_Tfinal:=((HeatedWaterV1*HeatedWaterT1)+(ChilledWaterV2*ChilledWaterT2))/(HeatedWaterV1+ChilledWaterV2);*)
+    (*--------------------------------*)
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+End
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
