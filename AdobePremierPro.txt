@@ -9,6 +9,7 @@ CONTENTS
 07 - Video speed manipulation
 08 - Video Effects
 09 - Audio Effects
+10 - Camera Shake or Anger Effect
 
 TIPS - J,K,L to speed up or slow down timeline play speed
 
@@ -180,7 +181,13 @@ Transitions
         Add Reverb to all the 3 tracks (This will add 'Reverb Tail' to the track)
         Re-reverse the 3 tracks (This will add in cool reverb effect at the beginning audio clip tail)
 
-
+10. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Camera shake or anger effect
+    Add face warp
+        Wave Type: Smooth Noise
+        Height: 100
+        Wave Width: 1
+        Direction: 90deg = Up/down
 
 
 
