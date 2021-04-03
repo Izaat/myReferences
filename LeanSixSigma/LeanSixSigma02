@@ -2007,6 +2007,119 @@ CONTENTS
                     Black Continuous Lines: Cyclical Variations
                     Red Dashed Lines: Temporal Variations
 
+    ///////////////////////////
+    //Simple Linear Correlation
+        Calculates the direction of movement of Y as the X changes (ascending or descending)
+        The association between variables
+        The Coefficient of Correlation shows the strength of the relationship between Y and X 
+        Correlation is used to associate Y with X, and statistically validate the relationship
+        Excel: =CORREL(A1:A6, B1:B6), where A and B are columns
+        The dependant variable Y may indedepent on other variable (X)
+        Correlation is used to find the behavior of Y as one of the Xs changes
+        Correlation helps to predict the direction of  movement in values in Y when X changes
+
+        'r' of Pearson's Coefficient of Correlation, If x increase, Y decrease
+            -1 : Movement in both variables in inverse
+            0  : No correlation between the two
+            +1  : Movement in both variables is same, as X increase, Y also increase
+            'r' value of >+0.85 or <-0.85 indicates a strong correlation
+
+        Scatter plots:
+            r=0.07, Plots are scatterd and more dispersed than r=0.45
+            r=0.45, Plots are not dispersed but you can tell the direction (whether it's ascending or descending)
+            r=0.90, scatter plots fall nicely along an ascending linear graph
+            r=-0.90, scatter plots fall nicely along a descending linear graph
+
+        Calculation:
+            Corr test was performed on the scores of a set of students from first grade to university
+            The score under university, correlation was the dependent variable
+            The first grade score was independent
+            Correlation coefficient was 0.29
+            Correlation coefficient score between university and high school was 0.45
+                This states the the performance of student in high school is a better indicator of their performance in university than their first grade
+                As both values are less than 0.85, it is diffficult to draw a straight line on scatter plot
+
+    ///////////////////////////
+    //Regression
+        Calculates the degree of movement of Y as the X changes
+        If a high percentage of variability in Y (r^2>70%) is explained by changes in X, the model to write a transfer function equation is:
+            Y = f(X)
+            This equation is for predicting future values of Y given X or vice versa
+            Regress Y on one ormore Xs simultaneously
+            Simple linear regression is for on X and Multiple Linear Regression is for multiple Xs
+
+        Key concepts of regression
+            Transfer function to control Y
+                Can't control Y because there may be low level of correlation between 2 variables
+            Vital X
+                It is important to discover whether a statistical significant relationship exists between Y and X by looking at P-values.
+                Based on regression, one can find out the vital X value and eliminate the rest
+                
+             Note: It is important to understand if there is statistical relevance between X and Y using the metrics from Regression Analysis
+                Simple Linear Regression should be used as a Statistical Validation Tool
+             
+        Simple Linear Regression
+            Is a fitted linear equation between Y and X
+            Equation: Y = A + BX +- C
+                where,
+                    Y = Dependent variable/output/response
+                    X = Independent variable/output/predictor
+                    A = Intercept of fitted line on Y axis / Where the graph intercepts Y axis
+                    B = Regression coefficient/Slope of fitted line
+                    C = Error in model
+
+            Least Squares Method
+                If X and Y are not perfectly linear (r = +-1), several lines could fit in the scatter plot
+                It can be inferred from the graphs: Any plot that is plotted away from the line is called an error
+                    The distance from the point to the line is the error distance used in Sum of Squares of Error (SSE)
+                Minitab fits the line which has the least SSE
+                In linear relationship, the points would lie on the line. Typically, the data lies off the line
+
+            Example:
+                | Years | Fertilizer       | Annual          |
+                |       | Expenses in $(Y) | selling in $(X) |
+                |-------|------------------|-----------------|
+                | 2009  |      2           |        20       |
+                | 2010  |      3           |        25       |
+                | 2011  |      5           |        34       |
+                | 2012  |      4           |         3       |
+                | 2013  |     11           |        40       |
+                | 2014  |      5           |        31       |
+                |-------|------------------|-----------------|
+                
+                
+                In Excel:
+                    Copy and paste data into cell B1 to C6
+                    Select "Plain Scatter Plot Chart"
+                        Main Menu > Insert > Plain Scatter Plot Chart (Scatter with only markers)
+                    Right click the datapoints in scatter chart and select "Add Trendline"
+                    Select "Linear" and select boxes titled "Display R-Squared value"
+                    Select Display Equation
+                        Linear line (Best fit line / least square line) will appear
+                
+                Regression Analysis:
+                    r^2 value (Coefficient of Determination) conveys if the model is good and can be used
+                    The r^2 value is 0.3797
+                    38% of variability in Y is explained by X
+                    The remaining 62% variation is due to residual factors
+                    Low value of r^2 validates a poor relationship between Y and X
+
+        Multiple Linear Regression
+            If new variable X2 is added to the above question r^2 model, the impact of X1 and X2 on Y gets tested
+            Value of r^2 changes due to the new variable and be called "r^2 adjusted"
+            If r^2 Adjusted value is greater than 70%, the model can be used
+
+            Key Concepts:
+                The residual between the actual value and the predicted value give an indication of how  good the model is
+                If the errors are small and the prediction uses Xs that are within the range of collected data, the predictions should be good
+                Equation:
+                    Total = Regression + Error
+                    Sum of Square Total (SST) = Sum of Square Regression (SSR) + Sum of Squares Error (SSE)
+                    r^2 = Regression (SSR) / Total (SST)
+                Prioritization of Xs can be done through SLR equation.
+                    Run separate regressions on Y with each X
+                If X does not explain variation in Y, it should not be explored further
+
 
 
 
