@@ -2130,6 +2130,48 @@ CONTENTS
 
     ///////////////////////////
     //Hypothesis Testing
+        Statistically significant differences between variables and hypothesized values may be not be practical and economically meaningful
+        Example:
+            Based on hypothesis test, ABC Inc wants to implement a trading company which is proven to provide statistically significant return.
+            However, it does not guarantee trading on this strategy will provide significant positive economic return due to taxes, transaction costs, risks
+
+        Null Hypothesis VS Alt Hypothesis
+            If null hypothesis is rejected, alt hypothesis must be right
+            Null:
+                Represented as H0
+                Cannot be proved, can only reject
+            Alt:
+                Represented as Ha 
+                Challenges the null hypothesis
+
+        TypeI and TypeII error
+            Type I Error:
+                Rejecting null hypothesis when it is true
+                Aka Producer's Risk
+                Alpha is the chance of committing Type I error
+                The value of alpha is 0.05 or 5%
+            Type II Error:
+                Accepting a null hypothesis when it is false
+                Aka Consumer's Risk
+                Beta is the chance of committing Type II error
+                The value of Beta is 0.2 or 20%
+                Any experiment should have less beta value as possible
+
+        Points to remember:
+            Probability of making one type of error increases the probability of the other type of error
+                Type 1 error will increase when specs of product increases surpassing customer's requirements (decreasing Type 2 error)
+            If a true null hypothesis is erroneously rejected (Type I error), a false null hypothesis may be accepted (Type II error)
+            Typical alpha (Type I) error is set at 0.05 which means committing type I error will be 1/20 experiments
+            Important to decide what type of error should be less and set alpha and beta accordingly
+
+        Power of Test
+            Is the probability of correctly rejecting the null hypothesis when it is false
+            Is represented as 1-beta (Type II error)
+            Is the probability of not committing Type II error
+            Helps improve the advantage of hypothesis testing
+            The higher the value, the better the choice for the test to be chosen
+            Alpha = Significance level. 
+            1-Alpha = Confidence level
 
 
 
