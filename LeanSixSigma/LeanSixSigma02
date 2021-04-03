@@ -2173,6 +2173,79 @@ CONTENTS
             Alpha = Significance level. 
             1-Alpha = Confidence level
 
+        Standard Sample Size Formula (Continuous Data)
+            The value alpha is taken as 5%
+            According to Z table, the Z97.5 is 1.96
+            Sample Size Formula:
+                n = [(1.96*sigma)/delta]^2 
+
+            Question:
+                The population standard deviation for the time to resolve customer problems is 30 hours.
+                What should be the size of a sample that can estimate the average problem resolution time within +-5 hours tolerance with 99% confidence?
+            
+            Answer:
+                Delta=5
+                sigma=30
+                alpha=0.01
+                Z99.5=2.575
+                Sample size = [(2.575*30)/5]^2 = 239
+
+        Standard Sample Size Formula (Discrete Data)
+            If the average population's proportion non defective is 'p', then population standard deviation can be calculated
+            sigma = sqrt of (p(1-p))
+            n = [1.96/delta]^2
+            p(1-p)
+            where delta = To;erance allowed on either side of the population proportion average in %
+            
+            Question:
+                The non-defective population proportion for pen manufacturing is 80%
+                What should be theh sample size to draw a sample that can estimate the proportion of compliant pens within +-5% with an alpha of 5%?
+            Answer:
+                Delta = 0.05
+                sigma 2 = 0.8(1-0.8)
+                alpha = 0.05
+                Z97.5 = 1.96
+                Sample size = [(1.96/0.05)^2] * 0.8 * 0.2 = 245.86 = 246
+                Sample size of lesser than 245 reduces confidence level  
+
+            Hypothesis testing roadmap
+                Hypothesis testing > 
+                    Discrete Data >
+                        Mean 
+                            t-test (unknown alpha value)
+                            F-test (unknown alpha value)
+                        Variance > X^2 test (chi squared test)
+                    Continuous Data >
+                        Mean 
+                            Comparison of two 
+                                t-test (unknown alpha value)
+                            Comparison of Many
+                                F-test (unknown alpha value)
+                            Z-test (known alpha value)
+                        Variance > 
+                            F-test
+
+            Hypothesis Test for Means
+                H0 (Null hypothesis) : Average height of American males = 165cm (u0)
+                Ha (Alt Hypothesis) : Average height of Indian males < > 165cm
+                H0: u = u0 against Ha: u <> u0
+                Sample size (n) = 117, (Z-test) and sample size (n) = 25 (t-test);
+                Sample average (Xbar) = 164.5
+
+                Z-test (known sigma)
+                    The population StdDev is known; sigma = 5.2
+                    Compute z = (Xbar - u0) / [sqrt(sigma^2 / n)] = (165-164.5) / sqrt (5.2^2 / 117) = 1.04
+                    Reject H0 at level of significance alpha if z is greater than z alpha
+                    Since Z0.05 = 1.96, the null hypothesis is not rejected at 5% level of significance
+                    Conclusion: Based on the sample collected, average height of American males is 165cm
+                
+                t-test (unknown sigma)
+                    The population StdDev is unknown
+                    However, estimated from the sample StdDev, s = 5.0 
+                    Compute t = (Xbar - u0) / sqrt (s^2 / n) = (165 - 164.4) / sqrt (5^2 / 25) = 0.5
+                    Reject H0 at level of significance alpha if t is greater than t(n-1), alpha
+                    Since t24, 0.05 = 2.064, the null hypothesis is not rejected at 5% level of significance
+                    Conclusion: Based on the sample collected is that the average height of American males is 165cm
 
 
 
