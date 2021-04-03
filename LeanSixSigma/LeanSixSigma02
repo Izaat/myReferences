@@ -2120,7 +2120,16 @@ CONTENTS
                     Run separate regressions on Y with each X
                 If X does not explain variation in Y, it should not be explored further
 
+            Difference between Correlation and Causation
+                Regression equation denotes a relationship between variables but does not indicate:
+                - if change in one variable causes change in the other
+                - both variables may be dependaent on another independent variable
+                Example:
+                    There is a positive correlation between number of sneezes and number of deaths
+                    But it cannot be assumed the sneezing is the cause of death despite the correlation is very strong
 
+    ///////////////////////////
+    //Hypothesis Testing
 
 
 
