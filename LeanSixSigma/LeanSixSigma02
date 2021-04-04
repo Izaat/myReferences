@@ -2319,14 +2319,14 @@ CONTENTS
             A restaurant wanting to explore the recent overuse of avocados suspects there is a difference between two chefs
             and number of avocados used to prepare the salads
             The table shows the measure of avocados in grams
-            | Grp A | Grp B |
-            | Chef1 | Chef2 |
-            |   4.2   |    4      |
-            |   4.5   |    4.5   |
-            |   7.2   |    5      |
-            |   6.1   |    5.2   |
-            |   8.9   |    5.3   |
-            |   5.2   |    6.1   |
+            |  Grp A  |  Grp B |
+            |  Chef1  |  Chef2 |
+            |   4.2   |    4   |
+            |   4.5   |    4.5 |
+            |   7.2   |    5   |
+            |   6.1   |    5.2 |
+            |   8.9   |    5.3 |
+            |   5.2   |    6.1 |
 
             The weight of avocado slices used in salads prepared by two different chefs is to determine if
             one chef is using more avocados than the other
