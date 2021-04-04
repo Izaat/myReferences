@@ -2358,14 +2358,14 @@ CONTENTS
                 From Excel result sheet, p-value = 0.03
                 
                 |          F-Test Two Sample for Variances           |
-                |                             |   Variable 1  |  Variable 2  |
-                |   Mean                 |   6.0167       |  5.0167       |
-                |   Variance            |  3.19767      |  0.51767     |
-                |   Observation       |        6            |        6         |
-                |          df                |       5            |         5         | //degrees of freedom
-                |          F                  |  6.1770766  |         -          | //Calculated F statistics
-                | P(F<=f) one tail    | 0.0336523   |        -           | //p-value
-                | F Critical one-tail | 5.05032906 |        -           | //Reference number found in statistics book table
+                |                     |   Variable 1  |  Variable 2  |
+                |   Mean              |  6.0167       |  5.0167      |
+                |   Variance          |  3.19767      |  0.51767     |
+                |   Observation       |     6         |    6         |
+                |      df             |     5         |    5         | //degrees of freedom
+                |      F              |  6.1770766    |    -         | //Calculated F statistics
+                | P(F<=f) one tail    |  0.0336523    |    -         | //p-value
+                | F Critical one-tail |  5.05032906   |    -         | //Reference number found in statistics book table
 
                 If p-value is below 0.05, null must be rejected
                 Hence, Null hypothesis with 97% confidence is rejected
