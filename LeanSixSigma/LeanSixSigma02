@@ -2257,6 +2257,156 @@ CONTENTS
                 X^2calculated = 1.36                
             Result: Since calculated value is less than critical value, the proportion of wins of Australia is independent of the country played or place
 
+        Hypothesis Test for Proportions
+            H0: Proportion of smokers among males in a place named R is 0.10 (p0)
+            Ha: Proportion of smokers among males in R is different than 0.10
+            H0: p = p0 against Ha: p <> p0
+            Among n = 150 adult males interviewed, 23 were found smokers
+            Sample proportion p = 23/150 = 0.153
+            Compute test statistic:
+                Z = (p-p0) / sqrt [p(1-p) / n] = (0.153-0.10) / sqrt [(0.153*0.847) / 150] = 1.80
+            Reject H0 at level significance alpha if z > zalpha
+            Since z0.05 = 1.96, null hypothesis is rejected at 5% level of significance in favour of the alternative
+            Conclusion: Proportion of smokers in R is greater than 0.10
+
+        Comparison of Means of Two Processes
+            Used for understanding the significant difference in the outcome of two processes
+            Understand whether a new process is better than an old process
+            Used for understanding whether 2 samples belong to the same population or different population
+            Benchmark the existing process with another process
+            
+        Paired Comparison Hypothesis Test for Means
+            H0: mu1 = mu2 against Ha: mu1 != mu2
+            Two samples of sizes n1=125 and n2=110 are taken from two populations
+            Mean value of sample size 1 (Xbar1) = 167.3, Xbar2=165.8, s1=4.2, s2=5.0, sample means and StdDev respictively
+            
+            Compute test statistics:
+                t = (Xbar1 - Xbar2) / sqrt[ ((s1^2)/n1) + ((s2^2)/n2) ]  =  (167.3 - 165.8) / sqrt[ ((4.2^2)/125) + ((5.0^2)/110) ]  =  2.47
+            
+            Reject H0 at level of significance alpha if |Computed t| > (tDF, alpha/2)
+            Since t223,0.025 = 1.96, null hypothesis is rejected at 5% level of significance
+
+        Paired Comparison Hypothesis Test for Variance - F-Test Example
+            Earnings of Company A are more volatile than Company B.
+            Earnings data obtained from Comapany A = 31 years history
+            Earnings data obtained from Company B = 41 years history
+            Sample StdDev of Company A = $4.40
+            Sample StdDev of Company A = $3.90
+            
+            Question:
+                Determine whether earnings of Company A have greater StdDev than those of Company B at 5% level of significance
+            
+            Answer:
+                H0: sigmaA^2 = sigmaB^2 = variance of earnings of Company A is equal to Company B
+                Ha: sigmaA^2 < > sigmaB^2 = variance of company A is different
+                sigmaA^2 = variance of Company A earnings
+                sigmaB^2 = variance of Company B earnings
+                
+                NOTE: sigmaA > sigmaB. In calculating the F-test statistics, always put greater variance as the numerator
+            
+        Hypothesis Test for Equality of Variance - Ftest Example
+            The degrees of freedom for Company A and B
+                dofA = 31-1=30
+                dofB = 41-1=40
+            The critical value from F-table equals 1.74
+            The null hypothesis is rejected if the F-test statistic is greater than 1.74
+            Calculation of F-test statistic: 
+                F = (SA^2/SA^2) = 4.4^2 / 3.9^2 = 1.273
+            The F-test statistic (1.273) is not greater than the critical value (1.74)
+            Therefore, at 5% significance level, the null hypothesis cannot be rejected
+
+        Hypothesis Test - Ftest for Independent Groups
+            A restaurant wanting to explore the recent overuse of avocados suspects there is a difference between two chefs
+            and number of avocados used to prepare the salads
+            The table shows the measure of avocados in grams
+            | Grp A | Grp B |
+            | Chef1 | Chef2 |
+            |   4.2   |    4      |
+            |   4.5   |    4.5   |
+            |   7.2   |    5      |
+            |   6.1   |    5.2   |
+            |   8.9   |    5.3   |
+            |   5.2   |    6.1   |
+
+            The weight of avocado slices used in salads prepared by two different chefs is to determine if
+            one chef is using more avocados than the other
+            The restaurant's expenditures on avocados is greater this month than the average of the past 12 month
+            Assume there is no changes in avocado prices or amountof avocados being used
+
+            Calculation in Excel:
+                NOTE: If Data Analysis Tool is not available
+                    https://libanswers.walsh.edu/faq/147605
+                    Main Menu > File > Options > Excel Options Window > Add-Ins > Manage Section (Bottom of window) > Click on "Go" > Check "Analysis Toolpak" > Click OK
+                Click Data Analysis Tab
+                Select F-Test Two sample for Variances
+                In variable 1 and 2 range, select the right dataset
+                Click OK
+
+            F-Test Assumptions
+                Similar with T-Test assumptions
+                Before interpreting the F-test, the assumptions to be considered are:
+                    Null Hypothesis: 
+                        There is no significant statistical difference between the VARIANCES of the two groups,
+                        thus concluding any variation could be because of chance.
+                        This is Common Cause of Variation
+                    Alternate Hypothesis:
+                        There is significant statistical difference between the VARIANCES of the two groups,
+                        thus concluding variations could be because of assignable causes.
+                        This is Special Cause of Variation
+
+            F-Test Interpretations
+                From Excel result sheet, p-value = 0.03
+                
+                |          F-Test Two Sample for Variances           |
+                |                             |   Variable 1  |  Variable 2  |
+                |   Mean                 |   6.0167       |  5.0167       |
+                |   Variance            |  3.19767      |  0.51767     |
+                |   Observation       |        6            |        6         |
+                |          df                |       5            |         5         | //degrees of freedom
+                |          F                  |  6.1770766  |         -          | //Calculated F statistics
+                | P(F<=f) one tail    | 0.0336523   |        -           | //p-value
+                | F Critical one-tail | 5.05032906 |        -           | //Reference number found in statistics book table
+
+                If p-value is below 0.05, null must be rejected
+                Hence, Null hypothesis with 97% confidence is rejected
+                Variation could only be due to Common Cause of Variation is rejected
+                There could be Assignable Causes of Variation OR Special Causes of Variation
+
+        Hypothesis Test - Ttest for Independent Groups
+            From the restaurant example above, 
+            if a significant difference in their means is found, there is a possibility of Special Cause of Variation
+            
+            2-sample t-Test in Excel
+                Main Menu > Data Tab > Data Analysis > 
+                    Select 2-Sample Independent t-test unequal variances
+                    In Var1 range, select dataset for Group A 
+                    In Var2 range, select dataset for Group B
+                    Hypothesized Mean Difference = 0
+                    Click OK
+
+            Assumptions of 2-sample Independent t-Test
+                Similar to F-Test assumptions
+                Before interpreting the T-test, the assumptions to be considered are:
+                    Null Hypothesis: 
+                        There is no significant statistical difference between the MEANS of the two groups,
+                        thus concluding any variation could be because of chance.
+                        This is Common Cause of Variation
+                    Alternate Hypothesis:
+                        There is significant statistical difference between the MEANS of the two groups,
+                        thus concluding variations could be because of assignable causes.
+                        This is Special Cause of Variation                
+                    
+                    H0: Mean of Group A = Mean of Group B
+                    Ha: Mean of Group A != Mean of Group B
+
+                Alternate hypothesis tests two conditions, 
+                    Mean of A < Mean of B
+                    Mean of A > Mean of B 
+                    Thus a 2 tailed probability needs to be used
+
+
+
+
 
 
 
