@@ -2208,45 +2208,54 @@ CONTENTS
                 Sample size = [(1.96/0.05)^2] * 0.8 * 0.2 = 245.86 = 246
                 Sample size of lesser than 245 reduces confidence level  
 
-            Hypothesis testing roadmap
-                Hypothesis testing > 
-                    Discrete Data >
-                        Mean 
+        Hypothesis testing roadmap
+            Hypothesis testing > 
+                Discrete Data >
+                    Mean 
+                        t-test (unknown alpha value)
+                        F-test (unknown alpha value)
+                    Variance > X^2 test (chi squared test)
+                Continuous Data >
+                    Mean 
+                        Comparison of two 
                             t-test (unknown alpha value)
+                        Comparison of Many
                             F-test (unknown alpha value)
-                        Variance > X^2 test (chi squared test)
-                    Continuous Data >
-                        Mean 
-                            Comparison of two 
-                                t-test (unknown alpha value)
-                            Comparison of Many
-                                F-test (unknown alpha value)
-                            Z-test (known alpha value)
-                        Variance > 
-                            F-test
+                        Z-test (known alpha value)
+                    Variance > 
+                        F-test
 
-            Hypothesis Test for Means
-                H0 (Null hypothesis) : Average height of American males = 165cm (u0)
-                Ha (Alt Hypothesis) : Average height of Indian males < > 165cm
-                H0: u = u0 against Ha: u <> u0
-                Sample size (n) = 117, (Z-test) and sample size (n) = 25 (t-test);
-                Sample average (Xbar) = 164.5
+        Hypothesis Test for Means
+            H0 (Null hypothesis) : Average height of American males = 165cm (u0)
+            Ha (Alt Hypothesis) : Average height of Indian males < > 165cm
+            H0: u = u0 against Ha: u <> u0
+            Sample size (n) = 117, (Z-test) and sample size (n) = 25 (t-test);
+            Sample average (Xbar) = 164.5
 
-                Z-test (known sigma)
-                    The population StdDev is known; sigma = 5.2
-                    Compute z = (Xbar - u0) / [sqrt(sigma^2 / n)] = (165-164.5) / sqrt (5.2^2 / 117) = 1.04
-                    Reject H0 at level of significance alpha if z is greater than z alpha
-                    Since Z0.05 = 1.96, the null hypothesis is not rejected at 5% level of significance
-                    Conclusion: Based on the sample collected, average height of American males is 165cm
-                
-                t-test (unknown sigma)
-                    The population StdDev is unknown
-                    However, estimated from the sample StdDev, s = 5.0 
-                    Compute t = (Xbar - u0) / sqrt (s^2 / n) = (165 - 164.4) / sqrt (5^2 / 25) = 0.5
-                    Reject H0 at level of significance alpha if t is greater than t(n-1), alpha
-                    Since t24, 0.05 = 2.064, the null hypothesis is not rejected at 5% level of significance
-                    Conclusion: Based on the sample collected is that the average height of American males is 165cm
+            Z-test (known sigma)
+                The population StdDev is known; sigma = 5.2
+                Compute z = (Xbar - u0) / [sqrt(sigma^2 / n)] = (165-164.5) / sqrt (5.2^2 / 117) = 1.04
+                Reject H0 at level of significance alpha if z is greater than z alpha
+                Since Z0.05 = 1.96, the null hypothesis is not rejected at 5% level of significance
+                Conclusion: Based on the sample collected, average height of American males is 165cm
+            
+            t-test (unknown sigma)
+                The population StdDev is unknown
+                However, estimated from the sample StdDev, s = 5.0 
+                Compute t = (Xbar - u0) / sqrt (s^2 / n) = (165 - 164.4) / sqrt (5^2 / 25) = 0.5
+                Reject H0 at level of significance alpha if t is greater than t(n-1), alpha
+                Since t24, 0.05 = 2.064, the null hypothesis is not rejected at 5% level of significance
+                Conclusion: Based on the sample collected is that the average height of American males is 165cm
 
+        Hypothesis Test for Variance
+            Chi squared is used in hypothesis test for variance
+            H0: Proportion of wins in Australia or abroad is independent of the country played against
+            Ha: Proportion of wins in Australia or abroad is dependent on the country played against
+            
+            IF:
+                X^2critical = 6.251
+                X^2calculated = 1.36                
+            Result: Since calculated value is less than critical value, the proportion of wins of Australia is independent of the country played or place
 
 
 
