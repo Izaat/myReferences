@@ -2404,6 +2404,85 @@ CONTENTS
                     Mean of A > Mean of B 
                     Thus a 2 tailed probability needs to be used
 
+**        2 Tailed Probability vs 1 Tailed Probability
+                2 Tailed Probability:
+                    When the alternate hypothesis tests more than one direction
+                    Example: If Mean of A is not equal to Mean of B, then it is 2 Tailed Probability
+                1 Tailed Probability:
+                    When the alternate hypothesis tests only one direction
+                    Example: If Mean of A is greater than Mean of B, then it is 1 Tailed Probability
+
+            2-Sample Independent t-Test - Results and Interpretations
+                From Excel result sheet, p-value = 0.24
+                
+                |    t-Test Two Sample Assuming Unequal Variances     |
+                |                      |   Variable 1  |  Variable 2  |
+                |   Mean               |   6.0167      |  5.0167      |
+                |   Variance           |  3.19767      |  0.51767     |
+                |   Observation        |     6         |        6     |
+                | Hypothesized Mean    |     0         |        -     |
+                |          df          |     7         |        -     | //degrees of freedom
+                |         T Stat       |  1.27079862   |        -     | //Calculated F statistics
+                | P(T<=t) one tail     | 0.12220054    |        -     | //p-value
+                | t Critical one-tail  | 1.89457861    |        -     | //Reference number found in statistics book table
+
+                If p-value is greater than 0.05, null hypothesis is not rejected
+
+            Paired t-Test
+                One of the powerful test from the t-test family
+                Conducted before and after the process to be measured
+                Often used in IMPROVE Stage
+                Example:    
+                    A group of students score X before taking the Training program.
+                    After the training program, scores are taken again.
+                        Find out if there is a statistical difference between the 2 sets of scores
+                        If there is difference, the inference could be the training is effective
+
+            Sample Variance (S^2)
+                https://www.youtube.com/watch?v=deIQeQzPK08
+                The average of the squared differences from the mean
+                Can be used in statistics
+                To be used in statistics, first convert the value into standard deviation and then combine with the mean
+                Formula:
+                    s^2 = [Sum of (Xi - Xbar)^2] / (n-1)
+                Calculating Sample Variance:
+                    1. Calculate the mean of the sample
+                    2. Subtract each of the value from the mean
+                    3. Calculate the square value of the result
+                    4. Take the average of the squared differences
+                Example:
+                    Calculate 6, 9, 14, 10, 5, 8, 11
+                    Formula: s^2 = [Sum of (Xi - Xbar)^2] / (n-1)
+                    Get Xbar (Mean):
+                        Add all numbers and divide by 7
+                        (6+9+14+10+5+8+11)/7 = 9
+                    Get result for subtracting number with Xbar and add to table (Xi-Xbar Column)
+                        5-9=-4, 6-9=-3, etc
+                    Square the result and add to table ((Xi-Xbar)^2 Column)
+                    Form a table:
+                        | Data   | Xi - Xbar | (Xi - Xbar)^2 |
+                        |  5     |   -4      |   16          |
+                        |  6     |   -3      |    9          |
+                        |  8     |   -1      |    1          |
+                        |  9     |    0      |    0          |
+                        | 10     |    1      |    1          |
+                        | 11     |    2      |    4          |
+                        | 14     |    5      |   25          |
+                        |--------|-----------|---------------|
+                        | 63     |-----------| 56            | //Total
+                    
+                    Find s^2:
+                        s^2 = [Sum of (Xi - Xbar)^2] / (n-1)
+                        s^2 = [56] / (n-1), //Keep in mind that "n" is 7
+                        s^2 = [56] / (7-1)
+                        s^2 = [56] / 6
+                        s^2 = 9.3
+
+                    Therefore, 9.3 is the variance of the sample
+
+            ANOVA - Comparison of more than 2 Means
+
+
 
 
 
