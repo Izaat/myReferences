@@ -1306,6 +1306,7 @@ CONTENTS
                     P(Z between 0 and 1.12) = 0.3686
 
             Chi Square Distribution (X^2 distribution)
+                Repeated in Line 2533            
                 https://www.youtube.com/watch?v=80ffqpZdKiA
                 A distribution of the sum of squares of k independent standard normal random variables
                 Widely used probability distribution in inferential statistics
