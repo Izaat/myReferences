@@ -2694,6 +2694,69 @@ CONTENTS
                 
         ///////////////////////////
         Kruskal Wallis Test
+            A non parametric test used for testing the source of origin of the samples.
+            Characteristics of Kruskal Wallis:
+                Only way to analyze the variance by ranks
+                Medians of two or more samples are compared to find the source of origin of the sample
+                Since this test is non parametric method, it does not assume the normal distribution of residuals, unlike the analogous one-way analysis of variance
+                For this test, the Null hypothesis is when medians of all groups are equal.
+                And Alt hypothesis is when at least one population median of one group is different than that of at least one other group
+
+        ///////////////////////////
+        Mood's Median Test
+            A non parametric test that is used to test the equality of medians from two or more different populations
+            This test works when:
+                The output (Y) variable is continuous, or discrete-ordinal, or discrete-count
+                While the input (X) variable is discrete with two or more attributes
+
+            Steps:
+                1. Find median of combined dataset
+                2. Find the number of values in each sample > median
+                3. Form a contingency table
+                4. Find expected value for each cell
+                5. Find chi square value
+
+        ///////////////////////////
+        Friedman Test
+            A form of non-parametric test that does not make any assumptions on the shape and origin of the sample
+            Allows smaller sample dataset to be analyzed
+            Unlike ANOVA, it does not require the dataset to be randomly sampled from normally distributed populations with equal variances
+            This test uses null hypothesis where the population medians of each treatment are statistically identical to the rest of the group
+            
+        ///////////////////////////
+        1 Sample Sign Test
+            The simplest of all non-parametric tests that can be used instead of a one sample t-test
+            Similar to the concept of testing if the coin is showing heads or tail
+            H0: The hypothecated median or assumed median of the sample which belongs to the population
+           
+            Steps:
+                1. Count the number of positive values
+                        Values that are larger than the hypothesized median
+                2. Count the number of negative values
+                        Values that are smaller than the hypothesized median
+                3. Test values
+                        Check if there are significantly more positives (or negatives) than expected
+
+        ///////////////////////////
+        1 Sample Wilcoxon Test
+            Aka Wilcoxon Signed Rank test
+            A non-parametric test
+            Equivalent to parametric One Sample t-Test
+            More powerful than non-parametric 1 Sample Sign Test
+            Assumes the existing sample is randomly taken from a population, with a symmetric freq. distribution around the median
+            The symmetry can be observed with a histogram, or by checking if the median and mean are approximately equal
+            The conclusion in this test is that if the value is on the mid-point, you can continue and accept the null hypothesis
+            Otherwise, reject the alternate hypothesis
+
+            Example:
+                The median customer satisfaction score of an organization is always at 3.7 
+                The management would like to see if this has changed
+                They conduct a survey group and get the results grouped by the customer type
+                
+                If median = 3.7, Accept H0
+                If median != 3.7, Reject Ha
+                alpha = 0.05
+
 
 
 
