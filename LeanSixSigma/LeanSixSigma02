@@ -2595,6 +2595,107 @@ CONTENTS
                             The calculated value is found to be less than critical value
 
 
+    ///////////////////////////
+    //Hypothesis Testing with Non Normal Data 
+    
+        ///////////////////////////
+        Mann Whitney Test
+            https://www.youtube.com/watch?v=fEobVCV2TJE
+            Mann-Whitney or Wilcoxon Rank Sum test is a non-parametric test used to compare two unpaired groups.
+            -The value of alpha is set at 0.05 
+            -The rejection and acceptance condition remains the same for different cases
+            
+            If p < alpha, then reject null hypothesis
+            If p > alpha, then accept null hypothesis  
+            
+            The aim is to rank the entire data available for each condition and then compare the total outcome of the 2 ranks
+
+            Steps to perform Mann-Whitney Test:
+                1. Rank all values from low to high
+                        - The smallest number gets rank of 1
+                        - The largest number gets rank of 'n', where, n is the total number of values in the 2 groups
+                2. Find the average of the ranks for all the identical values
+                        - Continue until all the whole numbered ranks are used
+                3. Sort the values into two groups
+                        - Summate the ranks for the observations from sample 1
+                        - Then summate the rank in sample 2 (Larger group)
+
+            Example calculation
+                | Group   | Data  |
+                |   G1    |  14   |
+                |   G1    |   2   |
+                |   G1    |   5   |
+                |   G1    |  16   |
+                |   G1    |   9   |
+                |---------|-------|
+                |   G2    |   4   |
+                |   G2    |   2   |
+                |   G2    |  18   |
+                |   G2    |  14   |
+                |   G2    |   8   |
+                |---------|-------|
+                
+                Re-sort Data and Rank Data
+                | Sorted  | Group    | Rank A    |
+                |    2    |  G1      |    1      |
+                |    2    |  G2      |    2      |
+                |    4    |  G2      |    3      |
+                |    5    |  G1      |    4      |
+                |    8    |  G2      |    5      |
+                |    9    |  G1      |    6      |
+                |   14    |  G1      |    7      |
+                |   14    |  G2      |    8      |
+                |   16    |  G1      |    9      |
+                |   18    |  G2      |   10      |
+                |---------|----------|-----------|
+
+                Final Ranking
+                | Rank A     | Final Rank   |
+                |       1    |     1.5      | //2 (Based on table above)
+                |       2    |     1.5      | //2 (Based on table above)
+                |       3    |     3        |
+                |       4    |     4        |
+                |       5    |     5        |
+                |       6    |     6        |
+                |       7    |     7.5      | //14 (Based on table above)
+                |       8    |     7.5      | //14 (Based on table above)
+                |       9    |     9        |
+                |      10    |     10       |
+
+                G1 Rank  and G2 rank
+                | G1 Rank (R1)        | G2 Rank (R2)        |
+                |        1.5          |          1.5        |
+                |        4            |          3          |
+                |        6            |          5          |
+                |        7.5          |          7.5        |
+                |        9            |          10         |
+                |---------------------|---------------------|
+                |        28           |          27         | //Total
+                |      n1=5           |       n2=5          | //n
+
+                Formula for Mann-Whitney U test for n1 and n2:
+                    U1 = n1 * n2 +  [ (n1 (n1+1)) / (2-R1) ] 
+                    U1 = n1 * n2 +  [ (n2 (n2+1)) / (2-R2) ] 
+                    
+                    In this example:
+                        U1 = 12
+                        U2 = 13
+
+                To calculate U value:
+                    U = Min(U1, U2) = Min(12, 13) = 12
+                    Lookup the Mann-Whitney U test table for n1=5 and n2=5, 
+                        Method: Find vertical n1 column to 5, find horizontal row n2 to 5, the intersect between n1 and n2 is 2 
+                        where,
+                            Nondirectional alpha = 0.05 (directional alpha = 0.25)
+                    
+                    Note:
+                        To be statistically significant, the obtained U value must be equal or less than this critical value
+                        Since the calculated U value is 12 (not less than 2), there is no statistical difference between the mean of two groups
+                
+        ///////////////////////////
+        Kruskal Wallis Test
+
+
 
 
 
