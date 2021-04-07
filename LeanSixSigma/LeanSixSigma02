@@ -2482,6 +2482,117 @@ CONTENTS
                     Therefore, 9.3 is the variance of the sample
 
             ANOVA - Comparison of more than 2 Means
+                T-Test is used for one sample (1 mean)
+                ANOVA is used for 2 or more samples (2 or more means)
+                Stands for Analysis of Variance
+                Helps in understanding that all sample means are not equal
+                Generalizes the t-test to include more than 2 samples
+
+                Example:
+                    Takeaway food delivery time of 3 outlets:
+                    | Outlet 1    | Outlet 2    | Outlet 3    |
+                    |    48       |    50       |   49        |
+                    |    49       |    48       |   48        |
+                    |    48       |    36       |   39        |
+                    |    53       |    50       |   49        |
+                    |    58       |    50       |   34        |
+                    |    50       |    62       |   33        |
+                    |    46       |    45       |   57        |
+                    |    50       |    47       |   48        |
+                    |    49       |    51       |   47        |
+                    |    47       |    44       |   39        |
+                    
+                    Can the delivery time be benchmarked?
+                    Null hypothesis will assume that the 3 means are equal
+                    Alt hypothesis would mean at least 2 outlets are different in their average delivery time
+
+                Perform ANOVA in Minitab
+                    1. Stack anova into 2 columns
+                        Column 1: Outlet
+                        Column 2: Delivery time 
+                    2. ANOVA One-Way
+                        Main Menu > Stat > Anova > One Way
+                        Response: Delivery Time
+                        Factor: Outlet
+                    Result: From steps above, your 'P' value will give 0.138, which is higher than 0.05
+                        Therefore, the Null hypothesis is accepted
+                        There is no significant difference between the means of delivery time for 3 outlets
+                        Based on the confidence intervals, it is found that the intervals overlaps
+                        In one way ANOVA, one factor has to be benchmarked unlike the 2-way ANOVA
+
+                Perform ANOVA in Excel
+                    1. Enter the 3 columns data into spreadsheet
+                    2. Main Menu > Data Tab > Data Analysis > ANOVA single factor test
+                    Result: You'll find the P-value is at 0.138, which is higher than 0.05
+                        Therefore, the Null hypothesis is accepted
+                        There is no significant difference between the means of delivery time for 3 outlets
+                        In one way ANOVA, one factor has to be benchmarked unlike the 2-way ANOVA
+
+                Chi Squared Distribution for Two or more means
+                    Refer to Line 1313, 
+                    Measure Phase > Statistical Distribution > Chi Squared Distribution
+                    
+                    Formula:
+                        X^2 = Sum = [(f0 - fe)^2] / fe
+                        where, X2 calculated (Sum) = chi-squared index
+                        f0 = observed frequency
+                        fe = expected frequency
+
+                    Analyze Australian Hockey team's win, and data has 2 classifications
+                    
+                        |                 |  No of wins in Australia and abroad against following countries                                  |           |
+                        |                 |       S.Africa          |    Pakistan          |       England          |         N.Korea        | Total     |
+                        | Australia       |            3            |         6            |          5             |           7            |   21      |
+                        | Abroad          |            2            |         2            |          4             |           2            |   10      |
+                        | Total           |            5            |         8            |          9             |           9            |   31      |  *where, 31 is Overall Total
+                        
+                    Expected frequency for each of observed frequencies = (Row Total) * [(Column Total) / (Overall Total)]
+                    Example: 
+                        Observed frequency of 3 wins against S.Africa in Australia
+                        (Row Total) * [(Column Total) / (Overall Total)]
+                        5 * (21/31)
+                        3.39
+
+                        |                    |  No of wins in Australia and abroad against following countries                    |           |
+                        |                    |       S.Africa      |    Pakistan       |       England    |         N.Korea       | Total     |
+                        | Aus    | Observed  |       3             |    6              |       5          |        7              |  21       |
+                        |        | Expected  |       3.39          |    5.42           |       6.10       |        6.10           |  21       |
+                        |        | Observed  |       2             |    2              |       4          |        2              |  10       |
+                        |        | Expected  |       1.61          |    2.58           |       2.90       |        2.90           |  10       |
+                        |        | Total     |       5             |    8              |       9          |        9              | 
+
+                        Where,
+                            5.42 and 1.61 is estimated Population Parameters
+                            5 (England) and 2 (N.Korea) is Sample Statistics 
+
+                        | f0 |  fe    | (f0-fe)^2 | [(f0-fe)^2] / fe |
+                        |  3 | 3.39 |  0.15       |        0.04           |
+                        |  6 | 5.42 |  0.34       |        0.06           |
+                        |  5 | 6.10 |  0.20       |        0.20           |
+                        |  7 | 6.10 |  0.82       |        0.13           |
+                        |  2 | 1.61 |  0.15       |        0.09           |
+                        |  2 | 2.58 |  0.34       |        0.13           |
+                        |  4 | 2.90 |  1.20       |        0.41           |
+                        |  2 | 2.90 |  0.82       |        0.28           |
+                        |-------------------------|       1.36            |
+                        
+                        The table above is populated by:
+                            calculating and adding the estimated population parameters
+                            estimating the observed frequency
+                            calculating the final chi square index
+                        
+                        Interpretation of results:
+                            There is a different chi squared distribution for each different number of degrees of freedom.
+                            For chi squared distribution, dof are calculated as per the number of rows and columns in the contingency table
+                            Degrees of Freedom: (2-1) * (4-1) = 3 
+                            Assuming, 
+                                alpha = 10%
+                                X^2 critical = 6.251
+                            X^2 calculated = 1.36 
+                            X^2 critical divides region into acceptance and rejection zones while,
+                            X^2calculated allows accepting or rejecting null hypothesis depending in which zone it falls
+                            
+                            The calculated value is found to be less than critical value
 
 
 
