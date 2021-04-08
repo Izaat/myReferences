@@ -4,24 +4,24 @@ CONTENTS
     6sigma and Organizational Goals
     Lean Principles
     Design for 6sigma
-02. Define Phase
+02. Define Phase -                                      //Line 292
     Project Identification
     Customer
     Project Management Basics
     Management and Planning Tools
     Business Results for Projects
     Team Dynamics and Performance
-03. Measure Phase
+03. Measure Phase -                                     //Line 978
     Process Analysis and Documentation
     Probability and Statistics
     Statistical Distribution
     Collecting and Summarizing Data
     Measurement System Analysis
-04. Analysis Phase
+04. Analysis Phase -                                    //Line 1965
     Exploratory Data Analysis
     Hypothesis Testing
-05. Improve Phase
-    Design of Experiments
+05. Improve Phase -                                     //Line 2763
+    Designof Experiments
     Root Cause Analysis
     Lean Tools
 06. Control
@@ -2758,6 +2758,170 @@ CONTENTS
                 alpha = 0.05
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. Improve Phase
+    //Design of Experiments (DOE)
+    //Residuals Analysis
+    //Box and Cox Transformation technique
+    //RCA - Cause and Effect Matrix
+    //RCA - 5 Why tool
+    //Lean and Kaizen techniques
+
+    /////////////////////////////////////////////////////////////
+    Design of Experiments
+        A structured method that tests input variables and their impact on the output variable
+        Used as a one-stop method for analyzing all influencing factors
+        DOE is preferred over One Factor at a Time (OFAT) experiments because it does not miss interactions
+        Blocking technique eliminates experimental error
+            The trials should be randomized to avoid concluding that a factor is significant 
+        Replication enables many experiments to be conducted to ensure robust model
+        
+        Example:
+            Suppose the objective of a plastic molding experiment is to achieve uniform dimensions for a part at a particular target value to reduce variations
+            
+            ---------------------------------------------------------------------------
+            Input (X)                  Process                   Output (Y)
+            Cycle Time     >    |-------------------|
+            Mold Temp      >    |                   |
+            Hold Pressure  >    |      Molding      |      >     Part Hardness
+            Holding Time   >    |                   |
+            Material Type  >    |-------------------| 
+            
+            Factors:                                              Response:
+            In Experiment                                         of experiment
+            ------------------------------------------------------------------------------
+            
+        Components of DOE:
+            Output Response
+                Part Hardness that is measured as a result of the experiment and is used to judge the effects of factors.                
+            Factors
+                Cycle time, mold temperature, holding pressure, holding time, and material type                
+            Levels
+                Factors can be varied and are called levels
+                Mold temperature (600deg and 700deg), Plastic Type (Fillers and No Fillers), Material Type (Nylon or Acetal)
+            Interactions
+                Refer to the degree to which factors depend on one another
+                Time*Temp (the best level for time depends on the set temperature)
+                If the temperature level is higher, the cycle time may have to be decreased to achieve the same response from the experiment
+
+        Full Factorial Experiment Example
+            Contains all combinations of all levels of all factors
+            Ensures no possible treatment combinations get omitted
+            Is preferred over other designs
+            
+            Two way heat treatment experiment table:
+            |----------------------|-----------------------|
+            | Factor B:            | Factor A : Draw       |
+            | Oven Time (X2)       | Oven Temp (X1)        |
+            |----------------------|-----------|-----------|
+            |                      | 700deg    | 900deg    |
+            |----------------------|-----------|-----------|
+            | 30min                |    Y1     |    Y5     |
+            |                      |    Y2     |    Y6     |
+            |----------------------|-----------|-----------|
+            | 60min                |    Y3     |    Y7     |
+            |                      |    Y4     |    Y8     |
+            |----------------------|-----------|-----------|
+            Note: 
+                Y refers to Part Hardness
+                Without repetition, the experiment will have 4 different outcomes based on changes in levels of factors
+
+            Analysis of Mean Effect:
+                Explains how a change in temperature at which material creates a difference in the average part hardness
+                Explains how change in oven time creates a difference in average part hardness
+                Explains interaction between temperature and time affects the average part hardness (Interaction effect)
+
+            Calculation:
+                |----------------|------------------------------------|
+                | Factor B:      | Factor A : Draw                    |
+                | Oven Time (X2) | Oven Temp (X1)                     |
+                |----------------|-----------------|------------------|
+                |                | A1 = 700deg     | A2 = 900deg      |
+                |----------------|-----------------|------------------|
+                | B1 =30min      |    90           |    84            |
+                |                |    87           |    87            |
+                |----------------|-----------------|------------------|
+                | B2 = 60min     |    95           |    79            |
+                |                |    92           |    78            |
+                |----------------|-----------------|------------------|           
+                
+                //////////////////////////////////////////////
+                Mean Effect Plot (Draw Temp)
+                    A1bar = (90+87+95+92) / 4 = 91
+                    A2bar = (84+87+79+78) / 4 = 82
+                
+                    Hardness
+                    |
+                95+
+                    |
+                90+          91 X
+                    |               
+                85+                  
+                    |                    
+                80+                        82 X
+                    |
+                    +------------+------------+----------
+                //              700          900   
+                //                    Temp
+                
+                Results:
+                We see that changing the draw temp changes the average hardness
+                
+                //////////////////////////////////////////////
+                Mean Effect Plot (Oven Time)
+                    B1bar = (90+87+84+87) / 4 = 87
+                    B2bar = (95+92+79+78) / 4 = 86
+                
+                    Hardness
+                    |
+                95+
+                    |
+                90+        
+                    |        87 X       
+                85+                        86 X
+                    |                    
+                80+                           
+                    |
+                    +------------+------------+----------
+                //                 30min       60min   
+                //                        Time
+
+                Results:
+                We see that changing the oven time have no major change in average hardness
+
+                //////////////////////////////////////////////
+                Interaction Effect  
+                    Formula: Find AbarBbar
+                    A1barB1bar = (90+87) / 2 = 88.5
+    
+                    |    | A1   | A2   |
+                    | B1 | 88.5 | 85.5 |
+                    | B2 | 93.5 | 78.5 |
+                    *Table shows the mean of the factors
+                    
+                    Hardness
+                    |
+                95+                           X 93.5
+                    |              
+                90+                 --------------------------------700deg
+                    |      88.5 X       
+                85+        85.5 O                   
+                    |               --------------------------------900deg
+                80+                           O 78.5             
+                    |
+                    +------------+------------+----------
+                //                 30min       60min   
+                //                        Time                    
+                Draw line X to X and O to O, where X represents 700deg and O represents 900deg
+                Result:
+                    The interaction plot shows low temp and high oven time should be selected to achieve highest desired hardness
+                    Parallel lines (Temp) indicate the ideal output if no interactions occur between the main effects
+
+
+        Runs
+            The number of experiments in DOE setting
 
 
 
