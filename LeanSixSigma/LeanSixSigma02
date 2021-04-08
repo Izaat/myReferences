@@ -2938,6 +2938,39 @@ CONTENTS
     /////////////////////////////////////////////////////////////
     Root Cause Analysis
 
+        Residuals Analysis
+            During regression analysis of linear or non linear model, the value for Y at level X is predicted
+            However, the actual value for Y observed at that level of X is different from the predicted value
+            Formula:
+                Residual = Observed - Predicted
+            Assumptions on random errors:
+                Independent
+                Exhibit normal distribution
+                Have constant variance (sigma^2) for all the settings of the independent variables
+                Have mean of zero
+
+            Linear regression model is not always appropriate for the data, 
+            Appropriateness of the model should be assessed by defining residuals and examining the residual plots
+            If all assumptions are satisfied, residuals is zero and no systematic patterns are observed
+            In residual analysis, the sum and mean of residuals are 0
+            
+            Residuals and diagnostic statistics allows to identify the patterns that:
+                are poorly fitted in the model with strong influence upon the estimated parameters
+                or have high leverage
+            To understand any potential problems with the model, interpret both diagnostics together
+
+        Box Cox Transformation
+            Used for estimating the best transformation to normality
+            By taking current Y data and raising to the power (lambda)
+            Formula:
+                Y* = (Y^lambda - 1) where, lambda is not 0
+                Y* = log(Y) where lambda is 0
+            
+            Family of Power transformation
+                Used for converting a dataset so that parametric statistics can be used
+                Used for any continuous data greater than 0 (This will not work when value is less than 0 or equals to 0, transforming specs)             
+                Note: Does not guarantee normality
+
 
 
 
