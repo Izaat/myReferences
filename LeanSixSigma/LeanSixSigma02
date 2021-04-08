@@ -2921,7 +2921,22 @@ CONTENTS
 
 
         Runs
-            The number of experiments in DOE setting
+            The number of experiments in DOE setting terms:
+                Full factorial experiment without replication on 5 dactors and 2 levels:  2^5 = 32 runs
+                Full factorial experiment with 1 replication on 5 factors and 2 levels:  32+32 = 64 runs
+                Half fractional factorial experiment without replication on 5 factors and 2 levels: 2^[5-1] = 16
+                Half factorial experiment with 1 replication on 5 factors and 2 levels: 16+16 = 32
+
+                Summary:
+                    Number of combinations: L^F, where, L is level and F is factors
+                    Half fractional: L^[F-1]
+                    Full factorial experiment requires 243 trials
+                    Half factorial experiments require 81 trials
+                    Difference between full factorial and half factorial can be seen through the number of runs
+
+
+    /////////////////////////////////////////////////////////////
+    Root Cause Analysis
 
 
 
