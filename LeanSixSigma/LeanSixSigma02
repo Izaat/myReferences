@@ -3031,6 +3031,65 @@ CONTENTS
                 
     /////////////////////////////////////////////////////////////
     Lean Tools
+        8 Tools:
+            1. Kaizen
+                - Aka Continuous Improvement
+                - Philosophy implies that all incremental changes routinely applied and sustained over a long period result in improvements
+            2. Poka Yoke
+                - Aka Mistake Proofing or Fool Proofing
+                - Do right first time and make it impossible to create mistake the first time
+            3. 5S
+                - Sort, Set in order, Shine, Standardize, Sustain
+                - Sort or consolidate items into categories, Organize categories into order, clean up or discard unwanted items, form and circulate a set of written standards and then sustain the process
+            4. JIT (Just in Time)
+                - Producing necassry units, in necessary quantity, at necessary time with required quality
+                - This removes and prevent accumulation of unwanted inventory, stock taking manpower and storage spaces
+            5. Kanban
+                - Aka Signboard
+                - Utilizes visual display cards to signal movement of material between steps of a product process
+                - Visual control board
+            6. Jidoka (Right First Time)
+                - Aka Automation 
+                - Implement supervisory function in production line and stopping the process as soon as a defect is encountered
+                - The process does not start until the root cause for the defect is eliminated
+            7. Takt Time
+                - The maximum time in which the customer demands his needs to be met
+                - TAKT Time is calculated by the total time available divided by demand
+                - Example: 
+                    Customer needs 100 products within 420 minutes to produce them
+                    Therefore, 420/100=4.2min Takt Time per product
+            8. Heijunka
+                - Reducing waste occurring due to fluctuation in customer demand
+
+        Cycle Time Reduction
+            Refers to the reduction in the time taken for a complete process
+            Increases productivity and throughput
+            Releases resources early
+            Reduces internal and external wastes
+            Simplifies operational process
+            Decreases product defects
+            Indirectly helps in satisfying the customer and staying ahead of competition
+            
+        Kaizen and Kaizen Blitz
+            Kaizen is a Continuous Improvement method that improves the functions of an organization in terms of process, productivity, quality, technology and safety
+            Kaizen Blitz is known as Kaizen Event. Tems improve processes through structured wokshops
+
+            Differences:
+                Kaizen > 
+                    Is a method
+                    Brings small incremental change
+                    Standardize, measures and compares the process with requirements
+                    Everybody is involved
+                    Relatively delays the process decision making
+                    An improvement process
+                Kaizen Blitz >
+                    A workshop or event
+                    Bring rapid solutions required
+                    Plans, executes the event, decides the solution and follow through
+                    Led by the top management and others are invited to participate
+                    Accelerates the process of decision making
+                    A part of improving the process
+
 
 
 
