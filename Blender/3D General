@@ -21,6 +21,7 @@ CONTENTS
        Animation
 11 - Hair Creation
 12 - Explosion Effects
+13 - Adding Multiple Characters into a scene
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01 Interface
@@ -1016,7 +1017,22 @@ CONTENTS
         Type: Effector            
             
             
-            
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+13. Adding Multiple Characters into a scene
+    
+    Take note of the body and the rig as these 2 will be imported seperately
+    Import Body
+        Main Menu > File > Link
+            Go to blend file and find the collection name
+            Select the Collection name and click on Link
+            The body object will appear
+    Import Rig
+        Select the body in object mode and press F3
+        Type in "Proxy" in the search box and select "Make Proxy"
+        Drop down list will appear
+        Select RIG-##
+ 
+ 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
