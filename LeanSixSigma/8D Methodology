@@ -81,7 +81,80 @@ CONTENT
         Documents the problem solving process
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-2. D0 to D2 (Prelimenary Data, Team Selection and Problem Definition)
+2. D0 to D2 (Preliminary Data, Team Selection and Problem Definition)
+
+    D0 - Preliminary Data
+        Gather after defect is found
+        Capture critical info that may be lost with time.
+            Machine
+            Operator
+            Batch Details
+            Time of Failure
+            Processing Conditions
+            Special circumstances
+        Assess Who, What, Where, When Why How
+        Decision to use 8D or not 8D
+
+        Refer to D0 of 8D Template
+        
+    D1 -  Team Selection
+        Based on SIPOC Model (Suppliers Inputs Process Output Customers)
+        Members should include:-
+            Suppliers of the process
+            Customers of the process
+            Process Representatives
+            Subject Matter Expert (Engineers)
+            QA
+            Others as Necessary
+
+        Smaller teams are desired:
+            Easier to manage
+            Respond faster
+            Better team member participation
+
+        Refer to D1 of 8D Template
+
+    D2 -  Problem Defiition
+        (+) - Many Problem sare solved at this stage
+            Miscommunication
+            Misunderstanding
+            Bad Measurement
+            Misinformation
+            
+        (-) - Hardest part of 8D after Root Cause
+            Considered trivial or waste of time
+            Treated with low importance and priority
+            Team is eager to get it solved
+            Management expects immediate answers
+            Customers want quick resolution
+
+        Problem follows Verb-Noun Format Example:  
+            Broken part, Mixed parts, missing thread, wrong label, etc
+            
+        Must be free of:
+            Opinions
+            Judgement
+            Assumptions
+            Solutions
+            Blame
+            Compound Problems
+            Ambiguity
+
+        Caution: Many problem statements are expresed as solutions
+
+        Use IS/IS NOT Format
+            Identify what the problem "IS" and "IS NOT"
+        Covers Who What Where When Why How
+        Ask:
+            Can a problem be replicated
+            Isolated
+            Trending
+            Reoccurence
+        Include Scope
+        Other Relevant information
+        
+
+
 
 
 
