@@ -153,8 +153,75 @@ CONTENT
         Include Scope
         Other Relevant information
         
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 3. D3 (Containment)
+
+    A critical step in preventing further defects from reaching customer
+    Source of problem may be unknown: Mitigate risk using prpoblem definition
+    Key pre-requisite and activities
+        Problem defined
+        Team selected
+        Risk assessment
+        Containment recommendation
+        Communication plan
+        Physical containment
+    Containment is temporary until permanent corrective action is taken
+
+    7 MUSTS of containment in steps
+        Must ensure problem is defined
+        Must have team selected
+        Must perform Risk assessment
+        Must recommend containment
+        Must develop communication plan
+        Must get buy-in on containment action
+        Must contain
+        
+    Risk Assessment
+        Severity, Occurence, Detectability
+        Risk Priority Number
+            RPN = Sev x Occ x Det
+        See Six Sigma documentation for more information
+
+    Recommend Containment
+        Coordinated with:
+            Quality
+            Production
+            Customer
+
+    Communication Plan
+        Who do you need to communicate with? (Audience)
+        What messages are you communicating? (Delivery method)
+        What do you need from them (Objective)
+        What can they expect from you
+        Who will deliver the message
+        Key Message:
+            What are we doing
+            What does it mean to the person
+            What does the person need to do differently
+            What support can the person expect from us
+
+    Buy-In Containment Action
+        What actions are recommended?
+        How will the containment be executed?
+        Where and when containment will take place?
+        Who needs to agree to action?
+            Production
+            Quality
+            Customer
+            Management
+            
+    Containment
+        What actions will be taken (Noun+Verb)
+        What is the deliverable?
+        When will containment be complete?
+        Who is:
+            Responsible?
+            Accountable?
+            Consulted?
+            Informed?
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+4. D4 (Root Cause)
 
 
 
