@@ -222,16 +222,93 @@ CONTENT
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 4. D4 (Root Cause)
+    An event, condition or state that when removed, prevents recurrence of an undesirable behavior
+    Least understood and most difficult part of 8D
+        Need many Root Cause tools at disposal
+        Requires practitioner to think
+        To get good - need to practice alot
+    
+    Table in High, Low, Medium    
+    Example: Medium Complexity for FMEA and Low complexity for Fishbone
+    | Root Cause              | Tool       | Time        | Ability to find | Level of     | Intuitiveness | Requires X      | # Factors   |
+    | Tool                    | Complexity | Requirement | Root Cause      | Subjectivity | (ease of use) | Functional Team | Studied     |
+    |-------------------------|------------|-------------|-----------------|--------------|---------------|-----------------|-------------|
+    | *IS/IS NOT              |        M   |     H       |         H       |      L       |      M        |        M        |     M       |
+    | Fault Tree              |        M   |     M       |         H       |      L       |      L        |        H        |     M       |
+    | Process Map             |        L   |     L       |         L       |      L       |      H        |        L        |     L       |
+    | *5 Whys                 |        L   |     L       |         M       |      M       |      H        |        L        |     L       |
+    | Multi Vari              |        H   |     M       |         H       |      L       |      L        |        L        |     M       |
+    | FMEA                    |        M   |     H       |         M       |      M       |      M        |        M        |     H       |
+    | Pareto                  |        L   |     L       |         L       |      L       |      H        |        L        |     H       |
+    | *Fishbone               |        L   |     M       |         L       |      M       |      H        |        M        |     M       |
+    | *Inter Relate diag      |        M   |     L       |         H       |      L       |      M        |        M        |     H       |
+    | Current Reality Tree    |        M   |     M       |         M       |      L       |      L        |        M        |     L       |
+    | Scatter Plot            |        L   |     L       |         H       |      L       |      M        |        L        |     L       |
+    | Concentration Chart     |        L   |     L       |         L       |      L       |      H        |        L        |     L       |
+    | DOE                     |        H   |     H       |         H       |      L       |      L        |        M        |     L       |
+    | Tree Diagram            |        L   |     L       |         L       |      L       |      H        |        M        |     H       |
+    | Brainstorming           |        L   |     L       |         L       |      H       |      H        |        M        |     L       |
+    | Regression Analysis     |        L   |     L       |         H       |      L       |      H        |        L        |     L       |
+    | Artificial Neural Net   |        H   |     M       |         H       |      L       |      L        |        L        |     H       |
+    | Component Search        |        L   |     M       |         H       |      L       |      H        |        L        |     H       |
 
+    IS/IS NOT
+        Based on problem definition
+        Consists of a series of questions
+        Looks at problem from multitude views
+        Imagine looking at an object from multiple views, perspective will be different
+        Ask Who, What Where, When, Why and How
+        Ensures team is seeing problem from all possible angles
 
+    5 Whys
+        Ask question "Why" 5 or more times and add in "how you confirm" the evidence on every why answers..
+        Pitfalls:
+            Teams may stop at symptoms believing root cause has been found
+            Effectiveness is limited to the collective team knowledge
+            Doesnt guide team to ask the right questions
+            Different people using 5 Whys may come up with different causes for the same problem
+        Note: Mitigate these by grounding the 5 whys in observation and not deduction
 
+    Fishbone
+        Problem Definition  
+            Materials
+            People (Training)
+            Measurement
+            Machines
+            Methods
+            Environment
+        CNX Variables
+            Label all variables as C, N or X where 
+            C: Constant
+                Those variables which must be held constant and require SOPs to insure consistency
+            N: Noise
+                Variables which are noise or uncontrolled variables and cannot be easily held constant
+            X: POT KPIV
+                Variables considered to be potential key process variables to be tested in order to determine their effect on "BIG Y" / Fish Head
+    
+    Inter-relationship Diagram
+        Helps distinguish between Cause and Effectiveness
+        Used to understand relationship between issues
+        Very good for identifying people or organizational root cause
+        Very easy to understand
+        Low Time commitment
+
+        Have Issues set in a box and set boxes to form a circle
+        For every Box, determine with the other boxes within the circle if there is cause and effect relationship
+        Add arrow pointing to the effect if there is Cause and effect
+        Do this for every other boxes creating a web
+                Point System:
+            Out with Strong points = 1 point 
+            Out with weak point = 0.5 point
+        Add all the points
+        The box with the most "Out" points will be the root cause
 
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+5. D5 and D6 (Identify Corrective Actions and Implementation)
 
 
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
