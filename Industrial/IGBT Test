@@ -1,0 +1,97 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+##########################################################
+
+| Single IGBT Block Schematic
+|
+|           G2                G1
+|           |                 |
+|    o_____/ \________O______/ \_____o
+|   E2   +-->|--+   C2E1   +-->|--+  C1
+|
+
+##########################################################
+
+| Block Pinout
+|                      G2
+|                      E2   
+|    C2E1  E2  C1
+|                      E1
+|                      G1
+
+###########################################################
+
+| IGBT Diagram
+|               _____________________________________oG2
+|               |       ____________________________ oE2
+|               |       |         +-->|---+
+|      o_______/ \______o     O___|__   __|____oC1
+| C2E1 |     +--|<--+   E2    |      \ /
+|      |______________________|_______|______________oE1
+|                                     |______________oG1
+
+############################################################
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+IGBT
+    Usually has 3 sets of IGBT per driver for 3 phases
+    Normal Biploar Junction Transistor has Base, Collector, Emitter
+    IGBT has Gate, Collector Emitter
+    Gate side is like a Mosfet
+    Emitter and Collector side is like Bipolar Junction Transistor
+    Collector and Emitter can handle high voltage and high current
+    Gate and Emitter handles small voltage
+    The diode (+-->|--+) protects IGBT from reverse current
+    Control will send signal from G2 and E2 to allow voltage/current to pass through C2 to E2
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+Testing
+    Note: Switch Multimeter to Diode Test
+        Short E1 & G1 to release any voltage from Gate
+        
+    Diode Test      
+        Gate 1: Red Lead
+        Emitter 1: Black Lead
+        Result: OL
+        
+        Gate 1: Black Lead
+        Emitter 1: Red Lead
+        Result: Reading
+        
+    Ground Test
+        Red Lead to Ground
+        Black Lead to all pins
+        Result: OL
+        
+    Lead Test   
+        Collector: Red Lead
+        Emitter: Black Lead
+        Result: OL
+
+        Emitter: Red Lead
+        Collector: Black Lead
+        Result: 0.4Vdc (Usually 0.3 to 0.7 is good)
+            Voltage will double if check across both diodes (0.78Vdc)
+
+        Gate: Red Lead
+        Emitter/Collector: Black Lead
+        Result: OL 
+
+    Charging the Gate
+        Gate: Red Lead
+        Emitter: Black Lead
+        Result: Collector 1 (Red) and Emitter 1 (Black) will result in 0.45Vdc
+            Short Gate and Emitter to switch off and this will result in OL between C1 and E1
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+End
+
+
+
+
+
+
+
+
+
