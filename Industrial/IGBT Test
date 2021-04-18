@@ -43,7 +43,7 @@ IGBT
     Collector and Emitter can handle high voltage and high current
     Gate and Emitter handles small voltage
     The diode (+-->|--+) protects IGBT from reverse current
-    Control will send signal from G2 and E2 to allow voltage/current to pass through C2 to E2
+    Control will send signal to both G2 and E2 this will allow voltage/current to pass through C2 to E2
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
 Testing
