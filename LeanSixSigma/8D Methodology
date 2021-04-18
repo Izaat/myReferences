@@ -307,6 +307,63 @@ CONTENT
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 5. D5 and D6 (Identify Corrective Actions and Implementation)
+    
+    D5 - Corrective Action
+        Based on one or more Root Cause tools identified in previous processes, decide on what are the top 3 most likely root causes
+        For each root cause, identify the corrective action (An action to eliminate the cause of a detected nonconformity or other undesired outcome)
+        A good practice to describe in detail the corrective action because commonly this is handed off to someone else
+        This may be combined with D7 if appropriate
+
+    D6 - Implement and Verify
+        List the corrective actions from D5
+        Identify the best means of verifying Root Cause
+            DOE
+            Hypothesis Testing
+            Components Swapping
+            Correlation and/or Regression Analysis
+            On/Off Switching
+            Tukey Quick Test
+        Verify Root Cause
+        
+    Tukey's Quick Test
+        Select a sample of 8 from the process with the defect
+        Implement the first Corrective Action from the above list
+        Select a second sample of 8 from the process
+        Rank the sample readings from low to high
+        Identify each as either "good" or "bad"
+        Verify root cause then return to 1 above for next Corrective Action
+
+        Tukey's Table:
+        | Sample      |    | Reading      | Good/   |
+        | Set         | #  |              | Bad     |
+        |-------------|----|--------------|---------|      
+        |     1       | 01 |      -       |    Bad  |
+        |     1       | 02 |      -       |    Bad  |
+        |     1       | 03 |      -       |    Bad  |
+        |     1       | 04 |      -       |    Good |
+        |     1       | 05 |      -       |    Good |
+        |     1       | 06 |      -       |    Good |
+        |     1       | 07 |      -       |    Good |
+        |     1       | 08 |      -       |    Good |
+        |     2       | 09 |      -       |    Bad  |
+        |     2       | 10 |      -       |    Good |
+        |     2       | 11 |      -       |    Good |
+        |     2       | 12 |      -       |    Good |
+        |     2       | 13 |      -       |    Good |
+        |     2       | 14 |      -       |    Good |
+        |     2       | 15 |      -       |    Good |
+        |     2       | 16 |      -       |    Good |
+
+        Identify the total number of CONSECUTIVE Bad Units in a set of samples
+        
+        Consecutive Bad Units: 3 in sample 1 (From Top Down)
+        Consecutive Good Units: 7 in sample 2 (From Bottom UP)
+        
+        Total 'End Count' : 10 (7+3)
+        Based on the Total 'End Count of 10, there is 99% confidence that the likely Root Cause is an actual Root Cause
+            otherwise, repeat on the second corrective action
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
