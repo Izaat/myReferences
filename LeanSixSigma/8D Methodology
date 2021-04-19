@@ -365,7 +365,110 @@ CONTENT
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+6. D7 and D8 (Prevent Reoccurrence and Congratulate)
+    
+    D7 - Preventing Reoccurrence
+    
+        Control Continuum
+            __________________________________________________
+            | Low Control, Low Effort -----------> High Control, High Effort |
+            | Verbal, Written, Visual, SPC, Mistake Proofing, New Design |
+            |------------------------------------------------------------------------------|
+
+        Addressing Prevention (3Ps)
+            People
+            Product
+            Process
+            
+        6 Step process 
+            Capture Root Cause from D6
+            Lookup Root Cause from 3P Error List
+            Identify suggested preventions OR corrective action number
+            Lookup action associated with the number identified
+            Apply preventive measures
+            Document
+            
+            Preventive Action List
+            |--------------|--------------|---------------|
+            |--------------| Error        | Prevention    |
+            |--------------|--------------|---------------|
+            | People       |  Tap Leak    | 1, 2, 3, ...  | //The numbering corresponds to the PA/CA list table below
+            |  ...         |              | ...           | 
+            |--------------|--------------|---------------|
+            | Product      |  Tap Leak    | 1, 2, 3, ...  | 
+            |  ...         |              | ...           |
+            |--------------|--------------|---------------|     
+            | Process      |  Tap Leak    | 1, 2, 3, ...  | 
+            |  ...         |              | ...           |
+            |--------------|--------------|---------------|
+            
+            Prevention / Corrective Action List
+            |--------------|------|------------------------------|
+            | Verbal       |  1   | Verbal instruction           |
+            |              |  2   | Shadowing                    |
+            |              | ...  | ...                          |
+            |--------------|------|------------------------------|
+            | Written      |  4   | SOP                          |
+            |              | ...  | ...                          |
+            |--------------|------|------------------------------|            
+            | Visual       | ...  | Andon Lights                 |
+            |              | ...  | ...                          |
+            |--------------|------|------------------------------|  
+            | SPC &        | ...  | Process Control              |
+            |  VOC         | ...  | ...                          |
+            |--------------|------|------------------------------|  
+            | Mistake      | ...  | Go / No Go                   |
+            |  Proofing    | ...  | ...                          |
+            |--------------|------|------------------------------|              
+            | New          | ...  | Simplification               |
+            | Design       | ...  | ...                          |
+            |--------------|------|------------------------------|  
+
+
+        NOTE:
+            Prevention likely to take more than 1 corrective action
+            Test the effectiveness of the Preventive Actions by:
+                Implement
+                Remove
+                Implement
+                Remove
+                Implement
+            For each time, observe that the problem disappears then reappears then disappears, etc
+            Involve people who work within the process
+
+    D8 - Congratulate the Team
+        
+        People are motivated by:
+            Being appreciated
+                -Simple but genuine thank you
+                -Recognition in front of peers
+            When making a positive difference
+            When asked for their input
+            Achieving difficult goals
+            Growing their knowledge and skills
+
+    Final Report
+        1 to 2 page summary of all 8 Disciplines
+        Not required by customer
+        Organization's Excel template captures most of reelevant information
+        Must be signed by appropriate personnel
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+End
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
