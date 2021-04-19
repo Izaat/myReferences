@@ -1,0 +1,150 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Silicon Control Rectifier
+
+    2 types of SCR
+        Packet Type
+        Puck Type
+        
+    Required: 
+        AA battery with 6.8ohm resistor connected to (+) to energize
+        Set multimeter to Resistance
+
+    ##########################
+
+    Schematics
+    #  |-------------------------- 1, AK2
+    #  |
+    #  |------>|------o----------- 2, K1
+    #  |        \     |
+    #  |        5     4
+    #  |________________________
+    #                          |
+    #  |------>|------o--------| 
+    #  |        \     |
+    #  |        6     7
+    #  |
+    #  |--------------------------- 3, A
+
+    where, -->|-- is the diode
+
+    ##########################
+
+    Pinout
+    #              1
+    #              2
+    #              3
+    #       5, 4        7, 6
+    
+    Pin 5: Anode (+)
+    Pin 4: Cathode (-)
+    Pin 6: Anode (+)
+    Pin 7: Cathode (-)
+
+    ##########################
+    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+Test
+    De-energized
+        Pin 1: Red Lead
+        Pin 2: Black Lead
+        Result: OL
+        
+        Pin 1: Black Lead
+        Pin 2: Red Lead
+        Result: OL
+
+        Pin 3: Red Lead
+        Pin 1: Black Lead
+        Result: OL
+        
+    Energized (Using the battery to energize) - Pin 4 and 5 Energized
+        NOTE: Positive side of battery (with resistor) to Pin 5, and negative side to Pin 4
+        
+        Pin 1: Red Lead
+        Pin 2: Black Lead
+        Result: 0.89Mohm
+        
+        Pin 1: Black Lead
+        Pin 2: Red Lead
+        Result: -0.75Mohm   
+    
+    Energized (Using the battery to energize) - Pin 6 and 7 Energized
+
+        Pin 3: Red Lead
+        Pin 1: Black Lead
+        Result: 0.89Mohm
+        
+        Pin 3: Black Lead
+        Pin 1: Red Lead
+        Result: -0.75Mohm   
+
+    Resistance Test (Gate to Cathod Resistance) - Should have resistance
+        Pin 5: Black Lead
+        Pin 2: Red Lead
+        Result: 16.7ohm
+
+        Pin 5: Red Lead
+        Pin Others: Black Lead
+        Result: OL    
+
+        Pin 6: Red Lead
+        Pin 1: Black Lead
+        Result: 16.7ohm
+
+        Pin 6: Red Lead
+        Pin Others: Black Lead
+        Result: OL
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+Test for Puck Type SCR
+    A mushroom shape with small bottom belly and large cap
+    Use monkey clamp to clamp the puck (Puck types need pressure to energize the gate) - Use wire tape to avoid short circuit by the clamp
+    The gate will be the pin between the cap and bottom
+    The Anode will be the bottom belly
+    The cathode will be the male cap (large)
+    
+    Pin: Red Lead
+    Cap: Black Lead
+    Result: 21 ohm (Low resistance) - Must not be more than 80ohms
+
+    Pin: Red Lead
+    Belly: Black Lead
+    Result: 15.5 Mohm (High resistance) - Must not be in kohm range
+
+    Belly (Anode): Red Lead
+    Cap (Cathode): Black Lead
+    Result: 10 Mohm (Not shorted) - Must not be in kohm range
+
+    Belly (Anode): Black Lead
+    Cap (Cathode): Red Lead
+    Result: 15 Mohm (Not shorted)
+
+    Energized with battery (resistor attached) while being clamped
+        Positive side of battery (with resistor) to be attached to the gate
+        Negative side of the battery to be attached to cathode (Cap)
+
+        Belly (Anode): Red Lead
+        Cap (Cathode): Black Lead
+        Result: 1.1 Mohm
+
+        Belly (Anode): Black Lead
+        Cap (Cathode): Red Lead
+        Result: -0.9 Mohm
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+End
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
