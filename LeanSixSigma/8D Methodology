@@ -230,6 +230,7 @@ CONTENT
     
     Table in High, Low, Medium    
     Example: Medium Complexity for FMEA and Low complexity for Fishbone
+    |-------------------------|------------|-------------|-----------------|--------------|---------------|-----------------|-------------|
     | Root Cause              | Tool       | Time        | Ability to find | Level of     | Intuitiveness | Requires X      | # Factors   |
     | Tool                    | Complexity | Requirement | Root Cause      | Subjectivity | (ease of use) | Functional Team | Studied     |
     |-------------------------|------------|-------------|-----------------|--------------|---------------|-----------------|-------------|
@@ -251,6 +252,7 @@ CONTENT
     | Regression Analysis     |        L   |     L       |         H       |      L       |      H        |        L        |     L       |
     | Artificial Neural Net   |        H   |     M       |         H       |      L       |      L        |        L        |     H       |
     | Component Search        |        L   |     M       |         H       |      L       |      H        |        L        |     H       |
+    |-------------------------|------------|-------------|-----------------|--------------|---------------|-----------------|-------------|
 
     IS/IS NOT
         Based on problem definition
