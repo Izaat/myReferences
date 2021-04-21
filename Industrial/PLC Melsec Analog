@@ -62,7 +62,7 @@ CONTENT
                 20mA = 4095
                 
     
-        |     X000                                                                                         |
+        |     X000                                                                |
         |-----|\|-----------------------+----------------[RD3A K0 K21 D0]---------|         // Example: [RD3A K0 K1 D0], Note the square bracket
         |                               |----------------[RD3A K0 K22 D2]---------|
         |                               |----------------[DIV D0 K41 D5]----------|         //Value will be seen as percentage in D5
