@@ -1,0 +1,90 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+PLC Analog
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENT
+01. Components
+02. Setup
+03. Program
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Components
+    1. PLC: FX3U
+    2. Analog Card: FX2N 2AD
+    3. 4mA to 20mA Pressure Sensor, 4pin, 2 Channels
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Setup
+    
+   
+    |--------------|           |------------|
+    | PLC          |           | 2ADP       |
+    |     S/S 0------------------0 Com2     |
+    |              |           |            |
+    |     24V 0-------\ \1     |            |
+    |              |           |            |
+    |              |  \ \S-----0 Vin2 & IN2 |
+    |              |           |            |    
+    |--------------|           |------------|
+    Where, 
+        \\ = Pressure Sensor
+        1 = 24V power
+        S = Signal out  
+    
+    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Program
+    Ladder Diagram - Drive to Increment
+        |------------------|-------------------|---------------------------|---------------|         
+        | Mnemonic         | Function          |           Operands        |  Program      |
+        |                  |                   |   M1    |  M2   |   D     |  Steps        |
+        |------------------|-------------------|---------------------------|---------------|        
+        |RD3A              | Analog block      | K, H, KnX, KnY, KnM,      | RD3A          |
+        | FNC 176          | read for          | KnS, T, C, D, V, Z        | 7 Steps       |
+        | Read Analog      | FX0N-3A,          |                           |               |
+        | Block            | FX2N-2AD          |                           |               |
+        |------------------|-------------------|---------------------------|---------------|     
+        Example:
+            --[RD3A M1 M2 D]--
+            M1: Special block number, K0 to K7, Location of the analog card, (If right next to the PLC, then location 0, hence K0)
+            M2: Analog input channel number, K1/K2(FX0N) OR K21/K22(FX2N)
+            D: Read data
+            FX0N-3A: 
+                K1=Channel1
+                K2=Channel2
+                D=0 to 255(8bit)
+            FX2N-2AD:
+                K21=Channel1
+                K22=Channel2
+                D=0 to 4095(12bit)
+            Data Register:
+                4mA = 0
+                20mA = 4095
+                
+    
+        |     X000                                                                                         |
+        |-----|\|-----------------------+----------------[RD3A K0 K21 D0]---------|         // Example: [RD3A K0 K1 D0], Note the square bracket
+        |                               |----------------[RD3A K0 K22 D2]---------|
+        |                               |----------------[DIV D0 K41 D5]----------|         //Value will be seen as percentage in D5
+        |-----------------------------------------------------------[END]---------| 
+        
+        [Second Rung]
+        Detail Instruction Help - Window will appear and double click on "Corresponding instruction list"
+        | Input device     | Data Type    |
+        |       K0         |    Bin 16    |
+        |       K22        |    Bin 16    |
+        |       D0         |    Bin 16    |
+        
+        [Third Rung]
+        Detail Instruction Help - Window will appear and double click on "Corresponding instruction list"
+        | Input device      | Data Type    |
+        |       D0          |    Bin 16    |
+        |       K41         |    Bin 16    |
+        |       D5          |    Bin 16    | 
+
+
+
+
+        
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+End
