@@ -1,0 +1,121 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+PLC Stepper
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENT
+01. Components
+02. Setup
+03. Program
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Components
+    1. PLC: FX3U
+    2. Stepper Driver: Leadshine DM556
+    3. Stepper Motor: 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Setup
+    
+    Electrical Specs
+    | Parameters            |  DM556                                   |
+    |                       | Min    |  Typical  | Max        | Unit   |
+    |-----------------------|--------|-----------|------------|--------|
+    | Output Current        | 0.5    |           | 5.6 (4RMS) |  A     |
+    | Supply                | +20    |   +36     |  +45       |  VDC   |
+    | Pulse Input Freq      |   0    |    -      |  200       |  kHz   | **Important
+    |-----------------------|--------|-----------|------------|--------|
+    
+    NPN (24v or 12v as common)
+    Wiring - Connections to open-collector signal (Common Anode / NPN)
+    R = 1K if VCC=12V
+    R = 2K if VCC=24V**
+    |--------------|           |------------|
+    | Controller   |           | Driver     |
+    |     Vcc  0------------------0 Pul+, Dir+, Ena+
+    |              |           |            |
+    |     Pul  0---------R---------0 Pul-   |
+    |              |           |            |
+    |     Dir  0---------R---------0 Dir-   |
+    |              |           |            |
+    |     Ena  0--------R---------0 Ena-    |
+    |              |           |            |    
+    |--------------|           |------------|
+    
+    PNP (0V or Gnd as common)
+    Wiring
+    R = 1K if VCC=12V
+    R = 2K if VCC=24V
+    |--------------|           |------------|
+    | Controller   |           | Driver     |
+    |              |           |            |
+    |     Pul  0---------R---------0 Pul+   |
+    |              |           |            |
+    |     Dir  0---------R---------0 Dir+   |
+    |              |           |            |
+    |     Ena  0--------R---------0 Ena+    |
+    |              |           |            |    
+    |     GND  0------------------0 Pul-, Dir-, Ena-    
+    |--------------|           |------------|    
+    
+    Microstep Resolution Selection (Step/Rev=6400) - MRS
+    | Microstep | Step     | SW5  | SW6  | SW7  | SW8  |
+    | 1 to 512  | Default  | ON   | ON   | ON   | ON   |
+    |       32  | 6400     | OFF  | ON   | OFF  | ON   |
+    
+    Dynamic Current Setting (DCS)
+    Current = 2.7A
+    | Peak Current      | RMS Current    | SW1 | SW2 | SW3 |
+    | Default           | 0.5 to 5.6A    | ----- OFF ----  |
+    | 2.7A              |     1.9A       | OFF | ON  | OFF |
+    
+    DIP SWITCH
+    | DCS       | - |  MRS          |
+    | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+    
+    
+    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Program
+    Ladder Diagram - Drive to Increment
+        Use "Drive to Increment" (DRVI, 9 steps), 16 bit instruction
+            Note: DDRVI is 17 steps, 32 bit instruction
+        S1 =  Number of output pulses (relative address), Data type: 16 or 32 bit binary            // Pulse
+        S2 = Output pulse frequency, Data type: 16 or 32 bit binary                                 //Frequency
+        D1 = Device number (Y) from which pulses are to be output, Data Type: Bit
+        D2 = Device number to which rotation direction signal is output, Data Type: Bit
+    
+        |     X003                                                            |
+        |-----||-------------------------[DRVI K6400 K5000 Y000 Y004]---------|         // Example: [DRVI D1 D2 S1 S2], Note the square bracket
+        |------------------------------------------------------[END]----------|         //Set D1 to negative to reverse rotational direction, increase value to 12800 to increase speed
+
+    Ladder Diagram - Drive to Absolute
+        Use "Drive to Absolute" (DRVA, 9 steps), 16 bit instruction
+            Note: DDRVA is 17 steps, 32 bit instruction
+        S1 =  Number of output pulses (relative address), Data type: 16 or 32 bit binary            // Pulse
+        S2 = Output pulse frequency, Data type: 16 or 32 bit binary                                 //Frequency
+        D1 = Device number (Y) from which pulses are to be output, Data Type: Bit
+        D2 = Device number to which rotation direction signal is output, Data Type: Bit
+    
+        |     M1      X003                                                      |
+        |-----||------| |-------------------[DRVA K6400 K5000 Y000 Y004]--------|        // Example: [DRVI D1 D2 S1 S2], Note the square bracket
+        |     M2      X003                                                      |        //Set D1 to negative to reverse rotational direction, increase value to 12800 to increase speed
+        |-----||------| |-------------------[DRVA K12800 K5000 Y000 Y004]-------|   
+        |     M3      X003                                                      |        
+        |-----||------| |-------------------[DRVA K0 K5000 Y000 Y004]-----------|   
+        |-----------------------------------------------------------[END]-------|         
+        **M# switch to select which of the 3 rungs to run (Run only 1 rung)
+        
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+End
+
+
+
+
+
+
+
+
+
+
+
+
