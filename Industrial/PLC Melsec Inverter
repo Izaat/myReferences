@@ -128,6 +128,12 @@ CONTENT
         |-----||---------+                                 |
         |-----------------------------------[END]----------|
 
+    Input List
+        M0: Stop
+        M1: Forward
+        M2: Reverse
+        D0: Position Display
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 04. Connections
     In Navigation Panel, click on Connection Destination
