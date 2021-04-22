@@ -1,0 +1,173 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+Design of Experiments
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+CONTENTS
+01. Introduction
+02. Simulation
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+01. Introduction
+    
+    Definition: A collection of techniques used to manipulate a process and allows interaction between variables and results to be observerable
+    Example: Customize standard machine parameters to suit your product (Temperature, RPM, Pressure, Cooling, Packing, etc)
+    
+    Injection Molding Common Parameters
+        Temperature
+        Screw Speed (RPM)
+        Water Temperature (Cooling)
+        Packing Pressure (Packing)
+
+    Steps for DOE Analysis - Injection Molding for Plastic Parts example        
+        Step 1: Determine the response that we are interested in analyzing (DOE Response)
+            - Part weight
+            - Part resistance to breaking
+        Step 2: Create a list of factors that can affect the response (DOE Factors)
+            - Machine (Barrel) Temperature
+            - Water Temperature
+            - Screw Speed (RPM)
+            - Packing Pressure
+        Step 3: Determine the levels and range that we are interested in testing (DOE Levels)
+            - Barrel Temperature: 300, 310, 320 degrees
+            - Water Temperature: 50, 60 degrees
+            - Screw Speed: 200, 500, 750 RPM
+
+        NOTE: 
+            DOE Response: It's the measurable result that we are interested in improving
+            DOE Factors: All variables analyzed in DOE
+            DOE Levels: Concrete values that we will use for each factor (Identified setpoints based on ranges specified by OEM)
+
+        DOE Studies
+            2^2 : 2 Levels and 2 Factors
+            2^4 : 2 Levels and 4 Factors
+            3^4 : 3 Levels and 4 Factors
+
+        Example of 2^4 (2 Levels ^ 4 Factors)
+            - Machine (Barrel) Temperature: 300, 320 degrees
+            - Water Temperature: 50, 60 degrees
+            - Screw Speed (RPM): 200, 700 rpm
+            - Packing Pressure: 1, 2 bar                
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+02. Simulation
+    
+    Single cup catapult simulation
+        https://sigmazone.com/catapult
+    
+    Determine 4 factors from 5 factors
+        5 different factors:
+            Pin elevation
+            Bungee position
+            Firing angle: Not used, set value at 110 as a set constant
+            Cup elevation
+            Release angle
+    
+    Identify DOE Levels (2^4 Study)
+        Determine the minimum and maximum values for the other 4 factors    
+            Pin Elevation: 120 to 180
+            Bungee Position: 120 to 180
+            Cup Elevation: 220 to 280            
+            Release Angle: 140 to 180
+        Create table in Minitab Worksheet
+            | Pin Elevation | Bungee Position | Cup Elevation | Release Angle |
+            |         120        |           120           |         220         |          140          |
+            |         180        |           180           |         280         |          180          |
+        Number of runs
+            2^4 Study requires 2*2*2*2=16 runs
+            Minitab has DOE creator that will calculate
+
+    Minitab:
+        Main Menu > Stat > DOE > Factorial > Create Factorial Design
+        Create Factorial Design Window:
+            Type of Design: 2-level factorial (default generators)
+            Number of Factors: 4
+            Click on "Designs" > Select Full factorial (Runs:16) from table
+            Click on "Factors" >     
+                | Factor | Name                  | Type       | Low | High |
+                |     A     | Pin Elevation      | Numeric | 120  | 180   |
+                |     B     | Bungee Position | Numeric | 120  | 180   |
+                |     C     | Cup Elevation     | Numeric | 220  | 280   |
+                |     D     | Release Angle    | Numeric | 140  | 180   |
+            Click on "Options" >
+                Fold Design: Do not fold
+                Randomize Runs: Unchecked
+                    NOTE: 
+                        Proper DOE will have randomized runs in order to make sure what Minitab is seeing and analyzing is actually the process variation and
+                        not attributed to a state that affects the parameters
+                Store design worksheet: Checked
+            Click on OK
+                Minitab will create a new DOE worksheet full of values
+        
+        Add "Result" column and test the the catapult according to the value given in the table for each row
+            NOTE: Since most machines are electronically controlled, it will be between 119.5 to 121.2 even when you try to set at 120
+        Repeat test for other results
+        RESULT:
+            | N  | PE   | BP   | CE  | RA   | Result |
+            | 01 | 120 | 120 | 220 | 140 | 88       |
+            | 02 | 180 | 120 | 220 | 140 | 119     |
+            | 03 | 120 | 180 | 220 | 140 | 120     |
+            | 04 | 180 | 180 | 220 | 140 | 162     |
+            | 05 | 120 | 120 | 280 | 140 | 125     |
+            | 06 | 180 | 120 | 280 | 140 | 168     |
+            | 07 | 120 | 180 | 280 | 140 | 162     |
+            | 08 | 180 | 180 | 280 | 140 | 233     |
+            | 09 | 120 | 120 | 220 | 180 | 167     |
+            | 10 | 180 | 120 | 220 | 180 | 235     |
+            | 11 | 120 | 180 | 220 | 180 | 228     |
+            | 12 | 180 | 180 | 220 | 180 | 315     |
+            | 13 | 120 | 120 | 280 | 180 | 237     |
+            | 14 | 180 | 120 | 280 | 180 | 329     |
+            | 15 | 120 | 180 | 280 | 180 | 316     |
+            | 16 | 180 | 180 | 280 | 180 | 448     |
+
+        With the Result, Analyze with Minitab:
+            Main Menu > Stat > DOE > Factorial > Analyze Factorial Design
+            Analyze Factorial Design Window:
+                Add "Results" to Response
+                Click on "Graphs":
+                    Effects Plot:
+                        Normal - Unchecked
+                        Half Normal: Unchecked
+                      *Pareto: Checked
+                        Alpha: 0.05
+                        Residuals for Plts: Regular
+                        Residual plots: Individual plots, leave all unchecked
+                        Residuals vs Variables: Unchecked
+                Pareto Chart will appear
+
+        Pareto Chart of Effects:
+            Anything above 40.5 red line is considered a critical factor for the process (PE, BP, CE and RA are above red line)
+            Note that the Release Angle has the highest impact on the process result
+            If RA is being adjusted, it will affect the process alot more than the other parameters
+            The other parameters (PE, BP and CE) is considered the fine adjustment factors
+            If you do DOE, you're also analyzing interactions
+                Example: 
+                    Since BP=B and PE=A, Factor AB is the combination of BP and PE                    
+                    Adjusting Tension via BP and PE (This will affect the force exerted)
+                    Hence interaction between BP and PE will be considered critical
+            Minitab Session Window prints out all the calculations
+            
+        Testing accuracy of the Calculations
+            In catapult window, click on "Green Belt Linear"
+            Target: 250 (To hit 250 mark)
+                In Minitab > Main Menu > Stat > DOE > Factorial > Response Optimizer
+                    Add "Results" to "Selected" input box
+                    Click on "Setup"
+                        |Response | Goal    | Lower | Target | Upper | Weight |
+                        | Result      | Target | 240    | 250      | 260     |    1       |
+                        Click on OK and Optimization Plot window appears
+            Optimization Plot Window
+                Result:
+                    PE: 139.2821
+                    BP: 138.6740
+                    CE: 248.2815
+                    RA: 180.0
+                Follow the parameter settings
+                The actual catapult result will fall between the process window (Result; 256, LSL: 230, USL:270, Mean:250)
+                You can also modify the vertical sliders for each factors to get your result in "y"
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+END
