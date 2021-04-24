@@ -1,0 +1,193 @@
+ISO9001:2015
+ISO9001 Lead Implementer
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENT
+01. Introduction
+02. Planning Phase
+03. Operation
+04. Check and Act Phase
+05. Getting Project Approved
+06. Prepare for Implementation
+07. Implementation of a management system
+08. Monitor, Control, and Completing the project
+09. Taking the organization for certification
+10. Maintaining certification
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Introduction
+    Suggested Reading
+        What is ISO 9001? - https://bit.ly/3azVMdu
+        ISO 9001:2015 – The benefits of early implementation - https://bit.ly/3gzBR28
+        Six Key Benefits of ISO 9001 Implementation - https://bit.ly/2QTdCkU
+        Quality Management System: What is it? - https://bit.ly/2S150sX
+        Six greatest myths about ISO 9001 - https://bit.ly/3eoNVRj
+    
+    Structure
+        Clause 0 - Introductory clause
+            Provides general overview, its pupose and compatibility with other standards
+        Clause 1 - Scope
+            Defines scope of the standard - Points out it is applicable to all types of organization
+        Clause 2 - Normative references
+        Clause 3 - Terms and definitions
+            Refers to ISO 9000 as a standard where terms and definitions are given
+        Clause 4 - Context of organization
+            Defines the requirement for understanding external and internal issues, interested parties and their partners
+            Interested Parties:
+                Employees
+                Clients
+                Partners
+                Suppliers
+                Authorities
+        Clause 5 - Leadership
+            Defines top management responisbilities
+            Setting the roles, responsibilities and contents of quality policy
+        Clause 6 - Planning
+            Requirements for addressing risks, opportunities, quality objectives and plans for achieving them
+        Clause 7 - Support
+            Requirements for availability of resources, competences, awareness, communication, and documentation control
+        Clause 8 - Operation
+            Requirements for 
+                Operational planning and control, 
+                Design and development, 
+                Control of externally provided processes, 
+                Products and services,
+                Poduction and service provision
+                Release of products, services, nonconforming outputs
+        Clause 9 - Performance evaluation
+            Requirements for monitoring
+                Mesurement
+                Evaluation
+                Analysis
+                Internal Audit
+                Management Review
+        Clause 10 - Improvement
+            Requirements for 
+                Nonconformities
+                Corrective actions
+                Continual improvements
+        Annex A
+            Clarification of new structure
+            Terminology and concepts
+        Annex B
+            Other international standards on Quality Management and QMS
+    
+    Quality management Principles
+        Used to enhance company performance and achieve success
+        7 Principles:
+            Customer Focus
+                To meet customer requirements and strive to exceed expectations
+            Leadership
+                Leaders at all levels establish unity of purpose and direction
+                People are engaged in achieving the quality objectives
+            People engagement
+                It is essential that people are competent, empowered and engaged in delivering value
+            Process Approach
+                Predictable and consistent results are achieved more effectively when activities are understood and managed as interrelated processes
+            Improvement
+                Successful organization has ongoing focus on improvement
+            Evidence based decision making
+                Decisions based on analysis and evaluation of data and information are more likely to produce desired result
+            Relationship management
+                For sustained success, organization manage their relationship with interested parties such as suppliers
+    
+    Quality Management System   
+        Is a systematic approach for quality management and for enhancing customer satisfaction
+        QMS is a set of policies, procedures and instructions that sets internal rule that governs the company on how to create and deliver product or services to customers
+            Explain to employees what the best practice is in order to determine the needs and expectations of the customers,
+            Establish control of processes to ensure that employees deliver what can be expected from them
+        The quality management controls are not only technical, but they can be a combination of both types of controls
+            Organizational Control - Documentation of procedures
+            Engineering Control - Implementation of new technologies
+            HR Related Control - Training of People
+        Quality: The level of fulfillment of customer expectations
+
+    Implementation requirements
+        ISO9001 specifies the requirements for establishing, implementing and maintaining the QMS
+        Standards to be implemented and maintained through PDCA cycle
+        Plan
+            What to do and how to do it
+            Understanding the context of the organization
+            Define Scope, Quality Policy, Risks and Opportunities, quality objectives and control of processes
+        Do 
+            Implementation of the plan defined in Plan Phase
+            Fulfilling QMS requirements
+            Achieve quality objectives
+            Implement control of processes
+        Check
+            Confirm that thing run as planned
+            Check all objectives are achieved
+            Regular monitoring and measuring
+            Internal audits and management reviews
+        Act            
+            Improving the way things being done
+            Implement corrective actions and improvement intiatives
+
+    Implementing ISO9001 as a project
+        Form a team and assign them to concrete roles
+        Roles:
+            Project Manager
+                Person that coordinates project for the implementation of ISO9001
+            Project Team 
+                Any person under coordination of PM will be included in documenting and implementing the process controls
+                Assist to organize and give advices on the changes made
+            Management Representative
+                Responsible for maintaining QMS and its continual improvement
+                Often this person is the project manager
+            Top Management
+                Responsible to support the process by showing commitment, setting objectives, making decisions and
+                provide relevant resources by assigning the right people to dedicate time for implementation process
+                Dedicate budget and other resources
+
+    Documenting ISO9001 requirements
+        QMS consists of set of policies, procedures and other controls that set rules
+        What to document and to what level of details
+            Check whether a document is required/mandatory by ISO9001
+                Example: Results of Management review are mandatory to be documented
+                The organization shall retain documented information of 
+                    Quality Policy
+                    Quality objectives and plans to achieve them
+                    Records of training, skills, experience and qualifications
+                    Criteria for evaluation and selection of suppliers
+                    Monitoring and measuring equipment, calibration records
+                    Product/service requirements review records
+                    Records about design and development outputs review, inputs, controls, change records
+                    Characteristics of product to be produced and service to be provided
+                    Records about customer property
+                    Production/service provision change control records
+                    Records of conformity of product/service with acceptance criteria
+                    Records of nonconforming outputs
+                    Monitoring and measurement results
+                    Internal audit program
+                    Results of internal audits
+                    Results of management review
+                    Results of corrective actions
+                    NOTE: 
+                        Not every process needs a documented procedure
+                        But useful to have additional policies and procedures documented
+            Criteria for non-mandatory document
+                Size of company
+                    Smaller companies tend to have fewer documents so avoid writing a procedure for every small process
+                    Makes more sense for MNCs with 10k employees to write policies where each have related procedures and every procedure has working instructions
+                Importance and complexity
+                    The more important and complex a process or activity is, the more likely you have to write the policy or procedure to describe it
+                    This is to make sure everyone understands how to perform a process or activity to avoid breakdowns in the operations
+                ISO9001 does not specify what kind of document is required for operating the QMS, it's up to the organization to document in a way it finds most appropriate
+                Amount of documentation depends on the size and complexity of the products and services
+    
+    Benefits of ISO9001
+        Improves credibility and image, ability to achieve higher quality since QMS is mandatory for the certified organization
+        Improvement of customer satisfaction, higher chance to retain repeat customers
+        Better process integration
+            Easier to find improvements in efficiency and cost savings
+            Drive efficiencies towards fewer errors
+        Improve evidence for decision making
+            Focused on applying resources to areas that improves efficiencies and increases cost savings with less trial and error to find the right decision
+            Ability to visualize how much improvement has happened
+        Create continual improvement culture
+        Engagement of employees
+            Employees who are engaged in continuous improvement projects are happier and more engaged
+            Engaged employees are more productive
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Planning Phase
