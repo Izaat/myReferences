@@ -385,7 +385,43 @@ CONTENT
             Who shall communicate
             With whom to communicate
             
-
+    Clause 7.5: Documented Information
+        How documented information should be created, updated and controlled
+        2 Types of Information
+            Information that guides how processes are conducted, i.e procedures
+            Information as an evidence of results achieved or activities performed, i.e histroic records
+        Examples of documents:
+            Procedures
+            Policies
+            Plans
+        Example of Records:
+            Emails,
+            Paper forms,
+            Records in database,
+            Logs in measuring devices,
+        When creating and updating, the company should ensure:
+            Appropriate identification and description, ie title, date, author, etc
+            Appropriate media and format used for documenting
+        Documented information must be controlled to ensure availability, protected from loss of confidentiality, integrity or improper use
+        To be able to control, company needs to consider:
+            How to distribute, access, retrieve and use the information
+                To whether or not send the information through email
+                Whether or not to distribute via USB thumbdrive
+                Whether or not to print, or password protecting them, limited access
+            How to store and preserve the information
+                Storing electronic information in shared folders
+                Storing in company file server or cloud
+                Archives rack or in locked cabinets
+            How to control the changes
+                Version number and date updated 
+            How to Dispose the documented information   
+                Company should determine how long the documents will be kept and how they will be destroyed
+                Should first identify the information that are regulated by law and control them in compliance with the law
+                Decide how to control the rest of the documented information
+                Example: Old versions of procedures will be kept only for 2 months, electronic version will be deleted and physical documents be shredded
+            Additional:    
+                Company should control information from external origin that are relevant for the QMS
+                Example: Emails, ISO standards, instruction manuals for equipment, laws, etc
 
 
 
