@@ -67,6 +67,28 @@ CONTENT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 03. Chiller
     
+    2 Types of Chiller
+        Water Cooled Chiller, (Indoor & Outdoor): Will be linked to or integrated with outdoor cooling tower
+        Air Cooled Chiller, (Outdoor): Integrated with cooling tower
+        
+    Water that supplies to AHU (Chilled Water)
+        Chiller to AHU: Water at 6 degree water (via pump)
+        AHU to Chiller: Water at 12 degree
+
+    Water that supplies to Cooling Tower (Condenser Water)
+        Tower to Chiller: 27 degree
+        Chiller to Tower: 32 degree (via pump)
+
+    4 Main components of a Chiller
+        Evaporator
+        Condenser
+        Compressor
+        Expansion Valve
+
+    3 Main Circuits of a Chiller
+        Evaporation Loop (Evaporator > Compressor > Condenser > Expansion Valve) > Back to Evaporator
+        Chilled Water Loop (AHU > Evaporator > Back to AHU)
+        Condensed Water Looop (Tower > Condenser > Back to Tower)
 
 
 
