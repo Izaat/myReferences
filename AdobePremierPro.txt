@@ -10,6 +10,7 @@ CONTENTS
 08 - Video Effects
 09 - Audio Effects
 10 - Camera Shake or Anger Effect
+11 - Copying Effects Attributes to Multiple Frames
 
 TIPS - J,K,L to speed up or slow down timeline play speed
 
@@ -189,7 +190,20 @@ Transitions
         Wave Width: 1
         Direction: 90deg = Up/down
 
+11. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Copying Effects Attributes to Multiple Frames
+    
+    Select source clip and press CTRL+C
+    Then highlight the target frames 
+    Right click > Paste Attributes
+        Scale Attribut Times: Unchecked
+        Motion Attributes: Checked
+        Opacity: Unchecked
+        Time remapping: Unchecked
+        Click OK
 
+
+12. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
