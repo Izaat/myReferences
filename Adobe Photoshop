@@ -1,0 +1,63 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01. Cutout image with white outline
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Cutout image with white outline
+    
+    Quick Selection Tool
+        In vertical toolbar, Select "Quick Selection Tool" and click on the target subject
+            Press and hold ALT and click on bleed area to deselect
+            You can also use "Select Subject" in horizontal toolbar
+        Click on "Select and Mask" in horizontal toolbar
+    Smooth Edges
+        In right hand properties tab > Global Refinements > 
+            Smooth: 90
+            Contrast: 20%
+    
+    Export Image
+        In right hand properties tab > Output settings > 
+            Output To: New Layer
+            Click OK
+            
+    Blurring
+        Select the background layer (Should be at the bottom, below mask layer)
+        Main Menu > Filter > Blur > Gaussian Blur
+            Radius: 20%
+            Click OK
+    
+    Add outline
+        Select the mask layer
+        Click "Fx" icon at the bottom of the layer panel > Stroke
+            Size: 10
+            Position: Outside
+            Color: Your choosing
+            Click OK
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
