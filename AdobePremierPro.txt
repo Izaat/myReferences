@@ -194,7 +194,7 @@ Transitions
 //Copying Effects Attributes to Multiple Frames
     
     Select source clip and press CTRL+C
-    Then highlight the target frames 
+    Then highlight the target clip, may highlight multiple clips at once 
     Right click > Paste Attributes
         Scale Attribut Times: Unchecked
         Motion Attributes: Checked
@@ -202,6 +202,10 @@ Transitions
         Time remapping: Unchecked
         Click OK
 
+    Scale Attribute Times meaning
+        The effect marker placement is based on the scale of the clip
+        The longer the clip the effect being applied to, the further apart the marker will be applied
+        
 
 12. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
