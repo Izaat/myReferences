@@ -1,0 +1,90 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+HVAC
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENT
+01. Cooling Tower
+02. AHU (Air Handling Unit)
+03. Chiller
+04. FCU
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Cooling Tower
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. AHU    
+
+    Return Line: Hot Air Exhaust
+        Grills > Wall > Dampers > Fan > Duct
+        <--------------------------------- Air Flow
+    Supply Line: Fresh Air Intake (Usually 10% fresh air needs to flow into the system)
+        Grills > Wall > Dampers > Panel Filter > Bag Filter > Heater > Cooler > Fan > Duct
+        ---------------------------------> Air Flow
+    Recirculation Dampers
+        Recirculation are connected between Return Line and Supply Line. 
+        Controlled Mechanically or by BMS System
+        Located between the Supply dampers and fan in Return Line, and between dampers and panel filter in Supply Line     
+        Connects Extraction/Exhaust duct and Supply Duct
+    Dampers (Open Supply dampers if CO2 is too high)
+        Return and Supply dampers are interlocked with each other. If Supply Dampers are open 100%, Return Dampers will follow
+        BMS Dampers are opposite of Supply Dampers. If Supply is open 100%, BMS Dampers will close at 0%, disconnecting Return and Supply lines
+    Check Filter Condition: Pressure differential sensors    
+        Pressure before and after filter needs to be equal
+        If pressure of compartment after the filter is lower than the compartment before the filter, then filter is dirty
+    Heater (Applicable for cold climates)
+        Connected to Boiler or electrical heater
+        Cooler water enters from base inlet and exits at top outlet
+    Cooler (CHW)
+        Connected to chilled water system
+        Cool water enters from the base inlet and exits at top outlet
+    Fan
+        Belt driven induction motor
+        Centrifuge type fan system
+        Motor controlled by VFD linked to BMS System
+    Base of AHU
+        Drain pan is fitted underneath AHU to collect condensed water and drain hole connected to the drain pipe
+    Frost Temperature Sensor (Applicable for cold climates)
+        Measures temperature between filters and heater
+        Controls the heater
+        If temperature value drops below 5 degrees, it activates the heater
+    Sensors
+        Supply Line
+            Enthalpy (Outside VS Supply) - kjkg
+            Supply Air Temp/%RH (Humidity and Temperature)
+            Calculated Supply Air Temp (Cooling & Heating Values)
+            Pressure
+        Exhaust/Extract Line 
+            Extract Enthalpy - kjkg
+            Extract Air Temp/%RH (Humidity and Temperature)
+            
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Chiller
+    
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. Fan Coil Unit
+    
+    Used to condition local air to suit the temperature requirements of immediate space
+    Located near the AHU Main Supply Duct and before the squareish ceiling diffuser/vent (Usually hidden in the office ceiling or exposed in airconditioned canteen)
+    FCU are not connected to the Main Suppply Duct by ducting
+    It only recirculates air in the room (Think of standalone standing fan with intake filter)
+    Unlike standalone fans, FCUs treat the air temperature through another series cooling and heating (Think of miniaturized AHU - Supply Line) 
+    Basically a standalone mini-version of the AHU.
+
+    Intake > Fan > HeatCoil / Cooling > Ducting > Ceiling Diffuser/Vent
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
