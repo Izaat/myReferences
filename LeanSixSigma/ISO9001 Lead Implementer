@@ -442,6 +442,58 @@ CONTENT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 03. Operation
 
+    Suggested Reading
+        https://advisera.com/9001academy/blog/2015/07/07/what-clauses-can-be-excluded-in-iso-90012015/
+        https://advisera.com/9001academy/blog/2015/10/27/how-to-evaluate-supplier-performance-according-to-iso-90012015/
+        https://advisera.com/9001academy/blog/2013/11/05/iso-9001-design-process-explained/
+        https://advisera.com/9001academy/knowledgebase/iso9001-design-verification-vs-design-validation/
+        https://advisera.com/9001academy/blog/2014/10/07/understanding-product-service-provision-iso-9001/
+        https://advisera.com/9001academy/blog/2015/11/03/iso-90012015-clause-8-5-product-realization-practical-examples-for-compliance/
+
+    Clause 8.1: Operational Planning and Control
+        Requires establishment of criteria/acceptance, resource needs, process controls, documented information
+        Without proper planning and control, company cannot ensure its processes delivers intended results
+        The requirements for products and services must be determined 
+            What exactly we want to produce
+            How our service should look like
+        Usually done in the document called "Product" or "Service Specification"
+        Once the organization knows what characteristics its product or service should have, it needs to determine the criteria for the processes
+            Company needs to prescribe the way how its processes are carried out
+            And what values some parameters must have during the process
+        Example: A Bakery, The bakery produces 1 type of bread with defined recipe without any new products
+            Purchasing of ingredients or raw materials
+                Job of bakery owner
+                Warehousing process where worker stores other ingredients
+            Production Process
+                The baker is responsible
+            Distribution Process
+                Driver is responsible to deliver the bread
+            Determine resources needed to ensure that the product or services will be delivered as intended
+                Human resources,
+                Facilities,
+                Equipment,
+                Raw Materials
+            Define 
+                How many bakers it needs, 
+                How many ovens and what type of ovens
+                How much flour and other ingredients, etc
+            Implement controls of the processes according to the criteria
+                Temperature of the oven
+                Monitoring of the oven and how frequent
+            Determine what procedures and records will be kept and to what extent
+                To ensure that the processes will be carried out as planned
+                To demonstrate the conformity of the products to their requirements
+                Work Instruction: 
+                    Recipe on how the bread is made
+                    Ingredients at required temperature (Records of at what temperature yeast being stored before production, etc)
+            Planning of processes and controls must result with the outputs that are suitable to organization's operations
+                Drawings, 
+                Controls,
+                Procedures,
+                Defined clear rules and instructions for all operations, validation and verification activities
+
+    Clause 8.2: Requirements for products and services
+
 
 
 
