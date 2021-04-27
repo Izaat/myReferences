@@ -12,15 +12,16 @@ CONTENTS
             Press and hold ALT and click on bleed area to deselect
             You can also use "Select Subject" in horizontal toolbar
         Click on "Select and Mask" in horizontal toolbar
-    Smooth Edges
+        
+    Smooth Edges and Export
         In right hand properties tab > Global Refinements > 
             Smooth: 90
             Contrast: 20%
     
-    Export Image
-        In right hand properties tab > Output settings > 
-            Output To: New Layer
-            Click OK
+        Export Image
+            In right hand properties tab > Output settings > 
+                Output To: New Layer
+                Click OK
             
     Blurring
         Select the background layer (Should be at the bottom, below mask layer)
