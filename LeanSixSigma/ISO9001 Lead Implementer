@@ -492,7 +492,52 @@ CONTENT
                 Procedures,
                 Defined clear rules and instructions for all operations, validation and verification activities
 
-    Clause 8.2: Requirements for products and services
+    Clause 8.3a: Design and Development (Planning and Inputs)
+        Creates competitive advantage for the organization
+        Enables it to adapt its products and services to changing needs and expectations of its customers
+        
+        Step 1: Planning 
+            Determine the phases/stages and controls during design and development
+                Start project > Phase 1 > Phase 2 > Validation > End Project
+            Consider the various aspects of 
+                The nature, duration and complexities of activities
+                Required process stages and reviews
+        Step 2: Required process stages and reviews
+            The stages mu be defined as well as the points where the review will be conducted
+        Step 3: Validation and verification activities
+            Validation: Computer simulation to ensure the product is able to meet the requirement
+            Verification: Inspections on first prototype
+        Step 4: Resources
+            What facility and software is needed
+
+        ISO9001 does not require this clause to be documented but it is common to document
+        Usually documented in Project Plan or Project Tasks
+        Organization must determine all inputs needed for successful design and development
+        Incomplete inputs can lead design and development process to faillure (Customer poorly define requirements)
+
+        Defining the inputs
+            Function and performance requirements of the product and service to be defined
+                How the product should look like
+                What materials will be used, etc
+            Information from previous similar activities
+                Company may use some parts from previous design to save time
+            Applicable statutory and regulatory requirements
+                Strict rules around the materials used in production of toys
+            Potential consequences of failure due to nature of product and services
+                Risks in design process must be identified, 
+                What can go wrong
+                What are the potential consequences of the design process failure
+
+        Factors to have effective design and development process:
+            Inputs must be adequate, complete and clear
+            Inputs must be well expressed and defined
+            Input will help the company to precisely plan the design process and save time
+            Poorly defined inputs will definitely result in constant changes, increased time and money spent for the design
+            Any conflicting design and development input must be resolved before continuing
+
+        ISO9001 require Inputs to be documented usually in the Project Task
+
+    Clause 8.3b: Design and Development (Controls, Outputs and Changes)
 
 
 
