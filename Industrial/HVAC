@@ -69,7 +69,7 @@ CONTENT
     
     2 Types of Chiller
         Water Cooled Chiller, (Indoor & Outdoor): Will be linked to or integrated with outdoor cooling tower
-        Air Cooled Chiller, (Outdoor): Integrated with cooling tower
+        Air Cooled Chiller, (Outdoor): No cooling tower
         
     Water that supplies to AHU (Chilled Water)
         Chiller to AHU: Water at 6 degree water (via pump)
