@@ -742,7 +742,40 @@ CONTENT
             Results must be presented to the top management in a form of documented internal audit report
             The report includes general observations of the auditor, spotted nonconformites, good practices and recommendations
             
-    Clause 9.3: Management Review
+    Clause 9.3: Management Review        
+        Purpose of management review is for top management to review the QMS at planned intervals to ensure it is suitable, adequate and effective
+        Management does not have to define the operational controls but must know what is going on in the QMS
+        Management must take some crucial decisions 
+        ISO9001 requires the top management to review:
+            Condition of actions from previous management review
+                Example if the last review was the decision to train 3 more auditors, the top management should check if this was implemented and what are the results
+            Changes in external and internal issues relevant to the QMS
+            Changes in needs and expectations of interested parties
+            Performance of exernal providers
+                Analyze whether the supplier delivers what was expected and whether there is a need for additional control of the supplier
+            Effectiveness of actions taken to address risks and opportunities
+            Level of achievement of the quality objectives
+                When the objectives are met, management should introduce new ones or of higher standards
+                If objectives arent met, the mangement must initiate corrective actions to determine the root cause and to ensure the objectives will be met in the future
+            Information on process performance includes: 
+                The nonconformities and corrective actions, 
+                Monitoring and measurement results, 
+                Conformity of products and services, 
+                Audit results and adequacy of resources
+            Opportunities for improvement of the QMS
+                Based on customer feedback, the company may decide to improve its customer support process
+        The best practice is to conduct the QMS Review through a meeting at least once a year (The more often, the better)
+        ISO9001 requires the company to document the results from the review as evidence
+        After the meeting, the outputs will be documented in "Management Review Minutes of Meeting" or "Management Review Report"
+        Mandatory outputs includes:
+            Opportunities for improvement (Raising the standards)
+            Decisions related to the changes of the QMS
+                The company decides to outsource some processes and then establish new controls for the outsourced process
+            Resources needs
+                During the quality objectives analysis, the management may conclude some objectives havent been met because of the lack of resources
+                In the new plans to achieve the objectives, additional resources will be appointed
+
+    Clause 10.1: Nonconformities and Corrective Actions
 
 
 
