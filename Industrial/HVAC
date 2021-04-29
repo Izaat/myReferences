@@ -68,8 +68,8 @@ CONTENT
 03. Chiller
     
     2 Types of Chiller
-        Water Cooled Chiller, (Indoor & Outdoor): Will be linked to or integrated with outdoor cooling tower
-        Air Cooled Chiller, (Outdoor): No cooling tower
+        Water Cooled Chiller, (Indoor & Outdoor): Will be linked to or integrated with outdoor cooling tower, 
+        Air Cooled Chiller, (Outdoor): No cooling tower, 
         
     Water that supplies to AHU (Chilled Water)
         Chiller to AHU: Water at 6 degree water (via pump)
@@ -89,6 +89,40 @@ CONTENT
         Evaporation Loop (Evaporator > Compressor > Condenser > Expansion Valve) > Back to Evaporator
         Chilled Water Loop (AHU > Evaporator > Back to AHU)
         Condensed Water Looop (Tower > Condenser > Back to Tower)
+        
+    Air Cooled Chiller Components
+        Condenser Cooling Fans (Takes heat away from refrigerant)
+        Compressor (Circulates refrigerant to condensers)
+            Types: Reciprocating (Piston), Scroll, Rotary Screw
+            Refrigerant leaves compressor as high pressure, high temperature, superheated vapor
+        Condenser
+            Refrigerant leaves condenser as high pressure, medium temperature, saturated liquid
+            Distribution Headers (Near compressor)
+            Multiple pass condenser (Categorized by numbers of passes)
+            Collection Headers (Near Dryer)
+        Filter Dryer
+            Refrigerant leaves Dryer as high pressure, medium temperature, saturated liquid
+            Absorbs moisture (Moisture will damage the circuit)
+            Cylindrical Shape
+        Expansion Valve
+            Refrigerant leaves Expansion valve as low pressure, low temperature, liquid vapor mixture
+            A tube installed perpendicular to the pipes located right before foam wrapped pipes
+        Evaporator (Cools down Chilled Water)
+            Water travels in the opposite direction to the flow of refrigerant (Direction is for maximum heat transfer and LMTD - Log Mean Temperature Difference)
+            Refrigerant leaves Evaporator as low pressure, low temperature saturated vapor
+            Shell and tube heat exhanger (A distributed network of refrigerant pipings contained within the tank)
+            Water flow within the evaporator is tubulent (flow being slowed down rapidly) as it makes multiple 90 degrees turns all the way through the tank
+        Cycle
+            Compressor -> Condenser -> Dryer -> Expansion Valve -> Evaporator -> Compressor
+    
+    Gas Charging
+        Turn gas supply tank upside down while charging
+        Red Line (Gauge) -> Large Valve (High Sight)
+        Blue Line (Gauge) -> Smaller Valve (Low Sight)
+        Center Line (Gauge) -> Gas Supply Tank
+        Purge out contaminated air from hoses by rapidly loosen and retighten the hose
+        Charge when the compressor is running
+        Open the blue line and see if the red line is slowly increasing
 
 
 
