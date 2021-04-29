@@ -679,6 +679,45 @@ CONTENT
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 04. Check and Act Phase
+    
+    Suggested Reading
+        https://advisera.com/9001academy/knowledgebase/analysis-of-measuring-and-monitoring-requirements-in-iso-90012015/
+        https://advisera.com/9001academy/blog/2020/09/21/how-to-perform-monitoring-and-measurement-according-to-iso-9001/
+        https://advisera.com/9001academy/blog/2014/07/15/handling-customer-satisfaction-code-conduct-complaints-procedure/
+        https://advisera.com/9001academy/blog/2014/07/01/main-elements-handling-customer-satisfaction-iso-9001/
+        https://advisera.com/9001academy/knowledgebase/five-main-steps-in-iso-9001-internal-audit/
+        https://advisera.com/9001academy/knowledgebase/13-steps-for-iso-9001-internal-auditing-using-iso-19011/
+        https://advisera.com/9001academy/blog/2014/01/21/make-management-review-useful-qms/
+        https://advisera.com/9001academy/blog/2013/12/10/make-management-review-practical/
+    
+    Clause 9.1: Monitoring, measurement, analysis and evaluation
+        Implementing monitoring and measurement activities is to verify that the criteria for control of processes and outputs are met
+            In hydraulic press production, you need to monitor the pressure of the presses, and,
+            When the product is finished, you need to measure the dimensions to see whether the requirements are met
+        Monitoring refers to reviewing and observing
+            Monitoring customer satisfaction refers to reviewing the results of measuring the customer satisfaction
+        Measuring refers to determining the size or amount of something by concrete values
+            Measuring customer satisfaction refers to obtaining the information from the customer
+        Analysis refers to examining the result of measuring
+            Analyzing customer satisfaction refers to comparing results of customer satisfaction from previous survey and current survey
+        The company needs to:
+            Identify what needs to be monitored and measured (ie parameters of process, number of complaints)
+            Identify methods for monitoring, measuring, analyze and evaluation (ie generate reports for monitoring) 
+            Determine the frequency of the measurement (ie data captured quarterly for analysis)
+            Have a person to be responsible for conducting, monitoring and measure (ie production manager, )
+            Determine when the results will be analyzed and evaluated and who will be responsible
+        ISO9001 requires organizations to monitor customer satisfaction
+            Establish the methods for obtaining, monitoring and reviewing the information about the customer satisfaction
+            Can be done through surveys, feedbacks, meetings, etc
+            Information about customer satisfaction is the most valuable inputs in management review
+        ISO9001 requires the results from the monitoring and measuring are documented as evidence
+        ISO9001 does not define what needs to be monitored and measured
+        For large corporations, the best practise is to have the process documented as a procedure
+        For smaller companies, QA manager is responsible for monitoring and measuring 
+        Time schedules, frequencies, tools, and methods to be written in the procedure
+        The results from monitoring and measuring is one of the main input for the QMS
+
+    Clause 9.2: Internal Audit
 
 
 
