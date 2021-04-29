@@ -617,9 +617,68 @@ CONTENT
             Documents required prior to the release
                 Evidence of conformity to acceptance criteria (ie lab results, inspection report, traceability to person authorizing the release)
 
+    Clause 8.7: Control of Non-Conforming Outputs
+        Difference between Clause 8.7 and Clause 10.2 
+            10.2 is about how to resolve the problem
+            8.7 is about how non conforming product should be handled before initiating the corrective action
+        Non-conforming output must be identified and controlled in order to prevent them from reaching the customer
+            This is to prevent penalties, lawsuit and dissatisfaction by customers
+        Actions to address nonconformities must be appropriate to the nature of the nonconformance and its effects on product/services
+        Actions taken on nonconforming products
+            Correction - nonconformance can be removed by simple correction
+                Verification of the corrected product is conforming to the original requirements
+            Segregation, containment, return or suspension of provision
+                In the case of food storage not complying to the required temperature
+                The batch must be separated and delivery must be stopped for that affected batch
+                Affected batch to be sent for analysis
+            Informing the customer
+                Determine if it is necessary to inform the customer about nonconforming output
+                If the company discovers the nonconformance it will jeopardize the delivery
+            Obtaining authorization for acceptance under concession
+                In some cases, delivery of nonconforming products can be allowed by the customer
+                Customer must provide authorization prior to delivery
+                Usually happens when the nonconformance product deviation is to small when compared to the original requirements
+        ISO9001 requires companies to keep records that describe nonconformity and actions taken to remove them
+            Usually done in "Record of Nonconformity" and contains the name of authority deciding on the actions taken in respect to the nonconformance
+
+    Clause 8: Operating the QMS
+        After obtaining QMS Certification, QMS must be operated on daily basis
+        This represents a real compliance to ISO9001 and the only way to benefit from the implementation
+        Ensure to:
+            Perform all the activities described in the Quality Policy and Procedures
+            All processes must be conducted as defined in the related procedure
+            If the procedure did not make the production process work, then simplify or delete some documents that are not mandatory
+        In the case of changing of company circumstances (new products/process/technology)
+            Update the policies and procedures otherwise, these documents will become useless
+            The best practice is to nominate an owner of each document and that person will have to review the document periodically
+
+    Documents
+        Sales Procedure
+            To describe all activities related to the sales process, from recording the customer’s requests to delivery of product and service.
+        Procedure for Design and Development
+            To define the design control process used by the organization during the design and development of its products.
+        Project Task
+            A list of tasks, with tracking of response and closure, to ensure that the design process is complete.
+        Project Plan and Review
+            Tracks the entire design process to ensure that each design step is properly completed, validated and verified.
+        Design Review Minutes
+            To record the review and approval of the scheduled reviews of the design to ensure that the end design is properly vetted.
+        Procedure for Purchasing and Evaluation of Suppliers
+            To describe the process of evaluation and selection of suppliers and the purchasing process in order to conform to specified purchase requirements
+        Procedure for Production and Service Provision
+            To describe the process of production according to demanded quantity and deadlines, in line with the request for product quality, 
+            and the service provision process according to customer request.
+        Product Specification
+            the product specification is the listing of the requirements that need to be met for the product to be satisfactory.
+        Warehousing Procedure
+            To describe the process of warehousing and planning warehousing resources.
+        Non-Conformity Record
+            The document that records the non-conformance of a product or service and any other nonconformity within the system and 
+            the decision of what is to happen to the product or service (such as rework or scrap).
 
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. Check and Act Phase
 
 
 
