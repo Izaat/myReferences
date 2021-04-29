@@ -580,6 +580,7 @@ CONTENT
 
     Clause 8.5: Control of production and service provision
         Organization must conduct the controls of production under controlled conditions
+        
         Controlled conditions are:
             Documents that define characteristics of the products and services (ie Product or Service Specification)
             Documents about the activities to be performed (ie Procedure for Production, Service Provision, Work Instruction)
@@ -590,15 +591,31 @@ CONTENT
             The production and service provision process should be organized in a way that minimizes the chance of human error
             Implement release, delivery, post-delivery activities
             Demonstrate the released product is conforming to the requirements through product release records
-            Whenever necessary, the organization needs to establish traceability of its product (Track down product from raw materials to every processes to delivery to customers)
-                Important especially when it is neeeded to stop the problematic process line that is nonconforming without recalling all finished goods
-            Standard requires property to be identified, verified and protected
-            When property is lost or damaged, company must report to the owner and document what has happened in notification to a customer about changes on his property
-            Changes must be reviewed on how the faulty equipment affect the conformance or the product or service
-            Exclusion of this activity will create more uncertainty and the final product will meet input requirements
-            Up to the company to decide whether or not to take the risk or not
+            
+        Whenever necessary, the organization needs to establish traceability of its product (Track down product from raw materials to every processes to delivery to customers)
+            Important especially when it is neeeded to stop the problematic process line that is nonconforming without recalling all finished goods
+        Standard requires property to be identified, verified and protected
+        When property is lost or damaged, company must report to the owner and document what has happened in notification to a customer about changes on his property
+        Changes must be reviewed on how the faulty equipment affect the conformance or the product or service
+        Exclusion of this activity will create more uncertainty and the final product will meet input requirements
+        Up to the company to decide whether or not to take the risk or not
 
     Clause 8.6: Post Production Activities
+        Influences the conformity of products, services and customer satisfaction
+        Activities include:
+            Preserving the outputs during production and service provision
+                Ensure they conform to the requirements
+            Determine the post-delivery activities
+                Ensure statutory and regulatory requirements are adhered
+                Potential undesired consequences associated with the product/service 
+                Nature, Use and intended lifetime of products and service (ie expiration date)
+                Customer requirements and feedback (ie warranty, after sales support)
+            The products need to be verified to demonstrate that it meets product requirements
+                Prior to delivery, sample of the product will be taken by customer to be tested to determine if it meets the requirements
+                If requirement does not meet, product cannot be delivered to the customer
+                    Exclusion of this can be made if relevant authorities approves the release
+            Documents required prior to the release
+                Evidence of conformity to acceptance criteria (ie lab results, inspection report, traceability to person authorizing the release)
 
 
 
