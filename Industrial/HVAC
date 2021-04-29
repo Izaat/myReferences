@@ -124,6 +124,23 @@ CONTENT
         Charge when the compressor is running
         Open the blue line and see if the red line is slowly increasing
 
+    Thermal Expansion Valve (TXV) 
+        Refrigerant within the evaporator is in liquid form (incompressible), therefore pressure needs to be controlled before entering the compressor
+        Acts like a control valve (Normally Closed) increasing and decreasing the amount of refrigerant entering the evaporator, mechanically controlled by Sensing Bulb
+        Sensing bulb contains refrigerant and this controls the diaphram located inside the Power Head which in turn controls the amount of flow via piston pin (removable orifice)
+        Components  
+            Refrigerant outlet port
+            Refrigerant inlet port
+            Adjustable Port Screw (With Removable cap)
+                Controls the tension spring that controls the diaphragm
+            Power Head (Coil with thin tubings aka Capillary Tube, Sensing Bulb attached at the end of the tube)
+                The bulb senses the superheat
+                The bulb will be located at the other end of the evaporator (the refrigerant outlet), away from the TXV main body
+        Sensing Bulb
+            When the refrigerant boils, it increases the pressure, and the pressure increases the flow in the TXV via the diaphragm and piston
+            When the refrigerant is cold, pressure decreases, and this decreases the flow in the TXV
+            The hotter it is, the more refrigerant will flow into the evaporator
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
