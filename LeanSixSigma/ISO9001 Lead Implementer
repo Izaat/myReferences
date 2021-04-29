@@ -776,6 +776,87 @@ CONTENT
                 In the new plans to achieve the objectives, additional resources will be appointed
 
     Clause 10.1: Nonconformities and Corrective Actions
+        Nonconformity is when a certain requirement doesn't comply with either:
+            ISO9001 standards
+            Relevant legislations,
+            QMS documentations,
+            Requirements of interested parties
+        This clause enables companies to identify and effectively deal with oversights, errors, mistakes, etc
+        NTOE: A customer complaint is not automatically a nonconformity; the cause of the complaint must be determined and then investigated to see if it was caused by a nonconformity or something else.
+        Nonconformance can be identified by anyone at any time
+        Usually nonconformities are identified during internal audit
+        Corrective Actions mean a formal way for a company to resolve nonconformity
+        ISO9001 requires companies to keep records as evidence of the nature of nonconformance, the actions that were taken, and the results of the implemented corrective actions
+        The record is called "The Corrective Action Form"
+        Corrective action isn't enough. The company should really resolve the root cause of nonconformity
+            The results and the effect should be evaluated
+        Correction and Corrective Action are not the same thing
+            Correction: Removal of the consequences
+            Corrective Action: Removal of the cause of nonconformity
+        Good practise to document the procedure for nonconformities and corrective actions
+        The procedure should: 
+            Define the steps for analysing the nonconformities, 
+            Initiating corrective actions, 
+            Assigning responsibilities for corrective actions,
+            How to document and evaluate the effectiveness of the corrective actions, etc
+        ISO9001 requires companies to take the following actions when nonconformities occur:
+            Correct and Control the nonconformity and deal with the consequences,
+                In the event where the company is not conducting the internal audit appropriately (using untrained auditors), the company should deal with the risks, consequences and train the internal auditors
+            Evaluate the need to eliminate the cause of nonconformity to prevent reoccurence by: 
+                Reviewing and determining the cause
+                Identifying if similar nonconformities exists
+                Make sure that this nonconformity will not happen again in the future    
+            Implement relevant actions
+                Conduct new audit with newly trained auditors
+            Review the effectiveness of the corrective actions
+                Check if the new conducted audits were performed by trained auditors
+            Make changes to the QMS if needed
+                Document internal audit procedure (although not required by the standad),
+                Explain the responsibiliies of the person in charge 
+                The requirements for having trained internal auditor
+
+    Clause 10.2: Continual Improvement
+        The standard requires that the company continually improve the suitability, the adequacy, and the effectiveness of QMS 
+        Everythihng changes and this has significant influences to the QMS, the risk and opportunities, customer satisfaction, market conditions, etc
+        The ISO standard changes as well
+        The QMS should change to reflect the changing of business, environment and threats 
+        The new opportunities changes as well
+        The improvement opportunities vary depending on the type of company and the maturity of the QMS
+        Examples of improvement initiatives:
+            Implement software tools to support the process control activities,
+            Document new procedure,
+            Introduce new modalities of awareness, etc
+        All improvements require changes in the QMS but not every changes bring improvement
+            
+    Documents:
+        Matrix of Key Performance Indicators 
+            The listing of the important factors that the company has chosen to track to ensure maintenance of the processes.
+        Data Analysis Report 
+            The statement detailing the analyzed data for the management review meeting.
+        Procedure for Measuring Customer Satisfaction 
+            Describe methods for gathering and using information about a customer satisfaction in order to establish a system for monitoring customer satisfaction.
+        Monitoring of Customer Satisfaction
+            The document that contains the plan for collecting, analyzing and reviewing the data on customer satisfaction.
+        Internal Audit Program
+            The document to record the yearly schedule for internal audits.
+        Internal Audit Report - this is the document used to report on the findings of an internal audit.
+        ISO 9001: Internal Audit Checklist
+            The list of questions required to ensure the management system is implemented and maintained.
+        Procedure for Management Review
+            To ensure systematic and periodic review of Quality System Management by the Top Management 
+            in order to evaluate possibilities for improvement and needs for changes, including Quality Policy and Quality Objectives.
+        Management Review Minutes        
+            The documented proof of the discussion, decisions and actions taken by top management at the management review meeting.
+        Procedure for the Management of Nonconformities and Corrective Actions
+            To describe all activities related to the identification of nonconformities, initiation, implementation, and keeping of records of corrections, as well as corrective actions.
+        Non-Conformity Record
+            The document that records the non-conformance of a product or service and any other nonconformity within the system and the decision of what is to happen to the product or service (such as rework or scrap).
+        Corrective Action Record
+            To record the problem, root cause analysis and corrective actions take for the problem.
+        
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. Getting Project Approved
+
 
 
 
