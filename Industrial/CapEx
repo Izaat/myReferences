@@ -85,8 +85,9 @@ CONTENT
         | Description      | Account          | Mth 1    | Mth 2 | Mth (n) | Total     | Reforecast | $Variance | %Variance |
         |------------------|------------------|----------|-------|---------|-----------|------------|-----------|-----------|
         |Carpet            | 5210             | $550     | $670  |         | $10020    | $10674.01  | $654.01   | -6.13%    | //Total = Total Mth 1 + Total Mth 2 + ... + Total Mth (n)
-        |Cleaning &        | Carpet Clean %   |  75%     |       |         |           |            |           |           | //Total = Reforecast + Variance
-        |Repair            | Carpet  Expense  | $250     |       |         |           |            |           |           | //%Variance = ($Variance / Reforecast) x 100
+        |Cleaning &        | Carpet Cleans    |    5     |       |         |           |            |           |           | //Total = Reforecast + Variance
+        |Repair            | Clean per unit   | $60      |       |         |           |            |           |           | //%Variance = ($Variance / Reforecast) x 100        
+        |                  | Carpet  Expense  | $250     |       |         |           |            |           |           | //%Variance = ($Variance / Reforecast) x 100
         |                  | CY Refore        | $569     |       |         | $10674.01 |            |           |           |
         |------------------|------------------|----------|-------|---------|-----------|------------|-----------|-----------|        
     
