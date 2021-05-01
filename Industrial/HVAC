@@ -9,7 +9,7 @@ CONTENT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Cooling Tower (For Water Cooled Chillers)
     Warm Water inlet -> Cooled Water out (Flow of water will be from top to bottom, opposite the flow of air)
-    Warm Air out        <-  Cool air in (Air flow will be from bottom to top against the flow of water)
+    Warm Air out     <-  Cool air in (Air flow will be from bottom to top against the flow of water)
     Fan will exhaust the warm air
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
