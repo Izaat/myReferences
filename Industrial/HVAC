@@ -8,9 +8,10 @@ CONTENT
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Cooling Tower (For Water Cooled Chillers)
-    Warm Water inlet -> Cooled Water out (Flow of water will be from top to bottom, opposite the flow of air)
-    Warm Air out     <-  Cool air in (Air flow will be from bottom to top against the flow of water)
+    Warm Water inlet > Distribution Header > Spray Nozzles > Cooling Fins > Collection Tank > Cooled Water out (Flow of water will be from top to bottom, opposite the flow of air)
+    Warm Air out        <----------------------------------- Cooling Fins <--------------------------  Cool air in (Air flow will be from bottom to top against the flow of water)
     Fan will exhaust the warm air
+    All stray mist sucked by the fan will condense by another fin located below the fan (Second layer cooling fin)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 02. AHU    
