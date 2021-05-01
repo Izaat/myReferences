@@ -75,6 +75,7 @@ CONTENT
         |Repairs          | Range     | $50   |       |         |           |            |           |           | //Total = Reforecast + Variance
         |                 | Stove     | $100  |       |         |           |            |           |           | //%Variance = ($Variance / Reforecast) x 100
         |                 | Misc      | $50   |       |         |           |            |           |           |
+        |                 | CY Refore| $173.34|       |         | $1469     |            |           |           |                
         |-----------------|-----------|-------|-------|---------|-----------|------------|-----------|-----------|    
     
     
