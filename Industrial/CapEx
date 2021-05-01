@@ -62,7 +62,18 @@ CONTENT
         Ordering: How are you currently placing orders and what is the frequency?
         Inventory Control: How are we currently managing our inventory?
     
-    
+    Budget Template
+        Daily Expenses (Repair & Maintenance)
+        | Account         |           |       |       |         |           |            |           |           |
+        | Description     | Account   | Day 1 | Day 2 | Day (n) | Total     | Reforecast | $Variance | %Variance |
+        |-----------------|-----------|-------|-------|---------|-----------|------------|-----------|-----------|
+        |Access Gates     |           |       |       |         |           |            |           |           |
+        |-----------------|-----------|-------|-------|---------|-----------|------------|-----------|-----------|
+        |Appliance        | 5210      | $200  |       |         | $1600     | $1469      | $131      | 8.88%     | //Total = Total Day 1 + Total Day 2 + ... + Total Day (n)
+        |Repairs          | Range     | $50   |       |         |           |            |           |           | //Total = Reforecast + Variance
+        |                 | Stove     | $100  |       |         |           |            |           |           | //%Variance = ($Variance / Reforecast) x 100
+        |                 | Misc      | $50   |       |         |           |            |           |           |
+        |-----------------|-----------|-------|-------|---------|-----------|------------|-----------|-----------|    
     
     
     
