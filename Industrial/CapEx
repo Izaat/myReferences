@@ -64,6 +64,8 @@ CONTENT
     
     Budget Template
         Daily Expenses (Repair & Maintenance)
+        | Balance         |           |       |       |         | $64618    | $74724.74  | $10106.74 | -13.53%   | //Balance = Reforecast - $Variance
+        |-----------------|-----------|-------|-------|---------|-----------|------------|-----------|-----------|
         | Account         |           |       |       |         |           |            |           |           |
         | Description     | Account   | Day 1 | Day 2 | Day (n) | Total     | Reforecast | $Variance | %Variance |
         |-----------------|-----------|-------|-------|---------|-----------|------------|-----------|-----------|
