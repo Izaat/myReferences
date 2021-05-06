@@ -101,7 +101,16 @@ CONTENTS
         Select brush in toolbar and choose white to reveal
         Just paint over the affected area
 
-
+    Reveal the missing fine strands of hair
+        Add a new layer on top of all the layers
+        Press CTRL + ALT + G (Clips the layer to the layer below)
+        Select brush tool and hold ALT key (Temporarily activates the eyedropper tool)
+        Select the darker color on the hair
+        Paint over the missing hair
+        Undo:
+            Hold Windows Key and drag over the affected area to erase
+            -OR-
+            Use the eraser tool
 
 
 
