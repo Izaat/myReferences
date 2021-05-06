@@ -1,6 +1,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
 01. Cutout image with white outline
+02. Working with green screen
 
 
 
@@ -36,6 +37,73 @@ CONTENTS
             Position: Outside
             Color: Your choosing
             Click OK
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Working with green screen
+    
+  Removing the Green Background  
+        In Layers Tab, select the layer with green screen (Green Screen Mask)
+        Main Menu > Select > Color Range
+            Select: Sampled Colors
+            Enable Eyedropper tool
+            Shift + Click and Drag over on the green screen (Until the preview image turns into a silhouette)
+            Once a silhoutte, activate the "Invert" checkbox (White means selected)
+            Preview the selection 
+                Selection Preview: Bleck Matte (Converts Green Background to Black Background)
+            Press OK
+        In Layers Tab, click on the Add Vector Mask icon (Camera Icon next to FX icon)
+        Add a new layer that contains background image below the masked layer
+        In Layers Tab, highlight the target layer, click on the (Circular contrast icon), select Solid Color
+            This will add Solid Color layer on top of the background layer
+    
+    Removing coarse green outlines over the object
+        In Layers Tab, Highlight the Green Screen Layer mask (The layer with silhouette)
+            In Properties Tab, select "Select and Mask"
+            This will bring up mask properties tab
+            This enables you to fine tune mask edges        
+            In Prperties Tab, click on View and select "On Black (A)" and go to "Global Refinements section
+                Smooth: 11
+                Feather: 0 
+                Contrast: 25
+                Shift Edge: -14
+                Click OK
+        Select the brush tool (Below Eraser)
+            Brush any part of the layer that still contains green outline
+            Use color black to hide, white to expose        
+        Main Menu > Filter > Other > Minimum (Contract a mask based on number of pixel)
+            Radius: 1.4
+            Preserve: Roundness
+            Press OK
+
+    Removing fine green outlines over the object (Adjusting Hair from green background)
+        In Layers Tab, Highlight the Green Screen Layer mask (The layer with silhouette) and click on "Select and Mask"
+        In Brush toolbar, select the rifine edge tool (Brush with hand icon)
+        Brush over the affected area (Strands of hair, or outlines of complex geometries)
+        In View section, check "Show Edge" to see what has been selected
+        Once all intricate geometries (i.e hair) is selected, press Ok
+        
+        In Layers tab, with Green Screen Layer mask still being highlighted, click on the adjustment layer icon (Circular black white icon)
+            Select Hue/Saturation
+            Clip to mask layer (In properties tab, activate the "Clip to layer" (White box with arrow down icon)
+                This will mask and applied effect will affect the selected layer
+            Hue/Saturation
+                Saturation (Finger left-Right icon): Greens (Master was default)
+                Hue: 0
+                Saturation: -100 (This makes all the green visible for you to do adjustment)
+                Lightness: 0
+                Scrolling color wheel: Expand the inner scrollbar to select all the green range
+                    38deg/69deg, 135deg\165deg
+                Readjust saturation to -7, hue to -61(Your color) 
+
+    Adding the missin/untargetted spots that was affected by the effect 
+        In Layers Tab, Select the Green Screen Layer mask (The layer with silhouette)
+        Select brush in toolbar and choose white to reveal
+        Just paint over the affected area
+
+
+
+
 
 
 
