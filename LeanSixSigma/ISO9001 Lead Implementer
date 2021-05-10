@@ -1326,7 +1326,48 @@ CONTENT
         Implement the change
         
         
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+08. Monitor, Control, and Completing the project
+    
+    Suggested Reading
+        https://advisera.com/27001academy/blog/2014/03/03/why-is-management-review-important-for-iso-27001-and-iso-22301/
+        https://advisera.com/9001academy/knowledgebase/five-main-steps-in-iso-9001-internal-audit/
+        https://advisera.com/14001academy/blog/2017/01/16/creating-an-iso-14001-internal-audit-plan/
+        https://advisera.com/27001academy/knowledgebase/how-to-make-an-internal-audit-checklist-for-iso-27001-iso-22301/
+    
+    Verifying and Issuing a status report
+        Verifying
+            Ensure that each team member has implemented what they reported
+            Ensure that the implemented tasks are successful
+            Verify actual implementation to get reliable information about progress and effectiveness
+            Develop implementation checklists to enable quality control over design of the management system activities, its implementation and effectiveness
+            Note that what was designed is not correctly transposed into reality during implementation. Therefore monitoring needs to be strengthen
+        
+        Status Report
+            A document compiling the situation of the project
+            It is to generate decisions, actions or awareness
+            Project information may be communicated verbally
+            A status report include:
+                Comparing planned activities in the project plan, showing deviations and indications whether planned duration will be observed or changed
+                Reporting performance: Control, costs, deadlines, planned intermediate results.
+                Information of concerns about changes in the context of the project (Key person resignation, change of external policies, etc)
+                Issuance of change request to the current plan version
+                Ensuring deliverables are correct based on implementation verifications
 
+        NOTE: Avoid implement a management system that bypasses the daily activities of the organization and its people. Have the right people to be involved.
+
+    Communication about the project status
+        Prepare and send status report before monitor and control meeting
+        Monitor and Control Meetings are team meetings to evaluate the status of the project, share information and make decisions
+        Sending the report makes the meeting more productive
+        Project manager may invite stakeholders to the meeting (Agenda and Report to be generated)
+        Agendas:
+            Start time, and End Time
+            Overall pupose of the meeting (Objective and decision to be made by the end of the meeting)
+            Content, purpose, responsible people and time allotted
+            Links where participants can find relevant information
+
+    Monitor and Control Meeting
 
 
 
