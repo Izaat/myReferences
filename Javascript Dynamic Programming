@@ -1,0 +1,177 @@
+///////////////////////////////////////////////////////////////////////
+Dynamic Programming (Memoization and Tabulation in Javascript)
+
+///////////////////////////////////////////////////////////////////////
+CONTENTS
+
+Memoization
+01. Fibonacci
+02. gridTraveler
+03. memoization recipe
+04. canSum
+05. howSum
+06. bestSum
+07. canConstruct
+08. countConstruct
+09. allConstruct
+
+Tabulation
+10. Fibonacci
+11. gridTraveler
+12. tabulation recipe
+13. canSum
+14. howSum
+15. bestSum
+16. canConstruct
+17. countConstruct
+18. allConstruct
+
+
+
+///////////////////////////////////////////////////////////////////////
+01. Fibonacci (Memoization)
+    
+    Question:
+        Write a function 'fib(n)' that takes in a number as an argument.
+        The function should return the n-th number of the Fibonacci sequence.
+
+    Explanation:
+        The 1st and 2nd number of the sequence is 1.
+        To generate the next number of the sequence, we sum the previous 2.
+
+    Example:
+        n:      : 1, 2, 3, 4, 5, 6,  7,  8,    9, ...
+        fib(n): 1, 1, 2, 3, 5, 8, 13, 21, 34, ...  //Note: 5+8=13
+        The 7th Fibonacci is 13
+
+    Code:
+        const fib = (n) => {                     //take nth number of fib sequence
+            if (n <= 2) return 1;                //if number is less or equals to 2, then return as 1
+            return fib(n-1) + fib(n-2);      //sum of previous 2 sequence          
+        };
+        
+        console.log(fib(6));                    //Answer: 8
+        console.log(fib(7));                    //Answer: 13
+        console.log(fib(8));                    //Answer: 21
+        console.log(fib(50));                  //Answer: Takes too long to compute
+    
+    Problem Explanation: Example calling fib(7)
+        (n-2) will be on the right side: (7-2)=5
+        (n-1) will be on the left: (7-1)=6
+        This will continue until it gets to 2 or 1 (Base case)
+        The tree below will take shape
+        //                                                                          7
+        //                                               |-----------------------------------------------------------|
+        //                                              6                                                            5
+        //                              |-----------------------------|                                   |-----------------------|
+        //                              5                             4                                   4                       3
+        //                       |-------------|              |-----------------|               |-------------------|      |--------------|
+        //                       4             3              3                 2               3                   2      2              1
+        //            |------------|     |-----------|   |-----------|                    |----------------|   
+        //            3            2     2           1   2           1                    2                1
+        //    |----------|
+        //    2          1
+        
+        Since in base case, returns 2 as 1, the integer 2 at the  bottom most of the tree will return 1
+        Add 1+1 = 2
+        Therefore the integer fib(3)=2
+        This will continue up the tree: 3 will return as 2
+        Therefore 2+1=3
+        fib(4)=3
+        
+        See table below for full calculation:
+        //                                                                       13
+        //                                        |-------------------------------------------------------------------|
+        //                                        8                                                                   5
+        //                           |-----------------------------|                                     |--------------------------|
+        //                           5                             3                                     3                          2
+        //                   |-------------|                 |-----------------|               |-------------------|         |--------------|
+        //                   3             2                 2                 1               2                   1         1              1
+        //            |------------|   |-----------|   |-----------|                    |----------------|   
+        //            2            1   1           1   1           1                    1                1
+        //    |----------|
+        //    1          1
+        
+        Final fib(7)=13
+        
+    Underlying Functions: (Foo, Bar, Dib, Lib)
+        Foo Functions: 
+            #Tree: 5 > 4 > 3 >2 > 1
+            #0(n) time
+            #0(n) space            
+            
+            const foo = (n) => {                     
+                if (n <= 1) return;                
+                foo(n-1);              
+            };
+        
+        Bar Functions:
+            #Tree: 6 > 4 > 2 > 0
+            #0(n/2) time = 0(n) time
+            #0(n/2) space = 0(n) space          
+        
+            const bar = (n) => {                     
+                if (n <= 1) return;                
+                bar(n-2);              
+            };
+
+        Dib Functions:
+            #Tree: 
+                //                                                        5                                                                  //Level 1, 1 node 
+                //                                |---------------------------------------------------------|
+                //                                4                                                         4                                //Level 2, 2 nodes
+                //                   |-------------------------------|                           |-----------------------|
+                //                   3                               3                           3                       3                   //Level 3, 4 nodes
+                //            |-------------|               |-----------------|            |------------|          |------------|
+                //            2             2               2                 2            2            2          2            2            //Level 4, 8 nodes
+                //       |---------|   |----------|   |-----------|      |---------|   |--------|   |--------|  |--------|  |--------|  
+                //       1         1   1          1   1           1      1         1   1        1   1        1  1        1  1        1       //Level 5, 16 nodes
+                //
+                //Height of tree = n = 5 > 4 > 3 > 2 > 1
+                //To calculate number of nodes in the level = 2 to power of (5 levels - 1) = 2^(5-1) = 2^4
+                //Level 4 = 2^4 = 16 nodes
+                
+            #0(2^n) time
+            #0(n) space       
+        
+            const dib = (n) => {                     
+                if (n <= 1) return;                
+                dib(n-1);              
+                dib(n-1);     
+            };        
+
+        Lib Functions:
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
