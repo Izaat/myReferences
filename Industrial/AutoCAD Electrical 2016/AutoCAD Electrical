@@ -1,0 +1,139 @@
+
+Autocad Electrical 2016
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENT
+01. Create 3 phase Motor Start-Stop schematics with 2 phase transformer
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Create 3 phase Motor Start-Stop schematics
+
+    Start a Template
+        Start tab > Get Started > Template dropdown menu > 
+            Select ACE_ANSI_B_Color.dwt
+
+        Create New Project
+            Side Panel > Click on "New Project" icon
+            Setup the new project and click "OK-Properties"
+            In Project Settings tab > Paths > Schematic Libraries
+                A few libraries were automatically added
+
+        Save main project to the new folder
+        At the side panel, under project manager section, right-click on the newly created project
+            Select "Add Active Drawing"
+            Apply the Project default to Drawing settings
+            Now the file *.dwg will be added into the project
+
+    Creating the Schematics
+        Main Menu > Schematics > Toolbar > Insert Wires/WireNumbers Section > Multiple Bus
+        Multiple Bus Window
+            Hor. Spacing: 0.5
+            Vert. Spacing: 0.5
+            Starting at: Empty Space, Go Vertical
+            Number of wires: 3
+            Click on OK
+            
+        Drawing the Wires
+            Snap Mode: ON (Click on the dotted grid at the bottom of screen OR Press F) - Blue means ON
+            Click once on the drawing, drag to length and click again to confirm
+            
+        Insert Circuit Breaker
+            Main Menu > Schematics > Icon Menu
+            Click on Icon Menu and the entire component library will appear
+            Select JIC and click on "Fuses/Breakers" > Circuit Breakers Disconnect
+            Select Breaker 1 pole
+            Switch OFF Object Snap  
+                Bottom of screen, click on Square icon to turn off Object Snap OR Press F3
+            Click on the 3 phase line to add the breaker, "Insert/Edit Component" window appears
+                Click on "OK/Repeat" to duplicate the breaker on another power ine
+
+        Move and Align Circuit Breakers
+            Main Menu > Schematics > Edit Component Section > Scoot (Row 1, Col 2 icon)
+                Click on CB1 and reposition
+            Main Menu > Schematics > Edit Component Section > Align (Row 1, Col 2 icon)
+                Click on Align and switch OFF snapmode (F9)
+                Click on CB1 to select the reference
+                Click on the components that will follow the selected reference
+                Press Enter
+
+        Flip a component
+            Main Menu > Schematics > Toolbar > Edit Component > Click on 4 directional Arrow icon (1st row 2nd col icon) > Reverse/Flip Component
+                Flip Component window will appear
+                    Select Flip
+                    Click on OK
+            Disable Snapmode to select the component
+
+        Move Component Text to Readable location
+            Main Menu > Schematics > Toolbar > Edit Component > Move/Show Icon (3rd row, 2nd col icon) > Move/Show Attribute
+            Select all the component names and then click on blank area to change to another cursor
+            Drag and move the selected names
+            Click to place
+
+        Add Relays
+            Main Menu > Schematics > Toolbar > Insert Component Section > Icon Menu 
+                Select Relays/Contacts > Relay NO with Pins
+                Add to the 3 phase power line
+
+        Add Overload Relay
+            Main Menu > Schematics > Toolbar > Insert Component Section > Icon Menu 
+                Select Motor Control > Overload
+            Add to the 3 phase power line
+            Component Tag: OL1
+            Pins > Pin 2: T1
+            Click on Ok-Repeat
+                
+        Add 3 Phase Motor
+            Main Menu > Schematics > Toolbar > Insert Component Section > Icon Menu 
+                Select Motor Control > 3 Phase Motor        
+            Add to L2 of the 3 phase power line
+            Click on OK - L1 and L3 will automatically attach to the motor
+
+        Add Transformer
+            Main Menu > Schematics > Toolbar > Insert Component Section > Icon Menu          
+                Select Fuses/CircuitBreaker > Transformer
+                Add to schematics
+                Click on OK
+
+        Connecting Transformer to Power Lines
+            Main Menu > Schematics > Toolbar > Insert Wires Section > Wires
+            Click on Contactor and connect to Transformer H1
+            Click on "Wire" again and repeat for Transformer H2
+
+        Add Fuses/Breakers
+            Main Menu > Schematics > Toolbar > Insert Component Section > Icon Menu
+                Select Fuses/CircuitBreaker > Fuse
+                Click on the circuit
+
+        Add Push Button
+            Main Menu > Schematics > Toolbar > Insert Component Section > Icon Menu
+                Push Button > Push Button NC
+                Component Tag: PB1
+                Description L1: STOP
+                Click on OK
+
+        Add Motor Contactor Coil
+            Main Menu > Schematics > Toolbar > Insert Component Section > Icon Menu
+                Motor Control > Motor Starter Coil
+                Click on OK
+            Hide Attribute (NO, NC)
+                Main Menu > Schematic > Toolbar > Edit Components Section > Hide Attrb Single Pick (3rd Row, 2nd Col Icon)
+                Click on the "NONC"
+                Press Enter
+
+        Add Wire Numbers (L1, L2, L3)
+            Main Menu > Schematics > Toolbar > Insert Wires Section > Wire Numbers > 3 Phase
+                Prefix: NIL
+                    Hold
+                Base: NIL
+                    Hold
+                Suffix: L1
+                    Increment
+                Click OK
+
+        Edit Project Description Block
+            Double click on the Project description block
+            Edit description and Press OK
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
