@@ -219,7 +219,8 @@ Tabulation
         console.log(fib(50));                  //Answer: 12586269025
         
         Note: 
-            The memo value will store a list of calculated subtree and the result will be recalled whenever the program come across a similar subtree
+            The memo value will store a list of calculated subtree and the result will be recalled whenever the program come across a similar subtree.
+            This method cuts down recurring calculation across the entire tree, therefore saving time.
             Example: fib(6)
             Memo {
                 3:2,
