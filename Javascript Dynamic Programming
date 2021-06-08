@@ -141,6 +141,64 @@ Tabulation
             };        
 
         Lib Functions:
+            #Tree: 
+                //                                                                                   8                                                                              //Level 1, 1 node 
+                //                                               |-----------------------------------------------------------|
+                //                                              6                                                                           6                                      //Level 2, 2 nodes
+                //                              |-----------------------------|                                     |-------------------------|
+                //                              4                                    4                                     4                               4                     //Level 3, 4 nodes
+                //                   |-------------|                  |-----------------|                |--------------|             |------------|
+                //                   2                2                  2                     2               2                  2             2              2             //Level 4, 8 nodes
+                //            |---------|     |----------|   |-----------|      |---------|   |--------|      |--------|  |--------|  |--------|  
+                //            0           0     0            0   0             0      0           0   0          0     0          0  0          0  0         0       //Level 5, 16 nodes
+                //
+                //Height of tree = n/2 = n = 8 > 6 > 4 > 2 > 0
+                //To calculate number of nodes in the level = 2 to power of [(5 levels - 1)] = 2^(5-1) = 2^4
+                //Level 4 = 2^4 = 16 nodes
+                
+            #0(2^n) time
+            #0(n) space           
+            
+            const lib = (n) => {                     
+                if (n <= 1) return;                
+                lib(n-2);              
+                lib(n-2);     
+            };     
+        
+        Fib Functions: (Combination of Dib and Lib)            
+            #Time
+                0(dib)  =< 0(fib)   =< 0(lib)
+                0(2^n) =< 0(2^n) =< 0(2^n)
+            #0(n) space 
+            
+            const fib = (n) => { 
+                if (n <= 2) return 1;    
+                return fib(n-1) + fib(n-2);         
+            };
+
+    Solution for Fib Function:
+        fib(50) = 2^50 = 1.12e+15  = 1,125,899,906,842,624 //Undesireable result in the calculator therefore will take a long time to process
+
+        Breaking down the Fibonacci Tree:
+        //                                                                      7
+        //                                        |-----------------------------------------------------------------|
+        //                                        6                                                                 5
+        //                        |----------------------------------|                                 |--------------------------|
+        //                        5                                  4                                 4                          3
+        //                |-----------------|               |-----------------|               |-------------------|         |--------------|
+        //                4                 3               3                 2               3                   2         2              1
+        //         |------------|     |-----------|   |-----------|                   |----------------|   
+        //         3            2     2           1   2           1                   2                1
+        //    |----------|
+        //    2          1        
+        //
+        //Notice that there are 5 subtrees - fib(3), recursive throughout the tree
+        //Also notice that there are 3 subtrees - fib(4), also recursive throughout the tree
+        //Also notice that there are 2 subtrees - fib(5), also recursive throughout the tree
+        //Therefore, the code must have the ability to calculate the subtrees and store the value to save time
+        //Using the stored values to solve the recurring subtrees in order to save time is called Dynamic Programming
+
+
         
         
         
