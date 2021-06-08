@@ -40,19 +40,19 @@ Tabulation
         To generate the next number of the sequence, we sum the previous 2.
 
     Example:
-        n:      : 1, 2, 3, 4, 5, 6,  7,  8,    9, ...
+        n:    : 1, 2, 3, 4, 5, 6, 7,  8,   9, ...
         fib(n): 1, 1, 2, 3, 5, 8, 13, 21, 34, ...  //Note: 5+8=13
         The 7th Fibonacci is 13
 
     Code:
-        const fib = (n) => {                     //take nth number of fib sequence
-            if (n <= 2) return 1;                //if number is less or equals to 2, then return as 1
+        const fib = (n) => {                 //take nth number of fib sequence
+            if (n <= 2) return 1;            //if number is less or equals to 2, then return as 1
             return fib(n-1) + fib(n-2);      //sum of previous 2 sequence          
         };
         
-        console.log(fib(6));                    //Answer: 8
-        console.log(fib(7));                    //Answer: 13
-        console.log(fib(8));                    //Answer: 21
+        console.log(fib(6));                   //Answer: 8
+        console.log(fib(7));                   //Answer: 13
+        console.log(fib(8));                   //Answer: 21
         console.log(fib(50));                  //Answer: Takes too long to compute
     
     Problem Explanation: Example calling fib(7)
