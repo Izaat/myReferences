@@ -94,7 +94,7 @@ Tabulation
         
         Final fib(7)=13
         
-    Underlying Functions: (Foo, Bar, Dib, Lib)
+    Underlying Functions: (Foo, Bar, Dib, Lib, Fib)
         Foo Functions: 
             #Tree: 5 > 4 > 3 >2 > 1
             #0(n) time
