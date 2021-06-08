@@ -198,7 +198,25 @@ Tabulation
         //Therefore, the code must have the ability to calculate the subtrees and store the value to save time
         //Using the stored values to solve the recurring subtrees in order to save time is called Dynamic Programming
 
-
+    Solution Code:
+        //memoization
+        //    js object, keys will be arg to fn, value will be the return value
+        //    > obj = {name: 'Bob', faveColor: 'grey'}
+        //    > "name" in obj                             //Returns 'True
+        
+    
+        const fib = (n, memo = {}) => {                              //assign a memory "memo" to be an empty object, to store a key "n"
+            if (n in memo) return memo [n];                          //check for existence of key inside of memo, if yes, return memo value. 
+            if (n <= 2) return 1;                
+            //memo [n] = fib(n-1) + fib(n-2);                        //store entire value in key     
+            memo [n] = fib(n-1, memo) + fib(n-2, memo);              //store subtree value in memo
+            return memo[n];
+        };
+        
+        console.log(fib(6));                   //Answer: 8
+        console.log(fib(7));                   //Answer: 13
+        console.log(fib(8));                   //Answer: 21
+        console.log(fib(50));                  //Answer: 12586269025
         
         
         
