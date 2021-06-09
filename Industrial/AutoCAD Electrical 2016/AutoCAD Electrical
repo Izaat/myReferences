@@ -3,7 +3,7 @@ Autocad Electrical 2016
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENT
 01. Create 3 phase Motor Start-Stop schematics with 2 phase transformer
-
+02. Other Features
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -135,5 +135,42 @@ CONTENT
             Double click on the Project description block
             Edit description and Press OK
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Other Features
+
+    Removing Project    
+        Left Hand Panel > Project Panel > Right Click on the Project folder > Select Close
+    
+    Open Project
+        Left Hand Panel > Project Panel > Click on "Open Project" icon
+        Find  the project file *.wdp (Electrical Project File)
+
+    Copy Project
+        Select Project from Project Panel (Left hand side panel) 
+        Main Menu > Project > Copy
+        Click on Cancel
+        Close open drawing
+        Start a new drawing
+        Highlight the project to be copied
+        Main Menu > Project > Copy
+        Click on "Copy active project"
+        Create a new Project folder
+        Enter the new folder
+        Name the new *.wdp file
+        Click save
+        Select Drawing to Process window will appear
+        Highlight the drawing and click on "Process" to add into the new project (Reset to cancel selections, Do ALL to copy all drawings)
+        Check path to the new folder and click OK
+        New Project Folder will appear in the Project Manager section (Left Hand Panel)
+
+    Activate a Project
+        In Project Manager Panel, the project folder which is on top is the Active one
+        To activate other project, right click on folder and select "Activate"
+
+    Open Project Manager Panel
+        Main Menu > Project > Manager
+        
+    Catalog Browser
+        
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
