@@ -323,6 +323,49 @@ Space Complexity
         console.log(gridTraveler(18, 18));  //Too Slow
         
         
+    Problem Explanation:
+        gridTraveler(2, 3)
+        //                                             (2,3)
+        //                      |-----------------------------------------------------|
+        //                  Down(1, 3)                                           Right(2, 2)
+        //          |-------------------------|                          |-------------------------|
+        //        NIL(0, 3)              Right(1, 2)                Down(1, 2)               Right(2, 1)
+        //                            |--------------|         |--------------|           |-------------| 
+        //                         NIL(0,2)     Right(1,1)    NIL(0,2)    Right(1,1)    Down(1,1)   NIL(0,0)
+        //    
+
+        The height of the tree is (n +m), [step 0, step 1, step 2, ..., step 4]
+        #O(2^ (n+m)) time
+        #O(n+m) space
+
+    Optimizing the tree:
+        Pattern with (1,2)
+        Also note that if grid (1,2) is flipped to (2,1), the result will be the same
+        Therefore:
+            gridTraveler(a,b) = gridTraveler(b,a)
+                If (1,2) = 1+0 = 1, 
+                Then (2,1) = 0+1 = 1
+
+    SOLUTION CODE:
+        const gridTraveler = (m, n, memo={}) => {
+            const key = m + ',' + n;                                                 //Separating comas from values by defining coma as another "key", to make program understand what comas stand for
+            if (key in memo) return memo[key];                                       //Check for values in key
+            if (m === 1 && n === 1) return 1;                                        //When grid is at (1, 1), then return as 1
+            if (m === 0 || n === 0) return 0;                                        //When grid is at (0, 1) OR (1, 0), then return 0
+            //return gridTraveler(m - 1, n) + gridTraveler(m, n - 1);                //Move down and move right
+            memo[key =] gridTraveler(m - 1, n, memo) + gridTraveler(m, n - 1, memo);
+            return memo[key];
+        };
+        
+        console.log(gridTraveler(1, 1));  //1
+        console.log(gridTraveler(2, 3));  //3
+        console.log(gridTraveler(3, 2));  //3
+        console.log(gridTraveler(3, 3));  //6
+        console.log(gridTraveler(18, 18));  //2333606220
+       
+        
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+03. Memoization Recipe        
 
 
 
