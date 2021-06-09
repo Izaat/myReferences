@@ -97,8 +97,8 @@ Tabulation
     Underlying Functions: (Foo, Bar, Dib, Lib, Fib)
         Foo Functions: 
             #Tree: 5 > 4 > 3 >2 > 1
-            #0(n) time
-            #0(n) space            
+            #O(n) time
+            #O(n) space            
             
             const foo = (n) => {                     
                 if (n <= 1) return;                
@@ -107,8 +107,8 @@ Tabulation
         
         Bar Functions:
             #Tree: 6 > 4 > 2 > 0
-            #0(n/2) time = 0(n) time
-            #0(n/2) space = 0(n) space          
+            #O(n/2) time = O(n) time
+            #O(n/2) space = O(n) space          
         
             const bar = (n) => {                     
                 if (n <= 1) return;                
@@ -131,8 +131,8 @@ Tabulation
                 //To calculate number of nodes in the level = 2 to power of (5 levels - 1) = 2^(5-1) = 2^4
                 //Level 4 = 2^4 = 16 nodes
                 
-            #0(2^n) time
-            #0(n) space       
+            #O(2^n) time
+            #O(n) space       
         
             const dib = (n) => {                     
                 if (n <= 1) return;                
@@ -156,8 +156,8 @@ Tabulation
                 //To calculate number of nodes in the level = 2 to power of [(5 levels - 1)] = 2^(5-1) = 2^4
                 //Level 4 = 2^4 = 16 nodes
                 
-            #0(2^n) time
-            #0(n) space           
+            #O(2^n) time
+            #O(n) space           
             
             const lib = (n) => {                     
                 if (n <= 1) return;                
@@ -167,9 +167,9 @@ Tabulation
         
         Fib Functions: (Combination of Dib and Lib)            
             #Time
-                0(dib)  =< 0(fib)   =< 0(lib)
-                0(2^n) =< 0(2^n) =< 0(2^n)
-            #0(n) space 
+                O(dib) =< O(fib) =< O(lib)
+                O(2^n) =< O(2^n) =< O(2^n)
+            #O(n) space 
             
             const fib = (n) => { 
                 if (n <= 2) return 1;    
