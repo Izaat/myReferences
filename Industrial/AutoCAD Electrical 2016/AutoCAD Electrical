@@ -171,6 +171,87 @@ CONTENT
         Main Menu > Project > Manager
         
     Catalog Browser
+        Main Menu > Schematic > Icon Menu > Catalog Browser
+        To add PButton:
+            Category drop down menu: Push Button
+            Clear search text box and click on search icon
+            All components in the list are arranged according to brandnames, assembly code, etc
+            Click on the component
+            Choose the symbol (Horz. OR Vert)
+            Place on the drawing
+            Press OK
+        
+    Delete Component
+        Main Menu > Schematics > Edit Component > Delete Component (1st row, 1st col)
+        Select Component 
+        Press Enter (Wire will automatically replace the deleted component)
+        Surf to Children: Search for related component i.e relay with multiple switch
+        Select "No" is there's no child component
+
+    Multiple Insert Component (Icon Menu)
+        Main Menu > Schematic > Insert Component Section > Multiple Insert (1st row, 1st col)
+        Select component
+        Draw a line across the wires and press enter
+        A window will pop up
+        Select "keep this on" to apply the component, select "no skip to next" to skip to next wire
+        "Show edit dialog after each" - disable to stop popup after inserting
+        Repeat process until all components added across the wires
+    
+    Multiple Insert Component (Pick Master)
+        Main Menu > Schematic > Insert Component Section > Multiple Insert (1st row, 1st col)
+        Copy component from existing component in the drawing
+        Draw line across multiple wires to insert the same component and press enter
+        Press OK
+        NOTE: The buttons will show white texts instead of colored texts. Right click and edit component. Disable "fixed".
+        
+    Trim Wire/Delete Wire
+        Main Menu > Schematic > Edit Wire Section > Trim Wire
+        Select the wire to delete
+
+    Link Component with dashed line
+        Main Menu > Schematic > Insert Component Section > Link Component with dashed line (2nd row, 3rd col)
+        Click on the component to link from
+        Click on the component to link to
+        Example 3phase circuit breaker:
+            Click on L1 (From)
+            Click on L2 and L3 (To)
+            The name CB2 and CB3 will be hidden automatically
+
+    Move Component from one wire to another wire
+        Main Menu > Schematic > Edit Component > Move Component (1st row, 2nd col)
+        Click on the component
+        Click on target wire
+
+    Change component NO to NC and vice versa
+        Main Menu > Schematic > Edit Component > Toggle NO/NC (1st row, 3rd col)
+        Click on component
+
+    Copy component
+        Main Menu > Schematic > Edit Component > Copy component (2nd row, 1st col)
+        Click on component to be copied
+        Click on the location of the wire
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
