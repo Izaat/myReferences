@@ -1,0 +1,414 @@
+Wordpress Theme Development
+Responsive design
+Understrap Wordpress Theme Builder
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENT
+01. Setup
+02. Database Setup - PhpMyAdmin
+03. Wordpress Theme Setup
+04. Install Gulp
+05. Customize Wordpress Menu Bar
+06. Header (Layout, Navigation and CSS Styling)
+07. Website Custom Fonts Imported Google & Menubar Layout and Styling
+08. Top Section Logo Links
+09. Header Responsive Design
+
+Header Mobile Menu Button and Nav
+Header Logo and Nav for mobile
+Home Page Hero Banner
+Home Call to Action Section
+Home Welcome to Section
+Home News Section
+Home About Us Section
+Home Testimonials Section
+Home Newsletter Signup Section
+Home Social Media Section
+Home Footer and Contact Form Section
+Home Animation using Wow Animation.css
+WordPress Home Page Review
+Conclusion
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Setup
+    https://github.com/understrap/understrap
+    Download all the files from Understrap and Wordpress
+    Create a website folder in any drive (name this folder as "root")
+    Create a "www" folder in "root" folder
+    Place all files downloaded from Wordpress into "www" folder
+    .. > www > wp-content > themes
+        Create a new folder in themes folder and name this "mytheme"
+        Place ALL files from Understrap into "mytheme" folder
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Database Setup - PhpMyAdmin
+    Start localhost/phpmyadmin
+    In Database tab, crate database and name it "yourwebsite"
+    Copy host folder from another website and paste into "root" folder
+    Open the host folder and edit "host" file using notepad
+        Add: 127.0.0.1 yourwebsite.localhost 
+
+    Enter web browser: yourwebsite.localhost/wp-admin/setup-config.php
+        Click on Let's Go button
+        Database Name: yourwebsite
+        Database Host: localhost
+        Table Prefix: wp_
+        Click submit and run installation
+        Continue and install wordpress
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Wordpress Theme Setup
+
+    Setting up UnderStrap Theme
+        Renaming: Open root >> www >> wp-content >> themes >> mytheme
+            Do not select any file. Right click and open folder with VSCode
+            Edit style.css
+                Theme Name: Yourwebsite
+        Replace picture: Open root >> www >> wp-content >> themes >> mytheme        
+            Highlight "screenshot.jpg"
+            Open and edit with Adobe
+            Save and replace image
+        Open Web Browser and enter yourwebsite.localhost/wp-admin/themes.php
+            Open Side Menu >> Appearance >> Themes        
+            Select Yourwebsite theme and click on "Activate"
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. Install and run Gulp
+    Open VSCode and enter Terminal
+    Type in "npm install" and enter //npm comes along with node.js as a package
+    Type in "gulp watch" to run gulp
+    
+    #Test by changing the primary color
+    Side Menu >> mytheme >> sass >> theme >> _theme_variables.scss
+        $primary: #5533ff    //this will be the primary color in hex
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. Customize Wordpress Menu Bar
+
+    Create "img" folder
+        Store all images and logos into this folder
+
+    Adding Menus
+        Wordpress >> Side Menu >> Appearance >> Menus
+        Add the menu required in Menu Structure
+            Menu Settings >> Display: Primary Menu
+
+        Open Side Menu >> mytheme >>  header.php >> wrapper-navbar >> main-nav >>             
+            class="navbar navbar-expand-lg" aria-lebelledby="main-nav-label"
+                //bg-primary sets background color to primary                 -- Remove
+                //navbar-dark sets navigation to dark                         -- Remove
+                //navbar-expand-md is responsive collapsing to mid size       -- Remove
+                //navbar-expand-lg breaks at earlier point
+            container > wp_nav_menu (); > array ()
+                'menu_class' => 'navbar-nav', //ml-auto enables automatic resizing
+    
+        Add new file
+            mytheme >> page-templates >> template-home.php
+            Copy all codes from fullwidthpage.php to template-home.php
+                Remove "<div class="wrapper">"
+                Remove "if(is_front-page()){}"
+                Remove "$container = get_theme_mod"
+                Template: Home
+
+        Wordpress >> yourwebsite.localhost
+            Create a new page
+                Click on +New >> Page
+            Right hand menu
+                Document >> Page attributes
+                Template Name: Template: Home
+                Click on Publish
+                Return to Wordpress admin page
+            Admin Page
+                Dashboard >> Settings >> Reading
+                    Your homepage displays: Static Page
+                    Homepage: Home
+                    Save Changes
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+06. Header (Layout, Navigation and CSS Styling)
+    //mytheme >> page-templates >> template-home.php
+        <?php
+        /**
+        @package understap
+        */
+        defined('ABSPATH') || exit;
+        get_header();
+        ?>
+        
+        <div class="home=banner">
+        </div>
+        
+        <?php
+        get_footer();
+
+    //mytheme >> sass >> theme >> _theme.scss
+        
+        $primary: #223A47;                                          //Taken from ../_theme_variables.scss
+        $secondary: F27257;                                         //For the secondary color on main menu whenever a Home menu is of different color
+        #wrapper-navbar{                                            //To add spacing before the logo
+            .top-header-holder {
+                height: 260px;
+                background:#f1f1f1;                
+            }
+            //#main-menu {                                          //Name taken from 'menu_id' in header.php, to apply across whole section, from browser inspect mode, you'll see <nav id="main-nav">, 
+            #main-nav {                                             //replace #main-menu to #main-nav
+                border-top:1px solid rgba(#5DA0AA, 0.5);            //where 0.5 is opacity
+                border-bottom:1px solid rgba(#5DA0AA, 0.5);
+                ul {                                                //Menu fonts and stylings
+                    li {
+                        a {
+                            font-weight:600px;
+                            font-size:22px;
+                            text-transform: uppercase;
+                        }
+                        
+                        &.current_page_item {                        //Home menu with different color, using the variable "$secondary" as secondary color
+                            a {
+                                color: $secondary;
+                            }
+                        }                        
+                    }
+                }
+            }
+        }
+        
+        .home-banner {
+            height:1080px;
+            background: #ccc;                                       //grey color
+            background-image:url(../img/home-banner.jpg);           //resides in ../wp-content/themes/mytheme/img
+            background-size:cover;
+        }
+    
+    //mytheme >> sass >> theme >> _theme_variables.scss
+        $primary: #223A47;                                          //Color of Main Menu fonts
+    
+    //mytheme > page-templates > header.php        
+        div class="site" >> div id="wrapper-navbar" >>
+                <div class="top-header-holder"></div>               //Add spacing before the logo. Add line above class "skip-link sr-onlyfocusable"
+
+
+        div class="container" >> button class="navbar-toggler" >> 
+            <?php
+            wp_nav_menu(
+                array(
+                    'menu_id' => 'main-menu',                       //Name reference for #main-menu in _theme.scss
+                )
+            );
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07. Website Custom Fonts Imported Google and Menubar Layout and Styling
+    
+    Import fonts from fonts.google.com
+        Search and select the fonts
+        Click on "Select this style"
+        Right hand panel, open "embed" tab
+        Copy <link> and paste it into header.php, head section
+        Copy CSS code and paste into _theme.scss
+    
+    //mytheme >> page-templates >> header.php  
+        <head>
+            <link rel="profile" href="..."> //Existing link
+            *Paste copied link here*
+            <?php wp_head(); ?>
+
+    //mytheme >> sass >> theme >> _theme.scss
+        Create a body function above #wrapper-navbar and paste the CSS code from google
+        
+        body {
+            *Paste Google font CSS code here*
+            font-size: 18px;
+            line-height:1.25;
+        }
+
+    Add spaces between the menu titles
+    //mytheme >> sass >> theme >> _theme.scss
+        #wrapper-navbar {
+            margin-bottom: -360px;
+            #main-nav{ 
+                padding: 0px;
+                ul{
+                    flex:1;                                           //Space between texts
+                    justify-content: space-between; //Add space
+                    li{
+                        a{
+                            padding:  1.5em 0.5em;  //add this line, 1.5em for y axis
+                        }
+                    }
+                } 
+            }
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+08. Top Section Logo and Link (Above Menubar)
+    
+    ///////////////////////////////////////////////////
+    Open Browser inspector to check the wrapper - Points out to div.top-header-holder OR "<div class="top-header-holder">"
+    //mytheme >> page-templates >> header.php                         //The code below only adds in plain texts
+        <div id="wrapper-navbar">
+            <div class="top-header-holder">        
+                <div class="container">                               //To utilize the same space/vertical alignment as the menu bar            
+                    <div class="logo-holder">                         //Type in '.logo-holder'
+                        <div class="logo"></div>
+                    </div>
+                    <div class="reservation-holder">
+                        <div class="contact-holder">
+                            <div class="phone">12345</div>
+                            <div class="address">Texts texts</div>
+                        </div>
+                    </div>
+                    <div class="social-media-holder">
+                        <i class="fa fa-facebook"></i>
+                        <i class="fa fa-instagram"></i>
+                    </div>       
+                </div>   //container                
+            </div>      //top-header-holder
+            .
+            .
+            .
+        </div>
+        
+    //mytheme >> sass >> theme >> _theme.scss
+        #wrapper-navbar
+            .top-header-holder {
+                height: 260px;               //default
+                background: #f1f1f1;         //default
+                padding-top:50px;            //adds padding to top to the plain texts
+                padding-bottom:50px;         //adds padding to bottom to the plain texts
+                
+            }
+
+    
+    ///////////////////////////////////////////////////
+    Splitting header texts into 3 separate sections (side by side) - utilize row and col
+    Adding logo
+    Styling reservation contact and address
+    //mytheme >> page-templates >> header.php     
+        <div id="wrapper-navbar">
+            <div class="top-header-holder">        
+                <div class="container">       
+                    //<div class="row">                              //This put the entire texts into row which can be subdivided into columns
+                    <div class="row align-items-end">                //Aligns the entire row    
+                    
+                        <div class="col-4">                          //This adds in a new column and add the logo holder into it
+                            //<div class="logo-holder">   
+                                //<div class="logo"></div>
+                                //<img src="logo.svg" alt="">        //logo image is in ../mytheme/img/logo.svg but this need php syntax to pass through wordpress
+                                <img src="<?php echo get_template_directory_uri(); ?> /img/logo.svg" alt="My Theme Logo" width="275"> //width is optional for resizing, can be in percentage or pixels
+                            //</div>
+
+                            <a href="/" class="logo-holder">         //add link to logo holder, styled in css (display:block)
+                                <img src="<?php echo get_template_directory_uri(); ?> /img/logo.svg" alt="My Theme Logo" width="275">
+                            </a>
+                            
+                        </div> //col-4
+                        
+                        <div class="col-6">
+                            <div class="reservation-holder">
+                                <div class="contact-holder">
+                                    //<div class="phone"><i class="fa fa-phone"></i>12345</div>              //iclass adds in symbol
+                                    <a href="#" class="phone"><i class="fa fa-phone"></i>12345</a>           //Adds in hyperlink
+                                    //<div class="address"><i class="fa fa-map"></i>Texts texts</div>        //iclass adds in symbol
+                                    <a href="#" class="address"><i class="fa fa-map"></i>Texts texts</a>     //Adds in hyperlink
+                                </div>
+                                //<div class="reservation-btn">Make reservation</div>    //class name same with css
+                                <a href="#" class="reservation-btn">Make reservation</a> //"a" tags adds in links
+                            </div>
+                        </div> //col-6   
+                        
+                        <div class="col-">                                                           //adding column without size
+                            <div class="social-media-holder">                                        //"social-media-holder" styled in css
+                                //<i class="fa fa-facebook"></i>
+                                //<i class="fa fa-instagram"></i>
+                                <a href="#"><i class="fa fa-facebook"></i></a>    //adding links
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>      
+                        </div> //col-
+                        
+                    </div> //row
+                </div>   //container                
+            </div>      //top-header-holder
+            .
+            .
+            .
+        </div>
+    
+    //mytheme >> sass >> theme >> _theme.scss
+        #wrapper-navbar
+            .top-header-holder {
+                .
+                .
+                .
+                .container {
+                
+                    .logo-holder {
+                        display: block;
+                        .logo {}
+                    } //logo-holder
+                    
+                    .social-media-holder {
+                        font-size: 50px;  //resizing the symbol
+                        a {
+                            color: $secondary;        //change symbol color
+                            text-decoration: none;    //disable underline, strike-through, overline, etc
+                            &:hover {
+                                color: darken($secondary, 15%);   //15% darker when hover over
+                            }
+                        }
+                    }
+                    
+                    .contact-holder {
+                        font-size: 18px;
+                        a {                                  //??
+                            display: inline-block;
+                            margin-right: 1em;               //Adds margin
+                            margin-bottom: 1em;              //Adds margin
+                            color: $primary;
+                            .fa {                            //adds in color to symbol
+                                color: $secondary;
+                            }
+                        }    
+                    }
+                    
+                    .reservation-btn {                       //Adding fonts
+                        font-family: 'Fredericka The Great';
+                        font-size: 38px;
+                        border: 1px dotted $secondary;       //Adds the border around "Make reservation" text using $secondary color variable
+                        display: inline-block;               //constricts linebox to text
+                        padding: 0.25em 0.5em;               //adds padding around text
+                        border-radius: 0.25em;               //adds rounded corners to the outline
+                        transition: 0.25s ease all;          //ease animation when hover
+                        cursor: pointer;
+                        text-decoration: none;
+                        &:hover {
+                            background: $secondary;          //change color when hover
+                            color: white;
+                        }                    
+                    }
+                    
+                }  //container          
+            } //top-header-holder
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+09. Header Responsive Design
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
