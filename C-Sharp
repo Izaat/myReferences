@@ -1,855 +1,854 @@
 /////////////CONTENTS///////////////////////////////////////////
-//Templates
-//Variables
-//Data Types
-//Srtings
-//Numbers
-//Storing input texts into a variable
-//Calculate Numbers
-//Mad Libs
-//Storing Arrays
-//Methods aka Functions
-//If Statements
-//Comparison Statements
-//Convert and Calculate
-//Switch Statement
-//While Loops
-//Guessing Game
-//For loops 1
-//For loops 2
-//2D arrays
-//Exception Handling
-//Classes and objects
-//Object methods
-//Getters and Setters
-//Static attributes
-//Static methods and classes
-
-/////////////TEMPLATES///////////////////////////////////////////
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading .Tasks;
-
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            Console.WriteLine("Hello World"); //By default, console will auto shutdown without the code below
-            Console.ReadLine(); //This line is to stop console from auto shutdown
-        }
-    }
-}
-/////////////End of TEMPLATES////////////////////////////////////
+01. Templates
+02. Variables
+03. Data Types
+04. Srtings
+05. Numbers
+06. Storing input texts into a variable
+07. Calculate Numbers
+08. Mad Libs
+09. Storing Arrays
+10. Methods aka Functions
+11. If Statements
+12. Comparison Statements
+13. Convert and Calculate
+14. Switch Statement
+15. While Loops
+16. Guessing Game
+17. For loops 1
+18. For loops 2
+19. 2D arrays
+20. Exception Handling
+21. Classes and objects
+22. Constructors
+23. Object methods
+24. Getters and Setters
+25. Static attributes
+26. Static methods and classes
+27. Inheritence
 
 
-/////////////VARIABLES//////////////////////////////////////////
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            string characterName = "John";
-            int characterAge;
-            characterAge = 25;
-            
-            //the "+" sign is concatenate
-            Console.WriteLine("A man named" + characterName + "is " + characterAge + "years old" ); 
-                       
-            characterName = "Mike"; //to change variable value midway through code
-            Console.WriteLine("He has a brother named" + characterName); 
-            
-            Console.ReadLine(); //This line is to stop console from auto shutdown
-        }
-    }
-}
-/////////////End of VARIABLES///////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+01. TEMPLATES
 
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading .Tasks;
 
-/////////////DATA TYPES//////////////////////////////////////////
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            string phrase = "hello";
-            char grade = 'A';
-            int age = 30;
-            float, double, decimal
-            bool io = true;
-            //But you don't really need to store variable values in CSharp
-            //You can just use true, false and numbers directly
-            Console.WriteLine(30);
-            Console.WriteLine(false);
-            Console.ReadLine();
-        }
-    }
-}
-/////////////End of DATA TYPES///////////////////////////////////
-
-
-/////////////STRINGS/////////////////////////////////////////////
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            string phrase = "abcdefg dog"; //letter a is 0, b is 1
-            Console.WriteLine("He said \" Hello\" "); // Newline: \n , Quotes \"
-            Console.WriteLine(phrase.Length);//length counts how many characters in phrase variable
-            Console.WriteLine(phrase.ToUpper());//make phrase var upper case
-            Console.WriteLine(phrase.Lower()); //lowercase
-            Console.WriteLine(phrase.Contains("dog")); //true or false answer if character in  string
-            Console.WriteLine(phrase[2]);//indexing the sting where a is 0 and 2 is letter c
-            Console.WriteLine(phrase('c'));//c is at index 2. NOTE THE SINGLE QUOTES, -1 if char not in string
-            Console.WriteLine(phrase.IndexOf("dog")); //will output number 8 as dog starts in 8th index of string    
-            Console.WriteLine(phrase.Substring(8));//grabbing the word dog from string
-            Console.WriteLine(phrase.Substring(8, 2));//grabbing the do from dog from string
-            
-            string name =  Console.ReadLine();//Storing into a variable
-            Console.ReadLine(); //This line waits for user to enter line a text, can be to stop console from auto shutdown
-        }
-    }
-}
-/////////////End of STRINGS//////////////////////////////////////
-
-
-
-/////////////NUMBERS/////////////////////////////////////////////
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            Console.WriteLine(5+8); //will answer 13
-            Console.ReasLine();
-        }
-    }
-}
-/////////////End of NUMBERS//////////////////////////////////////////////
-
-
-
-/////////////STORING INPUT TEXT INTO A VARIABLES///////////////////////
- namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            Console.Write("Enter your name");
-            string name =  Console.ReadLine();//Storing into a variable
-            Console.WriteLine("Hello" + name); //This line outputs the name variable
-            Console.ReadLine();
-        }
-    }
-}
-/////////////End of STORING INPUT TEXT INTO A VARIABLES/////////////////////
-
-
-
-/////////////CALCULATE NUMBERS/////////////////////////////////////////////
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            int num = "45"; //note that the number is still in string
-            int number = Convert.ToInt32("45"); //convert number to integer, the string must be in numbers
-            
-            Console.WriteLine("Enter a number"); 
-            int num1 = Convert.ToInt32(Console.ReadLine());//For decimals, use double or float, double num1 = Convert.ToDouble();
-            Console.WriteLine("Enter another number"); 
-            int num2 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine(num1 + num2);
-            Console.ReadLine();
-        }
-    }
-}
-/////////////End of CALCULATE NUMBERS//////////////////////////////////////////////
-
-
-
-/////////////MAD LIBS/////////////////////////////////////////////
- namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            string color, pluralNoun, celebrity;
-            
-            Console.Write("Enter a color:");
-            color = Console.ReadLine();
-            Console.Write("Enter a pluralNoun:");
-            pluralNoun = Console.ReadLine();
-            Console.Write("Enter a celebrity:");
-            celebrity = Console.ReadLine();
-            
-            Console.WriteLine("Roses are " + color);
-            Console.WriteLine(pluralNoun + "are blue");
-            Console.WriteLine("I love " + celebrity);
-            
-            Console.ReadLine();
-        }
-    }
-}
-/////////////End of MAD LIBS/////////////////////////////////////////////
-
-
-
-/////////////STORING ARRAYS///////////////////////
- namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            int[] luckyNumbers = {4, 8, 12, 16, 32};//int[] is to signify C# you are using array, each element based on index where first number is 0
-            Console.WriteLine(luckyNumbers[0]); //calling index 0 to console
-            
-            string[] friends = new string[5]; //the number inside signify how many bullet points you want
-            friends[0] = "Jim";
-            friends[1] = "Tim";
-            friends[2] = "Johan";
-            friends[3] = "John";
-            
-            Console.ReadLine();
-        }
-    }
-}
-/////////////End of STORING  ARRAYS/////////////////////
-
-
-/////////////METHODS AKA FUNCTIONS//////////////////////////////
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            SayHi("Mike", 33);            //the string "Mike" and "33" will be stored in the "name" and "age" variable in SayHi function
-            Console.ReadLine();
-        }
-        
-        static void SayHi(string name, string age){
-            Console.Write("Hi" + name + " you are" + age + "years old");
-        }
-    }
-}
-
-/////////////End of METHODS AKA FUNCTIONS///////////////////////
-
-
-
-/////////////IF STATEMENTS//////////////////////////////
-
- namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            bool isMale = true;
-            bool isTall = true;
-            
-            //OR - ||, AND - &&, NOT - ~
-            if (isMale && isTall){
-                Console.WriteLine("You are a tall male");
-            }else if(isMale && !isTall){
-                Console.WriteLine("You are a shot male");
-            }else if(!isMale && isTall){
-                Console.WriteLine("You are a tall female");    
-            }else{
-                Console.WriteLine("You are neither male or nor tall");
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                Console.WriteLine("Hello World"); //By default, console will auto shutdown without the code below
+                Console.ReadLine(); //This line is to stop console from auto shutdown
             }
-            
-            Console.ReadLine();
         }
     }
-}
-/////////////End of IF STATEMENTS///////////////////////
 
 
+////////////////////////////////////////////////////////////////////////////////////////////
+02. VARIABLES
 
-/////////////COMPARISON STATEMENTS//////////////////////////////
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                string characterName = "John";
+                int characterAge;
+                characterAge = 25;
 
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            
-            Console.WriteLine(GetMax(2,10)); //insert 2 to num1 and 10  to num2
-            Console.ReadLine();
-        }
-        
-        static int GetMax(int num1, int num2, int num3){ //Find which variable has higher number
-            int result;
-            if(num1 >= num2 && num1 >= num3){
-                result = num1;
-            }else if (num2 >= num1 && num2 >= num3 ){
-                result=num2;
-            }else{
-                result = num3;
+                //the "+" sign is concatenate
+                Console.WriteLine("A man named" + characterName + "is " + characterAge + "years old" ); 
+
+                characterName = "Mike"; //to change variable value midway through code
+                Console.WriteLine("He has a brother named" + characterName); 
+
+                Console.ReadLine(); //This line is to stop console from auto shutdown
             }
-            
-            return result;
         }
     }
-}
-/////////////End of COMPARISON STATEMENTS///////////////////////
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+03. DATA TYPES
+
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                string phrase = "hello";
+                char grade = 'A';
+                int age = 30;
+                float, double, decimal
+                bool io = true;
+                //But you don't really need to store variable values in CSharp
+                //You can just use true, false and numbers directly
+                Console.WriteLine(30);
+                Console.WriteLine(false);
+                Console.ReadLine();
+            }
+        }
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+04. STRINGS
+
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                string phrase = "abcdefg dog"; //letter a is 0, b is 1
+                Console.WriteLine("He said \" Hello\" "); // Newline: \n , Quotes \"
+                Console.WriteLine(phrase.Length);//length counts how many characters in phrase variable
+                Console.WriteLine(phrase.ToUpper());//make phrase var upper case
+                Console.WriteLine(phrase.Lower()); //lowercase
+                Console.WriteLine(phrase.Contains("dog")); //true or false answer if character in  string
+                Console.WriteLine(phrase[2]);//indexing the sting where a is 0 and 2 is letter c
+                Console.WriteLine(phrase('c'));//c is at index 2. NOTE THE SINGLE QUOTES, -1 if char not in string
+                Console.WriteLine(phrase.IndexOf("dog")); //will output number 8 as dog starts in 8th index of string    
+                Console.WriteLine(phrase.Substring(8));//grabbing the word dog from string
+                Console.WriteLine(phrase.Substring(8, 2));//grabbing the do from dog from string
+
+                string name =  Console.ReadLine();//Storing into a variable
+                Console.ReadLine(); //This line waits for user to enter line a text, can be to stop console from auto shutdown
+            }
+        }
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+05. NUMBERS
+
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                Console.WriteLine(5+8); //will answer 13
+                Console.ReasLine();
+            }
+        }
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+06. STORING INPUT TEXT INTO A VARIABLES
+
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                Console.Write("Enter your name");
+                string name =  Console.ReadLine();//Storing into a variable
+                Console.WriteLine("Hello" + name); //This line outputs the name variable
+                Console.ReadLine();
+            }
+        }
+    }
 
 
 
-/////////////CONVERT AND CALCULATE STATEMENTS//////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+07. CALCULATE NUMBERS
 
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            
-            Console.Write("Enter  number: "); 
-            double num1 = Convert.ToDouble(Console.ReadLine());
-            
-            Console.WriteLine("Enter Operator: ");
-            string op  = Console.ReadLine();
-            
-            Console.Write("Enter  number: "); 
-            double num2 = Convert.ToDouble(Console.ReadLine());
-            
-            if (op == "+"){
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                int num = "45"; //note that the number is still in string
+                int number = Convert.ToInt32("45"); //convert number to integer, the string must be in numbers
+
+                Console.WriteLine("Enter a number"); 
+                int num1 = Convert.ToInt32(Console.ReadLine());//For decimals, use double or float, double num1 = Convert.ToDouble();
+                Console.WriteLine("Enter another number"); 
+                int num2 = Convert.ToInt32(Console.ReadLine());
+
                 Console.WriteLine(num1 + num2);
-            }else if (op == "-"){
-                Console.WriteLine(num1 - num2);                
-            }else if (op == "*"){
-                Console.WriteLine(num1 * num2);                
-            }else if (op == "/"){
-                Console.WriteLine(num1 / num2);                
-            }else{
-                Console.WriteLine("Invalid Operator");
-            }            
-            Console.ReadLine();
+                Console.ReadLine();
+            }
         }
     }
-}
-/////////////End of CONVERT AND CALCULATE STATEMENTS///////////////////////
 
 
-/////////////SWITCH STATEMENTS//////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+08. MAD LIBS
 
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            
-            Console.WriteLine(GetDay(0));
-            Console.ReadLine();
-        }
-        
-        static string GetDay(int dayNum){
-            string dayName;
-            
-            switch(dayNum){ //needs one value in bracket
-                case 0:
-                    dayName = "Sunday";
-                    break;
-                 case 1:
-                    dayName = "Monday";
-                    break;
-                 case 2:
-                    dayName = "Tueday";
-                    break;
-                 case 3:
-                    dayName = "Wednesday";
-                    break;
-                 case 4:
-                    dayName = "Thursday";
-                    break;
-                 case 5:
-                    dayName = "Friday";
-                    break;
-                 case 6:
-                    dayName = "Saturday";
-                    break;
-                 default:
-                    dayName = "Invalid number";
-                    break;
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                string color, pluralNoun, celebrity;
+
+                Console.Write("Enter a color:");
+                color = Console.ReadLine();
+                Console.Write("Enter a pluralNoun:");
+                pluralNoun = Console.ReadLine();
+                Console.Write("Enter a celebrity:");
+                celebrity = Console.ReadLine();
+
+                Console.WriteLine("Roses are " + color);
+                Console.WriteLine(pluralNoun + "are blue");
+                Console.WriteLine("I love " + celebrity);
+
+                Console.ReadLine();
             }
-            
-            return dayName;
         }
     }
-}
-/////////////End of SWITCH STATEMENTS///////////////////////
 
 
-/////////////WHILE LOOPS//////////////////////////////
 
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-             
-            int index = 1;
-            while(index <= 5){
-                Console.WriteLine(index);
-                index++
+////////////////////////////////////////////////////////////////////////////////////////////
+09. STORING ARRAYS
+
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                int[] luckyNumbers = {4, 8, 12, 16, 32};//int[] is to signify C# you are using array, each element based on index where first number is 0
+                Console.WriteLine(luckyNumbers[0]); //calling index 0 to console
+
+                string[] friends = new string[5]; //the number inside signify how many bullet points you want
+                friends[0] = "Jim";
+                friends[1] = "Tim";
+                friends[2] = "Johan";
+                friends[3] = "John";
+
+                Console.ReadLine();
             }
-            
-            Console.ReadLine();
         }
-     }
-}
-/////////////End of WHILE LOOPS///////////////////////
+    }
 
 
-/////////////GUESSING GAME//////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+10. METHODS AKA FUNCTIONS
 
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            string secretWord = "giraffe";
-            string guess ="";
-            int guessCount = 0;
-            int guessLimit = 3;
-            bool outOfGuesses = false;
-            
-            while(guess != secretWord && !outOfGuesses){
-                //Console.Write("Enter guess: ");
-                //guess = Console.ReadLine();
-                //guessCount++;
-                
-                if(guessCount < guessLimit){
-                    Console.Write("Enter guess: ");
-                    guess = Console.ReadLine();
-                    guessCount++;
-                }else if (guessCount == guessLimit){
-                    outOfGuesses = true; //This is also known as a flag
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                SayHi("Mike", 33);            //the string "Mike" and "33" will be stored in the "name" and "age" variable in SayHi function
+                Console.ReadLine();
+            }
+
+            static void SayHi(string name, string age){
+                Console.Write("Hi" + name + " you are" + age + "years old");
+            }
+        }
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+11. IF STATEMENTS
+
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                bool isMale = true;
+                bool isTall = true;
+
+                //OR - ||, AND - &&, NOT - ~
+                if (isMale && isTall){
+                    Console.WriteLine("You are a tall male");
+                }else if(isMale && !isTall){
+                    Console.WriteLine("You are a shot male");
+                }else if(!isMale && isTall){
+                    Console.WriteLine("You are a tall female");    
+                }else{
+                    Console.WriteLine("You are neither male or nor tall");
                 }
+
+                Console.ReadLine();
             }
-            
-            if(outOfGuesses){
-                Console.Write("You lose!");
-            }else{
-                Console.Write("You Win!");
+        }
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+12. COMPARISON STATEMENTS
+
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+
+                Console.WriteLine(GetMax(2,10)); //insert 2 to num1 and 10  to num2
+                Console.ReadLine();
             }
-            Console.ReadLine();
+
+            static int GetMax(int num1, int num2, int num3){ //Find which variable has higher number
+                int result;
+                if(num1 >= num2 && num1 >= num3){
+                    result = num1;
+                }else if (num2 >= num1 && num2 >= num3 ){
+                    result=num2;
+                }else{
+                    result = num3;
+                }
+
+                return result;
+            }
         }
-     }
-}
-/////////////End of GUESSING GAME///////////////////////
+    }
 
+////////////////////////////////////////////////////////////////////////////////////////////
+13. CONVERT AND CALCULATE STATEMENTS
 
-/////////////FOR LOOPS 1//////////////////////////////
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
 
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-             
-            //int i =1;
-            //while(i <= 5){
-                //Console.WriteLine(i);
-                //i++;
-            //}
-            for(int i = 1; i <= 5; i++ ){
-                Console.WriteLine(i);
-            }           
-            Console.ReadLine();
+                Console.Write("Enter  number: "); 
+                double num1 = Convert.ToDouble(Console.ReadLine());
+
+                Console.WriteLine("Enter Operator: ");
+                string op  = Console.ReadLine();
+
+                Console.Write("Enter  number: "); 
+                double num2 = Convert.ToDouble(Console.ReadLine());
+
+                if (op == "+"){
+                    Console.WriteLine(num1 + num2);
+                }else if (op == "-"){
+                    Console.WriteLine(num1 - num2);                
+                }else if (op == "*"){
+                    Console.WriteLine(num1 * num2);                
+                }else if (op == "/"){
+                    Console.WriteLine(num1 / num2);                
+                }else{
+                    Console.WriteLine("Invalid Operator");
+                }            
+                Console.ReadLine();
+            }
         }
-     }
-}
-/////////////End of FOR LOOPS 1///////////////////////
+    }
 
 
+////////////////////////////////////////////////////////////////////////////////////////////
+14. SWITCH STATEMENTS
 
-/////////////FOR LOOPS 2//////////////////////////////
-https://www.youtube.com/watch?v=GhQdlIFylQ
-2hr 48min
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
 
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-             
-             int[] luckyNumbers = {4, 8, 15, 16, 23, 42};
-            //i=0 refers to index 0 hence number 4
-            //i<luckyNumbers.Length refers to any numbers lower than 6th index
-            for(int i = 0; i < luckyNumbers.Length; i++ ){
-                Console.WriteLine(luckyNumbers[i]); //will print out all numbers in the array
-            }           
-            Console.ReadLine();
+                Console.WriteLine(GetDay(0));
+                Console.ReadLine();
+            }
+
+            static string GetDay(int dayNum){
+                string dayName;
+
+                switch(dayNum){ //needs one value in bracket
+                    case 0:
+                        dayName = "Sunday";
+                        break;
+                     case 1:
+                        dayName = "Monday";
+                        break;
+                     case 2:
+                        dayName = "Tueday";
+                        break;
+                     case 3:
+                        dayName = "Wednesday";
+                        break;
+                     case 4:
+                        dayName = "Thursday";
+                        break;
+                     case 5:
+                        dayName = "Friday";
+                        break;
+                     case 6:
+                        dayName = "Saturday";
+                        break;
+                     default:
+                        dayName = "Invalid number";
+                        break;
+                }
+
+                return dayName;
+            }
         }
-     }
-}
-/////////////End of FOR LOOPS 2///////////////////////
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////
+15. WHILE LOOPS
+
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+
+                int index = 1;
+                while(index <= 5){
+                    Console.WriteLine(index);
+                    index++
+                }
+
+                Console.ReadLine();
+            }
+         }
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////
+16. GUESSING GAME
+
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                string secretWord = "giraffe";
+                string guess ="";
+                int guessCount = 0;
+                int guessLimit = 3;
+                bool outOfGuesses = false;
+
+                while(guess != secretWord && !outOfGuesses){
+                    //Console.Write("Enter guess: ");
+                    //guess = Console.ReadLine();
+                    //guessCount++;
+
+                    if(guessCount < guessLimit){
+                        Console.Write("Enter guess: ");
+                        guess = Console.ReadLine();
+                        guessCount++;
+                    }else if (guessCount == guessLimit){
+                        outOfGuesses = true; //This is also known as a flag
+                    }
+                }
+
+                if(outOfGuesses){
+                    Console.Write("You lose!");
+                }else{
+                    Console.Write("You Win!");
+                }
+                Console.ReadLine();
+            }
+         }
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+17. FOR LOOPS 1
+
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+
+                //int i =1;
+                //while(i <= 5){
+                    //Console.WriteLine(i);
+                    //i++;
+                //}
+                for(int i = 1; i <= 5; i++ ){
+                    Console.WriteLine(i);
+                }           
+                Console.ReadLine();
+            }
+         }
+    }
 
 
 
-/////////////2D ARRAYS//////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+18. FOR LOOPS 2
+    https://www.youtube.com/watch?v=GhQdlIFylQ
+    2hr 48min
 
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-             
-             //int[,] tellingC# you want a 2D array and put more commas for more
-             int[,] numberGrid = {
-                 {1, 2},
-                 {3, 4},
-                 {5, 6}
-            };
-            //to tell C# how many rows and columns you want to have
-            int[,] myArray = new int[2,3]
-            
-            Console.WriteLine(numberGrid[0, 1]); //Outputs number 2 where horz. column 0 and vert. row 1
-            Console.ReadLine();
-        }
-     }
-}
-/////////////End of 2D ARRAYS///////////////////////
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+
+                 int[] luckyNumbers = {4, 8, 15, 16, 23, 42};
+                //i=0 refers to index 0 hence number 4
+                //i<luckyNumbers.Length refers to any numbers lower than 6th index
+                for(int i = 0; i < luckyNumbers.Length; i++ ){
+                    Console.WriteLine(luckyNumbers[i]); //will print out all numbers in the array
+                }           
+                Console.ReadLine();
+            }
+         }
+    }
 
 
+////////////////////////////////////////////////////////////////////////////////////////////
+19. 2D ARRAYS
 
-/////////////EXCEPTION HANDLING//////////////////////////////
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
 
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-             
-            //Try dividing by 0 or an alphabet referring to code in ORIGINAL section of this paragraph
-            //exception error will pop up and crashing the console
-            //Try Catch block is designed to handle the exception error without crashing, now the program can instead handle the error
-            try{
-                //The code which are outside is now inside try block
+                 //int[,] tellingC# you want a 2D array and put more commas for more
+                 int[,] numberGrid = {
+                     {1, 2},
+                     {3, 4},
+                     {5, 6}
+                };
+                //to tell C# how many rows and columns you want to have
+                int[,] myArray = new int[2,3]
+
+                Console.WriteLine(numberGrid[0, 1]); //Outputs number 2 where horz. column 0 and vert. row 1
+                Console.ReadLine();
+            }
+         }
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////
+20. EXCEPTION HANDLING
+
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+
+                //Try dividing by 0 or an alphabet referring to code in ORIGINAL section of this paragraph
+                //exception error will pop up and crashing the console
+                //Try Catch block is designed to handle the exception error without crashing, now the program can instead handle the error
+                try{
+                    //The code which are outside is now inside try block
+                    Console.WriteLine("Enter a number"); 
+                    int num1 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter another number"); 
+                    int num2 = Convert.ToInt32(Console.ReadLine());        
+                    Console.WriteLine(num1 / num2); 
+                }
+                catch(Exception e){ //you can separate exception into multiple catch blocks in the bracket e.g DivideByZeroException or FormatException
+                //catch{    
+                    //Console.WriteLine("Error");
+                    Console.WriteLine(e.Message); //for more detailed handling
+                }
+                //The finally block will execute no matter what and is optional 
+                finally{     }
+
+                Console.ReadLine();
+
+                /* ORIGINAL
                 Console.WriteLine("Enter a number"); 
                 int num1 = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Enter another number"); 
-                int num2 = Convert.ToInt32(Console.ReadLine());        
+                int num2 = Convert.ToInt32(Console.ReadLine());            
                 Console.WriteLine(num1 / num2); 
+                Console.ReadLine();
+                */
             }
-            catch(Exception e){ //you can separate exception into multiple catch blocks in the bracket e.g DivideByZeroException or FormatException
-            //catch{    
-                //Console.WriteLine("Error");
-                Console.WriteLine(e.Message); //for more detailed handling
-            }
-            //The finally block will execute no matter what and is optional 
-            finally{     }
-            
-            Console.ReadLine();
-            
-            /* ORIGINAL
-            Console.WriteLine("Enter a number"); 
-            int num1 = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Enter another number"); 
-            int num2 = Convert.ToInt32(Console.ReadLine());            
-            Console.WriteLine(num1 / num2); 
-            Console.ReadLine();
-            */
-        }
-     }
-}
-/////////////End of EXCEPTION HANDLING///////////////////////
-
-
-
-/////////////CLASSES AND OBJECTS//////////////////////////////
-//CREATING A CLASS
-//In VStusdio open SolutionExplorer>right click ProjectTitle>Add>NewItem>Class>Add
-//C# CLASS FILE /Book.cs/
-namespace yourCurrentProjectNameWithoutExtension{
-    class BookClass{
-        public string title;
-        public string author;
-        public int pages;
+         }
     }
-}
-//C# Main File /Program.cs/
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-             
-            BookClass book1 = new BookClass(); //creating a new book from BookClass
-            book1.title - "Harry Potter";
-            book1.author = "JK Rowling";
-            book1.pages = 400;
-                
-            Console.WriteLine(book1.title); //to print out title on console
-            Console.ReadLine();
-        }
-     }
-}
-/////////////End of CLASSES AND OBJECTS///////////////////////
 
 
-/////////////CONSTRUCTORS//////////////////////////////
-
-//C# Main File /Book.cs/
-namespace yourCurrentProjectNameWithoutExtension{
-    class BookClass{
-        public string title;
-        public string author;
-        public int pages;
-        
-        public Book(string aTitle, string aAuthor, int aPages){
-            title = aTitle; //publicStrTitle to pass into aTitle
-            author = aAuthor;
-            pages = aPages;
+////////////////////////////////////////////////////////////////////////////////////////////
+21. CLASSES AND OBJECTS
+    //CREATING A CLASS
+    //In VStusdio open SolutionExplorer>right click ProjectTitle>Add>NewItem>Class>Add
+    //C# CLASS FILE /Book.cs/
+    namespace yourCurrentProjectNameWithoutExtension{
+        class BookClass{
+            public string title;
+            public string author;
+            public int pages;
         }
     }
-}
-//C# Main File /Program.cs/
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-             
-             /*
-            Constructors are used for shortening the paragraph effectively
-            BookClass book1 = new Book(); //creating a new book from BookClass
-            book1.title - "Harry Potter";
-            book1.author = "JK Rowling";
-            book1.pages = 400;
-            
-            BookClass book2 = new Book(); //creating a new book from BookClass
-            book2.title - "LOTR";
-            book2.author = "Tolkein";
-            book2.pages = 700;
-            */    
-            
-            BookClass book1 = new Book("Harry Patter", "JK Rowling", 400);
-            BookClass book2 = new Book("LOTR", "Tolkein", 700);
-            Console.WriteLine(book2.title); //Outputs LOTR into console
-            
-            book2.title = "Hobbit";
-            Console.WriteLine(book2.title); //Outputs Hobbit into console modifying the title
-            
-            Console.ReadLine();
-        }
-     }
-}
-/////////////End of CONSTRUCTORS///////////////////////
+    //C# Main File /Program.cs/
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
 
+                BookClass book1 = new BookClass(); //creating a new book from BookClass
+                book1.title - "Harry Potter";
+                book1.author = "JK Rowling";
+                book1.pages = 400;
 
-/////////////OBJECTS METHODS//////////////////////////////
-//CREATING A CLASS
-//In VStusdio open SolutionExplorer>right click ProjectTitle>Add>NewItem>Class>Add
-//C# CLASS FILE /Student.cs/
-namespace yourCurrentProjectNameWithoutExtension{
-    class Student{
-        public string name;
-        public string major;
-        public int gpa;
-        
-        public Student(string aName, string aMajor, double aGpa){
-            name = aName;
-            major = aMajor;
-            gpa = aGpa;
-        }
-        //Methods
-        //to find out which student has >3.5
-        public bool HasHonours(){
-            if(gpa >= 3.5){
-                return true;
+                Console.WriteLine(book1.title); //to print out title on console
+                Console.ReadLine();
             }
-            return false;
-        }
-        
+         }
     }
-}
-//C# Main File /Program.cs/
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-             
-            Student student1 = new Student("Jim", "Business", 2.8);
-            Student student2 = new Student("Pam", "Art", 3.6);
-            
-            //to find out which student has >3.5            
-            Console.WriteLine(student1.HasHonours()); //Output false
-            Console.WriteLine(student2.HasHonours()); //Output true
-            
-            Console.ReadLine();
-        }
-     }
-}
-/////////////End of OBJECT METHODS///////////////////////
 
 
-/////////////GETTERS & SETTERS//////////////////////////////
-//In VStusdio open SolutionExplorer>right click ProjectTitle>Add>NewItem>Class>Add
-//C# CLASS FILE /Movie.cs/
-namespace yourCurrentProjectNameWithoutExtension{
-    class Movie{
-        public string title;
-        public string director;
-        private string rating;
-        
-        public Movie(string aTitle, string aDirector, double aRating){
-            title = aTitle;
-            director = aDirector;
-            //rating = aRating;
-            //uses rating with the capital letter because this allows program to use "public string Rating" function
-            //making it secure
-            Rating = aRating;
+////////////////////////////////////////////////////////////////////////////////////////////
+22. CONSTRUCTORS
+
+    //C# Main File /Book.cs/
+    namespace yourCurrentProjectNameWithoutExtension{
+        class BookClass{
+            public string title;
+            public string author;
+            public int pages;
+
+            public Book(string aTitle, string aAuthor, int aPages){
+                title = aTitle; //publicStrTitle to pass into aTitle
+                author = aAuthor;
+                pages = aPages;
+            }
         }
-        
-        public string Rating{
-            get{ return rating; }
-            set{
-                if(value == "G" || value == "PG" || value == "PG-13" || value == "R" || value == "NR" ){
-                    rating = value;
-                }    
-                else {
-                    rating = "NR";
+    }
+    //C# Main File /Program.cs/
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+
+                 /*
+                Constructors are used for shortening the paragraph effectively
+                BookClass book1 = new Book(); //creating a new book from BookClass
+                book1.title - "Harry Potter";
+                book1.author = "JK Rowling";
+                book1.pages = 400;
+
+                BookClass book2 = new Book(); //creating a new book from BookClass
+                book2.title - "LOTR";
+                book2.author = "Tolkein";
+                book2.pages = 700;
+                */    
+
+                BookClass book1 = new Book("Harry Patter", "JK Rowling", 400);
+                BookClass book2 = new Book("LOTR", "Tolkein", 700);
+                Console.WriteLine(book2.title); //Outputs LOTR into console
+
+                book2.title = "Hobbit";
+                Console.WriteLine(book2.title); //Outputs Hobbit into console modifying the title
+
+                Console.ReadLine();
+            }
+         }
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+23. OBJECTS METHODS
+
+    //CREATING A CLASS
+    //In VStusdio open SolutionExplorer>right click ProjectTitle>Add>NewItem>Class>Add
+    //C# CLASS FILE /Student.cs/
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Student{
+            public string name;
+            public string major;
+            public int gpa;
+
+            public Student(string aName, string aMajor, double aGpa){
+                name = aName;
+                major = aMajor;
+                gpa = aGpa;
+            }
+            //Methods
+            //to find out which student has >3.5
+            public bool HasHonours(){
+                if(gpa >= 3.5){
+                    return true;
+                }
+                return false;
+            }
+
+        }
+    }
+    //C# Main File /Program.cs/
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+
+                Student student1 = new Student("Jim", "Business", 2.8);
+                Student student2 = new Student("Pam", "Art", 3.6);
+
+                //to find out which student has >3.5            
+                Console.WriteLine(student1.HasHonours()); //Output false
+                Console.WriteLine(student2.HasHonours()); //Output true
+
+                Console.ReadLine();
+            }
+         }
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////
+24. GETTERS & SETTERS
+    //In VStusdio open SolutionExplorer>right click ProjectTitle>Add>NewItem>Class>Add
+    //C# CLASS FILE /Movie.cs/
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Movie{
+            public string title;
+            public string director;
+            private string rating;
+
+            public Movie(string aTitle, string aDirector, double aRating){
+                title = aTitle;
+                director = aDirector;
+                //rating = aRating;
+                //uses rating with the capital letter because this allows program to use "public string Rating" function
+                //making it secure
+                Rating = aRating;
+            }
+
+            public string Rating{
+                get{ return rating; }
+                set{
+                    if(value == "G" || value == "PG" || value == "PG-13" || value == "R" || value == "NR" ){
+                        rating = value;
+                    }    
+                    else {
+                        rating = "NR";
+                    }
                 }
             }
         }
     }
-}
 
-//C# Main File /Program.cs/
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            Movie avengers = new Movie("The Avengers", "Joss Whedon", "PG13"); //you can pass invalid rating like "dog" here
-            Movie shrek = new Movie("Shrek", "Adam Adamson", "PG");
-            //avengers.rating = "Dog"; This line cannot call private string so use setter instead
-            
-            //Console.WriteLine(avengers.rating); //unsecured
-            Console.WriteLine(avengers.Rating);
-            Console.ReadLine();
+    //C# Main File /Program.cs/
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                Movie avengers = new Movie("The Avengers", "Joss Whedon", "PG13"); //you can pass invalid rating like "dog" here
+                Movie shrek = new Movie("Shrek", "Adam Adamson", "PG");
+                //avengers.rating = "Dog"; This line cannot call private string so use setter instead
+
+                //Console.WriteLine(avengers.rating); //unsecured
+                Console.WriteLine(avengers.Rating);
+                Console.ReadLine();
+            }
+         }
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////
+25. STATIC ATTRIBUTES
+
+    //normal vs static attribute and 
+    //C# CLASS FILE /Song.cs/
+    //Follow sequence number to understand
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Song{
+            public string title;
+            public string artist;
+            public int duration; 
+            public static int songCount = 0; //3.
+
+            public Song(string aTitle, string aArtist, int aDuration){
+                title = aTitle;
+                artist = aArtist;
+                duration = aDuration;
+                songCount++ //7. lets add this to print something out on console
+            }
+
+            //11. In order for kasmir to call the static songCount do the function below
+            public int getSongCount(){ //12. with this, now you can use kashmir.songCount like in 13.
+                return songCount; 
+            }
         }
-     }
-}
-/////////////End of GETTERS & SETTERS///////////////////////
+    }    
 
+    //C# CLASS FILE /Program.cs/
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                Song holiday = new Song("Holiday", "GreenDay", 200);
+                Song kashmir = new Song("Kashmir", "LedZep", 150);
 
+                Console.WriteLine(holiday.artist); //1 .Normal attribute
+                Console.WriteLine(Song.songCount); //8. Will output 1 since it shows the number of iteration by the class
+                Console.WriteLine(kashmir.artist); //2. Normal attribute
+                Console.WriteLine(Song.songCount); //9. Will output 2 since it shows the number of iteration by the class
 
-
-/////////////STATIC ATTRIBUTES//////////////////////////////
-//normal vs static attribute and 
-//C# CLASS FILE /Song.cs/
-//Follow sequence number to understand
-namespace yourCurrentProjectNameWithoutExtension{
-    class Song{
-        public string title;
-        public string artist;
-        public int duration; 
-        public static int songCount = 0; //3.
-        
-        public Song(string aTitle, string aArtist, int aDuration){
-            title = aTitle;
-            artist = aArtist;
-            duration = aDuration;
-            songCount++ //7. lets add this to print something out on console
-        }
-        
-        //11. In order for kasmir to call the static songCount do the function below
-        public int getSongCount(){ //12. with this, now you can use kashmir.songCount like in 13.
-            return songCount; 
+                Console.WriteLine(Song.songCount); //4. Static attribute, will print out 0, songCount belongs to the class
+                Console.WriteLine(Song.title); //5. will return error because title is an object of a class and not the class itself like songCount
+                Console.WriteLine(kashmir.songCount);//10. This will return error because kashmir is an object, not class
+                Console.WriteLine(kashmir.songCount());//13. This will output 1 and 2. 
+                //6. static is about the class and not the specific items like title, artist, duration etc.
+                Console.ReadLine();
+            }
         }
     }
-}    
 
-//C# CLASS FILE /Program.cs/
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            Song holiday = new Song("Holiday", "GreenDay", 200);
-            Song kashmir = new Song("Kashmir", "LedZep", 150);
-            
-            Console.WriteLine(holiday.artist); //1 .Normal attribute
-            Console.WriteLine(Song.songCount); //8. Will output 1 since it shows the number of iteration by the class
-            Console.WriteLine(kashmir.artist); //2. Normal attribute
-            Console.WriteLine(Song.songCount); //9. Will output 2 since it shows the number of iteration by the class
-            
-            Console.WriteLine(Song.songCount); //4. Static attribute, will print out 0, songCount belongs to the class
-            Console.WriteLine(Song.title); //5. will return error because title is an object of a class and not the class itself like songCount
-            Console.WriteLine(kashmir.songCount);//10. This will return error because kashmir is an object, not class
-            Console.WriteLine(kashmir.songCount());//13. This will output 1 and 2. 
-            //6. static is about the class and not the specific items like title, artist, duration etc.
-            Console.ReadLine();
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+26. STATIC METHODS & CLASSES
+    //C# CLASS FILE /usefultools.cs/
+    //Follow sequence number to understand
+    namespace yourCurrentProjectNameWithoutExtension{
+        //static class UsefulTools{ //6.example
+        class UsefulTools{     //6. add "static" infront if you don't want anyone to create instance out of this class
+            public static void SayHi(string name){
+                Console.WriteLine("Hello" + name);
+            }
         }
     }
-}
-/////////////End of STATIC ATTRIBUTES///////////////////////
 
+    //C# CLASS FILE /Program.cs/
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
 
+                //UsefulTools tools = new UsefulTools(); //7. cant create tools because class is a static class in 6.
+                //Math myMath = newMath(); //1. this is called instance for the line below. But we dont need this line to run the line below
+                //Console.WriteLine(Math.Sqrt(144)); //2. We dont need to create an instance for this, this called static method
+                //3. Let's create something similar to math class by creating the usefultools class file above
 
-
-/////////////STATIC METHODS & CLASSES//////////////////////////////
-//C# CLASS FILE /usefultools.cs/
-//Follow sequence number to understand
-namespace yourCurrentProjectNameWithoutExtension{
-    //static class UsefulTools{ //6.example
-    class UsefulTools{     //6. add "static" infront if you don't want anyone to create instance out of this class
-        public static void SayHi(string name){
-            Console.WriteLine("Hello" + name);
+                Console.WriteLine(UsefulTools.SayHi("Hello")); //4. now you can run directly like this
+                UsefulTools.SayHi("Mike"); //5. OR you can run directly like this
+                Console.ReadLine();
+            }
         }
     }
-}
 
-//C# CLASS FILE /Program.cs/
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            
-            //UsefulTools tools = new UsefulTools(); //7. cant create tools because class is a static class in 6.
-            //Math myMath = newMath(); //1. this is called instance for the line below. But we dont need this line to run the line below
-            //Console.WriteLine(Math.Sqrt(144)); //2. We dont need to create an instance for this, this called static method
-            //3. Let's create something similar to math class by creating the usefultools class file above
-            
-            Console.WriteLine(UsefulTools.SayHi("Hello")); //4. now you can run directly like this
-            UsefulTools.SayHi("Mike"); //5. OR you can run directly like this
-            Console.ReadLine();
+////////////////////////////////////////////////////////////////////////////////////////////
+27. INHERITENCE
+    //C# CLASS FILE 01/Chef.cs/
+    //Follow the 20 sequence numbers to understand
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Chef{
+            public void MakeChicken(){
+                Console.WriteLine("The Chef makes chicken");
+            }
+
+            public void MakeSalad(){
+                Console.WriteLine("The Chef makes salad");
+            }
+
+            public virtual void MakeSpecialDish(){ //14. the "virtual" makes the item can be overwritten in any subclass
+                Console.WriteLine("The Chef makes bbq ribs");
+            } //15. Lets copy the method and past into Italian chef class
         }
     }
-}
-/////////////End of STATIC METHODS & CLASSES///////////////////////
 
+    //C# CLASS FILE 02/ItalianChef.cs/
+    namespace yourCurrentProjectNameWithoutExtension{
+        class ItalianChef : Chef{
+            /* 4. So instead of copy and paste the entire code from chef, we just add ":Chef" to the ItalianChef class
+            public void MakeChicken(){
+                Console.WriteLine("The Chef makes chicken");
+            }        
+            public void MakeSalad(){
+                Console.WriteLine("The Chef makes salad");
+            }        
+            public virtual void MakeSpecialDish(){
+                Console.WriteLine("The Chef makes bbq ribs");
+            }   */        
+            //9. Lets add an item MakePasta for ItalianChef
+            public void MakePasta{
+                Console.Write("The Chef make pasta");            
+            }
 
-/////////////INHERITENCE//////////////////////////////
-//C# CLASS FILE 01/Chef.cs/
-//Follow the 20 sequence numbers to understand
-namespace yourCurrentProjectNameWithoutExtension{
-    class Chef{
-        public void MakeChicken(){
-            Console.WriteLine("The Chef makes chicken");
-        }
-        
-        public void MakeSalad(){
-            Console.WriteLine("The Chef makes salad");
-        }
-        
-        public virtual void MakeSpecialDish(){ //14. the "virtual" makes the item can be overwritten in any subclass
-            Console.WriteLine("The Chef makes bbq ribs");
-        } //15. Lets copy the method and past into Italian chef class
-    }
-}
-
-//C# CLASS FILE 02/ItalianChef.cs/
-namespace yourCurrentProjectNameWithoutExtension{
-    class ItalianChef : Chef{
-        /* 4. So instead of copy and paste the entire code from chef, we just add ":Chef" to the ItalianChef class
-        public void MakeChicken(){
-            Console.WriteLine("The Chef makes chicken");
-        }        
-        public void MakeSalad(){
-            Console.WriteLine("The Chef makes salad");
-        }        
-        public virtual void MakeSpecialDish(){
-            Console.WriteLine("The Chef makes bbq ribs");
-        }   */        
-        //9. Lets add an item MakePasta for ItalianChef
-        public void MakePasta{
-            Console.Write("The Chef make pasta");            
-        }
-        
-        //16. after pasting, the "virtual" must be replaced with "override"
-        public override void MakeSpecialDish(){ 
-            Console.WriteLine("The Chef makes chicken parm"); //17. instead of bbq ribs, we change it to chicken parm
+            //16. after pasting, the "virtual" must be replaced with "override"
+            public override void MakeSpecialDish(){ 
+                Console.WriteLine("The Chef makes chicken parm"); //17. instead of bbq ribs, we change it to chicken parm
+            }
         }
     }
-}
 
-//C# PROGRAM FILE /Program.cs/
-namespace yourCurrentProjectNameWithoutExtension{
-    class Program{
-        static void Main(string[] args){
-            Chef chef = new Chef(); //7. this is called superclass
-            chef.MakeChicken(); //1. Outputs chef makes chicken
-            //2. Lets use inheritence to make new type of classfile and call it italianchef.cs 
-            //3. Lets say the Italian chef can do what normal chef can do
-            
-            //5. Let's make instance for ItalianChef
-            ItalianChef italianChef = new ItalianChef(); //8. and this is called the subclass
-            italianChef.MakeChicken(); //6. now this line can print out "MakeChicken"
-            italianChef.MakePasta(); //10. Now italian chef can make pasta
-            chef.MakePasta();//11. this will throw error since superclass cannot call subclass
-            
-            //12. Lets add in MakeSpecialDish for ItalianChef class file
-            //13. This will be called overwriting the method. Let's go to Chef class file
-            
-            //18. lets print out the special dishes of the chef
-            chef.MakeChicken();
-            chef.MakeSpecialDish(); //19. now this will print out bbq ribs
-            ItalianChef italianChef = new ItalianChef();
-            italianChef.MakeSpecialDish(); //20. and this will print out chicken parm
-            
-            Console.ReadLine();
+    //C# PROGRAM FILE /Program.cs/
+    namespace yourCurrentProjectNameWithoutExtension{
+        class Program{
+            static void Main(string[] args){
+                Chef chef = new Chef(); //7. this is called superclass
+                chef.MakeChicken(); //1. Outputs chef makes chicken
+                //2. Lets use inheritence to make new type of classfile and call it italianchef.cs 
+                //3. Lets say the Italian chef can do what normal chef can do
+
+                //5. Let's make instance for ItalianChef
+                ItalianChef italianChef = new ItalianChef(); //8. and this is called the subclass
+                italianChef.MakeChicken(); //6. now this line can print out "MakeChicken"
+                italianChef.MakePasta(); //10. Now italian chef can make pasta
+                chef.MakePasta();//11. this will throw error since superclass cannot call subclass
+
+                //12. Lets add in MakeSpecialDish for ItalianChef class file
+                //13. This will be called overwriting the method. Let's go to Chef class file
+
+                //18. lets print out the special dishes of the chef
+                chef.MakeChicken();
+                chef.MakeSpecialDish(); //19. now this will print out bbq ribs
+                ItalianChef italianChef = new ItalianChef();
+                italianChef.MakeSpecialDish(); //20. and this will print out chicken parm
+
+                Console.ReadLine();
+            }
         }
     }
-}
-/////////////End of INHERITENCE//////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+End
 
 
 
