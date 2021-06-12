@@ -526,7 +526,130 @@ Space Complexity
             O(m) space            
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-05. howSum     
+05. howSum
+
+    Question:
+        Write a function 'howSum(targetSum, numbers)' that takes in a targetSum and an array of numbers as arguments.
+        The function should return an array containing any combination of elements that add up to exactly the targetSum.
+        If there is no combination that adds up to the targetSum, then return null.
+        If there are multiple combinations possible, you may return any single one.
+        
+    Example: 
+        howSum(7, [5, 3, 4, 7]) -> Answer: [3, 4] OR [4, 3] OR [7]
+        howSum(8, [2, 3, 5]) -> Answer: [3, 5] OR [2, 2, 2, 2]
+        howSum(7, [2, 4]) -> Answer: null
+        howSum(0, [1, 2, 3]) -> Answer: [] //Takes no element if it's an empty array, even when it does, summing up an empty array will still be 0
+
+    Structure: howSum(7, [5, 3, 4, 7])
+        Tree:
+        // 
+        //                                7
+        //      |-----------------|------------------|------------------|
+        //    -5|               -3|                -4|                -7|
+        //      |                 |                  |                  |
+        //      2                 4                  3                  0
+        //                  |------------|           |     
+        //                -3|          -4|         -3| 
+        //                  |            |           |
+        //                  1            0           0
+        //        
+        NOTE:
+            Basecase: 0
+                Basecases with 0 are already solved because the combination will be empty array
+                Therefore, whenever the basecase is 0, return an empty array
+                When it goes to the parent node, it needs a parent label, therefore, taking the last subtracted number, -> [4]
+                This empty array will again push up to another parent and take in another subtracted number, -> [4, 3]
+                Now with that array, node 7 contains [4, 3]
+                Therefore, howSum(7, [5, 3, 4, 7]) -> [4, 3]
+            Basecase: 2
+                For basecase of 2, empty array returns 'null'
+            Basecase: 1
+                Take note that the other node 4 contains [4] from another child
+                From child node 1, [null] is being generated
+                Therefore, at node 4, comparator needs to be introduced: Array will always overwrite the null
+                Comparison will be repeated until the the top of the tree
+
+    CODE: - Brute Force Method, similar to canSum
+        const howSum = (targetSum, numbers) => {    
+            if (targetSum === 0) return [];                                //returns an empty array
+            if (targetSum < 0) return null;                                //return null if targetsum is below 0 (negative numbers)
+            
+            for (let num of numbers) {                                
+                const remainder = targetSum - num;             
+                //howSum(remainder, numbers)
+                const remainderResult = howSum(remainder, numbers);       //type howSum returns (array or null element) and store in remainderResult variable
+                if (remainderResult !== null) {                           //check remainderResult variable and if not element(null), return the value stored in remainderResult
+                    return [...remainderResult, num];                     // [...remainderResult] means copying array into another array (restoperator/spreadoperator)
+                }
+            }         
+            
+            return null;                         
+   
+        };
+  
+        console.log(howSum(7, [2, 3]));           //[3, 2, 2]
+        console.log(howSum(7, [5, 3, 4, 7]));     //[4, 3]
+        console.log(howSum(7, [2, 4]));          //null
+        console.log(howSum(8, [2, 3, 5]));       //[2, 2, 2, 2]
+        console.log(howSum(300, [7, 14]));       //Takes too long to compute
+
+    Explanation: [...remainderResult]
+        arr = ['a', 'b', 'c']
+        newArr = [...arr]                       //arr will copy to newArr
+        otherArray = [...arr, 'z']              //otherArray will be ['a', 'b', 'c', 'z']
+        
+    Explanation: -Similar to canSum
+        m = tragetSum size
+        n = length of array
+        height of tree (from top to basecase)
+            Because you have to subtract the target sum from the array for 'm' times, so the height will be 'm'
+            Therefore, the number of levels is 'm'
+        branching factor = number of array length = 3 = n
+            If there are 3 numbers in the array, a node would have 3 children
+        Complexity
+            Time:
+                To find the number of nodes, n multiply by n for m times
+                Therefore: O(n^m) time           
+                However, the restoperator adds in 'm' steps by copying an array
+                Therefore: O(n^m * m) time 
+            Space:
+                Just the height of the tree
+                O(m) space
+
+
+    CODE: - Memoization Method, similar to canSum
+        const howSum = (targetSum, numbers, memo={}) => {                   //add in memo object
+            if (targetSum in memo) return memo;                             //use targetSum as key for memo
+            if (targetSum === 0) return [];                 
+            if (targetSum < 0) return null;     
+            
+            for (let num of numbers) {                                
+                const remainder = targetSum - num;             
+                const remainderResult = howSum(remainder, numbers, memo);   //add memo object to all recursive call
+                if (remainderResult !== null) {                           
+                    //return [...remainderResult, num];                     //return value to be stored in memo
+                    memo[targetSum] = [...remainderResult, num];  
+                    return memo[targetSum];
+                }
+            }         
+            
+            //return null;                         //return value has to be stored in memo
+            memo[targetSum] = null;
+            return null;
+   
+        };
+  
+        console.log(howSum(7, [2, 3]));           //[3, 2, 2]
+        console.log(howSum(7, [5, 3, 4, 7]));     //[4, 3]
+        console.log(howSum(7, [2, 4]));           //null
+        console.log(howSum(8, [2, 3, 5]));        //[2, 2, 2, 2]
+        console.log(howSum(300, [7, 14]));        //null
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+06. bestSum
+ 
 
 
 
