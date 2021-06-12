@@ -435,8 +435,8 @@ Space Complexity
             for (let num of numbers) {                               //Add recursive function, iterate through the array of numbers using num
                 //console.log(num);                                  //Check the array 
                 const remainder = targetSum - num;                   //Calculate the targetsum result by subtracting the numbers in array (Note that this may go to negative numbers)
-                //canSum(remainder, numbers);                        //store remainder in numbers array. canSum is a boolean (true/false)
-                if (canSum(remainder, numbers) === true) {         
+                //canSum(remainder, numbers);                        //store remainder in numbers array.
+                if (canSum(remainder, numbers) === true) {           //canSum is a boolean (true/false), if true, then return true
                     return true;
                 }
             }         
