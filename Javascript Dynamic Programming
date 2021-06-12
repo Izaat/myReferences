@@ -429,27 +429,27 @@ Space Complexity
 
     CODE: - Brute Force Method
         const canSum = (targetSum, numbers) => {                     //numbers array added
-            if (targetSum === 0) return true;                                  //if targetSum is 0, then return True            
-            if (targetSum < 0) return false;                                    //Preventing more calculations to be done in for loop if it hits negative numbers
+            if (targetSum === 0) return true;                        //if targetSum is 0, then return True            
+            if (targetSum < 0) return false;                         //Preventing more calculations to be done in for loop if it hits negative numbers
             
-            for (let num of numbers) {                                           //Add recursive function, iterate through the array of numbers using num
-                //console.log(num);                                                //Check the array 
-                const remainder = targetSum - num;                      //Calculate the targetsum result by subtracting the numbers in array (Note that this may go to negative numbers)
-                //canSum(remainder, numbers);                            //store remainder in numbers array. canSum is a boolean (true/false)
+            for (let num of numbers) {                               //Add recursive function, iterate through the array of numbers using num
+                //console.log(num);                                  //Check the array 
+                const remainder = targetSum - num;                   //Calculate the targetsum result by subtracting the numbers in array (Note that this may go to negative numbers)
+                //canSum(remainder, numbers);                        //store remainder in numbers array. canSum is a boolean (true/false)
                 if (canSum(remainder, numbers) === true) {         
                     return true;
                 }
             }         
             
-            return false;                                                                //Reason after for loop, after attempt all possibilities in for loop, return false
+            return false;                                            //Reason after for loop, after attempt all possibilities in for loop, return false
    
         };
   
-        console.log(canSum(7, [2, 3]));             //True
+        console.log(canSum(7, [2, 3]));           //True
         console.log(canSum(7, [5, 3, 4, 7]));     //True
-        console.log(canSum(7, [2, 4]));             //False
-        console.log(canSum(8, [2, 3, 5]));         //True
-        console.log(canSum(300, [7, 14]));       //Takes too long to calculate
+        console.log(canSum(7, [2, 4]));           //False
+        console.log(canSum(8, [2, 3, 5]));        //True
+        console.log(canSum(300, [7, 14]));        //Takes too long to calculate
         
     Tree structure with more complexity: 
         Example: canSum(8, [2, 3, 5]) -> True
