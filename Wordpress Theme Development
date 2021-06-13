@@ -569,8 +569,8 @@ Conclusion
     Menu Navigation - Responsive Dropdown Menu
         //mytheme >> sass >> theme >> _theme.scss        -- Lowers down the background image when the dropdown menu opens
             #wrapper-navbar {} >            
-                margin-bottom: -360px;             //By default, this was directly under #wrapper-navbar, located below .top-header-holder
-                @media(max-width:$lg) {         //taken from "col-6"
+                margin-bottom: -360px;                  //By default, this was directly under #wrapper-navbar, located below .top-header-holder
+                @media(max-width:$lg) {                 //taken from "col-6"
                     margin-bottom: 0px;        
                 }
 
@@ -578,11 +578,11 @@ Conclusion
                 height ...
                 .
                 .
-                //background: #ccc;                                          //Remove
+                //background: #ccc;                                 //Remove
                 background-size ...
                 background-position: bottom-center;                 //positions image to bottom in browser mode
-                @media(max-width:$lg) {                                  //taken from "col-6"
-                    background-position: top -350px center;      //positions image to top center in mobile mode
+                @media(max-width:$lg) {                             //taken from "col-6"
+                    background-position: top -350px center;         //positions image to top center in mobile mode
                 }                
             }
 
@@ -591,8 +591,8 @@ Conclusion
                 .
                 //background:#f1f1f1;               //Remove
                 .navbar-toggler {
-                    display: none;                         //This sets mobile menu icon to disable as a default
-                    @media(max-width:$lg) {      //Display enabled in mobile browser
+                    display: none;                  //This sets mobile menu icon to disable as a default
+                    @media(max-width:$lg) {         //Display enabled in mobile browser
                         display: block;
                     }
                 }
