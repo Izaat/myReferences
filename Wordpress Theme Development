@@ -603,6 +603,23 @@ Conclusion
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 11. Header Mobile Menu Button and Nav (Narrow Screens)
 
+    Make Logo Smaller
+        //mytheme >> sass >> theme >> _theme.scss
+            #wrapper-navbar
+                .top-header-holder {}
+                    .container {}
+                        .logo-holder {                 //In header.php, the logo image is under logo-holder class
+                            display:block;
+                            //.logo { ...empty }       //This will be removed since image is under logo-holder class
+                            img {
+                                width: 275px;          //In header.php, the logo image size is set at width of 275. To be moved into this block and empty out in header.php
+                                @media(max-width:$lg) {
+                                    width: 200px;      //Set the logo to smaller size for responsiveness
+                                }
+                            }                            
+                        }
+
+
 
 
 
