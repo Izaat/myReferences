@@ -13,6 +13,7 @@ CONTENT
 08. Top Section Logo Links
 09. Header Responsive Design
 10. Header Mobile Menu Button and Nav
+11. Header Mobile Menu Button and Nav (Narrow Screens)
 
 Header Logo and Nav for mobile
 Home Page Hero Banner
@@ -599,7 +600,8 @@ Conclusion
             }
 
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+11. Header Mobile Menu Button and Nav (Narrow Screens)
 
 
 
