@@ -649,6 +649,140 @@ Space Complexity
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 06. bestSum
+    Question:
+        Write a function 'bestSum(targetSum, numbers)' that takes in a targetSum and an array of numbers as arguments.
+        The function should return an array containing the shortest combination of numbers that add up to exactly the targetSum.
+        If there is a tie for the shortest combination, you may return any one of the shortest.
+        
+    Example: 
+        bestSum(7, [5, 3, 4, 7]) 
+            Solution: [3, 4] OR [7]
+            But may need to choose the solution with the smallest arrays
+            Therefore: [7]
+        bestSum(8, [2, 3, 5]) 
+            Solution: [2, 2, 2, 2] OR [2, 3, 3] OR [3, 5]
+            But may need to choose the solution with the smallest arrays
+            Therefore: [3, 5]
+
+    Structure: bestSum(8, [2, 3, 5])
+        Example: canSum(8, [2, 3, 5]) -> True
+        //   
+        //                                                                             8
+        //                                  |------------------------------------------|-----------------------------------|
+        //                                -2|                                        -3|                                 -5|
+        //                                  |                                          |                                   |
+        //                                  6                                          5                                   3 
+        //              |----------------|---------------|             |---------------|--------------|          |-------------------|
+        //            -2|              -3|             -5|           -2|             -3|            -5|        -2|                 -3|                    
+        //              |                |               |             |               |              |          |                   | 
+        //              4                3               1             3               2              0          1                   0
+        //       |------------|    |------------|                |------------|        |                  
+        //     -2|          -3|  -2|            3              -2|          -3|      -2|                       
+        //       |            |    |            |                |            |        |
+        //       2            1    1            0                1            0        0               
+        //     -2|            
+        //       | 
+        //       0   
+        //
+        Finding the best subtree
+            Here, subtree with node 6 will be used
+            Result to get to basecase will be [2, 2, 2] and the other basecase will be [3, 3]
+            With the 2 options, the shortest path will be [3, 3]
+            Therefore, the answer to the question for the shortest path for node 6 will be [3, 3]
+            
+        Adding to parent node 8
+            With the above subtree, the array will go to the parent node 8
+            Therefore, [3, 3] will become [3, 3, 2] at node 8
+
+        Repeat on another subtree (node 5) and (node 3)
+            The shortest path for node 5 will be [5]
+            At node 8, path will be [5, 3]
+            For node 3, path at parent node 8 will be [3, 5]
+
+        Parent node 8
+            Now node 8 has 3 paths, [3, 3, 3] , [5, 3] and [3, 5]
+            The program will then choose the first answer - [5, 3]
+            Note that [3, 5] comes after [5, 3]
+            Therefore, the answer for bestSum(8, [2, 3, 5]) will be [5, 3]
+
+    CODE: Brute Force Method - Similar to howSum
+        const bestSum = (targetSum, numbers) => {
+            if (targetSum === 0) return [];
+            if (targetSum < 0) return null;
+            
+            let shortestCombination = null;                                        //combination default set as null, this adds m to space complexity
+            
+            for (let num of numbers) {                                             // 'of' - get element, 'in' - get index
+                const remainder = targetSum - num;                                                
+                const remainderCombination = bestSum(remainder, numbers);
+                if (remainderCombination !== null) {
+                    //[...remainderCombination, num]                               //a combination for targetSum
+                    const combination = [...remainderCombination, num];
+                    //if the combination is shorter than the current shortest, then update
+                    if (shortestCombination === null || combination.length < shortestCombination.length) {
+                        shortestCombination = combination;                        //assign shortestCombination with combination which is shorter 
+                    }
+                }
+            }
+            return shortestCombination;
+        };
+        
+        console.log(bestSum(7, [5, 3, 4, 7]));          //[7]
+        console.log(bestSum(8, [2, 3, 5]));             //[3, 5]
+        console.log(bestSum(8, [1, 4, 5]));             //[4, 4]
+        console.log(bestSum(100, [1, 2, 5, 25]));       //Too slow 
+         
+
+    CODE: Memoization Method - Similar to howSum
+        const bestSum = (targetSum, numbers, memo = {}) => {
+            if (targetSum in memo) return memo[targetSum];
+            if (targetSum === 0) return [];
+            if (targetSum < 0) return null;
+            
+            let shortestCombination = null;  
+            
+            for (let num of numbers) {                                                                       
+                const remainder = targetSum - num;                                                
+                const remainderCombination = bestSum(remainder, numbers, memo);
+                if (remainderCombination !== null) {
+                    //[...remainderCombination, num]                                    
+                    const combination = [...remainderCombination, num];
+                    //if the combination is shorter than the current shortest, then update
+                    if (shortestCombination === null || combination.length < shortestCombination.length) {
+                        shortestCombination = combination;                    
+                    }
+                }
+            }
+            //return shortestCombination;               //to be stored in memo
+            memo[targetSum] = shortestCombination;
+            return shortestCombination;
+        };
+        
+        console.log(bestSum(7, [5, 3, 4, 7]));          //[7]
+        console.log(bestSum(8, [2, 3, 5]));             //[3, 5]
+        console.log(bestSum(8, [1, 4, 5]));             //[4, 4]
+        console.log(bestSum(100, [1, 2, 5, 25]));       //[25, 25, 25, 25]
+        
+        NOTE: The Time complexity and Space complexity are the same as howSum
+        Brute Force:
+            time: O(n^m * m)
+            space: O(m^2)
+            
+        Memoization:
+            time: O(m^2 * n)
+            space: O(m^2)
+
+
+SUMMARY
+NOTE: In a nutshell
+    canSum -> Can you do it "Yes/No"?          - Boolean
+    howSum -> How will you do it?              - Arrays
+    bestSum -> What is the best way to do it - Combination, Optimization
+    
+    
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+07. canConstruct
  
 
 
