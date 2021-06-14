@@ -599,16 +599,17 @@ Conclusion
                 }
             }
 
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-11. Header Mobile Menu Button and Nav (Narrow Screens)
-
     Make Logo Smaller
         //mytheme >> sass >> theme >> _theme.scss
             #wrapper-navbar
                 .top-header-holder {}
+                    @media(max-width:$lg) {      //This shrinks the padding between columns
+                        padding-top: 30px;
+                        height: auto;                     //Without adding this, the @media wont function since the top-header-holder default is still active at 260px
+                        padding-bottom: 30px;                        
+                    }
                     .container {}
-                        .logo-holder {                 //In header.php, the logo image is under logo-holder class
+                        .logo-holder {                   //In header.php, the logo image is under logo-holder class
                             display:block;
                             //.logo { ...empty }       //This will be removed since image is under logo-holder class
                             img {
@@ -617,7 +618,13 @@ Conclusion
                                     width: 200px;      //Set the logo to smaller size for responsiveness
                                 }
                             }                            
-                        }
+                        }     
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+11. Header Mobile Menu Button and Nav (Narrow Screens)
+
+
 
 
 
