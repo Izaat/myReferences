@@ -623,6 +623,60 @@ Conclusion
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 11. Header Mobile Menu Button and Nav (Narrow Screens)
+    
+    Cellphone size header
+        //mytheme >> sass >> theme >> _theme.scss
+            #wrapper-navbar
+                .top-header-holder {} >>
+                
+                    @media(max-width: $md) {                   //add padding around phone number box
+                        padding-top: 15px;
+                        padding-bottom: 15px;                            
+                    }
+                
+                    .container {
+                        .logo-holder {
+                            display ...
+                            img { ... }
+                            @media(max-width: $md) {
+                                display: none;                          //hides logo when viewport hits cellphone size
+                            }
+                        }                    
+                        
+                        .contact-holder {
+                            a {
+                                @media(max-width:$md) {
+                                    padding-top: 0em;
+                                    padding-bottom: 0em;                               
+                                }
+                            }
+                        }
+                        
+                        .navbar-toggler {
+                            @media(max-width: $md) {
+                                display: none;                            //hides menu icon
+                            }
+                        }
+                        
+                        .reservation-btn {
+                            @media(max-width: $lg) {
+                                font-size:18px;                            
+                            }
+                            @media(max-width: $md) {
+                                display: none;                            //hides reservation-btn
+                            }
+                        }
+                        
+                        .social-media-holder, .social-media-holder-tablet {
+                            &.social-media-holder-tablet {
+                                @media(max-width:$md) {
+                                    display: none;                      //hides social media icons
+                                }
+                            }
+                        }                        
+                    }
+
+    Redesign the columns
 
 
 
