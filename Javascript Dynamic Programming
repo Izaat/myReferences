@@ -783,6 +783,58 @@ NOTE: In a nutshell
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 07. canConstruct
+    Question:
+        Write a function 'canConstruct(target, wordBank)' that accepts a target string and an array of strings.
+        The function should return a boolean indicating whether ot not the 'target' can be constructed by concatenating
+        elements of the 'wordBank array.
+        You may reuse elements of 'wordBank' as many times as needed
+        
+    Example:
+        canConstruct(abcdef, [ab, abc, cd, def, abcd]) -> Answer: True
+            Constructing 'abcdef' using elements of the array -> abc + def
+
+        canConstruct(skateboard, [bo, rd, ate, t, ska, sk, boar]) -> Answer: False
+        
+        canConstruct('', [cat, dog, mouse]) -> True
+            Empty strings can take in any elements from the array
+
+    Visualization:
+        canConstruct(abcdef, [ab, abc, cd, def, abcd])
+        NOTE: Can't take out anything from the middle of the string ("cd" and "def" cannot be used), only prefixes can be used
+        //   
+        //                                              abcdef
+        //                |--------------------------------|-----------------------------|
+        //             -ab|                            -abc|                        -abcd|
+        //                |                                |                             |
+        //              cdef                              def                            ef
+        //                |                                |               
+        //             -cd|                            -def|                                 
+        //                |                                |              
+        //               ef                               ''                    
+        //                                                             
+        //NOTE: 
+            'ef' becomes the basecase
+            If reach 'ef', return False
+            If reach empty string, return True
+
+        canConstruct(skateboard, [bo, rd, ate, t, ska, sk, boar] 
+        //
+        //                              skateboard
+        //                |--------------------------------|
+        //            -ska|                             -sk|  
+        //                |                                | 
+        //             teboard                          ateboard  
+        //                |                                |               
+        //              -t|                            -ate|                                 
+        //                |                                |              
+        //             eboard                            board                   
+        //                                                 |
+        //                                        |------------------|        
+        //                                    -bo |            -boar |
+        //                                        |                  |       
+        //                                       ard                 d
+        //NOTE: 
+            All basecases returns False
  
 
 
