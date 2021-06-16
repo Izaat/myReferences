@@ -838,6 +838,85 @@ NOTE: In a nutshell
  
 
 
+    CODE: Brute Force Method
+        const canConstruct = (target, wordBank) => {
+            if (target === '') {           //check if target is an empty string
+                return true;               //if empty string, return true. So this stops taking string from wordBank
+            }
+            
+            for (let word of wordBank) {             //iterating through all the elements (words) in the array (wordBank)
+                if (target.indexOf(word) === 0) {  //Check if substring (word) is a prefix of target string, if it is 0, run code
+                    const suffix = target.slice(word.length);
+                    if (canConstruct(suffix, wordBank) === true) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        };
+        
+        console.log(canConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd"]));                      //true
+        console.log(canConstruct(skateboard, ["bo", "rd", "ate", "t", "ska", "sk", "boar"]));     //false
+        console.log(canConstruct(enterapotentpot, ["a", "p", "ent", "enter", "ot", "o", "t"]));  //true
+        console.log(canConstruct(eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef, ["e", "ee", "eee", "eeee", "eeeee", "eeeeee"]));  //True Slow
+        
+    Example01: target.indexOf(word) === 0;
+        "potato".indexOf('pot')    //Answer: Index 0
+        "potato".indexOf('tato')    //Answer: Index 2
+
+    Example02: const suffix = target.slice(word.length);
+        word = 'pot';
+        target = 'potato';
+        target.slice(word.length);  //Answer: 'ato'
+
+    Explanation:
+        canConstruct(enterapotentpot, ["a", "p", "ent", "enter", "ot", "o", "t"])
+        //
+        //                         enterapotentpot
+        //                |-----------------------------------------|
+        //            -ent|                                  -enter |  
+        //                |                                         | 
+        //          erapotentpot                               apotentpot
+        //                                                          |               
+        //                                                        -a|                                 
+        //                                                          |              
+        //                                                     potentpot                  
+        //                                                          |
+        //                                                          |               
+        //                                                        -p|                                 
+        //                                                          |              
+        //                                                       otentpot                 
+        //                                                          |
+        //                                     |--------------------------------|        
+        //                                  -o |                            -ot |
+        //                                     |                                |       
+        //                                  tentpot                           entpot    
+        //                                     |                                |    
+        //                                  -t |                           -ent |
+        //                                     |                                |       
+        //                                  entpot                             pot        
+        //                                     |                                |    
+        //                                -ent |                             -p |
+        //                                     |                                |       
+        //                                    pot                               ot        
+        //                                     |                     |------------------------| 
+        //                                  -p |                   -o|                     -ot|
+        //                                     |                     |                        |
+        //                                    ot                     t                       ' ' 
+        //                     |------------------------|            |
+        //                   -o|                     -ot|         -t |
+        //                     |                        |            |
+        //                     t                       ' '          ' '
+        //                     |                     
+        //                   -t| 
+        //                     |  
+        //                    ' '
+        //Structure:
+            m = target.length
+            n = wordBank.length
+
+
+
 
 
 
