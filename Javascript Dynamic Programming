@@ -1087,6 +1087,84 @@ NOTE: In a nutshell
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 09. allConstruct
+    
+    Question: 
+        Write a function 'allConstruct(target, wordBank)' that accepts a target string and an array of strings.
+        The function should return a 2D array containing all of the ways that the 'target' can be constructed by 
+        concatenating elements of the 'wordBank' array.
+        Each element of the 2D array should represent one combination that constucts the 'target'.
+        You may reuse elements of 'wordBank' as many times as needed.
+
+    Example: 
+        allConstruct("purple", ["purp", "p", "ur", "le", "purpl"])
+            Answer:
+            [
+                [purp, le],
+                [p, ur, p, le]
+            ]
+
+        allConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd", "c"])
+            Answer:
+            [
+                [ab, cd, ef],
+                [ab, c, def],
+                [abc, def],
+                [abcd, ef]
+            ]
+
+        allConstruct("hello", ["cat", "dog", "mouse"])
+            Answer:
+            []
+
+        allConstruct("", ["cat", "dog", "mouse"])
+            Answer:
+            [[]]            
+            
+    Visualization Tree: -allConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd", "c"])
+        //   
+        //                                                abcdef
+        //                          |------------------------|---------------------|
+        //                       -ab|                    -abc|                -abcd|
+        //                          |                        |                     |
+        //                         cdef                     def                   ef
+        //              |-------------------------|          |                     |
+        //           -cd|                       -c|     -def |                 -ef |
+        //              |                         |          |                     |
+        //             ef                        def        ' '                   ' '
+        //              |                         |
+        //          -ef |                    -def |
+        //              |                         |
+        //             ' '                       ' '
+        //
+        //NOTE:
+            The empty string will become the basecase
+            Basecases containing empty strings will return an empty array "[[]]"
+            The empty array will then return to the immediate parent node. 
+                Example: Node "ef" and "def" will contain "[[ef]]" and "[[def]]" respectively. (Absorbing the subtracted strings of the parent nodes)
+            The 2 nodes will continue upwards to another parent node
+                Example: Parent node "cdef" will now contain [[cd, ef]], [[c, def]]
+            Since there are to arrays in the node, the arrays will concatenate to form a single 2D array -> [[cd, ef], [c, def]]
+            Same process happens in other subtrees.
+                Node def -> [[def]]
+                Node ef -> [[ef]]
+            The arrays will move again to node "abcdef"
+                [[cd, ef], [c, def]],
+                [[def]],
+                [[ef]]
+            They will absorb the subtracted strings to form:
+                [[ab, cd, ef], [ab, c, def]],
+                [[abc, def]],
+                [[abcd, ef]]                
+            Now these arrays will be concatenated to form a single 2D array
+                [
+                    [ab, cd, ef], 
+                    [ab, c, def],
+                    [abc, def],
+                    [abcd, ef]
+                ]                
+
+
+
 
 
 
