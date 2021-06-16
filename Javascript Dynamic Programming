@@ -1076,6 +1076,15 @@ NOTE: In a nutshell
         console.log(countConstruct("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o", "t"]));  //4
         console.log(countConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeee", "eeeee", "eeeeee"]));  //0
 
+    Complexity:
+        Similar to canConstruct
+        Brute Force
+            O((n^m) * m) time
+            O(m^2) space
+        Memoized
+            O(n*(m^2)) time
+            O(m^2) space    
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 09. allConstruct
 
