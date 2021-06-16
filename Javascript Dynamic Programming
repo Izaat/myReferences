@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////
 Dynamic Programming (Memoization and Tabulation in Javascript)
-
+CTRL+C to stop coderun in VSCode
 ///////////////////////////////////////////////////////////////////////
 CONTENTS
 
@@ -26,7 +26,9 @@ Tabulation
 17. countConstruct
 18. allConstruct
 
-
+**to run program, type in: node *.js
+NOTE: 
+    For Python: https://github.com/medwatt/Notes/tree/main/Python/Dynamic_Programming
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Time Complexity
     Time taken to run the program
@@ -35,7 +37,6 @@ Time Complexity
 Space Complexity
     Memory usage to run a program
     https://www.youtube.com/watch?v=SHIg5UIfBnI
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Fibonacci (Memoization)
@@ -869,6 +870,21 @@ NOTE: In a nutshell
         target = 'potato';
         target.slice(word.length);  //Answer: 'ato'
 
+    Structure:
+        m = target.length -> Height
+        n = wordBank.length -> Width -> 1 * n (n multiplies by itself as it descends every level) -> O(n^m) time
+            Therefore: target.slice(word.length) = O((n^m)*m) time, 
+            Multiplied by 'm' since target will be called repetitively to be sliced
+            But the one that affects the time is the ^m
+        Time: O((n^m)*m)
+        Space:
+            const suffix = target.slice(word.length);    //each slice will return a new string and then be stored in suffix. 
+            if (canConstruct(suffix, wordBank)) { ... }  //Every new string is length 'm'
+            Therefore: O(m) -> O(m*m) -> O(m^2)
+
+        Time: O((n^m)*m) -> Exponential in time
+        Space: O(m^2) -> Quadratic in space     
+
     Explanation:
         canConstruct(enterapotentpot, ["a", "p", "ent", "enter", "ot", "o", "t"])
         //
@@ -911,10 +927,45 @@ NOTE: In a nutshell
         //                   -t| 
         //                     |  
         //                    ' '
-        //Structure:
-            m = target.length
-            n = wordBank.length
+        //Pattern Subtree: 
+            "entpot", to be stored in memo
+            canConstruct('entpot')
+        
+    CODE: Memoization Method
+        const canConstruct = (target, wordBank, memo={}) => {           //Create memo object
+            if (target in memo) return memo[target];                               //Using target as the key
+            if (target === '') return true;    
+            
+            for (let word of wordBank) {            
+                if (target.indexOf(word) === 0) {  
+                    const suffix = target.slice(word.length);
+                    if (canConstruct(suffix, wordBank, memo) === true) {
+                        //return true;                                                                //store in memo before completing the return
+                        memo[target] = true
+                        return true;
+                    }
+                }
+            }
+            //return false;                                                                          //store in memo before completing the return
+            memo[target] = false;
+            return false;
+        };
+        
+        console.log(canConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd"]));                      //true
+        console.log(canConstruct(skateboard, ["bo", "rd", "ate", "t", "ska", "sk", "boar"]));     //false
+        console.log(canConstruct(enterapotentpot, ["a", "p", "ent", "enter", "ot", "o", "t"]));  //true
+        console.log(canConstruct(eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef, ["e", "ee", "eee", "eeee", "eeeee", "eeeeee"]));  //false     
 
+    Brute Force
+        O((n^m) * m) time
+        O(m^2) space
+    Memoized
+        O(n*(m^2)) time
+        O(m^2) space
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+08. countConstruct
 
 
 
