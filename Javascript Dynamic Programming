@@ -966,6 +966,122 @@ NOTE: In a nutshell
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 08. countConstruct
+    
+    Question:
+        Write a function 'countConstruct(target, wordBank)' that accepts a target string and an array of strings.
+        The function should return the number of ways that the 'target' can be constructed by concatenating elements of the 'wordBank' array
+        You may reuse elements of 'wordBank' as many times as needed.
+
+    Example:
+        countConstruct(abcdef, [ab, abc, cd, def, abcd]) -> Answer: 1
+        countConstruct(purple, [purp, p, ur, le, purpl]) -> Answer: 2
+
+    Visualization:
+        Example 1: countConstruct(abcdef, [ab, abc, cd, def, abcd])   -> Answer: 1
+        //   
+        //                               abcdef
+        //              |-------------------|-------------------|
+        //           -ab|               -abc|              -abcd|
+        //              |                   |                   |
+        //            cdef                 def                 ef
+        //              |                   |               
+        //           -cd|               -def|                                 
+        //              |                   |              
+        //             ef                  ''                    
+        //               
+        //NOTE: 
+            'ef' becomes the basecase
+            If reach 'ef', return 0
+            If reach empty string, return 1
+            When returning to parent tree, if there is 1 in the array, add all results and return as result
+            
+        
+        Example 2: countConstruct(purple, [purp, p, ur, le, purpl]) -> Answer: 2
+        //   
+        //                           purple
+        //            |-----------------|------------------|
+        //       -purp|               -p|            -purpl|
+        //            |                 |                  |
+        //           le               urple                e
+        //            |                 |               
+        //         -le|             -ur |                                 
+        //            |                 |              
+        //           ' '               ple         
+        //                              |
+        //                           -p |
+        //                              |
+        //                             le
+        //                              |
+        //                          -le |
+        //                              |
+        //                             ' '        
+        //                                                             
+        //NOTE: 
+            e becomes the basecase
+            If reach 'e, return 0
+            If reach empty string, return 1
+            When returning to parent tree, if there is 1 in the array, add all results and return as result
+
+    CODE: Brute Force Method
+        const countConstruct = (target, wordBank) => {
+            if (target === '')  return 1;            
+            let totalCount = 0;                                                //Set totalCount to 0 before counting for numWaysForRest
+            
+            for (let word of wordBank) {       
+                if (target.indexOf(word) === 0) {                              //If it is 0, then it is a prefix
+                    //const suffix = target.slice(word.length);                //taken from canConstruct
+                    //if (countConstruct(suffix, wordBank) === true) {         //taken from canConstruct
+                    //    return true;                                         //taken from canConstruct
+                    //}                                                                         //taken from canConstruct
+                    //const countConstruct(target.slice(word.length), wordBank);                //take the suffix and call recursively, countConstruct returns a number
+                    const numWaysForRest = countConstruct(target.slice(word.length), wordBank); //countConstruct to add a number to numWaysForRest
+                    totalCount += numWaysForRest;                                               //To count number of times a number being added into numWaysForRest
+                }
+            }
+            return totalCount;      //if none of the 'word' is a valid prefix after finishing the 'for loop', return as 0. Otherwise return the new totalCount calculated in 'for loop'
+        };
+        
+        console.log(countConstruct("purple", ["purp", "p", "ur", "le", "purpl"]));                   //2
+        console.log(countConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd"]));                   //1
+        console.log(countConstruct("skateboard", ["bo", "rd", "ate", "t", "ska", "sk", "boar"]));    //0
+        console.log(countConstruct("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o", "t"]));  //4
+        console.log(countConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeee", "eeeee", "eeeeee"]));  //Too Slow
+
+    CODE: Memoization Method
+        const countConstruct = (target, wordBank, memo={}) => {
+            if (target in memo) return memo[target];
+            if (target === '')  return 1;            
+            let totalCount = 0;                                                //Set totalCount to 0 before counting for numWaysForRest
+            
+            for (let word of wordBank) {       
+                if (target.indexOf(word) === 0) {                              //If it is 0, then it is a prefix
+                    //const suffix = target.slice(word.length);                //taken from canConstruct
+                    //if (countConstruct(suffix, wordBank) === true) {         //taken from canConstruct
+                    //    return true;                                         //taken from canConstruct
+                    //}                                                                               //taken from canConstruct
+                    //const countConstruct(target.slice(word.length), wordBank);                      //take the suffix and call recursively, countConstruct returns a number
+                    const numWaysForRest = countConstruct(target.slice(word.length), wordBank, memo); //countConstruct to add a number to numWaysForRest
+                    //memo[target] = totalCount;                                                      //Not needed but still works with this line added
+                    totalCount += numWaysForRest;                                                     //To count number of times a number being added into numWaysForRest
+
+                }
+            }
+            memo[target] = totalCount;
+            return totalCount;      //if none of the 'word' is a valid prefix after finishing the 'for loop', return as 0. Otherwise return the new totalCount calculated in 'for loop'
+        };
+
+        console.log(countConstruct("purple", ["purp", "p", "ur", "le", "purpl"]));                   //2
+        console.log(countConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd"]));                   //1
+        console.log(countConstruct("skateboard", ["bo", "rd", "ate", "t", "ska", "sk", "boar"]));    //0
+        console.log(countConstruct("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o", "t"]));  //4
+        console.log(countConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeee", "eeeee", "eeeeee"]));  //0
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+09. allConstruct
+
+
+
+
 
 
 
