@@ -1169,6 +1169,113 @@ NOTE: In a nutshell
                     [abcd, ef]
                 ]                
 
+    Visualization Tree 01: -allConstruct("purple", ["purp", "p", "ur", "le", "purpl"])
+        //   
+        //                           purple
+        //            |-----------------|-----------------------|
+        //       -purp|               -p|                 -purpl|
+        //            |                 |                       |
+        //           le               urple                     e
+        //            |                 |               
+        //         -le|             -ur |                                 
+        //            |                 |              
+        //           ' '               ple         
+        //                              |
+        //                           -p |
+        //                              |
+        //                             le
+        //                              |
+        //                          -le |
+        //                              |
+        //                             ' '        
+        //                                                           
+        //NOTE:
+            The empty string will become the basecase
+            Basecases containing empty strings will return an empty array "[[]]"
+            The empty array will then return to the immediate parent node. 
+                Example: Node "le" and "le" will contain "[[le]]" and "[[le]]" respectively. (Absorbing the subtracted strings of the parent nodes)
+            The 2 arrays will continue upwards to another parent node until it reaches the main parent node
+                Example: Parent node "purple" will now contain [[purp, le]], [[p, ur, p, le]]             
+            Now these arrays will be concatenated to form a single 2D array
+                [
+                    [purp, le],
+                    [p, ur, p, le]
+                ]                
+            For the tree that does not end with empty string, return 1D empty array -> []
+                1D -> []
+                2D -> [[]]
+
+    CODE: Brute Force Method
+        const allConstruct = (target, wordBank) => {
+            if (target === '') return [[]];            
+            const result = [];                                                 //Create an array to store results
+            
+            for (let word of wordBank) {
+                if (target.indexOf(word) === 0) {                              //check if it is a prefix
+                    const suffix = target.slice(word.length);                  //returns the remainder of string and store in suffix
+                    //allConstruct(suffix, wordBank);                          //calls the function recursively on the suffix. allConstruct will contain an array containing suffix
+                    const suffixWays = allConstruct(suffix, wordBank);         //return value stored in suffixWays
+                    const targetWays = suffixWays.map(way => [word, ...way]);  //To find out the ways that make the original "target" string. Adding "word" to "suffixWays"
+                    result.push(...targetWays);                                //Pushes results from targetWays into the result array
+                }
+            }
+            return result;
+        };
+        
+        console.log(allConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']));                             // [[purp, le], [p, ur, p, le]]
+        console.log(allConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd', 'ef', 'c']));                  // [[ab, cd, ef], [ab, c, def],  [abc, def], [abcd, ef]]   
+        console.log(allConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar']));              // []
+        console.log(allConstruct('aaaaaaaaaaaaaaaaaaaaaaaaaaaaz', ['a', 'aa', 'aaa', 'aaaa', 'aaaaa']));     // []
+
+    Explanation: string.map()
+        Example 01:
+            arr = [1, 2, 3, 4];        //Creates the array
+            arr.map(el => el * 2);     //multiply every element by 2, Answer: [2, 4, 6, 8]
+        Example 02:
+            suffixWays = [['xy, 'z'], ['x', 'yz']];  //Creates the array
+            suffixWays.map(way => ['a', ...way])     //Answer: [['a', 'xy', 'z'], ['a', 'x', 'yz']]
+        Example 03:
+            arr = [1, 2, 3, 4];         //Creates the array
+            nums = [7, 8];              //Creates another array
+            arr.push(nums);             //Adds in entire array into another. -> [1, 2, 3, 4, [7, 8]]
+            arr.push(...nums);          //Adds in contents of an array into another to form a single array -> [1, 2, 3, 4, 7, 8]
+
+    CODE: Memoization Method
+        const allConstruct = (target, wordBank, memo={} ) => {        //Create memo object
+            if (target in memo) return memo[target];                  //Use target as key
+            if (target === '') return [[]];            
+            const result = [];                              
+            
+            for (let word of wordBank) {
+                if (target.indexOf(word) === 0) {                            
+                    const suffix = target.slice(word.length);  
+                    //allConstruct(suffix, wordBank);          
+                    const suffixWays = allConstruct(suffix, wordBank, memo);      //Add memo to recursive calls 
+                    const targetWays = suffixWays.map(way => [word, ...way]);  
+                    result.push(...targetWays);         
+                }
+            }
+            memo[target] = result;           //Stores result in memo
+            return result;
+        };
+        
+        console.log(allConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']));                         // [[purp, le], [p, ur, p, le]]
+        console.log(allConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd', 'ef', 'c']));              // [[ab, cd, ef], [ab, c, def],  [abc, def], [abcd, ef]]   
+        console.log(allConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar']));          // []
+        console.log(allConstruct('aaaaaaaaaaaaaaaaaaaaaaaaaaaaz', ['a', 'aa', 'aaa', 'aaaa', 'aaaaa'])); // []    NOTE: If there is no 'z' at the end of the target, memoization will never solve the problem as it is infinite in itself.
+
+    Complexity:
+        m = target.length
+        n = wordBank.length
+        O(n^m) time
+        O(m) space
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+10. Fibonacci Tabulation
+
+
+
 
 
 
