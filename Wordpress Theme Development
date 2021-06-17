@@ -676,7 +676,179 @@ Conclusion
                         }                        
                     }
 
-    Redesign the columns
+    Redesign the columns and move "contact phone" to the left end of the screen
+        //mytheme >> page-templates >> header.php  
+            <div id="wrapper-navbar">
+                <div class="top-header-holder">
+                    <div class="container">
+                        <div class="row align-items-end">
+                            //<div class="col-4">            //Removed. "col-" not used since disabled in earlier process
+                            <div class="col-md-4">         //"md" being added for the class - (@media), [See "Cellphone size header" topic]
+                                <a href="/" class="logo-holder">
+                                    <img src="<?php echo get_template_directory_uri(); ?> /img/logo.svg" alt="My Theme Logo" width="275">
+                                </a>
+                            //<div class="col-md-4">
+                            <div class="col-md-6">     //"md" being added for the class - (@media), [See "Cellphone size header" topic]
+
+    Add menu hamburger to the top right hand corner of screen
+        //mytheme >> page-templates >> header.php  
+            <div id="wrapper-navbar">
+                <div class="top-header-holder">
+                    <div class="container">
+                        <div class="row align-items-end">
+                        
+                            //<div class="col-6">
+                            <div class="col-md-6">
+                                <div class="reservation-holder">
+                                    <div class="contact-holder">
+                                        <a href="#" class="phone"><i class="fa fa-phone"></i>12345</a> 
+                                        <a href="#" class="address"><i class="fa fa-map"></i>Texts texts</a>
+                                        <div class="social-media-holder-tablet"> ... </div>
+                                        
+                                        //<button class="navbar-toggler" type="button" data-toggle="collapse"   
+                                        <button class="navbar-toggler md-view" type="button" data-toggle="collapse"        //Add "md-view" to "navbar-toggler" . To add"md-view" to _theme.scss
+                                        data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" 
+                                        aria-expanded="false" aria-label="<?php esc_attr_e('Toggle navigation', 'understrap'); ?>" >           
+                                            <div class="bar"></div>                                                                 
+                                            <div class="bar"></div>
+                                            <div class="bar"></div>
+                                            <div class="menu-title">                                                    
+                                                Menu                                                  
+                                            </div>
+                                        </button>     
+                                        
+                                    </div>
+                                    <a href="#" class="reservation-btn">Make reservation</a> //"a" tags adds in links
+                                </div>
+                            </div> //col-6              
+                            
+
+        //mytheme >> sass >> theme >> _theme.scss     ->    show one of the two menu icons
+            #wrapper-navbar {} > 
+                .top-header-holder {} >>
+                    .navbar-toggler {
+                        display: none;            
+                        @media(max-width:$lg) {      
+                            display: block;
+                        }
+                        padding: 0em 1em;  
+                        padding-top: 1em;  
+                        &:hover {
+                            background: rgba(#5DA0AA, 0.25);
+                        }
+                        .bar {
+                            height: 4px;
+                            border-radius: 4px;
+                            background: rgba(5DA0AA, 0.5);    
+                            margin-bottom: 4px;          
+                            width: 2.5em;           
+                        }
+                        .menu-title {                             
+                            font-size: 14px;
+                            margin-top: 2.5em;
+                            text-transform: uppercase;   
+                            font-weight: 600;         
+                        }                        
+                        @media(max-width: $md) {
+                            display: none;                        //disabling this line will show 2 separate menu icons before adding the ".md-view" class
+                            &.md-view {
+                                display: block;                   //this line will show only 1 menu icon
+                            }
+                        }
+                    }
+
+        //mytheme >> sass >> theme >> _theme.scss -> resizing the menu icon
+            #wrapper-navbar
+                .top-header-holder {} >>
+                    .contact-holder {
+                        @media(max-width:$md) {
+                            display: flex;                      //Makes the icon to appear next to the phone contact column
+                            justify-content: space-between;     //add spaces between contact number and menu icon, making both of them appear to either end of screen
+                        }
+                    }
+    
+    Modifying the menu icon
+        //mytheme >> sass >> theme >> _theme.scss
+            #wrapper-navbar { }
+                .top-header-holder { }
+                
+                    .container {}
+                        .contact-holder {
+                            @media(max-width:$md) {          //To be added in order to resize the contact number
+                                font-size: 18px;                                 
+                            }
+                        }                    
+                    
+                    .navbar-toggler { }
+                        .bar {                               //Copy and paste entire bar class into @media block
+                            height: 4px;
+                            border-radius: 4px;
+                            background:rgba(#5DA0AA, 0.5);
+                            margin-bottom:4px;
+                            width:2.5em;
+                        }
+                        
+                        .menu-title { ... }
+                        
+                        &.md-view {
+                            display: none;                   //Hides straying menu icon
+                        }
+                        
+                        @media(max-width:$md) {
+                            display:none;
+                            &.md-view {
+                                //display:block;
+                                display: flex;               //Changes the bars in menu icon
+                                padding: 0.5em;
+                                padding-bottom: 0.5em;
+                                align-items: center;         //Aligns the icon and the title
+                                margin:-0.5em;
+                                .menu-title {
+                                    margin-top: 0px;
+                                    margin-right: 0.5em;     //Add space between the 3 bars and the text
+                                    font-size: 18px;
+                                }
+                                .bar {                       //Copied from .navbar-toggle > .bar. Also shrinks the width and weight of the 3 bars
+                                    height: 3px;
+                                    border-radius: 3px;
+                                    background:rgba(#5DA0AA, 0.5);
+                                    margin-bottom:2px;
+                                    width:2em;
+                                }                                
+                            }
+                        }
+
+        //mytheme >> page-templates >> header.php
+            <div id="wrapper-navbar">
+                <div class="top-header-holder">
+                    <div class="container">
+                        <div class="row align-items-end">
+                            <div class="col-md-6">
+                                <div class="reservation-holder">
+                                    <div class="contact-holder">
+                                        <button class="navbar-toggler md-view" type="button" data-toggle="collapse" 
+                                        data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" 
+                                        aria-expanded="false" aria-label="<?php esc_attr_e('Toggle navigation', 'understrap'); ?>" >       
+                                            <div class="menu-title">                        //Insert the menu-title block
+                                                Menu
+                                            </div>
+                                            <div>                                           //Create div tag for the 3 bars
+                                                <div class="bar"></div>                     //Insert under div tag                                          
+                                                <div class="bar"></div>                     //Insert under div tag   
+                                                <div class="bar"></div>                     //Insert under div tag   
+                                            </div>
+                                            //<div class="menu-title">                      //Move title block to before div tag for menu icon                              
+                                            //    Menu                                                  
+                                            //</div>
+                                        </button>  
+
+    Adds logo below the header line
+
+
+
+
+
+
 
 
 
