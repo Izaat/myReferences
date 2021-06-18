@@ -907,7 +907,7 @@ Conclusion
                             }
                             @media(max-width: $md) {
                                 display: none;    
-                                &.mobile {                                               //Add this line to show the button
+                                &.mobile {                              //Add this line to show the button
                                     display: block;
                                     margin-top: 10px;
                                 }
