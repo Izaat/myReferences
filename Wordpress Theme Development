@@ -14,8 +14,8 @@ CONTENT
 09. Header Responsive Design
 10. Header Mobile Menu Button and Nav
 11. Header Mobile Menu Button and Nav (Narrow Screens)
+12. Header Logo and Nav for mobile
 
-Header Logo and Nav for mobile
 Home Page Hero Banner
 Home Call to Action Section
 Home Welcome to Section
@@ -842,7 +842,82 @@ Conclusion
                                             //</div>
                                         </button>  
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+12. Header Logo and Nav for mobile
+
     Adds logo below the header line
+        //mytheme >> page-templates >> header.php
+            <div id="wrapper-navbar">
+                <div class="top-header-holder">
+                    <div class="container">            
+                        <div class="mobile-logo-holder">          //Create new div class
+                            <a href="/">   //add link to logo holder, styled in css (display:block)
+                                <img src="<?php echo get_template_directory_uri(); ?> /img/logo.svg" alt="My Theme Logo">
+                            </a>
+                        </div>
+
+        //mytheme >> sass >> theme >> _theme.scss
+            #wrapper-navbar {}
+                @media(max-width:$lg) { ... }      //Add mobile-logo-holder below this class
+                
+                .mobile-logo-holder {
+                    text-align: center;                    //Centers the logo
+                    display: none;                         //hides the centered logo
+                    @media(max-width:$md) {      //Centered logo only appears in $md
+                        display: block;  
+                    }                    
+                    img {
+                        width: 66%;              //Shows the logo
+                        @media(max-width:$sm) {
+                            width: 100%;        //Show 100% width if viewport gets any smaller than $md (can't be simulated in browser)
+                        }
+                    }
+                }
+   
+    Adds reservation button under the logo
+        //mytheme >> page-templates >> header.php
+            <div id="wrapper-navbar">
+                <div class="top-header-holder">
+                    <div class="container">            
+                        <div class="mobile-logo-holder">  
+                            <div>   
+                                <a href ... <?php echo ... ... Logo"></a>                              //Move this line to div tag
+                            </div>
+                            <div>                                                                      //Adds a button and move to div tag
+                                <a href="#" class="reservation-btn mobile">Make a reservation</a> 
+                            </div>
+
+        //mytheme >> sass >> theme >> _theme.scss
+            #wrapper-navbar
+                .mobile-logo-holder {}
+                    img{
+                        width: 66%;
+                        margin-top: 10px;                              //Add this line
+                        margin-bottom: 10px;                           //Add this line
+                        @media(max-width:$sm) {
+                            width:85%;                                 //Change to 85% from 100
+                        }
+                    }
+                
+                .top-header-holder {} >>
+                    .container {}
+                        .reservation-btn {
+                            @media(max-width: $lg) {
+                                font-size:18px;                            
+                            }
+                            @media(max-width: $md) {
+                                display: none;    
+                                &.mobile {                                               //Add this line to show the button
+                                    display: block;
+                                    margin-top: 10px;
+                                }
+                            }
+                        }                        
+        
+    Adds separation line in header (between logo and menu icon)
+        
+
+
 
 
 
