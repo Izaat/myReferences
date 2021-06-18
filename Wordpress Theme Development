@@ -15,8 +15,8 @@ CONTENT
 10. Header Mobile Menu Button and Nav
 11. Header Mobile Menu Button and Nav (Narrow Screens)
 12. Header Logo and Nav for mobile
+13. Home Page Hero Banner
 
-Home Page Hero Banner
 Home Call to Action Section
 Home Welcome to Section
 Home News Section
@@ -915,6 +915,86 @@ Conclusion
                         }                        
         
     Adds separation line in header (between logo and menu icon)
+        //mytheme >> page-templates >> header.php
+            <div id="wrapper-navbar">
+                <div class="top-header-holder">
+                    <div class="container">            
+                        //<div class="mobile-logo-holder">                      //CUT the entire mobile-logo-holder section and paste outside wrapper-navbar class
+                        //    <div>                                             //Do the same thing with CSS .mobile-logo-holder class
+                        //        <a href ... <?php echo ... ... Logo"></a>  
+                        //    </div>
+                        //    <div>     
+                        //        <a href="#" class="reservation-btn mobile">Make a reservation</a> 
+                        //    </div>    
+                        //</div>
+                        
+            <div class="container">                                              //Add container to the section             
+                <div class="mobile-logo-holder">                                 //Paste entire section below wrapper-navbar
+                    <div>                                                 
+                        <a href ... <?php echo ... ... Logo"></a>  
+                    </div>
+                    <div>     
+                        <a href="#" class="reservation-btn mobile">Make a reservation</a> 
+                    </div>    
+                </div>      
+            </div>                
+
+        //mytheme >> sass >> theme >> _theme.scss
+
+            .reservation-btn {                         //Paste the entire section outside of wrapper-navbar class 
+                @media(max-width: $lg) {
+                    font-size:18px;                            
+               }
+                @media(max-width: $md) {
+                    display: none;                 
+                }
+            }
+        
+            .mobile-logo-holder {}                     //Paste the entire section and paste outside of wrapper-navbar class   
+                img{
+                    width: 66%;
+                    margin-top: 10px;                       
+                    margin-bottom: 10px;                  
+                    @media(max-width:$sm) {
+                        width:85%;                              
+                    }
+                }                
+                
+            #wrapper-navbar
+                //.mobile-logo-holder {}                //Cut the entire section and paste outside of wrapper-navbar class                  
+                //    img{
+                //        width: 66%;
+                //        margin-top: 10px;                     
+                //        margin-bottom: 10px;                     
+                //        @media(max-width:$sm) {
+                //            width:85%;                                
+                //        }
+                //    }        
+
+                .top-header-holder {}
+                    .container{}
+                        //.reservation-btn {              //Cut the entire section and paste outside of wrapper-navbar class 
+                        //    @media(max-width: $lg) {
+                        //        font-size:18px;                            
+                        //   }
+                        //    @media(max-width: $md) {
+                        //        display: none;                       
+                        //    }
+                        //}
+
+            #main-nav {}
+                //border-top: 1px solid rgba(#5DA0AA, 0.5);                 //To be removed
+                border-bottom: 1px solid rgba(#5DA0AA, 0.5);
+                padding: 0px;
+                @media (max-width:$md) {                                       //To be added
+                    border-top: 0px;
+                }
+                ul {} >  li {} > a { ... }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+13. Home Page Hero Banner
+
+
         
 
 
