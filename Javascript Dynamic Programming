@@ -1368,26 +1368,32 @@ NOTE: In a nutshell
         // fib(4)      fib(5)
 
 
-    CODE:
+    CODE: 
         const fib = (n) => {
-            //const table = Array(n + 1);          //creating an array and naming it "table", with dimension of 'n'. Last index will be 'n'. Indices start at 0 hence +1
-            //console.log(table);                  //Only be used for testing the line above. Answer: [<7 empty items>]. Meaning elements are undefined.
+            //const table = Array(n + 1);           //creating an array and naming it "table", with dimension of 'n'. Last index will be 'n'. Indices start at 0 hence +1
+            //console.log(table);                   //Only be used for testing the line above. Answer: [<7 empty items>]. Meaning elements are undefined.
             
-            //const table = Array(n + 1).fill(0);  //To define an array, fill with numbers by filling up the array with zeros
-            //console.log(table);                  //Only be used for testing the line above. Answer: [0, 0, 0, 0, 0, 0, 0]. Meaning elements are defined.
+            //const table = Array(n + 1).fill(0);   //To define an array, fill with numbers by filling up the array with zeros
+            //console.log(table);                   //Only be used for testing the line above. Answer: [0, 0, 0, 0, 0, 0, 0]. Meaning elements are defined.
             
             const table = Array(n + 1).fill(0);
-            table[1] = 1;                          //Adding 1 to index 1 of the table, as mentioned in the explanation section
-            for (let i = 0) {
-            
+            table[1] = 1;                           //Adding 1 to index 1 of the table, as mentioned in the explanation section
+            for (let i = 0; i <= n; i++) {          //Iteration loop: starts with 0; includes 'n'; increment through every position
+                //table[i + 1];                     //Looks at position 1 from starting point
+                //table[i + 2];                     //Looks at position 2 from starting point
+                table[i + 1] += table[i];           //increment by the value of the current position
+                table[i + 2] += table[i];           //increment by the value of the current position
             }
+            return table[n];
         };
         
-        console.log(fib(6)); //8
-        console.log(fib(7)); //13
-        console.log(fib(8)); //21
+        console.log(fib(6));  //8
+        console.log(fib(7));  //13
+        console.log(fib(8));  //21
         console.log(fib(50)); //12586269025
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+11. gridTraveler
 
 
 
