@@ -1054,6 +1054,62 @@ Conclusion
             }
             
     Setting up Header Text for Responsive
+        //mytheme >> sass >> theme >> _theme.scss
+            
+            body {
+                height: 8000px;                         //Set standard height
+            }
+            
+            #wrapper-navbar { ... }
+            .home-banner {
+                .
+                .
+                .
+                @media(max-width:$xl){                 //The reason for using "xl, lg, md" INSTEAD of "lg, md, sm" is to make it break 1 viewport earlier
+                    padding-bottom: 100px;              //This way, the format of the text will stay the same (having 1 row text instead of double rows)
+                }
+                @media(max-width:$lg){
+                    padding-bottom: 75px;
+                }
+                @media(max-width:$md){
+                    padding-bottom: 60px;
+                }     
+                
+                &.after {
+                    .
+                    .
+                    .
+                    @media(max-width:$xl){
+                        height: 200px;
+                    }
+                    @media(max-width:$lg){
+                        height: 150px;
+                    }
+                    @media(max-width:$md){
+                        height: 125px;
+                    }                  
+                }
+                h1{
+                    .
+                    .
+                    .
+                    z-index...
+                    @media(max-width:$xl){
+                        font-size: 72px;
+                    }
+                    @media(max-width:$lg){
+                        font-size: 48px;
+                    }
+                    @media(max-width:$md){
+                        font-size: 36px;
+                    }
+                }                
+
+
+
+
+
+
 
 
 
