@@ -992,7 +992,73 @@ Conclusion
                 ul {} >  li {} > a { ... }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-13. Home Page Hero Banner
+13. Home Page Hero Banner (Header Text)
+    
+    Banner Title / Header Text
+        //mytheme >> page-templates >> template-home.php
+            <?php
+            ...
+            get_header();
+            ?>
+            <div class="home-banner">                                 //Add div class with header tag
+                <div class="container">                               //Add container to center the text as mentioned in _theme.scss
+                    <h1>A dining Experience</h1>
+                </div>
+            </div>
+            <?phpget_footer();
+
+        //mytheme >> sass >> theme >> _theme.scss
+            #wrapper-navbar { ... }
+            .home-banner {
+                height: 1080px;
+                background-image ...
+                background-size ...
+                background-position ...
+                display: flex;                                         //Add display tag here
+                flex-direction: column;                                //Add flex direction tag here
+                justify-content: flex-end;                             //Add flex position here
+                padding-bottom: 115px                                  //Add bottom padding to the header text
+                @media(max-width:$lg) {
+                    background-position: top -350px center;
+                    height: 800px;                                      //Add size to fonts. But container needed to center the text
+                }
+                h1 {                                                    //Add h1 tag here
+                    font-size: 100px;
+                    font-family: "Fredericka the Great"; 
+                    position: relative;                                 //Bring text layer to front 
+                    z-index:1000;                                       //Bring text layer to front 
+                }
+            }
+
+    Add opaque gradient layer across the header text
+        //mytheme >> sass >> theme >> _theme.scss
+            #wrapper-navbar { ... }
+            .home-banner {
+                .
+                .
+                .
+                justify-content: flex-end;
+                &:after {                                                //Add opaque layer with empty content
+                    content:" ";
+                    display: block;
+                    height: 230px;
+                    //background: red;                                   //Colored red for preview, use linear gradient instead
+                    background: linear-gradient(to bottom, rgba(white, 0), rgba(white, 1));    //linear-gradient(direction, rgba(color, opacity), rgba(color, opacity))
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                }
+                @media(...){...}
+                h1{...}
+            }
+            
+    Setting up Header Text for Responsive
+
+
+
+
+
 
 
         
