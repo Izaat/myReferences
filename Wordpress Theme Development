@@ -1145,7 +1145,7 @@ Conclusion
                     height: 450px;
                 }
                 @media(max-width:$md) {                      //Added for small size viewport
-                    height: 350px;
+                    height: 300px;
                 }
 
 
