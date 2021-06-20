@@ -9,6 +9,7 @@ CONTENTS
 05. React Development Tools
 06. DOM Events
 07. Changing State and 'this'
+08. Introduction to Forms
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -291,5 +292,64 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 07. Changing State and 'this'
+
+    Undefined "this" function
+        <body>
+            <div id="app"></div>
+            <script type="text/babel">           
+                class App extends React.Component {       
+                    state = {                 
+                        name: 'Ryu',       
+                        age: 30
+                    }                  
+                    handleClick(e) {                
+                        //console.log(e.target);                      //Original code
+                        console.log(this.state);                      //Should have the same result but it's not defined
+                    }
+                    render() {                                  
+                        return (                                 
+                            <div className="app-content">
+                                <h1> Hello </h1>      
+                                <p>My name is: { this.state.name } and I am {this.state.age}</p> 
+                                <button onClick={this.handleClick}>Click Me </button> 
+                            </div>
+                        )
+                    }
+                }    
+                ReactDOM.render(<App />, document.getElementById('app'));    
+            </script>
+        </body>    
+
+    The "this" keyword
+        The keyword is determined by how and when the function is called and not by where the location of the function
+        Therefore, the keyword in onClick has lost its function in "this.state". Similar to public/private class
+        For new version of react, keyword must be binded to the function
+
+    Solution: -Use arrow function        
+        handleClick = (e) => {                       //This will make the keyword "public"
+            console.log(this.state);
+        }
+
+    Changing the property value: Name to another name
+        handleClick = (e) => {            
+            //this.state.name = 'yoshi'                //This is a bad practice
+            //this.setState({ });                      //use the setState function and '{}' object represents the state
+            this.setState({ 
+                name: 'Yoshi',
+                age: 25
+            });  
+            console.log(this.state);
+        }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+08. Introduction to Forms
+
+
+
+
+
+
+
 
 
