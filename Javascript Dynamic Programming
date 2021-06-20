@@ -1570,6 +1570,65 @@ NOTE: In a nutshell
             //         |------|------|------|------|
             //             
 
+    Complexity:
+        Since there are m rows and n columns, therefore m*n
+            Time: O(mn)
+        Space complexity will be the same as Time complexity
+            Space: O(mn)
+
+    CODE:
+        const gridTraveller = (m , n) => {
+            //const table = Array(m + 1)                        //+1 more row because of the indexing number begins at 0
+            //const table = Array(m + 1).fill().map()     //To apply the same thing on other subarrays
+            
+            const table = Array(m + 1)
+                .fill()                                                                              //See explanation code on why ".fill(Array(n+1))" is not being used
+                //.map(() => Array(n+1));                                              //Make every element a new array, add 1 for number of columns
+                .map(() => Array(n+1).fill(0));                                       //Fill entire grid with zeros
+            table[1][1] = 1;                                                                 //Set gridTraveller(1,1) value to 1
+            //console.log(table);                                                        //Only used for testing
+            for (let i = 0; i <= m; i++) {                                                  //To travel through the grid by iteration (Nested loop)
+                for (let j = 0; j <= n; j++) {                                               //To travel through the grid by iteration (Inner loop)
+                    const current = table[i][j];                                        //Take the current location (i, j) and add to right and bottom neighbors
+                    //table[i][j + 1] += current;                                      //Take value of current location and add to the neighbor on the right
+                    //table[i + 1][j] += current;                                      //Take value of current location and add to the neighbor below it
+                    if (j + 1 <= n) table[i][j + 1] += current;                   //Add out of bound logic: If j value is lower than required value, then increment
+                    if (i + 1 <= m) table[i + 1][j] += current;                  //Add out of bound logic: If i value is lower than required value, then increment
+                }
+            }
+            
+            return table [m] [n];
+        };
+
+        console.log(gridTraveller(1, 1)); //1
+        console.log(gridTraveller(2, 3)); //3
+        console.log(gridTraveller(3, 2)); //3
+        console.log(gridTraveller(3, 3)); //6
+        console.log(gridTraveller(18, 18)); //2333606220
+
+
+    Explanation code: .fill(Array(n+1))
+    
+        Example 1:        This fills the outer array with single array instance multiple times not allowing to select individual grid as required by the question
+            const gridTraveller = (m , n) => {
+                const table = Array(m + 1).fill(Array(n+1));
+                table [0] [0] = 'x';
+                console.log(table);            
+            };
+            console.log(gridTraveller(3, 2)); //3
+
+        Example 2:
+            const gridTraveller = (m , n) => {
+                const table = Array(m + 1).fill().map(() => Array(n+1));
+                table [0] [0] = 'x';
+                console.log(table);            
+            };
+            console.log(gridTraveller(3, 2)); //3
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+12. tabulation recipe
+
+
 
 
 
