@@ -1626,7 +1626,17 @@ NOTE: In a nutshell
             console.log(gridTraveller(3, 2)); //3
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-12. tabulation recipe
+12. Tabulation recipe
+
+    Main Steps
+        1. visualize the problem as a table (size and dimensions based on inputs)
+        2. Initialize the table with default values (numbers, booleans)
+        3. Seed the trivial answer into the table. Example: Use (3, 3) grid before running on (200, 200) grid
+        4. Iterate through the table (Loops), fill further positions based on the current position
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+13. canSum
 
 
 
