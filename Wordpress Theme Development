@@ -1095,6 +1095,9 @@ Conclusion
                     .
                     .
                     z-index...
+                    @media(max-width:$xl){
+                        font-size: 90px;
+                    }                         
                     @media(max-width:$lg){
                         font-size: 72px;
                     }
