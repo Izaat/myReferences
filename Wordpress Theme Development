@@ -1137,7 +1137,7 @@ Conclusion
                 &.after{...}
                 //@media(max-width:$lg) {                    //Change to $xl
                 @media(max-width:$xl) {        
-                    background-position: top -350px center;
+                    //background-position: top -350px center;
                     //height: 800px;                         //Change to 650px
                     height: 650px;
                 }
