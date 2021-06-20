@@ -1,0 +1,292 @@
+https://github.com/iamshaunjp/react-redux-complete-playlist/branches/stale
+React Fundamentals
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01. Introduction
+02. React Setup (with CDN)
+03. Creating React Components
+04. State
+05. React Development Tools
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Introduction
+    
+    Redux
+        > A layer on top of react
+        > Helps with state management of the app
+            - data management
+            - UI state of the app
+            
+    Fundamentals
+        React Basics - components, events, templates, props and forms
+        React Router - routes, route parameters, redirects
+        Redux - stores, actions and reducers
+        
+    How it works
+        React's components is the same as Flutter's widgets
+        DOM (Doc Object Model) is an interface ie Web Browser
+        Virtual DOM (VDOM) is 
+            Native to React where it will render the document before sending to the actual DOM
+            When program update takes place, VDOM will render and compare between the old and new render
+            It will then update the affected area, instead of reloading entire page
+            VDOM method saves page loading time
+
+        Components
+            Contains JSX (Javascript XML) Looks similar to HTML + JS
+            Contains state (data or UI state)
+            Contains JS for functionality
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. React Setup (with CDN)
+    Go to link: https://reactjs.org/docs/cdn-links.html
+    Get the script: 
+        <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    In VSCode:
+        Create a new file and save as empty html file
+        Type in : "doc" and then press tab
+            html structure will appear
+        Insert the scripts below the meta tags
+        Inside body tag, type in "div.#app"
+            <div class="" id="app"></div>  //This line will appear and remove -> class=""
+
+    Packages to be installed into VSCode:
+        ES7 React/Redux/GraphQL/React-Native snippets      //Contains libraries
+        Live Server                                                                     //Similar to Xampp to run React
+        Sublime Babel                                                               //Syntax highlighting
+        Monokai++                                                                    //Sublime theme for VSCode
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Creating React Components
+    
+    JSX:
+        Unlike html/php, JSX can only handle single root tags. Example: <div><ul><li><a></a></li></ul></div> where div is the root tag
+        "Class" keyword can't be used. Example: <div class="">. Instead, use "className". Example: <div className="">
+        <App /> where App is the class name and / is the closing tag similar to "</App>"
+        JSX is not supported by web browsers.
+            Solution is to add in babel loading script into the program, Link: https://babeljs.io/setup#installation
+            <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    CODE: - Static
+        <body>
+            //<div class="" id="app"></div>                         //Class need to be removed
+            <div id="app"></div>
+            //<script>                                                             //Create script tags inside of body tag
+            <script type="text/babel">                                  //type="text/babel" must be added once the babel loading script is inserted
+                class App extends React.Component {           //class name to be used in the ReactDOM function
+                    render() {                                                     //This function is responsible for rendering the template
+                        return (                                                    //To return JSX template. JSX enables html code to be written in JS
+                            <div className="app-content">
+                                <h1> Hello </h1>                            //JSX testing
+                            </div>
+                        )
+                    }
+                }    
+                ReactDOM.render(<App />, document.getElementById('app'));           //*.render(<class>, where to render)
+            </script>
+        </body>
+
+    Running the program:
+        Right click and select "Open with Live Server"
+        Note that the html file MUST be inside the workspace folder
+
+    CODE: - Dynamic with Javascript
+        <body>
+            <div id="app"></div>
+            <script type="text/babel">           
+                class App extends React.Component {       
+                    render() {                                  
+                        return (                                 
+                            <div className="app-content">
+                                <h1> Hello </h1>      
+                                <p>{ Math.random()*10 }</p>              //JS codes can be inserted into the curly braces
+                            </div>
+                        )
+                    }
+                }    
+                ReactDOM.render(<App />, document.getElementById('app'));    
+            </script>
+        </body>
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. State
+    
+    What is Component State
+        > A JavaScript Object
+        > Describes the current state of the components
+            - data, UI-state
+        > The state of a component can be updated over time
+            - a model could close
+            - the data we output could change
+
+    Example 01: 
+        Shopping cart component in JS
+            {
+                items: [
+                    {name: 'navy jumper', price: 9.99},
+                    {name: 'ninja mask', price: 19.99}
+                ]
+            }
+
+        Updated shopping cart component in JS
+            {
+                items: [
+                    {name: 'navy jumper', price: 9.99},
+                    {name: 'ninja mask', price: 19.99},
+                    {name: 'black cloak', price: 29.99}    //This will be added to reflect the update
+                ]
+            }    
+
+    Example 02: 
+        Popup enabled:
+            {
+                showPopup: true
+            }
+
+        Popup disabled:
+            {
+                showPopup: false
+            }
+
+
+    CODE: -cont'd on html
+        <body>
+            <div id="app"></div>
+            <script type="text/babel">           
+                class App extends React.Component {       
+                    state = {                                //This adds the JS object
+                        name: 'Ryu',                     //But the 2 lines wont update what being output to the browser
+                        age: 30
+                    }
+                    render() {                                  
+                        return (                                 
+                            <div className="app-content">
+                                <h1> Hello </h1>      
+                                //<p>{ Math.random()*10 }</p> 
+                                <p>My name is: { this.state.name } 
+                                    and I am {this.state.age}</p>   //This means this current line. State means the state. Name means the element in the state.
+                            </div>
+                        )
+                    }
+                }    
+                ReactDOM.render(<App />, document.getElementById('app'));    
+            </script>
+        </body>        
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. React Development Tools
+
+    React Developer Tools - Download from Chrome Web Store
+        Assist to keep track of the states and components
+        After installing, if the browser lands on any website that uses React, the icon will light up
+
+    Usage
+        In React website, open browser inspection tool
+        Main Menu > React
+            By selecting the parent tree, the state of that tree will show up on the right hand panel
+            Values in the right hand panel can be change by just typing the new value (Website will updated in real time)
+            Also note that the "<App>...</App>" corresponds to the "App Class" covered in earlier topic. See Topic 3 or 4
+        There are 2 types of React icons: 
+            Production: Blue
+            Developer: Red
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+06. DOM Events
+    
+    Events:
+        onClick is an event
+        Follow link to see entire list: https://reactjs.org/docs/events.html#supported-events
+    
+    Create a Clickable event
+        <script type="text/babel">           
+            class App extends React.Component {       
+                state = {                 
+                    name: 'Ryu',       
+                    age: 30
+                }
+                handleClick(e)  {                                     //Defining the JS function. "e" is the event on page by default
+                    console.log(e.target)                          //"e" is event. "Target" is property of the event (what triigger element that causes the event -> onClick)
+                }
+                render() {                                  
+                    return (                                 
+                        <div className="app-content">
+                            <h1> Hello </h1>      
+                            <p>My name is: { this.state.name } 
+                                and I am {this.state.age}</p> 
+                            <button onClick={this.handleClick}>    
+                                Click Me    //Use the already defined JS function (handleClick). Note that if "this.handleClick()" is used, the function will be automatically triggered when the page loads
+                            </button> 
+                        </div>
+                    )
+                }
+            }    
+            ReactDOM.render(<App />, document.getElementById('app'));    
+        </script>
+
+    Create a Mouse over event
+        <script type="text/babel">           
+            class App extends React.Component {       
+                state = {                 
+                    name: 'Ryu',       
+                    age: 30
+                }
+                handleClick(e)  {        
+                    console.log(e.target)   
+                }
+                handleMouseOver(e)  {        
+                    console.log(e)   
+                }                
+                //handleMouseOver(e)  {        
+                //    console.log(e.target, e.pageX)            //pageX can be found in inspection, list in components > console   
+                //}                 
+                render() {                                  
+                    return (                                 
+                        <div className="app-content">
+                            <h1> Hello </h1>      
+                            <p>My name is: { this.state.name } 
+                                and I am {this.state.age}</p> 
+                            <button onClick={this.handleClick}>Click Me </button> 
+                            <button onMouseOver={this.handleMouseOver}>Hover Me </button> 
+                        </div>
+                    )
+                }
+            }    
+            ReactDOM.render(<App />, document.getElementById('app'));    
+        </script>
+
+
+    Create an onCopy event - When user tries to highlight a text and copy, another text will appear in console
+        <script type="text/babel">           
+            class App extends React.Component {       
+                state = { ... }
+                handleClick(e)  { ... }
+                handleMouseOver(e)  { ... }                           
+                handleCopy(e) {                                                                     //The event
+                    console.log('Try being original for once');
+                }
+                render() {                                  
+                    return (                                 
+                        <div className="app-content">
+                            <h1> Hello </h1>      
+                            <p>My name is: { this.state.name } 
+                                and I am {this.state.age}</p> 
+                            <button onClick={this.handleClick}>Click Me </button> 
+                            <button onMouseOver={this.handleMouseOver}>Hover Me </button> 
+                            <p onCopy={this.handleCopy}>What we think, we become</p>                     //The target
+                        </div>
+                    )
+                }
+            }    
+            ReactDOM.render(<App />, document.getElementById('app'));    
+        </script>
+
+
+
+
+
