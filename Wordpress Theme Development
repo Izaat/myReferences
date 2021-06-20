@@ -1057,7 +1057,7 @@ Conclusion
         //mytheme >> sass >> theme >> _theme.scss
             
             body {
-                height: 8000px;                         //Set standard height
+                height: 8000px;                        //Set standard height
             }
             
             #wrapper-navbar { ... }
@@ -1066,7 +1066,7 @@ Conclusion
                 .
                 .
                 @media(max-width:$xl){                 //The reason for using "xl, lg, md" INSTEAD of "lg, md, sm" is to make it break 1 viewport earlier
-                    padding-bottom: 100px;              //This way, the format of the text will stay the same (having 1 row text instead of double rows)
+                    padding-bottom: 100px;             //This way, the format of the text will stay the same (having 1 row text instead of double rows)
                 }
                 @media(max-width:$lg){
                     padding-bottom: 75px;
@@ -1089,25 +1089,61 @@ Conclusion
                         height: 125px;
                     }                  
                 }
+                @media(...) { ... }
                 h1{
                     .
                     .
                     .
                     z-index...
-                    @media(max-width:$xl){
+                    @media(max-width:$lg){
                         font-size: 72px;
                     }
-                    @media(max-width:$lg){
+                    @media(max-width:$md){
                         font-size: 48px;
                     }
-                    @media(max-width:$md){
+                    @media(max-width:$sm){
                         font-size: 36px;
                     }
                 }                
 
-
-
-
+    Adjusting header background image height
+        //mytheme >> sass >> theme >> _theme.scss
+            #wrapper-navbar { ... }                
+                position: relative;                         //Added because menu is missing
+                z-index:2000;                               //Added because menu is missing
+                margin-bottom ...
+            .home-banner {} 
+                .
+                .
+                .
+                @media(max-width:$lg){
+                    padding-bottom:75px;
+                    background-position: bottom center;     //Added - To compensate the too much negative positioning on image
+                }
+                .
+                .
+                .
+                position: relative;                          //Added
+                &.before {                                   //Copy and paste the entire "after" function, change "after" to "before"
+                    //background: linear-gradient(to bottom, rgba(white, 0), rgba(white, 1));           //change "bottom" to "top"
+                    background: linear-gradient(to top, rgba(white, 0), rgba(white, 1));
+                    position: ...
+                    //bottom: 0;                             //change "bottom" to "top"
+                    top: 0;
+                }
+                &.after{...}
+                //@media(max-width:$lg) {                    //Change to $xl
+                @media(max-width:$xl) {        
+                    background-position: top -350px center;
+                    //height: 800px;                         //Change to 650px
+                    height: 650px;
+                }
+                @media(max-width:$lg) {                      //Added for mid size viewport
+                    height: 450px;
+                }
+                @media(max-width:$md) {                      //Added for small size viewport
+                    height: 350px;
+                }
 
 
 
