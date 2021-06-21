@@ -1638,7 +1638,104 @@ NOTE: In a nutshell
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 13. canSum
 
+    Question:
+        Write a function 'canSum(targetSum, numbers)' that takes in a targetSum and an array of numbers as arguments.
+        The function should return a boolean indicating whether or not it is possible to generate the targetSum using numbers from the array.
+        You may use an element of the array as many times as needed.
+        You may assume that all input numbers are nonnegative.
+        
+    Example:
+        canSum(7, [5, 3, 4]) -> true, 3+4 OR 4+3
+        
+        Determine the table size by using the target number. 
+            length = targetSum + 1        
+            Therefore: 7+1=8 (0->7)
+            
+        Determine what should be stored inside the table    
+            Answer is in boolean (true or false)
+            Therefore: boolean data should be in the table
 
+        Initialization:
+               0   1    2   3    4   5   6    7
+            | F | F | F | F | F | F | F | F |
+
+        Seeding:
+            Using canSum(0, [...]) -> true
+            Since the target is zero, anything in the array will result with True, hence, index 0 will contain the value of "true"
+               0   1    2   3    4   5   6    7
+            | T | F | F | F | F | F | F | F |
+            This will be the base before the iteration
+
+        Iterating through the table from index 0
+            Start by looking at index 0 of the table which contains the value of "true"
+            And then look at the array with the first value of 5, which means index 5 of the table
+            Jumping from index 0 to index 5 will return true since index 5 will absorb the value from index 0
+               0   1    2   3    4   5   6    7
+            | T | F | F | F | F | T | F | F |
+
+            Repeat process for index 3 and 4
+               0   1    2   3    4   5   6    7
+            | T | F | F | T | T | T | F | F |
+
+        Iterating through the table from index 1 and 2
+            Think of F as 0 and T as 1, Therefore anything with the result of T cant absorb the value F        
+            Start by looking at index 1 of the table which contains the value of "false"
+               0   1    2   3    4   5   6    7
+            | T | F | F | T | T | T | F | F |
+
+        Iterating through the table from index 3
+            Jumping 5 steps ahead from index 3 will return "out of bounds", index 8
+            Jumping 3 steps ahead from index 3 will return "True", index 6
+            Jumping 4 steps ahead from index 3 will return "True", index 7
+               0   1    2   3    4    5    6    7           8
+            | T | F | F | T | T | T | F | F | Out of Bounds |
+
+            NOTE: Notice that at this point everything past 7 will all be True
+
+
+    Complexity:
+        m = targetSum
+        n = numbers.length
+
+        O(mn) time
+        O(m) space
+        
+    CODE: 
+        const canSum = (targetSum, numbers) => {
+            //const table = Array(targetSum + 1);                    //Creating a table with 8 columns (0 -> 7)
+            const table = Array(targetSum + 1).fill(false);          //Initialize with all values as false
+            table[0] = true;                                         //Set index 0 to true
+            
+            //for (let i = 0; i <= table.length; i++) {              //Iterate through every element
+            for (let i = 0; i <= targetSum; i++) {                   //Better than table.length. See code problem below
+                if (table[i] === true) {                             //Check if the value in table is true
+                    for (let num of numbers) {                       //If true, then grab the values (num) from the numbers array
+                        //table[i + num];                            //Add current position to num to jump
+                        table[i + num] = true;                       //Assign the destination position as true
+                    }
+                }
+            }            
+            return table[targetSum];
+        };
+
+        
+
+        console.log(canSum(7, [2, 3]));       //T
+        console.log(canSum(7, [5, 3, 4, 7])); //T
+        console.log(canSum(7, [2, 4]));       //F
+        console.log(canSum(8, [2, 3, 5]));    //T
+        console.log(canSum(300, [2, 3]));     //F
+
+
+    CODE Bug;
+        const arr = ['a', 'b', 'c'];
+        arr[10] = 'x';             //This will actually add 7 more sections to the array and also add 'x' on the 11th
+        console.log(arr);          //Answer: ['a', 'b', 'c', <7 empty items>, 'x']
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+14. howSum
 
 
 
