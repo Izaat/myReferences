@@ -1153,6 +1153,230 @@ Conclusion
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 14. Home Call to Action Section (Buttons below header texts)
 
+    Create buttons (3 pcs - Begin with First button)
+        //mytheme >> page-templates >> template-home.php
+            .
+            .
+            .
+            <div class="home-banner"... </div>
+            <div class="home-call-to-action">
+                <div class="container">
+                    <div class="row">
+                    
+                        <div class="col-lg-4">                             //This adds the 3 circles
+                            <div class="call-to-action">
+                                <div class="image">
+                                    360
+                                </div> 
+                            </div>                    
+                        </div>                        
+                        
+                        <div class="col-lg-4">
+                            <div class="call-to-action">
+                                360
+                            </div>                            
+                        </div> 
+                        
+                        <div class="col-lg-4">
+                            <div class="call-to-action">
+                                360
+                            </div>                            
+                        </div> 
+                        
+                    </div>
+                </div>
+            </div>
+            
+        //mytheme >> sass >> theme >> _theme.scss
+            .
+            .
+            .
+            #wrapper-navbar {...}
+            .home-banner {...}
+            .home-call-to-action {
+                .call-to-action {
+                    border-radius: 50%;
+                    background: $primary;
+                    padding-bottom: 100%;
+                    position: relative;                     //Without this, the circle becomes warped semi circle
+                    .image {
+                        //Size of image: 600x600px
+                        //width: 100%;                       //Removed after top, left, right, bottom: 15px being added
+                        //padding-bottom: 100%;       //Removed after top, left, right, bottom: 15px being added
+                        //background-color: red;      //Remove once the adjustments being made
+                        background-image: url(../img/call-to-action-1.jpg);
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        position: absolute;               //Without this, the image sits on top of the warped circle
+                        top: 30px;
+                        left: 30px;
+                        right: 30px;
+                        bottom: 30px;
+                        border-radius: 50%;               //This will turn the image into a circle
+                    }
+                }
+            }
+
+    Add text across the button (Button 1)
+        //mytheme >> page-templates >> header.php
+            <div id="wrapper-navbar">
+            </div>
+
+            <div class="container">                               
+                <div class="mobile-logo-holder">  
+                    <div>                                                 
+                        <a href ... <?php echo ... ... Logo"></a>  
+                    </div>
+                    <div>     
+                        <a href="#" class="reservation-btn mobile">Make a reservation</a> 
+                    </div>    
+                </div>      
+            </div>    
+
+        //mytheme >> page-templates >> template-home.php
+            .
+            .
+            .
+            <div class="home-banner"... </div>
+            <div class="home-call-to-action">
+                <div class="container">
+                    <div class="row">
+                    
+                        <div class="col-lg-4">   
+                            <div class="call-to-action">
+                                <div class="image"></div> 
+                                <div class="title"> Dining Menu </div>                   //For title
+                            </div>                    
+                        </div>                        
+                        
+                        <div class="col-lg-4">
+                            <div class="call-to-action">
+                                360
+                            </div>                            
+                        </div> 
+                        
+                        <div class="col-lg-4">
+                            <div class="call-to-action">
+                                360
+                            </div>                            
+                        </div> 
+                        
+                    </div>
+                </div>
+            </div>
+
+        //mytheme >> sass >> theme >> _theme.scss
+            $primary-300: #5DA0AA;
+            .
+            .
+            .
+            #wrapper-navbar {...}
+            .home-banner {...}
+            .home-call-to-action {
+                .call-to-action {
+                    border-radius: 50%;
+                    //background: $primary;           //Change to secondary color
+                    background: $secondary;
+                    padding-bottom: 100%;
+                    position: relative;  
+                    .image { ... }
+                    .title {                          //For Title
+                        font-size: 30px;              //Add font size
+                        position: absolute;
+                        bottom: 45px;
+                        left: 50%;
+                        right:-15px;
+                        text-align: center;
+                        
+                        padding: 0.5em;
+                        background: #5DA0AA;
+                        color: white;                   //Font color
+                        
+                        border: 2px dashed white;
+                        border-radius: 0.25em;
+                    }
+                }
+            }
+
+    For 2nd and 3rd Button
+        Follow same Process as above
+
+        //mytheme >> sass >> theme >> _theme.scss
+            $primary-300: #5DA0AA;
+            .
+            .
+            .
+            #wrapper-navbar {...}
+            .home-banner {...}
+            .home-call-to-action {
+                .call-to-action {
+                    .
+                    .
+                    .
+                    position: relative;
+                    display: block;                                            //Added since a tags being used in template-home.php
+                    .image { ... }
+                    .title { ... }
+                    
+                    &.second {
+                        background-image: url(../img/call-to-action-2.jpg);
+                        background: $primary-300;
+                        .title {
+                            background: $primary;
+                        }
+                    }                    
+                    &.third {
+                        background-image: url(../img/call-to-action-3.jpg);
+                        background: $primary;
+                        .title {
+                            background: $secondary;
+                        }                        
+                    }  
+                    
+
+        //mytheme >> page-templates >> template-home.php
+            .
+            .
+            .
+            <div class="home-banner"... </div>
+            <div class="home-call-to-action">
+                <div class="container">
+                    <div class="row">
+                    
+                        <div class="col-lg-4">   
+                            //<div class="call-to-action">                        //Change to "a" tags
+                            <a href="#" class="call-to-action"> 
+                                <div class="image"></div> 
+                                <div class="title"> Dining Menu </div>  
+                            //</div>                                              //Change to "a" tags
+                            </a>
+                        </div>                        
+                        
+                        <div class="col-lg-4">
+                            //<div class="call-to-action second">                 //Second button, Change to "a" tags
+                            <a href="#" class="call-to-action second">
+                                <div class="image"></div> 
+                                <div class="title"> Lunch Menu </div>  
+                            //</div>                                              //Change to "a" tags           
+                            </a>
+                        </div> 
+                        
+                        <div class="col-lg-4">
+                            //<div class="call-to-action third">                  //Third Button, Change to "a" tags
+                            <a href="#" class="call-to-action third">
+                                <div class="image"></div> 
+                                <div class="title"> Functions </div>  
+                            //</div>                                              //Change to "a" tags                         
+                            </a>
+                        </div> 
+                        
+                    </div>
+                </div>
+            </div>
+
+
+    Add Animations
+
 
 
 
