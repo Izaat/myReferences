@@ -1375,7 +1375,52 @@ Conclusion
             </div>
 
 
-    Add Animations
+    Add Animations - Image enlarge when mouse hover
+
+        //mytheme >> sass >> theme >> _theme.scss
+            $primary-300: #5DA0AA;
+            .
+            .
+            .
+            #wrapper-navbar {...}
+            .home-banner {...}
+            .home-call-to-action {
+                .call-to-action { 
+                    .
+                    .
+                    .
+                    .image{
+                        .
+                        .
+                        .
+                        transition: ease 0.25s all;         //Enlarges the image
+                        opacity: 0.85;
+                    }
+                    .title{
+                        .
+                        .
+                        .
+                        transition: ease 0.25s all;          //Expands the button title              
+                    }                  
+                    //&.hover {...}                                //Take note that to apply to all buttons, this entire block should be at the bottom
+                    &.second{...}
+                    &.third{...}                    
+                    &:hover {                                       //Copied over to bottom to apply to second and third button
+                        .title {
+                            left: 0%;                                 //Expands the button title   
+                            background: rgba(white, 0.85);       //Turns to white once expanded
+                            color: $primary;
+                        }
+                        .image {
+                            top: 5px;                                //border balance after image expanded
+                            left: 5px;
+                            right: 5px;
+                            bottom: 5px;
+                            opacity: 1;
+                        }
+                    }  
+
+    Responsiveness   
 
 
 
