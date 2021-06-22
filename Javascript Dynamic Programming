@@ -1737,14 +1737,89 @@ NOTE: In a nutshell
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 14. howSum
 
+    Question:
+        Write a function 'howSum(targetSum, numbers)' that takes in a targetSum and an array of numbers as arguments.
+        The function should return an array containing any combination of elements that add up to exactly the targetSum.
+        If there is no combination that adds up to the targetSum, then return null.
+        If there are multiple combinations possible, you may return any single one.
+        NOTE: Similar to previous problem but instead of boolean it needs to return an array
+
+    Example:
+        howSum(7, [5, 3, 4]) -> [4, 3]
+        
+        Initialize:
+            length = targetSum + 1
+               0   1    2    3    4   5    6    7
+            | n | n | n | n | n | n | n | n |        
+            where 'n' is null
+
+        Seeding
+            Using canSum(0, [...]) -> [ ]          //Returns an empty array
+
+              0    1   2   3   4   5   6   7
+            | [] | n | n | n | n | n | n | n |       
+
+        Iterating through the table from index 0
+            Begin with 5 (first number in the array), 
+            Add 5 to the array
+               0    1   2   3   4    5    6   7
+            | [ ] | n | n | n | n | [5] | n | n | 
+            
+            Repeat process for index 3 and 4
+               0    1   2    3     4     5    6   7
+            | [ ] | n | n | [3] | [4] | [5] | n | n | 
+
+        Iterating through the table from index 1 and 2
+            Think of null as 0 and [] as 1, Therefore anything with the result of [] cant absorb the value null        
+            Start by looking at index 1 of the table which contains the value of null
+               0    1   2    3     4     5    6   7
+            | [ ] | n | n | [3] | [4] | [5] | n | n | 
+
+        Iterating through the table from index 3
+            Jumping 5 steps ahead from index 3 will return "out of bounds", index 8
+            Jumping 3 steps ahead from index 3 will return "[3, 3]", index 6
+            Jumping 4 steps ahead from index 3 will return "[3, 4]", index 7
+               0    1   2    3     4     5       6       7            8
+            | [ ] | n | n | [3] | [4] | [5] | [3, 3] | [3, 4] |  Out of Bounds |
+
+            Note: Push forward the current value and then adds in the steps value [Current, steps]
+
+        Iterating through the table from index 4
+            Jumping 3 steps ahead from index 4 will overwrite "[3, 4]" with "[4, 3]", index 7
+
+    Complexity:
+        m = targetSum
+        n = numbers.length
+
+        O(m^2*n) time
+        O(m^2) space
 
 
+    CODE: 
+        const howSum = (targetSum, numbers) => {        
+            const table = Array(targetSum + 1).fill(null); 
+            table[0] = [];                                  
+              
+            for (let i = 0; i <= targetSum; i++) {                 //m iteration - (m)
+                if (table[i] !== null) {                      
+                    for (let num of numbers) {                     //n iteration - (m*n)        
+                        //table[i + num] = true;                   //from previous example
+                        table[i + num] = [ ...table[i], num ];     //copying over logic - (m*n*m)
+                    }
+                }
+            }            
+            return table[targetSum];
+        };
+
+        console.log(howSum(7, [2, 3]));        //[3, 2, 2]
+        console.log(howSum(7, [5, 3, 4, 7]));  //[4, 3]
+        console.log(howSum(7, [2, 4]));        //null
+        console.log(howSum(8, [2, 3, 5]));     //[2, 2, 2, 2]
+        console.log(howSum(300, [7, 14]));     //null
 
 
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+15. bestSum
 
 
 
