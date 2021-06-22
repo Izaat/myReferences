@@ -345,6 +345,69 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 08. Introduction to Forms
 
+    Code:
+        <div id="app"></div>
+        <script type="text/babel">           
+            class App extends React.Component {       
+                state = {                 
+                    name: 'Ryu',       
+                    age: 30
+                }                  
+                render() {                                  
+                    return (                                 
+                        <div className="app-content">
+                            <h1> My name is {this.state.name}</h1>      
+                        </div>
+                    )
+                }
+            }    
+            ReactDOM.render(<App />, document.getElementById('app'));    
+        </script>
+
+    Code: - With input box
+        <div id="app"></div>
+        <script type="text/babel">           
+            class App extends React.Component {       
+                state = {                 
+                    name: 'Ryu',       
+                    age: 30
+                }                  
+                
+                handleChange = (e) => {
+                    this.setState({
+                        name: e.target.value                                         //Retrieves value from the textbox
+                    });
+                }
+                handleSubmit = (e) => {
+                    e.preventDefault();                                              //This disables the page from refreshing to default when pressing on submit button
+                    console.log('form submitted', this.state.name);                  //Diplay in console
+                }
+                
+                render() {                                  
+                    return (                                 
+                        <div className="app-content">
+                            <h1> My name is {this.state.name} </h1>      
+                            //<form>                                                 //Without onSubmit, the button will refresh to default (Ryu)
+                            <form onSubmit={this.handleSubmit}>                      //With onSubmit, event will be called either by pressing enter or clicking. Changes will take place ONLY upon Submit
+                                //<input type="text" />                              //Adds in basic text input box
+                                <input type="text" onChange={this.handleChange}/>    //Adding an event to retrieve the text being typed in
+                                <button>Submit</button>                              //If using "button onClick", if users press enter, it will refresh  to default (Ryu)
+                            </form>
+                        </div>
+                    )
+                }
+            }    
+            ReactDOM.render(<App />, document.getElementById('app'));    
+        </script>
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+09. Create React App
+
+
+
+
+
 
 
 
