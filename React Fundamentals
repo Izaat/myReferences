@@ -11,6 +11,7 @@ CONTENTS
 07. Changing State and 'this'
 08. Introduction to Forms
 09. Create React App
+10. Single Page Apps
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -404,6 +405,52 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 09. Create React App
+
+    A command line tool to create react apps
+        Development server
+        Use ES6 features which are not normally supported
+        Keep our code modular
+        Use build tools to create optimized code
+
+    Installation
+        npx create-react-app my-app
+        cd my-app
+        npm start
+        Open http://localhost:3000/ to see app
+        To deploy to production, create minifield bundle with "npm run build"
+
+    Command after installations
+        npm start
+            Starts the development servier
+        
+        npm run build
+            Bundles the app into static files for production
+        
+        npm test
+            Starts the test runner
+            
+        npm run eject
+            Removes this tool and copies build dependencies, configuration files
+            and scripts into the app directory. If you do this you can't go back.
+            
+        Recommended: Begin by typing
+            cd myapp
+            npm start
+
+
+    Folders
+        > node_modules : Libraries, dependencies
+        > public : For the browser
+        > src : Contains files to be programmed
+        > package.json : installed packages
+        > package-lock.json : Installed packages that are locked
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+10. Single Page Apps
+
+
+
+
 
 
 
