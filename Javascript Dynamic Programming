@@ -1917,6 +1917,108 @@ NOTE: In a nutshell
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 16. canConstruct
 
+    Question:
+        Write a function 'canConstruct(target, wordBank)' that accepts a target string and an array of strings.
+        The function should return a boolean indicating whether or not the 'target' can be constructed by 
+        concatenating elements of the 'wordBank' array.
+        You may reuse elements of 'wordBank' as many times as needed.
+        
+    Example:
+        canConstruct(abcdef, [ab, abc, cd, def, abcd]) -> true (abd+def)
+
+        Determine size of table:
+            table length = target.length + 1
+            So target, A to F = 6, 
+            Therefore, table length = 6 + 1
+            | 0   1    2    3    4   5    6 
+            |    |    |    |    |    |    |    |         
+            | a    b    c    d   e    f   
+
+            NOTE: 
+                Index 0 = empty
+                Index 1 = a
+                Index 2 = ab
+                Index 5 = abcde
+
+        Seeding
+            Using canConstruct(0, [...]) -> True          //Since answer is in boolean, fill with T/F
+
+            | 0   1    2    3    4   5    6 
+            | T | F | F |  F | F | F | F |         
+            | a    b    c    d   e    f  
+
+        Iterating through the table from index 0                    // [ab, abc, abcd] = 2, 3, 4
+            Begin with first combination in the array (ab), 
+            Add T to index 2, 3, 4. No change for cd, and def
+            | 0   1    2    3    4    5    6 
+            | T | F | T |  T | T | F | F |         
+            | a    b    c    d    e    f  
+
+        Iterating through the table from index 1                    //[F]
+            No change since the current value is F AND Nothing in array starts with 'b'
+            | 0   1    2    3    4    5    6 
+            | T | F | T |  T | T | F | F |         
+            | a    b    c    d    e    f  
+
+        Iterating through the table from index 2                    //[cd] = 4
+            No change to index 4 since the current value at 2 is T
+            | 0   1    2    3    4    5    6 
+            | T | F | T |  T | T | F | F |         
+            | a    b    c    d    e    f  
+
+        Iterating through the table from index 3                    //[def] = 6
+            Add T to index 6 since the current value at 3 is T
+            | 0   1    2    3    4    5    6 
+            | T | F | T |  T | T | F | T |         
+            | a    b    c    d    e    f  
+
+        Iterating through the table from index 4
+            Nothing in array begins with e or f
+
+        NOTE:
+            Since index 6 contains 'True', it means that it is possible to get the target
+
+        Complexity:
+            m = target
+            n = wordBank.length
+            
+            O(m^2*n) time
+            O(m) space
+
+    CODE:
+        const canConstruct = (target, wordBank) => {
+            const table = Array(target.length + 1).fill(false);
+            table[0] = true;
+            
+            for (let i = 0; i <= target.length; i++) {
+                if (table[i] === true) {
+                    for (let word of wordBank) {
+                        if(target.slice(i, i + word.length) === word) {      //if after slicing at location i and the balance matches one of the word in array
+                            table[i + word.length] = true;                          //then set table segment as true
+                        }
+                    }                
+                }            
+            }            
+            
+            return table[target.length];
+        };
+
+        console.log(countConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd"]));                         //true
+        console.log(countConstruct("skateboard", ["bo", "rd", "ate", "t", "ska", "sk", "boar"]));     //false
+        console.log(countConstruct("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o", "t"]));  //true
+        console.log(countConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeee", "eeeee", "eeeeee"]));  //false
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+17. countConstruct
+
+
+
+
+
+
+
 
 
 
