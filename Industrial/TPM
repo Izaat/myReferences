@@ -1,6 +1,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
 01. Overview
+02. Autonomous, Planned and Early Management
+03. Implementation Roadmap
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,8 +72,74 @@ CONTENTS
         
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Autonomous, Planned and Early Management
+    
+    Autonomous Maintenance
+        Operator Managed Tasks
+            Simplified inspections and monitoring (i.e Torqued bolt markings via visual inspection)
+        Documented maintenance activities
+        Training and certification        
+
+    Planned Maintenance    
+        5S
+            Organize, Clean and Shine equipment
+            
+        Visual Controls
+            Simplify communications
+            Smart visuals to set direction
+            
+        Planning and scheduling
+            Work order documentation
+            Prioritization of work
+            Controlled scheduling
+
+    Early Equipment Management
+        Preventive maintenanace
+            Greasing, Tightening, Filter change, other repetitive tasks
+        Documented PMs
+            Daily, weekly, monthly, annual, etc
+        Annual schedules
+        Downtime tracking
+            By documenting how long machine is running, balance hours will be considered as the downtime
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Implementation Roadmap
+
+    Charter an interdisciplinary team
+        Step 1: 
+            Identify pilot area
+            Kaizen/5S
+        Step 2:
+            Implement autonomous maintenance or restore equipment
+            Identify operator tasks from PM
+            Add visual controls
+        Step 3:
+            Start measuring OEE, measure downtime and uptime
+            Identify KPIs
+            Setup visual activity board
+        Step 4:
+            Address major losses
+            
+    Management to communicate the vision and plan            
+        Step 5:
+            Introduce planned maintenance techniques
+            Structured Planning and scheduling
+        Step 6:
+            Sustain efforts and continually improve
+            Regular communication
+        Back to step 1
+
+    Visual Activity Board - Lookup lean visual activity board
+        Team members/Department members
+        OEE Data (Graphs, charts, etc)
+        Pictures of Improvement efforts (Before and After)
+        Project goal
+        Failure Modes (Graphs, charts, etc)
+        Results (Graphs, charts, etc)
 
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
