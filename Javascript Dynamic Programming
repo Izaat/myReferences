@@ -2003,15 +2003,121 @@ NOTE: In a nutshell
             return table[target.length];
         };
 
-        console.log(countConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd"]));                   //true
-        console.log(countConstruct("skateboard", ["bo", "rd", "ate", "t", "ska", "sk", "boar"]));    //false
-        console.log(countConstruct("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o", "t"]));  //true
-        console.log(countConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeee", "eeeee", "eeeeee"]));  //false
+        console.log(canConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd"]));                   //true
+        console.log(canConstruct("skateboard", ["bo", "rd", "ate", "t", "ska", "sk", "boar"]));    //false
+        console.log(canConstruct("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o", "t"]));  //true
+        console.log(canConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeee", "eeeee", "eeeeee"]));  //false
 
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 17. countConstruct
+    
+    Question:
+        Write a function 'countConstruct(target, wordBank)' that accepts a target string and an array of strings.
+        The function should return the number of ways the 'target' can be constructed by 
+        concatenating elements of the 'wordBank' array.
+        You may reuse elements of 'wordBank' as many times as needed.
+        
+    Example:
+        countConstruct(purple, [purp, p, ur, le, purpl]) -> 2 (purple+le), (p+ur+p+le)    
+
+        Determine size of table:
+            table length = target.length + 1
+            So target, 'purple = 6, 
+            Therefore, table length = 6 + 1
+            | 0   1   2   3   4   5   6
+            |   |   |   |   |   |   |   |       
+            | p   u   r   p   l   e   
+
+            NOTE: 
+                Index 0 = empty
+                Index 1 = p
+                Index 2 = pu
+                Index 5 = pur
+
+        Seeding
+            Using countConstruct(' ', [...]) -> 1          //Since answer is in numbers, fill with 0
+
+            | 0   1   2   3   4   5   6
+            | 1 | 0 | 0 | 0 | 0 | 0 | 0 |       
+            | p   u   r   p   l   e     
+
+        Iterating through the table from index 0                    // [purp, p, purpl] = 4, 1, 5
+            Begin with first combination in the array (purp), 
+            Add 1 to index 4, 1, 5. No change for ur, and le
+            | 0   1   2   3   4   5   6
+            | 1 | 1 | 0 | 0 | 1 | 1 | 0 |      
+            | p   u   r   p   l   e   
+
+        Iterating through the table from index 1                    //[ur] = 3
+            Add 1 to index 3.
+            | 0   1   2   3   4   5   6
+            | 1 | 1 | 0 | 1 | 1 | 1 | 0 |      
+            | p   u   r   p   l   e   
+
+        Iterating through the table from index 2                    //[] = No change
+            Nothing in the array starts with letter 'r'. Therefore no change.
+            | 0   1   2   3   4   5   6
+            | 1 | 1 | 0 | 1 | 1 | 1 | 0 |      
+            | p   u   r   p   l   e   
+
+        Iterating through the table from index 3                    //[p] = 4, Add 1
+            Letter p in the array can be used. Add 1 to index 4
+            | 0   1   2   3   4   5   6
+            | 1 | 1 | 0 | 1 | 2 | 1 | 0 |      
+            | p   u   r   p   l   e  
+            
+            NOTE:
+                Notice that at index 4, 2 combinations can be made (purp and p+ur+p)
+                Therefore, the answer is consistent
+
+        Iterating through the table from index 4                    //[le] = 6
+            Letter le in the array can be used but contains number 2. Therefore change index 6 to 2
+            | 0   1   2   3   4   5   6
+            | 1 | 1 | 0 | 1 | 2 | 1 | 2 |      
+            | p   u   r   p   l   e   
+
+        Complexity:
+            m = target
+            n = wordBank.length
+            
+            O(m^2*n) time
+            O(m) space
+
+    CODE:
+        const countConstruct = (target, wordBank) => {
+            const table = Array(target.length + 1).fill(0);
+            table[0] = 1;
+            
+            for (let i = 0; i <= target.length; i++) {
+                for (let word of wordBank) {
+                    if(target.slice(i, i + word.length) === word) {      //if after slicing at location i and the balance matches one of the word in array
+                        table[i + word.length] += table[i];              //increment by the number in current position
+                    }
+                } 
+            }            
+            
+            return table[target.length];
+        };
+
+        console.log(countConstruct("purple", ["purp", "p", "ur", "le", "purpl"]));                   //2
+        console.log(countConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd"]));                   //1
+        console.log(countConstruct("skateboard", ["bo", "rd", "ate", "t", "ska", "sk", "boar"]));    //0
+        console.log(countConstruct("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o", "t"]));  //4
+        console.log(countConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeee", "eeeee", "eeeeee"]));  //0
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+18. allConstruct
+
+
+
+
+
+
+
 
 
 
