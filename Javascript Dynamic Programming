@@ -2187,6 +2187,67 @@ NOTE: In a nutshell
             |   a      b       c           d               e           f   
 
 
+        Complexity:
+            m = target
+            n = wordBank.length
+            
+            O(n^m) time
+            O(n^m) space
+
+    CODE:
+        const countConstruct = (target, wordBank) => {
+            const table = Array(target.length + 1).fill().map( () => []);
+            table[0] = [[]];
+            
+            for (let i = 0; i <= target.length; i++) {
+                for (let word of wordBank) {
+                    if(target.slice(i, i + word.length) === word) {                    //if after slicing at location i and the balance matches one of the word in array 
+                        //table[i].map(subArray => [...subArray, word])                //Copy over and add in the new suffix at the end
+                        const newCombinations = table[i].map(subArray => [...subArray, word]);   //Store in a variable named 'newCombinations' (a 2D array)
+                        //table[i + word.length] = newCombinations                     //This will only overite the existing combinations already found before the current location
+                        table[i + word.length].push(...newCombinations);               //This will add in the newcombination array into existing array
+                    }
+                } 
+            }            
+            
+            return table[target.length];
+        };
+        
+        
+#  From allConstuct Memoization
+#        const allConstruct = (target, wordBank, memo={} ) => {       //Create memo object
+#            if (target in memo) return memo[target];                 //Use target as key
+#            if (target === '') return [[]];            
+#            const result = [];                              
+#            
+#            for (let word of wordBank) {
+#                if (target.indexOf(word) === 0) {                            
+#                    const suffix = target.slice(word.length);  
+#                    //allConstruct(suffix, wordBank);          
+#                    const suffixWays = allConstruct(suffix, wordBank, memo);   //Add memo to recursive calls 
+#                    const targetWays = suffixWays.map(way => [word, ...way]);  
+#                    result.push(...targetWays);         
+#                }
+#            }
+#            memo[target] = result;           //Stores result in memo
+#            return result;
+#        };
+
+        console.log(allConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']));                             // [[purp, le], [p, ur, p, le]]
+        console.log(allConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd', 'ef', 'c']));                  // [[ab, cd, ef], [ab, c, def],  [abc, def], [abcd, ef]]   
+        console.log(allConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar']));              // []
+        console.log(allConstruct('aaaaaaaaaaaaaaaaaaaaaaaaaaaaz', ['a', 'aa', 'aaa', 'aaaa', 'aaaaa']));     // []    NOTE: If there is no 'z' at the end of the target, will never solve the problem as it is infinite in itself. 
+                                                                                                             //             Shares the same problem as memoization
+
+///////////////////////////////////////////////////////////////////////
+Think Recursively to use memoization
+Thinkiteratively to use tabulation
+
+///////////////////////////////////////////////////////////////////////
+END
+
+
+
 
 
 
