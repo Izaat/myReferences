@@ -2112,6 +2112,83 @@ NOTE: In a nutshell
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 18. allConstruct
 
+    Question:
+        Write a function 'allConstruct(target, wordBank)' that accepts a target string and an array of strings.
+        The function should return a 2D array containing all of the ways that the 'target' can be constructed by
+        concatenating elements of the 'wordBank' array.
+        Each element of the 2D array should represent one combination that constructs the 'target'
+        You may reuse elements of 'wordBank' as many times as needed.
+
+    Example:
+        allConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd", "ef", "c"]) ->        
+        [   [ab, cd, ef],
+            [ab, c, def],
+            [abc, def],
+            [abcd,ef]    ]
+        
+        Determine size of table:
+            table length = target.length + 1
+            So target, 'abcdef = 6, 
+            Therefore, table length = 6 + 1
+            | 0   1   2   3   4   5   6
+            |   |   |   |   |   |   |   |       
+            | a   b   c   d   e   f  
+
+            NOTE: 
+                Index 0 = 2D empty array -> [ [] ]
+                Index 1 = a
+                Index 2 = ab
+                Index 5 = abc
+
+        Seeding
+            Using allConstruct(' ', [...]) -> [ [] ]          //Since answer is in arrays, fill with [ [] ]
+            So, if true, 2D array. If false, 1D array
+            |   0     1    2   3    4    5    6
+            | [[]] | [] | [] | [] | [] | [] | [] |  
+            | a       b    c   d    e    f   
+
+        Iterating through the table from index 0                    // [ab, abc, abcd] = 2, 3, 4
+            Begin with first combination in the array (ab), 
+            Add arrays and values to index 2, 3, 4.
+            |   0     1      2           3            4        5    6
+            | [[]] | [] | [ [ab] ] | [ [abc] ] | [ [abcd] ] | [] | [] |  
+            |   a     b      c           d            e        f   
+
+        Iterating through the table from index 1                    //No change. Nothing starts with b
+            |   0     1       2          3            4       5    6
+            | [[]] | [] | [ [ab] ] | [ [abc] ] | [ [abcd] ] | [] | [] |  
+            |   a     b       c          d            e       f   
+
+        Iterating through the table from index 2                    //[cd, c] = 4, 3 
+            Add new array [current, new] to index 4 and 3
+            |   0     1         2               3              4         5     6
+            |       |     |             | [ [abc],     | [ [abcd],     |     |     |  
+            |  [[]] |  [] |  [ [ab] ]   |   [ab, c] ]  |   [ab, cd] ]  | []  | []  |  
+            |       |     |             |              |               |     |     |  
+            |   a     b         c               d              e          f   
+
+        Iterating through the table from index 3                    //[def] = 6
+            [abc] -> [abc, def]
+            [ab, c] -> [ab, c, def]
+            |   0      1       2           3               4           5            6
+            |       |     |          | [ [abc],     | [ [abcd],      |    | [ [abc, def],    |  
+            |  [[]] |  [] | [ [ab] ] |   [ab, c] ]  |   [ab, cd] ]   | [] |   [ab, c, def] ] |  
+            |       |     |          |              |                |    |                  |  
+            |   a      b       c           d               e           f   
+
+        Iterating through the table from index 3                    //[ef] = 6
+            [abcd] -> [abcd, ef]
+            [ab, cd] -> [ab, cd, ef]
+            |   0      1       2           3               4           5            6
+            |       |     |          | [ [abc],     | [ [abcd],      |    | [ [abc, def],     |  
+            |  [[]] |  [] | [ [ab] ] |   [ab, c] ]  |   [ab, cd] ]   | [] |   [ab, c, def],   |  
+            |       |     |          |              |                |    |   [abcd, ef],     |  
+            |       |     |          |              |                |    |   [ab, cd, ef] ]  |              
+            |   a      b       c           d               e           f   
+
+
+
+
 
 
 
