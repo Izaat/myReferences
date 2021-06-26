@@ -12,6 +12,7 @@ CONTENTS
 08. Introduction to Forms
 09. Create React App
 10. Single Page Apps
+11. Nesting Components
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -447,6 +448,42 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 10. Single Page Apps
+    
+    React apps are typically Single Page Applications
+    Only on HTML page served to the browser
+    React then controls what a suser sees on that page
+    
+    Traditionally, server will handle the index.html and every other pages of the website upon request.
+    In React, server handles the index.html BUT React (external to the server) will handle every other pages of the website as components.
+    
+    Main Components:
+        ../src/App.js  -> This contains the "App class/render() function", see code above for reference
+        ../src/index.js -> This contains the "ReactDOM.render(<App />, document.getElementById('root'))", see code above for reference
+            Technically, the code above will be split into separate components within the app
+        ../src/registerServiceWorker.js -> Website cache
+        ../src/index.css -> CSS stylings
+
+    Starting the App:
+        From Terminal, enter "myapp" folder
+        Then, npm start
+        This will start the website in the browser
+
+    Delete ../src/App.test.js
+    Delete ../src/App.css
+    Remove "import ./App.css" from ../src/App.js
+    Remove contents within "div className=App" for App.js. 
+        Add <h1>My App</h1>
+        Add<p>Hello</p>
+
+    Save file and this will automatically updates the page in the browser
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+11. Nesting Components
+
+
+
+
 
 
 
