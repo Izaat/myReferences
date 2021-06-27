@@ -13,6 +13,8 @@ CONTENTS
 09. Create React App
 10. Single Page Apps
 11. Nesting Components
+12. Props
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -480,6 +482,49 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 11. Nesting Components
+    
+    |                       App.js(Root Component)
+    |          |-----------------------------------------------|
+    |    Navbar.js                                        ContactForm.js
+    |
+    |Multiple components can be nested under the root component
+    
+    App.js
+        import React, {Component} from 'react';
+        import Ninjas from './Ninjas';                     //This will import the Ninjas.js file
+        
+        class App extends Component {
+            render () {
+                return (
+                    <div className="App">
+                      <h1>My App</h1>
+                      <p>Hello</p>
+                      <Ninjas />                           //This will call out the Ninja class from Ninjas.js
+                    </div>
+                );            
+            }
+        }
+        export default App;
+
+    Create a new file ../src/Ninjas.js
+        import React, {Component} from 'react';
+
+        class Ninjas extends Component {
+            render () {
+                return (
+                    <div className="ninja">
+                        <div>Name: Ryu</div>
+                        <div>Age: 30</div>
+                        <div>Black: Black</div>
+                    </div>
+                );            
+            }
+        }
+        export default Ninjas;
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+12. Props
 
 
 
