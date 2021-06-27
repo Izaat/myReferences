@@ -17,8 +17,8 @@ CONTENT
 12. Header Logo and Nav for mobile
 13. Home Page Hero Banner
 14. Home Call to Action Section
+15. Home Welcome to Section
 
-Home Welcome to Section
 Home News Section
 Home About Us Section
 Home Testimonials Section
@@ -1421,6 +1421,77 @@ Conclusion
                     }  
 
     Responsiveness   
+        //mytheme >> sass >> theme >> _theme.scss
+            $primary-300: #5DA0AA;
+            .
+            .
+            .
+            #wrapper-navbar {...}
+            .home-banner {...}
+            .home-call-to-action {
+                @media (max-width:$md) {                    //Added  
+                    text-align: center;
+                }          
+                .call-to-action { 
+                    .
+                    .
+                    .
+                    @media (max-width:$md) {                    //Added  
+                        width: 66%;
+                        padding-bottom: 66%;     
+                        display-inline: block;
+                        margin-bottom: 15px;
+                    }                    
+                    @media (max-width:$sm) {                    //Added  
+                        width: 85%;
+                        padding-bottom: 100%;     
+                        display-inline: block;
+                    }    
+                    .image{
+                        .
+                        .
+                        .
+                        transition: ease 0.25s all;   
+                        opacity: 0.85;
+                        @media (max-width:$xl) {                    //Added
+                            top: 20px;    
+                            left: 20px;
+                            right: 20px;
+                            bottom: 20px;                        
+                        }
+                    }
+                    .title{
+                        .
+                        .
+                        .
+                        transition: ease 0.25s all;           
+                        font-family: "Fredericka the Great";        //Added
+                        @media (max-width:$xl) {                      //Added
+                            font-size: 20px;                            
+                        }
+                        @media (max-width:$lg) {                    //Added  
+                            left: 0%;
+                            right: 0%;
+                            bottom: -10%;                        
+                        }
+                        @media (max-width:$md) {                    //Added  
+                            bottom: 45px; 
+                            left: 50%;
+                            right: -15px;                       
+                        }
+                    }                  
+                    &.second{...}
+                    &.third{...}                    
+                    &:hover {...}  
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Home Welcome to Section
+
+
+
+
+ 
 
 
 
