@@ -553,7 +553,7 @@ CONTENTS
         class Ninjas extends Component {
             render () {
                 //console.log(this.props);                       //This will print out the components from the parent into the console
-                const {name, age, belt} = this.props             //This is another method to call
+                const {name, age, belt} = this.props             //This is another method to call other than using "console.log"
                 return (
                     <div className="ninja">
                         //<div>Name: {this.prop.name} </div>
