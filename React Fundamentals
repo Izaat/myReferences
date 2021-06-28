@@ -14,6 +14,7 @@ CONTENTS
 10. Single Page Apps
 11. Nesting Components
 12. Props
+13. Outputting Lists
 
 
 
@@ -524,7 +525,56 @@ CONTENTS
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-12. Props
+12. Props (Properties)
+
+    Props is a method to pass a parent (App.js) component to child component (Ninjas.js)
+    
+    App.js
+        import React, {Component} from 'react';
+        import Ninjas from './Ninjas';         
+        
+        class App extends Component {
+            render () {
+                return (
+                    <div className="App">
+                      <h1>My App</h1>
+                      <p>Hello</p>
+                      <Ninjas name="Ryu" age="30" belt="black" />    
+                      <Ninjas name="Ken" age="25" belt="black" />       //Extra line when the const {} line exists in child component
+                    </div>
+                );            
+            }
+        }
+        export default App;
+
+    Ninjas.js
+        import React, {Component} from 'react';
+
+        class Ninjas extends Component {
+            render () {
+                //console.log(this.props);                       //This will print out the components from the parent into the console
+                const {name, age, belt} = this.props             //This is another method to call
+                return (
+                    <div className="ninja">
+                        //<div>Name: {this.prop.name} </div>
+                        //<div>Age: {this.prop.age} </div>
+                        //<div>Belt: {this.prop.belt} </div>
+                        <div>Name: {name} </div>                 //This line can only be used when the const {} line exists
+                        <div>Age: {age} </div>                   //This line can only be used when the const {} line exists
+                        <div>Belt: {belt} </div>                 //This line can only be used when the const {} line exists
+                    </div>
+                );            
+            }
+        }
+        export default Ninjas;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+13. Outputting Lists
+
+
+
+
+
 
 
 
