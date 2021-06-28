@@ -1486,7 +1486,7 @@ Conclusion
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Home Welcome to Section - Texts and "read more" button
+15a. Home Welcome to Section - Texts and "read more" button
 
         //mytheme >> page-templates >> template-home.php
             .
@@ -1596,6 +1596,65 @@ Home Welcome to Section - Texts and "read more" button
                     font-size: 1.75em;                            
                 }
             }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+15b. Home Welcome to Section B - Responsive Design
+
+
+        //mytheme >> sass >> theme >> _theme.scss
+            .
+            .
+            .
+            body{...}
+            .button {...}                         //Moved
+            .reservation-btn{...}
+            .
+            .
+            .
+            #wrapper-navbar {...}
+            .home-banner {...}
+            .home-call-to-action {...}
+            .home-welcome {
+                margin-top: 120px;
+                margin-bottom: 120px;              //Added
+                .title-holder {...}
+                h2 {
+                    .
+                    .
+                    span{
+                        .
+                        .
+                        .
+                        @media (max-width:$xl) {              //Added    (Welcome to)
+                            font-size: 120px;
+                            transform: translate(120px, 25px);
+                        }                        
+                        @media (max-width:$lg) {              //Added    (Welcome to)
+                            font-size: 60px;
+                            transform: translate(60px, 0px);
+                        }                                       
+                    }
+                    .
+                    .
+                    font-size: 72px;
+                    @media (max-width:$xl) {                  //Added  (Backbeach Eating House)
+                        font-size: 60px;
+                    }
+                    @media (max-width:$lg) {                  //Added    (Backbeach Eating House)
+                        font-size: 36px;                        
+                    }                           
+                }
+                p {...}
+                .button {                                     //Added
+                    @media (max-width:$lg) {                  //Added    (Shortens the width of Read More button)
+                        display-inline: block;
+                        padding-right: 2.5em;                 //Extends the width of Read More button
+                    }                      
+                }
+                
+            }            
+            //.button {...}                                   //Move to top below "body" and above ".reservation-btn"
 
 
 
