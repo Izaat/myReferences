@@ -1558,10 +1558,14 @@ Home Welcome to Section - Texts and "read more" button
                     
                 }
                 p {
+                    line-height: 2;                                              //Add spacing between the bold texts
+                    margin-bottom: 1em;                                          //Adds spacing between the p tags
+                    font-weight: 300;                
                     &.tagline {
                         font-size: 24px;
                         color: $primary-300;
                         font-weight: 600;                                          //make fonts thicker
+                        line-height: 1.5;                        
                     }
                 }
                 
