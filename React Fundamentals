@@ -15,6 +15,7 @@ CONTENTS
 11. Nesting Components
 12. Props
 13. Outputting Lists
+14. Stateless Components
 
 
 
@@ -570,6 +571,79 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 13. Outputting Lists
+    
+    Output an entire list of Ninjas
+    
+    App.js
+        import React, {Component} from 'react';
+        import Ninjas from './Ninjas';                          //ClassName - FileName
+        
+        class App extends Component {
+            state = {                                           //The new created array
+                ninjas : [
+                    {name: 'Ryu', age: 30, belt: 'black', id: 1},
+                    {name: 'Ken', age: 20, belt: 'green', id: 2},
+                    {name: 'Aduken', age: 40, belt: '2nd Dan', id: 3},
+                ]
+            }
+            render () {
+                return (
+                    <div className="App">
+                      <h1>My App</h1>
+                      <p>Hello</p> 
+                      <Ninjas ninjas={this.state.ninjas} />     //Calls the ninja array
+                    </div>
+                );            
+            }
+        }
+        export default App;
+
+    Ninjas.js
+        import React, {Component} from 'react';
+
+        class Ninjas extends Component {
+            render () {
+                const { ninjas } = this.props;                   //Similar to "const ninjas = this.props.ninjas"
+                
+                //const ninjaList = ninjas.map(ninja)            //arrayName.map(individualNinja)
+                //const ninjaList = ninjas.map(ninja => {})      //Cycling through the individual ninja
+                const ninjaList = ninjas.map(ninja => {
+                    return (
+                        //<div className="ninja">                //This doesn't contain any key therefore will prompt a key error into the console
+                        <div className="ninja" key={ninja.id}>   //This will activate the key by calling the id number in App.js (id=1, id=2, etc)
+                            <div>Name: {ninja.name} </div>
+                            <div>Age: {ninja.age} </div>   
+                            <div>Belt: {ninja.belt} </div>    
+                        </div>                    
+                    )
+                })
+                
+                return (
+                    //<div className="ninja">      //Not in use since this will be called by ninjaList instead as a template for the ninjas
+                    //    <div>Name: {name} </div> //Not in use since this will be called by ninjaList instead as a template for the ninjas
+                    //    <div>Age: {age} </div>   //Not in use since this will be called by ninjaList instead as a template for the ninjas
+                    //    <div>Belt: {belt} </div> //Not in use since this will be called by ninjaList instead as a template for the ninjas
+                    //</div>                       //Not in use since this will be called by ninjaList instead as a template for the ninjas
+                    
+                    <div className="ninja-list">
+                        { ninjaList }
+                    </div>  
+                    
+                );            
+            }
+        }
+        export default Ninjas;                      //Filename
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+14. Stateless Components
+
+
+
+
+
+
+
+
 
 
 
