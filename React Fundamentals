@@ -16,7 +16,7 @@ CONTENTS
 12. Props
 13. Outputting Lists
 14. Stateless Components
-
+15. Conditional Output
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -637,6 +637,90 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 14. Stateless Components
 
+    Container VS UI Components
+    
+        Container Components
+            Contain state
+            Contain lifecycle hooks
+            Not concerned with UI
+            Use classes to create
+            
+        UI Components
+            Dont contain state
+            Receive data from props or container components
+            Only concerned with UI (How data is presented on the screen)
+            Use functions to create
+
+        |                               App.js
+        |                         Container Component
+        |           |----------------------|------------------------|
+        |     Navbar.js              Ninjas.js                ContactForm.js
+        |    UI component            UI Compnent            Container Component
+        |
+        Container components can parent a UI component and/or another container component
+
+
+    App.js
+        import React, {Component} from 'react';
+        import Ninjas from './Ninjas';         
+        
+        class App extends Component {     //Container Component
+            state = {                                      //This is the state and it requires to be inside a class
+                ninjas : [
+                    {name: 'Ryu', age: 30, belt: 'black', id: 1},
+                    {name: 'Ken', age: 20, belt: 'green', id: 2},
+                    {name: 'Aduken', age: 40, belt: '2nd Dan', id: 3},
+                ]
+            }
+            render () {
+                return (
+                    <div className="App">
+                      <h1>My App</h1>
+                      <p>Hello</p> 
+                      <Ninjas ninjas={this.state.ninjas} />  
+                    </div>
+                );            
+            }
+        }
+        export default App;
+
+    Ninjas.js
+        //import React, {Component} from 'react';  //The {Component} can be removed
+        import React from 'react';
+
+        //class Ninjas extends Component {         //Since this does not contain any state, the class can be removed and use a function instead
+        //const Ninjas = () => {                   //This will be the function holding the UI compnent
+        //const Ninjas = (props) => {              //And this function will take in the props
+        //const Ninjas = (ninjas) => {             //Using ninjas as direct prop. You may remove "const {ninjas} = props" below.
+        const Ninjas = ({ninjas}) => {             //Also note that multiple props can be called by the function -> "const Ninjas = ({ninjas, age, shop, name}) => {}"
+            //render () {                          //This can be removed since render method is only for a class
+                //const { ninjas } = this.props;   //Since functions dont take "this.*" method, it will be removed
+                //const { ninjas } = props;        //This entire line can be removed IF "const Ninjas = (ninjas) => {}" is being used above
+                
+                const ninjaList = ninjas.map(ninja => {
+                    return (
+                        <div className="ninja" key={ninja.id}> 
+                            <div>Name: {ninja.name} </div>
+                            <div>Age: {ninja.age} </div>   
+                            <div>Belt: {ninja.belt} </div>    
+                        </div>                    
+                    )
+                })
+                
+                return (
+                    
+                    <div className="ninja-list">
+                        { ninjaList }
+                    </div>  
+                    
+                );            
+            //}
+        }
+        export default Ninjas;   
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+15. Conditional Output
 
 
 
