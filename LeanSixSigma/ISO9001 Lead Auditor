@@ -131,6 +131,68 @@ CONTENT
         Audit plan doesn't need to contain questions to be asked during the audit (Questions should be in internal audit checklist instead)
 
     Creation of checklist
+        Purpose is to remind what needed to be done during the audit
+        But the problem during the audit is that auditors need to speak to alot of people for various evidences, clauses, policies and procedures
+        All that is impossible without the reminder or list
+        Checklist will be created during the document review - Take note of what needed to be check during the review
+        Might drive the auditor in one direction and miss some newly discovered leads that havent been planned in the checklist
+        Example, while process being performed correctly, you might miss that top management didn't provide enough resources to resolve nonconformities
+        Best approach is to have one document with 4 columns
+            > Clause
+            > Description of requirements
+            > Compliance: Y/N
+            > Notes
+
+    Internal Audit Report
+        A mandatory document according to ISO9001
+        Results are to be stored for few years
+        3 parts of the report
+            > General: Dates, name, which part of the company being audited, audit criteria, other general information
+            > Nonconformities found
+            > Observations
+        Doesnt have to be a detailed report but it needs to be precise
+        Report should be issued and distributed as defined in the audit plan/procedure
+
+    Corrective Action follow up
+        It is not enough to write corrective actio request. 
+        As internal auditor, follow up and make sure it is completed
+        Also check  the corrective action form as this will provide an insight of what has been done
+        Make sure that the root cause of nonconformity was resolved
+        The follow up will be some kind of small audit focused on this nonconformity
+        Conduct follow up check within 1 month
+
+    Recording of Evidence
+        Internal audit records need to be produced as it is a mandatory document
+        It is crucial for internal auditor to write everything being heard or discovered
+        Include date, version number, record names, serial number
+        For interviews, write the name of the interviewee, job title, date and time and exact quotes that are relevant
+        For observation of the facilities and processes, write the exact rooms, location, date and time, description of what being discovered
+        Write all the evidence in the internal audit checklist
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+06. Understanding Auditing Standards
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
