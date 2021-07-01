@@ -17,6 +17,7 @@ CONTENTS
 13. Outputting Lists
 14. Stateless Components
 15. Conditional Output
+16. Forms Revisited
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -721,6 +722,98 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 15. Conditional Output
+    
+    Showing something to the user based on certain condition
+    Example: 
+        Show discount only when the user adds 5 or more items to a shopping basket
+        Show ninjas with age above 20
+    If statement:
+        If (ninjas.age > 20) { return(...) } else { return null }
+    Ternary operator can be used (Indirect Output)
+        condition ? ( return(...) ) : null;   //Where "null" is the else statement
+    Ternary operator can be used (Direct Output)
+        
+
+    Ninjas.js (IF Statement)
+        import React from 'react';
+
+        const Ninjas = ({ninjas}) => {                      
+            const ninjaList = ninjas.map(ninja => {
+                if (ninja.age > 20) {                                   //Only shows ninjas that are above 20
+                    return (
+                        <div className="ninja" key={ninja.id}> 
+                            <div>Name: {ninja.name} </div>
+                            <div>Age: {ninja.age} </div>   
+                            <div>Belt: {ninja.belt} </div>    
+                        </div>                    
+                    )
+                } else {
+                    return null
+                }
+            })
+            
+            return (                    
+                <div className="ninja-list">
+                    { ninjaList }
+                </div>                      
+            );            
+        }
+        export default Ninjas;   
+
+    Ninjas.js (Ternary Operator 01)
+        import React from 'react';
+
+        const Ninjas = ({ninjas}) => {                      
+            const ninjaList = ninjas.map(ninja => {            
+                //condition ? () : ();                                 // (if true) : (if false)
+                //return condition ? () : ();                          //map function always expects a return value
+                //return ninja.age > 20 ? (JSXCode) : null;            //JSX code to be added into the bracket                
+                return ninja.age > 20 ? (
+                    <div className="ninja" key={ninja.id}> 
+                        <div>Name: {ninja.name} </div>
+                        <div>Age: {ninja.age} </div>   
+                        <div>Belt: {ninja.belt} </div>    
+                    </div>                      
+                ) : null;
+            });                                                        //Semicolon needed
+            
+            return (                
+                <div className="ninja-list">
+                    { ninjaList }
+                </div>                  
+            );            
+        }
+        export default Ninjas; 
+
+    Ninjas.js (Ternary Operator 02)
+        import React from 'react';
+
+        const Ninjas = ({ninjas}) => {       
+            
+            return (                
+                <div className="ninja-list">
+                    {
+                        //const ninjaList = ninjas.map(ninja => {       //"const ninjaList = " not in use since this is direct
+                        ninjas.map(ninja => {         
+                            return ninja.age > 20 ? (
+                                <div className="ninja" key={ninja.id}> 
+                                    <div>Name: {ninja.name} </div>
+                                    <div>Age: {ninja.age} </div>   
+                                    <div>Belt: {ninja.belt} </div>    
+                                </div>                      
+                            ) : null;
+                        })                                              //Semicolon not needed
+                    }
+                </div>                  
+            );            
+        }
+        export default Ninjas; 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+16. Forms Revisited
+
+
 
 
 
