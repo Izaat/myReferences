@@ -174,6 +174,130 @@ CONTENT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 06. Understanding Auditing Standards
 
+    Reading:
+        https://advisera.com/blog/2016/02/29/accreditation-vs-certification-vs-registration-in-the-iso-world/
+        https://advisera.com/blog/2021/01/11/how-to-choose-an-iso-certification-body/
+        https://advisera.com/27001academy/knowledgebase/surveillance-visits-vs-certification-audits/
+        https://advisera.com/27001academy/blog/2015/07/20/which-questions-will-the-iso-27001-certification-auditor-ask/
+        https://advisera.com/9001academy/knowledgebase/iso-9011-dont-confuse-it-with-iso-9001-or-iso-19011/
+        https://advisera.com/9001academy/knowledgebase/checklist-of-iso-9001-implementation-certification-steps/
+        https://advisera.com/27001academy/knowledgebase/how-to-become-iso-27001-lead-auditor/
+
+    What is certification
+        Certification is a voluntary decision that can be made by any organization that they are complying with the management system standards
+        Certification are offered by certification bodies which in turn accredited by the accreditation body
+        Certification are offered to any organization of any size
+        Auditors are the people who will conduct the audit on behalf of the certification body
+        Auditors must have experience of the type of organization that they are auditing
+        Auditors must have the competency in the standard being audited, auditing process and training or experience in auditing management systems
+        Certification bodies need to develop their processes to ensure their auditors are competent
+        Auditors' competency is a big part of what accreditation bodies will check
+
+    Certification Process
+        Certification process starts with an "implementation project" to ensure they meet the requirements of the standard
+        This also develops the processes and documentation needed
+        The company will then choose which certification body will conduct the certification audits
+        Certification bodies are actually commercial businesses offering different rates and services
+        The certification body will collect information about their clients and decide how many audits are necessary and decide the audit program
+        They will also conduct "Gap analysis audit" which is an additional audit and not part of the certification process
+        2 stages of Initial certification process:            
+            Find out which part of the standard and process needs to be improved
+                Check if there are any basic framework and process in place
+            Test the implementation of the organizations' management system
+                Check if the last audit being fixed
+                Assess if the organization has met all the requirements and standards
+            NOTE: 
+                If the nonconformities are not major nonconformances, they can still be awarded the certificate
+                Organizations do also need to show the certification body that they will make the required improvements
+        The certificate is valid for 3 years but the organization will continue to be audited at regular intervals during the period
+            1st Contact > Gap Analysis > Stage 1 > Stage 2 > Recommendation for Cert > Surveillance > Recertification
+            Stage 1 -> Stage 2 -> Surveillance Audits -> Recertification Audit
+
+    Certification of integrated management systems
+        An organization may have combination of ISO standards. I.e 9001, 14001, 50001
+        In the case of organizations with combined standards, certification body may conduct a integrated management system audit
+        The auditors will assess that the management system requirements for each standard are being achieved
+        Since there are overlaps between the management systems, the total number of audit days are lesser compared to separate audits
+        The organization only has to organize 1 audit program to caover the integrated management system
+
+    Accreditation and ISO17021
+        ISO17021:2015 is a standard certification bodies need to meet to achieve accreditation
+        Accreditation are independent or government regulated bodies
+        The accredited status gives the certification bodies the right to issue formal certificates
+        ISO17021-1 covers the requirements for all certification body audits 
+        Accreditation process involves 
+            An audit of the certification body's management system
+            Witnessed audits to assess the competency of lead auditors
+            Application of the certification body's processes
+        Accreditation body will not be there to audit the audit client, but to audit the certification body's work
+        ISO17021-1 covers:
+            Clause 4 - Audit Principles
+            Clause 9 - Audit Processes
+            Annexes - Auditor Competencies and Evaluation methods
+            Ramaining clauses - 
+                Auditors, 
+                Auditing Processes, 
+                Management Systems 
+                    Certification issuance, 
+                    Confidentiality management, 
+                    Conflict of interest, 
+                    Appeals and complains management
+        ISO17021-1 Topics:
+            Audit Principles
+            Audit Program
+            Audit Delivery
+            Auditor competency and evaluation
+            
+    Competencies of Lead Auditors required by ISO17021-1
+        Requires certification bodies to establish competency criteria, evaluation methods and competency development processes
+        Requires auditors to acquire general knowledge and skills (Found in Annex A)
+            Knowledge of audit principles, practices, and techniques that apply to all management system audits
+            Knowledge of the processes and procedures of the certification body
+            Knowledge of the specific sector's business operations, products, processes and organization
+            Knowledge of general business management practices, for different types of businesses
+            Presentation skills, note taking and report writing
+            Interviewing skills
+            Audit management skills
+            Sufficient language skills
+         NOTE: There are also further defined skills in other standards in ISO17021 series 
+            ISO17021-2 for ISO14001
+            ISO17021-3 for ISO9001
+
+    International Accreditation Forum (IAF) Documents
+        Is an association for the various accreditation bodies around the world/
+        Its aim is to bring about coordination and assimilation between different accreditation bodies involved in conformity assessments
+        Accreditation bodies that signed the IAF Multilateral Recognition Arrangement (MLA) agreed to recognize other accreditations
+        IAF pulblishes various documents including mandatory documents used by accreditation bodies when auditing certification bodies
+        Useful for certification bodies and lead auditors as they give more details on how to implement the requirements of ISO17021-1
+        The mandatory documents cover topic such as:
+            How to calculate audit duration for certification audits
+            How to develop a multisite audit program and sampling process
+            The evaluation of auditor competencies
+        Other documents includes 
+            Guidance Documents
+            Informative Documents
+
+    ISO19011
+        A standard that doesn't need to be used by lead auditors undertaking certification audits
+        Does not replace the use of ISO17021-1
+        A guidance for lead auditors hence it is optional
+        Not possible to acieve certification against ISO19011
+        Organizations often choose to use this as a guidance for their internal audit processes and auditing of management systems
+        
+    Principles of Auditing
+        ISO17021-1 and ISO19011 contains information on auditing
+        ISO17021-1  principles apply mainly the the way  the certification body operates
+        ISO19011 principles apply more to the behavior of the auditors 
+            First principle: Integrity, honesty, transparency
+            Second principle: Fair presentation
+            Third principle: Professional care
+            Fourth principle: Confidentiality
+            Fifth principle: Conflict of Interest
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07. Understanding Audit roles and responsibilities
+
+
 
 
 
