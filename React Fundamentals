@@ -18,6 +18,7 @@ CONTENTS
 14. Stateless Components
 15. Conditional Output
 16. Forms Revisited
+17. Functions as Props
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -812,6 +813,116 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 16. Forms Revisited
+    A Form to add in new ninja into the list
+    Create a new form in ../src/AddNinja.js
+    This new file will be a class base component since it has to locally store whatever the user types in 
+    Data entered will be stored as a component state
+    
+    AddNinja.js
+        import React, {Component} from 'react';
+        
+        class AddNinja extends Component {  
+        
+            state = {
+                name: null,                      //Here, whenever there's value in textbox, it will update the 'null' but did not store the value
+                age: null,                       //Therefore another function is required to for storing. So add handleChange event
+                belt: null
+            }
+            
+            handleChange = (e) => {
+                
+                //name[2]                        //This is the example square bracket to get name from index 2
+                //ninja['name']                  //This is the example square bracket to get objects
+                //['name']                       //In setState(), only the square bracket is written
+                //[e.target.id]                  //This is the example square bracket to get string from an event under setState()
+                
+                this.setState({
+                    //[e.target.id]              //Getting the id name from JSX and refer to its state
+                    [e.target.id] : e.target.value  //To replace the current value with the new value
+                })
+            }
+            
+            handleSubmit = (e) => {
+                e.preventDefault();           //Preventing the default action that refreshes the entire page
+                console.log(this.state);      //Prints state into console
+            }
+            
+            render(){
+                return(
+                    <div>
+                        //<form>
+                        <form onSubmit={this.handleSubmit}>                   //calling a function when submit
+                            <label htmlFor="name">Name:</label>               //Jsx version for "for" attribute in HTML
+                            <input type="text" id="name" onChange={this.handleChange} />
+                            <label htmlFor="name">Age:</label>    
+                            <input type="text" id="age" onChange={this.handleChange} />
+                            <label htmlFor="name">Belt:</label>  
+                            <input type="text" id="belt" onChange={this.handleChange} />
+                            <button>Submit</button>
+                        </form>
+                    </div>
+                )
+            }        
+        }
+        
+        export default AddNinja
+
+    App.js
+        import React, {Component} from 'react';
+        import Ninjas from './Ninjas';         
+        import AddNinja from './AddNinja';      
+        
+        class App extends Component {    
+            state = {                         
+                ninjas : [
+                    {name: 'Ryu', age: 30, belt: 'black', id: 1},
+                    {name: 'Ken', age: 20, belt: 'green', id: 2},
+                    {name: 'Aduken', age: 40, belt: '2nd Dan', id: 3},
+                ]
+            }
+            render () {
+                return (
+                    <div className="App">
+                      <h1>My App</h1>
+                      <p>Hello</p> 
+                      <Ninjas ninjas={this.state.ninjas} />  
+                      <AddNinja />                                            //Retrieve data from AddNinja
+                    </div>
+                );            
+            }
+        }
+        export default App;
+
+    Ninjas.js (Ternary Operator 02)
+        import React from 'react';
+
+        const Ninjas = ({ninjas}) => {       
+            
+            return (                
+                <div className="ninja-list">
+                    {
+                        ninjas.map(ninja => {         
+                            return ninja.age > 20 ? (
+                                <div className="ninja" key={ninja.id}> 
+                                    <div>Name: {ninja.name} </div>
+                                    <div>Age: {ninja.age} </div>   
+                                    <div>Belt: {ninja.belt} </div>    
+                                </div>                      
+                            ) : null;
+                        })
+                    }
+                </div>                  
+            );            
+        }
+        export default Ninjas; 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+17. Functions as Props
+
+
+
+
 
 
 
