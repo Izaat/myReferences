@@ -19,6 +19,7 @@ CONTENTS
 15. Conditional Output
 16. Forms Revisited
 17. Functions as Props
+18. Deleting Data
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -919,6 +920,116 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 17. Functions as Props
+    
+    A Form to add in new ninja into the list (Continued)
+    Instead of the new ninja being displayed in the console, the data will instead be stored and displayed in the browser
+    Data will be taken from the state component of AddNinja.js and pushed into the state component of App.js
+    Read 1 thru 15 steps
+
+
+    App.js
+        import React, {Component} from 'react';
+        import Ninjas from './Ninjas';         
+        import AddNinja from './AddNinja';      
+        
+        class App extends Component {    
+            state = {                         
+                ninjas : [
+                    {name: 'Ryu', age: 30, belt: 'black', id: 1},
+                    {name: 'Ken', age: 20, belt: 'green', id: 2},
+                    {name: 'Aduken', age: 40, belt: '2nd Dan', id: 3},
+                ]
+            }
+            
+            //addNinja = ()                   //1. Create a new variable and call it "addNinja" which will take in a parameter
+            //addNinja = (ninja)              //2. Create another variable that retrieves the state component data in addNinja.js
+            //addNinja = (ninja) => {}        //3. Arrow function to set the state
+            addNinja = (ninja) => {
+                //console.log(ninja);                             //9. For testing: This will retrieve the state component objects from AddNinja.js and display into the console
+                ninja.id = Math.random();                         //10. This will add an id tag to the user input ninja and assign a random number to its id
+                
+                //this.ninjas.push(ninja)                         //11. This pushes the new data into the ninjas array hence disrupting the array. Therefore can't be used. A bad practice
+                //let ninjas = []                                 //12. This creates a new empty array so the original ninjas array can be duplicated
+                //let ninjas = [...this.state.ninja]              //13. This will retrieve the data from ninjas array, spread them out and paste into the empty array
+                let ninjas = [...this.state.ninja, ninjas]        //14. This adds the new ninja element into the array
+                
+                this.State({
+                    ninjas : ninjas                               //15. Set the new updated/duplicated ninjas arrays as the current array state
+                })
+            }
+            
+            render () {
+                return (
+                    <div className="App">
+                      <h1>My App</h1>
+                      <p>Hello</p> 
+                      <Ninjas ninjas={this.state.ninjas} />  
+                      //<AddNinja />      
+                      //<AddNinja addNinja={} />                  //4. Create another function and this will enable the function to be accessed by AddNinja.js
+                      <AddNinja addNinja={this.addNinja} />       //5. Run the code from the "addNinja" function above   
+                    </div>
+                );            
+            }
+        }
+        export default App;
+
+    
+    AddNinja.js
+        import React, {Component} from 'react';
+        
+        class AddNinja extends Component {          
+            state = {
+                name: null,    
+                age: null,   
+                belt: null
+            }
+            
+            handleChange = (e) => {   
+                this.setState({
+                    [e.target.id] : e.target.value 
+                })
+            }
+            
+            handleSubmit = (e) => {
+                e.preventDefault();    
+                //console.log(this.state);              //6. Instead of diplaying in console directly, a function will be called from App.js
+                //this.props.addNinja();                //7. This will call the "<AddNinja addNinja={this.addNinja} />" function in App.js
+                this.props.addNinja(this.state);        //8. This will call the "ninja" in "addNinja = (ninja) => {}" in App.js
+            }
+            
+            render(){
+                return(
+                    <div>
+                        <form onSubmit={this.handleSubmit}>        
+                            <label htmlFor="name">Name:</label>     
+                            <input type="text" id="name" onChange={this.handleChange} />
+                            <label htmlFor="name">Age:</label>    
+                            <input type="text" id="age" onChange={this.handleChange} />
+                            <label htmlFor="name">Belt:</label>  
+                            <input type="text" id="belt" onChange={this.handleChange} />
+                            <button>Submit</button>
+                        </form>
+                    </div>
+                )
+            }        
+        }
+        
+        export default AddNinja;
+
+    Ninjas.js (No changes)
+        import React from 'react';
+
+        const Ninjas = ({ninjas}) => { ... }
+        export default Ninjas; 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+18. Deleting Data
+
+
+
+
+
 
 
 
