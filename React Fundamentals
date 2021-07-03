@@ -816,7 +816,7 @@ CONTENTS
     A Form to add in new ninja into the list
     Create a new form in ../src/AddNinja.js
     This new file will be a class base component since it has to locally store whatever the user types in 
-    Data entered will be stored as a component state
+    Data entered will be displayed in the console
     
     AddNinja.js
         import React, {Component} from 'react';
