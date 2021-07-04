@@ -952,7 +952,7 @@ CONTENTS
                 //this.ninjas.push(ninja)                         //11. This pushes the new data into the ninjas array hence disrupting the array. Therefore can't be used. A bad practice
                 //let ninjas = []                                 //12. This creates a new empty array so the original ninjas array can be duplicated
                 //let ninjas = [...this.state.ninja]              //13. This will retrieve the data from ninjas array, spread them out and paste into the empty array
-                let ninjas = [...this.state.ninja, ninjas]        //14. This adds the new ninja element into the array
+                let ninjas = [...this.state.ninja, ninja]        //14. This adds the new ninja element into the array
                 
                 this.State({
                     ninjas : ninjas                               //15. Set the new updated/duplicated ninjas arrays as the current array state
@@ -1044,7 +1044,7 @@ CONTENTS
                 
                 addNinja = (ninja) => {
                     ninja.id = Math.random();            
-                    let ninjas = [...this.state.ninja, ninjas]                 
+                    let ninjas = [...this.state.ninja, ninja]                 
                     this.State({
                         ninjas : ninjas    
                     })
@@ -1081,7 +1081,7 @@ CONTENTS
         import React from 'react';
 
         //const Ninjas = ({ninjas}) => {                      
-        const Ninjas = ({ninjas, deleteNinjas}) => {                                             //03. This to add the deleteNinja function in App.js
+        const Ninjas = ({ninjas, deleteNinja}) => {                                             //03. This to add the deleteNinja function in App.js
             const ninjaList = ninjas.map(ninja => {                      
                 return ninja.age > 20 ? (
                     <div className="ninja" key={ninja.id}>                                       //06. Point 05. is referring to the "ninja.id" in this line
