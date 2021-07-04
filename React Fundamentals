@@ -826,27 +826,27 @@ CONTENTS
         class AddNinja extends Component {  
         
             state = {
-                name: null,                      //Here, whenever there's value in textbox, it will update the 'null' but did not store the value
-                age: null,                       //Therefore another function is required to for storing. So add handleChange event
+                name: null,                     //Here, whenever there's value in textbox, it will update the 'null' but did not store the value
+                age: null,                      //Therefore another function is required to for storing. So add handleChange event
                 belt: null
             }
             
             handleChange = (e) => {
                 
-                //name[2]                        //This is the example square bracket to get name from index 2
-                //ninja['name']                  //This is the example square bracket to get objects
-                //['name']                       //In setState(), only the square bracket is written
-                //[e.target.id]                  //This is the example square bracket to get string from an event under setState()
+                //name[2]                      //This is the example square bracket to get name from index 2
+                //ninja['name']                //This is the example square bracket to get objects
+                //['name']                     //In setState(), only the square bracket is written
+                //[e.target.id]                //This is the example square bracket to get string from an event under setState()
                 
                 this.setState({
-                    //[e.target.id]              //Getting the id name from JSX and refer to its state
+                    //[e.target.id]                 //Getting the id name from JSX and refer to its state
                     [e.target.id] : e.target.value  //To replace the current value with the new value
                 })
             }
             
             handleSubmit = (e) => {
-                e.preventDefault();           //Preventing the default action that refreshes the entire page
-                console.log(this.state);      //Prints state into console
+                e.preventDefault();         //Preventing the default action that refreshes the entire page
+                console.log(this.state);    //Prints state into console
             }
             
             render(){
@@ -867,7 +867,7 @@ CONTENTS
             }        
         }
         
-        export default AddNinja
+        export default AddNinja;
 
     App.js
         import React, {Component} from 'react';
@@ -942,20 +942,20 @@ CONTENTS
                 ]
             }
             
-            //addNinja = ()                   //1. Create a new variable and call it "addNinja" which will take in a parameter
-            //addNinja = (ninja)              //2. Create another variable that retrieves the state component data in addNinja.js
-            //addNinja = (ninja) => {}        //3. Arrow function to set the state
+            //addNinja = ()                 //1. Create a new variable and call it "addNinja" which will take in a parameter
+            //addNinja = (ninja)            //2. Create another variable that retrieves the state component data in addNinja.js
+            //addNinja = (ninja) => {}      //3. Arrow function to set the state
             addNinja = (ninja) => {
-                //console.log(ninja);                             //9. For testing: This will retrieve the state component objects from AddNinja.js and display into the console
-                ninja.id = Math.random();                         //10. This will add an id tag to the user input ninja and assign a random number to its id
+                //console.log(ninja);                       //9. For testing: This will retrieve the state component objects from AddNinja.js and display into the console
+                ninja.id = Math.random();                   //10. This will add an id tag to the user input ninja and assign a random number to its id
                 
-                //this.ninjas.push(ninja)                         //11. This pushes the new data into the ninjas array hence disrupting the array. Therefore can't be used. A bad practice
-                //let ninjas = []                                 //12. This creates a new empty array so the original ninjas array can be duplicated
-                //let ninjas = [...this.state.ninja]              //13. This will retrieve the data from ninjas array, spread them out and paste into the empty array
-                let ninjas = [...this.state.ninja, ninja]        //14. This adds the new ninja element into the array
+                //this.ninjas.push(ninja)                   //11. This pushes the new data into the ninjas array hence disrupting the array. Therefore can't be used. A bad practice
+                //let ninjas = []                           //12. This creates a new empty array so the original ninjas array can be duplicated
+                //let ninjas = [...this.state.ninja]        //13. This will retrieve the data from ninjas array, spread them out and paste into the empty array
+                let ninjas = [...this.state.ninjas, ninja]  //14. This adds the new ninja element into the array
                 
-                this.State({
-                    ninjas : ninjas                               //15. Set the new updated/duplicated ninjas arrays as the current array state
+                this.setState({
+                    ninjas : ninjas                         //15. Set the new updated/duplicated ninjas arrays as the current array state
                 })
             }
             
@@ -966,8 +966,8 @@ CONTENTS
                       <p>Hello</p> 
                       <Ninjas ninjas={this.state.ninjas} />  
                       //<AddNinja />      
-                      //<AddNinja addNinja={} />                  //4. Create another function and this will enable the function to be accessed by AddNinja.js
-                      <AddNinja addNinja={this.addNinja} />       //5. Run the code from the "addNinja" function above   
+                      //<AddNinja addNinja={} />             //4. Create another function and this will enable the function to be accessed by AddNinja.js
+                      <AddNinja addNinja={this.addNinja} />  //5. Run the code from the "addNinja" function above   
                     </div>
                 );            
             }
@@ -1025,7 +1025,7 @@ CONTENTS
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-18. Deleting Data
+18. Deleting Data (PROBLEM)
     Adding a delete button for each ninja and remove the array from the stored state array
     
     App.js
@@ -1044,22 +1044,22 @@ CONTENTS
                 
                 addNinja = (ninja) => {
                     ninja.id = Math.random();            
-                    let ninjas = [...this.state.ninja, ninja]                 
+                    let ninjas = [...this.state.ninjas, ninja]                 
                     this.State({
                         ninjas : ninjas    
                     })
                 }
                 
-                deleteNinja = (id) => {                                              //01. Selecting the id in the array
-                    //console.log(id)                                                //08. To printout the id number into the console for testing
-                    //let ninjas = this.state.ninjas.filter()                        //09. This will filter out the the array based on id number
-                    let ninjas = this.state.ninjas.filter(ninja => {                 //10. This will cycle through the duplicated array
-                        //return true/false                                          //11. For true, the ninja object will remain in the new array. For false, this will filter out from the array
-                        //return false                                               //12. In order to filter out, it has to return false
-                        return ninja.id !== id                                       //13. If id = ninja object "ninja => {", then return false
+                deleteNinja = (id) => {                                  //01. Selecting the id in the array
+                    //console.log(id)                                    //08. To printout the id number into the console for testing
+                    //let ninjas = this.state.ninjas.filter()            //09. This will filter out the the array based on id number
+                    let ninjas = this.state.ninjas.filter(ninja => {     //10. This will cycle through the duplicated array
+                        //return true/false                              //11. For true, the ninja object will remain in the new array. For false, this will filter out from the array
+                        //return false                                   //12. In order to filter out, it has to return false
+                        return ninja.id !== id                           //13. If id = ninja object "ninja => {", then return false
                     });
                     this.setState({
-                        ninjas : ninjas                                              //14. Set the updated array as current array 
+                        ninjas : ninjas                                  //14. Set the updated array as current array 
                     })
                 }
                 
@@ -1069,7 +1069,7 @@ CONTENTS
                           <h1>My App</h1>
                           <p>Hello</p> 
                           //<Ninjas ninjas={this.state.ninjas} />  
-                          <Ninjas deleteNinja={this.deleteNinja} ninjas={this.state.ninjas} />   //02. Giving access Ninjas.js to run deleteNinja function
+                          <Ninjas deleteNinja={this.deleteNinja} ninjas={this.state.ninjas} />       //02. Giving access Ninjas.js to run deleteNinja function
                           <AddNinja addNinja={this.addNinja} /> 
                         </div>
                     );            
@@ -1077,22 +1077,26 @@ CONTENTS
             }
             export default App;
 
-    Ninjas.js (Ternary Operator 01)
+    Ninjas.js
         import React from 'react';
 
         //const Ninjas = ({ninjas}) => {                      
-        const Ninjas = ({ninjas, deleteNinja}) => {                                             //03. This to add the deleteNinja function in App.js
+        const Ninjas = ({ninjas, deleteNinja}) => {                                                 //03. This to add the deleteNinja function in App.js
             const ninjaList = ninjas.map(ninja => {                      
-                return ninja.age > 20 ? (
-                    <div className="ninja" key={ninja.id}>                                       //06. Point 05. is referring to the "ninja.id" in this line
-                        <div>Name: {ninja.name} </div>
-                        <div>Age: {ninja.age} </div>   
-                        <div>Belt: {ninja.belt} </div>    
-                        //<button onClick={deleteNinja}>Delete ninja</button>                     //04. This to add the button to every ninja in the browser
-                        //<button onClick={deleteNinja(ninja.id)}>Delete ninja</button>           //05. This to call up the id number of the displayed ninja via key. NOTE: Adding (ninja.id) enables automatic trigger
-                        <button onClick={() => {deleteNinja(ninja.id)}}>Delete ninja</button>     //07. This will disable the auto mode. Known as anonymous function
-                    </div>                      
-                ) : null;
+                if (ninja.age > 20) {
+                    return (
+                        <div className="ninja" key={ninja.id}>                                      //06. Point 05. is referring to the "ninja.id" in this line
+                            <div>Name: {ninja.name} </div>
+                            <div>Age: {ninja.age} </div>   
+                            <div>Belt: {ninja.belt} </div>    
+                            //<button onClick={deleteNinja}>Delete ninja</button>                   //04. This to add the button to every ninja in the browser
+                            //<button onClick={deleteNinja(ninja.id)}>Delete ninja</button>         //05. This to call up the id number of the displayed ninja via key. NOTE: Adding (ninja.id) enables automatic trigger
+                            <button onClick={() => {deleteNinja(ninja.id)}}>Delete ninja</button>   //07. This will disable the auto mode. Known as anonymous function
+                        </div>                   
+                    )    
+                } else {
+                    return null
+                }
             });     
             
             return (                
@@ -1106,9 +1110,6 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 19. Recap & Virtual DOM
-
-
-
 
 
 
