@@ -20,6 +20,7 @@ CONTENTS
 16. Forms Revisited
 17. Functions as Props
 18. Deleting Data
+19. Recap & Virtual DOM
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1025,6 +1026,88 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 18. Deleting Data
+    Adding a delete button for each ninja and remove the array from the stored state array
+    
+    App.js
+            import React, {Component} from 'react';
+            import Ninjas from './Ninjas';         
+            import AddNinja from './AddNinja';      
+            
+            class App extends Component {    
+                state = {                         
+                    ninjas : [
+                        {name: 'Ryu', age: 30, belt: 'black', id: 1},
+                        {name: 'Ken', age: 20, belt: 'green', id: 2},
+                        {name: 'Aduken', age: 40, belt: '2nd Dan', id: 3},
+                    ]
+                }
+                
+                addNinja = (ninja) => {
+                    ninja.id = Math.random();            
+                    let ninjas = [...this.state.ninja, ninjas]                 
+                    this.State({
+                        ninjas : ninjas    
+                    })
+                }
+                
+                deleteNinja = (id) => {                                              //01. Selecting the id in the array
+                    //console.log(id)                                                //08. To printout the id number into the console for testing
+                    //let ninjas = this.state.ninjas.filter()                        //09. This will filter out the the array based on id number
+                    let ninjas = this.state.ninjas.filter(ninja => {                 //10. This will cycle through the duplicated array
+                        //return true/false                                          //11. For true, the ninja object will remain in the new array. For false, this will filter out from the array
+                        //return false                                               //12. In order to filter out, it has to return false
+                        return ninja.id !== id                                       //13. If id = ninja object "ninja => {", then return false
+                    });
+                    this.setState({
+                        ninjas : ninjas                                              //14. Set the updated array as current array 
+                    })
+                }
+                
+                render () {
+                    return (
+                        <div className="App">
+                          <h1>My App</h1>
+                          <p>Hello</p> 
+                          //<Ninjas ninjas={this.state.ninjas} />  
+                          <Ninjas deleteNinja={this.deleteNinja} ninjas={this.state.ninjas} />   //02. Giving access Ninjas.js to run deleteNinja function
+                          <AddNinja addNinja={this.addNinja} /> 
+                        </div>
+                    );            
+                }
+            }
+            export default App;
+
+    Ninjas.js (Ternary Operator 01)
+        import React from 'react';
+
+        //const Ninjas = ({ninjas}) => {                      
+        const Ninjas = ({ninjas, deleteNinjas}) => {                                             //03. This to add the deleteNinja function in App.js
+            const ninjaList = ninjas.map(ninja => {                      
+                return ninja.age > 20 ? (
+                    <div className="ninja" key={ninja.id}>                                       //06. Point 05. is referring to the "ninja.id" in this line
+                        <div>Name: {ninja.name} </div>
+                        <div>Age: {ninja.age} </div>   
+                        <div>Belt: {ninja.belt} </div>    
+                        //<button onClick={deleteNinja}>Delete ninja</button>                     //04. This to add the button to every ninja in the browser
+                        //<button onClick={deleteNinja(ninja.id)}>Delete ninja</button>           //05. This to call up the id number of the displayed ninja via key. NOTE: Adding (ninja.id) enables automatic trigger
+                        <button onClick={() => {deleteNinja(ninja.id)}}>Delete ninja</button>     //07. This will disable the auto mode. Known as anonymous function
+                    </div>                      
+                ) : null;
+            });     
+            
+            return (                
+                <div className="ninja-list">
+                    { ninjaList }
+                </div>                  
+            );            
+        }
+        export default Ninjas; 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+19. Recap & Virtual DOM
+
+
 
 
 
