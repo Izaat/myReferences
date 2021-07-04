@@ -129,6 +129,196 @@ CONTENT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 02. The Planning Phase
 
+    Further Reading
+        https://advisera.com/books/the-iso-14001-2015-companion/
+        https://advisera.com/14001academy/blog/2014/11/26/iso-14001-competence-training-awareness-important-ems/
+        https://advisera.com/14001academy/blog/2015/06/15/how-to-achieve-regulatory-compliance-in-iso-14001/
+        https://advisera.com/14001academy/blog/2014/10/01/demystification-legal-requirements-iso-14001/
+        https://advisera.com/14001academy/blog/2014/11/05/understanding-responsibility-authority-identification-iso-14001/
+        https://advisera.com/14001academy/blog/2014/12/10/seven-elements-control-documents-ems/
+        https://advisera.com/9001academy/blog/2015/05/19/iso-9001-awareness-training-material-how-to-create-it-what-it-should-contain/
+
+    Understanding your organization and its context [Clause 4.1]
+        Analyze the external and internal issues related to the ability of the company to achieve the intended outcomes of EMS
+        This will give a better understanding of the company and the context in which it operates
+        Issues arising from the external environment must be taken into consideration when defining EMS
+        External Contexts: 
+            Legal and regulatory requirements, 
+            Economic environment 
+            Political environment
+            Social and cultural norms
+            Competitive environment
+        For the EMS to be effective, it also must be aligned with all the internal contexts
+        Internal Contexts:
+            Organizational structure
+            Company culture
+            Company values
+            Business Strategy
+            Business processes
+            Technologies being used
+            Available resources
+            Organizational knowledge
+        NOTE: The EMS of a large pharma corporation will be much more complex than the family owned fashion company
+        Important: The standard requires the internal and external issues to be analyzed but does not require them to be documented
+            
+    Understanding the needs and expectations of interested parties [Clause 4.2]
+        Requires to identify the interested parties which are significant for echievement of the environmental objectives
+        There can be different interested parties depending on the nature of the business
+        Interested parties:
+            Local authorities
+            Local communities
+            Suppliers
+            Partners
+            Clients
+            Employees
+        Determine the requirements regarding the EMS of the interested parties since different parties have different requirements
+        See the bigger picture and understand the needs of the company
+        The Clause requires interested parties to be analyzed but not required to be documented
+
+    Determine the scope of the EMS [Clause 4.3]
+        Define and document the scope of the EMS
+        The scope sets the boundaries of the EMS as it will be written in ISO14001 certificate
+        Consider the followings prior to defining the scope
+            What the company wants to achieve 
+            The results of previous analyses of issues and interested parties
+            The activities of the organization and other organizations (Associates, partners, vendors)
+            How those activities are related and how they depend on each other
+        The standard requires the scope to be documented
+        The scope document includes the followings:
+            Product and services the company provides,
+            Location,
+            All Processes, 
+            All departments
+        Example:
+            The Environmental Management System (EMS) applies to the production and / or service provision processes.
+            The EMS applies to the provision of products and services, outsourcing of vehicle maintenance, operating from the offices in UK.
+
+    Leadership and Commitment [Clause 5.1]
+        Covers 3 aspects: 
+            Leadership and Commitment, 
+            Environmental policy, 
+            Organizational roles and responsibilities
+        Commitments:
+            Establishing environmental policy and objectives
+            Ensuring availability of resources (allocating people, time and fincaial resources)
+            Communicating the importance of environment protection
+            Demonstrating leadership by setting good examples
+            Ensuring EMS is integrated within company processes
+            Promoting continuous improvement of the EMS (Suggestion box, emails, projects)
+        ISO14001 requires top management to demonstrate leadership and commitment but doesnt require to be documented
+
+    Environmental Policy [Clause 5.2]
+        The policy is mandatory to be documented, distributed to all employees and available to interested parties
+        Policy should reflect the intentions of the company regarding the environment
+        The policy should demonstrate the top management's commitment to satisfy environment safety rules and continually improve the EMS
+        Top management should also give the directions for setting the environmental objectives
+        The policy is a top level policy and shouldn't be too detailed
+        The details should be documented in another document i.e procedures
+
+    Organizational roles, responsibilities and authorities [Clause 5.3]
+        Top management are responsible for the followings:
+            Define the responsibilities and authorities for the roles and communicate them to everyone
+            Assigning and communicating roles and responsibilities so everyone in the organization knows what is expected and the impacts
+        Top management must assign responsibilities for 2 main aspects
+            Ensuring the EMS is compliant to ISO14001
+            Monitoring and Reporting the effectiveness of EMS
+        Roles can be allocated to one or more roles or people depending on the company size
+        The standard does not require roles and responsibilities to be documented 
+        But it is more practical to communicate them once they're documented
+        The roles can be documented in job description, organizational chart, policies, plans or other documents created during ISO14001 implementation
+        
+    Environmental Objectives [Clause 6.2]
+        Covers the requirements to address risks and opportunities
+        Sets the basis for continual improvement of the EMS
+        Demonstrates the priorities in environmental protection
+        Things to be considered:
+            Aligned with the environmental policy
+            Should be easily measured in order to monitor the progress of the achievement
+            The needs of the company and results of the identification and evaluation of environmental aspects
+            Objectives should be updated in order to reflect the current state in the company and its EMS
+            Communicated to all interested parties
+        To ensure fulfillment of the objectives, create plan to achieve them by:
+            Assigning the responsible person, 
+            Allocating resources, 
+            Define deadline for completion, etc
+        The standard requires the environmental objectives to be documented (Usually 1 single document) - Description, Measurable target, timeframe
+            Example: "To decreae electrical energy consumption by 20% in the following year"
+            
+    Resources [Clause 7.1]
+        Defines the requirements for availibility of resources, competences, awareness, communication and control of documented information
+        The standard requires companies to ensure the resources are available for the EMS, the daily activities and continual improvement of the EMS
+        This also includes allocating people and time for the activities
+        Without the appropriate resources, EMS cannot run smoothly
+        Provision of resources is prescribed as a management commitment
+        Example:
+            Increasing the environmental awareness trainings for 2 hours per employee
+            Then the management will assign this responsibility (usually to the EHS Manager)
+            The employees then will be given 2 more hours for this training
+            Manager will also find out if there is enough time to conduct the training and the financial resources to hire consultants or trainers
+        The standard does not require this clause to be documented but it is very common to document through the budget, HR plan, environmental objectives and plans for achievement
+
+    Competence [Clause 7.2]
+        Requires to define competencies for all employees and to make sure they have appropriate training and experience
+        Determining the competencies is based on education, training, and experience
+        Companies should take certain actions for people to acquire the necessary competency 
+            Example: Sending to training and in-house trainings, providing mentorship, reassigning to another position
+        Companies should alse keep records of employees competence (Certificates, recommendations, attendance of trainings, etc)
+        A good practice on managing employees is to establish a procedure for managing human resources
+        Procedures to include when employing new people:
+            Performance appraisals
+            Defining training needs
+            Documenting training plan
+            etc
+        
+    Awareness [Clause 7.3]
+        Requires all employees to be aware of the environmental policy, their roles and the impact on EMS
+        All employees should also know the consequences if the EMS rules arent followed
+        Methods for raising awareness
+            Emails and news letters
+            Organizing trainings
+            Attending online courses
+            Environment safety meetings
+            Events and gatherings
+            etc
+        The standard does not require awareness activities to be documented unless the company require a more structured approach
+            Example: Awareness raising plans (Trainings, newsletters, etc), defined period and resources needed
+        
+    Communication [Clause 7.4]
+        Requires companies to define the needs for internal/external communications and to define what and when will be communicated and by whom
+        Communication is the essence of understanding
+        This clause does not require the communication rules to be documented
+        The communication rule can be more or less formal, fully documented or stated in a few sentences within other policies, procedures and plans
+        
+    Documented information [Clause 7.5]
+        Defines the requirements about how the documented information should be created, controlled and updated 
+        Generally there are 2 types of documents:
+            How processes should be conducted (ie policies, procedures, plans, etc)
+            Evidence and Activities performed (records, logs, databases, etc)
+        Updating (Consider the followings)
+            Appropriate identification and description (title, date, name, etc)
+            Proper media format
+        Document should be approved and reviewed to make sure they're appropriate
+        Company should control the documented information to ensure it availability
+        Ensure that the documents are protected from the loss of confidentiality, integrity and improper use
+        Document control measures include:
+            How to distribute, access, retrieve and use the information (Emails, usb, password protected, limited access, etc)
+            How to store and preserve the information (storing in shared folders, preservation in archives, stored in locked cabinets, etc)
+            How to control the changes (varsion control)
+            How to dispose the documented information - company should determine how long the socument should be preserved
+                Identify documents regulated by the law and control them according to the law
+                Decide how to control the rest of the documented information
+            The company must control the information from external sources (emails from customers, instruction manuals for equipment, laws, etc)
+        ISO14001 does not require the rules to be documented but it is a good practice to document the in a procedure
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Risk Opportunities and Environmental Aspects
+
+
+
+
+
 
 
 
