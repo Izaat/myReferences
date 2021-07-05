@@ -1045,7 +1045,7 @@ CONTENTS
                 addNinja = (ninja) => {
                     ninja.id = Math.random();            
                     let ninjas = [...this.state.ninjas, ninja]                 
-                    this.State({
+                    this.setState({
                         ninjas : ninjas    
                     })
                 }
