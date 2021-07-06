@@ -21,6 +21,7 @@ CONTENTS
 17. Functions as Props
 18. Deleting Data
 19. Recap & Virtual DOM
+20. CSS Files
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1110,6 +1111,45 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 19. Recap & Virtual DOM
+    
+    Current Application structure
+        |
+        |                         App.js
+        |                    Container Component
+        |                            |
+        |                 |----------|------------|
+        |    deleteNinja  |                       |     
+        |  ninjas (prop)  |                       | addNinja
+        |                 |                       |
+        |              Ninjas.js              AddNinjas.js
+        |             UI Compnent         Container Component
+        |    
+
+    Virtual DOM
+        |                     
+        |     props  / ninjas
+        |       |        |
+        |  |------------------|
+        |  |    Ninjas.js     |
+        |  |------------------|                                              |----------------|
+        |           |                     |-----------|  |-----------|       |                |
+        |           |---------------------|  Virtual  |  |  Virtual  |       |    The DOM     |
+        |               jsx template      |    DOM    |  |    DOM    |       |   (BROWSER)    |
+        |                                 |   (new)   |  | (current) |       |                |
+        |                                 |-----------|  |-----------|       |----------------|
+        |                                       |              |                      |
+        |                                       |--------------|                      |
+        |                                              |------------------------------|
+        |                                                    differences updated
+        |
+        | The browser will always show the current VDom
+        | If there is differences between the new and current VDom, the new becomes the current VDom 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+20. CSS Files
+
+
 
 
 
