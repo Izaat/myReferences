@@ -22,6 +22,7 @@ CONTENTS
 18. Deleting Data
 19. Recap & Virtual DOM
 20. CSS Files
+21. Lifecycle Methods
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1148,6 +1149,29 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 20. CSS Files
+    
+    There are few different ways to use CSS files in React 
+    Methods:
+        1. Create CSS file for individual component - This will only affect the component individually
+        2. Using 'index.css' - This will affect ALL components and no need to import to every single component file
+        3. Using CSS modules - Need to setup the configuration file, https://blog.pusher.com/css-modules-react/
+    
+    CSS file for individual component
+        Ninjas.css
+            body{                                   //This will actually affect Ninjas.js as well as App.js since they are shared BUT
+                background: pink;                   //when another component is updated, it will only affect that particular component
+            }       
+        
+        Ninjas.js
+            import React from 'react';
+            import './Ninjas.css'                   //Just import the file
+
+            const Ninjas = ({ninjas, deleteNinja}) => {...}
+            export default Ninjas;         
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+21. Lifecycle Methods
 
 
 
