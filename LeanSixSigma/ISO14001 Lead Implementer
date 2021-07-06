@@ -315,6 +315,87 @@ CONTENT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 03. Risk Opportunities and Environmental Aspects
 
+    Reading 
+        https://advisera.com/14001academy/knowledgebase/the-role-of-risk-management-in-the-iso-140012015-standard/
+        https://advisera.com/14001academy/knowledgebase/risk-management-in-iso-140012015-what-why-and-how/
+        https://advisera.com/14001academy/knowledgebase/environmental-aspect-identification-and-classification/
+        https://advisera.com/14001academy/blog/2015/03/09/what-makes-environmental-aspect-significant-in-iso-14001/
+        https://advisera.com/14001academy/blog/2015/04/20/understanding-relationship-between-environmental-aspects-and-operational-procedures/
+        https://advisera.com/14001academy/blog/2015/09/14/compliance-requirements-according-to-iso-140012015-what-has-changed/
+        https://advisera.com/14001academy/blog/2015/06/15/how-to-achieve-regulatory-compliance-in-iso-14001/
+        https://advisera.com/14001academy/blog/2014/10/01/demystification-legal-requirements-iso-14001/
+        https://advisera.com/14001academy/blog/2015/05/18/how-to-identify-environmental-aspects-in-your-office-using-iso-14001/
+        https://advisera.com/14001academy/blog/2015/06/22/environmental-aspects-in-the-manufacturing-sector/
+        
+    Addressing Risks and Opportunities [Clause 6.1.1]
+        Identify all factors (risk and opportunities) that can affect the company from achieving EMS objectives during the planning stage of the EMS
+        Considerations should be done on much higher level than "identification and evaluation" stage of environmental aspects
+        Opportunity example:
+            Heat produced by one process can be used to heat up an area in another part of the facility (Affects energy usage)
+            Opportunities like this cannot be identified during identification and evaluation stage
+        The "identification and evaluation" stage leaves out the external context as it only focuses on processes inside the company
+        Risk example:
+            Pollutants in the neighborhood enhances the environment impact on the environment
+        The documents needed for addressing risks and opportunities:
+            A list of risks and opportunities that needs to be addressed
+            Rules, instructions or SOPs to ensure that everything is carried out as planned
+        The standard doesnt require risk management to be documented
+
+    Environmental aspects and Impacts [Clause 6.1.2]
+        The company needs to identify environment aspects and associate them with environmental impacts
+        Also determnie the significant aspects adressed by EMS 
+        The environmental objectives, operational controls and other elements are directly linked to the significant environment aspects
+        The aspects are elements of the company activities, products or services that interacts with the environment
+            Example: Raw materials and process by products
+        Changes in the environment (beneficial or adverse) resulting from the environment aspects are called environmental impact
+        Relationship between aspects and impacts is the one of cause and effect
+
+    Identification of Environmental Aspects [Clause 6.1.2]
+        Provides foundation of future activities
+        Initialize by breaking down operating processes into activities and consider their inputs and outputs
+        Things to Consider during identification:
+            Relevant past products, services and activities (including planned and new developments) 
+                Speak to the process owner to get the better insights and to avoid missing something out
+                In larger companies, the process owners will identify the environmental aspects of their own processes
+            Lifecycle of the product and services
+                Identify the aspects that can emerge along the way
+                Stages in its lifecycle that can be controlled or influenced
+                Typical stages: 
+                    Raw material acquisition
+                    Production
+                    Development
+                    Transportation
+                    Delivery
+                    Usage
+                    End of life treatment
+                    Final disposition
+            Normal and abnormal operating conditions
+                Shut-down and startup
+                Potential emergency situations (Spills, leaks, etc)
+        The company does not have to consider each product, component or raw materials individually when identifying aspects
+        The company may instead group activities, products and services with common characteristics
+            Example: Same processses and raw materials for several products will be merged into one group
+            Helpful to have a list of all aspects related to the company (Processes, products, services, related impacts)
+        The standard requires all aspects and impacts to be documented but does not have to be separated from the evaluation of aspects
+            This way, same document can be used to meet the two requirements
+
+    Evaluation of Environmental Aspects [Clause 6.1.2]
+        The standard requires to establish methods and criteria for evaluation
+        The method and criteria need to be documented through procedure (Document details depend on the size of the company)
+        After the aspects are determined, it'll be easier to know where to focus on the EMS and it will also prevent unwanted usage of the resources
+        The method and criteria should provide the consistent results 
+        The company sets the criteria for determining significant environment aspects
+        For small companies, only 2 criteria is required, "probability of occurence and severity of consequence" (Similar to FMEA - S*O*D)
+        For larger companies, scale, duration, exposure to environment, recovery time can be added
+        In order to determine the level of severity/significance, create a scale and define by multiplication (Similar to risk assessment methods)
+        If some environmental aspects are regulated by law, it becomes automatically significant
+        The most effective method is not the one with highest severity/significance value but the one with accurate results
+
+    Compliance Obligations [Clause 6.1.3]
+
+
+
+
 
 
 
