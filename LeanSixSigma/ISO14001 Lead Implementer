@@ -432,6 +432,133 @@ CONTENT
             Evaluate the effectiveness of actions to determine they delivered what being expected in the plan (Done in performance evaluation)
         
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. Operation
+    
+    Reading
+        https://advisera.com/books/the-iso-14001-2015-companion/
+        https://advisera.com/14001academy/blog/2015/04/20/understanding-relationship-between-environmental-aspects-and-operational-procedures/
+        https://advisera.com/14001academy/blog/2015/07/27/5-tips-to-improve-your-environmental-management-system-performance/
+        https://advisera.com/14001academy/blog/2014/07/23/5-steps-set-emergency-plan-according-iso-14001/
+        
+    Operational Planning and Control [Clause 8.1]
+        Define activities to decrease the impact 
+        Achieve by implementing operational controls
+        Purpose of operational controls is to decrease pollution, maintain compliance, improve EMS, achieve environmental objectives
+        For every process with high severity aspect, operational control must be established
+        To establish operational control:
+            Establish operating criteria for the process - determine target values/parameters
+            Define activities to decrease negative impact of the aspect
+            Criteria should be based on its effect on environment
+            Fulfill other legal requirements
+        Define Operating Criteria
+            The process should be considered "out of lifecycle" to determine its additional requirements and providing additional information regarding stages in the lifecycle
+            Example: 
+                During process of designing of a new product, company may include requirements for env protection during production
+                Or include information about recycling the product in instruction manual
+                After determining the activities for the process, impact with significant aspects can be influenced
+        Define new activities or change existing ones to decrease environmental impact 
+            Example: Waste disposal activities -> Recycling
+            Monitoring and measuring can be introduced (i.e measurement of gas emissions)
+        Defining the way of documenting the operational control
+            The standard does not require which kind of protection method must be used as it all depends on type of business, environment, etc
+            But it requires operational controls to be documented to the extent necessary to have confidence that the process have been carried out as planned
+            The company has freedom to decide whether to document the operational control  in a procedure, guidelines, or other document
+            Process criteria:
+                Complex operational controls
+                Complex processes
+                High risk of making mistakes
+                Activities not often carried out
+            For Simple Processes, short and simple guidelines is sufficient
+            Document must contain enough information to define roles, responsibilities and properly conduct activities
+            Also important to define methods and frequency for reviewing activities to ensure activities are performed as plannes
+            Review the effectiveness of operational controls (Done during environmental performance review and internal audits)
+
+    Managing outsourcing of operations [Clause 8.1]
+        ISO14001 requires all outsourced processes to be identified and controlled regarding environmental protection
+        The company should first make sure that the hired company follows their environmental protection rules (Proper waste disposal, etc)
+        The outsourcer must document a procedure and include all the environmental protection rules
+        Then communicate the procedure to its partner and get acceptance
+        The outsourcee company will get the requirements in writing so they could facilitate the fulfilllment of client's requirements
+        The outsourcer is then be able to control outsourced process
+        When a process/product/service is supplied by external provider, the ability of the control can vary from direct control, limited control or no control
+        No control when the outsourcee is a major corporation overseas
+        In some cases, some products/services can be excluded from operational controls
+        The control should be documented as any other operational control "to the extent necessary to achieve confidence that process is being carried out as planned"
+
+    Controlling Changes [Clause 8.1]
+        The standard requires the company to manafe the changes by planning and controlling the implementation
+        Also, it requires the company to analyze the changes and deal with unexpected changes to decrease unwanted effects
+        NOTE: The biggest loophole in EMS is when changes are being made especially when these changes are unplanned and unexpected
+        Example:
+            When top management decides to change the technology (ie filter removal from chimneys),
+            This implication should be analyzed to anticipate consequences and make plans how to deal with them
+            The person incharge of the change should analyze, make a report and explain to the top management
+            Explanations should include what should be done, the resources needed, time schedule for planned activities and a project team for implementing the change
+            Based on the report, the top management should make decision and to what extent to approve the change
+        Issues that can be critical for environmental protection are: 
+            Changes in the processes, 
+            Development of new products, 
+            Introduction of new technologies, 
+            Changing the energy source, etc
+        The standard has no requirements for documenting the changes
+        The best practice to plan and effectively implement changes is to develop the procedure for change management
+        Change Management Procedure should include:
+            Information about who and how to initiate changes
+            What kind of analysis should be conducted and documented
+            Who will approve and implement the changes
+
+    Emergency Preparedness and Response [Clause 8.2]
+        Emergency situations are some unplanned or unexpected events that results in adverse consequences to the company or environment
+        So the event require immediate actions to mitigate, prevent actual/potential consequences 
+        Being prepared helps to prevent injuries, contamination of the workplace and the environment
+        Example:
+            If chemical spill happened, the response will be more effective  if there is already a plan that was tested beforehand
+            The employees will know who and how to perform the containment, who will talk to the public, etc
+        Handling emergencies is important for the reputation and even the survival of the company
+        
+        Identify potential emergency situations - 
+            Process of addressing risks and opportunities can be a great help
+            External issues, can be a guidance in identifying potential emergency situations
+                i.e company located in the area that is vulnerable to flood, droughts, earthquakes
+            Internal issues, should be taken into account when determining emergency situations
+                i.e usage of highly flammable substances or outdated equipment
+        Plan the emergency preparedness and response process
+            There may be some similar activities for every emergency, some activities are specific for each situation
+            Consider defining methodology for response - What actions will be taken and in which order
+            Example: The employee will first take actions for containment while others require evacuation
+        Communication process during emergency
+            Inside the company (Alarm, PA system, etc)
+            Outside the company (Who will talk to the public, who will activate the fire department, spillage cleaning services, etc)
+            What actions will be taken to mitigate consequences (How employee extinguish fire or how to turn off machine during flooding)
+        Assessing needs for post emergency evaluation to determine and implement corrective actions
+            Actions taken during emergency need to be reviewed after the emergency whether the plan was implemented correctly
+            Check for mistakes and how they can be prevented
+        Trainings
+            Due to the unexpected nature of emergencies, all employees must know their roles and responsibilities and to execute without delay
+            Who switch off machines, who provides first aid, who will talk to fire department, etc
+            To achieve them, the company must conduct trainings and periodical testing of the response actions
+            Also to evaluate them in order to improve the response and to determine needs for relevant training
+            
+        Emergency preparedness and response process need to be documented as procedures to ensure emergencies will be handled as planned
+        The standard requires evidence of testing and evaluation of emergency response
+        Corrective action records from emergency response evaluation can be used as evidence that testing and evaluation was conducted
+        The standard doesnt explicitly require scenarios and equipment used to be documented
+
+    Operating the EMS [Clause 8.1]
+        The EMS must be operated on daily basis
+        The daily operation represents a real compliance to the ISO14001 and is the only way to benefit from the implementation
+        Make sure to revisit all activities that were planned in the policies and procedures
+        If some of the document doesn't make sense or is too complicated, then simplify or delete if they are not mandatory
+        Note that the circumstances of the company will change by creating new products, adding services, introduced new technology
+        With these changes, policies and procedures need to be updated
+        The best practice for keeping updates is to nominate an owner of the document and the owner is to review them periodically
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. Check and Act Phase
+
+
 
 
 
