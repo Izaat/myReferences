@@ -23,6 +23,8 @@ CONTENTS
 19. Recap & Virtual DOM
 20. CSS Files
 21. Lifecycle Methods
+22. Simple Todo App
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1215,13 +1217,66 @@ CONTENTS
     |      |                                |     |                                                          |    |                                    |  
     |      |--------------------------------|     |----------------------------------------------------------|    |------------------------------------|
 
+    App.js
+        import React, {Component} from 'react';
+        import Ninjas from './Ninjas';         
+        import AddNinja from './AddNinja';      
+        
+        class App extends Component {    
+            state = {                         
+                ninjas : [
+                    {name: 'Ryu', age: 30, belt: 'black', id: 1},
+                    {name: 'Ken', age: 20, belt: 'green', id: 2},
+                    {name: 'Aduken', age: 40, belt: '2nd Dan', id: 3},
+                ]
+            }
+            
+            addNinja = (ninja) => {
+                ninja.id = Math.random();            
+                let ninjas = [...this.state.ninjas, ninja]                 
+                this.setState({
+                    ninjas : ninjas    
+                })
+            }
+            
+            deleteNinja = (id) => {      
+                let ninjas = this.state.ninjas.filter(ninja => {      
+                    return ninja.id !== id            
+                });
+                this.setState({
+                    ninjas : ninjas    
+                })
+            }
+            
+            componentDidMount() {
+                console.log('component mounted')         //Will show DOM is mounted and this will only be mounted ONCE unless page being refreshed
+            }
+            
+            componentDidUpdate(prevProps, prevState) {   //When the state/props changes, 
+                console.log('component updated');        //prevProps/prevState = props/state AFTER the change, will show when a ninja being deleted or added
+                console.log(prevProps, prevState');      //prevProps/prevState = props/state BEFORE the change, will show previous state in console - See "{ninjas: Array(#)}"
+            }
+            
+            render () {
+                return (
+                    <div className="App">
+                      <h1>My App</h1>
+                      <p>Hello</p> 
+                      <Ninjas deleteNinja={this.deleteNinja} ninjas={this.state.ninjas} /> 
+                      <AddNinja addNinja={this.addNinja} /> 
+                    </div>
+                );            
+            }
+        }
+        export default App;
+
 
 
 
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-22. 
+22. Simple Todo App
 
 
 
