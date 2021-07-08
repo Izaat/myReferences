@@ -558,6 +558,138 @@ CONTENT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 05. Check and Act Phase
 
+    Reading
+        https://advisera.com/books/the-iso-14001-2015-companion/
+        https://advisera.com/14001academy/knowledgebase/what-will-the-iso-14001-auditor-ask-you-during-the-certification/
+        https://advisera.com/14001academy/blog/2015/03/02/iso-14001-monitoring-measurement-equipment-control/
+        https://advisera.com/14001academy/blog/2015/07/06/environmental-performance-evaluation/
+        https://advisera.com/14001academy/blog/2015/07/27/5-tips-to-improve-your-environmental-management-system-performance/
+        https://advisera.com/14001academy/knowledgebase/the-importance-of-management-review-in-the-iso-140012015-process/
+        https://advisera.com/14001academy/blog/2014/07/30/can-ems-management-review-useful/
+        https://advisera.com/14001academy/blog/2014/10/08/environmental-nonconformity-management-iso-14001-different-iso-9001/
+        https://advisera.com/14001academy/blog/2014/07/13/corrective-preventive-actions-support-environmental-management/
+        https://advisera.com/9001academy/blog/2013/10/27/seven-steps-corrective-preventive-actions-support-continual-improvement/
+
+    Monitoring, Measurement, Analysis and Evaluation [Clause 9.1]
+        Define the requirements for evaluating the environmental performance and the effectiveness of EMS
+        This is done by monitoring, measuring, analyses and evaluation 
+        Monitoring refers to reviewing and observing 
+        Measuring refers to determining the amount/size of something by using concrete values
+        Analyses refers to examining the results of measurements
+        Evaluation refers to making conclusions based on analyses
+
+        Monitoring and Measuring are closely related to significant environmental aspects
+            Example: Monitoring amount of toxic gas into the atmosphere for nuclear power plant
+        Monitoring and measuring parameters represent criteria to determine effectiveness of the EMS
+            Example: Reduction of fuel consumption for transportation company
+
+        Things need to be considered prior to developing Monitoring and Measuring parameters:
+            What needs to be monitored and measured - Parameters of operational controls, monitoring of gas emissions in a process
+            Methods for monitoring, measuring, analyses and evaluation need to be defined to get suitable results - Report for waste disposal and storage
+            The frequency and timing of the monitoring - Daily measurement reports
+            Responsible people for conducting, monitoring, and the corresponding measurements
+            When the results be analyzed and evaluated and who will be the person in charge
+                Weekly detailed analysis of daily reports - Environment Compliance Manager
+                Monthly detailed evaluation - Monthly meetings
+                
+        The standard requires monitoring and measuring are documented as evidence
+        A good practice is to have the process documented as a procedure 
+        The procedure must include all the mentioned elements
+        The time schedule, frequencies, tools and methods must also be included in the procedure
+        
+        Important because the result is the main input for the improvement of EMS
+
+    Internal Audit [Clause 9.2]
+        The clause requires companies to conduct the internal audit at planned intervals
+        The internal audit is to provide information whether if the EMS is fulfilling the requirements for environmental protection and to continually improve the EMS
+        The standard also requires companies to establish the internal audit program (An annual schedule of internal audits)
+        The scope of the audit also must be defined (What processes and departments will be audited)
+        The scope of the audit should be documented in Internal Audit program 
+
+        Before the audit starts, determine the criteria against which the audit will be conducted (ISO14001, contract obligations, interested party requirements)
+        The company must select the auditors to conduct the audit - But take note to avoid conflict of interest (Auditor cannot audit his own work)
+        The auditor must also be familiar with the standard and the auditing techniques (Achieved through training)
+        Create plan for the internal audit although the document is not mandatory
+        With documented plan, the auditor will avoid missing the details and easier to communicate the audit information
+
+        To define the audit plan, determine the amount of time will be spent in each process, department and roles 
+        Audit can be conducted by the single auditor or a team
+        The results must be presented to the top management in the form of documented internal audit report
+        The report includes general observations of the auditor, nonconformities, good practices and recommendations
+
+    Management Review [Clause 9.3]
+        Requiremments for top management to review the EMS at planned intervals
+        This is to ensure that the EMS is suitable, adequate and effective
+        Adequacy means the requirements of ISO14001 are met and the EMS is implemented appropriately
+        The top management does not have to define operational controls but must know what is going on in the EMS
+            Example: Whether or not every employees is perfroming their duties OR if the EMS is achieving the intended results
+        The management must also make decisions regarding the following:
+            The actions from previous management review (ie. last review was to train 3 more auditors, then the management should check if this was implemented and the results)
+            Changes in internal and external issues relevant to the EMS
+            Changes in needs and expectations of interested parties - (i.e Local authority requires increase in requirements regarding EMS)
+            Changes regarding significant environmental aspects - Aspects should be reassessed regularly and changes be addressed properly
+            Changes in risks and opportunities - (ie. Local authority decides to finance introduction of new technologies to improve energy efficiency)
+            Level of achievement of objectives - 
+                When objectives are met, the management should introduce new objectives, 
+                If not met, then corrective actions must be performed in order to find its root cause to ensure the objectives will be met in the future
+            Information on performance evaluation (Nonconformities, corrective actions, monitoring, measurements, fulfillment of compliance obligations, audit results and resource adequacy)
+            Opportunities for improving the EMS (ie automation of the CO2 emissions monitoring)
+        Review of the EMS is performed through a meeting and such meeting should be held at least once a year
+        
+        ISO14001 requires to keep documented results from the management review as evidence
+        Usually after the meeting, the output will be documented in management review minutes or report
+        Mandatory output includes:
+            Conclusion and adequacy, suitability and effectiveness of EMS
+            Decisions about continual improvement of the EMS
+            Decisions related to the changes in the EMS
+            Actions when the objectives havent been met
+            Opportunities to improve the integration of EMS with other business activities - Raising awareness or altering processes and controls
+            Any implication to strategic direction of the company - Top management must consider how the global strategy of the company affects the EMS or vice versa
+
+    Nonconformities and Corrective Actions [Clause 10.1]
+        Nonconformities is when a certain requirement is not complied with 
+        The requirement may be the standard itself, the relevant legisltaion, the EMS documentation, and the requirements of interested parties
+        Nonconformities and Corrective actions are important because they enable companies to identify oversights, mistakes, errors and deal with them effectively
+        Nonconformities can be identified by anyone at any time
+
+        Corrective actions are formal ways for resolving nonconformities
+        Companies are required to document the evidence and the nature of the nonconformities, the corrective actions taken, and the results of the corrective actions
+        The record is called the corrective action form
+        The company should also check if the root cause is really being resolved
+        The results and effect should be evaluated
+        It is a good practice to document the procedure for nonconformities and corrective actions
+        The procedure defines the steps for 
+            Analyzing the nonconformities, 
+            Initiating corrective actions, 
+            Assigning responsibilities for corrective actions
+            How to document and evaluate the effectiveness of teh corrective actions
+        The standard requires the company to take the following actions when nonconformities occurs
+            Control and correct the nonconformity and deal with the consequences
+            Evaluate the need to eliminate the cause of nonconformity to prevent its reoccurrence
+            Implement relevant actions - conducting new audit with newly trained auditors
+            Review the effectiveness of the corrective action
+            Make changes to the EMS if needed
+
+    Continual Improvement [Clause 10.2]
+        Continual improvement is an integral part of ISO14001
+        The standard requires companies to continually improve the adequacy, suitability, and the effectiveness of its EMS
+        The theory behind the standard implies that everything changees and it affects the EMS, hence the stress on adequacy and suitability than effectiveness
+        The EMS must change to reflect the changes in the environment to respond to new threats and also to seize new opportunities
+        Improvement opportunities may vary depending on the type of business and the maturity of the EMS
+        Examples of improvement initiatives
+            Implement software tools to support operational control processes and documntation activities
+            Implement new modalities of awareness raising in the company
+        Every improvement requires changes in the EMS BUT not every change brings the improvement
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+06. Getting Project Approved
+
+
+
+
+
+
+
 
 
 
