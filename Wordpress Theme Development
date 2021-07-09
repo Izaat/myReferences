@@ -18,8 +18,8 @@ CONTENT
 13. Home Page Hero Banner
 14. Home Call to Action Section
 15. Home Welcome to Section
+16. Home News Section
 
-Home News Section
 Home About Us Section
 Home Testimonials Section
 Home Newsletter Signup Section
@@ -1607,7 +1607,7 @@ Conclusion
             .
             .
             body{...}
-            .button {...}                         //Moved
+            .button {...}                                //Moved
             .reservation-btn{...}
             .
             .
@@ -1617,8 +1617,30 @@ Conclusion
             .home-call-to-action {...}
             .home-welcome {
                 margin-top: 120px;
-                margin-bottom: 120px;              //Added
-                .title-holder {...}
+                margin-bottom: 120px;                      //Added
+
+                @media(max-width:$md) {                    //Added
+                    margin-bottom: 60px;
+                    margin-bottom: 60px;                        
+                }
+                @media(max-width:$sm) {                    //Added
+                    margin-bottom: 30px;
+                    margin-bottom: 30px;                        
+                }
+                
+                .title-holder {                             //Edit
+                    padding-bottom ...
+                    border-bottom ...
+                    margin-bottom ...
+                    @media(max-width:$md) {
+                        padding-bottom: 20px;
+                        margin-bottom: 20px;
+                    }
+                    @media(max-width:$sm) {
+                        padding-bottom: 15px;
+                        margin-bottom: 15px;                        
+                    }
+                }
                 h2 {
                     .
                     .
@@ -1626,50 +1648,61 @@ Conclusion
                         .
                         .
                         .
-                        @media (max-width:$xl) {              //Added    (Welcome to)
+                        @media (max-width:$lg) {              //Added    (Welcome to)
                             font-size: 120px;
                             transform: translate(120px, 25px);
                         }                        
-                        @media (max-width:$lg) {              //Added    (Welcome to)
+                        @media (max-width:$md) {              //Added    (Welcome to)
                             font-size: 60px;
                             transform: translate(60px, 0px);
                         }                                       
+                        @media (max-width:$sm) {              //Added    (Welcome to)
+                            font-size: 48px;
+                            transform: translate(30px, 0px);
+                        }    
                     }
                     .
                     .
                     font-size: 72px;
-                    @media (max-width:$xl) {                  //Added  (Backbeach Eating House)
+                    @media (max-width:$xl) {                   //Added  (Backbeach Eating House)
                         font-size: 60px;
                     }
                     @media (max-width:$lg) {                  //Added    (Backbeach Eating House)
                         font-size: 36px;                        
                     }                           
                 }
-                p {...}
-                .button {                                     //Added
-                    @media (max-width:$lg) {                  //Added    (Shortens the width of Read More button)
+                p {                                           //Edited
+                    .
+                    .
+                    .
+                    &.tagline {
+                        .
+                        .
+                        .
+                        @media(max-width:$lg) {
+                            font-size: 18px;                     
+                        }                        
+                    }
+                }
+                .button {                                      //Added
+                    @media (max-width:$lg) {                   //Added    (Shortens the width of Read More button)
                         display-inline: block;
-                        padding-right: 2.5em;                 //Extends the width of Read More button
+                        padding-right: 2.5em;                  //Extends the width of Read More button
                     }                      
                 }
-                
+                .button {                                      //Added to shorten the "Read More" button
+                    @media (max-width:$md) {
+                        display: inline-block;        
+                        padding-right: 2em;                    //Lengthen the button slightly
+                    }                        
+                }
             }            
-            //.button {...}                                   //Move to top below "body" and above ".reservation-btn"
+            //.button {...}                                     //Move to top below "body" and above ".reservation-btn"
 
 
 
-
-
- 
-
-
-
-
-
-        
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+16. Home News Section
 
 
 
