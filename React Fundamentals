@@ -24,7 +24,7 @@ CONTENTS
 20. CSS Files
 21. Lifecycle Methods
 22. Simple Todo App
-
+23. Simple Todo App (Part 2)
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1271,14 +1271,130 @@ CONTENTS
         export default App;
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+22. Simple Todo App (Part 1)
+    
+    Creating a new app
+        In Terminal, type in "npx create-react-app yourappname"
+        Therefore: npx create-react-app todoapp
+        Once created, just enter the folder "cd todoapp"
+        And then start the app "npm start"
+        
+    CSS library
+        https://materializecss.com
+        In CDN section, copy this lines
+            <!-- Compiled and minified CSS -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
 
+    Paste the copied CSS
+        Explporer > React > todoapp > public > index.html
+        
+        index.html
+            <!DOCTYPE html>
+            <html lang="en">
+                <head> 
+                    .
+                    .
+                    .
+                    <!-- Compiled and minified CSS -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+                    <title> ... </title>
+                </head>
+                <body> ... </body>
+            </html>
 
+    Remove few files from src folder
+        ../todoapp/src/ >
+            App.css
+            App.test.js
+            logo.svg
+            
+    App.js (Starting a clean slate)
+        import React, {Component} from 'react';
+        //import logo from './logo.svg';                    //Removed
+        //import './App.css';                               //Removed
+        
+        class App extends Component {
+            render () {
+                return (
+                    <div className="App">
+                        **REMOVED**
+                    </div>
+                );            
+            }
+        }
+        export default App;
+
+    App.js (CODING)
+        import React, {Component} from 'react';
+        import Todos from './Todos';                        //Import Todo.js
+        
+        class App extends Component {
+            state = {
+                todos: [
+                    {id: 1, content: 'buy some milk'},
+                    {id: 2, content: 'play games'}
+                ]
+            }
+            
+            deleteTodo = (id) => {
+                //console.log(id);                                //Prints id number into the console when clicking on the list
+                const todos = this.state.todos.filter(todo => {   //Adds a delete event in order to delete the an element from the list
+                    return todo.id !== id                         //IF ".filter(todo)" is not equal to "deleteTodo=(id)", then return true
+                });
+                this.setState({
+                    //todos: todos                                //"Current todos" to absorb "const todos"
+                    todos                                         //Shorter version of "todos:todos" since both share the same name
+                })
+            }
+            
+            render () {
+                return (
+                    //<div className="App">
+                    <div className="todo-app container">                                    //Adding simple styling
+                        //h1.center.blue                                                    //Type this in to add h1 tag
+                        <h1 className="center blue-text">Todo's</h1>
+                        //<Todos todos={this.state.todos}/>                                 //Nesting component from Todos.js and referencing to state array
+                        <Todos todos={this.state.todos} deleteTodo={this.deleteTodo} />     //Reference to deleteTodo event
+                    </div>
+                );            
+            }
+        }
+        export default App;
+
+    Todos.js (Create a functional component)
+        import React from 'react'
+        
+        const Todos = ({todos, deleteTodo}) => {                             //{todos} received as prop
+            
+            const todoList = todos.length ? (
+                todos.map(todo => {
+                    return(
+                        //div.collection-item                               //creates div tag with "collection-item" as className
+                        <div className="collection-item" key={todo.id} >    //Calling the state key
+                            //<span>{todo.content}</span>                                       //Calling the state content
+                            //<span onClick={deleteTodo(id)}>{todo.content}</span>              //Calling deleteTodo event from App.js and delete by id, but note that this is automatically triggered
+                            <span onClick={() => {deleteTodo(todo.id)}}>{todo.content}</span>   //Disabling auto trigger by anonymous function
+                        </div>
+                    )
+                })
+            ) : (
+                <p className"center">You have no todo's left</p>
+            )
+        
+            return (
+                //div.todos.collection                  //Type this line in to add in a div tag
+                <div className="todos collection">
+                    {todoList}                          //Output the todoList
+                </div>
+            )
+        }
+
+        export default Todos;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-22. Simple Todo App
-
-
+23. Simple Todo App (Part 2)
 
 
 
