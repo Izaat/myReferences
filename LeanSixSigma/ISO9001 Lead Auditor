@@ -433,6 +433,67 @@ CONTENT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 08. Planning the Audit
 
+    Reading:
+        https://advisera.com/9001academy/knowledgebase/how-to-define-the-scope-of-the-qms-according-to-iso-90012015/
+        https://advisera.com/14001academy/blog/2017/01/16/creating-an-iso-14001-internal-audit-plan/
+        https://advisera.com/9001academy/knowledgebase/iso-9001-audit-checklist/
+        
+    Audit Criteria and Objectives
+        The objectives and criteria will be defined by the audit client and certification body
+        Auditors should be competent in the standards he/she is going to audit against as reference
+        If the auditor didn't know the audit team well, check if the audit team members are also competent on the standards they are going to refer to
+        For combined audits, not everyone in the team needs to be competent in the every single standard
+        Example: One auditor competent in ISO9001 and the another auditor competent in ISO14001
+        Lead auditors only need competency in one of the standards
+        The audit objectives are written by the certification body
+        
+        Objectives:
+            How well the company meets the requirements of the QMS/EMS standards
+            How well the company is implementing its own managements systems (Are they developing their own procedures and are they following them)
+            How well the managment system can ensure compliance with compliance obligations the company has
+                Example: Through ISO27001 (Information Security) processes, it will have identified compliance obligations such as legal requirements, 
+                but is it in compliance with the legal requirements
+            How effective is the management system in meeting its specified objectives?
+                Example: The organization will have set objectives as part of ISO9001 systems, but are they being achieved?
+            Find out whether there are areas for potential improvement of the management systems
+                Example: Are there opportunities to improve training so that staff are more competent?
+                
+        Audit objectives are to confirm the implementation of management program that conform with the stated criteria and deliveries
+            - Control of risks
+            - Understanding level of complilance with identified compliance obligations
+            - Ongoing improvements in performance
+
+        The certification body will define the set of audit objectives that you can simply use without making any changes
+        It is useful to know what the purpose of the audit objectives are
+        Consider the audit objectives as the "Why" the audit is taking place
+
+    Audit scope 
+        Describes the what and where of the audit (i.e Which site, what processes)
+        Example:
+            Only the facility will be audited
+            In this case, the scope will specify only the facilities management activities
+        Exclusions to scope should also be captured
+            Example: If the company has an off-site warehouse but it's not part of the audit
+            Then this should be noted as an exclusion
+        Example:
+            Scope Statement
+                Scope of audit scope:
+                    Manufacturing of parts
+                    Components
+                    Assemblies
+                Associated With:
+                    "Company Address"
+        Scope is usually defined by the audit client and the certification body
+        It is critical for lead auditor to understand the scope as it will be used to define the audit plan
+        It's no use finishing the audit just to find out you're on the wrong site or wrong part of the business
+
+    Selecting Audit Methods
+        The various techniques that are used for conducting the audit
+
+
+
+
+
 
         
 
