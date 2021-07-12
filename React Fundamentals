@@ -25,6 +25,7 @@ CONTENTS
 21. Lifecycle Methods
 22. Simple Todo App
 23. Simple Todo App (Part 2)
+24. The React Router
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1394,7 +1395,102 @@ CONTENTS
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-23. Simple Todo App (Part 2)
+23. Simple Todo App (Part 2 - Form) >> 19 points
+
+    Create a new file under "src" folder
+        ../appname/src/AddForm.js
+        Since we need a state in the component, so this will be a class base comonent
+        
+    AddTodo.js
+        import React, {Component} from 'react'
+        
+        class AddTodo extends Component {
+            
+            state = {
+                content: ''                                                          //03. Set state content as an Empty string
+            }
+             
+            handleChange = (e) => {
+                this.setState({                                                      //04. Updates the state content
+                    content: e.target.value                                          //05. Syncing the value of state
+                })
+            }
+            
+            handleSubmit = (e) => {
+                e.preventDefault();                                                  //06. Preventing the default which is auto refresh of page
+                //console.log(this.state)                                            //07. Submit to console (To test if the form works)
+                this.props.addTodo(this.state);                                      //12. This will run the event function code in App.js (addTodo function)
+                this.setState({
+                    content: ''                                                      //18. This clears the state in AddTodo.js after submitting content into the state in App.js
+                })
+            }            
+            
+            render () {
+                return(
+                    <div>
+                        <form onSubmit={this.handleSubmit}>                          //01. Since the form contains submit button
+                            <label>Add new todo:</label>
+                            //<input type="text" onChange={this.handleChange} />     //02. Handles event handler and sync user inputs with the state
+                            <input type="text" onChange={this.handleChange} value={this.state.content} />  //19. Clears the user textbox field using the event in point 18
+                        </form>
+                    </div>
+                )
+            }
+        }
+    
+        export default AddTodo
+
+    App.js (CODING)
+        import React, {Component} from 'react';
+        import Todos from './Todos';   
+        import AddTodo from './AddTodo';                                              //08. Importing AddTodo.js
+        
+        class App extends Component {
+            state = {
+                todos: [
+                    {id: 1, content: 'buy some milk'},
+                    {id: 2, content: 'play games'}
+                ]
+            }
+            
+            deleteTodo = (id) => {
+                const todos = this.state.todos.filter(todo => {  
+                    return todo.id !== id   
+                });
+                this.setState({
+                    todos      
+                })
+            }
+            
+            addTodo = (todo) => {                                                        //10. Syncing state from AddTodo.js with state from App.js
+                todo.id = Match.random();                                                //13. Add id number to the new todo
+                //let todos                                                              //14. Creates a new set of state in App.js state
+                //let todos = [...this.state.todos]                                      //15. Copy the contents of the state and duplicate over into the newly created state
+                let todos = [...this.state.todos, todo];                                 //16. Adds in the user defined todo into the duplicated state
+                this.setState({
+                    //todos: todos                                                       //17. Update the todos (Not required since they are the same name)
+                    todos
+                })
+            }
+            
+            render () {
+                return (
+                    <div className="todo-app container">
+                        <h1 className="center blue-text">Todo's</h1>
+                        <Todos todos={this.state.todos} deleteTodo={this.deleteTodo} /> 
+                        //<AddTodo />                                                     //09. Sync with AddTodo.js file
+                        <AddTodo addTodo={this.addTodo} />                                //11. Enable access for AddTodo.js
+                    </div>
+                );            
+            }
+        }
+        export default App;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+24. The React Router
+
+
+
 
 
 
