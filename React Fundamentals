@@ -1486,8 +1486,114 @@ CONTENTS
         }
         export default App;
 
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 24. The React Router
+
+
+    STEP 1 - 11 Points
+    ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+    The react router handles a website with multiple pages
+    Creating a new app (Details are exactly the same as in Topic 22)
+    App.js (Starting a clean slate exactly the same as in Topic 22)
+    
+    Once the new app has been configured,
+    Create a new folder to store multiple component files and name this folder as "component"
+        ../myapp/src/component/
+    Create a new file under component folder and name this "Home.js"
+        This is going to be a functional component since it won't contain any state array
+        
+    Home.js                                                       //01. The Home.js
+        import React from 'react';
+        
+        const Home = () => {
+            return (
+                <div className="container">
+                    <h4 className="center">Home</h4>
+                    <p>Lorem Ipsum</p>                            //02. To add in lorem ipsum paragraph, type in "lorem" between the p tags and press Tab                    
+                </div>
+            )
+        }
+        export default Home
+    
+    Create another file (About.js + Contact.js) in component folder, copy the code from Home.js and paste into About.js and Contact.js
+    
+    About.js                                                      //03. The About.js and Contact.js
+        import React from 'react';
+        
+        const About = () => {
+            return (
+                <div className="container">
+                    <h4 className="center">About</h4>
+                    <p>Lorem Ipsum</p>                 
+                </div>
+            )
+        }
+        export default About    
+    
+    Contact.js
+        import React from 'react';
+        
+        const Contact = () => {
+            return (
+                <div className="container">
+                    <h4 className="center">Contact</h4>
+                    <p>Lorem Ipsum</p>                                     
+                </div>
+            )
+        }
+        export default Contact        
+    
+    Now we have created all the pages, we need to link them with a navber, therefore, create a navbar file under component folder and name it Navbar.js
+    This is where the router sits
+    Navbar.js doesnt contain states so it will be a functional component
+    
+    Navbar.js                                                //04. The Navbar.js
+        import React from 'react';
+        
+        const Navbar = () => {
+            return (
+                //nav.nav-wrapper                             //05. This class comes from the imported materialize file
+                //nav.nav-wrapper.red                         //06. Add background color
+                //nav.nav-wrapper.red.darken-3                //07. Red will be darken by 3 shades
+                
+                <nav className="nav-wrapper red darken-3">
+                    <div className="container">
+                        <a className="brand-logo">My App</a>
+                        <ul className="right">                //08. Display on the right hand side
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/about">About</a></li>
+                            <li><a href="/contact">Contact</a></li>                            
+                        </ul>
+                    </div>
+                </nav>
+            )
+        }
+        export default Navbar               
+
+    App.js (Starting a clean slate)                           //09. Add "import" Navbar component to App.js 
+        import React, {Component} from 'react';
+        import Navbar from './component/Navbar'               //11. Sync Navbar.js to App.js             
+        
+        class App extends Component {
+            render () {
+                return (
+                    <div className="App">
+                        <Navbar />                            //10. Sync Navbar.js to App.js
+                    </div>
+                );            
+            }
+        }
+        export default App;
+
+    
+    STEP 2
+    ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+
+
 
 
 
