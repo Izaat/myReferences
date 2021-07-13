@@ -26,6 +26,7 @@ CONTENTS
 22. Simple Todo App
 23. Simple Todo App (Part 2)
 24. The React Router
+25. Links and NavLinks
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1564,6 +1565,7 @@ CONTENTS
                         <a className="brand-logo">My App</a>
                         <ul className="right">                //08. Display on the right hand side
                             <li><a href="/">Home</a></li>
+                            //<li><a href="/home">Home</a></li>  //17c. Addressing problem 17 but not a good practice                            
                             <li><a href="/about">About</a></li>
                             <li><a href="/contact">Contact</a></li>                            
                         </ul>
@@ -1589,9 +1591,50 @@ CONTENTS
         export default App;
 
     
-    STEP 2
+    STEP 2 - Install router
     ///////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
+    In Terminal, inter the myapp folder and type in "npm install react-router-dom"
+    Take note that the method shown here only reloads the page instead of having the router to intervene
+
+    App.js (Continued from STEP 1)              
+        import React, {Component} from 'react';
+        import Navbar from './component/Navbar'     
+        //import {BrowserRouter} from 'react-router-dom'      //12. After installation, add this line
+        import {BrowserRouter, Route} from 'react-router-dom' //14. Add Route tag
+        import Home from './component/Home'                   //16. Import Home file so this will be recognized by the router
+        import About from './component/About' 
+        import Contact from './component/Contact' 
+        
+        class App extends Component {
+            render () {
+                return (
+                    //<div className="App">
+                    //    <Navbar />      
+                    //</div>
+                    
+                    <BrowserRouter>                                   //13. Wrap the div tag with the new BrowserRouter tag
+                        <div className="App">
+                            <Navbar />      
+                            //<Route path='/' component={Home} />     //15a. Setup router to point to Home.js file but need to import the Home.js to App.js. 
+                            //                                        //15b. Note that this will show up over the contact despite contact page is selected
+                            //<Route path='/home' component={Home} /> //17a. This will get rid of the Home content when other page is selected, but Home content wont show up in Home screen
+                            //                                        //17b. Changing the path link from '/' to '/home' in Navbar.js will solve this but not a good practice (See 17c)
+                            <Route exact path='/' component={Home} /> //18. This will be the better method for problem 17
+                            <Route path='/about' component={About} />
+                            <Route path='/contact' component={Contact} />
+                        </div>
+                    </BrowserRouter>
+                );            
+            }
+        }
+        export default App;
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+25. Links and NavLinks
+
 
 
 
