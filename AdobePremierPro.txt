@@ -11,6 +11,7 @@ CONTENTS
 09 - Audio Effects
 10 - Camera Shake or Anger Effect
 11 - Copying Effects Attributes to Multiple Frames
+12 - Green Screen to Blue Screen Transitions
 
 TIPS - J,K,L to speed up or slow down timeline play speed
 
@@ -208,8 +209,20 @@ Transitions
         
 
 12. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Green Screen to Blue Screen Transitions
+    
+    Setup: 
+        First clip plays in green screen, then transition to another video via blue screen
+    Insert Green-Blue screen clip on top of the 2 target clips
+    Add Ultra key effect to the Green-Blue screen clip
+    Select the chroma green and adjust
+    Nest the first clip together with the Green-Blue screen clip
+    Add another Ultra key effect to the nested clip
+    Select the chroma blue and adjust
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[End]
 
 
 
