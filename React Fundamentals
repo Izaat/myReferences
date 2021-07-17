@@ -27,6 +27,7 @@ CONTENTS
 23. Simple Todo App (Part 2)
 24. The React Router
 25. Links and NavLinks
+26. Programmatic Redirects
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1634,6 +1635,52 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 25. Links and NavLinks
+
+    NOTE: Notice that the page in Topic 24 refreshes itself whenever another page is being called
+    Refreshing the page repeatedly is a bad practice in React
+    Using Link will prevent the repeated page refresh and let the DOM take over
+    
+    Navbar.js                         
+        import React from 'react';
+        import {Link, NavLink} from 'react-router-dom'            //This will import the Link and Navlink
+        
+        const Navbar = () => {
+            return (               
+                <nav className="nav-wrapper red darken-3">
+                    <div className="container">
+                        <a className="brand-logo">My App</a>
+                        <ul className="right">        
+                            //<li><a href="/">Home</a></li>                  //The 'a' tag is no longer used in order to use the "link" method
+                            //<li><a href="/about">About</a></li>
+                            //<li><a href="/contact">Contact</a></li>           
+                            
+                            <li><Link to="/">Home</Link></li>                //The "Link" method. 
+                            <li><Link to="/about">About</Link></li>
+                            <li><Link to="/contact">Contact</Link></li>                                         
+
+                            //<li><NavLink to="/">Home</NavLink></li>                //The "NavLink" method. 
+                            //<li><NavLink to="/about">About</NavLink></li>
+                            //<li><NavLink to="/contact">Contact</NavLink></li>                    
+                            
+                        </ul>
+                    </div>
+                </nav>
+            )
+        }
+
+    Difference between Link and NavLink
+    If you use the "Link tag" and then open the browser's inspect feature, the "a tag" will be displayed. 
+        The only exception is that the page will not be refreshed and the loading will be smoother.
+    If you use the "NavLink tag" and then open the browser's inspect feature, the "a tag" will be displayed BUT will be as an "active" class. 
+        This "active" class will toggle between the listed items
+        Example, 
+            if "about" being clicked, then the "about" will contain the "active" class whereas the "home" and "contact" will be similar to "Link" which is the "a tag"
+            if "home" being clicked, then the "home" will contain the "active" class whereas the "about" and "contact" will be similar to "Link" which is the "a tag"
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+26. Programmatic Redirects
+
+
 
 
 
