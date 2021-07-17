@@ -777,6 +777,135 @@ CONTENT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 10. Managing Your Audit Team
 
+    Reading
+        https://advisera.com/27001academy/blog/2014/06/02/major-vs-minor-nonconformities-in-the-certification-audit/
+        https://advisera.com/27001academy/blog/2014/11/24/records-management-in-iso-27001-and-iso-22301/
+        
+    The importance of managing the audit team
+        Lead Auditor takes responsibility for achieving the audit objectives
+        To ensure objectives are delivered, audit team members have to work together coherently and coordinated in a way
+        The team may include less experienced auditors who will need the leader's guidance, support and supervision
+        More experienced auditors may need to be guided away from following their own established audit processes
+        Good management of a team includes:
+            Managing personal relationships and emotions
+            Answering technical auditing subject matter
+            Communications
+            Project management skills
+        The start of the audit management is not the day the audit starts but long before the audit scope, criteria and objectives were being discussed
+        Understanding the objectives is key to the lead auditor's ability to meet them
+        Understand the team's strengths, weaknesses and competencies
+        Assign their tasks appropriately
+        The audit will quickly fail without any leadership
+        If the auditors dont understand their role in the audit plan, they will follow their own processes without the coordination with the other members
+        Strike a balance between coordination and letting them follow their process by develoing the team's framework to allow auditors some freedom within that framework
+        Example: Plan times for site visits but allow auditors to select the areas they want to visit
+        Benefits of good team leadership:
+            Effective planning, well structured, organized audit delivery makes the team comfortable and their efforts are not wasted
+            It also makes the audit client to feel comfortable that the audit is being professionally carried out and will add value to that organization
+    
+    Communication with the team before audit
+        Discussions can be held during audit planning
+        Topics that must be discussed and agreed on with the auditors before starting the audit:
+            Understand the competencies of the auditors via
+                CVs, 
+                Profiles
+                Experiences with the auditee's industry and its operations
+                Knowledge of the management system standard being audited
+            Audit objectives, scope and criteria
+            Audit plan and discuss any remote auditing techniques if applicable
+            Logistics (ie accommodation, workspaces, travel, etc)
+            Risks and any issues that need to be considered to manage the risks (ie security protocols, confidentiality, business processes)
+            Safety issues (ie PPE)
+            Any information and documentation, auditor might want to see prior to the audit 
+                Organizational charts
+                Data reports
+                Evidence of actions to close previous nonconformances
+                Maps
+                Schematics
+                Procedures, etc
+        Lead auditors will coordinate in advance to request for the information with the audit client 
+        Discussion will be held before the pre-audit discussion with the client
+        Notify the audit team of the final agreed plan
+        
+    Managing audit progress
+        Managing the progress is like managing the flow of information against time
+        How the prorgess will be managed vary depending of the audit, existing procedures, experiences and confidence
+        The information that need to be managed include:
+            Evidence requests - those that are pending and those received
+            Which document have been reviewed
+            Progress with interviews - those that are pending and those completed
+            Site visits - those that are pending and those completed
+            Audit plan status - review and amend if needed
+            Questions that are raised and those that have been answered
+            A list of all audit evidence identified
+            A list of findings identified by the team
+        Use tools such as shared electronic documents, softwares, charts and notes to assist in managing the information
+        Keep the flow of information visible and under control (ie using agile methods) in order to ease communications and coordination among the team
+        Onsite stage of the audit falls into following steps:
+            Opening meeting
+            Evidence gathering (Site visits, interviews, document reviews, etc)
+            Forming audit findings (Deciding if the evidence demonstrates nonconformity or an observation)
+            Drawing audit conclusions (Based on nonconformities, does the company meet the ISO standards)
+            Prepare for closing meeting 
+            Presenting/delivery of the closing meeting
+        Aim to allocate time for each of the step above and one method is to start from closing meeting and work the way backwards
+        Opening and closing meetings are typically one hour
+        Evidence gathering needs to be the bulk of the entire audit time (At least 75%)
+        Make sure to allow adequate time to evaluate the audit evidence, agree on findings, and draw audit conclusions
+        Allow adequate time at the end of the audit to prepare closing presentation (Depends on how efficient at preparing the materials needed - Templates, photos, etc)
+        The non-tech savvy auditors may even prepare the presentation template the evening before
+        Lead auditors must be realistic about their abilities and allow themselves time to prepare the best presentation they can
+
+    Team Meetings
+        There are times when the lead auditor need to pull back together the team
+        Audit coordination, progress review and planning activities between team members require a separate time depending on team size
+        Team meetings can be scheduled at any time but recommended at least once a day
+        Typically the meeting will review the information from the audit
+        Aim:   
+            Update audit information
+            Plan next activities
+            Review necessary changes to the audit
+        Team meetings should be kept seperate from the debriefing sessions that are held with audit clients
+        Debriefing session is an opportunity to manage audit process with the client, share information and maintain communications
+        Make sure that the audit team knows the differences between team meetings and debriefing sessions and both the purpose
+        Knowing the difference prevent the team from holding general discussions about the evidence during debriefing sessions
+        If the debrief and team meetings are mixed up, debriefing sessions can lose its purpose
+        Plan time to have a debate between the auditors in team meetings
+
+    Managing audit findings
+        Pulling together the results of the audit team
+        Different auditors may have different opinions and experiences about how they treat audit findings
+            Example: How they word them or how they classify their significance
+        To make sure you can use the findings to draw conclusions and present them to the audit client, it's best to find consistency in how they are presented
+        A method to consistency is to develop a template for the auditors to record the findings against
+        Example table:
+            | Auditor                        | John Hancock                    |
+            | Description of nonconformance  | Mgmt review not carried out     |
+            | Evidence                       | Interview with QA Manager       | //Photos may be included
+            | Criteria not met               | ISO9001, Clause 9.3 Mgmt Review |
+        If the record is already existing in another document, then ensure that the team members are consistent with the way they are using them
+        To achieve recording consistency, discuss audit findings at audit team meetings
+        As group, apply peer review of each other's audit findings even when auditors are responsible for different areas of the audit
+        Share evidence between auditors in support of each other's audit findings
+        Draft and Finalized
+            Recommended to consider audit findings as being in "draft" form until the debriefing session with audit client
+            If there is an agreement with the audit findings, they can be considered "final"
+        The debriefing session allows the audit client to provide additional evidence or clarify a misunderstanding
+        This gives opportunity to prevent mistakes making sure findings are properly understood by the audit client
+        A good practice is to avoid drawing audit conclusions before discussing the findings with the audit client
+        Plan time to review findings with the audit client before drawing audit conclusions or closing meeting preparations        
+        If the audit client didnt agree with the findings, be allowed the opportunity to raise objections
+        Record any objections and include them in the closing presentation
+
+    Managing audit records
+        
+
+
+
+
+
+
+
 
 
 
