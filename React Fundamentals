@@ -1667,7 +1667,8 @@ CONTENTS
                 </nav>
             )
         }
-
+        export default Navbar
+        
     Difference between Link and NavLink
     If you use the "Link tag" and then open the browser's inspect feature, the "a tag" will be displayed. 
         The only exception is that the page will not be refreshed and the loading will be smoother.
