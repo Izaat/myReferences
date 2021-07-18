@@ -29,6 +29,7 @@ CONTENTS
 25. Links and NavLinks
 26. Programmatic Redirects
 27. Higher Order Components
+28. Using Axios
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1752,8 +1753,64 @@ CONTENTS
         //export default Navbar
         export default withRouter(Navbar) //Wraps Navbar with the "withRouter"
 
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 27. Higher Order Components
+
+    Higher component
+    |                                             HOC                      Supercharged
+    |         Component                 |----------------------|             Component
+    |   |---------------------|         |  |----------------|  |         |-----------------|
+    |   |    Navbar.js        |---------|  |    Navbar.js   |  |---------|    Navbar.js    |
+    |   |---------------------|         |  |----------------|  |         |-----------------|
+    |                                   |----------------------|
+    |
+
+    Create a "hoc" folder and create Rainbow.js file
+        ../src/hoc/Rainbow.js
+    This will HOC will randomly change the colour of the texts in About page
+    
+    Rainbow.js
+        import React from 'react'
+        
+        const Rainbow = (WrappedComponent) => {                                  //01. WrappedComponent will be absorbing the js file and for this case, About.js
+            const colour = ['red', 'pink', 'orange', 'blue', 'green', 'yellow']; //03. Creating array with 6 elements. Note the 6 elements and 0-5 in index
+            const randomColour = colours[Math.floor(Math.random() * 5)];         //04. Get random number from 0 to 5 where Math.floor is rounding off the decimals to nearest whole number
+            const className1 = randomColour + '-text';                           //05. Setting up the CSS style naming convention.  Example "blue-text"
+            
+            return(props) => {                                                   //06. props will pass through WrappedComponent together with About.js
+                return (
+                    <div className={className1}>
+                        <WrappedComponent {...props} />                          //07. The {...props} gives access to About.js and return as supercharged component
+                    </div>
+                )
+            }
+        }
+
+        export default Rainbow
+
+    About.js  (Copied from React Router Topic 24)
+        import React from 'react';
+        import Rainbow from '../hoc/Rainbow'                                      //08. Import file from Rainbow.js 
+        
+        const About = () => {
+            return (
+                <div className="container">
+                    <h4 className="center">About</h4>
+                    <p>Lorem Ipsum paragraph</p>                 
+                </div>
+            )
+        }
+        export default Rainbow(About)                                            //02. The about will be turned into 'props' and be captured by "WrappedComponent"
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+28. Using Axios
+
+
+
+
 
 
 
