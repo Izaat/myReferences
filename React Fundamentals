@@ -25,7 +25,7 @@ CONTENTS
 21. Lifecycle Methods
 22. Simple Todo App
 23. Simple Todo App (Part 2)
-24. The React Router
+24. The React Router                  **Installation of react-router-dom required
 25. Links and NavLinks
 26. Programmatic Redirects
 27. Higher Order Components
@@ -1597,7 +1597,7 @@ CONTENTS
     STEP 2 - Install router
     ///////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
-    In Terminal, inter the myapp folder and type in "npm install react-router-dom"
+****In Terminal, inter the myapp folder and type in "npm install react-router-dom"
     Take note that the method shown here only reloads the page instead of having the router to intervene
 
     App.js (Continued from STEP 1)              
