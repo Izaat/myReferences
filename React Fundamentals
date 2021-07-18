@@ -1775,7 +1775,7 @@ CONTENTS
         import React from 'react'
         
         const Rainbow = (WrappedComponent) => {                                  //01. WrappedComponent will be absorbing the js file and for this case, About.js
-            const colour = ['red', 'pink', 'orange', 'blue', 'green', 'yellow']; //03. Creating array with 6 elements. Note the 6 elements and 0-5 in index
+            const colours = ['red', 'pink', 'orange', 'blue', 'green', 'yellow']; //03. Creating array with 6 elements. Note the 6 elements and 0-5 in index
             const randomColour = colours[Math.floor(Math.random() * 5)];         //04. Get random number from 0 to 5 where Math.floor is rounding off the decimals to nearest whole number
             const className1 = randomColour + '-text';                           //05. Setting up the CSS style naming convention.  Example "blue-text"
             
