@@ -25,11 +25,11 @@ CONTENTS
 21. Lifecycle Methods
 22. Simple Todo App
 23. Simple Todo App (Part 2)
-24. The React Router                  **Installation of react-router-dom required
+24. The React Router                  **Installation required "npm install react-router-dom"
 25. Links and NavLinks
 26. Programmatic Redirects
 27. Higher Order Components
-28. Using Axios                       **Installation of react-router-dom required
+28. Using Axios                       **Installation required "npm install axios"
 29. Route Parameters (Part 1)
 
 
