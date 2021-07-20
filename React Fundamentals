@@ -1925,6 +1925,7 @@ CONTENTS
 
     Continued from the website with Axiom
     Clicking on the cards redirects to another URL(Route Parameter)
+    But part 1 will contain code that when a page extension is typed in,  example "mysite.com/12345", then "12345" will be printed onto the browser
 
     Create a file (Post.js) under "src/component" folder
         ../myapp/src/component/Post.js
