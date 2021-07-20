@@ -29,7 +29,8 @@ CONTENTS
 25. Links and NavLinks
 26. Programmatic Redirects
 27. Higher Order Components
-28. Using Axios
+28. Using Axios                       **Installation of react-router-dom required
+29. Route Parameters (Part 1)
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1807,6 +1808,113 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 28. Using Axios
+    
+    Read 22 Points
+    To grab data from somewhere else to make website more dynamic (ie RestAPI, Firebase)
+    In this example, we'll use RestAPI using JSON placeholders
+    Link: https://jsonplaceholder.typicode.com
+    Example:
+        fetch('https://jsonplaceholder.typicode.com/todos/1')  //See resources for alternatives for "todo" 
+            .then(response => response.json())
+            .then(json => console.log(json))
+    Resources
+        /todos           200 todos
+        /posts           100 posts
+        /comments   500 comments
+        /albums        100 albums
+        /photos       5000 photos
+        /users             10 users
+    Installation
+        ../myapp> npm install axios
+    Method
+        Refer to Topic 21
+        Will be using "componentDidMount" to retrieve external data where the component already mounted to DOM
+        But first, convert component into a class based component since functional component cant use lifecycle method
+
+    Home.js  (Conversion to Class Component)                                          
+        //import React from 'react';
+        import React, {Component} from 'react'                       //Convert to class component
+        
+        //const Home = () => {
+        class Home extends Component {                               //Convert to class component
+            //return (
+            //    <div className="container">
+            //        <h4 className="center">Home</h4>
+            //        <p>Lorem Ipsum paragraph</p>                                                  
+            //    </div>
+            //)
+            render () {                                              //Wraps return in order to convert into a class component
+                return (
+                    <div className="container">
+                        <h4 className="center">Home</h4>
+                        <p>Lorem Ipsum paragraph</p>                                                  
+                    </div>
+                )            
+            }
+        }
+        export default Home
+
+    Home.js   (CODE)
+        import React, {Component} from 'react' 
+        import axios from 'axios'                                     //02. Import the installed axios library
+        
+        componentDidMount(){                                          //01. Used for calling axios to import data
+            state = {                                                 //07. This will store data from "res"
+                post:[]                                               //08. Empty array to store the retrieved contents
+            }
+            axios.get('https://jsonplaceholder.typicode.com/posts')   //03. Asynchronous. It takes some time to go and complete a task
+                //.then()                                                         //04. This function will run when the async function completes
+                //.then(res)                                                      //05. The "res" or "response" takes async results as a parameter 
+                .then(res => {
+                    console.log(res)                                              //06. Prints out in console [Config, data, headers, request, status, _proto_] - All data retrieved being stored in "data"
+                    this.setState({
+                        //posts: res.data                                         //09. Pushes ALL data into the state's empty array
+                        posts: res.data.slice(0, 10)                              //10. Pushes 10/100 data into the state's empty array by slicing the data that contains 100 elements
+                    })
+                })
+        }
+        class Home extends Component {    
+            const {posts} = this.state;                                           //11. Cycles through the state in the template (See 14). This line grabs the posts property from the state
+            //const postList = posts.length  ?                                    //12. If there's data, then return True, If empty or no length, then False. 
+            const postList = posts.length ? (
+                //posts.map()                                                     //14. Cycles through the posts property
+                //posts.map(post => {})                                           //15. Runs a function for each post
+                posts.map(post => {  
+                    return (                                                      //16. Returns a JSX for each post element
+                        //<div className="post card"></div>                       //17. Prints out as CSS stylized postcards
+                        //<div className="post card" key={post.id}></div>         //18. Calls out every post by their key IDs
+                        <div className="post card" key={post.id}>
+                            <div className="card-content">
+                                <span className="card-title">{post.title}</span>  //19. Output the title content
+                                <p>{post.body}</p>                                //20. Output the body content
+                            </div>
+                        </div>
+                    )
+                }) 
+            ) : (
+                <div className="center">No posts yet</div>                 //13. When false, print "No posts yet"
+            )
+            render () {               
+                return (
+                    <div className="container">
+                        <h4 className="center">Home</h4>
+                        //<p>Lorem Ipsum paragraph</p>                     //21. Not required since we are returning the cards
+                        {postList}                                         //22. Prints out the cards
+                    </div>
+                )            
+            }
+        }
+        export default Home
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+29. Route Parameters (Part 1)
+
+
+
+
+
+
+
 
 
 
