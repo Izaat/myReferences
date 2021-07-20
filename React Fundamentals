@@ -1833,17 +1833,17 @@ CONTENTS
 
     Home.js  (Conversion to Class Component)                                          
         //import React from 'react';
-        import React, {Component} from 'react'                       //Convert to class component
+        import React, {Component} from 'react'                     //Convert to class component
         
         //const Home = () => {
-        class Home extends Component {                               //Convert to class component
+        class Home extends Component {                              //Convert to class component
             //return (
             //    <div className="container">
             //        <h4 className="center">Home</h4>
             //        <p>Lorem Ipsum paragraph</p>                                                  
             //    </div>
             //)
-            render () {                                              //Wraps return in order to convert into a class component
+            render () {                                                       //Wraps return in order to convert into a class component
                 return (
                     <div className="container">
                         <h4 className="center">Home</h4>
@@ -1856,50 +1856,50 @@ CONTENTS
 
     Home.js   (CODE)
         import React, {Component} from 'react' 
-        import axios from 'axios'                                     //02. Import the installed axios library
+        import axios from 'axios'                                              //02. Import the installed axios library
         
-        componentDidMount(){                                          //01. Used for calling axios to import data
-            state = {                                                 //07. This will store data from "res"
-                post:[]                                               //08. Empty array to store the retrieved contents
-            }
-            axios.get('https://jsonplaceholder.typicode.com/posts')   //03. Asynchronous. It takes some time to go and complete a task
-                //.then()                                                         //04. This function will run when the async function completes
-                //.then(res)                                                      //05. The "res" or "response" takes async results as a parameter 
-                .then(res => {
-                    console.log(res)                                              //06. Prints out in console [Config, data, headers, request, status, _proto_] - All data retrieved being stored in "data"
-                    this.setState({
-                        //posts: res.data                                         //09. Pushes ALL data into the state's empty array
-                        posts: res.data.slice(0, 10)                              //10. Pushes 10/100 data into the state's empty array by slicing the data that contains 100 elements
-                    })
-                })
-        }
         class Home extends Component {    
-            const {posts} = this.state;                                           //11. Cycles through the state in the template (See 14). This line grabs the posts property from the state
-            //const postList = posts.length  ?                                    //12. If there's data, then return True, If empty or no length, then False. 
-            const postList = posts.length ? (
-                //posts.map()                                                     //14. Cycles through the posts property
-                //posts.map(post => {})                                           //15. Runs a function for each post
-                posts.map(post => {  
-                    return (                                                      //16. Returns a JSX for each post element
-                        //<div className="post card"></div>                       //17. Prints out as CSS stylized postcards
-                        //<div className="post card" key={post.id}></div>         //18. Calls out every post by their key IDs
-                        <div className="post card" key={post.id}>
-                            <div className="card-content">
-                                <span className="card-title">{post.title}</span>  //19. Output the title content
-                                <p>{post.body}</p>                                //20. Output the body content
-                            </div>
-                        </div>
-                    )
-                }) 
-            ) : (
-                <div className="center">No posts yet</div>                 //13. When false, print "No posts yet"
-            )
+            state = {                                                          //07. This will store data from "res"
+                posts:[]                                                       //08. Empty array to store the retrieved contents
+            }        
+            componentDidMount(){                                               //01. Used for calling axios to import data
+                axios.get('https://jsonplaceholder.typicode.com/posts')   //03. Asynchronous. It takes some time to go and complete a task
+                    //.then()                                                  //04. This function will run when the async function completes
+                    //.then(res)                                               //05. The "res" or "response" takes async results as a parameter 
+                    .then(res => {
+                        console.log(res)                                       //06. Prints out in console [Config, data, headers, request, status, _proto_] - All data retrieved being stored in "data"
+                        this.setState({
+                            //posts: res.data                                  //09. Pushes ALL data into the state's empty array
+                            posts: res.data.slice(0, 10)                       //10. Pushes 10/100 data into the state's empty array by slicing the data that contains 100 elements
+                        })
+                    })
+            }
             render () {               
+                const {posts} = this.state;                                    //11. Cycles through the state in the template (See 14). This line grabs the posts property from the state
+                //const postList = posts.length  ?                             //12. If there's data, then return True, If empty or no length, then False. 
+                const postList = posts.length ? (
+                    //posts.map()                                              //14. Cycles through the posts property
+                    //posts.map(post => {})                                    //15. Runs a function for each post
+                    posts.map(post => {  
+                        return (                                               //16. Returns a JSX for each post element
+                            //<div className="post card"></div>                //17. Prints out as CSS stylized postcards
+                            //<div className="post card" key={post.id}></div>  //18. Calls out every post by their key IDs
+                            <div className="post card" key={post.id}>
+                                <div className="card-content">
+                                    <span className="card-title">{post.title}</span>  //19. Output the title content
+                                    <p>{post.body}</p>                         //20. Output the body content
+                                </div>
+                            </div>
+                        )
+                    }) 
+                ) : (
+                    <div className="center">No posts yet</div>                 //13. When false, print "No posts yet"
+                )            
                 return (
                     <div className="container">
                         <h4 className="center">Home</h4>
-                        //<p>Lorem Ipsum paragraph</p>                     //21. Not required since we are returning the cards
-                        {postList}                                         //22. Prints out the cards
+                        //<p>Lorem Ipsum paragraph</p>                         //21. Not required since we are returning the cards
+                        {postList}                                             //22. Prints out the cards
                     </div>
                 )            
             }
@@ -1908,6 +1908,19 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 29. Route Parameters (Part 1)
+
+    Part of a URL that can change
+    Usually see them on URLs for individual records
+    User Profile Route:
+        mysite.com/users/yoshi
+        mysite.com/users/mario
+    Cooking recipe page:
+        mysite.com/recipes/12345
+        mysite.com/recipes/98765
+
+    Continued from the website with Axiom
+    Clicking on the cards redirects to another URL(Route Parameter)
+
 
 
 
