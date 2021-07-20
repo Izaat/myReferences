@@ -1921,6 +1921,87 @@ CONTENTS
     Continued from the website with Axiom
     Clicking on the cards redirects to another URL(Route Parameter)
 
+    Create a file (Post.js) under "src/component" folder
+        ../myapp/src/component/Post.js
+        This file will contain state therefore, will be a class base component
+
+    App.js (From Topic 21 Step 2)              
+        import React, {Component} from 'react';
+        import Navbar from './component/Navbar'     
+        import {BrowserRouter, Route} from 'react-router-dom' 
+        import Home from './component/Home'     
+        import About from './component/About' 
+        import Contact from './component/Contact' 
+        import Post from './component/Post'                                     //03. Import Post.js into App.js
+        
+        class App extends Component {
+            render () {
+                return (
+                    
+                    <BrowserRouter>                
+                        <div className="App">
+                            <Navbar />      
+                            <Route exact path='/' component={Home} />    
+                            <Route path='/about' component={About} />
+                            <Route path='/contact' component={Contact} />
+                            //<Route path='' component={} />                    //01. Blank route path and function
+                            //<Route path='/:post_id' component={} />           //02. If the route id "mysite.com/users/mario" then the "post_id" is "/mario"
+                            <Route path='/:post_id' component={Post} />         //04. Linking post
+                        </div>
+                    </BrowserRouter>
+                );            
+            }
+        }
+        export default App;
+
+    Post.js (The Route parameter skeleton to print "Route Param" on screen)
+        import React, {Component} from 'react';
+        
+        class Post extends Component {
+            render() {
+                return (
+                    <div className="container">
+                        <h4>Route Param</h4>
+                    </div>
+                )
+            }
+        }
+        export default Post;
+
+    Post.js (CODE to fetch data)
+        import React, {Component} from 'react';
+        
+        class Post extends Component {
+            state = {                                            //08. To store the post_id in the state array
+                id: null                                         //09. When the component first loads up, it will show as null
+            }
+            componentDidMount(){
+                //console.log(this.props);                       //07. Prints out the prop object in console [Object: history, loc, match, _proto_], Note under Object>Match>params, you'll find the post_id
+                //let id = this.props.match.params               //05. Grabs the prop object parameter
+                let id = this.props.match.params.post_id;        //06. Based on App.js, the name of the parameter is "post_id"
+                this.setState({                                  //10. When componentDidMount function runs, this will replace null value in state with the post_id value
+                    id: id                                       //11. The first id refers to the state and the second refers to "let id". Meaning "state id : let id"
+                })
+            }
+            render() {
+                return (
+                    <div className="container">
+                        //<h4>Route Param</h4>
+                        <h4>{this.state.id}</h4>                 //12. Prints out the id on the browser
+                    </div>
+                )
+            }
+        }
+        export default Post;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+30. Route Parameters (Part 2)
+
+
+
+
+
+
 
 
 
