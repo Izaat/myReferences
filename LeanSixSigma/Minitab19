@@ -73,7 +73,14 @@ CONTENTS
             Identify the cause and effects relationships
             Create and manage different experiment designs. Entering values and record corresponding output
         Control Charts - Statistical Process Control (SPC)
-            https://www.youtube.com/watch?v=WdqSm0DiYtY
+            https://www.youtube.com/watch?v=WdqSm0DiYtY 
+                The 3 Types of Variations
+                    Normal Variation (In statistical control, Stable) - Within UCL/LCL, 
+                    Instability (At extreme ends of UCL/LCL)
+                    Abnormal Variation (Out of statistical control, Instability, Outlier points) - Outside UCL/LCL, 
+                Xbar Chart (Current Average Value), R Chart (Range), 
+                Moving Xbar Chart (Average of Current + Previous Readings), Moving R Chart (Average of Current + Previous Readings)
+                Individual X Chart (Single Value, Used together with Moving R Chart)
             Cause and Effect diagrams, 
             Variables and Attribute control charts,
             Time weighted and Multivariate control charts,
