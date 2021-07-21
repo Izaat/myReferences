@@ -76,7 +76,7 @@ CONTENTS
             https://www.youtube.com/watch?v=WdqSm0DiYtY 
                 The 3 Types of Variations
                     Normal Variation (In statistical control, Stable) - Within UCL/LCL, 
-                    Instability (At extreme ends of UCL/LCL)
+                    Instability (At extreme ends of UCL/LCL but wtill within UCL/LCL)
                     Abnormal Variation (Out of statistical control, Instability, Outlier points) - Outside UCL/LCL, 
                 Xbar Chart (Current Average Value), R Chart (Range), 
                 Moving Xbar Chart (Average of Current + Previous Readings), Moving R Chart (Average of Current + Previous Readings)
