@@ -2072,8 +2072,8 @@ CONTENTS
             }
             componentDidMount(){
                 let id = this.props.match.params.post_id;   
-                //axios.get('https://jsonplaceholder.typicode.com/posts')                     //07. Insert the axios post tag
-                axios.get('https://jsonplaceholder.typicode.com/posts' + id)                  //08. Concatenate post with the id from "let id". This will return a single json object
+                //axios.get('https://jsonplaceholder.typicode.com/posts/')                     //07. Insert the axios post tag
+                axios.get('https://jsonplaceholder.typicode.com/posts/' + id)                  //08. Concatenate post with the id from "let id". This will return a single json object
                     //.then(res => {} )                                                       //11. Add callback function (Ref Topic 28)
                     .then(res => {
                         this.setState({  
