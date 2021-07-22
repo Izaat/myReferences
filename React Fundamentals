@@ -32,6 +32,7 @@ CONTENTS
 28. Using Axios                       **Installation required "npm install axios"
 29. Route Parameters (Part 1)
 30. Route Parameters (Part 2)
+31. Switch Tag (Route Parameters Part 3)
 
 
 
@@ -2002,6 +2003,121 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 30. Route Parameters (Part 2)
+
+    Continued from part 1
+    Home (Home.js)
+        Clicking on card and redirect to route parameter
+        Method is to surround the card with clickable event link tag (Topic 25) and this will divert to a seperate component
+        Therefore surround the "post.title" with a link tag
+    New Page (Post.js)
+        Grabbing the post data using Axios (Ref Topic 28)
+    
+    Home.js   (CODE)
+        import React, {Component} from 'react' 
+        import axios from 'axios'           
+        import {Link} from 'react-router-dom'                                              //01. Import the Link tag router parameter (Ref Topic 25)
+        
+        class Home extends Component {    
+            state = {                  
+                posts:[]                     
+            }        
+            componentDidMount(){                                   
+                axios.get('https://jsonplaceholder.typicode.com/posts')  
+                    .then(res => {
+                        console.log(res)                                   
+                        this.setState({
+                            posts: res.data.slice(0, 10)     
+                        })
+                    })
+            }
+            render () {               
+                const {posts} = this.state;                      
+                const postList = posts.length ? (
+                    posts.map(post => {  
+                        return (                     
+                            <div className="post card" key={post.id}>
+                                <div className="card-content">
+                                    //<span className="card-title">{post.title}</span>      //02. This will be surrounded by a link tag
+                                    //<Link>                                                //03. Wrapping with link tag
+                                    //<Link to={''}>                                        //04. Add dynamic link but note that '/post.id' can't be used or react will take the link at face value
+                                    <Link to={'/' + post.id}>                               //05. Concatenate link with 'post.id'. Therefore, "myapp.com/12345"
+                                        <span className="card-title">{post.title}</span> 
+                                    </Link>    
+                                    <p>{post.body}</p>                                  
+                                </div>
+                            </div>
+                        )
+                    }) 
+                ) : (
+                    <div className="center">No posts yet</div>            
+                )            
+                return (
+                    <div className="container">
+                        <h4 className="center">Home</h4>
+                        {postList}             
+                    </div>
+                )            
+            }
+        }
+        export default Home
+
+    Post.js (CODE to fetch data)
+        import React, {Component} from 'react';
+        import axios from 'axios'                                                             //06. Importing axios (Ref Tppic 28)
+        
+        class Post extends Component {
+            state = {         
+                //id: null                                                                    //09. Now that the state no longer store the id but it will store the post
+                post: null                                                                    //10. This will store the post
+            }
+            componentDidMount(){
+                let id = this.props.match.params.post_id;   
+                //axios.get('https://jsonplaceholder.typicode.com/posts')                     //07. Insert the axios post tag
+                axios.get('https://jsonplaceholder.typicode.com/posts' + id)                  //08. Concatenate post with the id from "let id". This will return a single json object
+                    //.then(res => {} )                                                       //11. Add callback function (Ref Topic 28)
+                    .then(res => {
+                        this.setState({  
+                            //id: id                                                          //13. id no longer in use. Now using post in the state
+                            post: res.data                                                    //14. Post will be equal to the data inside the response callback function therefore "res.data"
+                        })                        
+                        //console.log(res)                                                    //15. Print out the response into console. //17. Not in use
+                    })
+                //this.setState({                                                             //12. Setting the state for the id no longer needed but transferred into callback function
+                //    id: id         
+                //})
+            }
+            render() {
+                //const post = this.state.post ?  () : ()                                      //18. Using JSX and ternary operator. If there's post, then true. Else return false
+                const post = this.state.post ? (
+                    <div className="post">
+                        <h4 className="center">{this.state.post.title}</h4>                    //20. If there is content in state, the print out title in browser
+                        <p>{this.state.post.body}</p>                                          //21. If there is content in state, the print out body content in browser
+                    </div>  
+                ) : (
+                    <div className="center">Loading post...</div>                              //19. If no post in state array, return as false and print "Loading post..." in browser
+                )   
+                return (
+                    <div className="container">
+                        //<h4>{this.state.id}</h4>                                             //16. No longer needed since no longer calling the id
+                        //<h4></h4>
+                        <h4>{post}</h4>                                                        //22. Prints out the "const post" onto browser screen
+                    </div>
+                )
+            }
+        }
+        export default Post;
+
+    NOTE: 
+        Notice that when contact mene is being clicked, the body content of the card will also show up in the contact page
+        This will be addressed in next Topic
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+31. Switch Tag (Route Parameters Part 3)
+
+
+
+
 
 
 
