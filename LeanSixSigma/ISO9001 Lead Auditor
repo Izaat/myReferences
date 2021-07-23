@@ -1071,6 +1071,78 @@ CONTENT
         The presentation should present the facts clearly, openly and honestly, embedding the principles of auditing (Topic 6) 
 
     Effective Audit Report writing
+        In most cases, the certification body will have a report template developed as part of the auditing procedures
+        If there isn't any template, ISO17021 provides a list of contents that must be included in the report
+        Under ISO17021, the followings must be in the report
+            Name of the certification body and its accreditation number
+            Name and address of the audit client
+            Type of audit 
+                Initial assessment, Stage 1, Stage 2, Surveillance, Recertification, etc
+                Combined, Joined or Integrated Audit
+            Audit objectives, scope and criteria
+            Dates, departments and processes
+            Details ofLead auditor, the audit team, technical specialists (if any)
+            Anything that impacts future audits and certification body
+            All nonconformities and opportunities for improvement, supporting audit evidence
+            Audit conclusions
+        Additional  
+            Identify in the report if remote auditing techniques have been used during the audit
+            Identify if there have been any disagreements about the audit findings and conclusions raised by the auditee
+        When writing the report, ensure that the findings and evidences are presented clearly, factually and objectively
+        Report simple fact and evidence 
+        Avoid using the words like "should", "must", "have to", "needs to" as these are instruction based and opinion based words
+            Example:
+                Instead of "The security policy should be signed by the managing director"
+                Write "The security policy was not signed by the managing director"
+        Certification audit reports should not include any recommendations 
+        Also avoid instructing the auditee on what they should do to address non conformities
+        The report can include the opportunities for improvement but these must not be specific solutions
+            Inappropriate Example: "Full time contracted staff should be included in the company's training program"
+            Opportunity Example: "There is an opportunity to improve the training processes with the contractors"
+        Audit client is always required to 
+            Analyze the results of the audit, 
+            Evaluate for themselves the root causes for nonconformity
+            Develop appropriate corrections and corrective actions
+        Audit conclusions for a certification audit should be a statement of the Lead Auditor's decision to recommend the organization for certification
+
+    Post audit activities, corrections and correction actions
+        Certification body's audit procedures should include a time period in which the report should be written 
+        Also state down what to do if there is a delay in informing the client 
+        The lead auditor will generate the report
+        In some cases, the certification body's process is for the report to be written and issued to the audit client during site audit
+        
+        Activity steps generally taken by certification bodies
+            Step 1: Issuing audit report
+            Step 2: Audit client indentifies root causes and produces cerrections and corrective actions
+            Step 3: Lead auditor reviews and approves the plan 
+                Ensure they're appropriate to nonconformity raised (Timescale, responsibilities, clear actions)
+            Step 4a: Minor nonconformity - Actions will be reviewed at next audit
+            Step 4b: Major nonconformity - Lead auditor accepts and verifies actions through "Special audit" (onsite or remotely)
+                Check if actions are sufficient for the major nonconformity to be downgraded to minor nonconformity or closed
+            Step 5: Nonconformity closed
+        
+        Verifying actions
+            The action is completed as planned
+            Any evidence succeeded in addressing the nonconformity
+            Assess whether the action achieved its purpose
+                Example: 
+                A company did not fully identify their environmental aspects and impacts 
+                And their corrective actions was to develop an environmental aspects and impacts register
+                Then verify that the register contained all the relevant environmental aspects and impacts
+                This verification will be conducted at the next audit (planned audit or special audit)
+
+    Certification review process
+        For initial certification or certification audits, the decision to grant certification is made by the certification reviewer
+        The audit report is sent to the certification reviewer, along with the information of the audit client 
+        Also the relevant evidences from the audit client on how they have or will address their nonconformity
+        Based on the compliance with the certification body's certification criterias, the lead auditor's recommendation can be upheld, questioned or overturned
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[End]
+
+
+
         
 
 
