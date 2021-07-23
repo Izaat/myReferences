@@ -33,7 +33,7 @@ CONTENTS
 29. Route Parameters (Part 1)
 30. Route Parameters (Part 2)
 31. Switch Tag (Route Parameters Part 3)
-
+32. Importing Images
 
 
 
@@ -2114,6 +2114,67 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 31. Switch Tag (Route Parameters Part 3)
+
+    In App.js, there is nothing to differentiate between the Route path tags, "/:post_id" and "/contact" || "/about"
+        <BrowserRouter>                
+            <div className="App">
+                ...
+                <Route path='/about' component={About} />
+                <Route path='/contact' component={Contact} />
+                <Route path='/:post_id' component={Post} />  
+            </div>
+        </BrowserRouter>    
+        
+    Solution (App.js)
+        //<Route path='/:post_id' component={Post} />        //01. Change from '/:post_id' to '/posts/:post_id'
+        <Route path='/posts/:post_id' component={Post} />
+
+    Solution (Home.js)
+        //<Link to={'/' + post.id}>                                          //02. Change from '/' to '/posts/'
+        <Link to={'/posts/' + post.id}>
+
+    But the URL above requires restructuring of URLs from 'myapp.com/12345' to 'myapp.com/posts/12345'
+    Another solution is to use Switch Tags
+    
+    App.js (From Topic 29)              
+        import React, {Component} from 'react';
+        import Navbar from './component/Navbar'     
+        //import {BrowserRouter, Route} from 'react-router-dom' 
+        import {BrowserRouter, Route, Switch} from 'react-router-dom'          //03. Add Switch Tag
+        import Home from './component/Home'     
+        import About from './component/About' 
+        import Contact from './component/Contact' 
+        import Post from './component/Post'       
+        
+        class App extends Component {
+            render () {
+                return (                    
+                    <BrowserRouter>                
+                        <div className="App">
+                            <Navbar />      
+                            //<Route exact path='/' component={Home} />    
+                            //<Route path='/about' component={About} />
+                            //<Route path='/contact' component={Contact} />
+                            //<Route path='/:post_id' component={Post} /> 
+                            <Switch>                                                      //04a. Wrap up Route path tags with Switch Tag
+                                <Route exact path='/' component={Home} />                 //04b. The Switch Tag property works the same way as switches in Python
+                                <Route path='/about' component={About} />                 //04c. Therefore, each individual path will be separated from other paths
+                                <Route path='/contact' component={Contact} />
+                                <Route path='/:post_id' component={Post} />         
+                            </Switch>
+                        </div>
+                    </BrowserRouter>
+                );            
+            }
+        }
+        export default App;
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+32. Importing Images
+
+
+
 
 
 
