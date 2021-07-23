@@ -1,0 +1,100 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Labview
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01. Introduction
+02. While Loops
+03. Plotting
+04. SubVIs
+05. Case Structures
+06. Formula Node
+07. Arrays
+08. Clusters
+09. Property Nodes
+10. Project Explorer
+11. Debugging
+12. DAQ
+13. Labview and USB6008
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Introduction
+
+    Starting
+        Splash screen > File > New VI
+        2 split screen Windows will open (Front panel + Block Diagram)
+
+    Right Click on Front Panel
+        Controls Selection Panel:
+            Silver > Numeric, Boolean, String&Path, Arrays/Matrix, List/Tables, Graph, Ring&Enum, Decor, IO
+            Modern, System, Classic, Express, Control/Simulation, .NET/ActiveX,
+            SignalProcessing, Addons, UserControls,
+            DSCModule, Vision
+
+    Select Numeric Control and Paste in Front Panel
+        Right Click > Numeric > Numeric
+        A diagram will appear in Bloack Diagram Panel
+
+    Right Click on Block Diagram    
+        Functions Selection Panel:
+            Programming > Structures, Array, Cluster, Numeric, Boolean, String, Comparison, Timing, Dialog, FileIO, Waveform, Apps, Sync, Graphics, Report
+            Control/Sim, MeasurementIO, DataComms, Maths, Instruments, Vision/Motion, 
+            SignalProcessing, Connectivity, Express, Addons, Favorites, UserLibs,
+            DESCModules, FPGAInterface, RealTime, SQL
+    
+    Run the program
+        Front Panel > Main Toolbar > Click on 'Run' (Arrow Icon)
+
+    Program (without loops):
+        Add in 2 Numerical Control display in Front Panel
+        Add in 'Addition Operator' in Blcok Diagram Panel
+            Reight Click in Block Diagram > Mathematics > Numeric > Add
+        Add in Numeric Indicator in Block Front Panel
+        Link everything up in BD Panel
+        Click on Run in Front Panel
+        Input numbers in Front Panel
+        Click on Run in Block Diagram
+        Calculated value will appear in Indicator
+        NOTE: 
+            Whenever the input changes, clicking on the Run button again is required
+            Therefore, While loop needed to solve the problem
+        
+    Toggling between Panels
+        CTRL+E
+
+    Program (with loops):
+        Cont'd
+        Add while Loop
+            In BD panel > Right Click > Programming > Structures > While Loop
+            Draw 'While Loop' around the diagram
+        Add Button to stop the program
+            In Front Panel > Right Click > Silver > Boolean > Stop Button
+        In Block Diagram, link Stop Button Block to the While Loop condition
+        In Front Panel, Click on Run button
+            Change the input parameter and the calculated value will appear in the indicator automatically
+        NOTE:
+            While loops are computer processing intensive since it's updating continuously
+            To solve, add Timer function into the While Loop box in BD Panel
+        Add Timer    
+            In BD panel > Right Click > Programming > Timing > Wait(ms)
+            Right Click on Input > Create > Constant
+            Add "100" ms to the timer (This will update the while loop every 100 ms)
+
+    Plotting Graph:
+        Cont'd
+        Add Waveform Chart
+            Front Panel > Silver > Graph > Waveform Chart
+            Block Diagram:
+                Move Waveform Chart block into the while loop box
+                Link Waveform Chart with the Add function's output
+        Run and change the input parameters in Front Panel
+        Notice that the Chart will plot continuously plotting the answers as the imput parameters changes
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. While Loops
+
+
+
+
