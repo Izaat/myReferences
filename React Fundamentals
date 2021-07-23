@@ -84,9 +84,9 @@ CONTENTS
 
     Packages to be installed into VSCode:
         ES7 React/Redux/GraphQL/React-Native snippets      //Contains libraries
-        Live Server                                                                     //Similar to Xampp to run React
-        Sublime Babel                                                               //Syntax highlighting
-        Monokai++                                                                    //Sublime theme for VSCode
+        Live Server                                        //Similar to Xampp to run React
+        Sublime Babel                                      //Syntax highlighting
+        Monokai++                                          //Sublime theme for VSCode
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 03. Creating React Components
@@ -101,20 +101,20 @@ CONTENTS
     
     CODE: - Static
         <body>
-            //<div class="" id="app"></div>                         //Class need to be removed
+            //<div class="" id="app"></div>                   //Class need to be removed
             <div id="app"></div>
-            //<script>                                                             //Create script tags inside of body tag
-            <script type="text/babel">                                  //type="text/babel" must be added once the babel loading script is inserted
+            //<script>                                        //Create script tags inside of body tag
+            <script type="text/babel">                        //type="text/babel" must be added once the babel loading script is inserted
                 class App extends React.Component {           //class name to be used in the ReactDOM function
-                    render() {                                                     //This function is responsible for rendering the template
-                        return (                                                    //To return JSX template. JSX enables html code to be written in JS
+                    render() {                                //This function is responsible for rendering the template
+                        return (                              //To return JSX template. JSX enables html code to be written in JS
                             <div className="app-content">
-                                <h1> Hello </h1>                            //JSX testing
+                                <h1> Hello </h1>              //JSX testing
                             </div>
                         )
                     }
                 }    
-                ReactDOM.render(<App />, document.getElementById('app'));           //*.render(<class>, where to render)
+                ReactDOM.render(<App />, document.getElementById('app'));    //*.render(<class>, where to render)
             </script>
         </body>
 
@@ -131,7 +131,7 @@ CONTENTS
                         return (                                 
                             <div className="app-content">
                                 <h1> Hello </h1>      
-                                <p>{ Math.random()*10 }</p>              //JS codes can be inserted into the curly braces
+                                <p>{ Math.random()*10 }</p>                    //JS codes can be inserted into the curly braces
                             </div>
                         )
                     }
@@ -187,8 +187,8 @@ CONTENTS
             <div id="app"></div>
             <script type="text/babel">           
                 class App extends React.Component {       
-                    state = {                                //This adds the JS object
-                        name: 'Ryu',                     //But the 2 lines wont update what being output to the browser
+                    state = {                                     //This adds the JS object
+                        name: 'Ryu',                              //But the 2 lines wont update what being output to the browser
                         age: 30
                     }
                     render() {                                  
@@ -240,7 +240,7 @@ CONTENTS
                     name: 'Ryu',       
                     age: 30
                 }
-                handleClick(e)  {                                     //Defining the JS function. "e" is the event on page by default
+                handleClick(e)  {                                  //Defining the JS function. "e" is the event on page by default
                     console.log(e.target)                          //"e" is event. "Target" is property of the event (what triigger element that causes the event -> onClick)
                 }
                 render() {                                  
@@ -308,7 +308,7 @@ CONTENTS
                                 and I am {this.state.age}</p> 
                             <button onClick={this.handleClick}>Click Me </button> 
                             <button onMouseOver={this.handleMouseOver}>Hover Me </button> 
-                            <p onCopy={this.handleCopy}>What we think, we become</p>                     //The target
+                            <p onCopy={this.handleCopy}>What we think, we become</p>                //The target
                         </div>
                     )
                 }
@@ -353,7 +353,7 @@ CONTENTS
         For new version of react, keyword must be binded to the function
 
     Solution: -Use arrow function        
-        handleClick = (e) => {                       //This will make the keyword "public"
+        handleClick = (e) => {                         //This will make the keyword "public"
             console.log(this.state);
         }
 
