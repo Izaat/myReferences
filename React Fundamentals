@@ -34,7 +34,7 @@ CONTENTS
 30. Route Parameters (Part 2)
 31. Switch Tag (Route Parameters Part 3)
 32. Importing Images
-
+33. Introduction to Redux
 
 
 
@@ -2171,7 +2171,104 @@ CONTENTS
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-32. Importing Images
+32. Importing Images 
+
+    Recap:
+        ../src/component
+            Home.js: Topic 30
+            Post.js: Topic 30
+            About,js: Topic 27
+            Navbar.js: Topic 26
+            Contact.js: Topic 26         
+        ../src/hoc/
+            Rainbow.js: Topic 27
+        ../src/    
+            App.js: Topic 31
+
+    Adding a PNG file to every card (See 9 points)
+        ../src/image.png
+        To use the image, just import the image
+    
+    Home.js   (CODE)
+        import React, {Component} from 'react' 
+        import axios from 'axios'           
+        import {Link} from 'react-router-dom'     
+        import YoutubeLogo from '../image000.png'                            //01. Import the image
+        
+        class Home extends Component {    
+            state = {                  
+                posts:[]                     
+            }        
+            componentDidMount(){                                   
+                axios.get('https://jsonplaceholder.typicode.com/posts')  
+                    .then(res => {
+                        console.log(res)                                   
+                        this.setState({
+                            posts: res.data.slice(0, 10)     
+                        })
+                    })
+            }
+            render () {               
+                const {posts} = this.state;                      
+                const postList = posts.length ? (
+                    posts.map(post => {  
+                        return (                     
+                            <div className="post card" key={post.id}>         //04. The class "post card" where "post" will be used in CSS 
+                                <img src={YoutubeLogo} alt="A YoutubeLogo" /> //02. Adding the image and the "img" class to be used in CSS
+                                <div className="card-content">
+                                    <Link to={'/' + post.id}>
+                                        <span className="card-title red-text">{post.title}</span>       //09. Adds in text color in CSS
+                                    </Link>    
+                                    <p>{post.body}</p>                                  
+                                </div>
+                            </div>
+                        )
+                    }) 
+                ) : (
+                    <div className="center">No posts yet</div>            
+                )            
+                return (
+                    //<div className="container">
+                    <div className="container home">                     //03. Adding home CSS class to the container
+                        <h4 className="center">Home</h4>
+                        {postList}             
+                    </div>
+                )            
+            }
+        }
+        export default Home
+
+
+    Index.css (../src/index.css)
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        
+        .home .post img {                                                 //05. The CSS class for line 2, 3, 4
+            width:120px;                                                  //07. For Resizing the image proportionally
+            height: auto;                                                 //08. For resizing the image proportionally
+            position: absolute;
+            top: 20px;
+            left: -50px;
+            opacity: 0.6;
+        }
+
+        .home .post{                                                      //06. Cuts away the logo that is outside the card (Only image on card will be seen)
+            overflow: hidden;
+            padding-left: 80px;
+        }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+33. Introduction to Redux
+
+
+
+
+
+
 
 
 
