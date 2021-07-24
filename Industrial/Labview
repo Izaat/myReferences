@@ -95,6 +95,85 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 02. While Loops
 
+    Types of Loops and Structures
+        While Loops (Solid line border)
+        For Loops (Pages border)
+        If-Else (Case Structure) - (Border with pattern)
+            Nodes can be linked to the border 
+            The border nodes can be connected to another area
+        Sequence Structure (Film border)
+
+    While Loop Example
+        Voltage input (0-5V) from DAQ
+        Converts voltage signal (Multiply by 4) to output water level height in tank
+        Therefore, 25V = 100cm
+        Front Panel
+            Voltage
+            Tank Level
+            Stop while loop button
+        Block Diagram   
+            Voltage nodes
+            multiplication node
+            Tank level in cm node
+            Timer node (ms)
+            Stopbutton
+            
+        **Similar to Topic 1**
+        NOTE: Just change the max Voltage input property to 25 and max output water level to 100
+
+        Adding Numeric indicator to While Loop's Loop Iteration
+            In front panel, 
+                Right click > Silver > Numeric > Numeric Indicator
+            In Block Diagram
+                Link Numeric Indicator node to the While Loop's "i" box 
+            This will show how many iterations the While Loop ran
+            The Numeric indicator node can also be linked to a mathematics operator node for calculation
+
+        While Loop border
+            Connections inside the while loop can also be extended outside the while loop border
+            Extend the output of the mathematics operator to the border
+            A square connection node will appear (Loop Tunnel)
+            An external node can be connected to the border node (Loop Tunnel)
+            Add in Numeric Control block (This wont show any value when the loop is running, will show the value when the loop is stopped)
+            
+        Loop Tunnel
+            Types of Tunnel Mode
+                Last value
+                Indexing
+                Concatenate
+            2 Ways to add external nodes
+                - Normal Right click on panel and add
+                - Select the Loop Tunnel > Right Click > Create >
+                    Constant
+                    Control
+                    Indicator
+            Indexing + Indicator = Array Indicator
+            Array indicator
+                In Front Panel, the indicator can be extended when dragged down to open up more arrays of indicators
+            
+        Shift Register
+            Click on the While loop border and click on "Add shift register"
+            Two arrow icons will appear on both sides of the border
+            Arrow up icon - Output value
+            Arrow down icon - Previous value
+            Example
+                Add in "Add Operator node" in between the the tank and multiplication node
+                Link Arrow down shift reg to Add operator node
+                Link Multiplication node output to Add operator node
+                Extend Multiplication node output to Arrow up shift register
+                Link Add operator node output to tank level indicator
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Plotting
+
+
+
+
+
+
+
+
 
 
 
