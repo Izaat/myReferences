@@ -5,6 +5,7 @@ Gateways:
     Siemens IOT2040 Connecting to S71200: https://www.youtube.com/watch?v=buuvrdR0OX4
     Siemens IOT2050 Overview: https://www.youtube.com/watch?v=gEe8FVaR2Zo
     Siemens IOT2050 SD Card image: https://support.industry.siemens.com/cs/document/109780231/simatic-iot2050-sd-card-example-image?dti=0&lc=en-WW
+More Python Programs: https://github.com/Izaat/references/tree/main/Python%20References
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
@@ -43,4 +44,25 @@ CONTENTS
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 02. Server
+
+    Write a simple server code for OPC UA
+    Create a new project in VSCode with Python 3.5
+    Name this project "OPCUAServer"
+    Under the project tree, create a new file and name this file "server.py"
+
+    Server.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
