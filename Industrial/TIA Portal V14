@@ -1,0 +1,131 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Siemens TIA Portal V14
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENT
+01. Manuals
+02. Configuration
+03. Setting up TIA Portal
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Manuals
+
+    Siemens Simatic S7-1200 Getting Started with S7-1200 - 
+        https://support.industry.siemens.com/cs/document/39644875/simatic-s7-1200-getting-started-with-s7-1200?dti=0&lc=en-US
+    Siemens Simatic S7-1200 System Manuals
+        https://cache.industry.siemens.com/dl/files/593/109741593/att_895681/v1/s71200_system_manual_en-US_en-US.pdf
+    Siemens Simatic S7-1200 Easy Book
+        https://support.industry.siemens.com/cs/document/39710145/simatic-s7-1200-easy-book?dti=0&pnid=13683&lc=en-WW
+    Siemens Simatic S7-1200 Product Web Page
+        https://new.siemens.com/global/en/products/automation/systems/industrial/plc/s7-1200.html
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Configuration
+
+    Purchase
+        https://canada.newark.com/siemens/6es7212-1bd34-4yb0/simatic-s7-1200-basic-starterkit/dp/79Y5437
+        Siemens: 6ES7212-1BD34-4YB0
+    
+    Connection:
+        Surface Pro > Router > PLC via ProfiNET
+    
+    Open TIA Portal V14
+    At home screen, click on "Create new project"
+        Fill up text boxes and click on Create
+        
+    First Steps tree screen will appear
+        Click on Configure a Device
+        Then Click on Add new Device
+        In Controllers > SIMATIC S7-1200 > CPU >
+            Select the variations
+            Open the tree - CPU1212C AC/DC/Rly [As shown in the datasheet - Product Description]
+            Choose 6ES7 212-1BD40 OR configure via unspecified CPU (Controller > SIMATIC > CPU > Unspecified)
+            But we will be using the Unspecified CPU route
+            Check the "Open device view" checkbox
+            Click on "Add" button
+        In Device view window (Left Panel > Project Tree > Devices Tab > Project Tree > PLCName > Main Panel > Device View Tab)
+            A dialog box "Device is not specified", click on "detect"
+            A window will appear (Hardware detection for PLC)
+                Type of PG/PC interface: PN/IE   (Profinet)
+                PG/PC interface: Surface Ethernet Adapter (Surface Pro)
+                Click on "Start Search"
+                The device will appear in the list, take note of the IP Address and MAC
+                    IP: 192.168.2.10
+                    MAC: 28-63-36-AD-E8-1D
+                Highlight the device and click on "Detect" button
+            Once done, the PLC will show up in color in the main panel
+            Zoom in into the PLC in Device view tab to see the I/O Addresses
+            
+    Check Communications
+        In the Main Panel > Device Tab >
+        Double Click on the ethernet port on the PLC
+        PROFINET Interface will appear at the bottom [General tab, IO Tags tab, System constants tab, Texts tab]
+            General Tab > Ethernet Addresses > IP Protocol Section
+                Set IP Address
+                    IP: 192.168.2.10
+                    Sub Mask: 255.255.255.0
+                    Use Router: Unchecked
+                NOTE:
+                    Another method is to click on the main toolbar > Accessible Devices
+                    Accessible devices window will pop up
+                    Start search
+
+    Start Programming
+        Once the configurations and communnications are set, double click on OB1
+        Project Tree panel > Devices Tab > Project name > PLC > Program Blocks > Main [OB1]
+        Note: 
+            Arrow right is opening the parallel circuit
+            Arrow up is closing the parallel circuit
+        Create this Rung in Network 1:
+            |        Stop                        Start                         Coil      |
+            |-------|  |------------+-------|  |-------+-------------(  )-----|
+            |                             |        Coil          |                           |
+            |                             |-------|  |--------|                           |
+
+    Addressing
+        Open the Device View Tab in the Main panel
+        Note that in normal windows, the 3 icons are minimize, full screen and close. 
+        But in TIA Portal, the window consist of 4 icons. Minimize, float, full screen and close
+        And 'Float' means unlatching the window from the main panel (Similar to Adobe's tool docking)
+        Split screen between the OB1 Program Block and the Device view Tab
+        Drag the name of the 'Stop' and drop it into the Device view's PLC addresses
+        This will automatically link the program to the I/Os
+        %I0.0 = Stop
+        %I0.1 = Start
+        %Q0.0 = Coil Output      //Double click on the I/O in Device view tab to edit the tags
+            
+
+    Download to PLC
+        In Main Toolbar, find the icon  with the arrow down PLC
+        Hover over the icon and  'download to device' will appear
+        On the left of this icon is 'Compile'
+        Compile the program first and then download to PLC
+        A synchronization window will appear, select 'continue without synchronization'
+        Load preview will then appear:
+            PLC >
+                Stop modules: Stop all (This will stop the PLC)
+                Software: Consistent download
+                Additional information: Upgrade target device (Checked)
+                Text Libraries: Consistent download
+            Click on Load button
+        Load results window will then appear
+            Start modules: Start all (Checked)
+            Click on Finish
+        Unlike Mitsubishi, Siemens won't go 'Live' straight away
+        To view the I/O, in program block window, click on "Monitoring on/off" icon in toolbar (icon with spectacle symbol)
+        Green line mean current passes through, dashed blue lines means no current passes through
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Setting up TIA Portal
+
+
+
+
+
+
+
+
+
