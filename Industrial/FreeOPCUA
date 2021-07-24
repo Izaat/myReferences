@@ -1,0 +1,47 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+OPC-UA
+IOT Overview https://www.youtube.com/watch?v=QRBMVngtVhA
+Gateways:
+    Siemens IOT2040 Connecting to S71200: https://www.youtube.com/watch?v=buuvrdR0OX4
+    Siemens IOT2050 Overview: https://www.youtube.com/watch?v=gEe8FVaR2Zo
+    Siemens IOT2050 SD Card image: https://support.industry.siemens.com/cs/document/109780231/simatic-iot2050-sd-card-example-image?dti=0&lc=en-WW
+OPC-UA: https://www.youtube.com/watch?v=mEbPHflLNyc&list=PLWw98q-Xe7iGf-c4b6zF0bnJA9avEN_mF
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01. Installation
+02. Server
+03. Client
+04. RPi OPC Server
+05. RPi OPC Client
+06. Changing Server values from client & controlling LEDs
+07. OPC-UA Server Security with Username and Password (Part 1)
+08. OPC-UA Server Security with Username and Password (Part 2)
+09. OPC-UA Server Security with Username and Password (Part 3)
+10. Designing IOT Dashboard for OPCUA Client, Serveer
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Installation
+
+    Architecture
+        Address Space >
+            Node 1
+                Var 1 (Temperature)
+                Var 2 (Pressure)
+                Var 3 (Time)
+            Node 2
+            Node 3
+
+    Installation 
+        FreeOPCUA
+            https://github.com/FreeOpcUa/python-opcua
+        Python 3.5 required
+        Go to Python installation directory
+        Enter 'scripts' folder
+        C:\>Python3.5\Scripts>pip3 install freeopcua
+        C:\>Python3.5\Scripts>pip3 install cryptography
+        
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Server
+
