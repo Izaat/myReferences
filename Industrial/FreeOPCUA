@@ -50,7 +50,93 @@ CONTENTS
     Name this project "OPCUAServer"
     Under the project tree, create a new file and name this file "server.py"
 
-    Server.py
+    Server.py (Skeleton)
+        from opcua import Server
+        
+        server = Server()
+        url = "opc.tcp://192.168.0.8:4840"
+        server.set_endpoint(url)
+        
+        name = "OPCUA_SIMULATION_SERVER"
+        addspace = server.register_namespace(name)
+
+        node = server.get_objects_node()                            //Assign root node
+        
+        Param = node.add_object(addspace, "Parameters")
+
+        Temp = Param.add_variable(addspace, "Temperature", 0)  //Add variable, assign addspace, name it temperature, assign initial value of 0
+        Press = Param.add_variable(addspace, "Pressure", 0)  //Add variable, assign addspace, name it pressure, assign initial value of 0
+        Time = Param.add_variable(addspace, "Time", 0)  //Add variable, assign addspace, name it time, assign initial value of 0
+
+        Temp.set_writable()                                  //Set variable as writable
+        Press.set_writable()                                 //Set variable as writable
+        Time.set_writable()                                  //Set variable as writable
+
+        server.start()
+        print("Server started at {}".format(url))
+
+
+    Server.py (CODE)
+        from opcua import Server
+        from random import randint                           //Importing random to inject random values into while loop
+        import datetime                                      //Importing time to inject current date and time into while loop
+        import time                                          //Importing time for the time delay in while loop
+        
+        server = Server()
+        url = "opc.tcp://192.168.0.8:4840"
+        server.set_endpoint(url)
+        
+        name = "OPCUA_SIMULATION_SERVER"
+        addspace = server.register_namespace(name)
+
+        node = server.get_objects_node()        
+        
+        Param = node.add_object(addspace, "Parameters")
+
+        Temp = Param.add_variable(addspace, "Temperature", 0)  
+        Press = Param.add_variable(addspace, "Pressure", 0) 
+        Time = Param.add_variable(addspace, "Time", 0) 
+
+        Temp.set_writable()            
+        Press.set_writable()                     
+        Time.set_writable()                          
+
+        server.start()
+        print("Server started at {}".format(url))
+
+        while True:                                             //Assigning random values to Temp, Press and Time
+            Temperature = randint(10, 50)                       //Generates random value from 10 to 50
+            Pressure = randint(200, 999)
+            TIME = datetime.datetime.now()
+
+            print(Temperature, Pressure, TIME)
+
+            Temp.set_value(Temperature)
+            Press.set_value(Pressure)
+            Time.set_value(TIME)
+
+            time.sleep(2)                                       //Delay for 2 seconds
+
+
+    Display:
+        12 906 2021-07-23 12:00:25.123465
+        where 
+            12 is temperature,
+            906 is pressure
+            and the reset is time
+            Note: the values will keep on generating
+
+    NOTE: For more simulation code, Google for "opc ua simulation server"
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Client
+
+
+
+
+
+
 
 
 
