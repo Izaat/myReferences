@@ -6,9 +6,6 @@ Siemens TIA Portal V14
 CONTENT
 01. Manuals
 02. Configuration
-
-
-05. Where are the PLC programs stored in the PC
 06. AND & OR Program
 07. AND & OR Program (Unintentional troubleshooting)
 08. Replacement input simulator
@@ -151,7 +148,7 @@ CONTENT
             Profinet Port - For linking with the PC
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-05. Where are the PLC programs stored in the PC
+06. AND & OR Program
 
 
 
