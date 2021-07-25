@@ -44,7 +44,11 @@ CONTENT
     Purchase
         https://canada.newark.com/siemens/6es7212-1bd34-4yb0/simatic-s7-1200-basic-starterkit/dp/79Y5437
         Siemens: 6ES7212-1BD34-4YB0
-    
+
+    Purchase 2:
+        6AV6 651-7KA01-3AA4 Siemens S7-1200+KTP400 BASIC STARTERKIT (With KTP400 HMI)
+        https://www.plc-city.com/shop/en/siemens-simatic-s7-1200-starter-kits/6av6651-7ka01-3aa4.html
+
     Connection:
         Surface Pro > Router > PLC via ProfiNET
     
