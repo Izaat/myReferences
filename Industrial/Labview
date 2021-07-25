@@ -168,6 +168,90 @@ CONTENTS
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 03. Plotting
+    
+    Example
+        Simulate the temperature in Air Heater system. 
+        The temperature in the air heater should be between 20 and 50 degree Celsius
+        Use Random Generator for this Example
+    Front Panel
+        Waveform chart
+        Low temp limit
+        Upper temp limit
+        Thermometer
+        Stop
+    Block Diagram Panel (While loop)
+        Random number (0-1)
+        Upper Temp Limit (UTL)
+        Lower Temp Limit (LTL)
+        Subtract Node (UTL - LTL)
+        Multiply Node (Rand * Substract)
+        Addition Node(Multiply + LTL)
+        Waveform Chart (Add)
+        Thermometer (Add)
+        Timer (Wait - ms) - 1000ms
+        Stop Button
+
+    Features of Waveform Chart
+        Renaming
+            Double Click on Vertical/Horizontal axis title
+            Title "Plot 0" can be changed by double clicking
+        Plotting timing syncing
+            The plotting of graph is totally different from the while loop timing
+            To readjust plot sampling time to sync with the block diagram time, readjust the multiplier
+            Right click > Scales Tab > Scaling factors > Multiplier       
+            Example: 
+                While loop wait time (ms): 2000ms
+                Therefore, Plot multiplier: 2
+        Right Click on title bar' title
+            Visible Items
+                Index Display
+                Vertical Scrollbar
+                Plot visibility checkbox
+            Properties
+        Right Click on title bar's icon
+            Plot Visible
+            Common Plots (Commonly used types of graph)
+            Graph's line styling
+                Color (Color of graph), Line Style (Style of graph), Line Width (Line thickness), Anti Aliased
+            Graph Type Selection
+                Bar Plots, Fill Base Line, Point Style, X/Y Scale
+        NOTE: X=Horizontal, Y=Vertical
+        Clear Chart
+            Right Click > Data operation > Clear chart
+        Historical Logs
+            Block Diagram Panel > Right Click on Waveform Chart Node > Create > Property Node > History Data
+                Place the node outside while loop border
+                Right Click on History Node and select "Change All to write"
+                Right Click on Input > Create > Constant = 0
+                Link the History Data Node output to the While Loop border
+            This will enables you to store data
+
+    Sampling rate Timer
+        Front Panel
+            Numeric Control
+        Block Diagram
+            Numeric Control Node (Placed outside while loop) - Linked to while loop border
+            Multiplier (While loop border, Constant), where the constant is 1000 since Timer is in ms and Numeric Control is in sec
+            Timer - Wait (ms)
+        Note: 
+            Remember to change the waveform chart's multiplier for every changes made
+            In order to automate the process, use the Historical Log Node
+        Block Diagram
+            Right Click on Waveform Chart Node > Create > Property Node > History Data
+            Place the node outside while loop border
+            Right Click on History Node and select "Change All to write"
+            Right Click on Input > Create > Constant = 0
+            Link the History Data Node output to the While Loop border
+            Drag down the box to extend the array ("History")
+            Right Click > Select Property > X Scale > Offset and Multiplier > Multiplier
+            Link the multiplier's input to the Sampling rate timer node's  output
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. SubVIs
+
+
+
+
 
 
 
