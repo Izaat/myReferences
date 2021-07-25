@@ -2264,6 +2264,60 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 33. Introduction to Redux
 
+    What is Redux
+        A central data storage for all app data
+        Any component can access data from it
+        Managing state components will be easier
+
+    Architecture of simple application
+        |
+        |                                  App.js
+        |                      |------------------------------|
+        |                   Blog                           Homepage
+        |         |------------------|                |-----------------|
+        |  Latest Blogs     Comments                Sidebar       Main Content
+        | (Latest post)                          (Latest post) 
+        |
+        Explanation:
+            In order to have the latest post to appear in both Sidebar and Latest Blog page,
+            one would pass in props and store data in both the class components, Blog and Homepage components
+            But this method is actually duplicating the data and is not the best practice as the solution.
+            The best solution is to use Redux, which is an external storage component, external to the app.
+            The storage component will then be shared between Class components and the UI components 
+            This will avoid unnecessary duplication of data.
+
+    Redux process
+    |                   
+    |                                                 Dispatch Action
+    |                                         /                               \
+    |                                        /                                 \
+    |                                       /                                   \
+    |                                      /                                     \
+    |                                     /                                       \
+    |                                    /                                         \
+    |                                   /                                           \
+    |                                  /                                             \
+    |     Component                   /                                               \            Action passed     
+    |    dispatches an               /                                                 \              to reducer
+    |   action (Addpost)            /                                                   \                   
+    |  Contains optional           /                                                     \                
+    |      payload                /                                                       \              
+    |                            /                                                         \            
+    |                           /                                                           \           
+    |                      Component ---->------------->----- REDUX ---->------------->----- Reducer
+    |                                       component                        reducer
+    |                                      subscribes                      updates the
+    |                                      to changes                     central state
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+34. Redux Stores
+
+
+
+
 
 
 
