@@ -7,7 +7,7 @@ CONTENT
 01. Manuals
 02. Configuration
 
-04. PLC Hardware overview
+
 05. Where are the PLC programs stored in the PC
 06. AND & OR Program
 07. AND & OR Program (Unintentional troubleshooting)
@@ -141,9 +141,17 @@ CONTENT
         To view the I/O, in program block window, click on "Monitoring on/off" icon in toolbar (icon with spectacle symbol)
         Green line mean current passes through, dashed blue lines means no current passes through
 
+    PLC Hardware overview
+        Top: 
+            Power input (L1, N, Gnd)
+            DC power output (L+, M) - where M is 0V
+            24DC Inputs (1M, .0, .1, etc) - where 1M is common (Link to 0V for PNP, Link to 24V for NPN)
+            Analog Input (2M, 0, 1)
+            Digital output (1L, 2L, .0, .1, ..., .5) - where 1L and 2L are commons
+            Profinet Port - For linking with the PC
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-04. PLC Hardware overview
+05. Where are the PLC programs stored in the PC
 
 
 
