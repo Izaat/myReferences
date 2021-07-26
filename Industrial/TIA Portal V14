@@ -149,6 +149,7 @@ CONTENT
 
      NOTE: If the program monitoring mode is not properly synced to the PLC
         In Device View tab, right click on PLC > Download to device > Hardware configuration
+        Once complete, Compile and download program to PLC        
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 06. AND & OR Program
