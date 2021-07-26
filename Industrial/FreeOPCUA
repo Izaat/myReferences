@@ -132,6 +132,75 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 03. Client
 
+    Writing a client code to write into the server
+    Using UAExpert to connect to server
+        https://www.unified-automation.com/products/development-tools/uaexpert.html
+    Download and install the free UAExpert software
+    Once installed, run the server code from Topic 2
+    Start UAExpert
+    Create a new project folder and name this folder as "OPCUAClient"
+    Create a new file and name this file as "client.py"
+        ../OPCUAClient/client.py
+        Note that ../OPCUAServer shares the same parent folder as ../OPCUAClient
+    
+    UAExpert Software
+        In main toolbar, click on the "+" icon to add server
+        Add server window will appear
+            Open "Advanced" tab
+            Server Information section
+                Endpoint Url: opc.tcp://192.168.0.8:4840
+        In Project Panel (Left hand side panel)
+            Project > Servers > Empty server >
+                Right click > Click on "Connect"
+                A folder tree will appear in the Address Space Panel 
+        Address Space
+            Root > Objects > Parameters >
+                Pressure
+                Temperature
+                Time
+            Drag and drop all the 3 subtrees (Pressure, Temperature, Time) into the Main viewport "Data Access View" tab
+            Take note of the Node IDs for the 3 variables
+                Pressure: NS2 |Numeric| 3
+                Temperature: NS2 |Numeric| 2
+                Time: NS2 |Numeric| 4
+
+    client.py
+        from opcua import Client
+        import time
+        
+        url = "opc.tcp://192.168.0.8:4840"        
+        client = Client(url)
+        client.connect()
+        print("Client connected")
+        
+        while True:
+            Temp = client.get_node("ns=2;i=2")
+            Temperature = Temp.get_value()
+            print(Temperature)
+
+            Press = client.get_node("ns=2;i=3")
+            Pressure = Press.get_value()
+            print(Pressure)
+
+            TIME = client.get_node("ns=2;i=4")
+            TIME_Value = TIME.get_value()
+            print(TIME_Value)
+
+            time.sleep(1)
+
+    Run client.py and compare with server.py
+    Both values on server.py and client.py should be in sync
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. RPi OPC Server
+
+
+
+
+
+
+
 
 
 
