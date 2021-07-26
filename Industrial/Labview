@@ -249,6 +249,67 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 04. SubVIs
 
+    SubVIs are the same as a function or a method used in other langugaes
+    Hundreds or thousands of SubVIs are included with Labview
+    SubVIs can be customized and created to your own needs
+    SubVIs can be reused in other programs that uses the same operation
+    Can also be used repeatedly in the same program
+    Maintaining and debugging programs with SubVIs are much easier
+    SubVI icons are located at the top right hand corner of Front Panel and Block Diagram Panel
+    SubVIs can also appear in the form of nodes in Block Diagram Panel and be linked to other nodes
+    
+    Create Celsius to Fahrenheit converter SubVI
+        Front Panel
+            Add Numeric Control
+            Add Numeric Indicator
+        Block Diagram Panel
+            Numeric Control Node
+            Add Division node (Constants [9, 5])
+            Add Multiply node (NumericControl, Division)
+            Add Addition node (Multiply, Constant[32])
+            Numeric Indicator Node (Addition)
+
+    Converting the program into SubVI
+        In front panel, at the top right hand corner, right click on the grid icon
+        Select 'pattern' and choose the one with one single vertical line in the center of square
+        This represents one input and one output
+        The left side of the square means input. 
+        The right side of the square means output
+        Left click on the left side of the SubVI square and then click the numeric control to link the 2 entities
+        Left click on the right side of the SubVI square and then click the numeric indicator to link the 2 entities
+        Both the section of the square should turn out green which means they are connected
+        Next to the pattern selection, double click on the icon image to open the property window
+        This enables you to change the icon image, texts, titles or any other SubVI properties
+        NOTE: In Icon Text Tab, note that the image on the right is actually a paintbrush. Cropping, drawing, adding texts can be done here
+        Once complete, the new image will appear as the new icon
+        Save as ConvertToFahr.vi
+
+    Using the new SubVI
+        Create a new VI
+        Front Panel
+            Add Vertical Fill Slide (Name this Celsius)
+            Add Dial Gauge (From Numeric silver) - Name this Fahrenheit
+        Block Diagram
+            Right click > Select VI > Browse through the folder where ConvertToFahr.vi was stored
+            Link the SubVI input to Control and SubVI output to indicator
+        Double click on the SubVI to open its own front panel, CTRL+E to open the block diagram
+        NOTE:
+            Add while loop to the main block diagram, NOT the SubVI's block diagram
+            The SubVI can also be duplicated as many times as you like according to the application
+            But in order to reuse the subvi, make sure to change the memory to preallocated memory
+            In SubVI Front Panel > Right Click on SubVI icon > VI Properties > Category: Execution > Reentrancy Section >
+                1. Non-reentrant execution - Only one of the duplicated node can run and shares data across all duplicated nodes
+                2. Shared clone reentrant execution - Sharing the memory between the duplicated SubVIs (Output will be first come first serve)
+                3. Preallocated clone reentrant execution - All duplicated nodes are different from each other
+            Usually select number 3 for duplicated nodes of different entity
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. Case Structures
+
+
+
 
 
 
