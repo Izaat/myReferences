@@ -36,6 +36,8 @@ CONTENTS
 32. Importing Images
 33. Introduction to Redux
 34. Redux Stores
+35. Redux Actions
+36. Redux Reducers
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2313,6 +2315,89 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 34. Redux Stores
+    
+    Role of the Reducers
+        There are many different type of reducers
+        The reducer gets the action from the "Dispatch Action" node
+        Only the reducer is able to update or retrieve the component in Redux and send back to the Dispatch action node
+
+    Use Codepen.io to test Redux functionality
+    In JS settings, make sure to include the following URLs
+        JS Preprocessor: Babel
+        https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.0-rc.1/redux.js
+        https://codepan.io/username/pen/aBcDef
+   
+    Code
+        const {createStore} = Redux;                //01. Get createStore from Redux library
+        
+        const initState = {                         //06. Create an initial state for the reducer to initialize with
+            todos: [],
+            posts: []
+        }
+        
+        //function myreducer(){                     //04. Creating a reducer function
+        //function myreducer(state){                //05. Create an initial state parameter for the store
+        function myreducer(state = initState){      //07. Adding the initState to the state parameter
+        
+        }
+        
+        //const store = createStore();              //02. Create a store from the 'createStore' and note that 'createStore' is a function
+        const store = createStore(myreducer);       //03. Adding a reducer to the 'store'. Note the reducers are functions that need to be created
+    
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+35. Redux Actions
+    
+    To edit the data in the store, a process needs to be achieved since they can't be edited directly
+    The process requires an action to be dispatched into the reducer
+    
+    Code
+        const {createStore} = Redux;   
+        
+        const initState = {       
+            todos: [],
+            posts: []
+        }
+        
+        //function myreducer(state = initState){ 
+        function myreducer(state = initState, action){           //01.  Creates an action, which is an object with a type property that describes the action
+            //console.log(action);                               //08. Prints out the action received
+            console.log(action, state);                          //09. Prints out the updated state array
+        }
+        
+        const store = createStore(myreducer);     
+
+        //const todoAction                                       //02. Create a new action variable to add in a new 'todos' into the initState
+        //const todoAction  = { }                                //03. Set as an object
+        //const todoAction  = {type: 'ADD_TODO'}                 //04. Set the object property
+        const todoAction  = {type: 'ADD_TODO', todo: 'buy milk'};           //05. Include the element to be added into the initState
+
+        //store.dispatch()                                       //06. This adds the dispatch for the action to be executed 
+        store.dispatch(todoAction)                               //07. Runs the action by adding the action name. We have the only action hence, todoAction 
+
+    Console Output
+        Object {                                                 //This will be the initialization stage where the arrays are empty
+            type: "@@redux/INITx.7.5.h.i.j"
+        } Object {
+            posts: [],
+            todos: []
+        }
+
+        Object {                                                //The second pass where the action runs
+            todo: "buy milk",
+            type: "ADD_TODO"
+        } Object {
+            posts: [],
+            todos: []
+        }
+    
+    NOTE: Another action is required to update the array
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+36. Redux Reducers
+
+
+
+
 
 
 
