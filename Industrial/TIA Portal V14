@@ -147,6 +147,9 @@ CONTENT
             Digital output (1L, 2L, .0, .1, ..., .5) - where 1L and 2L are commons
             Profinet Port - For linking with the PC
 
+     NOTE: If the program monitoring mode is not properly synced to the PLC
+        In Device View tab, right click on PLC > Download to device > Hardware configuration
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 06. AND & OR Program
 
