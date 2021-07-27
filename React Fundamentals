@@ -2349,6 +2349,7 @@ CONTENTS
     
     To edit the data in the store, a process needs to be achieved since they can't be edited directly
     The process requires an action to be dispatched into the reducer
+    Here, the code dispatches an action    
     
     Code
         const {createStore} = Redux;   
