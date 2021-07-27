@@ -7,7 +7,6 @@ CONTENT
 01. Manuals
 02. Configuration
 06. AND & OR Program
-07. AND & OR Program (Unintentional troubleshooting)
 08. Replacement input simulator
 09. 2 wire and 3 wire
 10. 2 wire control of conveyor
@@ -168,9 +167,29 @@ CONTENT
     Refer to PLC for details
     https://github.com/Izaat/references/blob/main/Industrial/PLC
 
+    Create a new project
+    Network 1:
+    |                                                       |
+    |  %I0.0        %I0.1                %Q0.0 |
+    |    PB1           PB2            Output 1 |
+    |----| |----------| |-----------------( )---|
+    |                                                       |
+    |    %I0.2                              %Q0.1  |
+    |    PB3                              Output 2 |
+    |-----| |---+------------------------( )----|
+    |               |
+    |   %I0.3   |
+    |    PB4     |
+    |----| |-----|
+    
+    Run program and download to device
+    Start monitoring
+    IF the monitoring is not synced with the PLC,
+        In Device View, Right click on the device > Download to device > Hardware configuration
+        Compile again and download to PLC again
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-07. AND & OR Program (Unintentional troubleshooting)
+08. Replacement input simulator
 
 
 
