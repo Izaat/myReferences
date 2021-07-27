@@ -39,6 +39,7 @@ CONTENTS
 35. Redux Actions
 36. Redux Reducers
 37. Store Subscriptions
+38. Setting up Redux in React
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -2430,22 +2431,111 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 37. Store Subscriptions
 
+    Subscribe to the store and reacting to the changes in the store
+    Normally this is done in a component
+    Since there is no component in Codepen.io, this code will just do a simple subscription
+    Then print out to console whenever there is a change
+    See the 12 points
+    
+    //////////////////
+    Code
+        const {createStore} = Redux;   
+        const initState = {       
+            todos: [],
+            posts: []
+        }
+        
+        function myreducer(state = initState, action){        
+            if (action.type == 'ADD_TODO'){      
+                return {                     
+                    ...state,                               //08. Add this line so it will process both todos and posts and the todos will be overwritten with the new element
+                    todos: [...state.todos, action.todo]    //07. Since there is no action for the posts array, the program deletes of the array 
+                }
+            }
+        }
+        
+        const store = createStore(myreducer);     
+        
+        //store.subscribe()                                  //01. This will be the function
+        //store.subscribe(() => {})                          //02. The function will take in parameter
+        store.subscribe(() => {                              //03. Function will run everytime there's change
+            console.log('state update');                     //04. Prints out "state updated" in console
+            console.log(store.getState());                   //05. Can't use initState since it's empty. Need to call "createStore(myReducer)" which was saved as "store"
+        })   
+        
+        const todoAction  = {type: 'ADD_TODO', todo: 'buy milk'};    
+        store.dispatch(todoAction)        
+
+        Console1:
+            "state updated"
+            Object {
+                todos: ["buy milk"]                           //06. The problem here is that the "posts:[]" wasn't printed out in the console
+            }
+
+        Console2:
+            "state updated"
+            Object {
+                posts: [],                                    //09. Notice the posts array is added
+                todos: ["buy milk"]             
+            }
+    
+    ////////////////////////////
+    Code (With multiple actions)
+        const {createStore} = Redux;   
+        const initState = {       
+            todos: [],
+            posts: []
+        }
+        
+        function myreducer(state = initState, action){        
+            if (action.type == 'ADD_TODO'){      
+                return {                     
+                    ...state,          
+                    todos: [...state.todos, action.todo]   
+                }
+            }
+            if (action.type == 'ADD_POST'){                     //12. This will be the action for post
+                return {                     
+                    ...state,          
+                    posts: [...state.posts, action.post]   
+                }
+            }
+        }
+        
+        const store = createStore(myreducer);     
+        store.subscribe(() => {                    
+            console.log('state update');     
+            console.log(store.getState());       
+        })   
+        
+        //const todoAction  = {type: 'ADD_TODO', todo: 'buy milk'};    
+        //store.dispatch(todoAction)        
+        store.dispatch({type: 'ADD_TODO', todo: 'buy milk1'});             //10. A direct dispatch instead of using 'todoAction'
+        store.dispatch({type: 'ADD_TODO', todo: 'buy milk2'});
+        store.dispatch({type: 'ADD_POST', post: 'buy milk3'});             //11. This will add an element to post array
 
 
+        Console:
+            "state updated"
+            Object {
+                posts: [],                   
+                todos: ["buy milk1"]             
+            }
 
+            "state updated"
+            Object {
+                posts: [],                   
+                todos: ["buy milk1", "buy milk2"]             
+            }
 
+            "state updated"
+            Object {
+                posts: ["buy milk3"],                   
+                todos: ["buy milk1", "buy milk2"]             
+            }
 
-
-
-
-
-
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+38. Setting up Redux in React
 
 
 
