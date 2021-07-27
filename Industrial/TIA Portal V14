@@ -6,8 +6,9 @@ Siemens TIA Portal V14
 CONTENT
 01. Manuals
 02. Configuration
-06. AND & OR Program
+03. AND & OR Program
 08. Replacement input simulator
+
 09. 2 wire and 3 wire
 10. 2 wire control of conveyor
 11. 3 wire control of conveyor
@@ -151,7 +152,7 @@ CONTENT
         Once complete, Compile and download program to PLC        
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-06. AND & OR Program
+03. AND & OR Program
     
     AND
     |  %I0.0        %I0.1                %Q0.0  |
