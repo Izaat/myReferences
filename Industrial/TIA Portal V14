@@ -7,9 +7,8 @@ CONTENT
 01. Manuals
 02. Configuration
 03. AND & OR Program
-08. Replacement input simulator
+04. 2 wire and 3 wire
 
-09. 2 wire and 3 wire
 10. 2 wire control of conveyor
 11. 3 wire control of conveyor
 12. Timers
@@ -190,8 +189,7 @@ CONTENT
         Compile again and download to PLC again
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-08. Replacement input simulator
-
+04. 2 wire and 3 wire
 
 
 
