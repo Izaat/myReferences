@@ -38,7 +38,7 @@ CONTENTS
 34. Redux Stores
 35. Redux Actions
 36. Redux Reducers
-
+37. Store Subscriptions
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -2395,6 +2395,42 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 36. Redux Reducers
+    
+    Make the reducer interact with the state and change the state
+
+    Code
+        const {createStore} = Redux;   
+        
+        const initState = {       
+            todos: [],
+            posts: []
+        }
+        
+        function myreducer(state = initState, action){        
+            //console.log(action, state);     
+            if (action.type == 'ADD_TODO'){                       //01. Perform an If-Check
+                return {                                          //02. If true, return a new state
+                    //todos: state.todos.push()                   //03. This directly changes the initState and destroys the initialization stage when loading up
+                    //todos: []                                   //04. Create a new todo array
+                    //todos: [state.todos]                        //05. Add in the current todo state into the array (Meaning duplicating the array)
+                    //todos: [...state.todos]                     //06. Spread the elements
+                    todos: [...state.todos, action.todo]          //07. Add the action as element (ie, "buy milk")
+                }
+            }
+        }
+        
+        const store = createStore(myreducer);     
+
+        const todoAction  = {type: 'ADD_TODO', todo: 'buy milk'};    
+
+        store.dispatch(todoAction)         
+
+    NOTE: The code here wont do anything at the moment unless React subscribes to changes in order to update the store
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+37. Store Subscriptions
+
+
 
 
 
