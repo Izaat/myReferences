@@ -304,9 +304,93 @@ CONTENTS
             Usually select number 3 for duplicated nodes of different entity
 
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 05. Case Structures
+
+    Case Structures work like If..Else statements
+    The box can be set as True/False
+    Case structures are good for generating Error messages or multiple program selection
+    
+    Simple Case Structure (True/False) - Two cases
+        Add Case Structure
+            Right click in Block Diagram Panel > Programming > Structures > Case Structure
+            Set as False
+            On left hand side of the border, there is a connector that can be connected to external nodes
+                Right click > Create Constant 
+                The constant can be toggled between True/False
+                Set as False
+        Add Dialog    
+            Right Click > Programming > Dialog Interface > One Btn Dialog
+            Place this in the Case Structure box
+            Dialog node Input:
+                Right click > Create > Constant
+                Add in "This is False"
+        Change Case Structure box to True
+            Add in another dialog node and set constant as "This is True"
+        Optional:
+            Add while loop to surround the Case structure
+            Add stop button to stop while loop
+            Add Wait timer and set constant to 5000ms (5sec)
+        Run Program
+        Explanation
+            When the Input constant is True, "This is True" will pop up
+            When the Input constant is False, "This is False" will pop up
+        You can also add in a latching button in place of the input constant
+            If button is pressed, then true. If button is off, then false
+            
+        Instead of using a latching button or constants to control the case structure, use numeric control instead
+            Set this numeric contol data type to integer 
+            Right click on node > Representation > I32
+            Note that the case structure now can be toggled between 0 and 1 instead of True and False
+            This can also be used for multiple case structures
+            
+    Case Structure with multiple cases
+        Use Numeric control to toggle between multiple case structures
+        Continued from the Simple Case structure above, right click on the case structure border
+            Add "Case After" or "Case Before" 
+        NOTE: 
+            If the value of the Numeric Control doesn't cover the available case structure (ie 0,1,2), Case Structure will revert to its default (0)
+            To set other pages as the default, change to the target page, right click and select "Make this the default case"
+        You can also use an Enumerator to control the case structure via string instead of using the Numeric Control
+            Right Click in Front Panel > Silver > Ring&Enum > Enum
+            Enter a text in the input box
+            To add another input, Right click > Add Item After > Add another text
+            Create multiple options
+            When clicked, a dropdown menu list will appear
+            In Block diagram, replace numerical control with the enumerator
+            Notice that in the case structure box, the name changes from integers to texts based on the enumerator
+            
+    Looping cases
+        Create Case structure
+        Create while loop around the case structure
+        Add Shift register  for while loop border
+            Link to the Case structure control node [?]
+        Add string constant and link to while loop's shift register
+            Right click > Programming > String > String constant
+            Name this to 'start'
+        Add stop button for while loop
+        Add Wait timer for while loop and set constant to 2 sec
+        Case 'Start' (Set as the default)
+            Add dialog box and add constant as 'Start'
+            Add String constant and name this to 'Next'
+            Link string constant to right side of case structure border
+            Link case structure border to right side of shift register
+        Case 'Next'
+            Add dialog box and add constant as 'Next'
+            Add String constant and name this to 'Start'
+            Link string constant to right side of case structure border
+            Link case structure border to right side of shift register
+        Run program
+            This will toggle between start and next whenever the button is pressed
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+06. Formula Node
+    
+    Use C language in Labview
+
+
+
+
 
 
 
