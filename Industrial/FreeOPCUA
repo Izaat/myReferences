@@ -195,6 +195,48 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 04. RPi OPC Server
 
+    Using RPi as server
+    Connect PC to RPi via ethernet
+    Use VNC Weaver software to connect to RPi and boot up RPi
+    Enter RPi terminal
+        Update: sudo apt-get update
+        Install libraries: sudo apt-get install libxml2-dev libxmlsec1-dev libffi-dev
+        Install cryptography: sudo pip3 install cryptography
+        Install FreeOPCUA: sudo pip3 install freeopcua
+        Once everything is installed, run python
+        Run python: python3
+            >>> from opcua import Client
+            Note: If it returns ">>>", then installation completed
+        Exit python: >>> exit
+        Check IP Address: ifconfig
+            Take note of the "eth0" IP Address 
+            Rpi: inet 169.254.1.93 netmask 255.255.0.0
+            PC: eth0 > 169.254.1.93
+        Copy paste server.py into RPi 
+            Change the IP address to eth0 IP address
+            Check: sudo nano server.py
+                //url = "opc.tcp://192.168.0.8:4840"     //Old IP
+                //url = "opc.tcp://169.254.1.93"           //New IP
+        Close server.py editor
+        Run server.py: python3 server.py
+        Once the program starts, open UAExpert in PC
+        
+    UAExpert
+        In main toolbar, click on '+' to add a server
+        In Add Server window, open Advanced Tab
+        In Server information section, change the endpoint url
+            Endpoint url: "opc.tcp://169.254.1.93"
+            Click OK
+        In Project Panel, Right click on empty server
+            Left Hand Panel > Project Tree > Project > Servers > Empty Server
+            Right click and select 'Connect'
+        Drag and drop the Parameter > Variables into the Data Access View tab
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. RPi OPC Server
+
+
+
 
 
 
