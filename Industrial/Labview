@@ -453,8 +453,31 @@ CONTENTS
             Need to have MATLAB Installed to your computer
             Works only with Windows
 
+    Simple VIs using MathScript Node
+        Block Diagram
+            Add MathScript Node
+                Right Click > Programming > Structures > MathScript
+                Borders share the same functions as Formula Node (Left Border for Input, Right Border for Output)
+            MathScript Code
+                x=0:10;
+                y=3*x+2;
+                plot(x,y)
+            Run program and a linear graph will appear
+
+    Simple VIs using MATLAB Node
+        Block Diagram
+            Add MATLAB Node
+                Right Click > Mathematics > Script & Formula > Script Node > MATLAB Script
+                Borders share the same functions as Formula Node (Left Border for Input, Right Border for Output)
+            MATLAB Script
+                x=0:10;
+                y=3*x+2;
+                plot(x,y)
+            Run program and MATLAB software will start to open the plot graph
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07. Arrays
 
 
 
