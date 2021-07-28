@@ -389,6 +389,73 @@ CONTENTS
 06. Formula Node
     
     Use C language in Labview
+    Useful for mathematical expressions and simulations in implementing discrete equations
+    Refer to Topic 4 for Celsius to Fahrenheit converter
+    For Formula node, the formula can just be input as Formula Node
+
+    Simple VI using formula node
+        Equation: Tf = (9/5)Tc + 32    
+        Front Panel
+            Numeric Control (Rename as "Tc")
+            Numeric Indicator (Rename as "Tf")
+        Block Diagram Panel
+            Formula node
+                Right click > Structures > Formula Node
+                Right click on left border > Add input
+                    Type the name "Tc"
+                Right click on right border > Add output
+                    Type the name "Tf"
+            Link up Numeric Control (Tc) to Tc connector
+            Link up Numeric Indicator (Tf) to Tf connector
+            Add formula into Formula Node
+                Tf = (Tc*9)/5 + 32;
+        Run program from the Front Panel
+            0C = 32F
+            25C = 77F
+
+    Simple VIs using Advanced formula node
+        Equation: f(x) = [(ln(ax^2+bx+c)) - (sin(ax^2 +bx +c))] / ((4*3.142*x^2) + cos(x-2)(ax^2+bx+c))
+        Given, 
+            a = 1
+            b = 3,
+            c = 5
+        Find f(9) //Answer should be 0.0044
+
+        Front Panel
+            Numerical Controls (a, b, c, x)
+            Numerical Indicator (f)
+        Block Diagram
+            Add Formula Node
+                Formula: 
+                    f = (ln(a*x*x + b*x + c) - sin(a*x*x + b*x + c)) / (4*pi*x*x + cos(x-2) * (a*x*x + b*x + c));
+            All Numerical controls (a, b, c, x) linked to Formula Node left border
+            Numerical Indicator (f) linked to right border
+
+    Alternative Solution
+        Front Panel
+            Numerical Controls (a, b, c, x)
+            Numerical Indicator (f)
+        Block Diagram
+            Add Formula Node
+                Formula: 
+                    g = a*x*x + b*x +c;
+                    f = (ln(g) - sin(g)) / (4*pi*x*x + cos(x-2) * (g));
+            All Numerical controls (a, b, c, x) linked to Formula Node left border
+            Numerical Indicator (f) linked to right border
+
+    LabView MathScript Node and LabView MATLAB Node
+        They use MATLAB Syntax
+        More powerful features regarding Arrays, Vectors and Matrices
+        MathScript:
+            Need to have LabView MathScript RT Module Installed
+            An add-on to LabView and it includes a lighter version of MATLAB
+        MATLAB Script Node:
+            Need to have MATLAB Installed to your computer
+            Works only with Windows
+
+
+
+
 
 
 
