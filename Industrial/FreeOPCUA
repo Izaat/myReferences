@@ -233,12 +233,35 @@ CONTENTS
         Drag and drop the Parameter > Variables into the Data Access View tab
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-04. RPi OPC Server
+05. RPi OPC Client
+    
+    Use VNC Viewer to view RPi
+    Using RPi as Client
+        Install simple UI-Client application to RPi to view the parameters in RPi
+            sudo apt-get install python3-pyqt5
+        Install OPCUA Client application
+            sudo pip3 install opcua-client
+    In Windows, run server.py
+        The IP Address is eth0 - ref to Topic 3
+    In RPi terminal, start client
+        opcua-client
+        An OPCUA Client window will open
+    OPCUA Client window
+        Change the "localhost" to IP Address
+        IP Address: opc.tcp://192.168.0.8:4840
+        Click on Connect
+        The node tree will appear in the list
+        Root > Objects > Parameters >
+            Pressure
+            Temperature
+            Time
+        The updated values will appear in the Attributes section 
+            Highlight the Parameters
+            Attribute Section > Attribute > Value > Value
+            Click on Refresh to see the updates
 
-
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+06. Changing Server values from client & controlling LEDs
 
 
 
