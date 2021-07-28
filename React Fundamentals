@@ -39,7 +39,8 @@ CONTENTS
 35. Redux Actions
 36. Redux Reducers
 37. Store Subscriptions
-38. Setting up Redux in React
+38. Setting up Redux in React       **Installation required "npm install redux react-redux"
+39. Mapping State to Props
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -2536,43 +2537,43 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 38. Setting up Redux in React
+    
+    Install Redux store and React Redux
+        npm install redux react-redux
+    Create Redux store in Index.js
+    Create a new folder "reducers" under ../src/ and add in a file  "rootReducer.js"
+    Read 9 points
+    
+    Index.js
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import './index.css';
+        import App from './App';
+        import registerServiceWorker from './registerServiceWorker';
+        import {createStore} from 'redux';                                                                  //01. Import the Redux store creator function
+        import {Provider} from 'react-redux';                                                               //03. Import component that enables React to interact with Redux. 
+        import rootReducer from './reducers/rootReducer'                                                    //08. import rootReducer file into Index.js
+        
+        //const store = createStore();                                                                      //02. Create the store variable                    
+        const store = createStore(rootReducer);                                                             //09. Setting the rootReducer to interact with the store
+        
+        //ReactDOM.render(<App />, document.getElementById('root')); 
+        //ReactDOM.render(<Provider></Provider><App />, document.getElementById('root'));                   //04. The provider will wrap the <App/> component
+        ReactDOM.render(<Provider store={store}></Provider><App />, document.getElementById('root'));       //05. Pass the store into the Provider together with <App/>
+        registerServiceWorker();
 
+    rootReducer.js
+        const initState = {                                                         //07. State initialization
+            posts: []
+        }
+        const rootReducer = (state = initState, action) => {
+            return state;                                                           //06. This will just return a state and do nothing
+        }
 
+        export default rootReducer
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+39. Mapping State to Props
 
 
 
