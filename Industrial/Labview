@@ -257,8 +257,10 @@ CONTENTS
     Maintaining and debugging programs with SubVIs are much easier
     SubVI icons are located at the top right hand corner of Front Panel and Block Diagram Panel
     SubVIs can also appear in the form of nodes in Block Diagram Panel and be linked to other nodes
-    
+
+
     Create Celsius to Fahrenheit converter SubVI
+        Equation: T(F) = 9/5 T(C) + 32    
         Front Panel
             Add Numeric Control
             Add Numeric Indicator
