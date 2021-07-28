@@ -7,10 +7,8 @@ CONTENT
 01. Manuals
 02. Configuration
 03. AND & OR Program
-04. 2 wire and 3 wire
+04. Counters and Timers
 
-10. 2 wire control of conveyor
-11. 3 wire control of conveyor
 12. Timers
 13. TON and TOF
 14. ON Delay TON Timer
@@ -169,16 +167,16 @@ CONTENT
 
     Create a new project
     Network 1:
-    |                                                       |
-    |  %I0.0        %I0.1                %Q0.0 |
-    |    PB1           PB2            Output 1 |
-    |----| |----------| |-----------------( )---|
-    |                                                       |
+    |                                              |
+    |  %I0.0          %I0.1                %Q0.0   |
+    |    PB1           PB2               Output 1  |
+    |----| |----------| |-------------------( )----|
+    |                                              |
     |    %I0.2                              %Q0.1  |
     |    PB3                              Output 2 |
-    |-----| |---+------------------------( )----|
-    |               |
-    |   %I0.3   |
+    |-----| |----+--------------------------( )----|
+    |            |
+    |   %I0.3    |
     |    PB4     |
     |----| |-----|
     
@@ -188,8 +186,16 @@ CONTENT
         In Device View, Right click on the device > Download to device > Hardware configuration
         Compile again and download to PLC again
 
+    Note:
+        2 Wire = Nonlatching rung
+        3 Wire = Latching rung
+    Tags can also be renamed in Tags List page
+    Open Tags List Page
+        Project Panel > Decives Tab > Project > PLC > PLC Tags > Show all tags
+        
+        
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-04. 2 wire and 3 wire
+04. Counters and Timers
 
 
 
