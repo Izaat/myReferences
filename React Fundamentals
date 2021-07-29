@@ -41,6 +41,7 @@ CONTENTS
 37. Store Subscriptions
 38. Setting up Redux in React       **Installation required "npm install redux react-redux"
 39. Mapping State to Props
+40. Blog Detail Page
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -2574,6 +2575,113 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 39. Mapping State to Props
+
+    Connect components to the store and get data from the state
+    Read all 17 points
+
+    Index.js
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import './index.css';
+        import App from './App';
+        import registerServiceWorker from './registerServiceWorker';
+        import {createStore} from 'redux';                                    
+        import {Provider} from 'react-redux';                                   
+        import rootReducer from './reducers/rootReducer'        
+  
+        const store = createStore(rootReducer);       
+        ReactDOM.render(<Provider store={store}></Provider><App />, document.getElementById('root'));   
+        registerServiceWorker();
+
+    rootReducer.js
+        const initState = {        
+            //posts: []                                                                       //01. Add in dummy datas containing 'id' and 'body'
+            posts: [                                                                          //02. To show the data, use React-Redux instead of Axios, refer to topic 28 for Axios, home.js
+                {id: '1', title: 'Squirtle', body: 'turtle turtle turtle turtle'},
+                {id: '2', title: 'Charmander', body: 'dinosaur dinosaur dinosaur dinosaur'},
+                {id: '3', title: 'Pikachu', body: 'squirrel squirrel squirrel squirrel'}
+            ]
+        }
+        const rootReducer = (state = initState, action) => {
+            return state;                 
+        }
+
+        export default rootReducer
+
+    Home.js   (CODE - Taken from Topic 32)
+        import React, {Component} from 'react' 
+        //import axios from 'axios'                                                           //03. Axios not required anymore for rootReducer but will be using React-Redux
+        import {Link} from 'react-router-dom'     
+        import YoutubeLogo from '../image000.png'       
+        import {connect} from 'react-redux'                                                   //06. Importing React-Redux method
+        
+        class Home extends Component {    
+            //state = {                                                                       //04. Now will be using state from rootReducer.js
+            //    posts:[]                     
+            //}        
+            componentDidMount(){                                   
+                //axios.get('https://jsonplaceholder.typicode.com/posts')                     //05. Now will be using axios for rootReducer.js
+                //    .then(res => {
+                //        console.log(res)                                   
+                //        this.setState({
+                //            posts: res.data.slice(0, 10)     
+                //        })
+                //    })
+                axios.get('https://jsonplaceholder.typicode.com/posts')  
+                    .then(res => {
+                        console.log(res)                                   
+                        this.setState({
+                            posts: res.data.slice(0, 10)     
+                        })
+                    })                
+            }
+            render () {               
+                console.log(this.props)                                                        //15. To check the props if it is functioning
+                //const {posts} = this.state;                                                  //16. The state in Home.js no longer exist
+                const {posts} = this.props;                                                    //17. Grabs the props instead of the state
+                const postList = posts.length ? (
+                    posts.map(post => {  
+                        return (                     
+                            <div className="post card" key={post.id}>           
+                                <img src={YoutubeLogo} alt="A YoutubeLogo" />      
+                                <div className="card-content">
+                                    <Link to={'/' + post.id}>
+                                        <span className="card-title red-text">{post.title}</span>   
+                                    </Link>    
+                                    <p>{post.body}</p>                                  
+                                </div>
+                            </div>
+                        )
+                    }) 
+                ) : (
+                    <div className="center">No posts yet</div>            
+                )            
+                return (
+                    <div className="container home">    
+                        <h4 className="center">Home</h4>
+                        {postList}             
+                    </div>
+                )            
+            }
+        }
+        
+        //const mapStateToProps = () => {}                                            //10a. Based on the redux process (Topic 33), in order for a component to retrieve data,     
+        //                                                                            //10b. the component will be mapped as a prop
+        //const mapStateToProps = (state) => {}                                       //11. This will give access to the states of the store
+        const mapStateToProps = (state) => { 
+            return(                                                                   //12. Retrieve elements in the store's state and attach them to props
+                posts: state.posts                                                    //13. Retrieving the data from rootReducer.js's state "state.posts" and then applying it to the "posts:" in home.js
+            )
+        }
+        //export default Home                                                         //07. Using higher order component
+        //export default connect(Home)                                                //08. Higher order component is the imported "connect" and then wrap it around the component which is "Home"          
+        //export default connect()(Home)                                              //09. Note that connect is also a function
+        export default connect(mapStateToProps)(Home)                                 //14. Pass in the retrieval function into connect function (The higher order component)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+40. Blog Detail Page
+
+
 
 
 
