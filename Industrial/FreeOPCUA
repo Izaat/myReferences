@@ -264,6 +264,178 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 06. Changing Server values from client & controlling LEDs
 
+    Change Server's values and variables from the Client
+    After retrieving the Server data, LEDs will controlled
+    Server will be hosted on RPi and with LED connected
+    Client will be the PC
+    
+    PART 1
+    /////////////////////////////////////////
+    /////////////////////////////////////////
+    Start Thonny Python IDE in Rpi
+    server.py
+        from opcua import Server
+        import RPi.GPIO as GPIO
+        import time
+
+        server = Server()
+        url = "opc.tcp://192.168.0.106:4840"
+        server.set_endpoint(url)
+        
+        name = "OPCUA_SERVER"
+        addspace = server.register_namespace(name)
+        
+        node = server.get_objects_node()
+        param = node.add_object(addspace, "parameters")
+        
+        var = param.add_variable(addspace, "VARIABLE", 10)    //Add 10 to the variable and this value will be changed from Client side
+        var.set_writable()
+        
+        server.start()
+        
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(18, GPIO.OUT)           //Set pin 18 as output
+
+        while True:
+            t = var.get_value()                    //Get the value "10" from variable
+            print("Value is {}".format(t))    
+            time.sleep(1)
+
+    Start VSCode and create a python file
+    Remember to install the components to the project
+    clientApp.py
+        from opcua import Client
+        
+        url = "opc.tcp://192.168.0.106:4840"
+        client = Client(url)
+        client.connect()
+
+        var = client.get_node("ns=2;i=2")
+        print("Initial value: {}".format(var.get_value()))
+
+    Start the server code
+        sudo python3 server.py
+        Note: The terminal will keep on printing "10"
+    Start client code
+        "10" will be printed out in the console
+
+
+    PART 2
+    /////////////////////////////////////////
+    /////////////////////////////////////////
+    server.py
+        from opcua import Server
+        import RPi.GPIO as GPIO
+        import time
+
+        server = Server()
+        url = "opc.tcp://192.168.0.106:4840"
+        server.set_endpoint(url)
+        
+        name = "OPCUA_SERVER"
+        addspace = server.register_namespace(name)
+        
+        node = server.get_objects_node()
+        param = node.add_object(addspace, "parameters")
+        
+        var = param.add_variable(addspace, "VARIABLE", 10) 
+        var.set_writable()
+        
+        server.start()
+        
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(18, GPIO.OUT)        
+
+        while True:
+            t = var.get_value()         
+            print("Value is {}".format(t))    
+            time.sleep(1)
+
+    clientApp.py
+        from opcua import Client
+        
+        url = "opc.tcp://192.168.0.106:4840"
+        client = Client(url)
+        client.connect()
+
+        var = client.get_node("ns=2;i=2")
+        print("Initial value: {}".format(var.get_value())) 
+        
+        var.set_value(0)                                                                  //This will change the value in server
+
+    Start the server code
+        sudo python3 server.py
+        Note: The terminal will keep on printing "10"
+    Start client code
+        "10" will be printed out in the console
+        But 0 will be printed out in server side
+        Change value from 0 to 1 and run the client again
+        This time 0 will be printed out as initial value and 1 will be printed out in server side
+
+    PART 3 (Controlling the LED from the client)
+    /////////////////////////////////////////
+    /////////////////////////////////////////
+    server.py
+        from opcua import Server
+        import RPi.GPIO as GPIO
+        import time
+
+        server = Server()
+        url = "opc.tcp://192.168.0.106:4840"
+        server.set_endpoint(url)
+        
+        name = "OPCUA_SERVER"
+        addspace = server.register_namespace(name)
+        
+        node = server.get_objects_node()
+        param = node.add_object(addspace, "parameters")
+        
+        var = param.add_variable(addspace, "VARIABLE", 10) 
+        var.set_writable()
+        
+        server.start()
+        
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(18, GPIO.OUT)        
+
+        while True:
+            t = var.get_value()         
+            //print("Value is {}".format(t))    
+            if t == 1:
+                GPIO.output(18, GPIO.HIGH)
+                print("LED is ON")
+            elif t == 0:
+                GPIO.output(18, GPIO.LOW)
+                print("LED is OFF")                
+            time.sleep(1)
+
+    clientApp.py
+        from opcua import Client
+        
+        url = "opc.tcp://192.168.0.106:4840"
+        client = Client(url)
+        client.connect()
+
+        var = client.get_node("ns=2;i=2")        
+        var.set_value(0)                                    //This will control the LED, 1=ON, 0=OFF
+
+    Start the server code
+        sudo python3 server.py
+        Note: The terminal will keep on printing "LED IS ON"
+    Start client code
+        Change the "var.set_value" to 1 or 0 and then run code 
+        This will control the LED
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07. OPC-UA Server Security with Username and Password (Part 1)
+
+
+
+
+
+
+
 
 
 
