@@ -7,9 +7,9 @@ CONTENT
 01. Manuals
 02. Configuration
 03. AND & OR Program
-04. Counters and Timers
+04. Connecting to Factory IO
+05. Counters and Timers
 
-12. Timers
 13. TON and TOF
 14. ON Delay TON Timer
 15. Off delay TOF Timer
@@ -195,7 +195,47 @@ CONTENT
         
         
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-04. Counters and Timers
+04. Connecting to Factory IO
+
+    Factory IO
+        Setup the machine
+        Connection
+            File > Drivers > Drop down menu > Select Siemens S7-1200/1500
+                NOTE: Advantech USB4704/4750 for other types of PLC (ie Mitsubishi)
+            Click on "Connect" (A green check mark will appear if successful)
+        Setup the I/O in Factory IO's mockup PLC    
+            Drag and drop the IOs
+            
+    In TIA Portal
+        Create a project
+        Before downloading to PLC, Open Device View Tab > Double click on the PLC
+            A bottom panel will appear with tabs [General, IO Tags, System constants, Texts]
+            In General Tab > Protection & Security > 
+                Access Level Section: Make sure the "Full Access" checkbox is ticked
+                Connection Mechanisms Section: Make sure "Permit access with PUT/GET" is ticked
+            In General Tab > DI 8/DQ 6 > I/O Addresses >
+                Input Addresses Section: Make sure the "Start Address" is set to 10
+                NOTE: The addressing in Device View tab will change from %I0.0 to %I10.0
+        Downloading to Device
+            In Device View Tab > Right Click on PLC > Select "Download to Device" > Select "Hardware configuration"
+            In Main Tool bar, click on "Download to PLC"
+        Enter "Monitoring Mode"
+
+    Factory IO
+        Head back to the Driver section
+            File > Driver
+            Click on "connect" if disconnected
+            Click on "Back" to return to main screen
+            Click on "Play"
+            Click on the Machine "Start" button to start machine
+        The Factory IO's animation will be synced to the PLC program     
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. Counters and Timers
+
+
+
+
 
 
 
