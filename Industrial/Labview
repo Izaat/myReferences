@@ -479,19 +479,97 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 07. Arrays
 
+    Front Panel
+        Add Array Node
+            Right click > Silver > Array, Matrix, Clusters > Array
+        Define Data Type for Array
+            Add Numeric Control 
+            Drag and Drop into the empty array box
+        Create Array
+            Drag the Array box downwards 
+            This will automatically duplicate the Numeric Control as Array elements
+            Key in the values and the data will be stored even when the array box is minimized
+            Note that the transparent array represents unused elements
+        Explanation
+            The Left Input box represents Index Number
+            The Right Input box represents Stored Value
+        Data Types
+            Integer: Right click > Silver > Array, Matrix, Clusters > Array
+            String: Right click > Silver > String, Path > String Control
+            Boolean: Right click > Silver > Boolean > Push Button
 
+    Finding the average value of elements in the array
+        Front Panel
+            Add Array Node
+            Add Numeric Control to Array Node
+            Key in Multiple values into the Array
+        Block Diagram Panel
+            Add Mean Node
+                Right Click > Mathematics > Probability/Statistics > Mean
+                Link Output of Array Node to Input of Mean Node
+            Add indicator
+                Right click on output of mean node > Create > Indicator
+        Run program and the Mean value will show in the indicator
 
+    Mathematical operators
+        Front Panel
+            Add Array Node
+            Add Numeric Control to Array Node
+            Key in Multiple values into the Array
+            Duplicate the Array Node
+        Block Diagram Panel
+            Add mathematical operator
+                Right Click > Mathematics > Numeric > Add
+            Add Indicator
+                Right click on Add Operator > Create > Indicator
+        Run program
 
+    2D Array
+        Front Panel
+            Instead of extending the element box, extend the index box downwards
+            Extend the element box horizontally to show the elements of both dimensions
+        Block Diagram
+            Add Array Size 
+                Right Click > Programming > Array > Array Size
+                Link the input of Array Size with the output of Array
+            Add Indicator
+                Right Click on output of Array Size > Create > Indicator
+        Run program
+        Answer: 
+            (Row by
+            Column)
+            
+    Also Try:
+        Index Array: Output the value of selected array to indicator (Using constant as the indexer for the input) - Single array
+        Delete Array: Output a new array after deleting to indicator (Using index number as constant for input to select the array to be deleted) - Single Array
+        Build Array (Combine): Output a combined array to indicator (The node can be extended downwards to add more inputs for multiple arrays) - For 2 separate 1D arrays
+            Example: (15,1) + (3,1) = (15,2)
+        Transpose 2D Array: With Build Array setup, extend the input of Build Array Node to the input of Transposed Array Node - For 2 separate 1D arrays
+            This generally switches horizontal array to vertical and vice versa
+            Example: (15,1) => (1, 15)
+        Build Array (Concatenate): Right click and select "Concatenate" option. This will form a single array from 2 separate ones. 
+            Example: (15,1) + (3,1) = (17,1)
+        Search 1D Array: For String Arrays. This searches and count the matches in the entire array. Constant input will be the target. Output will be number of matches.
 
+    Using Array with For Loops
+        Front Panel
+            Add 1D Array of random numbers
+        Block Diagram
+            Add For Loop box
+            With Array node outside For Loop box, Link Array output to Left Border
+            Add Indicator inside the Loop box and link indicator input to left border
+            Add timer with 2000ms
+        Run Program 
+            The indicator will run though array and show its values every 2 seconds
+        Also Try:
+            Adding math operators into the for loop to calculate individual array values and then output answers to indicator
+            OR
+            With the Math operator, link the output to right border and then right click on connection node to create external array indicator
+                Remove the timer and Extend the array box to show all the elements
+                Run program and this will store the calculated values as another array
 
-
-
-
-
-
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+08. Clusters
 
 
 
