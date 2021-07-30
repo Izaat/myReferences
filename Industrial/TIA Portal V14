@@ -241,6 +241,7 @@ CONTENT
     To add the timers, click on the arrow (Located on the top right hand corner) to open up a hidden menu "Instructions"
         Instructions > Basic Instructions > Timer / Counter / Comparator
         Drag and drop the blue colored blocks
+        Note: You can toggle between blocks (ie TON to TOF) by clicking on orange triangle at the top corner of the block        
         Timer:
             TP: Pulse Timer
             TON: ON Delay
