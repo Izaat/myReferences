@@ -15,11 +15,9 @@ CONTENTS
 04. RPi OPC Server
 05. RPi OPC Client
 06. Changing Server values from client & controlling LEDs
-07. OPC-UA Server Security with Username and Password (Part 1)
-08. OPC-UA Server Security with Username and Password (Part 2)
-09. OPC-UA Server Security with Username and Password (Part 3)
-10. Designing IOT Dashboard for OPCUA Client, Server
-11. Control S7-1200 with IoT2040 via node-red, ubidots
+07. OPC-UA Server Security with Username and Password
+09. Designing IOT Dashboard for OPCUA Client, Server
+10. Control S7-1200 with IoT2040 - node-red, ubidots
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Installation
@@ -428,25 +426,53 @@ CONTENTS
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-07. OPC-UA Server Security with Username and Password (Part 1)
+07. OPC-UA Server Security with Username and Password
+    
+    Adding Username and Password to access Server
+    Generic OPC UA Connection
+        Server  <------>  Client
+    OPC UA with Security Layer
+        Server <----> Security Layer (Server) <----> Security Layer (Client) <----> Client
 
+    
+    Server.py
+        from opcua import server
+        import time
+        from random import randint
+        
+        server = Server()
+        url = "opc.tcp://192.168.0.102:4841"
+        server.set_endpoint(url)
+        
+        name = "OPC UA SIMULATION SERVER"
+        add_space = server.register_namespace(name)
+        
+        node = server.get_objects_node()
+        param = node.add_object(add_space, "PARAMETERS")
+        
+        temp = param.add_variable(add_space, "Temperature", 0)
+        temp.set_writable()
+        server.start()
+        print("Server started at {}".format(url))
 
+        while True:
+            temperature = randint(10, 50)
+            temp.set_value(temperature)
+            time.sleep(1)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    Client.py
+        from opcua import Client
+        import time
+        
+        url = "opc.tcp://192.168.0.102:4841"
+        client = Client(url)
+        client.connect()
+        
+        while True:
+            temp = client.get_node("ns=2;i=2")
+            temp_value = temp.get_value()
+            print("Temperature is {}".format(temp_value))
+            time.sleep(1)
 
 
 
