@@ -2662,9 +2662,9 @@ CONTENTS
         //                                                                            //10b. the component will be mapped as a prop
         //const mapStateToProps = (state) => {}                                       //11. This will give access to the states of the store
         const mapStateToProps = (state) => { 
-            return(                                                                   //12. Retrieve elements in the store's state and attach them to props
+            return{                                                                   //12. Retrieve elements in the store's state and attach them to props
                 posts: state.posts                                                    //13. Retrieving the data from rootReducer.js's state "state.posts" and then applying it to the "posts:" in home.js
-            )
+            }
         }
         //export default Home                                                         //07. Using higher order component
         //export default connect(Home)                                                //08. Higher order component is the imported "connect" and then wrap it around the component which is "Home"          
