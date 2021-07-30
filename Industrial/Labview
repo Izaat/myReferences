@@ -569,6 +569,104 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 08. Clusters
 
+    A grouped data elements of mixed types, and handy to use when you want to structure a data into a manageable package
+    Similar to "struct", "record" and "miniature" class in other programming languages
+    
+    Front Panel > Right Click > Modern > Array/Matrix/Cluster > Cluster
+        Numeric Control, Strings and Boolean can be added
+    Block Diagram Panel > Right Click > Programming > Cluster/Class/Variant > 
+        Example: Manipulating a data that consist of Name (String), Age (Integer), Employed (Boolean) and Company Name (String)        
+        Unbundle by name                           //Separating every Strings, Boolean, Integers from the data
+        Bundle by name                               //Opposite of Unbundle by name
+        Unbundle                                          //Same functionality as Unbundle by Name except that the Node shows the data types instead of Names
+        Bundle                                              //Same functionality as Bundle by Name
+        BundleCluster constant
+        Build Cluster Array
+        Index & Bundle cluster Array
+        Cluster to Array
+        Array to Cluster
+        Error In                                          //Similar to Bundle Cluster into Array but for errors,  when activated will show the error number and message
+        Error Out                                       //Similar to Bundle Cluster into Array but for errors,  when activated will show the error number and message
+
+    Unbundle by Name/Unbundle
+        Front Panel
+            Add Cluster (Name as Books)
+                Right Click > Silver > Array/Matrix/Cluster > Cluster
+            Add String Control into Cluster Box (Name as Title)
+            Add String Control into Cluster Box (Name as Author)
+            Add Numerical Control into Cluster Box (Name as Year)
+            Add Boolean button (Name as Sale)
+            Add a book name to the inputs
+            To reorder the inputs, right click on the box and select "Reorder Controls"
+                Black box = New order, White box = Current order
+                This changes the order of the node in Block Diagram
+        Block Diagram
+            Add Unbundle by Name
+                Right Click > Programming > Cluster/Class/Variant > Unbundle by Name
+                Link input to the output of Books Node
+                Drag the Unbundle by Name Node to extend the output
+                Title, Author, Year and Sale will be shown
+            Add indicator
+                Right click on any of the 4 output > Create > Indicator
+        Run Program and the answer will be shown in the front panel
+            Title: "Title of the book" 
+
+    Bundle by Name/Bundle
+        Continued from Unbundle by Name
+        This is similar to Unbundle
+        The input will be the individual control nodes and the output indicator will be the cluster node
+        Block Diagram Panel
+            To show the input title, right click on Cluster input node (From Front Panel) and create a constant
+            Place the constant into the Bundle by Name node (This will show the input names) - Make sure the String, Boolean and Integer are within the blue box
+            Right click on the Cluster input node again and change this into indicator and link input to the output of Bundle by Name node
+            Change the indicators into control and link the output to the input of the Bundle by Name node
+            
+    Bundle Cluster into Array
+        Continued from Unbundle by Name
+        Front Panel
+            Add Array
+            Drag and Drop entire Cluster box into the Array box
+            Now you will have an array of books by titles, author, year and sale
+        Block Diagram   
+            Create a For Loop
+            With the Array outside the For Loop, link the output to the left border of For Loop
+            Add Unbundle by Name into the For Loop and link input to the left border (Array connection)
+            Move all indicators into the For Loop
+            Link indicators input to the output of the Unbundle by Name
+            Add Timer (Wait) to the For Loop (Set to 2 seconds)
+        Run Program
+            The output will scroll through all the books in the array every 2 seconds
+
+    Error In / Error Out
+        Front Panel
+            Add in Error In and Error Out
+                Right Click > Silver > Array/Matrix/Cluster > Error In
+                Right Click > Silver > Array/Matrix/Cluster > Error Out
+                Note: Right click on Error in Node in BDPanel, link to Unbundle by Name and add Indicator, this will show the status
+        Block Diagram Panel
+            Add Open File IO
+                Right Click > File IO > Open/Create/Replace File
+                Right Click > File IO > Close File
+                Right Click > File IO > Read Text File
+                Link OpenFile Error Output to ReadFile Error Input
+                Link ReadFile Error Output to CloseFile Error Input
+                Link Output of Error In Node to OpenFile Error Input
+                Link Input of Error Out to CloseFile Error Output
+            Add Case Structure
+                Link Output of CloseFile to the left border of Case Structure
+                Notice the Error and No Error header
+            Add One Btn Dialog
+                Right Click > Dialog Interface > One Btn Dialog
+                Place the node into Case Structure node
+                Add Text constant
+                If there is error in closing a file, a popup box will appear
+                
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+09. Property Nodes
+
+
+
+
 
 
 
