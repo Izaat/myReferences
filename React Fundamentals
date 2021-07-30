@@ -2796,11 +2796,11 @@ CONTENTS
 
     Post.js (CODE from Topic 30)
         import React, {Component} from 'react';
-        //import axios from 'axios'                                                                           //01. No longer needed since will be using Redux Store
-        import {connect} from 'react-redux'                                                             //03. Adding the connect function      
+        //import axios from 'axios'                                             //01. No longer needed since will be using Redux Store
+        import {connect} from 'react-redux'                                     //03. Adding the connect function      
         
         class Post extends Component {
-            //state = {                                                                                                  //02. No longer needed since will be using Redux Store
+            //state = {                                                         //02. No longer needed since will be using Redux Store
             //    post: null            
             //}
             //componentDidMount(){
