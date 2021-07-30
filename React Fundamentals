@@ -39,7 +39,7 @@ CONTENTS
 35. Redux Actions
 36. Redux Reducers
 37. Store Subscriptions
-38. Setting up Redux in React       **Installation required "npm install redux react-redux"
+38. Setting up Redux in React       **Installation required "npm install redux react-redux", and registerServiceWorker.js
 39. Mapping State to Props
 40. Blog Detail Page
 
