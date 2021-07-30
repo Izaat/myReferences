@@ -2559,7 +2559,7 @@ CONTENTS
         const store = createStore(rootReducer);                                                             //09. Setting the rootReducer to interact with the store
         
         //ReactDOM.render(<App />, document.getElementById('root')); 
-        //ReactDOM.render(<Provider></Provider><App />, document.getElementById('root'));                   //04. The provider will wrap the <App/> component
+        //ReactDOM.render(<Provider><App /></Provider>, document.getElementById('root'));                   //04. The provider will wrap the <App/> component
         ReactDOM.render(<Provider store={store}></Provider><App />, document.getElementById('root'));       //05. Pass the store into the Provider together with <App/>
         registerServiceWorker();
 
@@ -2590,7 +2590,7 @@ CONTENTS
         import rootReducer from './reducers/rootReducer'        
   
         const store = createStore(rootReducer);       
-        ReactDOM.render(<Provider store={store}></Provider><App />, document.getElementById('root'));   
+        ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));   
         registerServiceWorker();
 
     rootReducer.js
