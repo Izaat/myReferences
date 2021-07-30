@@ -42,6 +42,7 @@ CONTENTS
 38. Setting up Redux in React       **Installation required "npm install redux react-redux", and registerServiceWorker.js
 39. Mapping State to Props
 40. Blog Detail Page
+41. Map Dispatch To Props
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -2786,6 +2787,77 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 40. Blog Detail Page
+
+    If one of the cards is clicked, a dummy content will appear
+    Instead of getting a dummy content (json fake RestAPIs), the code below will receive the content from the state via redux store
+    In ../src/component/Post.js, the dummy content appears using "Axios" to get the post and the IDs and the IDs are still associated with the URLs
+    By connecting the components to the Redux Store, the components will get the individual post/data/record/content and show that in the page insteaad of the dummy
+    Read 16 points
+
+    Post.js (CODE from Topic 30)
+        import React, {Component} from 'react';
+        //import axios from 'axios'                                                                           //01. No longer needed since will be using Redux Store
+        import {connect} from 'react-redux'                                                             //03. Adding the connect function      
+        
+        class Post extends Component {
+            //state = {                                                                                                  //02. No longer needed since will be using Redux Store
+            //    post: null            
+            //}
+            //componentDidMount(){
+            //    let id = this.props.match.params.post_id;   
+            //    axios.get('https://jsonplaceholder.typicode.com/posts/' + id) 
+            //        .then(res => {
+            //            this.setState({  
+            //                post: res.data 
+            //            })                        
+            //        })
+            //}
+            render() {
+                //const post = this.state.post ? (                                //14. No longer using state since it is attached as props now
+                const post = this.props.post ? (
+                    <div className="post">
+                        //<h4 className="center">{this.state.post.title}</h4>     //15. No longer using state since it is attached as props now
+                        <h4 className="center">{this.props.post.title}</h4> 
+                        //<p>{this.state.post.body}</p>                           //16. No longer using state since it is attached as props now
+                        <p>{this.props.post.body}</p>  
+                    </div>  
+                ) : (
+                    <div className="center">Loading post...</div> 
+                )   
+                return (
+                    <div className="container">
+                        <h4>{post}</h4>      
+                    </div>
+                )
+            }
+        }
+        
+        //const mapStateToProps = (state) => {                      //05. Create the function that maps the state into props
+        const mapStateToProps = (state, ownProps) => {              //06. Grabs the single individual record via ownProps where ownProps refers to the Post component before attaching additional props from Redux Store
+            //let id = ownProps.match.params;                       //07. Gets the information about the route parameters
+            let id = ownProps.match.params.post_id;                 //08. The route parameter is called post_id as mentioned in App.js ("/:post_id") and store it as "id" variable
+            return {                                                //09. After getting the post_id, return the individual post
+                //post: state                                       //10. The post refers to the state received from redux store
+                //post: state.posts.find()                          //11. Uses "find()" to find an individual post from posts
+                
+                post: state.posts.find(post => post.id === id)      //12. Check if post.id is equal to the id, then return the post. This line is similar to the one below
+                
+                //post: state.posts.find((post) => {
+                //    return post.id === id
+                //}) 
+            }
+        }
+        
+        //export default Post;
+        //export default connect()(Post)                             //04. Using the higher order component to wrap the post component
+        export default connect(mapStateToProps)(Post)                //13. Passing state to Props into the higher order function
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+41. Map Dispatch To Props
+
+
+
 
 
 
