@@ -237,6 +237,62 @@ CONTENT
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 05. Counters and Timers
+    
+    To add the timers, click on the arrow (Located on the top right hand corner) to open up a hidden menu "Instructions"
+        Instructions > Basic Instructions > Timer / Counter / Comparator
+        Drag and drop the blue colored blocks
+        Timer:
+            TP: Pulse Timer
+            TON: ON Delay
+            TOF: OFF Delay
+            TONR: Retentive Timer
+            NOTE:
+                ET = Lapse Time
+                PT = Preset Time
+        Counter:
+        Math Functions
+            DIV
+        Move Operations
+            MOVE 
+            Deserialize
+            Serialize
+            MOVE_BLK
+            
+            
+    Network 1:
+        |       %I0.0                      %I0.1                    %M0.0     |
+        |     Stop PB                    Start PB                  SysRun     |
+        |-------|  |------------+-------|  |-------+----------------(  )------|
+        |                       |      %M0.0       |                          |
+        |                       |      SysRun      |                          |
+        |                       |-------|  |-------|                          |
+        |                                                                     |
+        |                              %DB1                                   |
+        |     %M0.0               IEC_Timer_0_DB                     %Q0.0    |
+        |     SysRun              |    TON     |                    Timer.Q   |
+        |-----|  |----------------|--IN     Q--|---------------------(  )-----| 
+        |                  T#5s---|--PT    ET--|                              |
+        |                                                                     |
+        |                               |    DIV     |                        |
+        |                               | Auto(Dint) |                        |
+        |-------------------------------|-EN     ENO-|------------X           |
+        |          IEC_Timer_0_DB".ET --|-IN1    OUT-|--Counter Value         |  
+        |                               |            | %MW100                 |
+        |                         1000--|-IN2        |                        |
+        |                                                                     |
+        |                                                                     |
+        |                               |    MOVE    |                        |
+        |-------------------------------|-EN     ENO-|------------X           |
+        |                      %MW100 --|-IN    OUT1-|--Digital Display       | //%QW100 matches the output in Factory IO
+        |               Counter Value   |            |      %QW100            |
+        |                         1000--|-IN2        |                        |
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 
 
