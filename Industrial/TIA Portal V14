@@ -224,6 +224,11 @@ CONTENT
     Factory IO
         Head back to the Driver section
             File > Driver
+            Configuration
+                Model: S7-1200
+                Host: 192.168.0.10
+                Network Adapter: Ethernet
+                IO Config: Numeric Data Type: WORD
             Click on "connect" if disconnected
             Click on "Back" to return to main screen
             Click on "Play"
