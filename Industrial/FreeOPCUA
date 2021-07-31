@@ -434,7 +434,7 @@ CONTENTS
     OPC UA with Security Layer
         Server <----> Security Layer (Server) <----> Security Layer (Client) <----> Client
 
-    
+    ////////////////////////////////////////////////////
     Server.py
         from opcua import server
         import time
@@ -459,7 +459,8 @@ CONTENTS
             temperature = randint(10, 50)
             temp.set_value(temperature)
             time.sleep(1)
-
+            
+    ////////////////////////////////////////////////////
     Client.py
         from opcua import Client
         import time
@@ -473,7 +474,8 @@ CONTENTS
             temp_value = temp.get_value()
             print("Temperature is {}".format(temp_value))
             time.sleep(1)
-
+            
+    ////////////////////////////////////////////////////
     OpcServerSecurity.py
         #1. Initialize Server socket
         #2. Set username and password of the server
