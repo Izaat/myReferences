@@ -2856,26 +2856,215 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 41. Map Dispatch To Props
 
+    Deleting OR Adding a card
+        Posting: mapStateToProps
+        Add/Delete: mapDispatchToProps
+    To delete, the Post component need to interact with the state
+    Refer to Topic 33 diagram, 
+        Posting requires mapping the state to props (Map State to Props)
+        To delete/add, the component dispatch an action from the component (Map Dispatch to Props)
+        This action will contain the type or an additional payload (ie addpost, deletepost, etc)
+        The payload also contain the ID of the post
+        The action is then dispatched to the Reducer
+        Reducer checks the action and the type of action
+        Then the reducer takes the payload (ID) and make the changes to the Redux Store's state
+        Once the changes being made to the store, the Props will be updated and then shown in the component
+    
+    PART 1 (9 Points)
+    ///////////////////////////////////////////////////////////////
+    Post.js (CODE from Topic 40)
+        import React, {Component} from 'react';
+        import {connect} from 'react-redux'           
+        
+        class Post extends Component {
+            render() {
+                console.log(this.props)                                //09. Test by printing to the console as a subtree of props. The "deletePost" tree will appear in console
+                const post = this.props.post ? (
+                    <div className="post">
+                        <h4 className="center">{this.props.post.title}</h4> 
+                        <p>{this.props.post.body}</p>  
+                    </div>  
+                ) : (
+                    <div className="center">Loading post...</div> 
+                )   
+                return (
+                    <div className="container">
+                        <h4>{post}</h4>      
+                    </div>
+                )
+            }
+        }
+        
+        const mapStateToProps = (state, ownProps) => {    
+            let id = ownProps.match.params.post_id;   
+            return {         
+                post: state.posts.find(post => post.id === id)   
+            }
+        }
+        
+        //const mapDispatchToProps = (dispatch) => {}                                      //01. Adding the method
+        const mapDispatchToProps = (dispatch) => {
+            //dispatch({type: 'ADD_TYPE', payload: 'your text'})                           //03. No need to use as store as the 'dispatch' parameter handles it
+            return {
+                //deletePost: (id)                                                         //04. The deletePost will take in a parameter (an id of the post) that will be deleted
+                //deletePost: (id)   => {dispatch()}                                       //05. The run a function that dispatch an action
+                //deletePost: (id)   => {dispatch( {type: 'DELETE_POST', id: } )}          //06. Add in the type and create an id variable
+                deletePost: (id)   => {dispatch( {type: 'DELETE_POST', id: id} )}          //07. This ': id' corresponds to the 'id' in deletePost: (id) and will be sent to rootReducer.js
+            }
+        }
+        
+        //store.dispatch({type: 'ADD_TYPE', payload: 'your text'})                         //02. Refer to Topic 35, not required since this will be mapped directly to mapDispatchToProps
+        
+        //export default connect(mapStateToProps)(Post)   
+        export default connect(mapStateToProps, mapDispatchToProps)(Post)                  //08. Wraps the post component via 'connect'
+
+    PART 2 (See 7 points)
+    ///////////////////////////////////////////////////////////////
+    Post.js (CODE)
+        import React, {Component} from 'react';
+        import {connect} from 'react-redux'           
+        
+        class Post extends Component {
+            //handleClick = () => {}                                                       //04. Create the handleClick event
+            handleClick = () => {
+                //this.props.deletePost()                                                  //05. Add the action
+                this.props.deletePost(this.props.post.id);                                 //06. Adds the ID
+            } 
+            render() {
+                //console.log(this.props)                                                  //01. Testing from Part 1
+                const post = this.props.post ? (
+                    <div className="post">
+                        <h4 className="center">{this.props.post.title}</h4> 
+                        <p>{this.props.post.body}</p>  
+                        //<div className="center"><button className="btn grey"></button></div>      //02. Add a button
+                        <div className="center">
+                            <button className="btn grey" onClick={this.handleClick}>       //03. Add an event to the button
+                                Delete Post
+                            </button>                        
+                        </div>
+                    </div>  
+                ) : (
+                    <div className="center">Loading post...</div> 
+                )   
+                return (
+                    <div className="container">
+                        <h4>{post}</h4>      
+                    </div>
+                )
+            }
+        }
+        
+        const mapStateToProps = (state, ownProps) => {    
+            let id = ownProps.match.params.post_id;   
+            return {         
+                post: state.posts.find(post => post.id === id)   
+            }
+        }
+        
+        const mapDispatchToProps = (dispatch) => {
+            return {
+                deletePost: (id)   => {dispatch( {type: 'DELETE_POST', id: id} )}        
+            }
+        }
+        
+        export default connect(mapStateToProps, mapDispatchToProps)(Post)  
+
+    rootReducer.js (CODE from Topic 39) - As mentioned in Part 1, Number 07
+        const initState = {        
+            posts: [                 
+                {id: '1', title: 'Squirtle', body: 'turtle turtle turtle turtle'},
+                {id: '2', title: 'Charmander', body: 'dinosaur dinosaur dinosaur dinosaur'},
+                {id: '3', title: 'Pikachu', body: 'squirrel squirrel squirrel squirrel'}
+            ]
+        }
+        const rootReducer = (state = initState, action) => {
+            console.log(action);                                          //07. For testing: Whenever the button is clicked, the action will be printed to the console
+            return state;                 
+        }
+
+        export default rootReducer
+
+    PART 3 (8 Points)
+    ///////////////////////////////////////////////////////////////
+    
+    Post.js (CODE)
+        import React, {Component} from 'react';
+        import {connect} from 'react-redux'           
+        
+        class Post extends Component {
+            handleClick = () => {
+                this.props.deletePost(this.props.post.id);  
+                this.props.history.push('/');                              //08. [Optional] Redirects to the home page after deleting the card
+            } 
+            render() {
+                const post = this.props.post ? (
+                    <div className="post">
+                        <h4 className="center">{this.props.post.title}</h4> 
+                        <p>{this.props.post.body}</p>  
+                        <div className="center">
+                            <button className="btn grey" onClick={this.handleClick}>
+                                Delete Post
+                            </button>                        
+                        </div>
+                    </div>  
+                ) : (
+                    <div className="center">Loading post...</div> 
+                )   
+                return (
+                    <div className="container">
+                        <h4>{post}</h4>      
+                    </div>
+                )
+            }
+        }
+        
+        const mapStateToProps = (state, ownProps) => {    
+            let id = ownProps.match.params.post_id;   
+            return {         
+                post: state.posts.find(post => post.id === id)   
+            }
+        }
+        
+        const mapDispatchToProps = (dispatch) => {
+            return {
+                deletePost: (id)   => {dispatch( {type: 'DELETE_POST', id: id} )}        
+            }
+        }
+        
+        export default connect(mapStateToProps, mapDispatchToProps)(Post)     
+    
+    rootReducer.js (CODE from Part 2)
+        const initState = {        
+            posts: [                 
+                {id: '1', title: 'Squirtle', body: 'turtle turtle turtle turtle'},
+                {id: '2', title: 'Charmander', body: 'dinosaur dinosaur dinosaur dinosaur'},
+                {id: '3', title: 'Pikachu', body: 'squirrel squirrel squirrel squirrel'}
+            ]
+        }
+        const rootReducer = (state = initState, action) => {
+            //console.log(action);                                        //01. The action will delete post from here
+            //if (action.type === 'DELETE_POST') {}                       //02. This will check the action type
+            if (action.type === 'DELETE_POST') {
+                //let newPost = state.posts.filter()                      //03. Duplicates the array and filters the elements that are the same between the new and old
+                //let newPost = state.posts.filter(post => {});           //04. Adds a post action
+                let newPost = state.posts.filter(post => {
+                    return action.id !== post.id                          //05. If the IDs are not the same, then return True (Run the action)
+                });        
+                //return {}                                               //06. Returns a new object that represents a new state
+                return {
+                    ...state,                                             //07. Remember this line from Topic 37. Add this line to avoid overwriting the entire state
+                    posts: newPosts
+                }     
+            } 
+            return state;                 
+        }
+
+        export default rootReducer
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+42. Action Creator
 
 
 
