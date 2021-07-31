@@ -664,6 +664,71 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 09. Property Nodes
 
+    Properties can be set from the configuration window or set them with a code
+    Typical properties are Title, Text, Value, Fonts, etc
+    In LabView, properties can be set via a property window to configure the selected control/object
+    
+    Method
+        Property Window
+            Right click on an object and select "Properties"
+            Property Window will appear
+        Property Nodes
+            Right click on an object > Create > Property Node > Select from the list
+            This enables to set properties with a code
+            Note: Each object has its own set of list to choose from
+
+    Property Node List
+        Class ID, Class Name, Owner, Owning VI
+        Bounds, Position        
+        Blinking, Mouse Wheel Support, Caption, Control Index, Data Binding, Data Socket, Description, Disabled
+        Focus Key Binding, Indicator, Key Focus, Label, Owning Pane, Skip when Tabbing, Synchronous Display
+        Tip Strip, Value, Value (Signalling), Visible, XControl        
+        Data Entry Limits, Decrement Key Binding, Increment Key Binding, Response to Outside Limit Values, Unit Label
+        Display Format, Format String, Increment/Decrement Visible, Numeric Text, Radix Visible, Text Width
+        
+    Disable a Numeric Control
+        via Property Window (Front Panel)
+            Add a Numeric Control
+            Right Click on Numeric Control > Properties
+            Appearance Tab > Enabled State: Disabled
+            Run program and Numeric Control can't be selected
+        via Property Node (Block Diagram)
+            Right click on an object > Create > Property Node > Select "Disabled"
+            Right Click on the Node and select "Change All To Write"
+            Right click on input > Create > Constant
+                Select Disabled and Grey
+            Run program and Numeric Control can't be selected
+
+    Application on Waveform Chart 1
+        Clear data whenever chart stops
+        Block Diagram Panel
+            Right Click on Waveform Chart Node > Create > Property Node > History Data
+            Right Click on the Node and select "Change All To Write"
+            Right click on input > Create > Constant: 0
+            No need to link to other nodes
+            NOTE: If the chart node is inside a loop box, then place property node outside the loop box
+            Run program
+                Graph clears when restarting thte chart
+        This method helps you from manually clearing the graph before starting the chart
+
+    Application on Waveform Chart 2
+        Auto Sampling Time Multiplier (Refer to Topic 3 Sampling Time)
+        Block Diagram Panel
+            Right Click on Waveform Chart Node > Create > Property Node > XScale > Multiplier
+            Right Click on the Node and select "Change All To Write"
+            Link input of the Multiplier Node to the output of the Sampling Time Node
+            NOTE: The Multiplier Node should be outside the loop
+            Run program
+                Sampling Time can be edited from the Front Panel without the need to change the Waveform Chart's multiplier
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+10. Project Explorer
+
+
+
+
+
 
 
 
