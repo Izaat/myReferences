@@ -264,7 +264,8 @@ CONTENT
             Serialize
             MOVE_BLK
             
-            
+    TIMERS        
+    //////////////////////////               
     Network 1:
         |       %I0.0                      %I0.1                    %M0.0     |
         |     Stop PB                    Start PB                  SysRun     |
