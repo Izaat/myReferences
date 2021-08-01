@@ -233,6 +233,8 @@ CONTENT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 05. Counters and Timers
     
+    Main Menu > Help > Information System > Programming a PLC > Instructions > Instructions (S7-1200) > Basic Instructions (S7-1200) > LAD
+    
     To add the timers, click on the arrow (Located on the top right hand corner) to open up a hidden menu "Instructions"
         Instructions > Basic Instructions > Timer / Counter / Comparator
         Drag and drop the blue colored blocks
