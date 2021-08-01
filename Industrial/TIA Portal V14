@@ -10,14 +10,9 @@ CONTENT
 04. Connecting to Factory IO
 05. Counters and Timers
 
-13. TON and TOF
-14. ON Delay TON Timer
-15. Off delay TOF Timer
-16. CTU Counter
-17. CTUD Up Down counter with High and Low limits
-18. 4 to 20 mA & 0 to 10V PLC (Analog signal simulation generator)
-19. Analog Signal Scaling using the Norm_X and Scale_X instructions
-20. How to Display an Analog 0-10VDC Signal / S7 1200
+06. 4 to 20 mA & 0 to 10V PLC (Analog signal simulation generator)
+07. Analog Signal Scaling using the Norm_X and Scale_X instructions
+08. How to Display an Analog 0-10VDC Signal / S7 1200
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Manuals
@@ -248,7 +243,7 @@ CONTENT
             TOF: OFF Delay
             TONR: Retentive Timer
             NOTE:
-                ET = Lapse Time
+                ET = Elapse Time
                 PT = Preset Time
         Counter:
         Math Functions
