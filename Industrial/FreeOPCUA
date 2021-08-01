@@ -435,7 +435,7 @@ CONTENTS
         Server <----> Security Layer (Server) <----> Security Layer (Client) <----> Client
 
     ////////////////////////////////////////////////////
-    Server.py
+    Server.py (Part 1) - Server Side
         from opcua import server
         import time
         from random import randint
@@ -461,7 +461,7 @@ CONTENTS
             time.sleep(1)
             
     ////////////////////////////////////////////////////
-    Client.py
+    Client.py - Client Side
         from opcua import Client
         import time
         
@@ -476,7 +476,7 @@ CONTENTS
             time.sleep(1)
             
     ////////////////////////////////////////////////////
-    OpcServerSecurity.py
+    OpcServerSecurity.py - Server Side
         #1. Initialize Server socket
         #2. Set username and password of the server
         #3. Client authentication
@@ -550,7 +550,43 @@ CONTENTS
                     return False
 
 
-
+    Authentication for Client's side
+    ////////////////////////////////////////////////////
+    Server.py (Part 2) - Server side
+        from opcua import server
+        import time
+        from random import randint
+        from opc_server_security import OPC_SERVER_SECURITY                   //01. Import Opc Server Security
+        
+        opc_server_security = OPC_SERVER_SECURITY()                           //02. Define
+        server = Server()
+        url = "opc.tcp://192.168.0.102:4841"
+        server.set_endpoint(url)
+        
+        name = "OPC UA SIMULATION SERVER"
+        add_space = server.register_namespace(name)
+        
+        node = server.get_objects_node()
+        param = node.add_object(add_space, "PARAMETERS")
+        
+        temp = param.add_variable(add_space, "Temperature", 0)
+        temp.set_writable()
+        server.start()
+        print("Server started at {}".format(url))
+        
+        opc_server.init_opc_server_security('192.168.0.102')                   //03a. Initialize
+        opc_server.set_server_credentials('admin', 'qwerty@123')               //03b. Initialize
+        
+        while True:
+            
+            res = opc_server.client_authentication()                           //04. Check authentication
+            while res:                                                         //05. While authentication is true
+                temperature = randint(10, 50)
+                temp.set_value(temperature)                
+            
+            #temperature = randint(10, 50)                                     //06. Transferred into the authentication while loop
+            #temp.set_value(temperature)
+            time.sleep(1)
 
 
 
