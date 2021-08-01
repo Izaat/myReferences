@@ -248,6 +248,14 @@ CONTENT
                 ET = Elapse Time
                 PT = Preset Time
         Counter:
+            CTU: Count Up 
+            CTD: Count Down
+            CTUD: Count Up and Down
+            NOTE:
+                CU: Counter Input
+                R: Reset Input
+                PV: Preset Value Input
+                CV: Counter Current Value (Either Empty or to Display)        
         Math Functions
             DIV
         Move Operations
