@@ -494,7 +494,7 @@ CONTENTS
             #def init_opc_server_security(self):            #c. Initialization                 #SEE POINT 1. Initialize Server socket
             #    self.server_socket.bind()                  #d. This will take in a parameter for this case, the ip address
             def init_opc_server_security(self, ip):                                                          
-                self.server_socket.bind(ip, 5000)           #e. And 5000 is the port number
+                self.server_socket.bind((ip, 5000))         #e. And 5000 is the port number
                 self.server_socket.listen(1)                #f. Listen to 1 client
 
             def set_server_credentials(self, username, password):                               #SEE POINT 2. Set username and password of the server
