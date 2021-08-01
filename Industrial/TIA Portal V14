@@ -305,6 +305,19 @@ CONTENT
     Method to prevent from going below negative value and above preset value
     //////////////////////////   
     Network 1:
+        |
+        |     %M0.0         %I0.0              %I0.1                   %M1.0              |
+        |     Stop PB       Input 0           Input 1                  SysRun             |
+        |------|/|-----------| |--------+------| |-------+---------------| |--------------|
+        |                               |                |                                |
+        |                               |     %M0.1      |                                |
+        |                               |    Start PB    |                                |
+        |                               |------| |-------|                                |
+        |                               |                |                                |        
+        |                               |     %M1.0      |                                |
+        |                               |     SysRun     |                                |
+        |                               |------| |-------|                                |        
+        |    
         |                                                            |----------------|
         |                                                            |     %DB2       |
         |      %M1.0        %M1.1               %MD4                 |     CTUD       |
