@@ -307,7 +307,7 @@ CONTENT
     Network 1:
         |
         |     %M0.0         %I0.0              %I0.1                   %M1.0              |
-        |     Stop PB       Input 0           Input 1                  SysRun             |
+        |     Stop PB      Sensor 0          Sensor 1                  SysRun             |
         |------|/|-----------| |--------+------| |-------+---------------| |--------------|
         |                               |                |                                |
         |                               |     %M0.1      |                                |
