@@ -3066,7 +3066,76 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 42. Action Creator
+    
+    Refer to Post.js's {dispatch( {type: 'DELETE_POST', id: id} )}        
+    Creating the action directly into the function makes it non reusable
+    The action can be made reusable by using Action Creator and be stored in seperate files
+    The Action Creators only generate an action
+    Start by creating an "actions" folder in "src"
+    Add a new file and name it "postActions.js"
+    Read 4 points
+    
+    postActions.js                                                 //01. Create the Action Creator
+        export sonst deletePost = (id) => {
+            return {
+                type: 'DELETE_POST',
+                //id: id                                           //02. Remember that when the names are similar, use one
+                id
+            }
+        }
 
+    Post.js (CODE from Topic 41)
+        import React, {Component} from 'react';
+        import {connect} from 'react-redux'           
+        import {deletePost} from '../actions/postActions'           //03. Imports the action from postActions.js
+        
+        class Post extends Component {
+            handleClick = () => {
+                this.props.deletePost(this.props.post.id);  
+                this.props.history.push('/'); 
+            } 
+            render() {
+                const post = this.props.post ? (
+                    <div className="post">
+                        <h4 className="center">{this.props.post.title}</h4> 
+                        <p>{this.props.post.body}</p>  
+                        <div className="center">
+                            <button className="btn grey" onClick={this.handleClick}>
+                                Delete Post
+                            </button>                        
+                        </div>
+                    </div>  
+                ) : (
+                    <div className="center">Loading post...</div> 
+                )   
+                return (
+                    <div className="container">
+                        <h4>{post}</h4>      
+                    </div>
+                )
+            }
+        }
+        
+        const mapStateToProps = (state, ownProps) => {    
+            let id = ownProps.match.params.post_id;   
+            return {         
+                post: state.posts.find(post => post.id === id)   
+            }
+        }
+        
+        const mapDispatchToProps = (dispatch) => {
+            return {
+                //deletePost: (id)   => {dispatch( {type: 'DELETE_POST', id: id} )}        
+                deletePost: (id)   => {dispatch( deletePost(id) )}          //04. Adds the action from postAction.js
+            }
+        }
+        
+        export default connect(mapStateToProps, mapDispatchToProps)(Post)     
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[End]
+Follow up with React App
 
 
 
