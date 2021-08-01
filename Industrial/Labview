@@ -725,6 +725,36 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 10. Project Explorer
 
+    Similar File Explorer Tree
+    Helps to easily visualize multiple VIs and Files
+    Use when creating executables, web services, embedded application, etc
+    
+    To use this feature, create a new project instead of creating a VI
+    The project will be saved as a file with *.lvproj extension
+    The project file can consist of multiple VIs
+    Tree structure:
+        Lvproj >
+            My Computer >
+                Virtual Folders (This folder can also contain VI files)
+                *.vi (This file can be saved anywhere in the disk)
+                Dependencies
+                Build Specifications (Creates a file)
+                    Application (EXE) - Suitable to deploy to other computers without LabView
+                    Installer
+                    .NET Interop Assembly
+                    Library
+                    Shared Library (DLL)
+                    Source Distribution
+                    Zip Files
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+11. Debugging
+
+
+
+
+
 
 
 
