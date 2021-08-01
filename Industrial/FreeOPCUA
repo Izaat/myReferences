@@ -435,7 +435,7 @@ CONTENTS
         Server <----> Security Layer (Server) <----> Security Layer (Client) <----> Client
 
     ////////////////////////////////////////////////////
-    Server.py (Part 1) - Server Side
+    server.py (Part 1) - Server Side
         from opcua import server
         import time
         from random import randint
@@ -461,7 +461,7 @@ CONTENTS
             time.sleep(1)
             
     ////////////////////////////////////////////////////
-    Client.py - Client Side
+    client.py - Client Side
         from opcua import Client
         import time
         
@@ -476,7 +476,7 @@ CONTENTS
             time.sleep(1)
             
     ////////////////////////////////////////////////////
-    OpcServerSecurity.py - Server Side
+    opc_server_security.py - Server Side
         #1. Initialize Server socket
         #2. Set username and password of the server
         #3. Client authentication
@@ -552,7 +552,7 @@ CONTENTS
 
     Authentication for Client's side
     ////////////////////////////////////////////////////
-    Server.py (Part 2) - Server side
+    server.py (Part 2) - Server side
         from opcua import server
         import time
         from random import randint
@@ -587,6 +587,64 @@ CONTENTS
             #temperature = randint(10, 50)                                     //06. Transferred into the authentication while loop
             #temp.set_value(temperature)
             time.sleep(1)
+
+
+    ////////////////////////////////////////////////////
+    opc_client_security.py - Client side, Process will be similar to Server authentication
+        import socket
+        import bcrypt
+        
+        class OPC_CLIENT_SECURITY:
+            def __init__(self):
+                self.client_socket = socket.socket()
+            
+            def init_opc_client_security(self, server_ip):
+                self.client_socket.connect((server_ip, 5000))
+            
+            def get_opc_server_access(self, credentials):
+                print("Regquesting server access....")
+                self.client_socket.send(credentials.encode())
+                result = self.client_socket.recv(1024).decode()
+                
+                if result == "Success":
+                    print("Server access granted")
+                    return True
+                elif result == "Failure"
+                    print("Server access denied")
+                    return False
+                    
+    ////////////////////////////////////////////////////
+    client.py (Part 2) - Client Side
+        from opcua import Client
+        import time
+        from opc_client_security import OPC_SERVER_SECURITY                   //01. Import Opc Server Security
+        
+        opc_client = OPC_CLIENT_SECURITY()                                    //02. Define
+        opc_client.init_opc_client_security('192.168.0.102')                  //03. Initialize
+        credentials = 'admin, qwerty@123'                                     //04. Set credentials
+        
+        while res: 
+            url = "opc.tcp://192.168.0.102:4841"
+            client = Client(url)
+            client.connect()
+            
+            while True:
+                temp = client.get_node("ns=2;i=2")
+                temp_value = temp.get_value()
+                print("Temperature is {}".format(temp_value))
+                time.sleep(1)
+        
+        //url = "opc.tcp://192.168.0.102:4841"                                  //05. Wrap by the authentication while loop
+        //client = Client(url)
+        //client.connect()
+        //
+        //while True:
+        //    temp = client.get_node("ns=2;i=2")
+        //    temp_value = temp.get_value()
+        //    print("Temperature is {}".format(temp_value))
+        //    time.sleep(1)
+        
+        
 
 
 
