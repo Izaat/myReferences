@@ -161,6 +161,7 @@ CONTENT
         Density converter
         specific heat capacity converter
 
+    /////////////////////////
     Calculation: METRIC
         Volume Flow Rate: 0.0995 m^3/s
         Water Temperature Out: 6'C
@@ -190,6 +191,35 @@ CONTENT
             BTU/h = 2500kW x 3412.142 
                   = 853357 BTU/h
 
+    /////////////////////////
+    Calculation: IMPERIAL
+        Volume Flow Rate: 12,649 ft^3/h
+        Water Temperature Out: 42.8'F
+        Water Temperature In: 53.6'F
+        Density of water @ AvTemp: 62.414lb/ft3
+        Specific heat capacity of water @ AvTemp: 1.0007643 BTU/lb.F
+
+        Formula
+            Q = (V * rho) * Cp * (Water Temp In (K) - Water Temp Out (K))
+            Where:
+                Q = Heat Transfer (BTU/h)
+                V = Volume flow rate (ft^3/h)
+                rho = Density of Water (lb/ft^3)
+                V*rho = Mass flow rate (lb/h)
+                Cp = Specific Heat Capacity (BTU/lb.F)
+                F = Fahrenheit (Temp)
+                RT = Refrigeration Ton
+                
+            Therefore:
+            Celsius to Kelvins = Temp in Celsius + 273.15
+            Q = (12,649 * 62.414) * 1.0007643 * [ 53.6 - 42.8 ]
+                = 789523 lb/h         * 1.0007643 * 10.8
+                = 8533364 BTU/h (Refrigeration effect)
+                
+            RT = 8533364 / 12000
+                 = 711 Refrigeration Tons
+            kW = 711RT x 3.517
+                       = 2500kW
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 05. Fan Coil Unit
