@@ -168,27 +168,27 @@ CONTENT
         Density of water @ AvTemp: 999.78 kg/m^3
         Specific heat capacity of water @ AvTemp: 4.19 kJ/kg.K
 
-    Formula
-        Q = (V * rho) * Cp * (Water Temp In (K) - Water Temp Out (K))
-        Where:
-            Q = Heat Transfer
-            V = Volume flow rate (m^3/s)
-            rho = Density of Water (kg/m^3)
-            V*rho = Mass flow rate (kg/s)
-            Cp = Specific Heat Capacity kJ/kg.K
-            K = Kelvin (Temp)
-            C = Celsius (Temp)
-        Therefore:
-        Celsius to Kelvins = Temp in Celsius + 273.15
-        Q = (0.0995 * 999.78) * 4.19 * [ (12 + 273.15K) - (6 + 273.15K) }
-          =    99.48 kg/s     * 4.19 * [285.15 - 279.15]
-          =    99.48 kg/s     * 4.19 * 6 Kelvins
-          = 2500 kW (Refrigeration effect)
-            
-        RT = 2500kW / 3.517
-           = 711 Refrigeration Tons
-        BTU/h = 2500kW x 3412.142 
-              = 853357 BTU/h
+        Formula
+            Q = (V * rho) * Cp * (Water Temp In (K) - Water Temp Out (K))
+            Where:
+                Q = Heat Transfer
+                V = Volume flow rate (m^3/s)
+                rho = Density of Water (kg/m^3)
+                V*rho = Mass flow rate (kg/s)
+                Cp = Specific Heat Capacity kJ/kg.K
+                K = Kelvin (Temp)
+                C = Celsius (Temp)
+            Therefore:
+            Celsius to Kelvins = Temp in Celsius + 273.15
+            Q = (0.0995 * 999.78) * 4.19 * [ (12 + 273.15K) - (6 + 273.15K) }
+              =    99.48 kg/s     * 4.19 * [285.15 - 279.15]
+              =    99.48 kg/s     * 4.19 * 6 Kelvins
+              = 2500 kW (Refrigeration effect)
+
+            RT = 2500kW / 3.517
+               = 711 Refrigeration Tons
+            BTU/h = 2500kW x 3412.142 
+                  = 853357 BTU/h
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
