@@ -184,12 +184,12 @@ CONTENT
             Q = (0.0995 * 999.78) * 4.19 * [ (12 + 273.15K) - (6 + 273.15K) }
               =    99.48 kg/s     * 4.19 * [285.15 - 279.15]
               =    99.48 kg/s     * 4.19 * 6 Kelvins
-              = 2500 kW (Refrigeration effect)
+              = 2500.879 kW (Refrigeration effect)
 
-            RT = 2500kW / 3.517
+            RT = 2500.879kW / 3.517
                = 711 Refrigeration Tons
-            BTU/h = 2500kW x 3412.142 
-                  = 853357 BTU/h
+            BTU/h = 2500.879kW x 3412.142 
+                  = 8533354 BTU/h
 
     /////////////////////////
     Calculation: IMPERIAL
@@ -213,13 +213,13 @@ CONTENT
             Therefore:
             Celsius to Kelvins = Temp in Celsius + 273.15
             Q = (12,649 * 62.414) * 1.0007643 * [ 53.6 - 42.8 ]
-                = 789523 lb/h         * 1.0007643 * 10.8
-                = 8533364 BTU/h (Refrigeration effect)
+                = 789474.686 lb/h * 1.0007643 * 10.8
+                = 8532843.28 BTU/h (Refrigeration effect)
                 
-            RT = 8533364 / 12000
-                 = 711 Refrigeration Tons
-            kW = 711RT x 3.517
-                       = 2500kW
+            RT = 8532843.28 / 12000
+                 = 711.07 Refrigeration Tons
+            kW = 711.07RT x 3.517
+                       = 2500.834kW
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 05. Fan Coil Unit
