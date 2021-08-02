@@ -747,9 +747,34 @@ CONTENTS
                     Source Distribution
                     Zip Files
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 11. Debugging
+
+    LabView Debug Techniques:
+        Broken Run Arrow: An icon in place of Run Arrow button. 
+            In main toolbar, click on broken arrow icon to open Error window. 
+            Double click on error messages to view details
+        Highlight Execution: See the flow and values while the code is running. 
+            In main toolbar, click on the "Lightbulb Icon"
+        Probes: See values from the node links. 
+            In Block Diagram, Right click on any node links and select "Probe". 
+            Probe Watch Window will appear. Add as many probe as needed by right clicking on another node link and select probe again
+        Breakpoints: Breaking down conditions/program into smaller sections.  
+            In Block Diagram, Right click on any node links and select "Breakpoint". 
+            The breakpoints are shown as red circles 
+            When the breakpoints are set, when ever the program starts, it will stop at these breakpoints
+            Open Tools Palette:
+                View > Tools Palette
+            Breakpoints can be used together with Probe
+            Breakpoint manager shows the list of all breakpoints
+                Solid Circle: Enable
+                Hollow Circle: Disable
+                Cross: Delete
+            Step Over to go to next breakpoints
+            
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+12. DAQ
 
 
 
