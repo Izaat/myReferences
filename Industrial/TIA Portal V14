@@ -379,7 +379,7 @@ CONTENT
     
         Analog Connections: 2M, 0, 1 
         
-        2Wires:
+        2Wires Sinking:
         |-----------------------------------|
         |     ________________________      |
         |     |            |         |      |
@@ -391,8 +391,7 @@ CONTENT
         |     2M           0         1      | <--PLC Side
 
         Refer to Analog Transmitter Connections for info (2 wire, 3 wires and 4 wires): 
-        Image shown is for Sourcing inputs
-        Opposite direction for Sinking
+        Image shown is for Sourcing inputs, opposite direction for Sinking
         https://github.com/Izaat/references/blob/main/Industrial/PLC%20Analog%20Transmitter%20Connections.png
 
 
