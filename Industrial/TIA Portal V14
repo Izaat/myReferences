@@ -342,6 +342,58 @@ CONTENT
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 06. 4 to 20 mA & 0 to 10V PLC (Analog signal simulation generator)
+    Analog Signal Scaling using the Norm_X and Scale_X instructions
+    
+    Analog signal modules provide expected output values that represent physical variable with either a voltage range or current range
+    The ranges are most likely 0-10Vdc, 4 to 20mA. NOTE: For Resistance based sensors, ie Thermistors and RTDs, use a Thermistor to Voltage signal converter
+    The Siemens Analog modules will provide integer values for these ranges, where 0 to 27648 represents 0-10Vdc analog voltage
+    Anything outside the range represents either an overflow or underflow
+    
+    Data Spec for Siemens CPU1212C:
+        Inputs: 2
+        Scale Range: 0-10V
+        Data Word Range: 0 to 27648
+        Resolution: 10bits
+    
+    Data Scaling (0-10V):
+        27648 - 10V
+        24883 - 9V
+        22118 - 8V
+        19354 - 7V
+        16589 - 6V
+        13824 - 5V
+        11059 - 4V
+        08294 - 3V
+        05530 - 2V
+        02765 - 1V
+        00000 - 0
+    
+    Data Scaling (4-20mA):
+        27648 - 20mA - 100%
+        20736 - 16mA - 75%
+        13824 - 12mA - 50%
+        06912 - 8mA  - 25%
+        00000 - 4mA - 0%
+
+    Sensor Wiring:
+    
+        Analog Connections: 2M, 0, 1 
+        
+        2Wires:
+        |-----------------------------------|
+        |     ________________________      |
+        |     |            |         |      |
+        |     |          |---|     |---|    |
+        |     |          |(-)|     |(-)|    |  //Where the inner box represents the sensor
+        |     |          |(+)|     |(+)|    |  //For Sinking input, (-) to M as shown
+        |     |          |---|     |---|    |  //For Sourcing input, (+) to M
+        |     |            |         |      |
+        |     2M           0         1      | <--PLC Side
+
+        Refer to Analog Transmitter Connections for info (2 wire, 3 wires and 4 wires): 
+        Image shown is for Sourcing inputs
+        Opposite direction for Sinking
+        https://github.com/Izaat/references/blob/main/Industrial/PLC%20Analog%20Transmitter%20Connections.png
 
 
 
