@@ -425,6 +425,9 @@ CONTENT
 
     Adding NORM_X and Scale_X blocks
         In OB1, drag and drop the function block icon into the rung
+        --OR--
+        Hidden Instructions Tab > Basic Instructions > Conversion Operations > SCALE_X OR NORM_X
+        
         The title will be "??" at first
         Simply type in Norm_X and Scale_X to convert the undefined function block into respective blocks
         Below the title block, "??? to ???" will be shown. Click on the "???" to open a drop down menu and change to "Int" or "Real"
