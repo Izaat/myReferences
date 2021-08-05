@@ -466,7 +466,8 @@ CONTENT
             This application used MD0 for NORM_X
             Therefore MD1, MD2 and MD3 cannot be used in Scale_X
             So MD4 will be used
-
+            See link for the spaces
+                https://github.com/Izaat/references/blob/main/Industrial/Siemens%20Data%20Types.jpg
 
 
 
