@@ -414,13 +414,13 @@ CONTENT
             |                  | Int to Real |                               |  Real to Real   |
             |------------------|--EN    EN0--|-------------------------------|--EN        EN0--|-------------------->>
             |               0--|--MIN        |                               |                 |
-            |                  |             |    %MD0           -3.00E+001--|--MIN            |     %MD80
-            |            %IW64 |             |    Normalized                 |            OUT--|--Current Temp
+            |                  |             |    %MD0                    0--|--MIN            |     %MD4
+            |            %IW64 |             |    Normalized                 |            OUT--|--Current Temp/Scaled Value
             |      Temp Input--|--VAL   OUT--|--  Value               %MD0   |                 |
             |           27648--|--MAX        |                   Normalized  |                 |
             |                  |             |                        Value--|--VALUE          |
             |                  |-------------|                               |                 |
-            |                                                     7.00E+001--|--MAX            |
+            |                                                            10--|--MAX            |
             |                                                                |                 |
             |                                                                |-----------------|
 
