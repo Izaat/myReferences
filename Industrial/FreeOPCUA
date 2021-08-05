@@ -832,6 +832,62 @@ CONTENTS
                     |------| |----------------------( )----|
             Compile again, Save and download to PLC
 
+    Ubidots
+        URL: https://industrial.ubidots.com/app/devices/
+        Log in 
+        Menu > Devices > Devices > Add Devices > Select Black Device
+            Device Name:  S7-1200
+            Device Label: s7-1200
+            New device (S7-1200) will appear under Devices list
+        Click on the new device (S7-1200)
+            Add Variable and name this "Data_1"
+            Click on this Variable block to check
+        Menu > Data > Dashboards
+            Add New Widget
+            Add Switch > Add Variables > 
+                Select S7-1200 > Select Data_1
+                Click OK
+            NOTE: 
+                Take note of the Values
+                Min: 0
+                Max: 1 
+                Off Message: Off 
+                On Message: On
+                Click OK and ON/OFF button will appear in the Dashboard
+            Get Token:
+                Account > API Credentials > Tokens > Copy the Token value 
+                This will be pasted into Node Red "ubidots input"
+
+    Node Red
+        Drag and drop "ubidots input" to panel
+            Click on node and paste Ubidots token into Token section
+            Device: s7-1200 
+                Must correspond to Ubidots API Labels
+                To check, head back to Ubidots website > Devices > S7-1200 > API Label
+            Variable: data_1
+                Must correspond to Ubidots API Labels                
+                To check, head back to Ubidots website > Devices >  S7-1200 > Data_1 Variable > API Label
+            Click on "Done"
+        Drag and drop "function" to panel
+            Link the output of "ubidots input" to the input of "function"
+            Click on function node to open properties tab
+                Function:
+                    var A=msg.payload.value;
+                    msg.payload=A;
+                    return msg;
+                Leave the name blank and click on Done
+        Drag and drop "debug" to panel
+            Link the output of "function" to the input of "debug"  //Notice that the note text changes from "debug" to "msg.payload"
+            Click on "Deploy" button on top right corner of screen
+            Click on the node and open the debug tab
+                Take note that the number is 0
+
+    Checking connectivity
+        Ubidots website > Main Menu > Data > Dashboards > Click on ON
+        Node Red > Debug Tab > 
+            Note the number change to 1 whenever Ubidots dashboard switch is ON.
+            Number changes to 0 whenever Ubidots dashboard switch is OFF
+            
 
 
 
