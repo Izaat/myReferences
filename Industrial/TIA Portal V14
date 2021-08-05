@@ -416,7 +416,7 @@ CONTENT
             |               0--|--MIN        |                               |                 |
             |                  |             |    %MD0                    0--|--MIN            |     %MD4
             |            %IW64 |             |    Normalized                 |            OUT--|--Current Temp/Scaled Value
-            |      Temp Input--|--VAL   OUT--|--  Value               %MD0   |                 |
+            |   Voltage Input--|--VAL   OUT--|--  Value               %MD0   |                 |
             |           27648--|--MAX        |                   Normalized  |                 |
             |                  |             |                        Value--|--VALUE          |
             |                  |-------------|                               |                 |
