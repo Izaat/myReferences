@@ -9,9 +9,8 @@ CONTENT
 03. AND & OR Program
 04. Connecting to Factory IO
 05. Counters and Timers
-06. 4 to 20 mA & 0 to 10V PLC (Analog signal simulation generator)
-07. Analog Signal Scaling using the Norm_X and Scale_X instructions
-08. How to Display an Analog 0-10VDC Signal / S7 1200
+06. Analog Signal Scaling using the Norm_X and Scale_X instructions with Analog signal simulation generator
+07. How to Display an Analog 0-10VDC Signal / S7 1200
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Manuals
@@ -469,6 +468,25 @@ CONTENT
             See link for the spaces
                 https://github.com/Izaat/references/blob/main/Industrial/Siemens%20Data%20Types.jpg
                 In the image, %ID0 represents %MD0
+
+    Compile program, Download program to PLC and Run
+        Check if the value of the external voltage generator (Connected to the PLC) matches the SCALE_X output value
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07. How to Display an Analog 0-10VDC Signal / S7 1200
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
