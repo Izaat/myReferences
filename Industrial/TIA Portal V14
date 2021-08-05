@@ -10,7 +10,6 @@ CONTENT
 04. Connecting to Factory IO
 05. Counters and Timers
 06. 4 to 20 mA & 0 to 10V PLC (Analog signal simulation generator)
-
 07. Analog Signal Scaling using the Norm_X and Scale_X instructions
 08. How to Display an Analog 0-10VDC Signal / S7 1200
 
