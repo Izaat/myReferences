@@ -775,6 +775,84 @@ CONTENTS
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 12. Labview and USB6008
+    
+    USB6008 Analog In/Out
+    Datalogging
+    
+    Connect USB-6008 to the PC directly via USB (NI-DAQmx driver must be installed to be recognized as a device)
+    Check the connection
+        Open Measurement and Automation Explorer (NI MAX)
+        NI USB-6008 "Dev 1" will appear under Devices and Interface Tree
+        Click on NI USB-6008 "Dev 1" and in Toolbar Menu, click on Self-test
+            "The self test completed successfully" message will appear
+        In Toolbar Menu, click on Test Panels
+            Click start to see if everything is running as expected
+            
+    Create New VI Project (Analog Input)
+        Block Diagram Panel
+            Add While Loop to wrap up all 4 Nodes below
+                Add Numeric Indicator
+                Add Stop Button
+                Add Timer with constant of 100
+                Add DAQ
+                    Right Click > Measurement > NI-DAQmx > DAQ Assist
+                        Read Values => Acquire Signals
+                        Output a Value => Generate Signals
+                    Select Acquire Signals > Analog Input > Voltage
+                        Note that there are 8 input channels for analog signals
+                        Choose any one and click Finish
+                    DAQ Assistant Window
+                        Timing Settings
+                            Acquisition Mode: 1 Sample (On demand)
+                        Signal Input Range: 
+                            Max: 5
+                            Min: 0
+                            Meaning, 0-5Vdc
+                        Click OK
+                Link DAQ "Data" Output to Indicator Input
+            Run Program    
+            
+    DAQ Assistant Window  (For Input signal)
+        To search for DAQ functions
+        Right click > Search (Top right hand corner of toolbar)
+        Search and click on Convert from Dynamic Data, a configuration window will appear
+        In Conversion Section > Resulting Array Type > 
+            Select Single Scalar
+            Scalar Data Type: Floating point
+            Channel: 0 
+            Press OK
+        Link DAQ "Data" Output to "Convert from Dynamic Data" node's input
+        Link DAQ "Convert from Dynamic Data"  output to Numeric Indicator input
+        Run Program
+
+    DAQ Assistant Window  (For Output signal)
+        Similar to Input signal above
+        The only difference is that us "Generate Signals" instead of "Acquire"
+        And, Add Numeric Control instead of Numeric Indicator
+        Link Output of Numeric Control to the input of DAQ Assistant node (input)
+        Run program and input 3 to Numeric control. Check with multimeter to verify the signal volltage
+
+    For loop back test
+        Add Numeric Indicator to the while loop
+        Connect DAQ output to DAQ input (Loop Back Test)
+        Connect both Analog Out Project and Analog In Project
+        Run both programs at the same time
+            If you enter "3" into Front Panel, the Indicator will show the voltage value in Numeric  Indicator
+
+    For having 2 seperate VIs to single Visible
+        Follow Input Signal program reference
+        Add convert to Dynamic Data
+        Link "Numerical Control" output to the input of "Convert to Dynamic Data" node
+        Link output of "Convert to Dynamic Data" node to input of DAQ Assistant Data
+        NOTE: The opposite should be applied (Convert from Dynamix Data)
+        Run Program 
+            Key in value to Numerical Control and the real value will appear in Indicator
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+13. Labview Communicate PLC Mitsubishi via TCP/IP
+
+
 
 
 
