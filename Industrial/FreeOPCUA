@@ -750,6 +750,87 @@ CONTENTS
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 10. Control S7-1200 with IoT2040 - node-red, ubidots
+    
+    Connect IOT2040 X1P1 port to the PC with Ethernet cable via a router (192.168.200.1)
+    Initialize: PuTTY
+        Host Name: 192.168.200.1:22
+        Connection Type: SSH
+        Click "Open"
+        PuTTY Terminal:
+            login as: root
+            root@iot2000:# iot2000setup
+            This will open the IOT2000 Boot loader
+            
+            IOT2000 Boot Loader
+                Software > Manage Autostart Options > Check the 2 boxes
+                    [*] Auto Start node-red
+                    [*] SSH Server Enabled
+                    [  ] Auto Start Mosquitto Broker
+                    Click on "Done" button and exit the Boot Loader
+                
+            Install S7 Node 
+                Connect IOT2040 X2P1 to internet and configure DHCP
+                root@iot2000:# cd /usr/lib/node_modules
+                root@iot2000:/usr/lib/node_modules# install node-red-contrib-s7@2.0.2
+                Once installed successfully, then reboot
+                    root@iot2000:/usr/lib/node_modules# reboot
+        Close PuTTY and then restart PuTTY
+
+    PuTTY (Reconnect after reboot)
+        Host Name: 192.168.200.1:22
+        Connection Type: SSH
+        Click "Open"
+        PuTTY Terminal:
+            login as: root
+
+    Open Node Red to check
+        In PC, Open Internet Browser
+        URL: 192.168.200.1:1880
+            
+    Install Ubidots (PuTTY)
+        root@iot2000:# cd /usr/lib/node_modules
+        root@iot2000:/usr/lib/node_modules# npm install ubidots-nodered
+            Once installed successfully, then reboot
+                root@iot2000:/usr/lib/node_modules# reboot
+
+    Open Node Red again to check
+        In PC, Open Internet Browser
+        URL: 192.168.200.1:1880
+        Under filter nodes, "ubidots input", "ubidots out", "s7 in" and "s7 out" will be available
+
+    TIA Portal
+        S7-1200: CPU1212C > 6ES7 212-1AE40-0XB0
+        Create a new project
+        Properties Tab (Bottom Screen) > General >
+            Ethernet Addresses:
+                IP: 192.168.0.50                                                      //Take note of the Address since PLC is connected to the router
+                Subnet: 255.255.255.0
+            Protection Security > Connection Mechanisms >
+                PUT/GET: Check the box
+        Program Block
+            Add new block > Data Block >
+                Name: Data
+                Type: Global DB
+                Number: Auto
+            Right Click on the newly created Data Block > Select Properties 
+            Data Properties Window > General Tab > Attributes >
+                Only store load memory: uncheck
+                Data block write protected in device: Uncheck
+                Optimized block access: Uncheck
+                DB accessible from OPC UA: Checked
+                Click OK
+            Open DB1
+                Add in a new Data
+                | Name   |Data Type | Acc      | Write  | Visible | ...
+                | Data_1 | Bool         | Ticked | Ticked | Ticked | ...
+            Compile
+            Open OB1
+                Network 1:
+                    |
+                    |  %DB1.DBX0.0                 %Q0.0   | 
+                    | "Data".Data_1               "Tag 1"  |
+                    |------| |----------------------( )----|
+            Compile again, Save and download to PLC
 
 
 
