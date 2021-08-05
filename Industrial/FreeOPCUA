@@ -905,7 +905,29 @@ CONTENTS
         Click on deploy
         In Ubidots Dashboard, whenever the switch is ON, the value in Node Red will be True
 
+    Using Boolean to control PLC
+        In Node Red, add an output node (s7 out)
+        Link the output of "change" node to input of "s7 out" node
+        Click on the s7 node - Click on "add new s7 endpoint" 
+            Connection Tab
+                Transpost: Ethernet (ISO on TCP)
+                Address: 192.168.0.50:102 
+                Rack: 0
+                Slot: 1                             //In TIA Portal Device View, just see where the CPU sits. Slot number is above the Virtual PLC
+                Cycle Time: 500 ms
+                Timeout: 1500 ms 
+            Variables Tab
+                Address: DB1, X0.0         //X0.0 is the offset number in DB1 list
+                Name: Data_1
+                Click on Add and another popup will appear
+                    PLC: 192.168.0.50:102@0:1
+                    Variable: Data_1
+                    Click on Done
+            Click on Deploy
+        In Ubidots Dashboard, whenever the switch is ON, the value in PLC OB1 will be True
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[End]
 
 
 
