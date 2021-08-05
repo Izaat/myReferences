@@ -398,6 +398,8 @@ CONTENT
         In control program, first normalize the analog value (bar, psi, kg, celsius, etc) to a real (floating point) value from 0.0 to 1.0 OR 0% to 100%
         Then scale this down to the minimum and maximum values that it represents between 0 to 27648 OR -27648 to 27648 depending on the module
         STEP 7 provides NORM_X and SCALE_X instructions for this purpose
+        NORM_X = Takes 0-27648 and converts to 0-1
+        SCALE_X = Takes 0-1
 
         Example:
             Suppose temp value is -30degC @ 0 and 70degC @ 27648
@@ -405,6 +407,7 @@ CONTENT
             Then scale it between -30 to 70
             The resulting value is the temperature represented by the analog input in degC
             NOTE: If the analog input was from an analog signal module using voltage, the MIN for NORM_X would be -27648 instead of 0
+            Network 1:            
             |
             |                  |-------------|                               |-----------------|
             |                  |   NORM_X    |                               |    SCALE_X      |   
@@ -412,7 +415,7 @@ CONTENT
             |------------------|--EN    EN0--|-------------------------------|--EN        EN0--|-------------------->>
             |               0--|--MIN        |                               |                 |
             |                  |             |    %MD60          -3.00E+001--|--MIN            |     %MD80
-            |            %IW82 |             |    Normalized                 |            OUT--|--Current Temp
+            |            %IW64 |             |    Normalized                 |            OUT--|--Current Temp
             |      Temp Input--|--VAL   OUT--|--  Value              %MD60   |                 |
             |           27648--|--MAX        |                   Normalized  |                 |
             |                  |             |                        Value--|--VALUE          |
