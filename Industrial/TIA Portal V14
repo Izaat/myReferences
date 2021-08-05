@@ -474,7 +474,8 @@ CONTENT
         Try: 
             Change the SCALE_X MAX to 300
             If the Generator signal is at 10V, the Scale_X output will be 300 and this will be calculated by the PLC
-
+            So if generator outputs 5V, the Scale_X value will be 150
+            
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 07. How to Display an Analog 0-10VDC Signal / S7 1200
 
