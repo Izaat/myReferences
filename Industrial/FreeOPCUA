@@ -888,7 +888,22 @@ CONTENTS
             Note the number change to 1 whenever Ubidots dashboard switch is ON.
             Number changes to 0 whenever Ubidots dashboard switch is OFF
             
-
+    Using numbers as Boolean
+        In Node Red, add a function (change node)
+        Link the output of existing function node to the input of the change node //Notice that the node text changes from "function" to "set msg.payload"
+        Edit the node > Rules >
+            Change 1:
+                Change | msg.payload
+                Search for : Click to select "number" and add in the value "0"
+                Replace with : Click to select "boolean" and add in the value "false"
+            Change 2:
+                Change | msg.payload
+                Search for : Click to select "number" and add in the value "1"
+                Replace with : Click to select "boolean" and add in the value "true"
+            Click on Done
+        Add in another debug node and link the node to change node
+        Click on deploy
+        In Ubidots Dashboard, whenever the switch is ON, the value in Node Red will be True
 
 
 
