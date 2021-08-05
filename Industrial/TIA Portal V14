@@ -424,7 +424,46 @@ CONTENT
             |                                                                |                 |
             |                                                                |-----------------|
 
-
+    Adding NORM_X and Scale_X blocks
+        In OB1, drag and drop the function block icon into the rung
+        The title will be "??" at first
+        Simply type in Norm_X and Scale_X to convert the undefined function block into respective blocks
+        Below the title block, "??? to ???" will be shown. Click on the "???" to open a drop down menu and change to "Int" or "Real"
+        For MIN and MAX (NORM_X)
+            Enter the values (0, 27648)
+        For VALUE (NORM_X)
+            Project Tree > Devices > PLC Project Name > PLC > Device Configuration > Config panel > General Tab > AI2 > Analog Inputs > 
+                Channel 0 >
+                    Channel Address: IW64
+                    Measure Type: Voltage
+                    Voltage Range: 0..10V      //This can be changed to 4 to 20mA
+                    Smoothing: Weak (4 cycles)
+                    Enable overflow diagnostics: Checked
+                Channel 1 >
+                    Channel Address: IW66
+                    Measure Type: Voltage
+                    Voltage Range: 0..10V      //This can be changed to 4 to 20mA
+                    Smoothing: Weak (4 cycles)
+                    Enable overflow diagnostics: Checked
+                I/O addresses
+                    Start Address: 64      //Note that start and end address corresponds to "%IW" addresses
+                    End Address: 67       //Therefore: Channel 0 = 64, and Channel 1 = 66. 
+                    Organization Block: Auto
+                    Process Image: Auto
+        For OUT (NORM_X) and VALUE (SCALE_X)
+            The output of Norm_X is a REAL value so it needs Double Word to store 32bit value
+            Therefore just change the Output to %MD0 on both blocks
+        For MIN and MAX (SCALE_X)
+            For this application, 0-10V will be the input signal
+            Therefore, MIN will be 0 and MAX will be 10
+            This can be used with liters, pressure, temp, flow, or any other SI Units
+        For OUT (SCALE_X)
+            This can output as Real Value or Int value
+            This application, Real will be used to keep the decimal places
+            Note that for double words, 32 bits take up 4 MDs
+            This application used MD0 for NORM_X
+            Therefore MD1, MD2 and MD3 cannot be used in Scale_X
+            So MD4 will be used
 
 
 
