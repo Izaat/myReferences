@@ -998,6 +998,9 @@ CONTENTS
             Temperature (Numeric Control)
 
     ClientRead.vi (Read)
+        NOTE:
+            For Results Indicator Array, Error link does not have to go into while loop. Only the refnum goes through.
+            For Temperature indicator, Both Error and Refnum are linked into while loop and into Multiple Read.vi like in ClientWrite.vi    
         Block Diagram 
             Connect.vi > While Loop [Multiple Read] > Disconnect.vi > Simple Error Handler.vi
                 Top wire links (refnum) will go to the While Loop and runs to Multiple Read Node and to Disconnect.vi node
