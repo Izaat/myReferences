@@ -937,6 +937,64 @@ CONTENTS
             Stop Button
         Run Program
 
+    ClientWrite.vi (Write)
+        Block Diagram 
+            Connect.vi > While Loop [Multiple Write] > Disconnect.vi > Simple Error Handler.vi
+                Top wire links (refnum) will go to the While Loop and runs to Multiple Write Node and to Disconnect.vi node
+                Bottom wire links (error) will have similar connection with refnum but ends at Simple Error Handler.vi
+            Server Endpoint URL (Copy over and change to control)
+                Copy the indicator over from Front Panel of Server.vi and then change to control
+                Connect.vi's "Server endpoint url" input will be linked to this indicator
+            Security Policy 
+                Right Click Connect.vi's security policy input > Create > Constant
+                Message Mode:
+                    None
+                Security:
+                    Basic256
+            While Loop
+                |
+                | Request Node   >-----------------------------+          
+                |                                              |
+                |                                              V
+                |                             _________________V____
+                |                            | Bundle By Name |  |  |
+                | Item Path                > | Node ID        |  |  | >> Build Array node >> Multiple Write.vi
+                | Temperature Value        > | Value          |  |  |
+                |                            |----------------|--|--|
+                
+                Multiple Write.vi
+                    Click on bottom constant > Scalar > Double
+                BundleByName 
+                    Create 
+                        Create "Request" Constant node first from Multiple Write (As mentioned below)
+                        Right click on "Request" Constant node > Cluster > Bundle By Name
+                    Item Node ID - Link to Node ID Input
+                        (Copy and paste "Item Node" indicator from server) and change to control
+                        Value: Process Data.Temperature  //Remove "ns=2;s="
+                    Temperature (Numeric Control) - Link to Value Input
+                    Request (Constant) - Top Input (Cluster Input of "Bundle By Name") - See diagram
+                        Right Click on "request" input of Multiple Write.vi (As mentioned above) and then seperate the nodes
+                        Node ID 
+                        Value
+                        Timestamp
+                        Node Status
+                Build Array Node
+                    Right Click > Programming > Array > Build Array
+                    Output will be linked to the input of Multiple Write.vi
+                    Input will be linked to the output of Bundle By Name Node
+                Timer Wait with Constant of 1000
+                Stop Button
+        Front Panel
+            Server Endpoint URL (Control)
+            Item Node ID (Control)
+                Value: Process Data.Temperature
+                Main Menu > Edit > Make Current Values Default
+            Stop Button
+            Temperature (Numeric Control)
+
+    ClientRead.vi (Read)
+
+
 
 
 
