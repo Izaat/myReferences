@@ -17,6 +17,7 @@ CONTENTS
 11. Debugging
 12. Labview and USB6008
 13. Labview and OPC UA
+14. Labview and Python
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -1011,18 +1012,18 @@ CONTENTS
                 Security:
                     Basic256
             While Loop
-                |-----------------------------------------------------------------------------------|
-                |                                                                                   |
-                | Item Node > Build Array>--+                                                       |
-                |                           |                                                       |                        
-                |                           V                         +--->Results                  |
-                |                           |     _______________     |                             |
-                |                           |    | Multiple Read |    |    Index             Temp   |
-                |                           +--->|               | >> + >> Array >> Value >> Value  |
-                |                                |---------------|                                  |
-                |                                 Double                                            |
-                |                                                                                   |
-                |-----------------------------------------------------------------------------------|
+                |--------------------------------------------------------------------------------------|
+                |                                                                                      |
+                | Item Node > Build Array>--+                                                          |
+                |                           |                                                          |                        
+                |                           V                         +--->Results                     |
+                |                           |     _______________     |                                |
+                |                           |    | Multiple Read |    |    Index                Temp   |
+                |                           +--->|               | >> + >> Array >> Unbundle >> Value  |
+                |                                |---------------|                                     |
+                |                                 Double                                               |
+                |                                                                                      |
+                |--------------------------------------------------------------------------------------|
                 Timer Wait with Constant of 1000
                 Stop Button
                 Multiple Read.vi
@@ -1047,11 +1048,14 @@ CONTENTS
                     Right Click on "Results" input link wire >  Array Palette > Index Array
                     Link the input of Index Array to share the same input as Results
                     Create constant with value of "0"                    
-                Link output of Index Array to input of Temperature Indicator (Temp Value)
+                Add Unbundle by Name    
+                    Right click on output of Index Array > Cluster > Unbundle by Name
+                    Change "Node ID" to "Value"
+                Link output of Unbundle by Name to input of Temperature Indicator (Temp Value)    
 
 
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+14. Labview and Python
 
 
 
