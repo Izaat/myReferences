@@ -240,7 +240,60 @@ CONTENT
         The larger the change on waveform, the larger the "loading"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-07. UART/Serial Trigger & Decode
+07. UART/Serial Trigger & Decode Serial Traffic
+    
+    Use serial pin on Arduino to send the word Hello
+    serial.ino
+        const byte led = 13;
+        bool ledState = false;
+        
+        void setup() {
+            Serial.begin(9600);
+            pinMode(led, OUTPUT);
+        }
+        void loop() {
+            ledState = !ledState;  //Toggles LED
+            digitalWrite(led, ledState);
+            Serial.println("Hello");
+            delay(250);
+        }
+        
+    Oscilloscope Probe
+        Probe to PIN1 of Arduino (TX)
+
+    Oscilloscope Setting
+        Go to the Protocol Menu
+            Analysis > Protocol
+        Bus Type: UART
+        Configuration Setup
+            Tap "Find Threshold"
+            RX CH1 2.92V High
+        Trigger Setup
+            Tap on UART Trigger
+                Select "Pattern"
+                Change Hex Number to 48 (0x48)
+                48 is the Ascii value for letter H
+        Trigger Condition Panel:
+            | C1 |    |   Norm    |  1ms/ | Run    |
+            |  Setup  | 2.5 GSa/s |  0s   | Sample |
+        Active Channel Panel:
+            C1: 780mV/
+        Press Stop and Zoom to the Start Bit of 48h (Use Horizontal knobs)
+        The Start bit, Data Bit and Stop bit will be shown on the screen
+        
+    Reading the Data
+        Zoom Out
+        Go to the Protocol Menu
+            Analysis > Protocol
+        Tap on Display Setup
+            Display: ASCII
+        The word "Hello" will be shown
+        Behind the word is CR and LF
+            CR: Carriage Return
+            LF: Line Feed
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[End]
 
 
 
