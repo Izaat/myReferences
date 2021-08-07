@@ -931,10 +931,11 @@ CONTENTS
                 Right click to enable label
         Front panel
             Server Endpoint URL
-                opc.tcp://XPS15HPH:49580
+                opc.tcp://XPS15HPH:49580 (Auto generate when program runs)
             Item Node ID
-                ns=2;s=Process Data.Temperature
+                ns=2;s=Process Data.Temperature (Auto generate when program runs)
             Stop Button
+        Run Program
 
 
 
