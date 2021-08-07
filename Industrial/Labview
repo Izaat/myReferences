@@ -952,15 +952,19 @@ CONTENTS
                 Security:
                     Basic256
             While Loop
-                |
-                | Request Node   >-----------------------------+          
-                |                                              |
-                |                                              V
-                |                             _________________V____
-                |                            | Bundle By Name |  |  |
-                | Item Path                > | Node ID        |  |  | >> Build Array node >> Multiple Write.vi
-                | Temperature Value        > | Value          |  |  |
-                |                            |----------------|--|--|
+                
+                |-----While Loop----------------------------------------------------------------------------------|
+                |                                                                                                 |
+                | Request Node   >-----------------------------+                                                  |
+                |                                              |                                                  |
+                |                                              V                                                  |
+                |                             _________________V____                                              |
+                |                            | Bundle By Name |  |  |                                             |
+                | Item Path                > | Node ID        |  |  | >> Build Array node >> Multiple Write.vi    |
+                | Temperature Value        > | Value          |  |  |                                             |
+                |                            |----------------|--|--|                                             |
+                |                                                                                                 |
+                |-------------------------------------------------------------------------------------------------|                
                 
                 Multiple Write.vi
                     Click on bottom constant > Scalar > Double
