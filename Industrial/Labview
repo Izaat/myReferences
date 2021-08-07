@@ -852,6 +852,93 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 13. Labview and OPC UA
 
+    Requirements
+        Labview 2017 onwards
+        Labview OPCUA Toolkit
+            OPCUA Toolkit is a standalone product from 2017 onwards
+            Version below 2017 contains OPCUA API (DSC+RealTime)
+            From 2017 onwards, DSC and RealTime no longer contain OPCUA API
+
+    Structure
+        |                 OPC UA Server (Data Storage)
+        |                             |
+        |          |------------------|-----------------------|
+        |          |                                          |
+        |          ^  write                             read  V
+        |          |                                          |
+        |    OPC UA Client                              OPC UA Client
+        |          |                                          |
+        |     Measurement                          Monitoring & Analysis
+        |
+        
+    Standards
+        Classic - COM/DCOM
+            Realtime data: OPC DA
+            Historical Data: OPC HDA
+            Alarm and Event: OPC AE
+            etc
+            Windows based systems only
+        Next Gen (2017 and later) - XML, HTTP, SOAP
+            Unified Architecture: OPC UA - All in one
+            Works with any OS (Windows, Linux, OSX, etc)
+            Protocols: UA Binary, UA XML
+
+    OPC UA Toolkit
+        Right Click on Block Diagram > Data Communication > OPC UA >
+            OPC UA Client
+                Connect, Forward Browse, Create Subscription, Delete Subscription, Disconnect, Add Monitored Data Nodes,
+                Get Node Attr, Multiple Read, Multiple Write, Delete Monitored, Alarms Conditions, Historical Access
+            OPC UA Server
+                Create, Close, Start, Stop, Add Clients, Clear Clients, Register Server, Unregister Server, 
+                Add Folder, Add Item, Add Analog Item, Add Property, Delete Node, Read, Write, 
+                Alarms and Conditions, Historical Access
+            Create Certificate
+
+    Server.vi
+        Block Diagram
+            Create.vi > Add Folder.vi > Add Item.vi > Start.vi > While Loop > Stop.vi > Close.vi > Simple Error Handler.vi
+                Top wire links will go through from Create.vi and all the way through to Close.vi
+                Bottom wire links will go through from Create.vi and all the way through to Simple Error Handler.vi
+                Note that top and bottom wire links will go through the while loop (left border and right border will be connected to the 2 wires)
+                Simple Error Handler    
+                    Right Click > Dialog & User > Simple Error Handler
+                Center ouput of Add Folder.vi will be linked to the center input of Add Item.vi
+            While Loop
+                Add Wait Timer with constant of 1000
+                Add Stop Button
+            Server Endpoint URL
+                Right Click on Create.vi node (center output) > Create > Indicator
+                The input of this node with be linked to the center output of Create.vi
+            Item Node ID
+                Right Click on Add Item.vi node (center output) > Create > Indicator
+                The input of this node with be linked to the center output of Add Item.vi
+            ItemBox
+                Right Click on Add Item.vi node (center input) > Create > Constant
+                The output of ItemBox will be linked to the center input of Add item.vi
+                Items: - Enable the internal labels
+                    Name
+                        Temperature
+                    DataType
+                        Double
+                    Access level
+                        read/write
+                    Description
+                        TC-01 Thermocouple Values
+            Folder Name
+                Right Click on Add Folder.vi node (center input) > Create > Constant
+                The output of this node will be linked to the center input of Add Folder.vi
+                Constant = "Process Data"
+                Right click to enable label
+        Front panel
+            Server Endpoint URL
+                opc.tcp://XPS15HPH:49580
+            Item Node ID
+                ns=2;s=Process Data.Temperature
+            Stop Button
+
+
+
+
 
 
 
