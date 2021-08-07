@@ -1046,6 +1046,7 @@ CONTENTS
                 Add Index Array
                     Right Click on "Results" input link wire >  Array Palette > Index Array
                     Link the input of Index Array to share the same input as Results
+                    Create constant with value of "0"                    
                 Link output of Index Array to input of Temperature Indicator (Temp Value)
 
 
