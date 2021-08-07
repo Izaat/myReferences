@@ -1017,13 +1017,36 @@ CONTENTS
                 |                           |                                                       |                        
                 |                           V                         +--->Results                  |
                 |                           |     _______________     |                             |
-                |                           |    | Multiple Read |    |                      Temp   |
+                |                           |    | Multiple Read |    |    Index             Temp   |
                 |                           +--->|               | >> + >> Array >> Value >> Value  |
                 |                                |---------------|                                  |
                 |                                 Double                                            |
                 |                                                                                   |
                 |-----------------------------------------------------------------------------------|
-
+                Timer Wait with Constant of 1000
+                Stop Button
+                Multiple Read.vi
+                    Change "Variant" to "Scalar > Double"
+                    Add Item Node ID (String Control)
+                        Or just copy over from Write.vi
+                        Link output to the input of Build Array Node
+                        Value in Front Panel: Process Data.Temperature
+                    Add Build Array
+                        Right Click > Array > Build Array
+                        Link output of Build Array Node to the input Multiple Read.vs (node id)
+                    Add Results (Indicator)
+                        Right Click on output (results) > Create > Indicator
+                        Result box indicator will appear in the Front Panel
+            Run Program
+                Run all 3 programs (Server, Write and Read)
+                Temperature value will show up in the Results Indicator of Client (Read)
+                
+            To show the Temperature value in Temperature indicator (Temp Value)
+                In While loop, Add Temperature Indicator
+                Add Index Array
+                    Right Click on "Results" input link wire >  Array Palette > Index Array
+                    Link the input of Index Array to share the same input as Results
+                Link output of Index Array to input of Temperature Indicator (Temp Value)
 
 
 
