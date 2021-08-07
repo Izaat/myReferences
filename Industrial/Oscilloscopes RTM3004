@@ -1,0 +1,259 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Oscilloscope
+Rohde Schwarz RTM3004
+Overview: https://www.youtube.com/watch?v=-siuk4p4dO0
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENT
+01. Preset and Autoset
+02. Measure DC Voltage Rail
+03. DC and AC Channel Coupling
+04. PWM and Measurements
+05. Auto-Reset with Triggering and Measuring
+06. Probe Loading and Reference Waveforms
+07. UART/Serial Trigger & Decode
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Preset and Autoset (Action Section)
+    Preset Button: Puts the scope into known default setup
+    Autoset Button: Checks the signal and automatically scales each of the input
+    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Measure DC Voltage Rail
+    
+    Measure 5 volt pin
+        Header pins to 5V output rail and ground to ground
+        On oscilloscope, bottom left corner, make sure it shows 5V per division in Channel 1 -OR "C1: 5V/"
+            This setting determines how much signal is shown on screen
+            Use "Vertical > Scale" knob to adjust
+            Use "Vertical > Position" knob to reposition the signal
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. DC and AC Channel Coupling
+
+    When measuring the voltage rail, usually will be interested in the noise
+    The scope is able to remove the DC offset from the DC signal
+    On the left hand Channel Panel, "Coupling" shows AC and DC
+    Changing this to AC coupling activates the series capacitor between the BNC connectors and the AC-DC converter
+        BNC = Bayonet Neill-Concelman, a type of coaxial connector
+        The capacitor removes the DC offset leaving only the AC component
+    Tap "AC" on screen and press the "Vertical > Position" knob
+    Now turning the "Vertical > Scale" knob, only the noise gets larger
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. PWM and Measurements
+    
+    /////////////////////////////////////////
+    Set PWM signal output
+        pwmExample.ino
+            const byte led = 13;          //Pin 13
+            const byte pwm = 3;           //Pin 3
+            void setup() {
+                pinMode(led, OUTPUT);     //Setup pins for DC out
+                pinMode(pwm, OUTPUT);     //Setup pin for PWM output
+                analogWrite(pwm, 128);    //Turn on analogWrite(), at 50% duty cycle
+            }
+            void loop(){
+                digitalWrite(led, HIGH);  //Turn LED to ON
+                delay(100);               //Delay for 1 second
+                digitalWrite(led, LOW);        
+                delay(100);
+            }
+    
+    Connection
+        Ground to Ground
+        Probe to Pin 3
+
+    Oscilloscope
+        Press "Action > Preset" to return to default setup
+        Press "Action > Autoset" to automatically scale the signal
+        Press "Analysis > Measure" to open the measurement window on screen
+            Add 3 measurements
+            On screen, tap on "Type" and a menu will appear with 4 tabs [Basic, Vertical, Horizontal, Count]
+                Basic:
+                    Peak to Peak, Period, Frequency, Rise Time, Fall Time, Mean Cycle, RMS Cycle
+                Vertical:       //Vertical Measurements or Voltage measurement
+                    Amplitude, Top Level, Base Level, Mean Cycle, RMS Cycle, Peak to Peak, Peak+, Peak-,
+                    Positive Overshoot, Negative Overshoot, RMS Value, Sigma Std Dev, Sigma Std, Dev Cycle, Crest Factor
+                Horizontal:   //Horizontal Measurements or Time measurement
+                    Frequency, Period, Duty Cycle+, Duty Cycle-, Delay, Rise Time, Fall Time, Pulse Width+, Pulse Width-,
+                    Phase, Slow Rate+, Slow Rate-, Burst Width
+            Add Amplitude to Channel 1        
+                Tap on Vertical > Amplitude to add and this will direct to Channel 1 in "Measurement Place"
+            Add Frequency to Channel 2    
+                Tap on "Measurement Place" and select Channel 2
+                Tap on "Type" and select "Horizontal > Frequency"
+            Add Duty Cycle to Channel 3
+                Tap on "Measurement Place" and select Channel 3
+                Tap on "Type" and select "Horizontal > Duty Cycle+"
+        Tap on "Menu" on screen to close the window
+        Below the Graph, there will be 3 measurements (VAmp, f and Dty+)
+            VAmp: 5.0419V      // 5V Amplitude
+            f: 489.806Hz       //Frequency of 490Hz
+            Dty+: 50.20%       //Duty cycle of 50%, where it is at 5V half the time
+        On the screen, although there's analogWrite(), there are only 2 Voltages in square wave (0V and 5V)
+        The 'Analog' part comes from the amount of time signal is ON or OFF 
+
+    Test:
+        Change analogWrite() from 128 to 64
+        Reading on Oscilloscope:
+            VAmp and f will be constant
+            Dty+ will be down to 25% which means 5V is ON 25% of the time
+
+    /////////////////////////////////////////
+    Set PWM signal output as For Loop
+        pwmExample.ino
+            const byte pwm = 3;                 //Pin 3
+            void setup() {
+                analogWrite(pwm, OUTPUT);       //Turn on analogWrite()
+            }
+            void loop(){
+                for (int x=0; x<256; x++){      //Sweeps value from 0 to 255
+                    analogWrite(pwm, x);
+                    delay(20);
+                }
+            }
+
+    Oscilloscope
+        Running the program will show signal sweeping across left to right
+        Tap on Menu > Display > Persistence (Off, Manual, Infinite)
+            Switch "Persistence" to Infinite, 
+            This means the graph is "Always ON" until "Action > Clear" is pressed
+            This is the method to find signal glitches
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. Auto-Reset with Triggering and Measuring
+    
+    When to use Auto or Normal trigger or sweep modes
+    
+    Using Arduino Reset circuit to "catch" the glitch
+        When serial signal RTS/DTR (USB to Serial) is low, it causes a short glitch that resets the 328P 
+        DTR, TX, RX
+        The key is the 100 nanofarad reset capacitor between USB-Serial and 328P, reset pin  
+        
+        | USB-Serial |                        | Arduino328P  |
+        |        RX--|--                      |              |        
+        |        TX--|--       100uF          |              |
+        |   RTS/DTR--|----------] [-----------|--Reset       |
+        |            |                        |              |
+        
+        Using the oscilloscope to check the capacitor
+            Use channel 1 probe on RTS/DTR
+            Use channel 2 probe on reset signal
+            Run the scope
+            There will be a quick pulse of "2nd line" on the screen
+
+        The reason the glitch flashes quickly is because it is in Auto-Trigger mode
+        If it does not see the trigger condition after a set period of time, it will just show the signal as it is on screen
+        This is useful when checking the circuit because the screen is constantly updating in real time
+        But to catch the glitch, the scope needs to be set to trigger which updates the screen only when trigger condition is met
+
+    Trigger condition panel on Oscilloscope
+        | C1 |  \  |    Auto   | 10us/ |  Run   |
+        |   2.8V   |  5 GSa/s  |  0s   | Sample |
+        Where:
+            C1 = Listening to Channel 1
+            \    = Falling Edge
+            2.8V = Minimum voltage that triggers
+            Auto = Auto Trigger. If it is in Norm, the screen stops updating
+            10us/ = Time per division
+                If the screen has 12 divisions (vertical columns on screen) and set at 10us/, then 12*10=120ms
+                Therefore the entire screen is at 120ms
+            0s = Delay/Offset of 0s. 
+                On the screen, this controls the "vertical ruler" that moves on horizontal axis.
+                Triangle icon with "T"
+        Tap on any of the boxes to change
+
+    Trigger condition Settings to catch the glitch
+        | C1 |  \  |    Norm   |     500us/     |   Run    |
+        |   2.8V   |  5 GSa/s  |    2.025ms     |  Sample  |
+        Note: Bottom Left corner will be set at 1V/ at both C1 and C2
+    Reprobe the capacitor
+        Using the oscilloscope to check the capacitor
+            Use channel 1 probe on RTS/DTR
+            Use channel 2 probe on reset signal
+            Run the scope (Press "Trigger > Run Button")
+            Rerun the code
+        Waveform shown on screen
+            There will be constant voltage left side of the vertical delay line
+            And a slope from right side of the vertical delay line
+            Also C2 at constant 0V from right side of the vertical delay line
+            This is the glitch that causes the reset
+        Waveform meaning
+            When the RTS/DTR(C1) and Reset(C2) signals become low, C1 recharges
+    Check Datasheet
+        |Symbol   | Parameter                    | Condition     | Min    |  Max    |
+        | V(IL2)  | Input Low Voltage Reset Pin  | Vcc=1.8V-5.5V | -0.5   | 0.1Vcc  |  //Calculate the Max
+        | V(IH2)  | Input High Voltage Reset Pin | Vcc=1.8V-5.5V | 0.9Vcc | Vcc+0.5 |  //Calculate the Min
+        Therefore,
+            0.1*Vcc = 0.1*5 = 0.5 (Max)
+            0.9*Vcc = 0.9*5 = 4.5 (Min)
+            Anything below 0.5V is a low and anything above 4.5V is a High
+            These levels only apply to Reset pin and does not apply to GPIO pins
+    Measuring - Time and Amplitude (Measurement Panel)
+        Click on the Analysis Knob
+            This will toggle between which line to choose from
+        Display: t1, V1, t2, V2, delta t, delta V
+            t1: Vertical Line labelled "1"
+            V1: Horizontal Line labelled "3"
+            t2: Vertical Line labelled "2"
+            V2: Horizontal Line labelled "3"
+            delta t: The measured time value of selected graph within the box
+            delta V: The measured V (amplitude of the selected graph within the box)
+        Answer will be in delta t or delta V
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+06. Probe Loading and Reference Waveforms
+    
+    A rule for test equipment is that when a probe is applied, the circuit changes
+    Equipment for test
+        Arduino UNO 16MHz Oscillator
+        Oscilloscope with 50MHz bandwidth
+        Oscilloscope probe with ground spring
+            Spring legs will probe to the standalone hole 
+            The hole is located away from circuit lines and between the word UNO, Italy and Arduino
+            The Probe will touch the right most leg of the chip (Located right below the word "Italy")
+            | ... Italy
+            |  _|_|_|_
+            | |_______|
+            |   | | |  <- Probe
+    Oscilloscope Settings
+        Trigger Condition Panel:
+            | C1 |  /  |    Auto   | 20ns/ |  Run   |
+            |  6 68mV  |  5 GSa/s  |  0s   | Sample |
+        Measurement Panel:
+            f: 15.9MHz
+        Active Channel Panel:
+            C1: 200mV/
+
+    Steps
+        Probe the ground and the oscillator (Oscilloscope should be running at this point)
+        Stop the scope and press "Vertical > Ref" to save the waveform as reference point for comparison
+        On screen, tap on "Copy"
+            Source: C1
+            Reference: R1
+        Run the scope again
+            Live waveform will be the yellow line
+            Reference waveform will be the white line
+        Add another probe (with spring attachment) to C3 and probe the same point as Probe C1
+            This means the oscillator has 2 probes on the same leg
+        On the screen, the live waveform will be different from the reference waveform
+        The larger the change on waveform, the larger the "loading"
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07. UART/Serial Trigger & Decode
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
