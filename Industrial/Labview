@@ -897,9 +897,9 @@ CONTENTS
     Server.vi
         Block Diagram
             Create.vi > Add Folder.vi > Add Item.vi > Start.vi > While Loop > Stop.vi > Close.vi > Simple Error Handler.vi
-                Top wire links will go through from Create.vi and all the way through to Close.vi
-                Bottom wire links will go through from Create.vi and all the way through to Simple Error Handler.vi
-                Note that top and bottom wire links will go through the while loop (left border and right border will be connected to the 2 wires)
+                Top wire links (refnum) will go through from Create.vi and all the way through to Close.vi
+                Bottom wire links (error) will go through from Create.vi and all the way through to Simple Error Handler.vi
+                Note that top (refnum) and bottom (error) wire links will go through the while loop (left border and right border will be connected to the 2 wires)
                 Simple Error Handler    
                     Right Click > Dialog & User > Simple Error Handler
                 Center ouput of Add Folder.vi will be linked to the center input of Add Item.vi
