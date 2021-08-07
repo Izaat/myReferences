@@ -960,7 +960,7 @@ CONTENTS
                 |                                              V                                                  |
                 |                             _________________V____                                              |
                 |                            | Bundle By Name |  |  |                                             |
-                | Item Path                > | Node ID        |  |  | >> Build Array node >> Multiple Write.vi    |
+                | Item Node ID             > | Node ID        |  |  | >> Build Array node >> Multiple Write.vi    |
                 | Temperature Value        > | Value          |  |  |                                             |
                 |                            |----------------|--|--|                                             |
                 |                                                                                                 |
@@ -1013,7 +1013,7 @@ CONTENTS
             While Loop
                 |-----------------------------------------------------------------------------------|
                 |                                                                                   |
-                | Item Path > Build Array>--+                                                       |
+                | Item Node > Build Array>--+                                                       |
                 |                           |                                                       |                        
                 |                           V                         +--->Results                  |
                 |                           |     _______________     |                             |
