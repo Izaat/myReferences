@@ -495,10 +495,24 @@ CONTENT
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 07. How to Display an Analog 0-10VDC Signal / S7 1200
+    
+    Display Value to Factory IO
+    Create new project and link signals as mentioned in previous topics
+    TIA Norm_X to Scale_X Rung as mentionsed in last topic:
+        Norm_X
+            Real to Real
+            Min: 0.0
+            Value: %ID100 "Lavel Sensor Value"
+            Max: 10.0
+            Out: %MD10 "Temp Value"
+        Scale_X
+            Real to Dint
+            Min: 0
+            Value: %MD10 "Temp Value"
+            Max: 300
+            Out: %QD112 "Signal Display"
 
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
