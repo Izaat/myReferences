@@ -18,6 +18,7 @@ CONTENTS
 12. Labview and USB6008
 13. Labview and OPC UA
 14. Labview and Python
+15. Labview Mathscript
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -1061,6 +1062,79 @@ CONTENTS
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 14. Labview and Python
+
+    Resources for Python
+        https://www.halvorsen.blog/documents/programming/python/
+        https://github.com/Izaat/references/tree/main/Python%20References
+        NOTE: For 64 bit Labview, use 64bit Pyhton. For 32bit Labview, use 32bit Python
+
+    Example:
+        Convert Celsius to Fahrenheit in Python and call function from Labview
+        Formulae:
+            Tf = (Tc*(9/5)) + 32
+            Tc = (Tf-32) * (5/9)
+
+    CODE:
+        fahrenheit.py
+            def c2f(Tc):
+                Tf = (Tc * 9/5) + 32
+                return Tf
+            def f2c(Tf):
+                Tc = (Tf-32) * (5/9)
+                return Tc
+
+        testRun.py
+            from fahrenheit import c2f, f2c            
+            Tc = 0
+            Tf = 32            
+            Tf = c2f(Tc) //Convert celsius to fahrenheit
+            Tc = f2c(Tf) //Convert fahrenheit to celsius
+            print(Tf)      //Prints answer for fahrenheit
+            print(Tc)      //Prints answer for celsius
+
+    LABVIEW (Celsius to Fahrenheit)
+        Front Panel
+            Add Numeric Control (Name to "Tc")
+            Add Numerci Indicator (Name to "Tf")
+        Block Diagram
+            Existing: 
+                Numeric Control
+                Numeric Indicator
+            Add Open Python Session
+                Right Click > Connectivity > Python > Open Python Session
+                Right click on "Python Version"  input and Create a constant
+                    Value: 3.7 (Where this will be the python version installed to the computer)
+            Add Python Node    
+                Right Click > Connectivity > Python > Python Node
+                Session In
+                    Link to "Session Out" of Open Python Session Node
+                Module Path
+                    Create Constant
+                    Value: C:\User\Labiew Python Folder\fahrenheit.py       //Path that contains the *.py to be used
+                Function Name
+                    Create Constant
+                    Value: c2f                                                 //The function name defined in the python program i.e "def c2f"
+                Node Array    
+                    By default, there are only one input 1 and output 1. Drag down to add more inputs
+                    Return Type 1 (Input)
+                        Create Constant
+                        Value: 0
+                    Return Type 2 (Input)
+                        Link this input to the output of Numeric Control (Tc)
+                    Return Value 1 (Output)
+                        Link this input to the output of Numeric Indicator (Tf)
+            Add Close Python Session
+                Right Click > Connectivity > Python > Close Python Session
+                Session In
+                    Link to "Session Out" of Python Node to "Session In" of Close Python Session Node
+        Save file and Run Program
+            Input Celsius in Tc box and this will convert to Fahrenheit in Tf box
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+15. Labview Mathscript
+
+
+
 
 
 
