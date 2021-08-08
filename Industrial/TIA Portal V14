@@ -486,7 +486,7 @@ CONTENT
             32bit fixed point number
             Value range -2147483648 to 2147483647            
         Real:
-            32 bit variable
+            32 bit variable with floating point number (decimal places)
             Length of Real number is the same as DINT
             Bit patterns are different from Int and Dint
             Bit 0 to 22 represents mantissa
