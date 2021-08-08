@@ -519,7 +519,7 @@ CONTENT
             | DWORD In  |    100 |     4 |
             | DWORD Out |    100 |     4 |   
         Move %ID100 to %ID112
-
+        Remember to change the Value in Norm_X, recompile and redownload
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
