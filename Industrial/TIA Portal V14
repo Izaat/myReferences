@@ -498,15 +498,12 @@ CONTENT
     
     Display Value to Factory IO
     Create new project and link signals as mentioned in previous topics
-        FactoryIO > Driver > Configuration > Siemens S71200 > IO Points >
-            |           | Offset | Count |
-            | DWORD In  |   100  |     4 |
-            | DWORD Out |   100  |     4 |    
+                
     TIA Norm_X to Scale_X Rung as mentionsed in last topic:
         Norm_X
             Real to Real
             Min: 0.0
-            Value: %ID100 "Lavel Sensor Value"
+            Value: %ID100 "Lavel Sensor Value"      //If the value not output properly, add a new count to "DWORD IN"
             Max: 10.0
             Out: %MD10 "Temp Value"
         Scale_X
@@ -515,6 +512,14 @@ CONTENT
             Value: %MD10 "Temp Value"
             Max: 300
             Out: %QD112 "Signal Display"
+    
+    If the value not output properly
+        FactoryIO > Driver > Configuration > Siemens S71200 > IO Points >
+            |           | Offset | Count |
+            | DWORD In  |    100 |     4 |
+            | DWORD Out |    100 |     4 |   
+        Move %ID100 to %ID112
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
