@@ -498,7 +498,9 @@ CONTENT
     
     Display Value to Factory IO
     Create new project and link signals as mentioned in previous topics
-                
+    Factory IO
+        Open > Scenes > Level Control
+        Save under different Name
     TIA Norm_X to Scale_X Rung as mentionsed in last topic:
         Norm_X
             Real to Real
@@ -514,7 +516,7 @@ CONTENT
             Out: %QD112 "Signal Display"
     
     If the value not output properly
-        FactoryIO > Driver > Configuration > Siemens S71200 > IO Points >
+        FactoryIO > File > Driver > Configuration > Siemens S71200 > IO Points >
             |           | Offset | Count |
             | DWORD In  |    100 |     4 |
             | DWORD Out |    100 |     4 |   
