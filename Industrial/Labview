@@ -43,7 +43,9 @@ CONTENTS
             Control/Sim, MeasurementIO, DataComms, Maths, Instruments, Vision/Motion, 
             SignalProcessing, Connectivity, Express, Addons, Favorites, UserLibs,
             DESCModules, FPGAInterface, RealTime, SQL
-    
+         Show I/O meaning of the nodes
+            Select node and CTRL+H
+
     Run the program
         Front Panel > Main Toolbar > Click on 'Run' (Arrow Icon)
 
