@@ -2240,8 +2240,8 @@ NOTE: In a nutshell
                                                                                                              //             Shares the same problem as memoization
 
 ///////////////////////////////////////////////////////////////////////
-Think Recursively to use memoization
-Thinkiteratively to use tabulation
+Think Recursively (Recalls) to use memoization
+Think Iteratively (Loops) to use tabulation
 
 ///////////////////////////////////////////////////////////////////////
 END
