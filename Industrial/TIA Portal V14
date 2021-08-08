@@ -498,6 +498,10 @@ CONTENT
     
     Display Value to Factory IO
     Create new project and link signals as mentioned in previous topics
+        FactoryIO > Configuration > Siemens S71200 > IO Points >
+            |           | Offset | Count |
+            | DWORD In  |   100  |     4 |
+            | DWORD Out |   100  |     4 |    
     TIA Norm_X to Scale_X Rung as mentionsed in last topic:
         Norm_X
             Real to Real
