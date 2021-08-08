@@ -2195,7 +2195,7 @@ NOTE: In a nutshell
             O(n^m) space
 
     CODE:
-        const countConstruct = (target, wordBank) => {
+        const allConstruct = (target, wordBank) => {
             const table = Array(target.length + 1).fill().map( () => []);
             table[0] = [[]];
             
