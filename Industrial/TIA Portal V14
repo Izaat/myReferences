@@ -498,9 +498,11 @@ CONTENT
     
     Display Value to Factory IO
     Create new project and link signals as mentioned in previous topics
+    Open TIA Portal first before opening Factory IO
     Factory IO
         Open > Scenes > Level Control
         Save under different Name
+        Configure and Connect
     TIA Norm_X to Scale_X Rung as mentionsed in last topic:
         Norm_X
             Real to Real
