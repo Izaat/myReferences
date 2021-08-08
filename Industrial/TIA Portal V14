@@ -475,7 +475,24 @@ CONTENT
             Change the SCALE_X MAX to 300
             If the Generator signal is at 10V, the Scale_X output will be 300 and this will be calculated by the PLC
             So if generator outputs 5V, the Scale_X value will be 150
-            
+
+    INT VS DINT VS Real
+        Integer: 
+            16bit fixed point number
+            Bit 0-14 represents integer value
+            Bit 15 represents negative or positive. If 15th bit is 1, then the integer is (-)
+            Value range -32768 to 32767
+        Double Integer:
+            32bit fixed point number
+            Value range -2147483648 to 2147483647            
+        Real:
+            32 bit variable
+            Length of Real number is the same as DINT
+            Bit patterns are different from Int and Dint
+            Bit 0 to 22 represents mantissa
+            Bit 23 to 30 represents exponent
+            Last bit is a sign
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 07. How to Display an Analog 0-10VDC Signal / S7 1200
 
