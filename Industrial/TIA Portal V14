@@ -548,7 +548,23 @@ CONTENT
             Start Device Wizard: Checked
             Click on Add and click on Finish in the Device Wizard window
             "Root Screen" Tab will appear at the bottom of the screen
-
+            Enter Project Tree > Devices Tab > HMI > Device Configuration
+            In Device view, double click on the virtual HMI to open Properties
+                Properties Panel > General Tab > Profinet Interface >
+                    IP Protocol Section
+                        IP Address 192.168.0.12
+                        Subnet: 255.255.255.0
+                        Use Router: Checked
+                        Router IP: 192.168.0.1
+                Device View, Right click on HMI > Compile > Hardware (Rebuild All)
+        Check if IP Address of computer matches the devices
+            Start Menu > Control Panel > Network and Internet > Network and Sharing Center > Ethernet
+            Properties Window will appear and click on Properties button
+                Double click on "IPv4 (TCP/IPv4)"
+                    Select "Use the following IP Address"
+                    IP Address: 192.168.0.2
+                    Subnet: 255.255.255.0
+                    Gateway: 192.168.0.1
 
 
 
