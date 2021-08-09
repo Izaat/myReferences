@@ -1133,6 +1133,107 @@ CONTENTS
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 15. Labview Mathscript
+    
+    Refer to Topic 6
+    Introduction
+    Basics
+    Plotting
+    Simulation
+    Create Functions
+    MathScript Node
+
+    Introduction
+        Install additional module "LabView MathScript Module"
+        Install "LabView Control Design and Simulation Module" to add Control and Simulation features to Mathscript
+        Can be used in 2 different ways
+            LabView MathScript - A seperate application similar to MATLAB, but need Labview to be installed
+            MathScript Node - Integration to LabView code
+        MATLAB scripts are able to run in LabView MathScript with almost no changes needed
+            Core functionality or MATLAB Control Toolbox required in LabView
+        LabView MathScript does not have the same speed and flexibility and toolboxes as MATLAB
+        If you know MATLAB, you know LabView MathScript
+        
+        Start MathScript: 
+            Front Panel > Main Menu > Tools > MathScript Window
+            There will be the 3rd window running on top of the default Front Panel and Block Diagram Panel
+
+        MathScript Window:
+            Left Side
+                Output Window: Shows results of calculations
+                Command Window: Run single commands
+            Right Side:
+                Script Window: Program editor. The script will be saved as "*.m" file
+                
+    Basic
+        Command List:
+            clc: Clear output window
+            clear: Clear all variables
+            i, j, pi, NaN, inf: See Built in Math Constants table below
+            log(X), log10(x), sqrt(x), exp(x), x^2 : See Mathematical Expressions below
+            
+        Simple Calculation 1
+            Formula
+                Find answer for X+Y, where X=3 and Y=5
+            Command Window:
+                X=3 
+                Press Enter
+                Y = 5
+                Press Enter
+                X+Y
+                Press Enter
+                Answer will show up as 8 in Output Window
+        Simple Calculation 2
+            Formula
+                Z=X*Y, where X=3 and Y=5
+            Command Window:
+                Z=X*Y
+                Press Enter
+                This will auto create Z variable and store the value 15
+        Variable List
+            In Script Editor, open Variables Tab
+            This will show all the variables in MathScript
+
+        Built-in Math Constants
+            | Name   | Description                            |
+            | i, j   | Used for complex numbers, e.g., z=2+4i |
+            | pi     | pi                                     |
+            | inf    | infinity                               |
+            | NaN    | Not a Number                           |
+        
+            Examples
+                pi:
+                    r=5;
+                    A=pi*r^2
+                    A=78.5
+                i, j:
+                    z1=3+3i;
+                    z2=3+5i;
+                    z=z1+z2;
+                    z=6 + 8i
+                inf:
+                    a=2;
+                    b=0;
+                    a/b;
+                    inf
+
+        Mathematical Expressions
+            log(X)
+            log10(x)
+            sqrt(x)
+            exp(x)
+            x^2
+
+            Example:
+                y(x) = (3x+2)/2 
+                Find y(2)
+                
+                Therefore:
+                    x=2;
+                    y=(3*x+2)/2
+                    y=4
+
+
+
 
 
 
