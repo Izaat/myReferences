@@ -1217,13 +1217,13 @@ CONTENTS
                     inf
 
         Mathematical Expressions
-            log(X) : ln(x)
+            log(x)     : ln(x)
             log10(x)
             sqrt(x)
             exp(x)
             x^2
 
-            Example:
+            Example 1:
                 y(x) = (3x+2)/2 
                 Find y(2)
                 
@@ -1231,6 +1231,15 @@ CONTENTS
                     x=2;
                     y=(3*x+2)/2
                     y=4
+
+            Example 2:
+                z = 3(x^2) + sqrt(x^2 + y^2) + e^(ln(x))
+
+                Therefore:
+                    x=2;
+                    y=2;
+                    z=3*x^2 + sqrt(x^2 + y^2) + exp(log(x));
+                    ans=16.83
 
 
 
