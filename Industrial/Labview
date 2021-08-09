@@ -1164,14 +1164,15 @@ CONTENTS
                 Command Window: Run single commands
             Right Side:
                 Script Window: Program editor. The script will be saved as "*.m" file
-                
-    //////////////////////////
-    Basic
+
         Command List:
             clc: Clear output window
             clear: Clear all variables
             i, j, pi, NaN, inf: See Built in Math Constants table below
             log(X), log10(x), sqrt(x), exp(x), x^2 : See Mathematical Expressions below
+
+    //////////////////////////
+    Basic
             
         Simple Calculation 1
             Formula
