@@ -1141,7 +1141,8 @@ CONTENTS
     Simulation
     Create Functions
     MathScript Node
-
+    
+    //////////////////////////
     Introduction
         Install additional module "LabView MathScript Module"
         Install "LabView Control Design and Simulation Module" to add Control and Simulation features to Mathscript
@@ -1164,6 +1165,7 @@ CONTENTS
             Right Side:
                 Script Window: Program editor. The script will be saved as "*.m" file
                 
+    //////////////////////////
     Basic
         Command List:
             clc: Clear output window
@@ -1241,7 +1243,8 @@ CONTENTS
                     z=3*x^2 + sqrt(x^2 + y^2) + exp(log(x));
                     ans=16.83
 
-
+    //////////////////////////
+    Plotting
 
 
 
