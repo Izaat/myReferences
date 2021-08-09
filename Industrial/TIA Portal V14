@@ -528,6 +528,25 @@ CONTENT
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 08. Setting up with HMI (KTP400)
+    
+    Connection
+        For the HMI to work, connect both PLC and HMI to a router or switch
+    TIA Portal    
+        Open base program
+        In device view > Properties Tab  (Double click on virtual PLC) > General Tab > PROFINET Interface >
+            Scroll to IP Protocol section
+                IP Address: 192.168.0.10
+                Subnet: 255.255.255.0
+                Use Router: Give checkbox a tick
+                Router Address: 192.168.0.1
+            Right click on virtual PLC in device view and select download to device >  hardware configuration
+            Once done, return to Portal view
+                Click on bottom left hand corner of screen
+        Portal View
+            Device Networks > Add new device > HMI > HMI Tree > Basic Panel > 4" Display > KTP400 > Model Number
+            Start Device Wizard: Checked
+            Click on Add and click on Finish in the Device Wizard window
+            "Root Screen" Tab will appear at the bottom of the screen
 
 
 
