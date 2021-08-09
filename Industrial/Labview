@@ -1217,7 +1217,7 @@ CONTENTS
                     inf
 
         Mathematical Expressions
-            log(X)
+            log(X) : ln(x)
             log10(x)
             sqrt(x)
             exp(x)
