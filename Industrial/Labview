@@ -1246,6 +1246,54 @@ CONTENTS
 
     //////////////////////////
     Plotting
+        Functions:
+            plot(), xlabel(), ylabel, title(), grid()
+
+        Colons:
+            x=0:5; where ":" means 0 through 5. Min:Max
+        
+        Example:
+            y(t)=2x+4 
+            
+            Therefore:
+                x=0:5;
+                y=2*x+4;
+                plot(x, y)
+            Graph:
+                Horizontal axis will be 0 to 5
+                Vertical axis will be 4 to 14 
+                Graph will be 45deg linear incline
+
+        Plot Functions
+            | Name         | Description                                                      |
+            | plot         | Create new plot                                                  |
+            | figure       | Define a new Figure/Plot window                                  |
+            | grid on/off  | Create Grid lines in a plot                                      |
+            | title        | Add Title to current plot                                        |
+            | xlabel       | Add a label to the x-axis                                        |
+            | ylabel       | Add a label to the y-axis                                        |
+            | axis         | Set xmin, xmax, ymin, ymax                                       |
+            | hold on/off  | Add several plots in the same Figure                             |
+            | legend       | Create a legend in the corner or specified position of the plot  |
+            | subplot      | Divide a figure into several subplots                            |
+
+            Examples:
+                x=0:0.1:2*pi;
+                y=sin(x);
+                plot(x, y)             //This will show a line graph
+                plot(x,y, 'o')         //This will show the plots instead of line in the graph
+                plot(x,y, '-o')        //This will show the plots both the line and the plots in the graph
+                title('Plot Title')
+                xlabel('x')
+                ylabel('y=sin(x')
+                grid on
+                axis([0,2*pi,-1,1])
+                legend('Temperature')
+
+
+
+
+
 
 
 
