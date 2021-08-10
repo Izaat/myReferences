@@ -1,7 +1,7 @@
 Good to use 4k clip on 1080p sequence so your effects wont bleed out of the video frame (visible black off screen background)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
-01 - Create new composition
+01 - Create new composition and save as MP4
 02 - Framerates
 03 - Cutting the frames
 04 - Animation presets
@@ -46,6 +46,13 @@ CONTENTS
     7. Scroll mouse button to zoom in or zoom out
     IMPORTANT NOTE: Drag and drop mp4 to the new composition icon in order to match up all the properties and framerates of the video.
     IMPORTANT NOTE:  Make sure that the start timecode is at 0,00,00,00. to align to the clip. Or it will follow the camera time code by default and tracking will be difficult
+
+//MP4
+    1. Open the Comp You Want to Export
+    2. Go to Composition > Add to Media Encoder Queue
+    3. Under Format, Choose H264
+    4. Under Preset, Choose the Preset You Want
+    5. Click the Green Play Button, to Start Export
 
 02 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////02
 //Framerate
