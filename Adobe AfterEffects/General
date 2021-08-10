@@ -47,7 +47,7 @@ CONTENTS
     IMPORTANT NOTE: Drag and drop mp4 to the new composition icon in order to match up all the properties and framerates of the video.
     IMPORTANT NOTE:  Make sure that the start timecode is at 0,00,00,00. to align to the clip. Or it will follow the camera time code by default and tracking will be difficult
 
-//MP4
+//MP4 (Also see Topic 20)
     1. Open the Comp You Want to Export
     2. Go to Composition > Add to Media Encoder Queue
     3. Under Format, Choose H264
