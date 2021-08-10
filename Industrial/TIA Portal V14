@@ -584,6 +584,23 @@ CONTENT
     Save project 
         Main Menu > Project > Save as > Save as "PLC HMI Router Setup"
 
+    Stucked at Bootloader screen
+        https://support.industry.siemens.com/tf/WW/en/posts/hmi-stuck-in-bootloader-screen-how-to-fix/108420?page=0&pageSize=10
+        Reset to Factory using USB Recovery stick
+            https://support.industry.siemens.com/cs/document/109744950/usb-recovery-(reset-to-factory)-mode-for-2nd-generation-basic-panels?lc=en-cn
+            Follow process copying latest *.fwf from PC to the USB stick
+            SIMATIC.HMI Folder should be in the root folder of the USB Stick
+            Plug in USB Stick and power off on HMI
+            Press Start recovery 3 times
+            Reboot
+            Wait few minutes until Start Center splash screen appears on HMI
+            Reconfiguration
+                Start Center > Settings > Network Interface 
+                    DHCP: Off
+                    IP Address: 192.168.0.12
+                    Subnet Mask: 255.255.255.0
+                    Gateway: 192.168.0.1
+                    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
