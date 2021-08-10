@@ -529,7 +529,9 @@ CONTENT
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 08. Setting up with HMI (KTP400)
-    
+
+    Reference:
+        https://wyedelta.wixsite.com/html_canada-electrical/copy-of-siemens-s7-1200-tutorials
     Connection
         For the HMI to work, connect both PLC and HMI to a router or switch
     TIA Portal    
@@ -565,7 +567,24 @@ CONTENT
                     IP Address: 192.168.0.2
                     Subnet: 255.255.255.0
                     Gateway: 192.168.0.1
+    Linking PLC and the HMI in TIA Portal
+        Project Tree > Devices Tab > Devices and Networks 
+            In the Main Panel View, Network View Tab, PLC_1 and HMI_1 will be shown
+            Click on the PLC_1 ethernet port and drag over to HMI_1 ethernet port
+            This will link both PLC and the HMI via PN/IE_1 link
+        Project Tree > Devices Tab > HMI_1 > Double click on Device Configuration
+            Click on the Virtual HMI image and click on Download to Device
+                Type of PG/PC: PN/IE
+                PG/PC: Ethernet Adapter
+                Connection to interface/subnet: PN/IE_1
+                Click on Start Search button
+                Highlight the HMI with IP Address and Flash LED to double check (HMI screen will be flashing)
+                Stop Flash LED and click Load button
+                Overwrite All and load button again
+    Save project 
+        Main Menu > Project > Save as > Save as "PLC HMI Router Setup"
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
