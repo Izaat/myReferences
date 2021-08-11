@@ -1329,16 +1329,16 @@ CONTENTS
                 a = 0.25;           //Model Parameters
                 b=2;                //Model Parameters
                 
-                Ts = 0.1;           //Simulation parameters, set to 0.1s for sample time
-                Tstop = 20;         //Set entire simulation time to 20s
-                uk = 1;             //Step response, input signal set to 1
-                x(1) = 0;           //Initialization, set the starting value of x
+                Ts = 0.1           //Simulation parameters, set to 0.1s for sample time
+                Tstop = 20         //Set entire simulation time to 20s
+                uk = 1             //Step response, input signal set to 1
+                x(1) = 0           //Initialization, set the starting value of x
                 
                 for k=1: (Tstop/Ts)                          //Simulation
-                    x(k+1) = (1 - Ts * a) * x(k) + Ts*b*u*k; //Refer to above equation
+                    x(k+1) = (1 - Ts * a).*x(k) + Ts*b*u*k   //Refer to above equation
                 end
                 
-                k=0:Ts:Tstop;
+                k=0:Ts:Tstop
                 plot(k,x)
                 grid on
 
