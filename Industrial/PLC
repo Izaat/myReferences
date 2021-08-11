@@ -7,7 +7,7 @@ CONTENTS
     #XIC/XIO/OTE
         Normal Inputs
         XIC = NO/NC   --] [-- Triggered by External Signal
-        XIO = NO/NC   --] [-- Triggered by Internal Signal
+        XIO = NO/NC   --]/[-- Triggered by Internal Signal
         OTE = Output  --( )--
 
     #OTL/OTU OR Set/Reset
