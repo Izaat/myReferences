@@ -1373,7 +1373,31 @@ CONTENTS
                 Tf=fahrenheit(Tc)
                 The output value will be 73.4
 
+    //////////////////////////
+    MathScript Node
 
+        Block Diagram Panel
+            Add MathScript Node
+                Right Click > Structure > MathScript
+                Use Celsius to Fahrenheit script (From Simulation topic) 
+                    OR import a script file Right Click on Node > Import > Select the file path
+                Right border: 
+                    Add connection "k"
+                        Right Click on Border > Add Output
+                    Add connection "x"
+                        Right Click on Border > Add Output
+            Add Bundle Node outside MathScript Node
+                Right Click > Programming > Cluster > Bundle
+                Link input to the output of "x" and "k" of MathScript Node
+            Add XY Graph Node
+                Right Click > Silver > Graph > XY Graph
+                View as Icon
+                    Right Click on Node > View as Icon
+                Link input to the output of Bundle Node
+            Run Program
+                The result will be plotted into the Graph Indicator in Front Panel
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
