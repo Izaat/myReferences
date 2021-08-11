@@ -6,8 +6,8 @@ CONTENTS
 01. Basics
     #XIC/XIO/OTE
         Normal Inputs
-        XIC = NO/NC   --] [-- Triggered by External Signal
-        XIO = NO/NC   --]/[-- Triggered by Internal Signal
+        XIC = NO      --] [-- Activate when there is signal
+        XIO = NC      --]/[-- Deactivate when there is signal
         OTE = Output  --( )--
 
     #OTL/OTU OR Set/Reset
