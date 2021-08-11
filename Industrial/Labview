@@ -1315,16 +1315,15 @@ CONTENTS
         Question:
             Assume the following Differential Equation:
                 'x = -ax + bu
-            
             Start by setting a=0.25 and b=2
-            Then we'll get:
+            Euler approximation:
+                'x = [x(k+1) - x(k)] / Ts
+                where, Ts is the sampling time            
+            Then we'll get this equation using Euler Approximation
                 [x(k+1) - x(k)] / Ts = -ax(k) + bu(k)
             Finally we'll get:
                 x(k+1) = (1 - Ts * a) x(k) + Ts * bu(k)
                 This is the discrete version of the differential equation
-            Therefore:
-                'x = [x(k+1) - x(k)] / Ts
-                where, Ts is the sampling time
 
 
 
