@@ -1342,7 +1342,35 @@ CONTENTS
                 plot(k,x)
                 grid on
 
+    //////////////////////////
+    Creating Functions
+        
+        Creating a function
+            Create a function in Script editor
+                Script:
+                    function total = add(x,y)
+                    total=x+y;
+            Save the function as *.m file (Function name should be the same as function name)
+            Open MathScript Properties
+                Main Menu > File > LabView MathScript Properties
+                    Property window will appear
+                    Category > SearchPaths
+                        Click on "Add folder" button
+                        Add the path to where the folder containing the file is saved
+            Test function
+                Command window, type in:
+                    add(3,5)
+        
+        Example Function Script 1: - Save file as "fahrenheit.m"
+            function Tf = fahrenheit(Tc)     //function "ReturnValue" = "FunctionName" ( "Input" )
+            Tf = (9/5)*Tc+32;                      //"ReturnValue" = "FunctionBody"            
+            Executing the Function: - From command window or script editor
+                Tc=23;
+                Tf=fahrenheit(Tc);
 
+            Test function:
+                Tc=23;
+                Tf=fahrenheit(Tc)
 
 
 
