@@ -1339,8 +1339,8 @@ CONTENTS
                 end
                 
                 k=0:Ts:Tstop
-                plot(k,x)
-                grid on
+                plot(k,x)          //Remove if this script will be used as a node (See MathScript Node)
+                grid on            //Remove if this script will be used as a node (See MathScript Node)
 
     //////////////////////////
     Creating Functions
