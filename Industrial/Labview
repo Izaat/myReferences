@@ -1371,7 +1371,7 @@ CONTENTS
             Test function:
                 Tc=23;
                 Tf=fahrenheit(Tc)
-
+                The output value will be 73.4
 
 
 
