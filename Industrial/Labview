@@ -1323,7 +1323,7 @@ CONTENTS
                 x(k+1) = (1 - Ts * a) x(k) + Ts * bu(k)
                 This is the discrete version of the differential equation
 
-            Plotting:
+            Plotting (Celsius to Fahrenheit):
                 clear
                 clc
                 a = 0.25;           //Model Parameters
