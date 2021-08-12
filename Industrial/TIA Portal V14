@@ -13,7 +13,8 @@ CONTENT
 07. How to Display an Analog 0-10VDC Signal / S7 1200
 08. Setting up with HMI (KTP400)
 09. Creating Start Stop Station on HMI (KTP400)
-10. PID Compact (Program and Tuning)
+10. Tank Project with 0-10V Analog Signal (Factory IO and TIA Portal)
+11. PID Compact (Program and Tuning)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Manuals
@@ -680,7 +681,117 @@ CONTENT
         The Physical HMI screen will reboot itself and the display above will appear
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-10. PID Compact (Program and Tuning)
+10. Tank Project with 0-10V Analog Signal (Factory IO and TIA Portal)
+
+    Factory IO
+        Inputs
+            %I00.0 Emergency Stop
+            %I00.1 Stop Button 1
+            %I00.2 Start Button
+            %I00.3 Reset Button
+            %I00.4 Fill
+            %I00.5 Drain
+            %I00.6 Auto
+            %I00.7 Reset           
+            %ID100(Real) Tank 1 Flow Meter
+            %ID104(Real) Tank 1 Level Meter
+        Outputs
+            %Q00.0
+            %Q00.1
+            %Q00.2
+            %Q00.3
+            %Q00.4
+            %Q00.5 Reset Button Light
+            %Q00.6 Fill Light
+            %Q00.7 Drain Light
+            %Q01.0 Start Button light
+            %Q01.1 Stop Button Light
+            %Q01.2
+            %QD100(Real) Tank 1 Fill Valve
+            %QD104(Real) Tank 1 Discharge Valve
+            
+        Panel
+            |----------------------------------------------------------------------------------------|
+            |                                                                                        |
+            |      EStop Button          Digital Display                   Auto                      |
+            |       |---------|          |------------------|           O |---------|                |
+            |       |         |          |              000 |             |         |                |
+            |       |---------|          |------------------|           1 |---------|                |
+            |                                                              Manual                    |
+            |                                                                                        |
+            |      Stop Button              Start Button                   Reset Button              |
+            |       |---------|              |----------|                   |---------|              |
+            |       |         |              |          |                   |         |              |
+            |       |---------|              |----------|                   |---------|              |
+            |                                                                                        |
+            |      Fill Button                                              Drain                    |
+            |       |---------|                                             |---------|              |
+            |       |         |                                             |         |              |
+            |       |---------|                                             |---------|              |
+            |                                                                                        |
+            |----------------------------------------------------------------------------------------|
+            
+    TIA Portal
+        Network 1:
+            |       %I0.1         %M0.1            %I0.2               %M0.4            %M0.0      |
+            |     Stop PB        EStop            Start PB           Reset Mode         SysRun     |
+            |-------|  |----------|\|-------+-------|  |-------+--------|\|--------------(  )------|
+            |                               |                  |                                   |
+            |                               |      %M0.0       |                                   |
+            |                               |      SysRun      |                                   |
+            |                               |-------|  |-------|                                   |
+            |                                                                                      |
+            |      %M0.0                                                                 %Q1.0     |
+            |      SysRun                                                             Star Light   |
+            |-------|  |----------------------------------------------------------------(  )-------| 
+            |                                                                                      |
+            |      %M0.0          %M0.1                                                  %Q1.1     |
+            |     SysRun     EStop  Activated                                          Stop Light  |
+            |-------|\|------------|\|-----------------+----------------------------------(  )-----|   //Flashing Stop Button Light
+            |                                          |                                           |
+            |      %M0.1                    %M10.7     |                                           |
+            | EStop  Activated           Clock 0.5Hz   |                                           |
+            |-------|  |----------------------|\|------|                                           |
+            |                                                                                      |
+            
+        Network 2:
+            |       %I0.0                                                            %M0.1         |
+            |       EStop                                                       EStop  Activated   |
+            |-------| \|--------------------------------------------------------------( S)---------| //See Topic 2 for Set-Reset
+            |                                                                                      |
+            |     %I0.0              %M0.4                                           %M0.1         |
+            |     EStop             Reset Mode                                  EStop  Activated   |
+            |-------|  |--------------|  |--------------------------------------------( R)---------| 
+            |                                                                                      |
+
+        Network 3:
+            |     %I0.7              %M0.3                                           %M0.2         |
+            |     Manual            Auto Mode                                        Manual Mode   |
+            |-------|  |--------------| \|--------------------------------------------(  )---------|
+            |                                                                                      |
+            |     %I0.6              %M0.2                                            %M0.3        |
+            |     Auto             Manual Mode                                        Auto Mode    |
+            |-------|  |--------------| \|---------------------------------------------(  )--------| 
+            |                                                                                      |
+
+        Network 4:
+            |      %I0.3                                                                 %M0.4     |
+            |    Reset PB           Reset Timer.Q                                    Reset Mode    |
+            |-------|  |----------+------| \|------------------------------------------(  )--------|
+            |                     |                                                                |
+            |     %M0.4           |         %DB1                                                   |
+            |   Reset Mode        |      Reset Timer                                               |
+            |-------|  |----------+     |-----------|                                              |
+            |                     |     |    TON    |                                              |                                                                      
+            |                     +-----|--IN    Q--|----                                          |   
+            |                     T#3s--|--PT   ET--|---...                                        |      
+            |                           |           |                                              |  
+            |                           |-----------|                                              |  
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+11. PID Compact (Program and Tuning)
 
 
 
