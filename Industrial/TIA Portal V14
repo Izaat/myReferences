@@ -12,7 +12,8 @@ CONTENT
 06. Analog Signal Scaling using the Norm_X and Scale_X instructions with Analog signal simulation generator
 07. How to Display an Analog 0-10VDC Signal / S7 1200
 08. Setting up with HMI (KTP400)
-09. PID Compact (Program and Tuning)
+09. Creating Start Stop Station on HMI (KTP400)
+10. PID Compact (Program and Tuning)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Manuals
@@ -602,6 +603,52 @@ CONTENT
                     Gateway: 192.168.0.1
                     
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+09. Creating Start Stop Station on HMI (KTP400)
+
+    Continued from the project above
+    Open OB1 and create a ladder
+        Project Tree > Devices Tab > Project > PLC_1 > Program Blocks > Main [OB1]
+        Network 1:
+            |       %M0.1                   %M0.0                      %Q0.0      |
+            |     Stop HMI                Start HMI                    Output     |
+            |-------|/|------------+--------|  |-------+----------------(  )------|
+            |                      |        %Q0.0      |                          |
+            |                      |       Output      |                          |
+            |                      |--------|  |-------|                          |
+        Compile and download to PLC
+    Setup HMI Screen
+        Project Tree > Devices Tab > Project > HMI_1 > Screens > Root Screen
+        A Root Screen window will appear, Root Screen virtual display on left and Toolbox on the right
+        Drag and drop components from Toolbox to the virtual display
+            Toolbox > Elements > Button
+                Name the utton as Stop
+                Copy and Paste another button and name it Start
+            Properties
+                Highlight stop button and open Properties Tab (Located at bottom right corner)
+                    Open Events Tab > select "Press" > Add function
+                        Type in "Set" and entire list will appear
+                        Select "SetBitWhileKeyPressed"
+                            Stop > Tag: Click on Browse > PLC_1 > PLC tags > Default tag table > Click on "Stop HMI" > Click on "Tick" button     
+                Highlight Start button and open Properties Tab (Located at bottom right corner)
+                    Open Events Tab > select "Press" > Add function
+                        Type in "Set" and entire list will appear
+                        Select "SetBitWhileKeyPressed"
+                            Stop > Tag: Click on Browse > PLC_1 > PLC tags > Default tag table > Click on "Start HMI" > Click on "Tick" button
+        Compile and download to device
+            Type: PN/IE
+            PG/PC interface: Ethernet Adapter
+            Connection to interface: PN/IE_1 
+            Click on "Start Search"
+                Highlight hmi_1 (192.168.0.12)
+            Click on "Load"
+            Check "Overwrite all" and click "Load" again
+        The Physical HMI screen will reboot itself and the display above will appear
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+10. PID Compact (Program and Tuning)
+
+
+
 
 
 
