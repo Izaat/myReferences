@@ -84,6 +84,21 @@ CONTENT
                     Accessible devices window will pop up
                     Start search
 
+    Output Instructions
+        Click on "--( )--" in OB1
+        Click on the small orange triangle at the corner of the instruction
+        This will drop down a list of output types
+            --( )--
+            --(/)--
+            R: Reset
+            S: Set
+            SET_BF
+            RESET_BF
+            --(P)--
+            --(N)--
+            --(PT)--
+            --(RT)--
+
     Start Programming
         Once the configurations and communnications are set, double click on OB1
         Project Tree panel > Devices Tab > Project name > PLC > Program Blocks > Main [OB1]
