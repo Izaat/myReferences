@@ -88,6 +88,7 @@ CONTENT
         Click on "--( )--" in OB1
         Click on the small orange triangle at the corner of the instruction
         This will drop down a list of output types
+        Set-Reset will usually be used to control memory bits, i.e E-Stop to control "%M0.0"
             --( )--
             --(/)--
             R: Reset
