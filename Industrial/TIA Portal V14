@@ -731,7 +731,7 @@ CONTENT
             |                                                                                        |
             |----------------------------------------------------------------------------------------|
             
-    TIA Portal
+    TIA Portal: Main [OB1]
         Network 1:
             |       %I0.1         %M0.1            %I0.2               %M0.4            %M0.0      |
             |     Stop PB        EStop            Start PB           Reset Mode         SysRun     |
@@ -787,6 +787,21 @@ CONTENT
             |                     T#3s--|--PT   ET--|---...                                        |      
             |                           |           |                                              |  
             |                           |-----------|                                              |  
+
+    TIA Portal: Manual Fill and Drain [OB2]
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
