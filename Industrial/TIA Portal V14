@@ -109,6 +109,7 @@ CONTENT
             Period = 1/f, where f is the frequency
                 Example for 0.5Hz, then 1/0.5Hz
                 Therefore, 2 second pulse (ON @2sec, OFF @2sec)
+                This pulse can be used for alarm lights, pulsing button light, etc
 
     Start Programming
         Once the configurations and communnications are set, double click on OB1
