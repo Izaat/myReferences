@@ -106,6 +106,9 @@ CONTENT
             Check Enable the use of clock memory byte
             Type in 10 into the text box to offset the memory addresses by 10 or use any other number to do the offset
             If 10 is used, then the memory clock will start with M10.0 and this will enable clock rate of 10Hz
+            Period = 1/f, where f is the frequency
+                Example for 0.5Hz, then 1/0.5Hz
+                Therefore, 2 second pulse (ON @2sec, OFF @2sec)
 
     Start Programming
         Once the configurations and communnications are set, double click on OB1
