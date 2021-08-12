@@ -104,6 +104,8 @@ CONTENT
         https://support.industry.siemens.com/cs/mdm/109759862?c=70445661963
         Project Tree > PLC_1 > Device Configuration > Double click on Virtual PLC > Properties > General > Pulse Generators (PTO/PWM) > System and Clock memory > Clock Memory bits
             Check Enable the use of clock memory byte
+            Type in 10 into the text box to offset the memory addresses by 10 or use any other number to do the offset
+            If 10 is used, then the memory clock will start with M10.0 and this will enable clock rate of 10Hz
 
     Start Programming
         Once the configurations and communnications are set, double click on OB1
