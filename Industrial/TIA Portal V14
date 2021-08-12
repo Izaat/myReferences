@@ -225,6 +225,12 @@ CONTENT
                 Host: 192.168.0.10
                 Network Adapter: Ethernet
                 IO Config: Numeric Data Type: WORD
+                    If using DWORD, 
+                        Network Datatype: DWORD
+                        Bool Inputs: Offset=0, Count=16
+                        Bool Outputs: Offset=0, Count=16
+                        DWORD Inputs: Offset=100, Count=8
+                        DWORD Outputs: Offset=100, Count=8
             Click on "connect" if disconnected (Make sure the PLC contains the PLC program)
             Click on "Back" to return to main screen
             Click on "Play"
