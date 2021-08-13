@@ -2,13 +2,14 @@
 
     Ziegler Nichols Method
         Table:
-            |   Controller       |  Kp     |  Ti     |  Td    |
-            |      P             | 0.5Ku   |  -      |   -    |
-            |      PI            | 0.45Ku  | Pu/1.2  |   -    | //Fast response process (Chemical industries)
-            | PID (Classic)      | 0.6Ku   | Pu/2    | Pu/8   | //Relative slow process
-            | Pessen Integration | 0.7Ku   |2Pu/5    | 3Pu/20 |
-            | Some overshoot     | Ku/3    | Pu/2    | Pu/3   |
-            | No overshoot       | 0.2Ku   | Pu/2    | Pu/3   |
+            |   Controller       |  Kp     |  Ti     |  Td    |//| Ki=Kp/Ti | Kd=Td/Kp  |
+            |      P             | 0.5Ku   |  -      |   -    |//|    -     |    -      |
+            |      PI            | 0.45Ku  | Pu/1.2  |   -    |//| 0.54Ku/Pu|    -      | //Fast response process (Chemical industries)
+            |      PD            | 0.8Ku   |  -      | Pu/8   |//|    -     | 0.1KuPu   |
+            | PID (Classic)      | 0.6Ku   | Pu/2    | Pu/8   |//| 1.2Ku/Pu | 0.075KuPu | //Relative slow process
+            | Pessen Integration | 0.7Ku   |2Pu/5    | 3Pu/20 |//| 1.75Ku/Pu| 0.105KuPu |
+            | Some overshoot     | Ku/3    | Pu/2    | Pu/3   |//|(2/3)Ku/Pu|(1/9)Ku/Pu |
+            | No overshoot       | 0.2Ku   | Pu/2    | Pu/3   |//|(2/5)Ku/Pu|(1/15)Ku/Pu|
             where,
                 Ku is the value used in P Gain to get sustained oscillations
                 Pu = Distance between peak to peak (time)
