@@ -12,7 +12,7 @@
             | No overshoot       | 0.2Ku   | Pu/2    | Pu/3   |//|(2/5)Ku/Pu|(1/15)Ku/Pu|
             where,
                 Ku is the value used in P Gain to get sustained oscillations
-                Pu = Distance between peak to peak (time)
+                Pu = Distance between peak to peak (time in seconds)
                     Use more peaks and divide by the number of peaks used for more accuracy
         Get sustained oscillation using P Gain. The Integral and Derivative gains should be OFF
 
