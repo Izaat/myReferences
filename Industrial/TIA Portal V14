@@ -1069,7 +1069,10 @@ CONTENT
             This will show all the data types, values, set values, etc 
             Retain (87) > CtrlParams > Gain, Ti, Td
                 Values can be linked to the HMI
-                
+        
+        The tuned values will be stored in the PLC and not in TIA Portal
+        To transfer the PID values to TIA Portal, click on the Commissioning > PID Parameters > Upload PID Parameters
+        
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
