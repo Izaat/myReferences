@@ -1049,6 +1049,7 @@ CONTENT
                                     Derivative action weighting
                                     Sampling time of PID algorithm
                                     Controller structure: PID
+                                    
         Using TIA Potal to tune PID
             Project Tree > Project > Devices Tab > PLC_1 > Technology Objects > PID Controller > Commissioning
             Tuning Mode Section
@@ -1062,7 +1063,13 @@ CONTENT
                     Also note that there will be a little bit of overshoot in the beginning hence the fine tuning
                 Fine tuning:
                     Just click on the Start button
-
+                    
+        Get the PID values 
+            Project Tree > Project > Devices Tab > PLC_1 > Technology Objects > Right Click on PID Controller > Open DB editor
+            This will show all the data types, values, set values, etc 
+            Retain (87) > CtrlParams > Gain, Ti, Td
+                Values can be linked to the HMI
+                
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
