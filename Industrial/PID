@@ -15,6 +15,7 @@
                 Pu = Distance between peak to peak (time in seconds)
                     Use more peaks and divide by the number of peaks used for more accuracy
         Get sustained oscillation using P Gain. The Integral and Derivative gains should be OFF
-
+        Note:
+            This method only works on simulations and a stable system to begin with
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
