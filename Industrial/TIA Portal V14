@@ -1056,11 +1056,12 @@ CONTENT
             |      P         | 0.5Ku   |  -      |   -  |
             |      PI        | 0.45Ku  | Pu/1.2  |   -  | //Fast response process (Chemical industries)
             |      PID       | 0.6Ku   | Pu/2    | Pu/8 | //Relative slow process
+            |  No overshoot  | 0.2Ku   | Pu/2    | Pu/3  |
             where,
                 Ku is the value used in P Gain to get sustained oscillations
+                Pu = Distance between peak to peak (time)
+                    Use more peaks and divide by the number of peaks used for more accuracy
         Get sustained oscillation using P Gain. The Integral and Derivative gains should be OFF
-        Pu = Distance between peak to peak (time)
-            Use more peaks and divide by the number of peaks used for more accuracy
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
