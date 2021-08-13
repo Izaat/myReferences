@@ -803,6 +803,7 @@ CONTENT
             |                           |-----------|                                              |  
 
     TIA Portal: Manual Fill and Drain [OB2]
+        Network 1: Manual Fill
             |      %M0.0               %M0.2          %I0.4         |---------------|              |
             |     Sys Run           Manual Mode      Fill PB        |      MOVE     |              |
             |-------|  |---------------|  |------+-----|  |---------|--EN      ENO--|--------------|
@@ -819,7 +820,22 @@ CONTENT
             |                                                       |        *      |              |   //The "*" enables adding another output
             |                                                       |---------------|              |  
 
-
+        Network 2: Manual Drain
+            |      %M0.0               %M0.2          %I0.5         |---------------|              |
+            |     Sys Run           Manual Mode      Drain PB       |      MOVE     |              |
+            |-------|  |---------------|  |------+-----|  |---------|--EN      ENO--|--------------|
+            |                                    |                  |               |    %QD104    |   
+            |                                    |            10.0--|--IN     OUT1--|--Drain Valve |   //Move Block will push 10V from IN to OUT                                                                 
+            |                                    |                  |        *      |              |   //The "*" enables adding another output
+            |                                    |                  |---------------|              |  
+            |                                    |                                                 |
+            |                                    |        %I0.5     |---------------|              |
+            |                                    |       Drain PB   |      MOVE     |              |
+            |                                    +---------|/|------|--EN      ENO--|--------------|
+            |                                                       |               |    %QD104    |   
+            |                                                  0.0--|--IN     OUT1--|--Drain Valve |   //Move Block will push 0V from IN to OUT                                                                 
+            |                                                       |        *      |              |   //The "*" enables adding another output
+            |                                                       |---------------|              |  
 
 
 
