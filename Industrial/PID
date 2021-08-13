@@ -1,3 +1,6 @@
+P, Proportional: Speed to steadystate (Causes overshoot if set too high, overdamped if too low)
+I, Integral    : Response, Speed
+D, Derivative  : Damping
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     Ziegler Nichols Method
@@ -18,8 +21,5 @@
         Note:
             This method only works on simulations and an already stable system to begin with
 
-P, Proportional: Speed to steadystate (Causes overshoot if set too high, overdamped if too low)
-I, Integral    : Response, Speed
-D, Derivative  : Damping
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Another method is by tuning P, D, then I
