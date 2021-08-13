@@ -1050,7 +1050,7 @@ CONTENT
                                     Sampling time of PID algorithm
                                     Controller structure: PID
         Using TIA Potal to tune PID
-            Project Tree > Project > Devices Tab > PLC_1 > Technology Objects > Commissioning
+            Project Tree > Project > Devices Tab > PLC_1 > Technology Objects > PID Controller > Commissioning
             Tuning Mode Section
                 Pretuning: 
                     Click on "Stop PID_Compact" button (Bottom of screen)
