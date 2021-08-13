@@ -1049,9 +1049,19 @@ CONTENT
                                     Derivative action weighting
                                     Sampling time of PID algorithm
                                     Controller structure: PID
-
-
-
+        Using TIA Potal to tune PID
+            Project Tree > Project > Devices Tab > PLC_1 > Technology Objects > Commissioning
+            Tuning Mode Section
+                Pretuning: 
+                    Click on "Stop PID_Compact" button (Bottom of screen)
+                    Wait until everything is at 0
+                    Acknowledge error (Click on "ErrorAck" button)
+                    Tuning Mode section, click on Start button
+                    This will automatically tune the PID
+                    Note that this doesnt require the system to oscillate like in the case of manual method
+                    Also note that there will be a little bit of overshoot in the beginning hence the fine tuning
+                Fine tuning:
+                    Just click on the Start button
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
