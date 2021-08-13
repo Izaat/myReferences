@@ -1003,6 +1003,8 @@ CONTENT
                         "Input" will be in real value (i.e litres, kg, etc) 
                         "Input_PER" will be the analog sensor's value (V, mA, Ohm, etc) and this will be converted internally (scaling) into real values (ie litres, kg, etc)
                         The scaling for "Input_PER" is in the PID configuration menu 
+                    Output_PER
+                        Outputs value at 0 to 27648 where 27648 is 10V
                     PID Configuration Menu    
                         Project Tree > PLC_1 > Technology objects > PID_Compact [DB#] > Configuration > Functional View Tab 
                         Basic Settings
