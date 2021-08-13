@@ -23,6 +23,11 @@ D, Derivative  : Damping
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Another method is by tuning P, D, then I
-
+    Set all gains to 0
+    Increase P at steady oscillation
+    Increase D until oscillation disappears
+    Repeat P and D until D gain oscillates
+    Set P and D to last stable values
+    Increase I to the number of oscillations desired
 
 
