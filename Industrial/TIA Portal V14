@@ -805,12 +805,19 @@ CONTENT
     TIA Portal: Manual Fill and Drain [OB2]
             |      %M0.0               %M0.2          %I0.4         |---------------|              |
             |     Sys Run           Manual Mode      Fill PB        |      MOVE     |              |
-            |-------|  |---------------|  |-----------|  |----------|--EN      ENO--|--------------|
+            |-------|  |---------------|  |------+-----|  |---------|--EN      ENO--|--------------|
+            |                                    |                  |               |    %QD100    |   
+            |                                    |             5.0--|--IN     OUT1--|--Fill Valve  |   //Move Block will push 5V from IN to OUT                                                                 
+            |                                    |                  |        *      |              |   //The "*" enables adding another output
+            |                                    |                  |---------------|              |  
+            |                                    |                                                 |
+            |                                    |        %I0.4     |---------------|              |
+            |                                    |       Fill PB    |      MOVE     |              |
+            |                                    +---------|/|------|--EN      ENO--|--------------|
             |                                                       |               |    %QD100    |   
-            |                                                  5.0--|--IN     OUT1--|--Fill Valve  |     //Move Block will push 5V from IN to OUT                                                                 
-            |                                                       |        *      |              |     //The "*" enables adding another output
-            |                                                       |---------------|              |     
-
+            |                                                  0.0--|--IN     OUT1--|--Fill Valve  |   //Move Block will push 5V from IN to OUT                                                                 
+            |                                                       |        *      |              |   //The "*" enables adding another output
+            |                                                       |---------------|              |  
 
 
 
