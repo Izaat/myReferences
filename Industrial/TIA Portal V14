@@ -1017,9 +1017,39 @@ CONTENT
                                 Output: Select either "Output" or "Output_PER"
                         Process Value Settings
                             Process value limits
-                                High Limit
-                                Low Limit
+                                High Limit: Max value
+                                Low Limit: Min value, usually 0
                             Process value scaling
+                                Only if Input_PER is being used
+                                Input_PER: Enable/Disable
+                                Scaled high process value: In liters, kg, etc
+                                Scaled low process value: In liters, kg, etc
+                                Low: 0
+                                High: 27648, 10V, 20mA, etc
+                            Advanced Settings
+                                Process value monitoring: For alarms
+                                PWM Limits: If PWM is used as the Input/Output (Basic Settings)
+                                    Min ON Time
+                                    Min OFF Time
+                                Output value limits
+                                    Output value limits
+                                        Output value high limits: Max output value from the PLC to the pump, valve, etc, usually set at 100%
+                                        Output value low limits: Min output value from the PLC to the pump, valve, etc, usually set at 0%
+                                    Reaction Error:
+                                        Set output to: Substitute output value while error is pending
+                                        Substitute output to: The default output value in case there's error, usually set at 0%
+                                PID Parameters (Manual Tuning)
+                                    Proportional gain
+                                    Integral action time
+                                    Derivative action time
+                                    Derivative delay coefficient
+                                    Proportional action weighting
+                                    Derivative action weighting
+                                    Sampling time of PID algorithm
+                                    Controller structure: PID
+
+
+
 
 
 
