@@ -105,6 +105,7 @@ CONTENT
     Move Instruction
         Hidden Instruction Tab > Basic instructions > Move Operations
         Drag and Drop "Move" into the rung
+        See Topic 10 for Move Example block
         Type:
             MOVE: Output preset value when activated
             Deserialize
@@ -802,7 +803,13 @@ CONTENT
             |                           |-----------|                                              |  
 
     TIA Portal: Manual Fill and Drain [OB2]
-    
+            |      %M0.0               %M0.2          %I0.4         |---------------|              |
+            |     Sys Run           Manual Mode      Fill PB        |      MOVE     |              |
+            |-------|  |---------------|  |-----------|  |----------|--EN      ENO--|--------------|
+            |                                                       |               |    %QD100    |   
+            |                                                    5--|--IN     OUT1--|--Fill Valve  |     //Move Block will push 5V from IN to OUT                                                                 
+            |                                                       |        *      |              |     //The "*" enables adding another output
+            |                                                       |---------------|              |     
 
 
 
