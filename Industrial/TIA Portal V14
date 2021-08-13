@@ -1050,10 +1050,20 @@ CONTENT
                                     Sampling time of PID algorithm
                                     Controller structure: PID
 
+    Ziegler Nichols Method
+        Table:
+            |   Controller   |  Kc     |  Ti     |  Td  |
+            |      P         | 0.5Ku   |  -      |   -  |
+            |      PI        | 0.45Ku  | Pu/1.2  |   -  | //Fast response process (Chemical industries)
+            |      PID       | 0.6Ku   | Pu/2    | Pu/8 | //Relative slow process
+            where,
+                Ku is the value used in P Gain to get sustained oscillations
+        Get sustained oscillation using P Gain. The Integral and Derivative gains should be OFF
+        Pu = Distance between peak to peak (time)
+            Use more peaks and divide by the number of peaks used for more accuracy
 
 
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
