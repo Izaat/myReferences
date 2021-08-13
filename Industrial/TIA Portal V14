@@ -1051,6 +1051,8 @@ CONTENT
                                     Controller structure: PID
 
     Ziegler Nichols Method
+        See linlk for PID table
+        https://github.com/Izaat/references/blob/main/Industrial/PID
         Table:
             |   Controller       |  Kp     |  Ti     |  Td    |
             |      P             | 0.5Ku   |  -      |   -    |
