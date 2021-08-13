@@ -807,7 +807,7 @@ CONTENT
             |     Sys Run           Manual Mode      Fill PB        |      MOVE     |              |
             |-------|  |---------------|  |-----------|  |----------|--EN      ENO--|--------------|
             |                                                       |               |    %QD100    |   
-            |                                                    5--|--IN     OUT1--|--Fill Valve  |     //Move Block will push 5V from IN to OUT                                                                 
+            |                                                  5.0--|--IN     OUT1--|--Fill Valve  |     //Move Block will push 5V from IN to OUT                                                                 
             |                                                       |        *      |              |     //The "*" enables adding another output
             |                                                       |---------------|              |     
 
