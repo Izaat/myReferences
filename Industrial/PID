@@ -19,7 +19,7 @@
             This method only works on simulations and an already stable system to begin with
 
 P, Proportional: Speed to steadystate (Causes overshoot if set too high, overdamped if too low)
-I, Integral    : Response
+I, Integral    : Response, Speed
 D, Derivative  : Damping
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
