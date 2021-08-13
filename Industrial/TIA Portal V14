@@ -968,6 +968,58 @@ CONTENT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 11. PID Compact (Program and Tuning)
 
+    Add new block [OB2]
+        Add New Block > Organization Block > Cyclic Interrupt
+            Number: Auto
+            Cyclic time (us): 1000      //Allows to start programs at periodic interval independently at 1 millisecond
+        Add PID Control
+            Hidden Instruction Tab > Technology > PID Control > 
+                Compact PID
+                    PID_Compact, PID_3Step, PID_Temp
+                PID Basic Functions
+                    CONT_C, CONT_S, PULSEGEN, TCONT_CP, TCONT_S
+                Aux Functions
+                    Polyfine, SplitRange, RampFunction
+                Add PID_Compact
+                    |                                                                                   |
+                    |                                   %DB#                                            |
+                    |                                    PID                                            |
+                    |                   |-------------------------------------|                         |
+                    |                   |            PID_Compact              |                         |
+                    |-------------------|--EN                            ENO--|-------------------------|
+                    |              0.0--|--Setpoint                   Output--|--0.0                    |
+                    |              0.0--|--Input                  Output_PER--|--0                      |
+                    |                0--|--Input_PER              Output_PWM--|--False                  |
+                    |                   |                              State--|--0                      |
+                    |                   |                              Error--|--False                  |
+                    |                   |                          ErrorBits--|--16#0                   |
+                    |                   |-------------------------------------|                         |
+                    |                                                                                   |
+                    |                                                                                   |
+                    This block can also be found in "Technology Objects"
+                        Project Tree > Device Tab > Project > PLC_1 > Technology objects > PID_Compact [DB#]
+                    Input VS Input_PER
+                        Only use either one
+                        "Input" will be in real value (i.e litres, kg, etc) 
+                        "Input_PER" will be the analog sensor's value (V, mA, Ohm, etc) and this will be converted internally (scaling) into real values (ie litres, kg, etc)
+                        The scaling for "Input_PER" is in the PID configuration menu 
+                    PID Configuration Menu    
+                        Project Tree > PLC_1 > Technology objects > PID_Compact [DB#] > Configuration > Functional View Tab 
+                        Basic Settings
+                            Controller Type
+                                Volume: liters
+                                Invert Mode: Unchecked    //This inverts the sensor value
+                                Activate Mode after CPU restarts: Checked
+                                Setmode to: Automatic Mode
+                            Input/Output parameters
+                                Setpoint
+                                Input: Select either "Input" or "Input_PER"
+                                Output: Select either "Output" or "Output_PER"
+                        Process Value Settings
+                            Process value limits
+                                High Limit
+                                Low Limit
+                            Process value scaling
 
 
 
