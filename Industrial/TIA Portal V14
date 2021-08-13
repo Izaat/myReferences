@@ -725,11 +725,11 @@ CONTENT
             %ID100(Real) Tank 1 Flow Meter
             %ID104(Real) Tank 1 Level Meter
         Outputs
-            %Q00.0
-            %Q00.1
-            %Q00.2
-            %Q00.3
-            %Q00.4
+            %Q00.0 00% Light
+            %Q00.1 25% Light
+            %Q00.2 50% Light
+            %Q00.3 75% Light
+            %Q00.4 100% Light
             %Q00.5 Reset Button Light
             %Q00.6 Fill Light
             %Q00.7 Drain Light
