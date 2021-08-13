@@ -1052,7 +1052,7 @@ CONTENT
 
     Ziegler Nichols Method
         Table:
-            |   Controller   |  Kc     |  Ti     |  Td  |
+            |   Controller   |  Kp     |  Ti     |  Td  |
             |      P         | 0.5Ku   |  -      |   -  |
             |      PI        | 0.45Ku  | Pu/1.2  |   -  | //Fast response process (Chemical industries)
             |      PID       | 0.6Ku   | Pu/2    | Pu/8 | //Relative slow process
