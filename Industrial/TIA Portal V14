@@ -116,6 +116,21 @@ CONTENT
             FILL_BLK
             UFILL_BLK: Fill block uninterruptible
 
+    Comparator Instructions
+        Hidden Instruction Tab > Basic instructions > Comparator Operations
+        See Topic 10 for Comparator Example block        
+        Types:
+            CMP==         Equal
+            CMP<>         Not Equal
+            CMP>=         Greater or Equal
+            CMP<=         Less or Equal
+            CMP>          Greater Than
+            CMP<          Less Than
+            IN_Range      Value within range
+            OUT_Range     Value outside range
+            -|OK|-        Check validity
+            -|NOT_OK|-    Check invalidity
+
     Memory Output Instructions (System Clock) -i.e.  "%M0.0"
         https://support.industry.siemens.com/cs/mdm/109759862?c=70445661963
         Project Tree > PLC_1 > Device Configuration > Double click on Virtual PLC > Properties > General > Pulse Generators (PTO/PWM) > System and Clock memory > Clock Memory bits
