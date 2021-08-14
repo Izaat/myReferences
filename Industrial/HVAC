@@ -295,6 +295,161 @@ CONTENT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 07. Pump Calculations
 
+    Flow Rate
+    Pump RPM
+    Head Pressure
+    Pump Power
+    Impeller Diameter
+    
+    Datasheet Example for Chilled Water circulation pumps
+        Pump Type: Belt driven centrifugal
+        Pump Design Duty: 57 l/sec @ 428kPa
+        Pump Speed: 1300rpm
+        Motor Type: TEFC CF200L
+        Motor Speed: 1460 rpm
+        Motor Power: 45.0 kW
+        FLC: 83A
+        Supply: 415V/3ph/50Hz
+        Starter: Star/Delta
+    
+    Formula List
+        New Flow Rate with Change in Pump RPM
+        New Flow Rate with Change Impeller Diameter
+        New RPM with Change in Flow Rate
+        New Head Pressure with Change in RPM
+        New Head Pressure with Change in Flow Rate
+        New Pump Power with Change in RPM
+        New Impeller Diameter with Change in Flow Rate
+    
+    Formula (New Flow Rate with Change in Pump RPM)
+        Finding out what the New Flow Rate will be if the pump's rpm is Increased or decreased
+        Flow Rate (New) = RPM (New) * [(Old Flow Rate) / (Old RPM)]
+
+        Metric
+            1200rpm * [(57 l/s) / 1300rpm]
+            1200rpm * 0.0438 l/s.rpm
+            52.615 l/s
+            New flow rate is 52.615l/s
+            m^3/s can be used instead of l/s, just divide by 1000 first
+            
+        Imperial
+            1200rpm * [903.471gpm/1300rpm]
+            1200rpm * 0.69498gpm/rpm
+            833.97gpm
+            New flow rate is 833.97gpm
+
+    Formula (New Flow Rate with Change Impeller Diameter)
+        Finding out the new flow rate when the diameter of impeller changes
+        Flow Rate (New) = Diameter (New) * [(Old Flow Rate) / (Old Diameter)]
+
+        Metric
+            184.56mm * [(57 l/s) / (200mm)]
+            184.56mm * 0.285 l/s.mm
+            52.5996 l/s 
+            New Flow Rate = 52.5996 l/s
+
+        Imperial
+            7.26in * [(903.5gpm) / (7.87in)]
+            7.26in * 114.8gpm/in
+            833gpm
+            New Flow Rate = 833gpm 
+            
+    Formula (New RPM with Change in Flow Rate)
+        Finding out what the New RPM will be if the flow rate is Increased or decreased
+        RPM(New) = RPM(Old) * [(New Flow Rate) / (Old Flow Rate)]
+
+        Metric
+            1200rpm * [(57 l/s) / (52.6 l/s)]
+            1200 rpm * 1.0837%
+            1300rpm
+            New RPM = 1300rpm
+            
+        Imperial
+            1200rpm * [(903.5gpm) / (833.97gpm)]
+            1200rpm * 1.0837%
+            1300rpm
+            New RPM = 1300rpm
+
+    Formula (New Head Pressure with Change in RPM)
+        Finding out what the New Head Pressure will be if the RPM is Increased or decreased
+        Head Pressure (New) = RPM(New)^2 * [(Old Head Pressure) / (Old RPM^2)]
+
+        Metric 
+            1200rpm^2 * [(428kPa) / (1300rpm^2)]
+            1440000rpm * [(428kPa) / (1690000rpm)]
+            1440000rpm * 0.000253kPa/rpm
+            364kPa
+            New Head Pressure is 364kPa
+            
+        Imperial
+            1200rpm^2 * [(143ft.H2O) / (1300rpm^2)]
+            1440000rpm * [(143 ft.H2O) / (1690000rpm)]
+            1440000rpm * 0.00008474 ft.H2O/rpm
+            122ft.H2O
+            New Head Pressure = 122ft.H2O
+
+    Formula (New Head Pressure with Change in Flow Rate)
+        Finding out what the New Head Pressure will be if the Flow Rate is Increased or decreased
+        Head Pressure (New) = Head Pressure (Old) * [(New Flow Rate) / (Old Flow Rate)]
+        
+        Metric 
+            428kPa * [(52.6 l/s) / (57 l/s)]^2
+            428kPa * (0.9228)^2
+            428kPa * 0.8516%
+            364kPa
+            New Head Pressure = 364kPa
+            
+        Imperial
+            143ft.H2O * [(833gpm) / (903.5rpm)]^2
+            143ft.H2O * 0.9231^2 
+            143ft.H2O * 0.8527%
+            122ft.H2O
+            New Head Pressure = 122ft.H2O
+
+    Formula (New Pump Power with Change in RPM)
+        Finding out what the Pump Power will be if the RPM is Increased or decreased
+        Pump Power (New) = RPM(New)^3 * [(Old Power) / (Old RPM^3)]
+        
+        Metric 
+            1200rpm^3 * [(45kW) / (1300rpm^3)]
+            1728000000rpm * [(45kW) / (2197000000rpm)]
+            1728000000rpm * 0.00000002048kW/rpm
+            35.4kW
+            New Pump Power is 35.4kW
+            
+        Imperial
+            1200rpm^3 * [(60.35HP) / (1300rpm^3)]
+            1728000000rpm * [(60.35HP) / (2197000000rpm)]
+            1728000000rpm * 0.00000002747 HP/rpm
+            47.5HP
+            New Pump Pwer = 47.5HP
+            
+    Formula (New Impeller Diameter with Change in Flow Rate)
+        Finding out what the Impeller Diameter will be if the Flow Rate is Increased or decreased
+        Diameter (New) = Diameter (Old) * [(New Flow Rate) / (Old Flow Rate)]
+        
+        Metric
+            200mm * [(52.6 l/s) / (57 l/s)]
+            200mm * 0.9228%
+            184.56mm
+            New Impeller diameter is at 184.56mm
+            
+        Imperial
+            7.87ln * [(833.7gpm) / (903.5gpm)]
+            7.87in * 0.9228% 
+            7.26in
+            New Impeller Diameter is at 7.26in
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[End]
+
+
+
+
+
+
+
 
 
 
