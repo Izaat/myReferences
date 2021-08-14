@@ -237,6 +237,71 @@ CONTENT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 06. VAV System (Variable Air Volume System)
 
+    Overview
+    VAV Terminal
+    Fan assisted VAV terminal
+    VAV System operation
+    
+    Overview
+        Supply air temperature is kept at constant
+        Volume/Flow Rate of air supply is varied
+        VAVs are more energy efficient than CAV (Constant Air Volume System)
+        CAVs are easier to install than VAVs
+        CAVs are installed above ceilings and users can't control the temperature of individual room (Centralized temperature)
+        VAVs can control multiple rooms individually (ie Room A colder than room B)
+        Heatloading
+            Number of people/equipment in the room
+            Direct sunlight/shade position of the room
+            etc
+        CAVs are just simple ductings that redirects cold air to a room through a diffuser (Ceiling outlet) - This will look like simple 90deg pipe
+        Like CAVs, VAVs are connected to the AHU's Supply Duct (AHU Air Output - Cold Air), where Return Duct is the input of AHU (warm air), BUT has "VAV Terminal" in between.
+        Typical temperature of Supply Air (AHU Output) = 13degC
+
+    VAV Terminal
+        A box like structure located in roof ceiling, installed between AHU Supply duct and the Ceiling Diffuser (Ceiling Outlet)
+        CAVs are installed directly to the AHU, BUT VAVs has a box like structure to control a zone
+        Every VAV Terminal has 
+            Wall mounted thermostat, 
+            Butterfly valve / damper controller (to control air supply from AHU Supply Duct), 
+            Reheater unit (For colder countries)
+            Air Flow sensor 
+                Located before the damper and this controls the damper controller
+                This will be located at the center of the cross-section of duct (Note: Air flows the fastest at the center of pipes than the walls of pipes)
+                To calculate the average air flow, the sensor will require an "X-Shape" structure made of pipes in the ducting
+        Control Panel
+            Controller >
+                Pressure Sensor > Airflow sensor
+                Transformer
+                Thermostat
+                Actuator > Shaft > Damper
+                Link to other devices ie BMS or Computer
+        Dampers doesn't usually close fully (For fresh air to enter the room)
+
+    Fan Assisted VAV Terminal
+        This centrifugal type fan will be located next to the VAV Terminal to redirect air from the room and back into the VAV Terminal
+        Inlet of this fan is usually contains a filter
+
+    VAV System Operation
+        Because of the variable damping system, the supply air duct fluctuates in air pressure
+        Example:
+            If all dampers along the AHU Supply Duct are open at 100%, the VAV Terminal nearest to the AHU will get most of the supply air pressure
+            And pressure furthest from the AHU will experience pressure drop due to the first VAV Terminal
+        To solve this problem, a pressure sensor will be installed at the furthest end of the AHU Supply duct, 
+        This pressure sensor will control the AHU's outlet fan's VFD drive
+        If the pressure at the furthest end of the duct is low, the VFD will increase the speed of the AHU's outlet fan, hence increasing the pressure 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07. Pump Calculations
+
+
+
+
+
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[END]
+
+
