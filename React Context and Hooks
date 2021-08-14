@@ -1,0 +1,152 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+React Context and Hooks
+https://www.github.com/iamshaunjp/react-context-hooks
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+01. Context API and Hooks
+02. Context and Provider
+03. Accessing Context
+04. Updating Context Data
+05. Creating Multiple Contexts
+06. Consuming Multiple Contexts
+07. Hooks
+08. useState Hook
+09. useState Forms
+10. useEffect Hook
+11. Hooks with Context
+12. Multiple Contexts with Hooks
+13. Creating Context with Functional Components
+14. Reading List - App Project
+15. Reducers, Actions and State
+16. Adding a Reducer
+17. Adding Local Storage
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Context API and Hooks
+    
+    Context API: Clean and Easy way to share state between components without having to pass props down all the time
+    Hooks: Allows to do things inside functional components that can normally be done in class components (ie useStates, lifeCycleMethod)
+    When being used together, Redux-like state management system can be built (Similar like how Redux behaves but without installation)
+    Read: https://reactjs.org/docs/context.html
+    
+    Creating a react App project
+        In VSCode Terminal, enter a desired folder (ie Folder ABCD)
+        Type in "npx create-react-app contextapp"
+        This will create a project in Folder ABCD (E:\ABCD\contextapp\)
+        Enter "contextapp" folder and type in "npm start" to start
+        This will open a default react app in browser
+        
+        Remove 
+            ../src/App.test.js, 
+            ../src/logo.svg, 
+            ../src/App.css
+        App.js
+            Remove imports (ie logo and App.css)
+            Remove header class
+        Add "component" folder in src
+            Add files
+                ../src/component/Navbar.js
+                ../src/component/BookList.js
+    
+    Navbar.js
+        import React, {Component} from 'react';
+        
+        class Navbar extends Component {
+            render() {
+                return(
+                    <nav>
+                        <h1>Context App</h1>
+                        <ul>
+                            <li>Home</li>
+                            <li>About</li>
+                            <li>Contact</li>
+                        </ul>
+                    </nav>
+                );
+            }
+        }
+        export default Navbar;
+
+    App.js
+        import React from 'react';
+        import Navbar from './components/Navbar';
+        import BookList from './components/BookList';
+        
+        function App() {
+            return(
+                <div className="App">
+                    <Navbar />
+                    <BookList />
+                </div>
+            );
+        }
+        export default App;
+
+    BookList.js
+        import React, {Component} from 'react';
+        
+        class BookList extends Component {
+            render() {
+                return (
+                    <div className='book-list'>
+                        <ul>
+                            <li>Book 1</li>
+                            <li>Book 2</li>
+                            <li>Book 3</li>
+                        </ul>
+                    </div>
+                );    
+            }
+        }
+        export default BookList;
+
+    index.css 
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+                "Ubuntu", "Cantarell", "Fire Sans", "Droid Sans", "Helvetica Neue",
+                sans-serif;
+            -webkit-font-smotthing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .App {
+            max-width: 400px;
+            margin: 30px auto;
+            text-align: center;
+        }
+        nav{
+            padding: 5px;
+        }
+        nav ul {
+            padding: 0;
+        }
+        nav ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        .book-list {
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .book-list ul{
+            padding: 0;
+            list-style-type: none;
+        }
+        .book-list li {
+            padding: 10px;
+            margin: 10px auto;
+            border-radius: 10px;            
+        }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Context and Provider
+
+
+
+
+
+
+
+
+
