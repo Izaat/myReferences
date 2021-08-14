@@ -462,7 +462,7 @@
 
 ////////////////////////////////////////////////////////////////
 //35. SWITCH STATEMENTS
-    https://www.youtube.com/watch?v=PkZNo7MFNFg&t=5776s
+
     var names = ["Hole-in-one", "Eagle", "Birdie", "Par", "Bogey", "Double Bogey", "Go Home!"];
     function golfScore(par, strokes){
         if (strokes == 1){
