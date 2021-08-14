@@ -255,7 +255,8 @@ CONTENT
             Direct sunlight/shade position of the room
             etc
         CAVs are just simple ductings that redirects cold air to a room through a diffuser (Ceiling outlet) - This will look like simple 90deg pipe
-        Like CAVs, VAVs are connected to the AHU's Supply Duct (AHU Air Output - Cold Air), where Return Duct is the input of AHU (warm air), BUT has "VAV Terminal" in between.
+        Like CAVs, VAVs are connected to the AHU's Supply Duct (AHU Air Output - Cold Air), where Return Duct is the input of AHU (warm air)
+        Unlike CAVs, VAVs has "VAV Terminal" in between.
         Typical temperature of Supply Air (AHU Output) = 13degC
 
     VAV Terminal
