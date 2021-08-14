@@ -17,11 +17,34 @@ CONTENTS
 12. Async code with Redux
 13. Thunk
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Planning the App
+    
+    App Structure >
+        App (Root) >
+            Navbar >
+                Signed in links
+                Signed out links
+            Dashboard > /dashboard
+                Project List
+                Notifications
+            Project Details > /project/:id
+            Create Project > /create
+            Sign in > /signin
+            Sign up > /signup
+
+    Backend Structure
+        |-------------------------|---------------------|
+        |   Client/Browser        |   Server/Firebase   |
+        |-------------------------|---------------------|
+        |                         | > Firestore db      |
+        |   React App > Redux  >  | > Firebase Auth     |
+        |                         | > Cloud Functions   |
+        |-------------------------|---------------------|
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
+02. Setting Up
 
 
 
