@@ -10,6 +10,7 @@ CONTENT
 05. Auto-Reset with Triggering and Measuring
 06. Probe Loading and Reference Waveforms
 07. UART/Serial Trigger & Decode
+08. Differential Probes
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Preset and Autoset (Action Section)
@@ -291,6 +292,31 @@ CONTENT
             CR: Carriage Return
             LF: Line Feed
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+08. Differential Probes and 2 channels
+    
+    Used for circuits that does not have ground connections (i.e powered up devices with 2 pin AC Socket - All ends lead to Neutral instead of ground)
+    Using the ground lead of scopes for testing will lead to damaging the scope
+    The probe that comes with the oscilloscope is connected directly to the ELCB in the mains
+    Multimeters are "floating" since they are battery powered and not connected to ground, therefore enabling reading signals from AC
+    Reading from Multimeters are generally not ground referenced
+    Oscilloscopes however are connected to ground, hence the ground reference readings
+    To work around this, in the case of testing AC circuits without grounding, use differential probes or use 2 channels with mathematics operations
+    
+    Applications for Differential Probes
+        Power
+            Power supply
+            DC-DC converter
+            Inverters
+            Motor drivers
+        Audio
+            Differential Audio/Balanced
+            Power Amplifiers
+        Serial Data/Busses
+            CAN
+            USB
+            Ethernet
+    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 [End]
 
