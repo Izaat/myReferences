@@ -141,6 +141,85 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 02. Context and Provider
+    Read 11 Points
+    
+    Files (Existing)
+        src/component/Navbar.js
+        src/component/BookList.js    
+        src/App.js
+        src/index.css
+
+    Add another folder in src and name it "contexts"
+    Add file in this folder and name it ThemeContext.js
+        src/contexts/ThemeContext.js
+
+    ThemeContext.js
+        import React, {createContext, Component} from 'react';
+        
+        export const ThemeContext = createContext();   //01. Creates a context and store into "ThemeContext"
+        
+        //02. Create another class component (contains state) and the state will be shared between different components
+            //Type in "cc" to for empty class component
+                //class extends Component {
+                //    state = {}
+                //    render() {
+                //        return();
+                //    }
+                //}
+                //export default ;
+
+        class ThemeContextProvider extends Component {
+            state = {
+                isLightTheme: true                                        //03. Using LightTheme or not
+                //light: {syntax: '#555'}                                 //04. Dark Grey color for texts
+                //light: {syntax: '#555', ui: '#ddd'}                     //05. Light grey buttons    
+                light: {syntax: '#555', ui: '#ddd', bg: '#eee'}           //06. Light grey background
+                dark: {syntax: '#ddd', ui: '#333', bg: '#555'}
+            }
+            render() {
+                //return(); 
+                return(                                                   //07. Creates JSX wrapper to be pushed to App.js
+                    //<ThemeContext.Provider>                       
+                    <ThemeContext.Provider value={{...this.state}}>       //08. Creates value property that takes data from the state
+                        {this.props.children}                             //11. This refers the Navbar and Booklist in App.js
+                    </ThemeContext.Provider>
+                );
+            }
+        }
+        export default ThemeContextProvider;
+
+    App.js
+        import React from 'react';
+        import Navbar from './components/Navbar';
+        import BookList from './components/BookList';
+        import ThemeContextProvider from './contexts/ThemeContext';        //09. import to App.js
+        
+        function App() {
+            return(
+                <div className="App">
+                    //<Navbar />
+                    //<BookList />
+                    <ThemeContextProvider>                                 //10. Adds the wrapper. Navbar and BookList will be attached to props
+                        <Navbar />
+                        <BookList />
+                    </ThemeContextProvider>
+                </div>
+            );
+        }
+        export default App;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Accessing Context
+
+    Files (Existing)
+        src/component/Navbar.js
+        src/component/BookList.js    
+        src/App.js (From Topic 2)
+        src/index.css
+        src/contexts/ThemeContext.js (From Topic 2)
+
+
+
 
 
 
