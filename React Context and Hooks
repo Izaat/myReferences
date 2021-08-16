@@ -171,10 +171,10 @@ CONTENTS
 
         class ThemeContextProvider extends Component {
             state = {
-                isLightTheme: true                                        //03. Using LightTheme or not
+                isLightTheme: true,                                       //03. Using LightTheme or not
                 //light: {syntax: '#555'}                                 //04. Dark Grey color for texts
                 //light: {syntax: '#555', ui: '#ddd'}                     //05. Light grey buttons    
-                light: {syntax: '#555', ui: '#ddd', bg: '#eee'}           //06. Light grey background
+                light: {syntax: '#555', ui: '#ddd', bg: '#eee'},          //06. Light grey background
                 dark: {syntax: '#ddd', ui: '#333', bg: '#555'}
             }
             render() {
