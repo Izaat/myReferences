@@ -335,6 +335,87 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 05. Updating Context Data
+    
+    Read 11 points
+    Using ThemeToggle.js to change the state in ThemeContext.js
+        ../src/component/ThemeToggle.js
+    
+    Files (Existing)
+        src/component/Navbar.js (From Topic 4)
+        src/component/BookList.js (From Topic 3)
+        src/App.js (From Topic 2)
+        src/index.css (From topic 1)
+        src/contexts/ThemeContext.js (From Topic 2)
+
+    ThemeToggle.js                                                             //01. Create the ThemeToggle file
+        import React, {Component} from 'react';
+        import {ThemeContext} from '../contexts/ThemeContext';                 //06. import ThemeContext for contextType
+        
+        class ThemeToggle extends Component {
+            static contextType = ThemeContext                                  //07. Add contextType and link this to ThemeContext
+            render () {
+                const {toggleTheme} = this.context;                            //08. Destructuring the context
+                return (
+                    //<button onClick={}>Toggle the theme</button>             //02. Adds the toggle button
+                    <button onClick={toggleTheme}>Toggle the theme</button>    //09. Adds the event
+                );
+            }
+        }
+        export default ThemeToggle;
+
+    ThemeContext.js
+        import React, {createContext, Component} from 'react';
+        
+        export const ThemeContext = createContext();  
+
+        class ThemeContextProvider extends Component {
+            state = {
+                isLightTheme: true,           
+                light: {syntax: '#555', ui: '#ddd', bg: '#eee'},   
+                dark: {syntax: '#ddd', ui: '#333', bg: '#555'}
+            }
+            
+            //toggleTheme = () => {}                                                                 //03. Adds the toggle state changer
+            toggleTheme = () => {
+                this.setState({isLightTheme: !this.state.isLightTheme});
+            }    
+            
+            render() {
+                return(                                 
+                    //<ThemeContext.Provider value={{...this.state}}> 
+                    //<ThemeContext.Provider value={{...this.state, toggleTheme}}>                   //04. Adds toggleTheme variable (can be of another name)
+                    <ThemeContext.Provider value={{...this.state, toggleTheme: this.toggleTheme}}>   //05. Sets to the toggleTheme state changer as defined above
+                        {this.props.children}       
+                    </ThemeContext.Provider>
+                );
+            }
+        }
+        export default ThemeContextProvider;
+
+    App.js
+        import React from 'react';
+        import Navbar from './components/Navbar';
+        import BookList from './components/BookList';
+        import ThemeContextProvider from './contexts/ThemeContext';  
+        import ThemeToggle from './components/ThemeToggle';                     //10. Imports ThemeToggle
+        
+        function App() {
+            return(
+                <div className="App">
+                    <ThemeContextProvider>   
+                        <Navbar />
+                        <BookList />
+                        <ThemeToggle />                                        //11. Add ThemeToggle to be rendered by App.js
+                    </ThemeContextProvider>
+                </div>
+            );
+        }
+        export default App;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+06. Creating Multiple Contexts
+
+
 
 
 
