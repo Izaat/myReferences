@@ -109,6 +109,97 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 03. Navbar
 
+    App Structure
+        src/components/auth
+            SignIn.js
+            SignOut.js
+        src/components/dashboard
+            Dashboard.js
+            Notifications.js
+        src/components/layout
+            Navbar.js
+            SignedInLinks.js
+            SignedOutLinks.js
+        src/components/project
+            CreateProject.js
+            ProjectDetails.js
+            ProjectList.js
+            ProjectSummary.js 
+        src 
+            App.js (Topic 2)
+
+    Navbar.js
+        import React from 'react'
+        import {Link} from 'react-router-dom'
+        import SignedInLinks from './SignedInLinks'
+        import SignedOutLinks from './SignedOutLinks'
+        
+        const Navbar = () => {
+            return (
+                <nav className="nav-wrapper grey darken-3">
+                    <div className="container">
+                        <Link to='/' className="brand-logo">React App</Link>
+                        <SignedInLinks />
+                        <SignedOutLinks />
+                    </div>
+                </nav>
+            )
+        }
+        export default Navbar
+
+    App.js
+        import React from 'react';
+        import {BrowserRouter} from 'react-router-dom'
+        import Navbar from './components/layout/Navbar'
+        
+        function App() {
+            return(
+                <BrowserRouter>
+                    <div className="App">
+                        //<hi>ReactApp</h1>
+                        <Navbar />
+                    </div>
+                </BrowserRouter>                
+            );
+        }
+        export default App;
+
+    SignedInLinks.js
+        import React from 'react'
+        import {Link} from 'react-router-dom'
+        
+        const SignedInLinks = () => {
+            return (
+                <ul className="right">
+                    <li><NavLink to ='/'>New Project</NavLink></li>
+                    <li><NavLink to ='/'>Log Out</NavLink></li>
+                    <li><NavLink to ='/' className='btn btn-floating pink lighten-1'>Icon</NavLink></li>
+                </ul>
+            )
+        }
+        export default SignedInLinks
+
+    SignedOutLinks.js
+        import React from 'react'
+        import {Link} from 'react-router-dom'
+        
+        const SignedOutLinks = () => {
+            return (
+                <ul className="right">
+                    <li><NavLink to ='/'>Signup</NavLink></li>
+                    <li><NavLink to ='/'>Login</NavLink></li>
+                </ul>
+            )
+        }
+        export default SignedOutLinks
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. Dashboard
+
+
+
+
+
 
 
 
