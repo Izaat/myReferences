@@ -210,7 +210,7 @@ CONTENTS
         export default App;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-03. Accessing Context 1
+03. Accessing Context Method 1
     
     ContextType enables ThemeContext.js to access data in Navbar.js via App.js
     This can only be used in class component and not functional component
@@ -276,14 +276,68 @@ CONTENTS
         export default BookList;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-03. Accessing Context 2
-
+04. Accessing Context Method 2
+    
+    Using ThemeContext.Consumer
+    This method can consume multiple contexts. Method 1 can only consume single context
+    
     Files (Existing)
-        src/component/Navbar.js (From Topic 3)
+        src/component/Navbar.js (From Topic 2)
         src/component/BookList.js (From Topic 3)
         src/App.js (From Topic 2)
         src/index.css (From topic 1)
         src/contexts/ThemeContext.js (From Topic 2)
+
+    Navbar.js
+        import React, {Component} from 'react';
+        import {ThemeContext} from '../contexts/ThemeContext';                     //01. Imports ThemeContext.js
+        
+        class Navbar extends Component {
+            render() {
+                return(
+                    //<nav style={{background: theme.ui, color: theme.syntax}}>   //02. Sets "theme" to the viewport
+                    //    <h1>Context App</h1>
+                    //    <ul>
+                    //        <li>Home</li>
+                    //        <li>About</li>
+                    //        <li>Contact</li>
+                    //    </ul>
+                    //</nav>
+                    
+                    //<ThemeContext.Consumer></ThemeContext.Consumer>                                    //03. Adds ThemeContext.Consumer
+                    //<ThemeContext.Consumer>{(context) => {return( *JSX* )}}</ThemeContext.Consumer>    //04. The full Consumer
+                    <ThemeContext.Consumer>{(context) => {
+
+                        //const {}                                                       //05. The curly braces creates multiple variables
+                        const {isLightTheme, light, dark} = context;                     //06. Extracting properties from "context" instead of "this.context" (Topic 3) and store into individual variable names created
+                        //const theme                                                    //07. This creates another variable "theme" as the active theme
+                        const theme = isLightTheme ? light : dark;                       //08. If isLightTheme is true, then set "theme" as light. If false, set "theme" as dark (object ? true : false)
+
+                        return(
+
+                            <nav style={{background: theme.ui, color: theme.syntax}}> 
+                                <h1>Context App</h1>
+                                <ul>
+                                    <li>Home</li>
+                                    <li>About</li>
+                                    <li>Contact</li>
+                                </ul>
+                            </nav> 
+
+                        )
+                    }}
+                    </ThemeContext.Consumer>
+                );
+            }
+        }
+        export default Navbar;
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. Updating Context Data
+
+
+
 
 
 
