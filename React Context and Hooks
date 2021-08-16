@@ -209,14 +209,82 @@ CONTENTS
         export default App;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-03. Accessing Context
-
+03. Accessing Context 1
+    
+    ContextType enables ThemeContext.js to access data in Navbar.js via App.js
+    This can only be used in class component and not functional component
+    
     Files (Existing)
         src/component/Navbar.js
         src/component/BookList.js    
         src/App.js (From Topic 2)
         src/index.css
         src/contexts/ThemeContext.js (From Topic 2)
+
+    Navbar.js
+        import React, {Component} from 'react';
+        import {ThemeContext} from '../contexts/ThemeContext';                  //01. Imports ThemeContext.js
+        
+        class Navbar extends Component {
+            static contextType = ThemeContext;                                  //02. Adds component and store as contextType
+            render() {
+                console.log(this.context);                                      //03. This will show "...this.state" from ThemeContext.js (ie "dark", "isLightTheme", "light")
+                //const {}                                                      //04. The curly braces creates multiple variables
+                const {isLightTheme, light, dark} = this.context;               //05. Extracting properties from this.context and store into individual variable names created
+                //const theme                                                   //06. This creates another variable "theme" as the active theme
+                const theme = isLightTheme ? light : dark;                      //07. If isLightTheme is true, then set "theme" as light. If false, set "theme" as dark (object ? true : false)
+                return(
+                    //<nav>
+                    <nav style={{background: theme.ui, color: theme.syntax}}>   //08. Sets "theme" to the viewport
+                        <h1>Context App</h1>
+                        <ul>
+                            <li>Home</li>
+                            <li>About</li>
+                            <li>Contact</li>
+                        </ul>
+                    </nav>
+                );
+            }
+        }
+        export default Navbar;
+
+    BookList.js
+        import React, {Component} from 'react';
+        import {ThemeContext} from '../contexts/ThemeContext';         //09. Imports ThemeContext.js
+
+        class BookList extends Component {
+            static contextType = ThemeContext;                         //10. Adds component and store as contextType
+            render() {
+                const {isLightTheme, light, dark} = this.context;      //11. See point 05
+                const theme = isLightTheme ? light : dark;             //12. See point 07
+                return (
+                    //<div className='book-list'>
+                    <div className='book-list' style={{background: theme.bg, color: theme.syntax}}> //13.See point 08
+                        <ul>
+                            //<li>Book 1</li>
+                            //<li>Book 2</li>
+                            //<li>Book 3</li>
+                            <li style={{background: theme.ui}}>Book 1</li>
+                            <li style={{background: theme.ui}}>Book 2</li>
+                            <li style={{background: theme.ui}}>Book 3</li>
+                        </ul>
+                    </div>
+                );    
+            }
+        }
+        export default BookList;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Accessing Context 2
+
+    Files (Existing)
+        src/component/Navbar.js (From Topic 3)
+        src/component/BookList.js (From Topic 3)
+        src/App.js (From Topic 2)
+        src/index.css (From topic 1)
+        src/contexts/ThemeContext.js (From Topic 2)
+
+
 
 
 
