@@ -5,21 +5,22 @@ https://www.github.com/iamshaunjp/react-context-hooks
 CONTENTS
 01. Context API and Hooks
 02. Context and Provider
-03. Accessing Context
-04. Updating Context Data
-05. Creating Multiple Contexts
-06. Consuming Multiple Contexts
-07. Hooks
-08. useState Hook
-09. useState Forms
-10. useEffect Hook
-11. Hooks with Context
-12. Multiple Contexts with Hooks
-13. Creating Context with Functional Components
-14. Reading List - App Project
-15. Reducers, Actions and State
-16. Adding a Reducer
-17. Adding Local Storage
+03. Accessing Context Method 1
+04. Accessing Context Method 2
+05. Updating Context Data
+06. Creating Multiple Contexts
+07. Consuming Multiple Contexts
+08. Hooks
+09. useState Hook
+10. useState Forms
+11. useEffect Hook
+12. Hooks with Context
+13. Multiple Contexts with Hooks
+14. Creating Context with Functional Components
+15. Reading List - App Project
+16. Reducers, Actions and State
+17. Adding a Reducer
+18. Adding Local Storage
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Context API and Hooks
