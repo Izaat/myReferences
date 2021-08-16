@@ -46,6 +46,69 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 02. Setting Up
 
+    Creating a react App project
+        In VSCode Terminal, enter a desired folder (ie Folder ABCD)
+        Type in "npx create-react-app reactapp"
+        This will create a project in Folder ABCD (E:\ABCD\reactapp\)
+        Enter "reactapp" folder and install React DOM. Type in "npm install react-router-dom"
+            Once installed, remember to import "BrowserRouter" to App.js (See App.js)
+        Once done, type in "npm start" to start app
+        This will open a default react app in browser
+        
+        Use materializecss for the layout
+            https://www.materializecss.com/getting-started.html
+            From HTML Setup <head>
+                IconFont + Import
+            Paste the codes into ../reactapp/public/index.html (Bottom of the <head> tag, above <title> tag)   
+
+        Create "components" folder in "src" folder and create 4 folders under "components" folder
+        Refer to Topic 1 App Structure
+            ../src/components/auth
+                SignIn.js
+                SignOut.js
+            ../src/components/dashboard
+                Dashboard.js
+                Notifications.js
+            ../src/components/layout
+                Navbar.js
+                SignedInLinks.js
+                SignedOutLinks.js
+            ../src/components/project
+                CreateProject.js
+                ProjectDetails.js
+                ProjectList.js
+                ProjectSummary.js                      //Will be nested with ProjectList.js
+            
+        Remove 
+            ../src/App.test.js, 
+            ../src/logo.svg, 
+            ../src/App.css
+            
+        App.js
+            Remove imports (ie logo and App.css)
+            Remove header class
+
+    App.js
+        import React from 'react';
+        import {BrowserRouter} from 'react-router-dom'  //After installing React DOM
+        
+        function App() {
+            return(
+                <BrowserRouter>
+                    <div className="App">
+                        <hi>ReactApp</h1>
+                    </div>
+                </BrowserRouter>                
+            );
+        }
+        export default App;
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Navbar
+
+
+
 
 
 
