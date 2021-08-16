@@ -58,7 +58,9 @@ CONTENTS
         Use materializecss for the layout
             https://www.materializecss.com/getting-started.html
             From HTML Setup <head>
-                IconFont + Import
+                IconFont
+            From CDN    
+                Compiled Minified CSS
             Paste the codes into ../reactapp/public/index.html (Bottom of the <head> tag, above <title> tag)   
 
         Create "components" folder in "src" folder and create 4 folders under "components" folder
