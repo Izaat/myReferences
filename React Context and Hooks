@@ -482,6 +482,88 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 07. Consuming Multiple Contexts
+    
+    Read 9 points
+    Using 2 properties "contextType" in a single component file
+        Can't have 2 "contextType" within a file, the contextTypes will conflict with each other
+        First method is to use 1 contextType and the other will be consumer tag (i.e <ThemeContext.Consumer>)
+        Second method is to use 2 consumer tags (i.e <ThemeContext.Consumer>)
+    
+    Files (Existing)
+        src/component/Navbar.js (From Topic 4)
+        src/component/BookList.js (From Topic 3)
+        src/component/ThemeToggle.js (From Topic 5)
+        src/App.js (From Topic 6)
+        src/index.css (From Topic 1)
+        src/contexts/ThemeContext.js (From Topic 5)
+        src/contexts/AuthContext.js (From Topic 6)
+
+    Navbar.js
+        import React, {Component} from 'react';
+        import {ThemeContext} from '../contexts/ThemeContext';  
+        import (AuthContext) from '../contexts/AuthContext';                          //01. Imports AuthContext
+        
+        class Navbar extends Component {
+            render() {
+                return(
+                    //<AuthContext.Consumer>                                          //02. Wraps up "ThemeContext.Consumer" with "AuthContext.Consumer"
+                    //<AuthContext.Consumer>{(authContext) => ()}                     //05. Add a function to return JSX which is all of ThemeContext.Consumer tag
+                    //    //<ThemeContext.Consumer>{(context) => {
+                    //    <ThemeContext.Consumer>{(themeContext) => {                 //03. Rename the context from generic "context" to "themeContext"
+                    //        const {isLightTheme, light, dark} = themeContext;       //04. Rename the context from generic "context" to "themeContext"
+                    //        const theme = isLightTheme ? light : dark; 
+                    //        return(
+                    //            <nav style={{background: theme.ui, color: theme.syntax}}> 
+                    //                <h1>Context App</h1>
+                    //                <ul>
+                    //                    <li>Home</li>
+                    //                    <li>About</li>
+                    //                    <li>Contact</li>
+                    //                </ul>
+                    //            </nav> 
+                    //        )
+                    //    }}</ThemeContext.Consumer>
+                    //</AuthContext.Consumer>
+                    
+                    <AuthContext.Consumer>{(authContext) => (                          //06. All ThemeContext.Consumer tag inside of the function
+                        <ThemeContext.Consumer>{(themeContext) => { 
+                            const {isAuthenticated, toggleAuth} = authContext;         //07. Refer to AuthContext.js for the properties
+                            const {isLightTheme, light, dark} = themeContext;   
+                            const theme = isLightTheme ? light : dark; 
+                            return(
+                                <nav style={{background: theme.ui, color: theme.syntax}}> 
+                                    <h1>Context App</h1>
+                                    <div onClick={toggleAuth}>                         //09. Enables a button to toggle between Logged in or logged out
+                                        {isAuthenticated ? 'LoggedIn' : 'LoggedOut'}   //08. Destructure the authentication to toggle between true (Logged in) or false (Logged out)
+                                    </div>
+                                    <ul>
+                                        <li>Home</li>
+                                        <li>About</li>
+                                        <li>Contact</li>
+                                    </ul>
+                                </nav> 
+                            )
+                        }}</ThemeContext.Consumer>
+                    )}</AuthContext.Consumer>                    
+                );
+            }
+        }
+        export default Navbar;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+08. Hooks
+
+    Files (Existing)
+        src/component/Navbar.js (From Topic 7)
+        src/component/BookList.js (From Topic 3)
+        src/component/ThemeToggle.js (From Topic 5)
+        src/App.js (From Topic 6)
+        src/index.css (From Topic 1)
+        src/contexts/ThemeContext.js (From Topic 5)
+        src/contexts/AuthContext.js (From Topic 6)
+
+
+
 
 
 
