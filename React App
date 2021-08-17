@@ -195,6 +195,129 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 04. Dashboard
+    
+    Read 8 points
+    
+    App Structure
+        src/components/auth
+            SignIn.js
+            SignOut.js
+        src/components/dashboard
+            Dashboard.js
+            Notifications.js
+        src/components/layout
+            Navbar.js                     (Topic 3)
+            SignedInLinks.js              (Topic 3)
+            SignedOutLinks.js             (Topic 3)
+        src/components/project
+            CreateProject.js
+            ProjectDetails.js
+            ProjectList.js
+            ProjectSummary.js 
+        src 
+            App.js                        (Topic 3)
+
+    Dashboard.js
+        import React, {Component} from 'react'
+        import Notifications from './Notifications'
+        import ProjectList from '../project/ProjectList'                        //04. Import ProjectList file
+        
+        class Dashboard extends Component {
+            render() {
+                return(
+                    <div className="dashboard container">
+                        <div className="row">
+                            //<div className="col s12 m6"></div>                //01. For small screens, 12 columns. Medium sized screen, 6 columns - Project on the Left
+                            <div className="col s12 m6">
+                                <ProjectList />                                 //05. Link to ProjectList
+                            </div>
+                            
+                            //<div className="col s12 m5 offset-m1"></div>      //02. Medium size screen 5 columns where 1 is for spacing - Notifications on the right
+                            <div className="col s12 m5 offset-m1">
+                                <Notifications />
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        }
+        export default Dashboard
+
+    Notifications.js
+        import React from 'react'
+        
+        const Notifications = () => {
+            return (
+                <div>
+                    <p>Notifications</p>
+                </div>
+            )
+        }
+        export default Notifications
+
+    ProjectList.js (Functional component)
+        import React from 'react'
+
+        const ProjectList = () => {
+            return (
+                <div className="project-list section">                              //03. Add 3 cards
+                
+                    <div className="card z-depth-0 project-summary">
+                        <div className="card-content grey-text text-darken-3">
+                            <span className="card-title">Project Title</span>
+                            <p>Posted by ...</p>
+                            <p className="grey-text">Date</p>
+                        </div>
+                    </div>
+                    
+                    <div className="card z-depth-0 project-summary">
+                        <div className="card-content grey-text text-darken-3">
+                            <span className="card-title">Project Title</span>
+                            <p>Posted by ...</p>
+                            <p className="grey-text">Date</p>
+                        </div>
+                    </div>
+                    
+                    <div className="card z-depth-0 project-summary">
+                        <div className="card-content grey-text text-darken-3">
+                            <span className="card-title">Project Title</span>
+                            <p>Posted by ...</p>
+                            <p className="grey-text">Date</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            )
+        }
+        export default ProjectList
+
+    App.js
+        import React from 'react';
+        //import {BrowserRouter} from 'react-router-dom'
+        import {BrowserRouter, Switch, Route} from 'react-router-dom'              //07. Add Switch and Route
+        import Navbar from './components/layout/Navbar'
+        import Dashboard from './components/dashboard/Dashboard'                   //08. Import Dashboard
+        
+        function App() {
+            return(
+                <BrowserRouter>
+                    <div className="App">
+                        <Navbar />
+                        //<Switch></Switch>                                        //06. For loading 1 route at a time
+                        <Switch>
+                            <Route path='/' component={Dashboard} />
+                        </Switch> 
+                    </div>
+                </BrowserRouter>                
+            );
+        }
+        export default App;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. Project Summary Component
+
+
+
 
 
 
