@@ -414,6 +414,75 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 06. Creating Multiple Contexts
+    
+    Create authentication context file
+        src/contexts/AuthContext.js
+        The base program is similar to ThemeContext.js
+    
+    Files (Existing)
+        src/component/Navbar.js (From Topic 4)
+        src/component/BookList.js (From Topic 3)
+        src/component/ThemeToggle.js (From Topic 5)
+        src/App.js (From Topic 5)
+        src/index.css (From topic 1)
+        src/contexts/ThemeContext.js (From Topic 5)
+
+    AuthContext.js
+        import React, {createContext, Component} from 'react';
+        
+        export const AuthContext = createContext();  
+
+        class AuthContextProvider extends Component {
+            state = {
+                isAuthenticated: false
+            } 
+            
+           toggleAuth = () => {
+                this.setState({isAuthenticated: !this.state.isAuthenticated});
+           } 
+           
+            render() {
+                return(                                 
+                    <AuthContext.Provider value={{...this.state, toggleAuth: this.toggleAuth}}>
+                        {this.props.children}       
+                    </AuthContext.Provider>
+                );
+            }
+        }
+        export default AuthContextProvider;        
+
+    App.js
+        import React from 'react';
+        import Navbar from './components/Navbar';
+        import BookList from './components/BookList';
+        import ThemeContextProvider from './contexts/ThemeContext';  
+        import ThemeToggle from './components/ThemeToggle'; 
+        import AuthContextProvider from './contexts/AuthContext';        //01. Imports AuthContext.js
+        
+        function App() {
+            return(
+                <div className="App">
+                    //<ThemeContextProvider>   
+                    //    <Navbar />
+                    //    <BookList />
+                    //    <ThemeToggle />      
+                    //</ThemeContextProvider>
+                    
+                    <ThemeContextProvider>   
+                        <AuthContextProvider>                             //02. Wraps with AuthContextProvider. This can also wraps up ThemeContextProvider
+                            <Navbar />
+                            <BookList />
+                            <ThemeToggle />      
+                        </AuthContextProvider>
+                    </ThemeContextProvider>
+                </div>
+            );
+        }
+        export default App;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07. Consuming Multiple Contexts
+
 
 
 
