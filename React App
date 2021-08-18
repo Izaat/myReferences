@@ -316,6 +316,69 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 05. Project Summary Component
 
+    Nesting ProjectSummary.js to ProjectList.js
+    Refer to the cards in ProjectList.js
+    Instead of repeating the cards, ProjectSummary will use templates
+    This will make it more modular
+    ProjectSummary.js will be a functional component
+
+    App Structure
+        src/components/auth
+            SignIn.js
+            SignOut.js
+        src/components/dashboard
+            Dashboard.js                  (Topic 4)
+            Notifications.js
+        src/components/layout
+            Navbar.js                     (Topic 3)
+            SignedInLinks.js              (Topic 3)
+            SignedOutLinks.js             (Topic 3)
+        src/components/project
+            CreateProject.js
+            ProjectDetails.js
+            ProjectList.js                (Topic 4)
+            ProjectSummary.js 
+        src 
+            App.js                        (Topic 3)
+    
+    ProjectSummary.js                                            //01. Create the file as functional component
+        import React from 'react'
+
+        const ProjectSummary = () => {
+            return (  
+                <div className="card z-depth-0 project-summary">
+                    <div className="card-content grey-text text-darken-3">
+                        <span className="card-title">Project Title</span>
+                        <p>Posted by ...</p>
+                        <p className="grey-text">Date</p>
+                    </div>
+                </div>
+            )
+        }
+        export default ProjectSummary
+
+    ProjectList.js (Functional component)
+        import React from 'react'
+        import ProjectSummary from './ProjectSummary'            //02. Import ProjectSummary.js
+
+        const ProjectList = () => {
+            return (
+                <div className="project-list section"> 
+                    <ProjectSummary />                           //03. Replace the entire chuck of codes to a single line
+                    <ProjectSummary />
+                    <ProjectSummary />
+                </div>
+            )
+        }
+        export default ProjectList
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+06. Project Details Component
+
+
+
+
+
 
 
 
