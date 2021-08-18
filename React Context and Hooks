@@ -10,7 +10,7 @@ CONTENTS
 05. Updating Context Data
 06. Creating Multiple Contexts
 07. Consuming Multiple Contexts
-08. Hooks
+08. Hooks                            **npm install uuid
 09. useState Hook
 10. useState Forms
 11. useEffect Hook
@@ -552,15 +552,119 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 08. Hooks
+    
+    A special function that allows functional components to do additional things (ie useState)
+    Usually states can only be used in class components
+    Adding hooks in functional components enables using states
+    Types of Hooks
+        useState()          //Use state within a functional component
+        useEffect()        //Runs code when a component renders or re renders
+        useContext()     //Consume context in a functional component
+    
+    Files
+        src/component/MyList.js
+        src/App.js
+    
+    //////////////////////////////////////////////
+    INITIALIZE
+    
+        MyList.js
+            //import React from 'react';
+            import React, {useState} from 'react';                //01. Define useState
+            
+            const MyList = () => {
+                //useState();                                     //02. Add useState function
+                //useState([]);                                   //03. in class component state, "{}" is used. In useState, "[]" works the same way as "{}" in state
+                //useState([                                      //05. This will return an array of 2 values, the state element and a function to edit the state
+                //    {title: 'Song 1', id:1},                    //04. Adds 3 elements
+                //    {title: 'Song 2', id:2},
+                //    {title: 'Song 3', id:3}
+                //]);
+                //const [] = useState([                           //06. Use array destructuring to retrieve the 2 values
+                const [songs, setSongs] = useState([              //07. Where "songs" represents the data and "setSongs" represents the function
+                    {title: 'Song 1', id:1},  
+                    {title: 'Song 2', id:2},
+                    {title: 'Song 3', id:3}
+                ]);
+                return(
+                    <div className="my-list">
+                        <ul>
+                            //<li>List One</li>                   //08. This can be removed since useState is being used
+                            //<li>List Two</li>
+                            //{songs.map(data => { })}            //09. This will be replacing the entire list 
+                            {songs.map(song => { 
+                                return(<li key={song.id}>{song.title}</li>);  //10. This will be shown on the browser
+                            })} 
+                        </ul>
+                    </div>
+                );
+            }
+            export default MyList;
 
-    Files (Existing)
-        src/component/Navbar.js (From Topic 7)
-        src/component/BookList.js (From Topic 3)
-        src/component/ThemeToggle.js (From Topic 5)
-        src/App.js (From Topic 6)
-        src/index.css (From Topic 1)
-        src/contexts/ThemeContext.js (From Topic 5)
-        src/contexts/AuthContext.js (From Topic 6)
+        App.js
+            import React from 'react';
+            import MyList from './component/MyList';
+            
+            function App(){
+                return(
+                    <div className="App">
+                        <MyList />
+                    </div>
+                );
+            }
+            export default App;
+
+    //////////////////////////////////////////////
+    MANIPULATING DATA (Using buttons to add and remove useState elements)
+        
+        Key id should be installed to generate new id number for every new useState element
+        Enter the project folder in terminal
+        Type in "npm install uuid"
+    
+        MyList.js
+            import React, {useState} from 'react'; 
+            import uuid from 'uuid/v1';                                         //15. After installing uuid, import uuid to the file
+            
+            const MyList = () => {
+                const [songs, setSongs] = useState([   
+                    {title: 'Song 1', id:1},  
+                    {title: 'Song 2', id:2},
+                    {title: 'Song 3', id:3}
+                ]);
+                const addSong = () ={                                            //12. Creates addSong function
+                    //setSong([])                                                //13. This will completely replace the array in useState
+                    //setSongs([...songs, {title: 'new song', id: 4}]);          //14. Spreads out the array and adds in a new title with new id. For id generator, install "uuid"
+                    setSongs([...songs, {title: 'new song', id: uuid() }]);      //16. This will create a unique id number for every track being added
+                }
+                return(
+                    <div className="my-list">
+                        <ul>
+                            {songs.map(song => { 
+                                return(<li key={song.id}>{song.title}</li>);  
+                            })} 
+                        </ul>
+                        <button onClick={addSong}>Add a track</button>           //11. Creates a button with addSong function
+                    </div>
+                );
+            }
+            export default MyList;
+
+        App.js
+            import React from 'react';
+            import MyList from './component/MyList';
+            
+            function App(){
+                return(
+                    <div className="App">
+                        <MyList />
+                    </div>
+                );
+            }
+            export default App;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+09. useState Hook with Forms
+
 
 
 
