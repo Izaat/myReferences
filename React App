@@ -374,6 +374,86 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 06. Project Details Component
+    
+    URL Routing for individual cards
+    Intall the VSCode extension "ES7 React/Redux/GraphQL/ReactNative snippets" to VSCode
+    
+    App Structure
+        src/components/auth
+            SignIn.js
+            SignOut.js
+        src/components/dashboard
+            Dashboard.js                (Topic 4)
+            Notifications.js
+        src/components/layout
+            Navbar.js                   (Topic 3)
+            SignedInLinks.js            (Topic 3)
+            SignedOutLinks.js           (Topic 3)
+        src/components/project
+            CreateProject.js
+            ProjectDetails.js
+            ProjectList.js              (Topic 5)
+            ProjectSummary.js           (Topic 5)
+        src 
+            App.js                      (Topic 4)
+    
+    ProjectDetails.js
+        import React from 'react'
+        
+        //const ProjectDetails = () => {
+        const ProjectDetails = (props) => {                                             //04. Grabs URL router property details from App.js
+            //console.log(props);                                                       //05. For testing. This will show the prop properties in console
+            const id = props.match.params.id;                                           //06. Stores prop properties as a variable named "id"
+            return(
+                <div className="container section project-details">
+                    <div className="card z-depth-0">                                    //"z-depth-0 removes the drop shadow
+                        <div className="card-content">
+                            //<span className"card-title">Project Title</span>
+                            <span className"card-title">Project Title - {id}</span>     //07. Prints out the id (coincides with URL id) number on screen
+                            <p>Long long paragraph</p>
+                        </div>
+                        <div className="card-action gret lighten-4 grey-text">
+                            <div>Posted by AuthorName</div>
+                            <div>Today's date</div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        export default ProjectDetails
+
+    App.js
+        import React, {Component} from 'react';
+        import {BrowserRouter, Switch, Route} from 'react-router-dom'   
+        import Navbar from './components/layout/Navbar'
+        import Dashboard from './components/dashboard/Dashboard' 
+        import ProjectDetails from './components/projects/ProjectDetails'                 //01. Import ProjectDetails.js
+        
+        class App extends Component {
+            render() {
+                return(
+                    <BrowserRouter>
+                        <div className="App">
+                            <Navbar />
+                            <Switch>
+                                //<Route path='/' component={Dashboard} />
+                                <Route exact path='/' component={Dashboard} />              //03. Added "exact" to avoid URL conflict with ProjectDetails URL path
+                                <Route path='/project/:id' component={ProjectDetails} />    //02. Add ProjectDetails filepath
+                            </Switch> 
+                        </div>
+                    </BrowserRouter>                
+                );
+            }
+        }    
+        export default App;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07. Login and Signup Component
+
+
+
+
+
 
 
 
