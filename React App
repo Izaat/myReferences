@@ -339,7 +339,7 @@ CONTENTS
             ProjectList.js                (Topic 4)
             ProjectSummary.js 
         src 
-            App.js                        (Topic 3)
+            App.js                        (Topic 4)
     
     ProjectSummary.js                                            //01. Create the file as functional component
         import React from 'react'
