@@ -739,6 +739,7 @@ CONTENTS
     useState enables function components to use class component's state properties, 
     useEffect enables function components to use class component's lifecycle properties (didMount, didUpdate, willMount, etc)
     Refer to React Fundamentals Topic 21
+        https://github.com/Izaat/references/blob/main/React%20Fundamentals
     Note that by default, useEffect will run "callback function" whenever any of the state changes, irregardless the states are related or not
     Callback function limit parameter will be used to solve constant callback (Point 7)
     
