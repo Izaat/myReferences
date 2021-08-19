@@ -732,6 +732,64 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 10. useEffect Hook
+    
+    See 8 points
+    
+    Similar to lifecycle method in class component
+    useState enables function components to use class component's state properties, 
+    useEffect enables function components to use class component's lifecycle properties (didMount, didUpdate, willMount, etc)
+    Refer to React Fundamentals Topic 21
+    Note that by default, useEffect will run "callback function" whenever any of the state changes, irregardless the states are related or not
+    Callback function limit parameter will be used to solve constant callback (Point 7)
+    
+    MyList.js
+        //import React, {useState} from 'react'; 
+        import React, {useState, useEffect} from 'react';                     //01. Adds useEffect hook
+        import uuid from 'uuid/v1';
+        import NewSongForm from './NewSongForm';   
+        
+        const MyList = () => {
+            const [songs, setSongs] = useState([   
+                {title: 'Song 1', id:1},  
+                {title: 'Song 2', id:2},
+                {title: 'Song 3', id:3}
+            ]);
+            const [age, setAge] = useState(20);                               //04. Adds another state property and initial age will be set to 20 
+            const addSong = (title) ={ 
+                setSongs([...songs, {title, id: uuid() }]);  
+            }
+            
+            //useEffect(() => {})                                             //02. Callback parameter
+            useEffect(() => {
+                console.log('useEffect hook running', songs)                  //03. This will print out songs in console when there are changes being made
+            //})
+            }, [songs])                                                       //07. Square brackets being added to update ONLY WHEN song data changes and NOT WHEN the age data changes
+
+            useEffect(() => {                                                 //08. useEffect can also be used multiple times
+                console.log('useEffect hook running age', age) 
+            }, [age])          
+            
+            return(
+                <div className="my-list">
+                    <ul>
+                        {songs.map(song => { 
+                            return(<li key={song.id}>{song.title}</li>);  
+                        })} 
+                    </ul>
+                    <NewSongForm addSong={addSong} /> 
+                    //<button onClick={}>Add 1 to age: {age}</button>                       //05. Increment age by 1 whenever button is pressed
+                    <button onClick={() => setAge(age + 1)}>Add 1 to age: {age}</button>    //06. Add function
+                </div>
+            );
+        }
+        export default MyList;
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+11. Hooks with Context
+
+
+
 
 
 
