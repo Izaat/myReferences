@@ -141,6 +141,88 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 03. Built in functions, constants and write custom functions
 
+    Functions
+        Sine, Cosine, Tangent
+            sin(0)       //Ans=0
+            cos(0)       //Ans=1
+            tan(0)       //Ans=0
+        Functions with Matrix
+            A = [1 2; 3 4];
+            sin(A)       //Ans=[0.84 0.91; 0.14 -0.76], elementwise
+        Exponential, Logarithm, Squareroot
+            exp(0)       //Ans=1
+            log(1)       //Ans=0
+            log(exp(1))  //Ans=1
+            sqrt(4)      //Ans=2
+        Built in Constants (Pi, Variable E, i)
+            pi           //By default, this constant is at 3.1416
+            pi=2         //pi can be assigned to another value, 2. To reset to its default value, go to workspace panel and delete "pi"
+            exp(1)       //There is no vaiable e in Matlab. e^1 = exp(1)
+            sqrt(-1)     //Ans=0.0000 + 1.0000i
+            i            //Ans=0.0000 + 1.0000i
+            i*i OR i^2   //Ans= -1
+            sin(pi) + i*cos(pi)  //Ans=0.0000-1.000i
+        Identity matrix (1s in diagonal)
+            A=[1 0 0 0; 0 1 0 0; 0 0 1 0; 0 0 0 1]    //Ans: [1 0 0 0; 0 1 0 0; 0 0 1 0; 0 0 0 1]
+            eye(4)                                    //Ans: [1 0 0 0; 0 1 0 0; 0 0 1 0; 0 0 0 1]
+        Matrix of zeros and ones
+            zeros(4)                   //Ans: [0 0 0 0; 0 0 0 0; 0 0 0 0; 0 0 0 0] - (4, 4) matrix
+            zeros(3,2)                 //Ans: [0 0; 0 0; 0 0] - (3,2) matrix
+            ones(4)                    //Ans: [1 1 1 1; 1 1 1 1; 1 1 1 1; 1 1 1 1] - (4, 4) matrix
+            ones(3,2)                  //Ans: [1 1; 1 1; 1 1] - (3,2) matrix
+        Modulus
+            mod(3,2)                   //Ans: 1, Returns remainder - Since the "%" is used for the comment, MATLAB uses "mod" for modulus operations
+        Invert
+            ~0                         //Ans: 1, This returns the opposite number
+            ~1                         //Ans: 0, This returns the opposite number
+
+    Define custom functions
+        Home Tab > New > Function > Editor Panel  
+            -OR-   
+        Right Click on Current Folder Panel > New File > Function
+        Editor
+            function [output_args] = untitled(input_args)
+                %function code goes in here
+            end
+        Syntax
+            When the function returns things, specify "output_arguments"
+            If more than 1 "output_args", specify as an array
+            If no "output_args", remove "[output_args] ="
+        Saving the Function file
+            The function name must be the same as the filename
+
+    Define hyperbolic sine function
+        Hyperbolic sine formula:
+            sinh z = (0.5) * [(e^z) - (e^-z)]
+        Editor
+            function y = my_sinh(x)
+                y = (exp(x) - exp(-x))/2;
+            end
+        Save file as "my_sinh.m"
+        Command:
+            my_sinh(1)                 //Ans=1.1752
+            my_sinh(0)                 //Ans=0
+        Calculate Hyperbolic sine of matrix "x"
+            x=0:10;
+            my_sinh(x)                 //Ans: 1.0e+04 * 0 ... 1.1013
+        
+    Define "is_even.m" function
+        Editor
+            function y = is_even(x)
+                %function return 1 if x is even
+                y = ~mod(x,2);                
+            end        
+        Command
+            is_even([1 2 3 4 5])       //Ans: [0 1 0 1 0]
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. Linear equations
+
+
+
+
+
 
 
 
