@@ -664,6 +664,78 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 09. useState Forms
 
+    Users to fill up a form, fill in song details and adds into useState
+    Add "NewSongForm.js" in component folder
+        ../src/component/NewSongForm.js
+    Read 21 point. Test function at point 14.    
+
+    NewSongForm.js                                                           //01. Create the form
+        import React, {useState} from 'react';
+
+        //const NewSongForm = () => { 
+        const NewSongForm = ( {addSong} ) => {                               //19. Sync with addSong from MyList.js
+            const [title, setTitle] = useState('');                          //07. Create a blank useState for the Form and retrieve the values as "title" and "setTitle"
+            const handleSubmit = (e) => {                                    //12. Create the handleSubmit function
+                e.preventDefault();                                          //13. Prevents the default automatic reload (Mentioned in React Fundamentals)
+                //console.log(title)                                         //14. Prints out title value in console. This value will be pushed to MyList.js
+                addSong(title);                                              //20.  Sync with title property
+                setTitle('');                                                //21. Clears out input textbox after submit
+            }
+            return (
+                //<form>
+                //<form onSubmit={}>                                         //05. Adds event to the form
+                <form onSubmit={handleSubmit}>                               //11. Adds in the handleSubmit function for the button the run upon submit
+                    <label>Song name:</label>
+                    //<input type="text" required />
+                    //<input type="text" required onChange={} />             //06. When input textbox changes, onChange will run
+                    //<input type="text" required onChange={ (e) = {} } />   //08. Inner curly braces not needed
+                    //<input type="text" required onChange={ (e) = setTitle(e.target.value) } />             //09. The event will link values in the input text box with the setTitle property in point 7
+                    <input type="text" value={title} required onChange={(e) = setTitle(e.target.value)} />   //10. The input box value will be linked to the title in point 7
+                    <input type="submit" value="add song" />
+                </form>
+            );
+        }
+        export default NewSongForm;
+
+    MyList.js
+        import React, {useState} from 'react'; 
+        import uuid from 'uuid/v1';
+        import NewSongForm from './NewSongForm';                         //02. Import NewSongForm.js
+        
+        const MyList = () => {
+            const [songs, setSongs] = useState([   
+                {title: 'Song 1', id:1},  
+                {title: 'Song 2', id:2},
+                {title: 'Song 3', id:3}
+            ]);
+            //const addSong = () ={ 
+            const addSong = (title) ={                                   //15. Adds in "title" from NewSongForm.js
+                //setSongs([...songs, {title: 'new song', id: uuid() }]);
+                //setSongs([...songs, {title: title, id: uuid() }]);     //16. Sets as "title" instead of "new song"
+                setSongs([...songs, {title, id: uuid() }]);              //17. Since the value and title both share the same name, shortcut is used therefore "title"
+            }
+            return(
+                <div className="my-list">
+                    <ul>
+                        {songs.map(song => { 
+                            return(<li key={song.id}>{song.title}</li>);  
+                        })} 
+                    </ul>
+                    //<button onClick={addSong}>Add a track</button>     //03, Remove button since NewSongForm.js will be nested with MyList.js     
+                    //<NewSongForm />                                    //04. Nesting
+                    <NewSongForm addSong={addSong} />                    //18. Add addSong function to nest with NewSongForm.js
+                </div>
+            );
+        }
+        export default MyList;
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+10. useEffect Hook
+
+
+
+
 
 
 
