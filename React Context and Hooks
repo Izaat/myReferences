@@ -848,6 +848,107 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 12. Multiple useContext Hooks
+    
+    Like useEffect hook, useContext can be used multiple times
+    
+    Continued from Topic 11
+    Files (Existing)
+        src/component/Navbar.js (From Topic 7)
+        src/component/BookList.js (From Topic 11)
+        src/component/ThemeToggle.js (From Topic 5)
+        src/App.js (From Topic 6)
+        src/index.css (From Topic 1)
+        src/contexts/ThemeContext.js (From Topic 5)
+        src/contexts/AuthContext.js (From Topic 6)
+
+    Navbar.js
+        //import React, {Component} from 'react';
+        import React, {useContext} from 'react';                                                  //01. Add useContext
+        import {ThemeContext} from '../contexts/ThemeContext';  
+        import (AuthContext) from '../contexts/AuthContext';     
+        
+        //class Navbar extends Component {                                                       //02. To be converted into functional component
+        //    render() {
+        //        return(
+        //            <AuthContext.Consumer>{(authContext) => (        
+        //                <ThemeContext.Consumer>{(themeContext) => { 
+        //                    const {isAuthenticated, toggleAuth} = authContext; 
+        //                    const {isLightTheme, light, dark} = themeContext;   
+        //                    const theme = isLightTheme ? light : dark; 
+        //                    return(
+        //                        <nav style={{background: theme.ui, color: theme.syntax}}> 
+        //                            <h1>Context App</h1>
+        //                            <div onClick={toggleAuth}> 
+        //                                {isAuthenticated ? 'LoggedIn' : 'LoggedOut'}   
+        //                            </div>
+        //                            <ul>
+        //                                <li>Home</li>
+        //                                <li>About</li>
+        //                                <li>Contact</li>
+        //                            </ul>
+        //                        </nav> 
+        //                    )
+        //                }}</ThemeContext.Consumer>
+        //            )}</AuthContext.Consumer>                    
+        //        );
+        //    }
+        //}
+        
+        const Navbar = () => {                                                   //03. Functional component
+            //const {isLightTheme, light, dark} = themeContext; 
+            const {isLightTheme, light, dark} = useContext(ThemeContext);        //04. Add data retrieve function for "ThemeContext". Refer to Topic 11
+            //const {isAuthenticated, toggleAuth} = authContext; 
+            const {isAuthenticated, toggleAuth} = useContext(AuthContext);       //05. Add data retrieve function for "AuthContext"
+            const theme = isLightTheme ? light : dark; 
+            return(
+                <nav style={{background: theme.ui, color: theme.syntax}}> 
+                    <h1>Context App</h1>
+                    <div onClick={toggleAuth}> 
+                        {isAuthenticated ? 'LoggedIn' : 'LoggedOut'}   
+                    </div>
+                    <ul>
+                        <li>Home</li>
+                        <li>About</li>
+                        <li>Contact</li>
+                    </ul>
+                </nav>               
+            );
+        }        
+        
+        export default Navbar;
+
+    ThemeToggle.js              
+        //import React, {Component} from 'react';                                       
+        import React, {useContext} from 'react';                                  //06. Convert ThemeToggle.js into function component
+        import {ThemeContext} from '../contexts/ThemeContext';    
+        
+        //class ThemeToggle extends Component {                                   //07. No longer in use
+        //    static contextType = ThemeContext    
+        //    render () {
+        //        const {toggleTheme} = this.context;   
+        //        return (
+        //            <button onClick={toggleTheme}>Toggle the theme</button>  
+        //        );
+        //    }
+        //}
+        
+        const ThemeToggle = () => {                                               //08. Conversion
+            //static contextType = ThemeContext    
+            //const {toggleTheme} = this.context;  
+            const {toggleTheme} = useContext(ThemeContext);                       //09. Add data retrieve function for "ThemeContext".
+            return (
+                <button onClick={toggleTheme}>Toggle the theme</button>  
+            );
+        }
+        
+        export default ThemeToggle;
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+13. Creating Context with Functional Components
+
+
+
 
 
 
