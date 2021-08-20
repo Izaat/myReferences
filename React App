@@ -452,6 +452,154 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 07. Login and Signup Component
 
+    App Structure
+        src/components/auth
+            SignIn.js
+            SignOut.js
+        src/components/dashboard
+            Dashboard.js                (Topic 4)
+            Notifications.js
+        src/components/layout
+            Navbar.js                   (Topic 3)
+            SignedInLinks.js            (Topic 3)
+            SignedOutLinks.js           (Topic 3)
+        src/components/project
+            CreateProject.js
+            ProjectDetails.js           (Topic 6)
+            ProjectList.js              (Topic 5)
+            ProjectSummary.js           (Topic 5)
+        src 
+            App.js                      (Topic 6)
+
+    SignIn.js                                                      
+        import React, {Component} from 'react'                                                         //01. Create SignIn.js file
+        
+        class SignIn extends Component {
+            state = {
+                email:'',                                                                              //08. Define state
+                password:''
+            }
+            handleChange = (e) => {                                                                    //04. Add event 
+                //console.log(e)
+                this.setState({                                                                        //09. Add setState
+                    //[e.target.id]                                                                    //10. This will capture any of the id (password/email) being updated first            
+                    [e.target.id]: e.target.value                                                      //11. Retrieves the value of the update
+                })
+            }
+            handleSubmit = (e) => {    
+                //console.log(e)
+                e.preventDefault();                                                                    //12. Prevent default refresh
+                console.log(this.state);                                                               //13. Prints the current state to the console
+            }
+            render() {
+                return(
+                    <div className="container">
+                        //<form onSubmit={} className="white">
+                        <form onSubmit={this.handleSubmit} className="white">                           //05. Add handleSubmit event tag
+                            <h5 className="grey-text text-darken-3">Sign In</h5>
+                            <div className="input-field">
+                                <label htmlFor="email">Email</label>
+                                <input type="email" id="email" onChange={this.handleChange} />          //06. Add handleChange event
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="password">Password</label>
+                                //<input type="password" id="password" onChange={} />
+                                <input type="password" id="password" onChange={this.handleChange} />    //07. Add handleChange event. Test app at this point
+                            </div>
+                            <div className="input-field">
+                                <button className="btn pink light-1 z-depth-0">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                )
+            }
+        }
+        export default SignIn
+
+    App.js
+        import React, {Component} from 'react';
+        import {BrowserRouter, Switch, Route} from 'react-router-dom'   
+        import Navbar from './components/layout/Navbar'
+        import Dashboard from './components/dashboard/Dashboard' 
+        import ProjectDetails from './components/projects/ProjectDetails' 
+        import SignIn from './components/auth/SignIn'                                                     //02. Import SignIn
+        import SignUp from './components/auth/SignUp'                                                     //18. Import SignUp
+        
+        class App extends Component {
+            render() {
+                return(
+                    <BrowserRouter>
+                        <div className="App">
+                            <Navbar />
+                            <Switch>
+                                <Route exact path='/' component={Dashboard} /> 
+                                <Route path='/project/:id' component={ProjectDetails} />  
+                                <Route path='/signin' component={SignIn} />                               //03. Add signin component
+                                <Route path='/signup' component={SignUp} />                               //19. Add signup component
+                            </Switch> 
+                        </div>
+                    </BrowserRouter>                
+                );
+            }
+        }    
+        export default App;
+
+    SignUp.js                                                                                             //14. Copy paste from SignIn.js
+        import React, {Component} from 'react'   
+        
+        class SignUp extends Component {
+            state = {
+                email: '',             
+                password: '',
+                firstName: '',                                                                            //15. Adds firstname and lastname
+                lastName: ''
+            }
+            handleChange = (e) => {  
+                this.setState({                 
+                    [e.target.id]: e.target.value     
+                })
+            }
+            handleSubmit = (e) => {    
+                e.preventDefault();     
+                console.log(this.state);  
+            }
+            render() {
+                return(
+                    <div className="container">
+                        <form onSubmit={this.handleSubmit} className="white">  
+                            <h5 className="grey-text text-darken-3">Sign Up</h5>
+                            <div className="input-field">
+                                <label htmlFor="email">Email</label>
+                                <input type="email" id="email" onChange={this.handleChange} />  
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="password">Password</label>
+                                <input type="password" id="password" onChange={this.handleChange} /> 
+                            </div>
+                            <div className="input-field">                                                   //16. Adds Lastname
+                                <label htmlFor="firstName">First Name</label>
+                                <input type="text" id="firstName" onChange={this.handleChange} /> 
+                            </div>   
+                            <div className="input-field">                                                   //17. Adds Lastname
+                                <label htmlFor="lastName">Last Name</label>
+                                <input type="text" id="lastName" onChange={this.handleChange} /> 
+                            </div>                            
+                            <div className="input-field">
+                                <button className="btn pink light-1 z-depth-0">Sign Up</button>
+                            </div>
+                        </form>
+                    </div>
+                )
+            }
+        }
+        export default SignUp
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+08. Create Project Form
+
+
+
+
 
 
 
