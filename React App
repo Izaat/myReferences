@@ -61,7 +61,9 @@ CONTENTS
                 IconFont
             From CDN    
                 Compiled Minified CSS
-            Paste the codes into ../reactapp/public/index.html (Bottom of the <head> tag, above <title> tag)   
+                Compiled Minified Javascript
+            Paste the CSS codes into ../reactapp/public/index.html (Bottom of the <head> tag, above <title> tag)   
+            Paste the JS codes into ../reactapp/public/index.html (Inside of the <body> tag, at the bottom)     
 
         Create "components" folder in "src" folder and create 4 folders under "components" folder
         Refer to Topic 1 App Structure
