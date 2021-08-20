@@ -14,7 +14,7 @@ CONTENTS
 09. useState Forms
 10. useEffect Hook
 11. Hooks with useContext
-12. Multiple Contexts with Hooks
+12. Multiple useContext Hooks
 13. Creating Context with Functional Components
 14. Reading List - App Project
 15. Reducers, Actions and State
@@ -847,7 +847,7 @@ CONTENTS
         export default BookList;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-12. Multiple Contexts with Hooks
+12. Multiple useContext Hooks
 
 
 
