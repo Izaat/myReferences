@@ -13,7 +13,7 @@ CONTENTS
 08. useState Hook                    **npm install uuid
 09. useState Forms
 10. useEffect Hook
-11. Hooks with Context
+11. Hooks with useContext
 12. Multiple Contexts with Hooks
 13. Creating Context with Functional Components
 14. Reading List - App Project
@@ -787,7 +787,68 @@ CONTENTS
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-11. Hooks with Context
+11. Hooks with useContext
+    
+    Read 6 points
+    
+    Similar to contextType method in class component
+    useState enables function components to use class component's state properties, 
+    useEffect enables function components to use class component's lifecycle properties
+    useContext enables function components to use class component's contextType properties
+
+    Continued from Topic 7
+    Files (Existing)
+        src/component/Navbar.js (From Topic 7)
+        src/component/BookList.js (From Topic 3)
+        src/component/ThemeToggle.js (From Topic 5)
+        src/App.js (From Topic 6)
+        src/index.css (From Topic 1)
+        src/contexts/ThemeContext.js (From Topic 5)
+        src/contexts/AuthContext.js (From Topic 6)
+
+    BookList.js
+        //import React, {Component} from 'react';                        //01. Add useContext and remove "Component"
+        import React, {useContext} from 'react'; 
+        import {ThemeContext} from '../contexts/ThemeContext';  
+
+        //class BookList extends Component {                             //02. This class component will be rewritten as a function component
+        //    static contextType = ThemeContext;   
+        //    render() {
+        //        const {isLightTheme, light, dark} = this.context;   
+        //        const theme = isLightTheme ? light : dark;   
+        //        return (
+        //            <div className='book-list' style={{background: theme.bg, color: theme.syntax}}> 
+        //                <ul>
+        //                    <li style={{background: theme.ui}}>Book 1</li>
+        //                    <li style={{background: theme.ui}}>Book 2</li>
+        //                    <li style={{background: theme.ui}}>Book 3</li>
+        //                </ul>
+        //            </div>
+        //        );    
+        //    }
+        //}
+        
+        const BookList = () => {                                           //03. Rewrite as function component
+            //useContext(ThemeContext);                                    //04. Add useContext. This replaces "static contextType"
+            const {isLightTheme, light, dark} = useContext(ThemeContext);  //05. Retrieve data from ThemeContext
+            const theme = isLightTheme ? light : dark;                     //06. Adds the "theme" function
+            return (
+                <div className='book-list' style={{background: theme.bg, color: theme.syntax}}> 
+                    <ul>
+                        <li style={{background: theme.ui}}>Book 1</li>
+                        <li style={{background: theme.ui}}>Book 2</li>
+                        <li style={{background: theme.ui}}>Book 3</li>
+                    </ul>
+                </div>
+            );    
+        }
+            
+        export default BookList;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+12. Multiple Contexts with Hooks
+
+
 
 
 
