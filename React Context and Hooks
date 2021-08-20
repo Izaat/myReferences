@@ -742,7 +742,8 @@ CONTENTS
         https://github.com/Izaat/references/blob/main/React%20Fundamentals
     Note that by default, useEffect will run "callback function" whenever any of the state changes, irregardless the states are related or not
     Callback function limit parameter will be used to solve constant callback (Point 7)
-    
+    useEffect can also be used multiple times (Point 8)
+
     MyList.js
         //import React, {useState} from 'react'; 
         import React, {useState, useEffect} from 'react';                     //01. Adds useEffect hook
