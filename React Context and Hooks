@@ -946,6 +946,106 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 13. Creating Context with Functional Components
+    
+    Files (Existing)
+        src/component/Navbar.js (From Topic 12)
+        src/component/BookList.js (From Topic 11)
+        src/component/ThemeToggle.js (From Topic 12)
+        src/App.js (From Topic 6)
+        src/index.css (From Topic 1)
+        src/contexts/ThemeContext.js (From Topic 5)
+        src/contexts/AuthContext.js (From Topic 6)
+
+    Points to note for props:
+        Class Component
+            render(){} > return() > <Context.Provider></Context.Provider> > {this.props.children}
+            Example: ThemeContext.js
+        Functional Component
+            const Function = (props) => {} > return() > <Context.Provider></Context.Provider> > {props.children} 
+            Example: BookContext.js
+
+    Create BookContext.js
+        src/contexts/BookContext.js
+
+    BookContext.js                                                              //01. Create BookContext
+        import React, {createContext, useState} from 'react';
+
+        export const BookContext = createContext();
+        const BookContextProvider = (props) => {
+            const [books, setBooks] = useState([
+                {title: 'Book 1', id: 1},
+                {title: 'Book 2', id: 2},
+                {title: 'Book 3', id: 3},
+                {title: 'Book 4', id: 4}
+            ]);
+            return(
+                <BookContext.Provider value={{books}}>
+                    {props.children}
+                </BookContext.Provider>
+            );
+        }
+        export default BookContextProvider;
+
+    App.js
+        import React from 'react';
+        import Navbar from './components/Navbar';
+        import BookList from './components/BookList';
+        import ThemeContextProvider from './contexts/ThemeContext';  
+        import ThemeToggle from './components/ThemeToggle'; 
+        import AuthContextProvider from './contexts/AuthContext';  
+        import BookContextProvider from './contexts/BookContext';               //02. Import BookContext.js
+        
+        function App() {
+            return(
+                <div className="App">
+                    <ThemeContextProvider>   
+                        <AuthContextProvider>   
+                            <Navbar />
+                            //<BookList />                                      //03. Wraps with BookContextProvider
+                            <BookContextProvider>                               //04. Add Context Provider
+                                <BookList />
+                            </BookContextProvider>
+                            <ThemeToggle />      
+                        </AuthContextProvider>
+                    </ThemeContextProvider>
+                </div>
+            );
+        }
+        export default App;
+
+    BookList.js
+        import React, {useContext} from 'react'; 
+        import {ThemeContext} from '../contexts/ThemeContext';  
+        import {BookContext} from '../contexts/BookContext';                  //05. Import BookContext.js
+        
+        const BookList = () => {       
+            const {isLightTheme, light, dark} = useContext(ThemeContext); 
+            const {books} = useContext(BookContext);                          //06. Add useContext
+            const theme = isLightTheme ? light : dark;      
+            return (
+                <div className='book-list' style={{background: theme.bg, color: theme.syntax}}> 
+                    <ul>
+                        //{books.map(book => {})}                             //07. Add mapping
+                        {books.map(book => {
+                            return(
+                                //<li key={book.id} style={{background: theme.ui}}></li>             //08. Add JSX template
+                                <li key={book.id} style={{background: theme.ui}}>{book.title}</li>   //09. Add book title
+                            )
+                        })}
+                        //<li style={{background: theme.ui}}>Book 1</li>     //10. No longer in use
+                        //<li style={{background: theme.ui}}>Book 2</li>
+                        //<li style={{background: theme.ui}}>Book 3</li>
+                    </ul>
+                </div>
+            );    
+        }
+            
+        export default BookList;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+14. Reading List - App Project
+
+
 
 
 
