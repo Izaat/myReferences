@@ -19,6 +19,7 @@ CONTENTS
 13. Labview and OPC UA
 14. Labview and Python
 15. Labview Mathscript
+16. Labview and Siemens TIA Portal
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -1398,7 +1399,142 @@ CONTENTS
                 The result will be plotted into the Graph Indicator in Front Panel
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+16. Labview and Siemens TIA Portal
+    
+    TIA Portal
+        Create Project > Configure a device > Add a device > Controllers > Select a PLC > Click on Add button
+        Device View > Double click on ethernet port on virtual PLC image
+            Properties Tab > General Tab > Ethernet Address 
+                Network interface with
+                    Subnet: PN/IE
+                IP Protocol
+                    IP Address: 192.168.0.10
+                    Subnet: 255.255.255.0
+        Create Program Block OB1
+            Create a simple single rung Start-Stop program
+            Network 1:
+                |       %M0.1                   %M0.0                       %Q0.1     |
+                |     Stop PB                 Start PB                     Output     |
+                |-------|/|------------+--------|  |-------+----------------(  )------|
+                |                      |      %Q0.1        |                          |
+                |                      |      Output       |                          |
+                |                      |-------|  |--------|                          |
+        Start simulation
+            Main Menu > Online > Simulation
+            PLCSIM window and Advanced Load window will appear
+            Advanced Load:  
+                Type of interface: PN/IE
+                Interface: PLCSIM
+                Interface/Subnet: PN/IE_1
+                Click on "Search" button
+                Highlight the PLC and Click Add
+            PLCSIM
+                CPU: Run-P
+        Going Online
+            Upload Hardware configurations to PLC
+            Main Toolbar > Go Online
+            Start Monitoring
+
+    NI OPC Servers
+        On windows "Opened Program" tray (Bottom Right corner) > Right click on NI OPC Server > Click on "Configuration"
+        OPC Window
+            LABPLC (Channel RootTree)
+                Click "Click to add a channel" and New Channel window will appear
+                Channel Name: LABPLC
+                Click Next
+                Device Driver: Siemens TCP/IP Ethernet
+                Click Next
+                Adapter: Default
+            PLC_300 (Channel device)
+                Click "Click to add a device" and New Channel window will appear
+                Device Name: PLC_1200
+                Click Next
+                Device Model: S7-1200
+                Click Next
+                Device ID: 192.168.0.12
+                    Open Windows Network Sharing Center > Change Adapter setting
+                    Configure PCIe adapter
+                    Use static address
+                    Change IP address to 192.168.0.12 from 192.168.0.10, the latter cause IP conflict with the PLC
+                Click Next
+                Scan Mode: Respect Client scan rate
+                Click Next
+        Static Tag
+            Click on "Add static tag" and add new tag
+            Tag Properties:
+                General Tab (To correlate with TIA OB1 Program)
+                    Name: Start PB
+                    Address: M0.0
+                    Click on "Check Address" (Tick Icon) and data properties will be automatically filled in
+                        Data Type will automatically changed to "Boolean" instead of "Default"
+                    Click on Apply
+                    Do the same with "Stop PB" button and "Output"
+        Disconnect Runtime
+            Main Menu > Runtime > Disonnect
+            NetToPLCsim must be connected first and then reconnect OPC Server
+    
+    Open NetToPLCsim
+        Run as administrator
+        Click on Add
+        Station Data
+            Name: PLC_LAB
+            IP Address: 192.168.0.12
+            PLCsim IP Address: Browse and select 192.168.0.10
+            TSAP: Unchecked
+            Click OK and Start Server
+            Head back to NI OPC Server and reconnect
+
+    NI OPC Servers
+        Main Menu > Runtime > Reconnect
+        Main Toolbar > Quick Client > Open LABPLC.PLC_1200 root folder
+            A list of PLC I/O will be shown
+
+    Labview
+        Create Blank Project
+        Project Explorer > Items Tab
+            Right Click on "My Computer" > New > I/O Server
+                I/O Server Type: OPC Client
+                Click on Continue
+            Configure OPC Client
+                Settings Tab
+                    Browse: Machine
+                    Machine: localhost
+                    Registered OPC Servers: NI.NIOPCServers
+                    Sample Rate(ms): 500
+                    Deadband(%): 0
+                    Poll Rate(s): 120
+                    A Labview "Untitled Library" will appear under "My Computer" root tree
+            Untitled Library Subtree
+                Drop down "Untitled Library" and right click on OPC1 subtree
+                Select "Create Bound Variables"
+                Create Bound Variables Window will appear
+            Create Bound Variables Window
+                Project Tree > My Computer > Untitled Library > OPC1 > LABPLC > PLC_1200
+                    Start PB, Stop PB and Output will be shown
+                    Select all 3 and Add to "Added variables"
+                    Click OK and Done
+            All 3 variables will be shown in Project Explorer window
+        Start a new VI
+            Front Panel:
+                Add Button (Start PB)
+                Add Button (Stop PB)
+                Add Indicator (LED)
+            Block Diagram
+                Drag and drop variables from Project Explorer into the Block Diagram
+                Right click on Project Explorer Nodes > Access Mode > Write
+                Link Nodes from Block Diagram Node output to Project Explorer Node input (For Push Buttons)
+                Link Nodes from Project Explorer Node output to Block Diagram Node input (For Output)
+                Wrap in While loop, wait time constant at 1 
+            Run Program    
+
+    Test
+        Click on Labview button and this will affect the TIA Portal ladder logic
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 [END]
+
+
 
 
 
