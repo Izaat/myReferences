@@ -595,7 +595,107 @@ CONTENTS
         export default SignUp
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-08. Create Project Form
+08. Create Project Form (Another App)
+
+    Copy Paste the entire SignIn.js into CreateProject.js
+
+    App Structure
+        src/components/auth
+            SignIn.js                   (Topic 7)
+            SignOut.js                  (Topic 7)
+        src/components/dashboard
+            Dashboard.js                (Topic 4)
+            Notifications.js
+        src/components/layout
+            Navbar.js                   (Topic 3)
+            SignedInLinks.js            (Topic 3)
+            SignedOutLinks.js           (Topic 3)
+        src/components/project
+            CreateProject.js
+            ProjectDetails.js           (Topic 6)
+            ProjectList.js              (Topic 5)
+            ProjectSummary.js           (Topic 5)
+        src 
+            App.js                      (Topic 7)
+
+    CreateProject.js                                                      
+        import React, {Component} from 'react'                 //01. Paste content from SignIn.js
+        
+        class CreateProject extends Component {
+            state = {
+                title:'',              
+                content:''
+            }
+            handleChange = (e) => {   
+                this.setState({                 
+                    [e.target.id]: e.target.value  
+                })
+            }
+            handleSubmit = (e) => {    
+                e.preventDefault();       
+                console.log(this.state);    
+            }
+            render() {
+                return(
+                    <div className="container">
+                        <form onSubmit={this.handleSubmit} className="white">   
+                            <h5 className="grey-text text-darken-3">Create new project</h5>
+                            <div className="input-field">
+                                <label htmlFor="title">Title</label>
+                                <input type="text" id="title" onChange={this.handleChange} /> 
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="content">Project Content</label>
+                                //<input type="password" id="password" onChange={this.handleChange} />                            //02. No longer in use. Textarea will be used instead
+                                //<textarea id="content" className="materialize-textare"></textarea>                              //03. Add textarea
+                                <textarea id="content" className="materialize-textare" onChange={this.handleChange}></textarea>   //04. Add handleChange event
+                            </div>
+                            <div className="input-field">
+                                <button className="btn pink light-1 z-depth-0">Create</button>
+                            </div>
+                        </form>
+                    </div>
+                )
+            }
+        }
+        export default CreateProject
+
+    App.js
+        import React, {Component} from 'react';
+        import {BrowserRouter, Switch, Route} from 'react-router-dom'   
+        import Navbar from './components/layout/Navbar'
+        import Dashboard from './components/dashboard/Dashboard' 
+        import ProjectDetails from './components/projects/ProjectDetails' 
+        import SignIn from './components/auth/SignIn'          
+        import SignUp from './components/auth/SignUp'    
+        import CreateProject from './components/projects/CreateProject'                  //05. Import CreateProject.js
+        
+        class App extends Component {
+            render() {
+                return(
+                    <BrowserRouter>
+                        <div className="App">
+                            <Navbar />
+                            <Switch>
+                                <Route exact path='/' component={Dashboard} /> 
+                                <Route path='/project/:id' component={ProjectDetails} />  
+                                <Route path='/signin' component={SignIn} />             
+                                <Route path='/signup' component={SignUp} />       
+                                <Route path='/create' component={CreateProject} />       //06. Add CreateProject route
+                            </Switch> 
+                        </div>
+                    </BrowserRouter>                
+                );
+            }
+        }    
+        export default App;
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+09. Nav Links and CSS
+
+
 
 
 
