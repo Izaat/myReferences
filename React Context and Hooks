@@ -18,7 +18,7 @@ CONTENTS
 13. Creating Context with Functional Components
 14. Reading List - App Project
 15. Reducers, Actions and State
-16. Adding a Reducer
+16. Adding a Reducer to App
 17. Adding Local Storage
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1272,6 +1272,61 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 15. Reducers, Actions and State
+    
+    The larger the app gets, the more value BookContext.Provider has to hold
+    This app contains 3 values and larger app may contain hundreds or thousands (Refer to BookContext.js in Topic 14)
+    Reducers help to shorten this by consolidating them into one single function
+    Reducers also make the app easier to maintain
+    Also check Reducers under Redux in React Fundamentals file 
+        https://github.com/Izaat/references/blob/main/React%20Fundamentals
+    
+    Reducers
+        dispatch({type:'ADD_BOOK', book: {book.id} }) ---> Reducer Function (Interacts with the state data), "reducer(action, state)"
+        
+    Example Reducer @ codepen.io
+        //import react, {createContext, useState} from 'react';
+        import react, {createContext, useState, useReducer} from 'react';     //01. Add Reducer
+        const AgeContext = createContext();
+        
+        //const ageReducer = (state, action) => {}                            //04. Define ageReducer
+        const ageReducer = (state, action) => {
+            switch(action.type){                                              //05. Use switch method to define individual action
+                case 'ADD_ONE':
+                    return state + 1;
+                case 'ADD_FIVE':
+                    return state + 5;
+                case 'ADD_NUM':
+                    return state + action.num;
+                default:
+                    return state;
+            }    
+        }
+        
+        //dispatch({action})                                                   //08. Define the dispatch and use only one action
+        //dispatch({type: 'ADD_ONE'})                                          //09. Example to use ADD_ONE action
+        dispatch({type: 'ADD_NUM', num: 7})                                    //10. Use ADD_NUM action
+        
+        const AgeContextProvider = (props) => {
+            //const [age, setAge] = useState(20);                              //02. Comment out since will be using reducers
+            const [age, dispatch] = useReducer(ageReducer, 20);                //03. Using reducer method
+            
+            //const addOneToAge = () => setAge(age+1);                         //06. No longer in use since will be using reducer method
+            //const addFiveToAge = () => setAge(age+5);
+            //const addNumToAge = (num) => setAge(age+num);
+            
+            return (
+                //<AgeContext.Provider value={age, addOneToAge, addFiveToAge, addNumToAge}>
+                <AgeContext.Provider value={age, dispatch}>                    //07. Adding dispatch for the reducer
+                    {props.children}
+                </AgeContext.Provider>
+            )  
+        }
+        
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+16. Adding a Reducer to App
+
+
+
 
 
 
