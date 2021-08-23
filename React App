@@ -694,6 +694,94 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 09. Nav Links and CSS
+    
+    Create image folder (img) under public folder and add a background *.png for background
+        ../project/public/img/bg.png
+    
+    App Structure
+        src/components/auth
+            SignIn.js                       (Topic 7)
+            SignOut.js                      (Topic 7)
+        src/components/dashboard
+            Dashboard.js                    (Topic 4)
+            Notifications.js
+        src/components/layout
+            Navbar.js                       (Topic 3)
+            SignedInLinks.js                (Topic 3)
+            SignedOutLinks.js               (Topic 3)
+        src/components/project
+            CreateProject.js
+            ProjectDetails.js               (Topic 6)
+            ProjectList.js                  (Topic 5)
+            ProjectSummary.js               (Topic 5)
+        src 
+            App.js                          (Topic 7)
+            index.css
+
+    SignedInLinks.js
+        import React from 'react'
+        import {Link} from 'react-router-dom'
+        
+        const SignedInLinks = () => {
+            return (
+                <ul className="right">
+                    //<li><NavLink to ='/'>New Project</NavLink></li>
+                    <li><NavLink to ='/create'>New Project</NavLink></li>
+                    <li><NavLink to ='/'>Log Out</NavLink></li>
+                    <li><NavLink to ='/' className='btn btn-floating pink lighten-1'>Icon</NavLink></li>
+                </ul>
+            )
+        }
+        export default SignedInLinks
+
+    SignedOutLinks.js
+        import React from 'react'
+        import {Link} from 'react-router-dom'
+        
+        const SignedOutLinks = () => {
+            return (
+                <ul className="right">
+                    //<li><NavLink to ='/'>Signup</NavLink></li>
+                    //<li><NavLink to ='/'>Login</NavLink></li>
+                    <li><NavLink to ='/signup'>Signup</NavLink></li>
+                    <li><NavLink to ='/signin'>Login</NavLink></li>
+                </ul>
+            )
+        }
+        export default SignedOutLinks
+
+    index.css
+        html{
+            min-height: 100%;                          //Set minimum height of background image
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: url(/img/bg.png) no-repeat;   //Add background path
+            background-size: 100%;                    //Image full size
+            background-position: bottom;              //Image starts at bottom
+            background-color: #95e8f3;                //Background base color behind image (Skyblue)
+            min-height: 100%;                         //Set minimum height of background image
+        }
+        form{
+            padding: 20px;                            //Add paddings around Input text boxes
+            margin-top: 60px;                         //Add top margins on Input text boxes
+        }
+        form button, form h5{
+            margin: 20px 0;                           //Add margin to submit button
+        }
+        input[type=text]:not(.browser-default):focus:not([readonly]),
+        input[type=email]:not(.browser-default):focus:not([readonly]),
+        input[type=password]:not(.browser-default):focus:not([readonly]),
+        textarea.materialize-textarea:focus:not([readonly]){
+            border-color: #ec407a;
+            box-shadow: none;
+        }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+10. Add Redux and Reducers
+
 
 
 
