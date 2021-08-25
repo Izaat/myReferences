@@ -1333,6 +1333,7 @@ CONTENTS
         ../src/components/BookList.js
         ../src/components/BookDetails.js
         ../src/App.js
+        ../src/index.css
     
     Create new folder "reducers"
         ../src/reducers/BookReducer.js
