@@ -4,7 +4,7 @@ React, Redux, Thunk, Firebase (Firestore data storage, authentications, cloud fu
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
 01. Planning the App
-02. Setting Up                    **npx create-react-app reactapp, **npm install react-router-dom
+02. Setting Up                        **npx create-react-app reactapp, **npm install react-router-dom
 03. Navbar
 04. Dashboard
 05. Project Summary Component
@@ -12,7 +12,7 @@ CONTENTS
 07. Login and Signup Component
 08. Create Project Form
 09. Nav Links and CSS
-10. Add Redux and Reducers        **npm install redux react-redux
+10. Add Redux and combinedReducers    **npm install redux react-redux
 11. Adding Dummy Beta
 12. Async code with Redux
 13. Thunk
@@ -780,27 +780,92 @@ CONTENTS
         }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-10. Add Redux and Reducers
+10. Add Redux and combinedReducers
 
+    Install Redux and React Redux
+        Enter project folder in terminal
+            E:\ABCD\reactapp\
+        Type in "npm install redux react-redux"
 
+    App Structure
+        src/components/auth
+            SignIn.js                       (Topic 7)
+            SignOut.js                      (Topic 7)
+        src/components/dashboard
+            Dashboard.js                    (Topic 4)
+            Notifications.js
+        src/components/layout
+            Navbar.js                       (Topic 3)
+            SignedInLinks.js                (Topic 3)
+            SignedOutLinks.js               (Topic 3)
+        src/components/project
+            CreateProject.js
+            ProjectDetails.js               (Topic 6)
+            ProjectList.js                  (Topic 5)
+            ProjectSummary.js               (Topic 5)
+        src 
+            App.js                          (Topic 7)
+            index.css
+    
+    Using Multiple Reducers and combine all reducers as one single rootReducer.js
+        Refer to React Fundamentals, Topic 38
+        https://github.com/Izaat/references/blob/main/React%20Fundamentals
+        Create "store/reducers" under src
+            ../src/store/reducers
+            Add "authReducer.js"
+            Add "projectReducer.js"
+            Add "rootReducer.js"
+        
+    index.js
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import './index.css';
+        import App from './App';
+        import registerServiceWorker from './registerServiceWorker';
+        import {createStore} from 'redux'                                  //01. Import createStore function
+        import rootReducer from './store/reducers/rootReducer'             //10. Import rootReducer.js
+        import {Provider} from 'react-redux'                               //12. This is the binder for redux with react
+        
+        //const store = createStore();                                     //02. Create a store with createStore function and save in "store"
+        const store = createStore(rootReducer);                            //11. Add in "rootReducer"
+        
+        //ReactDOM.render(<App />, document.getElementById('root'));
+        //ReactDOM.render(<Provider><App /></Provider>, document.getElementById('root'));              //13. Wraps App tag with Provider tag
+        ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));  //14. Adds the store
+        registerServiceWorker();
+        
+    authReducer.js
+        const initState = {}                                                //05. Create "initState" as empty state
+        
+        //const authReducer = (state, action) => {}                         //03. Add authReducer function
+        //const authReducer = (state = initState, action) => {}             //04. If no state present, then "initState" will be used
+        const authReducer = (state = initState, action) => {
+            return state
+        }
+        export default authReducer
 
+    projectReducer.js
+        const initState = {}   
+        
+        const projectReducer = (state = initState, action) => {
+            return state
+        }
+        export default projectReducer
 
+    rootReducer.js
+        import authReducer from './authReducer'                               //06. Import authReducer.js
+        import authReducer from './projectReducer'                            //07. Import projectReducer.js
+        import {combinedReducers} from 'redux'                                //08. Import combinedReducers to combine both reducers as one to form rootReducer
+        
+        //const rootReducer = combinedReducers({});                           //09. The "{}" is to mention which reducers to be combined
+        const rootReducer = combinedReducers({
+            auth: authReducer,
+            project: projectReducer
+        });                          
+        export default rootReducer
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+11. Adding Dummy Beta
 
 
 
