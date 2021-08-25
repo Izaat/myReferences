@@ -20,6 +20,7 @@ CONTENTS
 14. Labview and Python
 15. Labview Mathscript
 16. Labview and Siemens TIA Portal
+17. Labview and Arduino
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -1530,9 +1531,64 @@ CONTENTS
     Test
         Click on Labview button and this will affect the TIA Portal ladder logic
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+17. Labview and Arduino
+
+    Download VI Package Manager
+    Start VI Package Manager
+        Type in Arduino in search box
+        Select and double click on "Labview Interface for Arduino", install the library
+    Start Arduino IDE
+        Main Menu > Open > Labview installation folder from VI Package Manager (../Program Files/NI/LabVIEW/vi.lib/Labview Interface for Arduino/Firmware/LVIFA_Base)
+        Select LVIFA_Base.pde
+        Several tabs will appear in Arduino IDE (LVIFA_Base, AFMotor.cpp, AFMotor.h, AccelStepper.cpp, AccelStepper.h, LabVIEWInterface.h, LabViewInterface)
+        Load LVIFA_Base to Arduino
+            Make sure AVRISP mk2 is selected (Main Menu > Tools > Programmer > AVRISP)
+    Close Arduino IDE after loading. (Open IDE will interfere with the connection to Labview)
+    Open Labview and start Blank VI 
+        Block Diagram
+            Right Click > Search > Type in "Arduino" > Select "Arduino"
+            A tree with arduino nodes will appear in tool menu
+            Add "Init" node 
+                VISA Resource > Create > Constant > Drop Down menu > COM5
+                Baud Rate > Create > Constant > 9600
+                Board Type > Create > Constant > Uno
+                Bytes Per Packet: Empty
+                Connection Type > Create > Constant > USB/Serial      
+                Connect Arduino Resource output to left side of While Loop box
+                Connect Error Out output to left side of While Loop box
+            Add While Loop
+                Add Set Digital Pin
+                    Right Click > Arduino > Low Level > Set Digital Pin
+                    Connect Arduino Resource Input to left while loop box (Arduino resource from Init node)
+                    Connect Error In Input to left while loop box (Error Out from Init node)
+                    Connect Arduino Resource Output to Arduino Resource Input of Digital Write Node
+                    Connect Error Our output to Error In Input of Digital Write Node
+                    Digital IO Pin
+                        Right Click > Create > Control
+                        Set to "13" in Front Panel to set pin 13
+                        Split output to connect to the Digital Write Node (Input - Digital IO)
+                    Pin Mode (Connect LED to Pin 13)
+                        Right Click > Create > Constant
+                        Select "Output"
+                Add Digital Write
+                    Right Click > Arduino > Low Level > Digital Write Pin
+                    Connect Arduino Resource output to right side of While Loop box
+                    Connect Error Out output to right side of While Loop box
+                    Digital IO Pin
+                        See Digital IO Pin above
+                    Value
+                        Connect to "Value"  to output of "Boolean To (0,1) Node" - Use search in toolbar
+                Add Boolean Node (Create LED indicator node output in Front Panel)  
+                    Connect input of "Boolean To (0,1) Node" to output of  LED Indicator
+            Add "Close" node
+                Connect Arduino Resource input to right side of While Loop box (Digital Write node's Arduino Resource output)
+                Connect Error In input to right side of While Loop box (Digital Write node's Error Out output)
+        Run program
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 [END]
+
 
 
 
