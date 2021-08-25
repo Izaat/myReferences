@@ -4,7 +4,7 @@ React, Redux, Thunk, Firebase (Firestore data storage, authentications, cloud fu
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
 01. Planning the App
-02. Setting Up
+02. Setting Up                    **npx create-react-app reactapp, **npm install react-router-dom
 03. Navbar
 04. Dashboard
 05. Project Summary Component
@@ -12,7 +12,7 @@ CONTENTS
 07. Login and Signup Component
 08. Create Project Form
 09. Nav Links and CSS
-10. Add Redux and Reducers
+10. Add Redux and Reducers        **npm install redux react-redux
 11. Adding Dummy Beta
 12. Async code with Redux
 13. Thunk
