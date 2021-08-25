@@ -18,7 +18,7 @@ CONTENTS
 13. Creating Context with Functional Components
 14. Reading List - App Project
 15. Reducers, Actions and State
-16. Adding a Reducer to App
+16. Adding a Reducer to Reading List App
 17. Adding Local Storage
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1323,7 +1323,129 @@ CONTENTS
         }
         
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-16. Adding a Reducer to App
+16. Adding a Reducer to Reading List App
+    
+    Read 23 Points
+    Reading List App (From Topic 14)
+        ../src/contexts/BookContext.js 
+        ../src/components/Navbar.js
+        ../src/components/BookForm.js
+        ../src/components/BookList.js
+        ../src/components/BookDetails.js
+        ../src/App.js
+    
+    Create new folder "reducers"
+        ../src/reducers/BookReducer.js
+        
+    BookReducer.js
+        import uuid from 'uuid/v1';                                      //02. Add uuid
+    
+        export const bookReducer = (state, action) => {                  //03. Add reducer method
+            switch(action.type) {                                        //04. Refer to topic 15 (Reducers)
+                case 'ADD_BOOK':
+                    //return [...state, {}]                              //05. Spreads the state and adds a new array, similar to "addBook" in BookContext.js
+                    return [...state, {
+                        title: action.book.title,
+                        author: action.book.author,
+                        id: uuid()
+                    }]
+                case 'REMOVE_BOOK':
+                    return state.filter(book => book.id !== action.id)  //06. Similar to "removeBook" in Book.Context.js
+                default:
+                    return state
+            }
+        }
+
+    BookContext.js
+        //import React, {createContext, useState} from 'react';
+        import React, {createContext, useReducer} from 'react';          //07. Add hooks "useReducer" and remove useState
+        //import uuid from 'uuid/v1';                                    //01. No longer in use since using reducer method
+        import {bookReducer} from '../reducers/BookReducer';             //09. Import BookReducer.js
+        
+        export const BookContext = createContext();
+        
+        const BookContextProvider = (props) => {
+            //const [books, setBooks] = useState([
+            //const [books, setBooks] = useReducer([                     //08. Replace useState with useReducer
+            //const [books, setBooks] = useReducer(bookReducer, [        //10. Add bookReducer, initialize state needs to be added
+            //    {title: 'Book 1', author: 'Author 1', id: 1},
+            //    {title: 'Book 2', author: 'Author 2', id: 2}
+            //]);
+            //const [books, setBooks] = useReducer(bookReducer, []);     //11. Add empty array as initialize state
+            const [books, dispatch] = useReducer(bookReducer, []);       //12. Use dispatch instead of setBooks in order to use reducers
+            
+            //const addBook = (title, author) => {                       //13. Removes addBook method since dispatch method is used
+            //    setBooks([...books, {title, author, uuid()}]);
+            //};
+            //const removeBook = (id) => {                               //14. Removes removeBook method since dispatch method is used
+            //    setBooks(books.filter(book => book.id !== id));
+            //};
+            
+            return(
+                //<BookContext.Provider value={{books, addBook, removeBook}}>
+                <BookContext.Provider value={{books, dispatch}}>         //15. Removes removeBook method since dispatch method is used
+                    {props.children}
+                </BookContext.Provider>
+            )
+        }
+        export default BookContextProvider;
+
+    BookForm.js
+        import React, {useContext, useState} from 'react';
+        import {BookContext} from '../contexts/BookContext';
+        
+        const NewBookForm = () => {
+            //const {addBook} = useContext(BookContext);
+            const {dispatch} = useContext(BookContext);                  //16. Use dispatch instead of addBook
+            const [title, setTitle] = useState('');
+            const [author, setAuthor] = useState('');
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                //addBook(title, author);
+                //dispatch(title, author);                               //17. Use dispatch instead of addBook
+                //dispatch({});                                          //18. Adds function that contains an action
+                //dispatch({type: 'ADD_BOOK'});                          //19. Adds an action
+                //dispatch({type: 'ADD_BOOK', {} });                     //20. Adds a payload
+                dispatch({type: 'ADD_BOOK', {
+                    //title: title author: author
+                    title, author                                        //21. Using shortcuts since both are the same name
+                }}); 
+                setTitle('');
+                setAuthor('');
+            }
+            return (
+                <form onSubmit={handleSubmit}>
+                    <input type="text" placeholder="book title" value={title} onChange={(e) => setTitle(e.target.value)} required />
+                    <input type="text" placeholder="author" value={author} onChange={(e) => setAuthor(e.target.value)} required />
+                    <input type="submit" value="add book" />
+                </form>
+            );
+        }
+        export default NewBookForm;
+
+    BookDetails.js
+        import React, {useContext} from 'react';
+        import {BookContext} from '../contexts/BookContext';
+        
+        const BookDetails = ({book}) => {
+            //const {removeBook} = useContext(BookContext);
+            const {dispatch} = useContext(BookContext);                                  //22. Use dispatch instead of removeBook
+            return (
+                //<li onClick={ () => removeBook(book.id) }>           
+                <li onClick={ () => dispatch( {type: 'REMOVE_BOOK', id: book.id} )}>     //23. Use dispatch instead of removeBook
+                    <div className="title">{book.title}</div>
+                    <div className="author">{book.author}</div>
+                </li>
+            );
+        }
+        export default BookDetails;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+17. Adding Local Storage
+
+
+
+
 
 
 
