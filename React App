@@ -866,6 +866,138 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 11. Adding Dummy Beta
+    
+    Read 16 points
+    Create dummy data in ProjectReducer
+    Retrieve data inside ProjectList from Dashboard (container component)
+    Pass data to ProjectSummay as props via ProjectList from Dashboard
+
+    App Structure
+        src/components/auth
+            SignIn.js                 (Topic 7)
+            SignOut.js                (Topic 7)
+        src/components/dashboard
+            Dashboard.js              (Topic 4)
+            Notifications.js
+        src/components/layout
+            Navbar.js                 (Topic 3)
+            SignedInLinks.js          (Topic 3)
+            SignedOutLinks.js         (Topic 3)
+        src/components/project
+            CreateProject.js
+            ProjectDetails.js         (Topic 6)
+            ProjectList.js            (Topic 5)
+            ProjectSummary.js         (Topic 5)
+        src 
+            App.js                    (Topic 7)
+            index.css                 (Topic 9)
+            index.js                  (Topic 10)
+        src/store/reducers
+            authReducer.js            (Topic 10)
+            projectReducer.js         (Topic 10)
+            rootReducer.js            (Topic 10)
+
+    projectReducer.js
+        //const initState = {}   
+        //const initState = {projects:[]}                                  //01. Create an empty array
+        const initState = {
+            projects: [
+                {id: '1', title: 'title 1', content: 'content 1'},         //02. Add arrays
+                {id: '2', title: 'title 2', content: 'content 2'},
+                {id: '3', title: 'title 3', content: 'content 3'}
+            ]
+        }   
+        
+        const projectReducer = (state = initState, action) => {
+            return state
+        }
+        export default projectReducer
+
+    Dashboard.js
+        import React, {Component} from 'react'
+        import Notifications from './Notifications'
+        import ProjectList from '../project/ProjectList'   
+        import {connect} from 'react-redux'                                //03. Adding the binder as mentioned in topic 10
+        
+        class Dashboard extends Component {
+            render() {
+                //console.log(this.props);                                 //08. Test point, "Projects" property with 3 elements will appear in console > object
+                const {projects} = this.props;                             //09. To push data to ProjectList.js, first need to retrieve projects data from props
+                return(
+                    <div className="dashboard container">
+                        <div className="row">
+                            <div className="col s12 m6">
+                                //<ProjectList />        
+                                <ProjectList projects={projects} />        //10. Pushing data to ProjectList
+                            </div>
+                            
+                            <div className="col s12 m5 offset-m1">
+                                <Notifications />
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        }
+        
+        //const mapStateToProps = (state) => {}                //05. Add Map state from the store to the props
+        const mapStateToProps = (state) => {
+            return {
+                projects: state.project.projects               //06. "project" from rootReducer, "projects" from projectReducer
+            }
+        }     
+        
+        //export default Dashboard
+        //export default connect()(Dashboard)                  //04. Wraps Dashboard function with connect
+        export default connect(mapStateToProps)(Dashboard)     //07. Define which component "connect" will be connected to
+
+    ProjectList.js (Functional component)
+        import React from 'react'
+        import ProjectSummary from './ProjectSummary'      
+
+        //const ProjectList = () => {
+        const ProjectList = ({projects}) => {                                      //11. To retrieve data from Dashboard.js
+            return (
+                <div className="project-list section"> 
+                    //<ProjectSummary />                                           //12. No longer needed since reducers will be used
+                    //<ProjectSummary />
+                    //<ProjectSummary />
+                    
+                    //{projects && projects.map(project => {})}                    //13. Mapping through the project. If there data exists in "projects", then do "project => {}"
+                    {projects && projects.map(project => {
+                        return(
+                            <ProjectSummary project={project} key={project.id} />  //14. Pushes "project" to ProjectSummary and assign key value to individual project
+                        )
+                    })}
+                </div>
+            )
+        }
+        export default ProjectList
+
+    ProjectSummary.js                 
+        import React from 'react'
+
+        //const ProjectSummary = () => {
+        const ProjectSummary = ({project}) => {                                //15. Receives "project" from ProjectList
+            return (  
+                <div className="card z-depth-0 project-summary">
+                    <div className="card-content grey-text text-darken-3">
+                        //<span className="card-title">Project Title</span>
+                        <span className="card-title">{project.title}</span>    //16. Output the title name into display
+                        <p>Posted by ...</p>
+                        <p className="grey-text">Date</p>
+                    </div>
+                </div>
+            )
+        }
+        export default ProjectSummary
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+12. Async code with Redux
+
+
+
+
 
 
 
