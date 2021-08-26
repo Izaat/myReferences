@@ -19,7 +19,8 @@ CONTENTS
 14. Reading List - App Project
 15. Reducers, Actions and State
 16. Adding a Reducer to Reading List App
-17. Adding Local Storage
+17. Adding Local Storage (Overview)
+18. 17. Adding Local Storage
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Context API and Hooks
@@ -1442,41 +1443,101 @@ CONTENTS
         export default BookDetails;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-17. Adding Local Storage
+17. Adding Local Storage (Overview)
+
+    To store user added books into memory
+    Note that after refreshing the browser, the current states restored to default
+
+    Example to store to localhost
+        Start app in browser and inspect elements
+        Open "Application" tab and on left hand panel, open Storage > Local Storage > localhost
+        Two columns will appear "Key" and "Value" and these keys can be added directly from "Inspect Elements"
+        To Add key and value:
+            Open Console Tab
+            Type in "localStorage"
+            Press enter
+            "Storage {length:0}" will appear
+            Expand "Storage" 
+            Under "__proto__", a list of actions are available
+                clear, 
+                getItem, (retrieve an item from storage)
+                key, 
+                    length, 
+                removeItem, 
+                setItem, (add an item to storage)
+                etc
+        Create key and value, localStorage.setItem(key, value)
+            localStorage.setItem('name', 'izaat')
+        Head back to "Application" tab and "name" will be under Key column and "izaat" will be in Value column
+        Retrieve data from storage
+            localStorage.getItem('name')                                          //This will print out "izaat" in Console
+        Note: 
+            setItem and getItem only works with strings
+            To save objects, JSON will be used
+
+    Example using objects (Still in Console mode)
+        Saving object
+            const book = {title: 'Awesome', author: 'Izaat'}
+            book                                                                  //This will print out "{title: 'Awesome', author: 'Izaat'}"
+            localStorage.setItem('mybook', JSON.stringify(book))   //This will save book as JSON string
+            Head back to "Application" tab and "mybook" will be in Key column and the object in Value column
+        Retrieve object:
+            const result = localStorage.getItem('mybook')
+            result                                                                //The object {"title": "Awesome", "author": "Izaat"} will be shown
+        Parse as Javascript object:
+            JSON.parse(result)                                                    //The object {title: "Awesome", author: "Izaat"} will be shown
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+18. Adding Local Storage
+    
+    Points: - Read all 7 points
+        Add Data - setItem (without saving data): Point 1-4
+        Save Data - getItem (saves data): Point 5-7
+        
+    Continued from Topic 17
+    useEffect method will be used with JSON Stringify since useEffect will run everytime there is an update (Refer to Topic 10)
+    
+    Reading List App
+        ../src/contexts/BookContext.js (From Topic 16)
+        ../src/components/Navbar.js (From Topic 14)
+        ../src/components/BookForm.js (From Topic 16)
+        ../src/components/BookList.js (From Topic 14)
+        ../src/components/BookDetails.js (From Topic 16)
+        ../src/reducers/BookReducer.js (From Topic 16)
+        ../src/App.js (From Topic 14)
+        ../src/index.css (From Topic 14)
+    
+    BookContext.js
+        //import React, {createContext, useReducer} from 'react';  
+        import React, {createContext, useReducer, useEffect} from 'react';         //01. useEffect being added
+        import {bookReducer} from '../reducers/BookReducer'; 
+        
+        export const BookContext = createContext();
+        
+        const BookContextProvider = (props) => {
+            //const [books, dispatch] = useReducer(bookReducer, []);  
+            //const [books, dispatch] = useReducer(bookReducer, [], ()=>{});        //05. Add callback function as third function in useReducer
+            const [books, dispatch] = useReducer(bookReducer, [], ()=>{
+                const localData = localStorage.getItem('books');                    //06. Retrieve item from local storage
+                return localData ? JSON.parse(localData) : [];                      //07. If there is value in localData (true), then run JSON parse. If localData is empty (false), then return empty array
+            });
+            //useEffect(()=>{});                                                    //02. Add useEffect function with callback function inside that will run whenever data changes
+            //useEffect(()=>{}, [books]);                                           //03. Whenever books data changes, run hook
+            useEffect(()=>{
+                localStorage.setItem('books', JSON.stringify(books))                //04. Add setItem function, refer to Topic 17. "Add Item" can be tested at this point via console but when browser refreshed, everything clears
+            }, [books]);     
+            return(
+                <BookContext.Provider value={{books, dispatch}}>   
+                    {props.children}
+                </BookContext.Provider>
+            )
+        }
+        export default BookContextProvider;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[End]
 
 
 
