@@ -14,8 +14,8 @@ CONTENTS
 09. Nav Links and CSS
 10. Add Redux and combinedReducers    **npm install redux react-redux
 11. Adding Dummy Beta
-12. Async code with Redux
-13. Thunk
+12. Async code with Redux / Thunk
+13. Create Firebase Project
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Planning the App
@@ -993,7 +993,46 @@ CONTENTS
         export default ProjectSummary
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-12. Async code with Redux
+12. Async code with Redux (Using Redux Thunk)
+    
+    Manipulating external database (external to the app) requires time to retrieve and React reducer may already have loaded before retrieval
+    Therefore performing data retrieval from the reducer is eliminated 
+    Using components on the other hand can't handle external database manipulation
+    The only method is to use dispatch action and run asynchronous code to grab data from external database, continues with dispatch, pass to reducer
+        Dispatch Action > Asynchronous Code > Reducer > Updates Central State
+        Note that in Redux, Dispatch Action directly pass an action to Reducers, Refer to React Fundamentals, Topic 33 Redux Map
+        The Asynchronous code is called Redux-Thunk
+    Thunk:
+        Halts the Dispatch Action
+        Then it performs an async request
+        And then resumes the dispatch
+    
+    App Structure
+        src/components/auth
+            SignIn.js                   (Topic 7)
+            SignOut.js                  (Topic 7)
+        src/components/dashboard
+            Dashboard.js                (Topic 11)
+            Notifications.js
+        src/components/layout
+            Navbar.js                   (Topic 3)
+            SignedInLinks.js            (Topic 3)
+            SignedOutLinks.js           (Topic 3)
+        src/components/project
+            CreateProject.js
+            ProjectDetails.js           (Topic 6)
+            ProjectList.js              (Topic 11)
+            ProjectSummary.js           (Topic 11)
+        src 
+            App.js                      (Topic 7)
+            index.css                   (Topic 9)
+            index.js                    (Topic 10)
+        src/store/reducers
+            authReducer.js              (Topic 10)
+            projectReducer.js           (Topic 11)
+            rootReducer.js              (Topic 10)
+
+
 
 
 
