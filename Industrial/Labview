@@ -21,7 +21,7 @@ CONTENTS
 15. Labview Mathscript
 16. Labview and Siemens TIA Portal
 17. Labview and Arduino
-18. Compact Rio FPGA Application
+18. CompactRio/myRIO FPGA Application
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -1589,7 +1589,7 @@ CONTENTS
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-18. Compact Rio FPGA Application
+18. CompactRio/myRIO FPGA Application
 
     /////////////////////////////////////
     Structure
@@ -1659,7 +1659,7 @@ CONTENTS
                 This will rename "untilted.lvproj" to "FPGA-App.lvproj"
 
         Setup
-            In Items tab, right Click on "FPGA-App.lvproj" root directory > New > Targets and Devices (Note that cRIO is already connected to PC)
+            In Items tab, right Click on "FPGA-App.lvproj" root directory > New > Targets and Devices (Note that myRIO is already connected to PC)
             Check "Discover existing target and devices"
             In directory, Targets and Devices column, open "myRIO" and select "NI-myRIO-xxxx-xxxxxxxx"
             Click OK and the selected device will appear in "FPGA-App.lvproj" window
