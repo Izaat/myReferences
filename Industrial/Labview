@@ -1759,6 +1759,56 @@ CONTENTS
                     |                                                                                             |
                     |---------------------------------------------------------------------------------------------|
 
+                Add Timed Loop (Process Loop #2)
+                    Right click > Programming > Structures > Timed Structure > Timed Loop
+                    Enable Subdiagram Label
+                        Right click on top box > Visible Items > Subdiagram Label
+                        Rename to "Process Loop #1"
+                    Add constant for Timed Loop stop button, set to False
+                    Ticks:
+                        
+                    Add Feedback Loop
+                        Right click > Programming > Structures > Feedback Node
+                        Right click on feedback node and select Change direction
+                    Add Select Node
+                        Right click > Programming > Comparison > Select
+                    Add Equal to 0 Node
+                        Right click > Programming > Comparison > Equal to 0
+                    Add Numeric Constant - Unsigned Long (U32)
+                        Right click > Programming > Numeric > Numeric Constant
+                        Convert to Unsigned Long (U32)
+                            Right click on output > Representation > U32
+                        Change value to "39,999,999" - This represents 40MHz clock, or 40 million cycles per second
+                    Add Decrement
+                        Right click > Programming > Numeric > Decrement
+                    Add Less
+                        Right click > Programming > Comparison > Less?
+                        Less Node input 1 linked to output of Feedback Loop (Branch)
+                        Less Node input 2 linked to constant 5,000,000    //If counter is valued below 5 million, then activate LED 0
+                    Add LED 0
+                        Project Tree Panel > Items Tab > Project > Chassis > FPGA Target > Onboard IO > LED0
+                        LED0 second input will link to the output of Less Node     
+                    Add LED  (Added from Front Panel) - Rename to "Paused"
+                        LED input will be linked to second input of LED1 (Branch)
+
+                    FPGA is alive blinker - LED blinks once per second    
+                    | Process Loop #2---------------------------------------------------------------------|
+                    |                                                                                     |
+                    |             40MHz down counter                                                      |
+                    |           +---------------------------------------------------+                     |
+                    |           |                                                   |                     |
+                    |           |    39999999--------+                              |                     |
+                    |           |                    |                   >          |                     |
+                    |           |                    +                Feedback      |   <                 |
+                    |           +------EqualTo0------+ SelectNode------+Loop--------+ Less----LED0        |
+                    |           |                    +                              +                     |
+                    |           |                    |                              |                     |
+                    |           +------Decrement-----+            5000000-----------+                     |
+                    |                                                                                     |
+                    |-------------------------------------------------------------------------------------|
+
+
+
 
 
 
