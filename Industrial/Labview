@@ -1826,9 +1826,54 @@ CONTENTS
 
         FPGA-testbench.vi
             Front Panel
+                Add 2 Rounded box to place the controls
+                    Right Click > Silver > Decorations > Rounded Box
+                    Rounded Box 1: Onboard Devices
+                        > Button0 (Added from Block Diagram)  
+                        > LED 0:3 (Added from Block Diagram)  
+                    Rounded Box 2: Front panel Control and Indicators
+                        > Pause Button (Added from Block Diagram)  
+                        > Loop Time (U32) (Added from Block Diagram)  
+                        > Paused LED (Added from Block Diagram)  
+                        > LEDa (Added from Block Diagram)  
+                        > LEDb (Added from Block Diagram)  
+                Add While Loop Stop button (Added from Block Diagram)  
+                
             Block Diagram
-                Add FPGA Desktop Execution Node
-                    Right Click > FPGA Interface > FPGA Desktop Execution Node
+                Add While Loop
+                    Add Control for While Loop Stop button
+                        Right Click > Create > Control
+                    Add Time (Wait)
+                        Right Click > Programming > Timing > Wait (ms)
+                        Add Constant
+                            Right click on input > Create > Constant
+                            Constant: 100
+                    Add FPGA Desktop Execution Node
+                        Right Click > FPGA Interface > FPGA Desktop Execution Node
+                        Desktop Execution Node Configuration Window will appear
+                            VI: Browse and select FPGA-Main.vi from Project > myRIO > Chassis > FPGA Target 
+                            Terminal Configuration: 
+                                Open FPGA-Main.vi
+                                    Select all (Pause, LEDa, LEDb, Loop Timer)
+                                    Move to the other window
+                                Open FPGA Target > Onboard IO
+                                    Select Button0, LED0, LED1, LED2, LED3
+                                    Move to the other window
+                                    Change LED0-3 Direction to "Out" from "In/Out"
+                        Add Controls
+                            Right click on Pause/LoopTime/Button0 > Create > Controls
+                            See Front Panel for the placements
+                        Add Indicators
+                            Right Click on Paused/LEDa/LEDb > Create > Indicator
+                        Add Array
+                            Right Click > Programming > Array > Build Array
+                            Expand Build Array Node to 4 sections
+                            Link LED0, LED1, LED2, LED3 to the inputs of Build Array Node
+                            Add Indicator
+                                Right click on output node > Create > Indicator
+                                Rename indicator to "LED 0:3"
+
+
 
 
 
