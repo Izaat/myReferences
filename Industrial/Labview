@@ -1888,7 +1888,18 @@ CONTENTS
                 Check and Test
                 
     /////////////////////////////////////
-    5. Compile FPGA-Main to bitstream file                
+    5. Compile FPGA-Main to bitstream file
+
+        In Project Tree Panel > Right click on FPGA Target (myRIO > Chassis > FPGA Target)
+        Select Execution Mode > FPGA Target
+        In FPGA-Main.vi Front Panel, click on Run and "Select Compile Server" window appears
+            Check "use local compile server"
+            Check "Prompt to select a compile server for each compilation"
+            Click OK and "Compile Status" window will appear
+            Click on "Close" button to let the compilation run in the background
+
+    /////////////////////////////////////
+    6. Create and deploy shared variables on RT Target              
 
 
 
