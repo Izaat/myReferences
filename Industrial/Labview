@@ -1696,7 +1696,7 @@ CONTENTS
                     Enable Subdiagram Label
                         Right click on top box > Visible Items > Subdiagram Label
                         Rename to "Process Loop #1"
-                    Add constant for While Loop stop button
+                    Add constant for While Loop stop button, set to False
                     Add Timer
                         Right click > Programming > Timing > Wait
                             Counter Units: mSec
