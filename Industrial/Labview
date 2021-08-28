@@ -21,6 +21,7 @@ CONTENTS
 15. Labview Mathscript
 16. Labview and Siemens TIA Portal
 17. Labview and Arduino
+18. Compact Rio FPGA Application
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -1585,6 +1586,73 @@ CONTENTS
                 Connect Arduino Resource input to right side of While Loop box (Digital Write node's Arduino Resource output)
                 Connect Error In input to right side of While Loop box (Digital Write node's Error Out output)
         Run program
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+18. Compact Rio FPGA Application
+
+    Structure
+        |            Desktop PC   ------  Wireless Router  ----------------  Internet
+        |                 |                     |
+        |   +-------------+---------------------+-----------------------+
+        |   |             |                     |                       |
+        |   |           USB Lan            myRIO adapter                |
+        |   |             |                     |                       |
+        |   |             |---------------------+                       |
+        |   |             |                                             |
+        |   |      |------+--------------|                              |
+        |   |      |                     |                              |
+        |   |      |                     +------------UART<-------------+---->
+        |   |      |                     |                              |            |---------------------|
+        |   |      |     RT Target       |                              |            | > Sensors           |
+        |   |      |                     +----------USB Port<-----------+---->       | > Actuators         |
+        |   |      |                     +--------File System<----------+---->       | > Peripherals       |
+        |   |      |                     |                              |            | > User Interface    |
+        |   |      |------+--------------|                              |            | > Embedded Systems  |
+        |   |             |                                             |            |---------------------|
+        |   |      |------+--------------|                              |
+        |   |      |                     |                              |
+        |   |      |                     +-----------DIO<---------------+---->
+        |   |      |                     |                              |
+        |   |      |    FPGA Target      |                              |
+        |   |      |                     +-----------AIO<---------------+---->
+        |   |      |                     +-------Onboard Devices        |
+        |   |      |                     |                              |
+        |   |      |---------------------|                              |
+        |   |                                                           |
+        |   +-----------------------------------------------------------+
+        |
+
+        FPGA-Main.vi (FPGA Target)   
+            Front Panel: LEDs, Pause, Loop Time input
+            Block Diagram: Process Loop 1 for button and LEDs, Process Loop 2 for loop time input and clock speed
+        FPGA-testbench.vi (Desktop PC - Simulator)
+            Front Panel: Panel 1 to control 4 LEDs, Panel 2 to control FPGA-Main.vi
+            Block Diagram: 100ms While loop, FPGA-Main.vi node, 4 LEDs, output from FPGA-Main.vi, buttons, loop time input control
+        RT-Main.vi (RT Target)
+            Front Panel: Startup to interact with HMI in Desktop PC
+            Block Diagram: Conditional block
+        PC-Main.vi (Desktop PC) - HMI
+            Front Panel: Loop Time control slider, pause button, LEDs (a and b)
+            Block Diagram: Shared variables with FPGA-Mainvi, idle loop (to keep VI running until stop is pressed)
+            
+    Process
+        1. Create Labview project
+        2. Create FPGA-Main.vi
+        3. Create FPGA-testbench.vi
+        4. Test/debug FPGA-Main.vi
+        5. Compile FPGA-Main to bitstream file
+        6. Create and deploy shared variables on RT Target
+        7. Create RT-Main.vi
+        8. Create PC-Main.vi
+        9. Set RT-Main.vi as startup VI
+
+
+
+
+
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 [END]
