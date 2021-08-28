@@ -1638,7 +1638,7 @@ CONTENTS
             Block Diagram: Shared variables with FPGA-Mainvi, idle loop (to keep VI running until stop is pressed)
             
     Process
-        1. Create Labview project
+        1. Create Labview project (FPGA-App.lvproj)
         2. Create FPGA-Main.vi
         3. Create FPGA-testbench.vi
         4. Test/debug FPGA-Main.vi
