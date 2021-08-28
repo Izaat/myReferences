@@ -14,7 +14,7 @@ CONTENTS
 09. Nav Links and CSS
 10. Add Redux and combinedReducers    **npm install redux react-redux
 11. Adding Dummy Beta
-12. Async code with Redux / Thunk
+12. Async code with Redux / Thunk     **npm install redux-thunk
 13. Create Firebase Project
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
