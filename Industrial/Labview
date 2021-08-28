@@ -1668,6 +1668,100 @@ CONTENTS
 
     /////////////////////////////////////
     2. Create FPGA-Main.vi
+        
+        Create new VI
+            From Project Panel > FPGA-App.lvproj root tree > myRIO > Chassis > FPGA Target
+            Right click on FPGA Target > New > VI
+            Save as FPGA-Main.vi
+            Change Icon and properties
+                In Front Panel, double click on icon (Top right hand corner)
+                    Icon Text Tab
+                        Line 1: FPGA
+                        Line 2: Main
+                        Click on "Selection" icon (dotted line box)
+                        Box select the white area in image
+                        Click OK
+
+        FPGA-Main.vi
+            Front Panel
+                Add Button (Rename to Pause)
+                    Right click > Silver > Boolean > Push Button
+                Add LED (Silver) - 3x
+                    Right click > Silver > Boolean > LED
+                Add Timer control (Added from Block Diagram) - 
+                    Rename "Count(mSec)" to "Loop Time [ms]"   
+            Block Diagram
+                Add While Loop (Process Loop #1)
+                    Right click > Programming > Structures > While Loop
+                    Enable Subdiagram Label
+                        Right click on top box > Visible Items > Subdiagram Label
+                        Rename to "Process Loop #1"
+                    Add constant for While Loop stop button
+                    Add Timer
+                        Right click > Programming > Timing > Wait
+                            Counter Units: mSec
+                            Internal Counter size: 32bit
+                        Create Control on input
+                            Right click on input > Create > Control
+                            Name this "Loop Time [ms]"
+                    Add "Button" from Project Tree panel (Drag and drop)
+                        Project Tree Panel > Items Tab > Project > Chassis > FPGA Target > Onboard IO > Button0 
+                    Add Pause button node (Added from Front Panel)    
+                    Add OR gate
+                        Right click > Programming > Boolean > OR
+                        OR gate inputs will be linked to the output of Pause button and Onboard IO button
+                        OR gate output will be linked to the input of XOR gate
+                    Add XOR gate
+                        Right click > Programming > Boolean > Exclusive OR
+                        XOR input 1 will be linked to the output of Feedback Loop
+                        XOR output will be linked to the input of Feedback Loop
+                        XOR input 2 will be linked to the output of OR gate                    
+                    Add Feedback Loop
+                        Right click > Programming > Structures > Feedback Node
+                        Right click on feedback node and select Change direction
+                        Feedback Loop output will be branched out to both XOR gate input and NOT gate input
+                    Add NOT gate
+                        Right click > Programming > Boolean > NOT 
+                        NOT input will be linked to Feedback Loop output (branch)
+                    Add LED 2
+                        Project Tree Panel > Items Tab > Project > Chassis > FPGA Target > Onboard IO > LED2
+                        LED2 second input will link to the output of Feedback Loop that links to the input of XOR input 1
+                    Add LED 3
+                        Project Tree Panel > Items Tab > Project > Chassis > FPGA Target > Onboard IO > LED3
+                        LED2 second input will link to the output of NOT gate
+                    Add LED 1
+                        Project Tree Panel > Items Tab > Project > Chassis > FPGA Target > Onboard IO > LED1
+                        LED2 second input will link to the output of OR gate                
+                    Add LED  (Added from Front Panel) - Rename to "LEDa"
+                        LED input will be linked to second input of LED2 (Branch)
+                    Add LED  (Added from Front Panel) - Rename to "LEDb"
+                        LED input will be linked to second input of LED3 (Branch)
+                    Add LED  (Added from Front Panel) - Rename to "Paused"
+                        LED input will be linked to second input of LED1 (Branch)
+                LED Blinker - Blink the board        
+                | Process Loop #1-----------------------------------------------------------------------------|
+                |                                                                                             |
+                |                                                             Loop Time                       |
+                |                                                                U32 ------------ Timer(Wait) |
+                |                                                                                             |
+                |                                                                  LEDa                       |
+                |                                                             +-----TF                        |
+                |                                                             |                               |
+                |                       +-----------------------+-------------+----------- LED2               |
+                |                       |                       |                  LEDb                       |
+                |  Button0 ----|        |                       |             +-----TF                        |
+                |              +        +            Feedback   |             |                               |
+                |    Paused    +|OR|----+|XOR|--------Loop------+----NOT------+----------- LED3               |
+                |      TF------|        |                                         paused                      |
+                |                       |                                     +-----TF                        |
+                |                       |                                     |                               |
+                |                       +-------------------------------------+----------- LED1               |
+                |                                                                                             |
+                |---------------------------------------------------------------------------------------------|
+
+
+
+
 
 
 
