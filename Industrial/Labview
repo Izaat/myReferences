@@ -1591,6 +1591,7 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 18. Compact Rio FPGA Application
 
+    /////////////////////////////////////
     Structure
         |            Desktop PC   ------  Wireless Router  ----------------  Internet
         |                 |                     |
@@ -1647,7 +1648,26 @@ CONTENTS
         8. Create PC-Main.vi
         9. Set RT-Main.vi as startup VI
 
+    /////////////////////////////////////
+    1. Create Labview project
+    
+        New Project
+            Main Menu > New
+                Select Project Root Folder > Empty Project > Press OK
+            Empty Project Window
+                Save as FPGA-App.lvproj
+                This will rename "untilted.lvproj" to "FPGA-App.lvproj"
 
+        Setup
+            Right Click on "FPGA-App.lvproj" root directory > New > Targets and Devices (Note that cRIO is already connected to PC)
+            Check "Discover existing target and devices"
+            In directory, Targets and Devices column, open "myRIO" and select "NI-myRIO-xxxx-xxxxxxxx"
+            Click OK and the selected device will appear in "FPGA-App.lvproj" window
+            Note that the device "NI-myRIO-xxxx-xxxxxxxx" rott tree can be renamed
+            Save the project
+
+    /////////////////////////////////////
+    2. Create FPGA-Main.vi
 
 
 
