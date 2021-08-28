@@ -1710,12 +1710,16 @@ CONTENTS
                     Add OR gate
                         Right click > Programming > Boolean > OR
                         OR gate inputs will be linked to the output of Pause button and Onboard IO button
-                        OR gate output will be linked to the input of XOR gate
+                        OR gate output will be linked to the input of NOT gate 1
+                    Add NOT gate 1
+                        Right click > Programming > Boolean > NOT 
+                        NOT input will be linked to OR gate output (branch)
+                        NOT output will be linked to XOR gate input
                     Add XOR gate
                         Right click > Programming > Boolean > Exclusive OR
                         XOR input 1 will be linked to the output of Feedback Loop
                         XOR output will be linked to the input of Feedback Loop
-                        XOR input 2 will be linked to the output of OR gate                    
+                        XOR input 2 will be linked to the output of NOT gate 1       
                     Add Feedback Loop
                         Right click > Programming > Structures > Feedback Node
                         Right click on feedback node and select Change direction
@@ -1739,25 +1743,25 @@ CONTENTS
                     Add LED  (Added from Front Panel) - Rename to "Paused"
                         LED input will be linked to second input of LED1 (Branch)
                     LED Blinker - Blink the board        
-                    | Process Loop #1-----------------------------------------------------------------------------|
-                    |                                                                                             |
-                    |                                                             Loop Time                       |
-                    |                                                                U32 ------------ Timer(Wait) |
-                    |                                                                                             |
-                    |                                                                  LEDa                       |
-                    |                                                             +-----TF                        |
-                    |                                                             |                               |
-                    |                       +-----------------------+-------------+----------- LED2               |
-                    |                       |                       |                  LEDb                       |
-                    |  Button0 ----|        |                       |             +-----TF                        |
-                    |              +        +            Feedback   |             |                               |
-                    |    Paused    +|OR|----+|XOR|--------Loop------+----NOT------+----------- LED3               |
-                    |      TF------|        |                                         paused                      |
-                    |                       |                                     +-----TF                        |
-                    |                       |                                     |                               |
-                    |                       +-------------------------------------+----------- LED1               |
-                    |                                                                                             |
-                    |---------------------------------------------------------------------------------------------|
+                    | Process Loop #1------------------------------------------------------------------------------------|
+                    |                                                                                                    |
+                    |                                                                    Loop Time                       |
+                    |                                                                       U32 ------------ Timer(Wait) |
+                    |                                                                                                    |
+                    |                                                                         LEDa                       |
+                    |                                                                    +-----TF                        |
+                    |                                                                    |                               |
+                    |                              +-----------------------+-------------+----------- LED2               |
+                    |                              |                       |                  LEDb                       |
+                    |  Button0 ----|               |                       |             +-----TF                        |
+                    |              +               +            Feedback   |             |                               |
+                    |    Paused    +--|OR|---+NOT--+|XOR|--------Loop------+----NOT------+----------- LED3               |
+                    |      TF------|               |                                         paused                      |
+                    |                              |                                     +-----TF                        |
+                    |                              |                                     |                               |
+                    |                              +-------------------------------------+----------- LED1               |
+                    |                                                                                                    |
+                    |----------------------------------------------------------------------------------------------------|
 
                 Add Timed Loop (Process Loop #2)
                     Right click > Programming > Structures > Timed Structure > Timed Loop
@@ -1873,7 +1877,18 @@ CONTENTS
                                 Right click on output node > Create > Indicator
                                 Rename indicator to "LED 0:3"
 
-
+    /////////////////////////////////////
+    4. Test/debug FPGA-Main.vi
+        
+        Start Simulation
+            In Project Tree Panel > Right click on FPGA Target (myRIO > Chassis > FPGA Target)
+            Select Execution Mode > Simulation
+            Run FPGA-testbench.vi (Front Panel)
+                Click on Button on Onboard Devices panel, FPGA-Main.vi will run
+                Check and Test
+                
+    /////////////////////////////////////
+    5. Compile FPGA-Main to bitstream file                
 
 
 
