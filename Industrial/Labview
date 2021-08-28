@@ -1807,7 +1807,28 @@ CONTENTS
                     |                                                                                     |
                     |-------------------------------------------------------------------------------------|
 
+    /////////////////////////////////////
+    3. Create FPGA-testbench.vi
 
+        Create new VI
+            From Project Panel > FPGA-App.lvproj root tree > myRIO > Chassis > FPGA Target
+            Right click on FPGA Target > New > VI
+            Save as FPGA-testbench.vi
+            Change Icon and properties
+                In Front Panel, double click on icon (Top right hand corner)
+                    Icon Text Tab
+                        Line 1: FPGA
+                        Line 2: Test
+                        Line 2: Bench
+                        Click on "Selection" icon (dotted line box)
+                        Box select the white area in image
+                        Click OK
+
+        FPGA-testbench.vi
+            Front Panel
+            Block Diagram
+                Add FPGA Desktop Execution Node
+                    Right Click > FPGA Interface > FPGA Desktop Execution Node
 
 
 
