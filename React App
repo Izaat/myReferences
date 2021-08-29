@@ -995,6 +995,7 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 12. Async code with Redux (Using Redux Thunk)
     
+    Read 17 points
     Manipulating external database (external to the app) requires time to retrieve and React reducer may already have loaded before retrieval
     Therefore performing data retrieval from the reducer is eliminated 
     Using components on the other hand can't handle external database manipulation
@@ -1002,10 +1003,20 @@ CONTENTS
         Dispatch Action > Asynchronous Code > Reducer > Updates Central State
         Note that in Redux, Dispatch Action directly pass an action to Reducers, Refer to React Fundamentals, Topic 33 Redux Map
         The Asynchronous code is called Redux-Thunk
+    
     Thunk:
         Halts the Dispatch Action
         Then it performs an async request
         And then resumes the dispatch
+        
+    Install Thunk to App Project directory
+        Enter project folder in terminal
+            E:\ABCD\reactapp\
+        Type in "npm install redux-thunk"        
+    
+    Create a new folder "actions" in ../src/store
+        src/store/actions
+            projectActions.js
     
     App Structure
         src/components/auth
@@ -1019,7 +1030,7 @@ CONTENTS
             SignedInLinks.js            (Topic 3)
             SignedOutLinks.js           (Topic 3)
         src/components/project
-            CreateProject.js
+            CreateProject.js            (Topic 8)
             ProjectDetails.js           (Topic 6)
             ProjectList.js              (Topic 11)
             ProjectSummary.js           (Topic 11)
@@ -1028,21 +1039,118 @@ CONTENTS
             index.css                   (Topic 9)
             index.js                    (Topic 10)
         src/store/reducers
-            authReducer.js              (Topic 10)
+            authReducer.js              (Topic 11)
             projectReducer.js           (Topic 11)
             rootReducer.js              (Topic 10)
 
+    index.js
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import './index.css';
+        import App from './App';
+        import registerServiceWorker from './registerServiceWorker';
+        //import {createStore} from 'redux'  
+        import {createStore, applyMiddleware} from 'redux'                 //02. Import applyMiddleware from redux
+        import rootReducer from './store/reducers/rootReducer'       
+        import {Provider} from 'react-redux'           
+        import thunk from 'redux-thunk'                                    //01. Import Thunk
+        
+        //const store = createStore(rootReducer);   
+        const store = createStore(rootReducer, applyMiddleware(thunk));    //03. Apply Thunk as the Middleware. This enhances the store and also able to add multiple middlewares
+        
+        ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));  
+        registerServiceWorker();
 
+    projectActions.js
+        export const createProject = (project) => {
+            //return {                                                     //04. Returns an object but with Thunk, a function can be returned
+            //    type: 'ADD_PROJECT',
+            //    project: project
+            //}
+            
+            //return () => {}                                              //05. To return a function
+            //return (dispatch, getState) => {}                            //06. Add getState and dispatch (send to reducer). 
+            return (dispatch, getState) => {
+                //EMPTY                                                    //07. Make async call to database
+                dispatch({type: 'CREATE_PROJECT', project});               //08. Continues the dispatch action to reducer
+            }
+        };
 
+    CreateProject.js                                                      
+        import React, {Component} from 'react'    
+        import {connect} from 'react-redux'                                //10. Add binder as mentioned in topic 10
+        import {createProject} from '../../store/actions/projectActions'   //09. Import projectActions.js
+        
+        class CreateProject extends Component {
+            state = {
+                title:'',              
+                content:''
+            }
+            handleChange = (e) => {   
+                this.setState({                 
+                    [e.target.id]: e.target.value  
+                })
+            }
+            handleSubmit = (e) => {    
+                e.preventDefault();       
+                //console.log(this.state);    
+                this.props.createProject(this.state)                         //15. Add createProject props to pass into "project" in point 13
+            }
+            render() {
+                return(
+                    <div className="container">
+                        <form onSubmit={this.handleSubmit} className="white">   
+                            <h5 className="grey-text text-darken-3">Create new project</h5>
+                            <div className="input-field">
+                                <label htmlFor="title">Title</label>
+                                <input type="text" id="title" onChange={this.handleChange} /> 
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="content">Project Content</label>
+                                <textarea id="content" className="materialize-textare" onChange={this.handleChange}></textarea>   
+                            </div>
+                            <div className="input-field">
+                                <button className="btn pink light-1 z-depth-0">Create</button>
+                            </div>
+                        </form>
+                    </div>
+                )
+            }
+        }
+        
+        //const mapDispatchToProps = (dispatch) => {}                          //12. Map dispatch to props
+        const mapDispatchToProps = (dispatch) => {
+            return {
+                createProject: (project) => dispatch(createProject(project))   //13. Takes in individual project "(project) =>" and dispatch an action creator that takes in the "(project) =>"
+            }
+        }
+        
+        //export default CreateProject
+        //export default connect()(CreateProject)                              //11. Wrap CreateProject with binder
+        export default connect(null, mapDispatchToProps)(CreateProject)        //14. Add mapDispatchToProps as the second parameter where the first parameter is null since mapStateToProps is not available
 
+    projectReducer.js
+        const initState = {
+            projects: [
+                {id: '1', title: 'title 1', content: 'content 1'},        
+                {id: '2', title: 'title 2', content: 'content 2'},
+                {id: '3', title: 'title 3', content: 'content 3'}
+            ]
+        }   
+        
+        const projectReducer = (state = initState, action) => {
+            //switch()                   
+            //switch(action.type) {}                                          //16. Detects createProject
+            switch(action.type) {
+                case 'CREATE_PROJECT':
+                    console.log('created project', action.project)            //17. Prints out "Created project" and project action received
+            }  
+            return state
+        }
+        export default projectReducer
 
-
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+13. Create Firebase Project
 
 
 
