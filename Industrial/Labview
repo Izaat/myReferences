@@ -1643,7 +1643,7 @@ CONTENTS
         3. Create FPGA-testbench.vi
         4. Test/debug FPGA-Main.vi
         5. Compile FPGA-Main to bitstream file
-        6. Create and deploy shared variables on RT Target
+        6. Create and deploy shared variables to RT Target
         7. Create RT-Main.vi
         8. Create PC-Main.vi
         9. Set RT-Main.vi as startup VI
@@ -1899,7 +1899,7 @@ CONTENTS
             Click on "Close" button to let the compilation run in the background
 
     /////////////////////////////////////
-    6. Create and deploy shared variables on RT Target              
+    6. Create and deploy shared variables to RT Target              
 
 
 
