@@ -16,6 +16,20 @@ CONTENTS
 11. Adding Dummy Beta
 12. Async code with Redux / Thunk     **npm install redux-thunk
 13. Create Firebase Project           **npm install firebase
+14. Firestore Data & Collections
+15. Connecting Redux to Firebase
+16. Adding Data to Firestore
+17. Syncing Data with Firestore
+18. Project Details Data
+19. Firebase Authentication
+20. Firebase Authentication with Redux
+21. Logging users in
+22. Logging users out
+23. Tracking Authentication status
+24. Waiting for Auth Ready
+25. Route Guarding
+26. User Sign up (Firebase Auth)
+27. User Profile Data
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Planning the App
@@ -1150,7 +1164,7 @@ CONTENTS
         export default projectReducer
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-13. Create Firebase Project
+14. Firestore Data & Collections
 
 
 
