@@ -1934,7 +1934,110 @@ CONTENTS
                 These variables can be forced ON/OFF via NI Distributed System Manager
 
     /////////////////////////////////////
-    7. Create RT-Main.vi            
+    7. Create RT-Main.vi
+
+        Create new VI
+            From Project Panel > FPGA-App.lvproj root tree > myRIO
+            Right click on myRIO > New > VI
+            Save as RT-Main.vi
+            Change Icon and properties
+                In Front Panel, double click on icon (Top right hand corner)
+                    Icon Text Tab
+                        Line 1: RT
+                        Line 2: Main
+                        Click on "Selection" icon (dotted line box)
+                        Box select the white area in image
+                        Click OK
+            
+        RT-Main.vi
+            Front Panel:
+                Just Double Click and add a name "RT Main"
+            Block Diagram:
+                Add Flat Sequence (Left Frame and Right Frame)
+                    Enable Subdiagram Label
+                        Right Click on top border > Label > Subdiagram Label
+                        Left Frame: Initialize NPSVs
+                    Right Click > Programming > Structures > Flat Sequence
+                    Right Click on right side border > Select "Add Frame After" (To add Right Frame)
+                Add FPGA-App.lvlib variables
+                    From Project tree panel, drag and drop variables into the corresponding frames
+                    Left Frame
+                        Loop Time 
+                            Change Access Mode to Write - Right Click on Node > Access Mode > Select Write
+                            Create constant for input 1, Constant = 100
+                        Pause - Create constant for input 1, Constant = False
+                        Stop - Create constant for input 1, Constant = False
+                    Right Frame    
+                        Add FPGA VI Reference
+                            Right Click > FPGA Interface > Open FPGA VI Reference
+                            Double click on node to open configuration window
+                                Check the checkbox on VI section
+                                Click browse on VI section
+                                Select FPGA-Main.vi and click on OK
+                                Check "Run the FPGA VI" and "Dynamic Mode" checkboxese
+                                Click OK
+                        Add While Loop        
+                            Add Stop 
+                                From Project tree panel, drag and drop Stop
+                                Link output to the input of While Loop Stop node
+                            Add Read/Write Control        
+                                Right Click > FPGA Interface > Read/Write Control
+                                Link Read/Write Control Node Input 1 (Reference In) to FPGA Reference Node Output 1 (Reference Out) 
+                                Expand on "Unselected" box downwards to form an array
+                                    Loop Time
+                                    Pause
+                                    LEDa
+                                    LEDb
+                                    Paused
+                            Add Loop Time 
+                                From Project tree panel, drag and drop Loop Time
+                                Change Access Mode to Read - Right Click on Node > Access Mode > Select Read
+                                Link output to "Loop Time" input on Read/Write Control Node
+                            Add Pause - Create constant for input 1, Constant = False    
+                                From Project tree panel, drag and drop Pause or Copy/Paste Pause from Left Frame
+                                Link output to "Pause" input on Read/Write Control Node
+                            Add LEDa, LEDb and Paused from Library and linked to the Read/Write Node output
+                        Add "Close FPGA VI Reference"
+                            Right Click > FPGA Interface > Close FPGA VI Reference and place outside While Loop
+                            Link Reference In to Reference Out on Read/Write Node
+                            Right Click on Node and select "Close and Reset of Last Reference"
+            Diagram:
+                |-------Initialize NPSVs--------||-----------Right Frame----------------------------------------------------------|
+                |                               ||                                                                                |
+                |      100---'Loop Time         ||                    +----While Loop-------------------------+                   |
+                |                               ||                    |                                       |                   |
+                |      F---'Pause               ||      FPGA Main ----+---------------|Read/Write |-----------+-----Close FPGA    |
+                |                               ||                    |               |           |           |                   |
+                |      F---'Stop                ||                    | 'LoopTime-----+--LoopTime |           |                   |
+                |                               ||                    |    'Pause-----+--Pause    |           |                   |
+                |                               ||                    |               | LEDa      +---'LEDa   |                   |
+                |                               ||                    |               | LEDb      +---'LEDb   |                   |          
+                |                               ||                    |               | Paused    +---'Paused |                   |
+                |                               ||                    |               |-----------|           |                   |
+                |                               ||                    |                           'Stop--|O|  |                   |
+                |                               ||                    +---------------------------------------+                   |
+                |                               ||                                                                                |
+                |-------------------------------||--------------------------------------------------------------------------------|
+                Legend: Apostrope means from Project Tree Library
+
+        Running the Program
+            From RT-Main.vi Front Panel, click on Run
+            Physical LEDs on myRIO (LED0-3) will be blinking
+            Open Distributed System Manager for simulation
+                RT-Main.vi > Main Menu > Tools > Distributed System Manager
+                Slow down blink rate
+                    Select Pause, set to True and click on Set
+                    Select Loop Time
+                    New Value: 500 //Change from 100
+                    Click on Set
+                    Select Pause, set to False and click on Set
+                Press physical myRio button and LED1 will light up
+                Shuts down VI 
+                    Select Stop, set to True and click on Set
+                    All LEDs will be OFF
+
+    /////////////////////////////////////
+    8. Create PC-Main.vi           
 
 
 
