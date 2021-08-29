@@ -1164,7 +1164,53 @@ CONTENTS
         export default projectReducer
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+13. Create Firebase Project
+    
+    Sign up and create project
+        firebase.google.com
+        Go to Console
+        Add a new project
+            Project Name: reactapp
+        Click on "Create Project"
+        
+    Setup (From App Dashboard)
+        Click on "Add Firebase to webapp"
+        Copy "Initialize Firebase" script
+
+    Install Firebase in VSCode
+        In Terminal, enter application directory (reactapp folder) and install firebase
+        Type in "npm install firebase"
+    
+    Create "config" folder in src folder
+        ../src/config/fbConfig.js                              //01. Create Firebase configuration file
+
+    fbConfig.js
+        import firebase from 'firebase/app'                    //03. Import firebase core features. 
+        import 'firebase/firestore'                            //04. Import Firebase database features
+        import 'firebase/auth'                                 //05. Import firebase authentication features
+        
+        //Initialize Firebase                                  //02. Paste in the copied scripts from Firebase
+        var config = {
+            apiKey = "code",
+            authDomain: "reactapp.firebaseapp.com",
+            databaseURL: "https://reactapp.firebaseio.com",
+            projectId: "reactapp",
+            storageBucket: "reactapp.appspot.com",
+            messagingSenderId: "code"
+        };
+        firebase.initializeApp(config);
+        //firebase.firestore()                               //06. Initialize firestore
+        //firebase.firestore().settings({})                  //07. Add settings with object
+        firebase.firestore().settings({timestampsInSnapshots: true}); //08. Firebase works with timestamps to work properly
+        
+        export default firebase;                             //08. Enable exporting of firebase for interaction within the app
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 14. Firestore Data & Collections
+
+
+
+
 
 
 
