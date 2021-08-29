@@ -1899,7 +1899,42 @@ CONTENTS
             Click on "Close" button to let the compilation run in the background
 
     /////////////////////////////////////
-    6. Create and deploy shared variables to RT Target              
+    6. Create and deploy shared variables to RT Target (*.lvlib)
+
+        In Project Tree Panel > Right click on "NI myRio" (Project Root Tree > NI myRIO) > New > Variable
+        Shared variable properties window appear
+            Variable
+                Name: LEDa
+                Variable Type: Network Published
+                Data Type: Boolean
+            Click OK and a "Variable Library" will be created under "myRIO" in Project Tree
+        Right Click on "Variable Library" > New > Variable
+        Shared variable properties window appear
+            Variable
+                Name: LEDb
+                Variable Type: Network Published
+                Data Type: Boolean
+        Create other variables for 
+            Loop Time (Data Type: UInt32), 
+            Pause (Boolean), 
+            Paused (Boolean), 
+            Stop (Boolean)
+        Save project Tree (A prompt will appear to save the Library)
+        Save Library as FPGA-App.lvlib
+        Set Library as "public" and Deploy (Other project can access the library)
+            Project Tree Window > Main Menu > Tools > Shared Variables > Register Computer
+            Machine Name / IP Address: 172.22.11.2        //Network Address
+            Deploy Library
+                In Project Tree, right click on Library tree and select "Deploy All"
+        Check NI Distributed System Manager  window
+            Project Tree Window > Main Menu > Tools > Distributed System Manager
+            Directory > Network Items > 172.22.11.2 > FPGA-App >
+                All variables will be listed
+                The current state of individual variables is reflected
+                These variables can be forced ON/OFF via NI Distributed System Manager
+
+    /////////////////////////////////////
+    7. Create RT-Main.vi            
 
 
 
