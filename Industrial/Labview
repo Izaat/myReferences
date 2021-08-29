@@ -2037,7 +2037,101 @@ CONTENTS
                     All LEDs will be OFF
 
     /////////////////////////////////////
-    8. Create PC-Main.vi           
+    8. Create PC-Main.vi
+
+        Create new VI
+            From Project Panel > FPGA-App.lvproj root tree > My Computer
+            Right click on My Computer > New > VI
+            Save as PC-Main.vi
+            Change Icon and properties
+                In Front Panel, double click on icon (Top right hand corner)
+                    Icon Text Tab
+                        Line 1: PC
+                        Line 2: Main
+                        Click on "Selection" icon (dotted line box)
+                        Box select the white area in image
+                        Click OK
+
+        PC-Main.vi
+            Front Panel
+                Add Pause Button
+                Add Pause LED
+                Add LEDa
+                Add LEDb
+                Add Horizontal Pointer Slide (Silver > Numeric)
+                    Rename this to Loop Time
+                    Right Click  > Representation > U32
+                    Set Slider 10-1000 from the default 10-0
+                    Enable visual display
+                        Right click > Visible items > Digital Display
+                    Make Selected values default
+                        Highlight the display > Main Menu > Edit > Make Selected Values Default
+                    Logarithmic
+                        Right Click > Mapping > Logarithmic
+                Add Cancel Button   
+                    Right Click > Silver > Boolean > Cancel Button
+                    Rename to "Stop RT Main"
+                Add Titile "PC HMI"    
+            Block Diagram
+                Add Flat Frame
+                    Right Click > Programming > Structures > Decorations > Flat Frame
+                    Add Title "Controls and Indicators bound to Shared Variables"
+                    LoopTime (From Front Panel) - Write
+                        Right click > Properties
+                        Open Data Binding Tab
+                            Data Binding Selection: Shared Variable Engine (NI-PSP)
+                            Path section click on browse
+                                Network Published Source: Network Items
+                                Open 172.22.11.2 > FPGA-App
+                                    Select Loop Time
+                            Access Type: Write only  
+                            Click OK
+                    Pause (From Front Panel) - Write
+                        The process to configure Loop Time can also be done via "Mass Configuration"
+                            Main Menu > Tools > Shared Variable > From Panel Binding Mass Configuration
+                            Select "Pause" and click on Edit
+                            Same principles applies
+                            Do the same with StopRTMain, Paused, LEDa and LEDb
+                    StopRTMain (From Front Panel) - Write
+                    Paused (From Front Panel) - Read
+                    LEDa (From Front Panel) - Read
+                    LEDb (From Front Panel) - Read
+                Add While Loop
+                    Add Control (Stop) for While Loop Stop
+                    Add Titile "Idle Loop - Keep VI running until Stop is pressed"
+                    Add Event Structure
+                        Right Click > Programming > Structures > Event Structure
+                        Right Click on Border and select "Edit Events Handled by This Case"
+                        Edit Events window will appear
+                            Add Stop button to the Left Panel List by selecting on "Controls > Stop" on Event Sources list
+                            Click on OK
+                    Move the created While Loop Stop button to inside Event Structure and extend it to the While Loop Stop 
+
+            Diagram
+                |-------------------------------------------------------------------------------|
+                |                                                                               |
+                |   |--------------|      |---While Loop------------------------------------|   |
+                |   | Loop Time    |      |                                                 |   |
+                |   | Pause        |      |   |-----------Stop Button----------|            |   |
+                |   | StopRTMain   |      |   |                                |            |   |
+                |   | Paused       |      |   |Source                          |            |   |
+                |   | LEDa         |      |   |Type               StopButton---+----+       |   |
+                |   | LEDb         |      |   |Time                            |    |       |   |
+                |   |--------------|      |   |--------------------------------|    |       |   |
+                |                         |                                         +--|O|  |   |
+                |                         |-------------------------------------------------|   |
+                |                                                                               |
+                |-------------------------------------------------------------------------------|
+                
+            Run Program
+                From Front Panel of RT-Main.vi, run program
+                From Front Panel of PC-Main.vi, run program
+                    LED on PC-Main.vi HMI will reflect the LEDs on myRIO 
+                    Click on Pause and all LEDs will follow
+                    Increase Loop Time to Slow down the blink rate
+                    Click StopRTMain and LEDs on myRIO will OFF
+                    Click Stop to Stop the VI
+      
 
 
 
