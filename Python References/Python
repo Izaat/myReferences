@@ -46,6 +46,14 @@ CONTENTS
 43. Dunder/Magic/Datamodel Method
 44. Metaclasses
 
+
+///////////////////////////////////////////////////////////////////////
+Installation
+    Download executable
+    Ensure "Install to PATH" is checked
+    Choose customized installation
+    Install it C:\Python\Python**
+
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
     //Just type in 
