@@ -53,6 +53,9 @@ Installation
     Ensure "Install to PATH" is checked
     Choose customized installation
     Install in C:\Python\Python**
+    Test
+        Run Command Prompt
+        Type in "python" to enter Python Shell
 
 ////////////////////////////////////////////////////////////////////////
 01. Strings, Structure, Variables and Data Types
