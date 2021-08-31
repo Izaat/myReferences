@@ -1393,6 +1393,7 @@ CONTENTS
             Add Bundle Node outside MathScript Node
                 Right Click > Programming > Cluster > Bundle
                 Link input to the output of "x" and "k" of MathScript Node
+                Right click on connections to select the data types
             Add XY Graph Node
                 Right Click > Silver > Graph > XY Graph
                 View as Icon
