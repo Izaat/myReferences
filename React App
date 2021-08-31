@@ -1207,6 +1207,63 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 14. Firestore Data & Collections
+    
+    Continued from Topic 13
+    
+    Firestore is a NoSQL database
+    The database deals with documents and collections of documents (projects)
+    Each document has key value pairs
+        Title:            //Key
+        'Book title'      //Value in String
+    Each project contains 3 collections
+        Project Collection
+            Title, content, authorFirstName, authorLastName, authorId, timestamps
+        Users Collection  
+            Info about app users
+        Notifications Collection
+            Info about notifications
+        
+    Create Database
+        In Firebase main dashboard, click on "Database"
+        Left panel Project Overview > Develop > Database
+        Create database
+        Select "Start in test mode" and click on "enable"
+        Firestore database dashboard will open
+    
+    Firestore database dashboard
+        Rules Tab is where the database can be locked and made inaccessible to public after publishing the project
+        Data Tab 
+            Click on "Add collection"
+            Set collection
+                Collection ID: projects
+            Add first document 
+                Document ID: *Leave black as it auto generates*
+                    Field#1: 
+                        Field: title
+                        Type: string
+                        Value: Book Title 01
+                    Field#2: 
+                        Field: content
+                        Type: string
+                        Value: Book 01 Content
+                    Field#3: 
+                        Field: authorFirstName
+                        Type: string
+                        Value: Author01a
+                    Field#4: 
+                        Field: authorLastName
+                        Type: string
+                        Value: Author01b
+                Click on save and "project" appears in collection directory column 
+            Click on "projects" in collection column and a "document id" appears in "document column"    
+            Click on "document id" and a list of fields (authorFirstName, title, content, etc) appear in field column
+    
+    To add collection, document and field via React instead of physically logging into Firebase to create them
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+15. Connecting Redux to Firebase
+
+
 
 
 
