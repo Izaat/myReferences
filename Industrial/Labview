@@ -1449,7 +1449,7 @@ CONTENTS
                 Device Driver: Siemens TCP/IP Ethernet
                 Click Next
                 Adapter: Default
-            PLC_300 (Channel device)
+            PLC_1200 (Channel device)
                 Click "Click to add a device" and New Channel window will appear
                 Device Name: PLC_1200
                 Click Next
@@ -1474,7 +1474,7 @@ CONTENTS
                     Click on Apply
                     Do the same with "Stop PB" button and "Output"
         Disconnect Runtime
-            Main Menu > Runtime > Disonnect
+            Main Menu > Runtime > Disconnect
             NetToPLCsim must be connected first and then reconnect OPC Server
     
     Open NetToPLCsim
