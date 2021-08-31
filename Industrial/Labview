@@ -1145,7 +1145,13 @@ CONTENTS
     Simulation
     Create Functions
     MathScript Node
-    
+
+    //////////////////////////
+    //////////////////////////
+    Start MathScript: - Create and save scripts
+        Front Panel > Main Menu > Tools > MathScript Window
+        There will be the 3rd window running on top of the default Front Panel and Block Diagram Panel
+
     //////////////////////////
     Introduction
         Install additional module "LabView MathScript Module"
@@ -1328,8 +1334,8 @@ CONTENTS
                 This is the discrete version of the differential equation
 
             Plotting (Celsius to Fahrenheit):
-                clear
-                clc
+                clear               //Not used in Mathscript node
+                clc                 //Not used in Mathscript node
                 a = 0.25;           //Model Parameters
                 b=2;                //Model Parameters
                 
@@ -1338,11 +1344,12 @@ CONTENTS
                 uk = 1             //Step response, input signal set to 1
                 x(1) = 0           //Initialization, set the starting value of x
                 
-                for k=1: (Tstop/Ts)                          //Simulation
+                for k=1:(Tstop/Ts)                           //Simulation
                     x(k+1) = (1 - Ts * a).*x(k) + Ts*b*u*k   //Refer to above equation
+                    x(k+1) = (1 - a*Ts).*x(k) + Ts*b*uk     //For Mathscript node
                 end
                 
-                k=0:Ts:Tstop
+                k=0:Ts:Tstop       //For code editor
                 plot(k,x)          //Remove if this script will be used as a node (See MathScript Node)
                 grid on            //Remove if this script will be used as a node (See MathScript Node)
 
@@ -1385,11 +1392,13 @@ CONTENTS
                 Right Click > Structure > MathScript
                 Use Celsius to Fahrenheit script (From Simulation topic) 
                     OR import a script file Right Click on Node > Import > Select the file path
+                Left Border:
+                    No input
                 Right border: 
                     Add connection "k"
-                        Right Click on Border > Add Output
+                        Right Click on Border > Add Output (Data type: Orange array)
                     Add connection "x"
-                        Right Click on Border > Add Output
+                        Right Click on Border > Add Output (Data type: Orange array)
             Add Bundle Node outside MathScript Node
                 Right Click > Programming > Cluster > Bundle
                 Link input to the output of "x" and "k" of MathScript Node
