@@ -1646,8 +1646,6 @@ CONTENTS
         Front Panel
             Add Push Button (Boolean)
         Block Diagram
-            Push Button Node (From Front Panel)
-                Link Output to input of Digital Write (Output Value)
             Add Open
                 Right Click > MakerHub > LINX > Open
                 Select Serial for USB
@@ -1655,19 +1653,23 @@ CONTENTS
                     Right click > Create > Constant > COM6
                 Link output (Link Resource) to the input of Digital Write Node (Link Resource)    
                 Link output (Error Out) to the input of Digital Write Node (Error In)    
-            Add Digital Write
-                Right Click > MakerHub > LINX > Peripherals > Digital > Write
-                Add Constant for DO Channel
-                    Right click > Create > Constant > 8 (PIN8)
-                Link input (Link Resource) to the output of Open Node (Link Resource)    
-                Link input (Error In) to the output of Open Node (Error Out)  
-                Link output (Link resource) to the input of Close Node (Link Resource)    
-                Link output (Error Out) to the input of Close Node (Error In) 
-                Link input (Output Value) to output of Push Button Node         
+            Add While Loop    
+                Add Stop button for While Loop
+                Push Button Node (From Front Panel)
+                    Link Output to input of Digital Write (Output Value)            
+                Add Digital Write
+                    Right Click > MakerHub > LINX > Peripherals > Digital > Write
+                    Add Constant for DO Channel
+                        Right click > Create > Constant > 8 (PIN8)
+                    Link input (Link Resource) to the output of Open Node (Link Resource)    
+                    Link input (Error In) to the output of Open Node (Error Out)  
+                    Link output (Link resource) to the input of Close Node (Link Resource)    
+                    Link output (Error Out) to the input of Close Node (Error In) 
+                    Link input (Output Value) to output of Push Button Node         
             Add Close
                 Right Click > MakerHub > LINX > Close
                 Link input (Link resource) to the output of Digital Write Node (Link Resource)    
-                Link input (Error In) to the output of Digital Write Node (Error Out)    
+                Link input (Error In) to the output of Digital Write Node (Error Out)       
     
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
