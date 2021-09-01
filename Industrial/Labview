@@ -8,6 +8,8 @@ https://www.halvorsen.blog/documents/programming/python/python.php
     Python Control Library: pip install control
         https://docs.scipy.org/doc/scipy/reference/signal.html
     Python SciPy: SciPy.signal (Included in Anaconda Distribution)
+        Control Systems Library: https://pypi.org/project/control
+        Documentation: https://python-control.readthedocs.io
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
 01. Introduction
