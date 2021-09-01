@@ -1655,6 +1655,7 @@ CONTENTS
                 Link output (Error Out) to the input of Digital Write Node (Error In)    
             Add While Loop    
                 Add Stop button for While Loop
+                Add Timer (Wait) and set constant to 100                
                 Push Button Node (From Front Panel)
                     Link Output to input of Digital Write (Output Value)            
                 Add Digital Write
