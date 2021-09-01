@@ -22,7 +22,8 @@ CONTENTS
 15. Labview Mathscript
 16. Labview and Siemens TIA Portal
 17. Labview and Arduino
-18. CompactRio/myRIO FPGA Application
+18. Labview and LINX Toolkit (Arduino/RPi/Beaglebone)
+19. CompactRio/myRIO FPGA Application
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -1598,9 +1599,51 @@ CONTENTS
                 Connect Error In input to right side of While Loop box (Digital Write node's Error Out output)
         Run program
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+18. Labview and LINX Toolkit (Arduino/RPi/Beaglebone)
+
+    Add-on for Labview that make it possible to program Arduino device using Labview 
+    Enables creation of Data Logging applications without the need of expensive DAQ device
+    
+    Labview Linx
+    DAQ System
+    I/O Channels
+        Digital IO (R/W)
+        Analog IO (Read, Write/PWM)
+    
+    Start VI Package Manager
+        Splash Screen > Main Menu > Tools > VI Package Manager > Search for "Labview LINX"
+        Select NI Labview LINX Toolkit and Install
+        NOTE: LINX Toolkit is already included in the Community version
+    
+    Adding Arduino Uno
+        Front Panel:
+            Main Menu > Tools > MakerHub > LINX > LINX Firmware Wizard
+            LINX Firmware Wizard
+                Device Family: Arduino
+                Device Type: Arduino Uno
+                Firmware Upload Method: Serial / USB
+        Block Diagram (LINX Palette):
+            Open
+            Close
+            Peripherals
+                Analog, Digital, PWM, I2C, SPI, UART
+            Sensors
+                Accelerometer, Beta, Community, Display, Distance, Digilent
+                Lights, Mindstorms, Misc, Motion, Pmods, Temp, Signal Generator
+            Utilities
+                Custom CMD, Loop Frequency, Check Channel, Get UserID, Set UserID
+                Config Enet, Config Wifi
+
+
+
+
+
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-18. CompactRio/myRIO FPGA Application
+19. CompactRio/myRIO FPGA Application
 
     /////////////////////////////////////
     Structure
