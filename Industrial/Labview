@@ -2274,6 +2274,30 @@ CONTENTS
         |                 |-------------------------------------------------------------------------|
         |
 
+    Disk Folder
+        ../StateMachine/StateMachine.lvproj
+        ../StateMachine/StateMachine.lvlps
+        ../StateMachine/StateMachine.aliases
+        ../StateMachine/MainVI/LabviewMainApplication.vi
+        ../StateMachine/SubVIs/ConvertToFahrenheit.vi
+        ../StateMachine/SubVIs/NewSensor.vi
+        ../StateMachine/Images/Temp.ico
+        ../StateMachine/Resources/ *Empty*
+
+    Project Explorer (Save as StateMachine.lvproj)
+        Add folders to Project explorer after creation if project
+        My Computer
+            Images
+                Temp.ico
+            MainVI
+                LabviewMainApplication.vi
+            Resources
+            SubVIs
+                ConvertToFahrenheit.vi
+                NewSensor.vi
+            Build Specifications
+                LabviewApp
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 [END]
