@@ -31,6 +31,7 @@ CONTENTS
 17. Labview and Arduino
 18. Labview and LINX Toolkit (Arduino/RPi/Beaglebone)
 19. CompactRio/myRIO FPGA Application
+20. State Machine Principles
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -2243,6 +2244,35 @@ CONTENTS
             Just run PC-Main.vi to play around with the input values
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+20. State Machine Principles
+    
+    Use Project Explorer
+    While Loop: Similar to While Loops in Javascript
+    Case Structure: Similar to Switch Case in Javascript
+    Event Structure: Similar to eventHandler in Javascript
+    Structure principles are the same as how Mobile Apps or any other apps are created (See React Apps)
+
+    Diagram:
+        |                   
+        |                 |------While Loop---------------------------------------------------------|
+        |                 |                                                                         |
+        |                 |                |---Case Structure----------------------------------|    |
+        |   Initialize----|----------------|                                                   |    |
+        |                 |                |  |-----Event Structure------------------------|   |    |
+        |                 |                |  |                                            |   |    |
+        |                 |                |  |                                Event Loop--|---|----|
+        |                 |                |  |                                            |   |    |
+        |                 |                |  |                                            |   |    |
+        |                 |                |  |                                            |   |    |
+        |                 |                |  |                                            |   |    |
+        |                 |                |  |                                            |   |    |
+        |                 |   Tab Control--|  |--------------------------------------------|   |    |
+        |                 |                |                                                   |    |
+        |                 |                |---------------------------------------------------|    |
+        |                 |                                                                         |
+        |                 |-------------------------------------------------------------------------|
+        |
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
