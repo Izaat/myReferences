@@ -2252,6 +2252,8 @@ CONTENTS
     Case Structure: Similar to Switch Case in Javascript
     Event Structure: Similar to eventHandler in Javascript
     Structure principles are the same as how Mobile Apps or any other apps are created (See React Apps)
+    Rearrange Case Structures
+        Right Click on border > Rearrange Cases
 
     Diagram:
         |                   
@@ -2297,6 +2299,64 @@ CONTENTS
                 NewSensor.vi
             Build Specifications
                 LabviewApp
+
+    StateMachineTemplate.vi
+        This Template can be used in SubVI and MainVI
+        Front Panel
+            Add Error Handlers (In)
+                Right Click > Silver > Data Containers > Error In
+            Add Error Handlers (Out)
+                Right Click > Silver > Data Containers > Error Out
+        Block Diagram
+            Error Handlers
+                Error Handler (In)
+                    Link to While Loop Left Border (Shift Register)
+                Error Handler (Out)
+                    Link to While Loop Right Border (Shift Register)
+                Linking (Do for all cases)
+                    Error In > While Loop (Left) > Case Structure (Left, Wait) > Event (Timeout) > Case Structure (Right, Wait) > While Loop (Right) > Error Out
+                    Link all the way through for other Case Structures (Initialize, Template, Exit )
+            Add String Constant (Initialize) - Outside While Loop
+                Right Click > Programming > String > String Constant
+                Link to Shift Register (While Loop Left Border)
+            Add While Loop
+                Right Click > Programming > Structures > While Loop
+                Right Click on Left Border > Add Shift Register
+                    Link Shift Register to Case Structure Left Border
+                Link Stop to Case Structure border    
+                Add Case Structure
+                    Right Click > Programming > Structures > Case Structures
+                    Link Left Border to Left Border of While Loop
+                    Link Right Border of Case Structure to Right Border of While Loop    
+                    Link Border to While Loop Stop
+                    Initialize
+                        Add String Constant (Wait)
+                            Link "Wait" to Right Border of Case Structure
+                        Add Boolean constant
+                            Right Click > Programming > Boolean > False Constant
+                            Link to While Loop Stop
+                    Wait (Set as Default)
+                        Add Event Structure
+                            Right Click > Programming > Structures > Event Structure
+                            Timeout
+                                Add Timeout constant (Top left corner of event structure)
+                                    Set to 100
+                                Add String Constant (Initialize)
+                                    Link "Initialize" to Right Border of Case Structure
+                                Add Timer (Wait) 
+                                    Set Constant to 100
+                        Add Boolean constant
+                            Right Click > Programming > Boolean > False Constant
+                            Link to While Loop Stop
+                    Template
+                        Similar to Initialize
+                    Exit
+                        Add Boolean constant
+                            Right Click > Programming > Boolean > True Constant
+                            Link to While Loop Stop
+                        Add String Constant (Wait)
+                            Link "Wait" to Right Border of Case Structure
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
