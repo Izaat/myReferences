@@ -2567,9 +2567,39 @@ CONTENTS
             
             
             
-
     ////////////////////////////////
-    ConvertToFahrenheit.vi
+    ConvertToFahrenheit.vi (From Empty VI)
+        Front Panel
+            Add Numeric Control
+                Rename label to Celsius
+            Add Numeric Indicator
+                Rename label to Fahrenheit
+            Node Configuration (Boxes next to Icon Image - Top Right corner)
+                Change Pattern to 1 input and 1 output
+                    Rightclick > Patterns > Select the one with 2 box
+                |          +----+----+
+                | Celsius  |    |    |   Fahrenheit
+                |          +----+----+
+        Block Diagram
+            Formula: Tf = Tc * (9/5) + 32
+            Inherited from Front Panel
+                Celsius Node, Fahrenheit Node
+            Control Node (Celsius)
+                Link Output to Multiply Node Input 1
+            Math Operations
+                Add Division 
+                    Add constant 1 and set to 9
+                    Add constant 2 and set to 5
+                Add Multiply
+                    Link Input 1 to Control Node (Celsius)
+                    Link Input 2 to Division Node
+                Add Addition
+                    Link Input 1 to Multiply Node Output
+                    Add Constant 2 and set to 32
+                    Link Output to input of Indicator Node
+            Indicator Node (Fahrenheit)
+                Link input to output of Addition node
+
 
 
 
