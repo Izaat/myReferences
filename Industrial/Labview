@@ -2473,7 +2473,19 @@ CONTENTS
                     Link "Number - Output" to input of Celsius Node
                 Move Celsius Node (Inherited from Front Panel) into Case Structure "Celsius" box    
                     Link input to output of "Add Random Number" Node
-            Case Structure > "Fahrenheit"      
+                Add String Constant (Fahrenheit) and link to Right border    
+            Case Structure > "Fahrenheit" 
+                Add Fahrenheit Indicator Node
+                    Link input to Fahrenheit.vi Node output
+                Add Fahrenheit.vi Node
+                    Link input to output of Celsius Local Variable
+                    Link output to Fahrenheit Indicator Node input
+                Add Celsius Local Variable
+                    Rightclick on Celsius node in "Celsius case structure" > Create > Local Variable
+                    Move Local variable into Fahrenheit case structure
+                    Convert to "Read"
+                        Right click > Change to Read
+                    Link Output to Fahrenheit.vi Node input    
             Case Structure > "Exit"            
 
 
