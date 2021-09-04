@@ -2358,6 +2358,112 @@ CONTENTS
                             Link "Wait" to Right Border of Case Structure
 
 
+    MainApplication.vi (Extended from StateMachineTemplate.vi)
+        Front panel 
+            Add Listbox
+                Rightclick > Silver > List,Table,Tree > Listbox
+                Rename label to Sensorlist
+            Add Vertical Pointer Slide
+                Rightclick > Silver > Numeric > Vertical Pointer Slide
+                Rename label to Celsius
+                Enable digital display
+                    Rightclick on Slide > Visible Items > Digital Display
+            Add Thermometer
+                Rightclick > Silver > Numeric > Thermometer
+                Rename label to Fahrenheit
+                Enable digital display
+                    Rightclick on Slide > Visible Items > Digital Display
+            Add "Add Button" (For Listbox)
+                Rightclick > Silver > Numeric > Boolean > Buttons > Add Button
+                Rename label to New Button
+            Add "Cancel Button"
+                Rightclick > Silver > Boolean > Cancel Button
+                Rename label to Exit
+        Block Diagram
+            Inherited from Front Panel
+                New Button, Exit Button, Fahrenheit, Celsius, Sensorlist
+            Case Structure > Wait
+                Event Structure
+                    Create new Event Case
+                        Right click on border > Add Event Case
+                        Select "New Button"
+                Event Structure > New Button
+                    Add string constant "New Sensor" to the right border
+                Event Structure > OK Button (From existing OK Button Node)
+                    Create new Event Case
+                        Right click on border > Add Event Case
+                        Event Sources: OK Button
+                        Events: Value Change
+                        Place OK button Node
+                        Add String Constant (OK) and link to Right border
+                Event Structure > Cancel Button (From existing Cancel Button Node)
+                    Create new Event Case
+                        Right click on border > Add Event Case
+                        Event Sources: Cancel Button
+                        Events: Value Change
+                        Place Cancel button Node
+                        Add String Constant (Cancel) and link to Right border
+            Case Structure > New Sensor (New Case Structure from Template Case)
+                In Template Case, Right click > Duplicate case to add new case
+                Rename to "New Sensor"
+                Add NewSensor.vi (Drag and drop) - Also add this file  to Project Explorer
+                    Right Click on NewSensor.vi Node > Select VI Properties
+                    VI Properties
+                        Category: Window Appearance
+                            Click on Customize
+                            Customize Window:
+                                Checked checkboxes
+                                    Window has title bar
+                                    Show front panel when called
+                                    Close afterwards if closed
+                                    Show front panel when loaded
+                                    Window Behavior: Modal
+                                    Allow user to close window
+                        Category: Execution
+                            Checked checkboxes
+                                Allow Debugging
+                                Reentrancy: Non-reentrant execution
+                                Priority: Normal Priority
+                                Preferred Execution System: Same as Caller
+                                Enable automatic error handling
+                                Auto handle menus at launch
+
+    NewSensor.vi (Extended from StateMachineTemplate.vi)
+        Added to "New Sensor" Case Structure
+        Front Panel
+            Add String Control
+                Rightclick > Silver > String & Path > String Control
+                Rename Label to SensorName
+                Hide Label and show caption 
+                Caption : Sensor Name
+            Add OK Button
+                Rightclick > Silver > Boolean > OK Button
+            Add Cancel Button
+                Rightclick > Silver > Boolean > Cancel Button
+            Add String Indicator
+                Rightclick > Silver > String & Path > String Indicator
+                Rename Label to SensorNameOutput
+            Add Enum
+                Rightclick > Silver > Ring and Enum > Enum
+                Rename label to Status
+                Type in "OK"
+                Right click > Add Item After
+                Type in "Cancel"
+        Block Diagram
+            Note that the NewSensor.vi Node will appear in MainApplication.vi
+        Node Configuration (Boxes next to Icon Image - Top Right corner)
+            |           +----+----+----+----+
+            | Empty     |    |    |    |    |  Status
+            |           +----+    |    |----+
+            | Empty     |    |    |    |    |  SensorNameOutput
+            |           +----+----+----+----+
+            | Empty     |    |    |    |    |  Empty
+            |           +----+    |    |----+
+            | Error In  |    |    |    |    |  Error Out
+            |           +----+----+----+----+
+            
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 [END]
