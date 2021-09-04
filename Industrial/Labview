@@ -2300,6 +2300,8 @@ CONTENTS
             Build Specifications
                 LabviewApp
 
+
+    ////////////////////////////////
     StateMachineTemplate.vi
         This Template can be used in SubVI and MainVI
         Front Panel
@@ -2358,6 +2360,7 @@ CONTENTS
                             Link "Wait" to Right Border of Case Structure
 
 
+    ////////////////////////////////
     MainApplication.vi (Extended from StateMachineTemplate.vi)
         Front panel 
             Add Listbox
@@ -2414,6 +2417,13 @@ CONTENTS
                         Events: Value Change
                         Place Exit button Node
                         Add String Constant (Exit) and link to Right border
+                Event Structure > Sensorlist
+                    Create new Event Case
+                        Right click on border > Add Event Case
+                        Event Sources: SensorList
+                        Events: Value Change
+                        Move SensorList Node (Inherited from Front Panel) into the box
+                        Add String Constant (Celsius) and link to Right border
             Case Structure > New Sensor (New Case Structure from Template Case)
                 In Template Case, Right click > Duplicate case to add new case
                 Rename to "New Sensor"
@@ -2454,8 +2464,20 @@ CONTENTS
                             Link Input 1 to Output of ItemNames(Read) Node
                             Link Input 2 to Output of NewSensor.vi (SensorNameOutput)
                             Link Output to Input 2 of ItemNames(Write)
-            Case Structure > "Exit"
-                
+            Case Structure > "Celsius"
+                Add Random Number (Range).vi
+                    Right Click > Search > Type in "Random Number"
+                    Data Type: Dbl
+                    Add Constant to "Upper(Limit) - Input" and set to 30
+                    Add Constant to "Lower(Limit) - Input" and set to 10
+                    Link "Number - Output" to input of Celsius Node
+                Move Celsius Node (Inherited from Front Panel) into Case Structure "Celsius" box    
+                    Link input to output of "Add Random Number" Node
+            Case Structure > "Fahrenheit"      
+            Case Structure > "Exit"            
+
+
+    ////////////////////////////////            
     NewSensor.vi (Extended from StateMachineTemplate.vi)
         Added to "New Sensor" Case Structure
         Front Panel
@@ -2543,6 +2565,18 @@ CONTENTS
             | Error In  |    |    |    |    |  Error Out
             |           +----+----+----+----+
             
+            
+            
+
+    ////////////////////////////////
+    ConvertToFahrenheit.vi
+
+
+
+
+
+
+
 
 
 
