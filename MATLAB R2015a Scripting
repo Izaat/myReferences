@@ -348,14 +348,46 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 06. Data types
 
+    Strings
+        disp('Hello there')
+        Workspace panel but in Command window
+            whos                           //Similar to "dir/w" in DOS6.2. Also not that "Hello" and "there" are in double and not string
+            class('Hello there')           //Note this is returned as "char"
+        Enter as "char"
+            myString = 'Hello there'       //This will return as "char in "whos"
+
+    Structs
+        my_struct.name = 'My new struct'   //Single field struct, this case adds a string
+        my_struct.age = 12                 //Adds another field dynamically, this case adds integer
+        class()                            //Returns data type
+        class(my_struct)                   //Returns data type for "my_struct"
+        class(my_struct.name)              //Returns data type for name (char)
+        class(my_struct.age)               //Returns data type for age (double)
+        isfield(my_struct, 'name')         //Returns if the field (name) exists in "my_struct". Returns Boolean where 1 is true
+        rmfield(my_struct, 'age')          //Removes a field (age) from "my_struct"
+        setfield(my_struct, 'gender', 'f') //Similar to adding a field (my_struct.**), but setfield can be used while the program is running
+        
+    Struct within a struct
+        my_struct.contact.phone = 123456789          //Adds a contact struct inside of my-struct, adds contact stuct with phone field
+        my_struct.contact.email = person@gmail.com   //Adds a contact struct inside of my-struct, adds email field to contact struct
+        my_struct.contact                            //Shows fields in my_struct.contact
+
+    Initialize a struct
+        S = struct('name', 'Abu', 'email', 'abu@gmail.com')   //Creates a struct (S) with name and email fields
+
+    Cell
+        Similar to struct but contains arbitrary fields (array, index, matrix, etc)
+        my_cell{1} = 'hello bitch';              //Creates a cell with values containing "hello bitch"
+        my_cell                                  //Prints out "hello bitch"
+        my_cell2{1} = 'hello';
+        my_cell2{'A'} = [1 2; 3 4];              //Adds a 2x2 matrix to cell A
+        my_cell2                                 //Prints out rows and columns
+        my_cell2{1}                              //Print out 'hello'
+        my_cell2{'A'}                            //Prints out matrix
 
 
-
-
-
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07. Plotting data with Fibonacci Sequence
 
 
 
