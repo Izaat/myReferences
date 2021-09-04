@@ -1,6 +1,9 @@
 P, Proportional: Speed to steadystate (Causes overshoot if set too high, overdamped if too low)
 I, Integral    : Response, Speed
 D, Derivative  : Damping
+
+Write Integral in Python 
+    https://www.southampton.ac.uk/~fangohr/teaching/python/book/html/16-scipy.html
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     Ziegler Nichols Method
@@ -29,5 +32,33 @@ Another method is by tuning P, D, then I
     Repeat P and D until D gain oscillates
     Set P and D to last stable values
     Increase I to the number of oscillations desired
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    |
+    |                         +--> P - Kp e(t) ------------+
+    |                         |                            |
+    |                         |                            |
+    |             (+)         |             t              V
+    |     Setpoint-->Sum-->Error--> I - Ki I e(T)dT ---->Sum-->Process-->Output
+    |              (-)^       |             0              ^                |
+    |                 |       |                            |                |
+    |                 |       |                            |                |
+    |                 |       +--> D - Kd[(de(t)) / (dt)]--|                |
+    |                 |                                                     |
+    |                 +-----------------------------------------------------+
+    |
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
 
 
