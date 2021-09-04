@@ -1263,6 +1263,91 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 15. Connecting Redux to Firebase
 
+    Continued from Topic 14
+    Read all 14 points
+    Installation Required
+        React Redux Firebase and Firestore - "npm install react-redux-firebase redux-firestore"
+    
+    App Structure
+        src/components/auth
+            SignIn.js                   (Topic 7)
+            SignOut.js                  (Topic 7)
+        src/components/dashboard
+            Dashboard.js                (Topic 11)
+            Notifications.js
+        src/components/layout
+            Navbar.js                   (Topic 3)
+            SignedInLinks.js            (Topic 3)
+            SignedOutLinks.js           (Topic 3)
+        src/components/project
+            CreateProject.js            (Topic 12)
+            ProjectDetails.js           (Topic 6)
+            ProjectList.js              (Topic 11)
+            ProjectSummary.js           (Topic 11)
+        src 
+            App.js                      (Topic 7)
+            index.css                   (Topic 9)
+            index.js                    (Topic 12)
+        src/store/reducers
+            authReducer.js              (Topic 11)
+            projectReducer.js           (Topic 12)
+            rootReducer.js              (Topic 10)
+        src/store/actions
+            projectActions.js           (Topic 12)
+        src/config      
+            fbConfig.js                 (Topic 13)
+
+
+    index.js
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import './index.css';
+        import App from './App';
+        import registerServiceWorker from './registerServiceWorker';
+        //import {createStore, applyMiddleware} from 'redux'       
+        import {createStore, applyMiddleware, compose} from 'redux'           //06. Add Compose (Works similarly to "combineReducers" in rootReducer.js) but for "enhancers"
+        import rootReducer from './store/reducers/rootReducer'       
+        import {Provider} from 'react-redux'           
+        import thunk from 'redux-thunk'     
+        //import {getFirestore} from 'redux-firestore'                        //01. import Firestore
+        import {reduxFirestore, getFirestore} from 'redux-firestore'          //08. Import reduxFirestore, also a store enhancer
+        //import {getFirebase} from 'react-redux-firebase'                    //02. Import Firebase
+        import {reactReduxFirebase, getFirebase} from 'react-redux-firebase'  //09. Import reactReduxFirebase, also a store enhancer
+        import fbConfig from './config/fbConfig'                              //12. Import fbConfig file for compose(reduxFirestore and reactReduxFirebase)
+         
+        //const store = createStore(rootReducer, applyMiddleware(thunk)); 
+        //const store = createStore(rootReducer, applyMiddleware(thunk.withExtraArgument()));        //03. Enables the ability to use getFirebase and getFirestore
+        //const store = createStore(rootReducer, applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore}))); //04. Add getFirebase and getFirestore, these are also known as "enhancers"
+        const store = createStore(
+            rootReducer, 
+            //applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore}))                  //07. To wrap "middleware" with "compose"
+            compose (
+                applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
+                //reduxFirestore(),                  //10. Add reduxFirestore, but config file is needed
+                reduxFirestore(fbConfig),            //13. Adds config file
+                //reactReduxFirebase()               //11. Add reactReduxFirebase, but config file is needed
+                reactReduxFirebase(fbConfig)         //14. Adds config file 
+            )
+        );
+        
+        ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));  
+        registerServiceWorker();
+        
+    projectActions.js
+        export const createProject = (project) => {
+            //return (dispatch, getState) => {    
+            return (dispatch, getState, {getFirebase, getFirestore}) => {        //05. Add getFirebase and getFirestore
+                dispatch({type: 'CREATE_PROJECT', project});   
+            }
+        };
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+16. Adding Data to Firestore
+
+
+
+
+
 
 
 
