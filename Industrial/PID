@@ -31,7 +31,7 @@ Another method is by tuning P, D, then I
     Increase D until oscillation disappears
     Repeat P and D until D gain oscillates
     Set P and D to last stable values
-    Increase I to the number of oscillations desired or accuracy is achieved
+    Increase I to the number of oscillations desired or 0deg accuracy is achieved
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
