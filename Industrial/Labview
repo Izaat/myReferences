@@ -2599,7 +2599,8 @@ CONTENTS
                     Link Output to input of Indicator Node
             Indicator Node (Fahrenheit)
                 Link input to output of Addition node
-
+        Add into Main Application.vi        
+            Drag and Drop icon (Top right hand corner of front panel) into Main Application (Case Structure - Fahrenheit)
 
 
 
