@@ -1343,6 +1343,103 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 16. Adding Data to Firestore
+    
+    Read 19 Points
+    
+    From CreateProject.js, when Submit button is clicked by the user, the handleSubmit prevents from refreshing browser and it also calls "createProject"
+    which is added to props via mapDispatchToProps function and this mapDispatchToProps function will call dispatch that calls createProject(project). 
+    The project in createProject comes from the state in CreateProject.js. 
+    The dispatch fuction also calls createProject from projectAction.js that returns another function
+    that also takes in another project that returns getState, getFirebase and getFirestore
+    Data should be added to getFirestore and store in a variable
+
+    App Structure
+        src/components/auth
+            SignIn.js                            (Topic 7)
+            SignOut.js                         (Topic 7)
+        src/components/dashboard
+            Dashboard.js                    (Topic 11)
+            Notifications.js
+        src/components/layout
+            Navbar.js                          (Topic 3)
+            SignedInLinks.js                (Topic 3)
+            SignedOutLinks.js             (Topic 3)
+        src/components/project
+            CreateProject.js               (Topic 12)
+            ProjectDetails.js              (Topic 6)
+            ProjectList.js                    (Topic 11)
+            ProjectSummary.js           (Topic 11)
+        src 
+            App.js                               (Topic 7)
+            index.css                          (Topic 9)
+            index.js                             (Topic 15)
+        src/store/reducers
+            authReducer.js                 (Topic 11)
+            projectReducer.js             (Topic 12)
+            rootReducer.js                 (Topic 10)
+        src/store/actions
+            projectActions.js              (Topic 15)
+        src/config      
+            fbConfig.js                       (Topic 13)
+
+    projectActions.js
+        export const createProject = (project) => {
+            return (dispatch, getState, {getFirebase, getFirestore}) => {  
+                const firestore = getFirestore();                        //01. Create the variable to store the data
+                //firestore.collection('projects')                       //02. Provide reference to "projects" located in Firebase website
+                //firestore.collection('projects').add({})               //03. This will add the documents under the "projects" tree in Firebase website
+                firestore.collection('projects').add({
+                    ...project,                                          //04. Spread the "projects" property 
+                    authorFirstName: 'justFirstName',                    //05. Creating elements/field for another document under "projects"
+                    authorLastName: 'justLastName',
+                    authorId: 12345,
+                    createdAt: new Date()                                //06. Timestamp
+                //})                                                     //07. Creating data to google is asynchronous and will take time
+                //}).then( () => {} )                                    //08. Then() function will run only after the data creation is complete
+                }).then(() => {                                          //09. Assigning which function to run after data creation is complete
+                    dispatch({type: 'CREATE_PROJECT', project});         //10. Adding the dispatch function from point 11
+                //}) 
+                //}).catch((err)=>{})                                    //12. Adding catch function in the event of error
+                }).catch((err)=>{
+                    dispatch({type: 'CREATE_PROJECT_ERROR', err});       //13. If there is error, run dispatch and display to "err"
+                })   
+                //dispatch({type: 'CREATE_PROJECT', project});           //11. This will be called in point 10
+            }
+        };
+
+    projectReducer.js
+        const initState = {
+            projects: [
+                {id: '1', title: 'title 1', content: 'content 1'},        
+                {id: '2', title: 'title 2', content: 'content 2'},
+                {id: '3', title: 'title 3', content: 'content 3'}
+            ]
+        }   
+        
+        const projectReducer = (state = initState, action) => {
+            switch(action.type) {
+                case 'CREATE_PROJECT':
+                    //console.log('created project', action.project)
+                    console.log('created project', action.project);         //14. Add semicolon for return statement
+                    return state;                                           //15. Returns the state as it is
+                case 'CREATE_PROJECT_ERROR':                                //16. Create a new case for error handling
+                    console.log('create project error', action.err);        //17. Prints out error in console
+                    return state;
+                default:
+                    return state;                                           //18. Add default case
+            }  
+            //return state                                                  //19. No longer in use since the default case is added
+        }
+        export default projectReducer
+
+    Testing:
+        Input data into website and it will show up in Firestore database as a new document
+        But the note that the data is not reflected in the website (cards)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+17. Syncing Data with Firestore
+
+
 
 
 
