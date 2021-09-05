@@ -1355,32 +1355,32 @@ CONTENTS
 
     App Structure
         src/components/auth
-            SignIn.js                            (Topic 7)
-            SignOut.js                         (Topic 7)
+            SignIn.js                    (Topic 7)
+            SignOut.js                   (Topic 7)
         src/components/dashboard
-            Dashboard.js                    (Topic 11)
+            Dashboard.js                 (Topic 11)
             Notifications.js
         src/components/layout
-            Navbar.js                          (Topic 3)
-            SignedInLinks.js                (Topic 3)
-            SignedOutLinks.js             (Topic 3)
+            Navbar.js                    (Topic 3)
+            SignedInLinks.js             (Topic 3)
+            SignedOutLinks.js            (Topic 3)
         src/components/project
-            CreateProject.js               (Topic 12)
-            ProjectDetails.js              (Topic 6)
-            ProjectList.js                    (Topic 11)
-            ProjectSummary.js           (Topic 11)
+            CreateProject.js             (Topic 12)
+            ProjectDetails.js            (Topic 6)
+            ProjectList.js               (Topic 11)
+            ProjectSummary.js            (Topic 11)
         src 
-            App.js                               (Topic 7)
-            index.css                          (Topic 9)
-            index.js                             (Topic 15)
+            App.js                       (Topic 7)
+            index.css                    (Topic 9)
+            index.js                     (Topic 15)
         src/store/reducers
-            authReducer.js                 (Topic 11)
-            projectReducer.js             (Topic 12)
-            rootReducer.js                 (Topic 10)
+            authReducer.js               (Topic 11)
+            projectReducer.js            (Topic 12)
+            rootReducer.js               (Topic 10)
         src/store/actions
-            projectActions.js              (Topic 15)
+            projectActions.js            (Topic 15)
         src/config      
-            fbConfig.js                       (Topic 13)
+            fbConfig.js                  (Topic 13)
 
     projectActions.js
         export const createProject = (project) => {
