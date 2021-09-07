@@ -1,0 +1,41 @@
+//////////////////////////////////////////
+Positioners
+
+	|
+	| Control Valve
+	|  Diaphragm
+	| |----+-----|          
+	|      |   |                          Relay
+	|      |   |                         +----+          Compressed Air
+	|      |   +-------------------------|    |-----+------ Supply
+	|      |                             +----+     |
+	|      | Stem                     Input  |      |
+	|      |                                 |      |
+	|      |                        Nozzle   |      |
+	|      |                Baffle |<MWMWM---+------+  
+	|      |                       |
+	|      | ^        Rot Tension  |
+	|    ^ | | Lever    Spring     | Force
+	|    | |----------+-MWMWMWMWMWM+ Beam
+	|    V | |                     |
+	|      | V                     |
+	|      |                       |
+	|      |                       |<MWMWM <----- Controlled
+	|      |                          Bellow       Air Supply
+	|      |                         Expansion   (3 to 15PSI)
+	|    Valve
+	|    Valve
+	
+	Operations:
+		Bellow expands more when more pressure is applied
+		This will rotate the force beam about the Rotation Tension Spring axis
+		In turn, closing the gap between the Baffle and the Nozzle
+		When Baffle closes the Nozzle, pressure in relay increases
+		The Relay works like a pressure relief valve
+		The higher the pressure, the more air being supplied to the diaphragm
+		Since the Tension Spring is at high tension and Diaphragm is going upwards, Valve opens
+		Therefore, 15PSI will open the valve to maximum and 3PSI closes the valve
+
+
+//////////////////////////////////////////
+[END]
