@@ -389,8 +389,48 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 07. Plotting data with Fibonacci Sequence
 
+    Simple Plotting
+        Example 1: (1 dimension)
+            y = [1,1,2,3,5,8,13,21];          //Adding previous 2 number to create current number (Fibonacci)
+            ploy(y)                           //Plots the sequence as graph, note the x axis is 1-8
+        Example 2: (2 dimensions)
+            y = [1,1,2,3,5,8,13,21];  
+            x = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
+            plot(x, y)                        //Plots the sequence as graph, note the x axis is an increment of 0.1s instead of default 1-8
+    
+    Syntax:
+        y = [1,1,2,3,5,8,13,21];  
+        x = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
+        size(x)                              //Prints the dimension, "1,8"
 
+    Plotting a function:
+        Linspace 1:                          //Creates a range of x values automatically
+            x = linspace(0,100,200);         //linspace(start, end, points in between). The lower the number "in between", the higher the graph resolution
+            y = sin(x);
+            plot(x,y)                        //Shows a sine wave from -1, 0, 1 on amplitude and 0-100 on x-scale
+        Linspace 2:
+            x = linspace(0, 2*pi, 100);
+            y = sin(x);
+            plot(x,y)                        //Plots a smoother sine wave than "linspace 1"
 
+    Plotting multiple functions on same plot:
+        Multiple Functions:
+            x = linspace(0, 2*pi, 100);
+            y = sin(x);
+            y2 = cos(x);
+            plot(x,y,x,y2);                  //Shows 2 graphs on top of each other "plot(x1,y1,x2,y2,.....,xn,yn)"     
+            plot(x,y, '-', x,y2, '.');       //Graph 1 will be in continuous line, graph 2 will be dotted line
+            plot(x,y, '--', x,y2, '.');      //Graph 1 will be in dashed line, graph 2 will be dotted line
+
+    Saving the graph
+        In graph window, go to main menu > save as > select format > choose file format (pdf, png, jpg, etc)
+        Fig files enables users to zoom into the graph in high resolution unlike image file (png, jpg, etc)
+    
+    Open graph from command window
+        open('test.fig')                     //Opens the saved *.fig file 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+08. Plots useful for data analysis
 
 
 
