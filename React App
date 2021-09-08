@@ -1533,6 +1533,148 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 18. Project Details Data
 
+    To show content of the card that has already been linked to the firestore
+    When user click on the card (which resides in ProjectList.js), it will divert to ProjectDetails page
+    Therefore, the ProjectSummary in ProjectList.js needs to be wrapped by link tag
+    
+    App Structure
+        src/components/auth
+            SignIn.js                   (Topic 7)
+            SignOut.js                  (Topic 7)
+        src/components/dashboard
+            Dashboard.js                (Topic 17)
+            Notifications.js
+        src/components/layout
+            Navbar.js                   (Topic 3)
+            SignedInLinks.js            (Topic 3)
+            SignedOutLinks.js           (Topic 3)
+        src/components/project
+            CreateProject.js            (Topic 12)
+            ProjectDetails.js           (Topic 6)
+            ProjectList.js              (Topic 11)
+            ProjectSummary.js           (Topic 11)
+        src 
+            App.js                      (Topic 7)
+            index.css                   (Topic 9)
+            index.js                    (Topic 15)
+        src/store/reducers
+            authReducer.js              (Topic 11)
+            projectReducer.js           (Topic 16)
+            rootReducer.js              (Topic 17)
+        src/store/actions
+            projectActions.js           (Topic 16)
+        src/config      
+            fbConfig.js                 (Topic 13)
+
+
+    ProjectList.js (Functional component)
+        import React from 'react'
+        import ProjectSummary from './ProjectSummary'      
+        import {Link} from 'react-router-dom'                        //01. Adds Link
+
+        const ProjectList = ({projects}) => {     
+            return (
+                <div className="project-list section"> 
+                    
+                    {projects && projects.map(project => {
+                        return(
+                            //<ProjectSummary project={project} key={project.id} />    //02. Wraps ProjectSummary in Link
+                            //<Link>                                                   //03. Adds Link tag
+                            //<Link to={}>                                             //04. Linked to somewhere
+                            <Link to={'/project/' + project.id}>                       //05. Linking Firestore Collection root (Projects) and Collection Id (Projects Id) via the project name (from App.js route path)
+                                <ProjectSummary project={project} key={project.id} />     
+                            </Link>    
+                        )
+                    })}
+                </div>
+            )
+        }
+        export default ProjectList
+
+    ProjectDetails.js
+        import React from 'react'
+        import {connect} from 'react-redux'                             //06. Connect ProjectDetails.js to the redux state
+        import {firestoreConnect} from 'react-redux-firebase'           //07. Connect with firestore
+        import {compose} from 'redux'                                   //08. Import compose since using 2 connects
+        
+        const ProjectDetails = (props) => {      
+            //const id = props.match.params.id;                         //19. Removed for destructuring in point 20
+            //console.log(props);                                       //18. Check console, Console > {matxh:{...}} > project: > data from firestore will be shown
+            const {project} = props;                                    //19. Get project property from props (point 12)
+            //if (project) {}                                           //20. To check if project exist
+            if (project) {
+                return(                                                                         //22. From point 21
+                    <div className="container section project-details">
+                        <div className="card z-depth-0">         
+                            <div className="card-content">
+                                //<span className"card-title">Project Title - {id}</span>   
+                                <span className"card-title">{project.title}</span>              //23. Output the project title
+                                //<p>Long long paragraph</p>
+                                <p>{project.content}</p>                                        //24. Output content
+                            </div>
+                            <div className="card-action gret lighten-4 grey-text">
+                                //<div>Posted by AuthorName</div>
+                                <div>Posted by {project.authorFirstName} {project.authorLastName}</div>  //25. Output the project author firstname and lastname
+                                <div>Today's date</div>
+                            </div>
+                        </div>
+                    </div>
+                )    
+            //} 
+            //} else {}                                                 //26. If there is no project in firestore
+            } else {
+                return(
+                    //<div className="container center"></div>          //27. Adds JSX
+                    <div className="container center">
+                        <p>Loading project...</p>                       //28. This will appear when project does not exist yet due to syncing time
+                    </div>
+                )
+            }
+            //return(                                                   //21. Moved to point 22
+                //<div className="container section project-details"> 
+                //    <div className="card z-depth-0">         
+                //        <div className="card-content">
+                //            <span className"card-title">Project Title - {id}</span>   
+                //            <p>Long long paragraph</p>
+                //        </div>
+                //        <div className="card-action gret lighten-4 grey-text">
+                //            <div>Posted by AuthorName</div>
+                //            <div>Today's date</div>
+                //        </div>
+                //    </div>
+                //</div>
+            //)
+        }
+        
+        //const mapStateToProps = (state) => {object}                      //10. Create mapStateToProps which takes in the state from and then returns an object
+        //const mapStateToProps = (state) => {
+        const mapStateToProps = (state, ownProps) => {                     //13. Create another props and name it ownProps
+            //console.log(state)                                           //16. Check console Console > Object > firestore > data > projects > project id
+            const id = ownProps.match.params.id;                           //14. Therefore "ownProps" become the state before taking in what is being output by mapStateToProps
+            const projects = state.firestore.data.projects;                //15. Store data into "projects" that were received by the state from the firestore
+            const project = projects ? projects[id] : null                 //16. Get individual project. If no project in firebase, then return null
+            return{
+                //project : project                                        //17. Add project
+            }
+        }  
+        
+        //export default ProjectDetails
+        //export default compose()(ProjectDetails)                         //09. Adds compose component
+        export default compose(
+            connect(mapStateToProps),
+            //firestoreConnect([])                                         //11. Adds firestoreConnect
+            firestoreConnect([
+                {collection: 'projects'}                                   //12. Links to the collection (projects) in firestore
+            ]) 
+        )(ProjectDetails) 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+19. Firebase Authentication
+
+
+
+
+
 
 
 
