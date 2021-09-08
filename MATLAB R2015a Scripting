@@ -432,7 +432,39 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 08. Plots useful for data analysis
 
+    Bar charts
+        Example 1:
+            x=1:10;
+            bar(x)
+        Example 2 (Sine):
+            x = linspace(0, 2*pi, 100);
+            y=sin(x);
+            bar(x,y)
+    
+    Histogram:
+        x = randn(1000, 1);
+        plot(x)           //Noise
+        hist(x)           //Histogram with 4 bars resolution
+        hist(x, 50)       //Histogram with 50 bars resolution
 
+    Pie Chart:
+        x=1:5;
+        pie(x)      
+
+    Scatter Plot:
+        Ordered data
+            x = linspace(0, 2*pi, 1000);
+            y = 10*sin(x) + randn(1,1000);    //So that sine x has amplitude of 10 and add noise with variance of 1
+            plot(x,y)                         //Sine wave of noise
+            scatter(x,y)                      //Sine wave of dots
+        Disordered data
+            x = randn(1000, 1)*2;
+            y = 5*sin(x) + rand(1,1000);
+            plot(x,y)                         //Randomness
+            scatter(x,y)                      //Sine wave of dots
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+09. Loading and Saving data
 
 
 
