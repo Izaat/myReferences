@@ -466,6 +466,39 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 09. Loading and Saving data
 
+    Excel Files (*.xlsx)
+        help xlsread                        //Opens help and displays xlsread syntax
+        help xlswrite                       //Opens help and displays xlswrite syntax
+        NOTE: 
+            Usually Matlab cant read or write into Excel spreadsheet
+            Therefore, *.csv files are commonly used together with Matlab
+    
+    CSV Files (*.csv)
+        Create a 3x3 matrix in CSV
+            1,2,3
+            4,5,6
+            7,8,9
+        Save file as "csv_example.csv" into Project Tree
+
+    Functions
+        Example 1:
+            A = csvread('csv_example.csv')     //Stores csv into "A" variable and prints out content
+        Example 2:    
+            B = eye(4)*5;                      //Creates a new matrix (4x4 zero matrix with diagonal col contains 5)
+            csvwrite('another.csv', B)         //Creates new CSV file and store B matrix into the file
+        Example 3:
+            A = [1,2;3,4];
+            B = [5,6;7,8];
+            save('my_workspace.mat')           //Saves current variables as a single file
+            load('my_workspace.mat')           //Loads saved variables
+        Example 4:
+            A = [1,2;3,4];
+            B = [5,6;7,8];
+            C = [9,10;11,12]
+            save('AC.mat, 'A', 'C')             //Pass in the name of the variable to store into a file. This will store A and C without B
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+10. Subplots, 3D plots, and labeling plots
 
 
 
