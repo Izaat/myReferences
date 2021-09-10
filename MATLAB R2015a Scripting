@@ -500,10 +500,64 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 10. Subplots, 3D plots, and labeling plots
 
+    Subplots
+        X = linspace(0,2*pi,100);
+        Y = sin(X);
+        Z = Y + randn(1,100);      //Noise
+        plot(X,Z)                  //Individual Plot
+        plot(X,Z,X,Y)              //Multiplot
+        
+        subplot(2,1,1);            //subplot(number of rows in subplot, number of cols in subplot, which subplot to plot), from above, we have 2 subplots
+        plot(X,Y)
+
+        subplot(2,1,2);
+        plot(X,Z)
+        
+        NOTE: The entire subplots will create a window with 2 plots over each other for comparison purposes (Stacked)
+
+    3D Plots
+        Z = randn(100,100);         //Create 2 dimensional dataset - random noise
+        surf(Z)                     //3D plot will appear and this can be rotated via circular arrow in toolbar
+        contour(Z)                  //Creates 2D topology of 3D data where red is the high value and blue is low value
+
+    Label Plots
+        x = linspace(0,2*pi,100);
+        y = sin(x);
+        plot(x,y)                   //Opens 2D plot
+        title('Plot of sin(x)')     //Adds title to the plot
+        xlabel('myLabelX')          //Labels the X axis
+        ylabel('myLabelY')          //Labels the Y axis
+
+    Label subplot
+        z = cos(x);
+        
+        subplot(2,1,1)
+        plot(x,y)
+        title('sin(x)')             //Adds title to subplot 1
+
+        subplot(2,1,2)
+        plot(x,y)
+        title('cos(x)')            //Adds title to subplot 1
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+11. Sound is a wave of air particles
+
+
+
+
+
+
+
+
 
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 
 
 
