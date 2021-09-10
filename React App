@@ -1696,6 +1696,116 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 20. Firebase Authentication with Redux
 
+    Keeping track of user authentication status
+    To do this, sync user authentication status from firebase to state in redux store
+    This will make it easier to access from the user authentication from the state
+    firestoreReducer in rootReducer.js will be used for syncing
+    firebaseReduceer will be used for authentication syncing
+
+    App Structure
+        src/components/auth
+            SignIn.js                   (Topic 7)
+            SignOut.js                  (Topic 7)
+        src/components/dashboard
+            Dashboard.js                (Topic 17)
+            Notifications.js
+        src/components/layout
+            Navbar.js                   (Topic 3)
+            SignedInLinks.js            (Topic 3)
+            SignedOutLinks.js           (Topic 3)
+        src/components/project
+            CreateProject.js            (Topic 12)
+            ProjectDetails.js           (Topic 18)
+            ProjectList.js              (Topic 18)
+            ProjectSummary.js           (Topic 11)
+        src 
+            App.js                      (Topic 7)
+            index.css                   (Topic 9)
+            index.js                    (Topic 15)
+        src/store/reducers
+            authReducer.js              (Topic 11)
+            projectReducer.js           (Topic 16)
+            rootReducer.js              (Topic 17)
+        src/store/actions
+            projectActions.js           (Topic 16)
+        src/config      
+            fbConfig.js                 (Topic 13)
+
+    rootReducer.js
+        import authReducer from './authReducer'      
+        import authReducer from './projectReducer' 
+        import {combinedReducers} from 'redux'    
+        import {firestoreReducer} from 'redux-firestore'  
+        import {firebaseReducer} from 'react-redux-firebase'    //01. Import firebaseReducer for authentication syncing
+        
+        const rootReducer = combinedReducers({
+            auth: authReducer,
+            project: projectReducer,
+            firestore: firestoreReducer,  
+            firebase: firebaseReducer                           //02. Create "firebase" element for firebaseReducer
+        });                          
+        export default rootReducer
+
+    Navbar.js
+        import React from 'react'
+        import {Link} from 'react-router-dom'
+        import SignedInLinks from './SignedInLinks'
+        import SignedOutLinks from './SignedOutLinks'
+        import {connect} from 'react-redux'                      //03. To setup firebaseReducer to access the authentication status in a component
+        
+        const Navbar = () => {
+            return (
+                <nav className="nav-wrapper grey darken-3">
+                    <div className="container">
+                        <Link to='/' className="brand-logo">React App</Link>
+                        <SignedInLinks />
+                        <SignedOutLinks />
+                    </div>
+                </nav>
+            )
+        }
+        
+        //const mapStateToProps = (state) => {}                   //05. Map state to props to enable access to auth status inside props
+        const mapStateToProps = (state) => {
+            console.log(state);                                   //08. Check console and "firebase" property should appear under Object property
+            return {
+                
+            }
+        }  
+        
+        //export default Navbar
+        //export default connect()(Navbar)                         //04. Wrap Navbar with connect. 
+        export default connect(mapStateToProps)(Navbar)            //06.  Link to mapStateToProps
+
+    ProjectList.js (Functional component)
+        import React from 'react'
+        import ProjectSummary from './ProjectSummary'      
+        import {Link} from 'react-router-dom'       
+
+        const ProjectList = ({projects}) => {     
+            return (
+                <div className="project-list section"> 
+                    
+                    {projects && projects.map(project => {
+                        return(
+                            //<Link to={'/project/' + project.id}>   
+                            //    <ProjectSummary project={project} key={project.id} />     //07. Since ProjectSummary is no longer the parent element, the key will be transferred to another parent element
+                            <Link to={'/project/' + project.id} key={project.id} >    
+                                <ProjectSummary project={project}  />     
+                            </Link>    
+                        )
+                    })}
+                </div>
+            )
+        }
+        export default ProjectList
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+21. Logging users in
+
+
+
+
 
 
 
