@@ -13,7 +13,7 @@ CONTENTS
 08. Plots useful for data analysis
 09. Loading and Saving data
 10. Subplots, 3D plots, and labeling plots
-11. Sound is a wave of air particles
+11. Sound processing
 12. Reversing a signal
 13. The Fourier transform (Viewing the frequency components of a signal)
 14. Fourier transform of a sine wave
@@ -540,7 +540,53 @@ CONTENTS
         title('cos(x)')            //Adds title to subplot 1
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-11. Sound is a wave of air particles
+11. Sound processing
+
+    2 types of waves
+        Transverse Wave      //Pitch is constant throught its length - This doesn't create sound
+        Longitudinal Wave    //Pitch are different through out the length and ability to move back and forth
+
+    When viewing the sound wave from electrical standpoint, we generally see the transverse wave
+    But in reality, longitudinal wave produces the sound
+    Also note that we are also viewing the analog waves from the digital standpoint
+    Example, Ears > Longitudinal > Transverse > Matrix > Sampling Rate > Computer
+    A matrix of 1000 in length that recreates analog transverse waves that in turn produces longitudinal waves
+    The matrix also translates into 500 samples per second 
+    This process of sampling is called "discretization"
+    Discretization means datapoints along x-axis(time)
+    Another type of discretization is Quantization, meaning, datapoints along y-axis(amplitude)
+
+    Record a short clip and save as wave file (sample.wav) and mp3 file (sample.mp3)
+    Add both files into Matlab project
+    
+    Wavread Syntax
+        https://mathworks.com/help/matlab/ref/wavread.html
+        y = wavread(filename)                      //where y is the sampled data itself
+        [y, Fs] = wavread(filename)                //where Fs is sampling frequency
+        [y, Fs, nbits] = wavread(filename)         //where nbits is number of bits per sample
+        [y, Fs, nbits, opts] = wavread(filename)   //where opts is text description of audio file (title, author, etc)
+        [__] = wavread(filename, N)
+        [__] = wavread(filename, [N1 N2])
+        siz = wavread(filename, 'size')
+    
+    Reading (*.wav)
+        Note: Wavread only works with wav files
+        d = wavread('sample.wav')                  //Note that wavread is no longer in use in newer versions of matlab. Audioread will be used instead
+        plot(d)                                    //Plots the wave into matlab, this will look similar to what being shown in other audio softwares
+        size(d)                                    //Check size of matrix (number of samples, number of dimensions), where dimension is number of channels (Stereo = 2 dimensions)
+        
+        [d,fs] = wavread('sample.wav');
+        sound(d,fs)                                //Playback sound
+
+    Reading (*.mp3)
+        Note: Audioread has the ability to also read wav files
+        [d,fs] = audioread('sample.mp3');
+        sound(d,fs)                                //Playback sound
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+12. Reversing a signal
+
+
 
 
 
