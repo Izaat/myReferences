@@ -1053,7 +1053,7 @@ CONTENTS
             index.css                   (Topic 9)
             index.js                    (Topic 10)
         src/store/reducers
-            authReducer.js              (Topic 11)
+            authReducer.js              (Topic 10)
             projectReducer.js           (Topic 11)
             rootReducer.js              (Topic 10)
 
@@ -1289,7 +1289,7 @@ CONTENTS
             index.css                   (Topic 9)
             index.js                    (Topic 12)
         src/store/reducers
-            authReducer.js              (Topic 11)
+            authReducer.js              (Topic 10)
             projectReducer.js           (Topic 12)
             rootReducer.js              (Topic 10)
         src/store/actions
@@ -1374,7 +1374,7 @@ CONTENTS
             index.css                    (Topic 9)
             index.js                     (Topic 15)
         src/store/reducers
-            authReducer.js               (Topic 11)
+            authReducer.js               (Topic 10)
             projectReducer.js            (Topic 12)
             rootReducer.js               (Topic 10)
         src/store/actions
@@ -1464,7 +1464,7 @@ CONTENTS
             index.css                  (Topic 9)
             index.js                   (Topic 15)
         src/store/reducers
-            authReducer.js             (Topic 11)
+            authReducer.js             (Topic 10)
             projectReducer.js          (Topic 16)
             rootReducer.js             (Topic 10)
         src/store/actions
@@ -1558,7 +1558,7 @@ CONTENTS
             index.css                   (Topic 9)
             index.js                    (Topic 15)
         src/store/reducers
-            authReducer.js              (Topic 11)
+            authReducer.js              (Topic 10)
             projectReducer.js           (Topic 16)
             rootReducer.js              (Topic 17)
         src/store/actions
@@ -1723,7 +1723,7 @@ CONTENTS
             index.css                   (Topic 9)
             index.js                    (Topic 15)
         src/store/reducers
-            authReducer.js              (Topic 11)
+            authReducer.js              (Topic 10)
             projectReducer.js           (Topic 16)
             rootReducer.js              (Topic 17)
         src/store/actions
