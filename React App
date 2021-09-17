@@ -1802,6 +1802,169 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 21. Logging users in
+    
+    At current state, in Sign in page, entering email and password will push email and password into the console
+    To sign in, asynchronous request has to be made. Logging in for users requires an asynchronuous request
+    Creating "Action creator" enables app to make asynchronuous requests so users can log in
+
+    Create authActions.js 
+        src/store/actions/authActions.js
+
+    App Structure
+        src/components/auth
+            SignIn.js                  (Topic 7)
+            SignOut.js                 (Topic 7)
+        src/components/dashboard
+            Dashboard.js               (Topic 17)
+            Notifications.js
+        src/components/layout
+            Navbar.js                  (Topic 3)
+            SignedInLinks.js           (Topic 3)
+            SignedOutLinks.js          (Topic 3)
+        src/components/project
+            CreateProject.js           (Topic 12)
+            ProjectDetails.js          (Topic 18)
+            ProjectList.js             (Topic 18)
+            ProjectSummary.js          (Topic 11)
+        src 
+            App.js                     (Topic 7)
+            index.css                  (Topic 9)
+            index.js                   (Topic 15)
+        src/store/reducers
+            authReducer.js             (Topic 10)
+            projectReducer.js          (Topic 16)
+            rootReducer.js             (Topic 17)
+        src/store/actions
+            projectActions.js          (Topic 16)
+        src/config      
+            fbConfig.js                (Topic 13)
+
+
+    authActions.js
+        //export const signIn = (credentials) => {}                    //01. Use email and password (credentials)
+        //export const signIn = (credentials) => { return() }          //02. Thunk will halt the dispatch process and return a function instead
+        export const signIn = (credentials) => {
+            //return (dispatch, getState, {getFirebase}) => {          //03. The function will contain a dispatch parameter, getState, and destructured elements from getFirebase for firebase communication
+            return (dispatch, getState, {getFirebase}) => {
+                const firebase = getFirebase();                        //04. Initialize firebase instance to communicate with firebase project and sign users in
+                //firebase.auth().signInWithEmailAndPassword()         //05. Communicates and sign users in
+                firebase.auth().signInWithEmailAndPassword(
+                    credentials.email,                                 //06. Adds email and password
+                    credentials.password
+                //)
+                //).then(() => {})                                     //07. If email and password are correct, then dispatch an action
+                ).then(() => {
+                    dispatch({type: 'LOGIN_SUCCESS'});
+                //})     
+                //}).catch((err) => {})                               //08. Catches an error if any 
+                }).catch((err) => {
+                    dispatch({type: 'LOGIN_ERROR', err});             //09. dispatch LOGIN_ERROR and displays the error
+                }) 
+            }
+        }
+
+    authReducer.js
+        //const initState = {}            
+        const initState = {
+            authError: null                                           //13. Initialize "authError" with null
+        }
+        
+        const authReducer = (state = initState, action) => {
+            //switch(action.type){}                                   //10. Check action type
+            switch(action.type){
+                case 'LOGIN_ERROR':
+                    //console.log('login error');                     //17a. Check console
+                    //return {}                                       //11. In the case of error, return error to 'auth' state in rootReducer.js
+                    return {
+                        ...state,
+                        authError: 'Login failed'                     //12. Create "authError" state element in initState to store "Login failed"
+                    } 
+                case 'LOGIN_SUCCESS':
+                    //console.log('login success');                   //17b. Check console
+                    return {                                          //14. Similar to above
+                        ...state,
+                        authError: null
+                    }
+                default:                                              //15. Return state as it is
+                    return state;
+            }
+            //return state                                            //16. No longer in use since being used in switch cases as default
+        }
+        export default authReducer
+
+    SignIn.js                                                      
+        import React, {Component} from 'react'     
+        import {connect} from 'react-redux'                           //18. Connecting to redux
+        import {signIn} from '../../store/actions/authActions'        //19. Connecting to authActions.js
+        
+        class SignIn extends Component {
+            state = {
+                email:'',                    
+                password:''
+            }
+            handleChange = (e) => {               
+                this.setState({                        
+                    [e.target.id]: e.target.value        
+                })
+            }
+            handleSubmit = (e) => {    
+                e.preventDefault();          
+                //console.log(this.state);    
+                this.props.signIn(this.state);                          //24. Using signIn props to pass in the state (email and password) 
+                //                                                      //25. At this point logging into the app with correct email but incorrect password will return 'LOGIN_ERROR' in the console
+            }
+            render() {
+                const {authError} = this.props;                         //29. Destructuring the authError
+                return(
+                    <div className="container">
+                        <form onSubmit={this.handleSubmit} className="white">  
+                            <h5 className="grey-text text-darken-3">Sign In</h5>
+                            <div className="input-field">
+                                <label htmlFor="email">Email</label>
+                                <input type="email" id="email" onChange={this.handleChange} />  
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="password">Password</label>
+                                <input type="password" id="password" onChange={this.handleChange} /> 
+                            </div>
+                            <div className="input-field">
+                                <button className="btn pink light-1 z-depth-0">Login</button>
+                                //<div className="red-text center"></div>           //29. Output an error at the end of the form
+                                <div className="red-text center">
+                                    {authError ? <p>{authError}</p> : null}         //30. Output authError to app , if no error, then no output (null)
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                )
+            }
+        }
+        
+        //const mapStateToProps = (state) => {return{}}              //26. Capture error from console and display into the app itself
+        const mapStateToProps = (state) => {
+            return{
+                authError: state.auth.authError                      //27. State of 'auth' in rootReducer of rootReducer.js and authError's initState in authReducer.js 
+            }
+        }
+        
+        //const mapDispatchToProps = (dispatch) => {return{}}        //21. Create mapToProps to call authActions.js
+        const mapDispatchToProps = (dispatch) => {
+            return{
+                signIn: (creds) => dispatch(signIn(creds))           //22. Returns an object (signIn method) that receives credentialsand then dispatches an action creator (signIn class) that takes in "creds" from authActions.js
+            }
+        } 
+        
+        //export default SignIn
+        //export default connect()(SignIn)                                    //20. Wrap signIn class
+        //export default connect(null, mapDispatchToProps)(SignIn)            //23. Where null is mapStateToProps and mapDispatchToProps will be second
+        export default connect(mapStateToProps, mapDispatchToProps)(SignIn)   //28. Now able to access mapStateToProps
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+22. Logging users out
+
+
+
 
 
 
