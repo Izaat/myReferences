@@ -14,7 +14,7 @@ CONTENTS
 09. Loading and Saving data
 10. Subplots, 3D plots, and labeling plots
 11. Sound processing
-12. Reversing a signal
+12. Reversing and Speeding up an audio signal
 13. The Fourier transform (Viewing the frequency components of a signal)
 14. Fourier transform of a sine wave
 15. Applying a low-pass filter to an audio stream
@@ -584,7 +584,40 @@ CONTENTS
         sound(d,fs)                                //Playback sound
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-12. Reversing a signal
+12. Reversing and Speeding up an audio signal
+
+    Two methods to reverse an audio signal
+        Flip L-R           //Reverse the 2 channels
+        Flip U-D          //Reverse the signal
+    
+    Speeding up audio signal process: Downsampling
+    
+    Reading (*.wav)
+        [d,fs] = audioread('sample.mp3');
+        sound(d,fs)              
+        size(d)                          //Size=84480
+
+    Flip U-D
+        d2 = flipud(d);
+        plot(d2)                                                                        //Shows reversed version of the audio wave
+        audiowrite('sample_reversed.mp4', d2, fs)               //Matlab cannot save to mp3 despite being able to read mp3s
+        [d3, fs] = audioread('sample_reversed.mp4')
+        sound(d3, fs)                                                               //Plays reversed audio
+
+    Speed up soundwave (Downsampling)
+        [d,fs] = audioread('sample.mp3');
+        sound(d,fs)              
+        size(d)                          //Size=84480
+        d4 = downsample(d, 2);                                            
+        size(d)                          //Size=44240
+        sound(d4,fs)                //Plays audio at twice the speed, also note the pitch has increased
+        sound(d4,fs/2)            //Plays audio at original speed, also note that there will be compression loss since audio has been compressed
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+13. The Fourier transform (Viewing the frequency components of a signal)
+
+
+
 
 
 
