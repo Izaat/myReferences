@@ -32,6 +32,7 @@ CONTENTS
 18. Labview and LINX Toolkit (Arduino/RPi/Beaglebone)
 19. CompactRio/myRIO FPGA Application
 20. State Machine Principles
+21. PID Labview
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -2615,7 +2616,126 @@ CONTENTS
             Drag and Drop icon (Top right hand corner of front panel) into Main Application (Case Structure - Fahrenheit)
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+21. PID Labview
 
+    Requires LabVIEW Control Design and Simulation Module
+    Block Diagram Examples
+        Block diagram simulation is based on differential equations (Simulation Loop)
+        Built in PID blocks/functions
+        Simulation subsystems
+        Simulations using While Loop with subsystem
+    
+    Modelling of Dynamic Systems
+        Mathematical Models:
+            h = water level in tank
+            T = Temperature in tube
+            Water Tank:
+                Alt 1 (Integrator):
+                    h = [1/A] * [Kpu-Fout]
+                Alt 2 (Time constant/First order):
+                    h = [1/A] * [Kpu - Kvh]
+                Alt 3: (Non linear):
+                    h = [1/A] * [Kpu - Kv * sqrt( (pgh)/G )]
+            Air Heater:    
+                T-hat(out) = [1 / titter(t)] * {-Tout + [Khu(t-titter(d)) + Tenv ]}
+
+    Palettes 
+        Control and Simulation
+            PID
+                PID.vi, PID Advanced, PID Autotuning, ..., PID EGU, PID Percentage
+            Fuzzy Logic
+            Simulation
+                Simulation Loop Border, Signal Generator, Signal Arithematic, Lookup Tables, Utilities, ..., External Mod
+            Control Design
+                Model Constant, Model Information, Model Conversion, ..., Implementation
+            System Identification
+
+    Example 1:
+        x-hat = -ax + bu
+        |
+        |                         x                x
+        | u -----> b -----> +/- -----> 1/s -----+-------> 
+        |                    ^                  |  
+        |                    |                  |
+        |                    +-------- a <------+
+        |
+            
+    Example 1 (Contd) - Step Response
+        | x-hat = -ax + bu
+        | set a = 0.25 and b = 2
+        |
+        |           |---Simulation Loop Border-----------------------------------------------------------------------------------------------------------------|
+        |  Input |                                                                                                                                             | Error
+        |           |                     Multiplication           Sum       Integrator                                                                        |
+        |           |    u ------------> | x         =|-----------> +/-  ------>  1/s -------------+----------> | Simulation    |----------> Waveform Chart    |
+        |           |           +------> | x          |    (+)       ^                             |            | Time Waveform |                              |
+        |           |           |        |------------|           (-)|                             |                                                           |
+        |           |    b -----+                                    |      |----------|           |                                                           |
+        |           |                                                +------| =      x | <---------+                                                           |
+        |           |                                                       |        x | <--- a                                                                |
+        |           |                                                       |----------|                                                                       |
+        |           |                                                                                                                                          |
+        |           |                                                                                                                                          |
+        |           |                                                                                                                                          |
+        |           |------------------------------------------------------------------------------------------------------------------------------------------|
+        |
+        Simulation Loop Border Settings (Right click on border > Configure parameters)
+            Simulation Parameters Tab
+                Simulation Time 
+                    Initial Time: 0
+                    Final Time: 20
+                Solver Method
+                    ODE Solver: Runga Kutta 23 (Variable)
+                Continuous Time Step and Tolerance
+                    Initial Step Size (s): 0.01
+                    Minimum step size: 1E-10 
+                    Max Step Size: 1 
+                    Relative Tolerance: 0.001
+                    Absolute Tolerance: 1E-7
+                Discrete Time Step
+                    Auto Discrete Time: Checked 
+                Signal Collection
+                    Decimation: 0
+            Timing Parameters
+                
+        Program for Example 1
+            Front Panel
+                Add Numeric Controls
+                    Rename to "u"
+                    Set to 1
+                Add Numeric Controls
+                    Rename to "a"
+                    Set to 0.25
+                Add Numeric Controls
+                    Rename to "b"
+                    Set to 2
+                Make current values Default
+                    Main Menu > Edit > Make current valuse default
+            Block Diagram
+                Inherited from Front Panel
+                    u, a, b
+                Add Simulation Loop Border 
+                    Right Click > Control and Simulation > Simulation > Simulation Loop Border
+                Add Multiplication 1
+                    Right Click > Control and Simulation > Simulation > Signal Arithmetic > Multiplication
+                Add Multiplication 2
+                    Right Click > Control and Simulation > Simulation > Signal Arithmetic > Multiplication
+                    Change Direction:
+                        Right Click > Reverse Terminals
+                Add Summation
+                    Right Click > Control and Simulation > Simulation > Signal Arithmetic > Summation
+                Add Integrator
+                    Right Click > Control and Simulation > Simulation > Continuous Linear Systems > Integrator
+                Add Graph
+                    Right Click > Control and Simulation > Simulation > Graph Utilities > Sim Time Waveform
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 [END]
 
