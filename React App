@@ -1963,6 +1963,129 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 22. Logging users out
 
+    App Structure
+        src/components/auth
+            SignIn.js                  (Topic 21)
+            SignOut.js                 (Topic 7)
+        src/components/dashboard
+            Dashboard.js               (Topic 17)
+            Notifications.js
+        src/components/layout
+            Navbar.js                  (Topic 3)
+            SignedInLinks.js           (Topic 3)
+            SignedOutLinks.js          (Topic 3)
+        src/components/project
+            CreateProject.js           (Topic 12)
+            ProjectDetails.js          (Topic 18)
+            ProjectList.js             (Topic 18)
+            ProjectSummary.js          (Topic 11)
+        src 
+            App.js                     (Topic 7)
+            index.css                  (Topic 9)
+            index.js                   (Topic 15)
+        src/store/reducers
+            authReducer.js             (Topic 21)
+            projectReducer.js          (Topic 16)
+            rootReducer.js             (Topic 17)
+        src/store/actions
+            projectActions.js          (Topic 16)
+            authActions.js             (Topic 21)
+        src/config      
+            fbConfig.js                (Topic 13)
+
+
+    authActions.js
+        export const signIn = (credentials) => {
+            return (dispatch, getState, {getFirebase}) => {
+                const firebase = getFirebase();             
+                firebase.auth().signInWithEmailAndPassword(
+                    credentials.email,                 
+                    credentials.password
+                ).then(() => {
+                    dispatch({type: 'LOGIN_SUCCESS'});
+                }).catch((err) => {
+                    dispatch({type: 'LOGIN_ERROR', err});  
+                }) 
+            }
+        }
+
+        //export const signOut = () => {}                            //01. Add signOut const
+        export const signOut = () => {
+            //return (dispatch, getState, {getFirebase}) => {}       //02. Similar to signIn
+            return (dispatch, getState, {getFirebase}) => {
+                const firebase = getFirebase();                      //03. Initialize firebase
+                //firebase.auth().signOut()                          //04. Async so takes time to sign out
+                //firebase.auth().signOut() .then(() => {});         //05. Callback method
+                firebase.auth().signOut() .then(() => {
+                    dispatch({type: 'SIGNOUT_SUCCESS'});             //06. Once sign out complete, dispatch signout success
+                });
+            }
+        }
+
+
+    authReducer.js
+        const initState = {
+            authError: null           
+        }
+        
+        const authReducer = (state = initState, action) => {
+            switch(action.type){
+                case 'LOGIN_ERROR':
+                    return {
+                        ...state,
+                        authError: 'Login failed'    
+                    } 
+                case 'LOGIN_SUCCESS':
+                    return {          
+                        ...state,
+                        authError: null
+                    }
+                case 'SIGNOUT_SUCCESS':                                       //07. Adds Signout success
+                    console.log('signout success');                           //08. Prints out "Signout success" to console
+                    return state;                                             //09. Returns state as it is
+                default:                  
+                    return state;
+            }
+        }
+        export default authReducer
+
+    SignedInLinks.js
+        import React from 'react'
+        import {Link} from 'react-router-dom'
+        import {connect} from 'react-redux'                                   //10. Add react redux connect
+        import {signOut} from '../../store/actions/authActions'               //11. Add signOut from authActions.js
+        
+        //const SignedInLinks = () => {
+        const SignedInLinks = (props) => {                                    //16. Take props into the component
+            //props.signOut()                                                 //17. This can be done but not using this at the moment
+            return (
+                <ul className="right">
+                    <li><NavLink to ='/'>New Project</NavLink></li>
+                    //<li><NavLink to ='/'>Log Out</NavLink></li>
+                    <li><a onClick={props.signOut}>Log Out</a></li>           //18. A better way to sign out that involves clisking on the button instead of point 17
+                    <li><NavLink to ='/' className='btn btn-floating pink lighten-1'>Icon</NavLink></li>
+                </ul>
+            )
+        }
+        
+        //const mapDispatchToProps = (dispatch) => {}                  //13. Add dispatch to props
+        const mapDispatchToProps = (dispatch) => {
+            return {
+                signOut: () => dispatch(signOut())                     //14. Dispatch to signOut
+            }
+        }
+        
+        //export default SignedInLinks
+        //export default connect()(SignedInLinks)                         //12. Wrap with connect
+        export default connect(null, mapDispatchToProps)(SignedInLinks)   //15. Link connect to dispatch to props
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+23. Tracking Authentication status
+
+
+
+
+
 
 
 
