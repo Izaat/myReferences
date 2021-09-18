@@ -615,6 +615,45 @@ CONTENTS
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 13. The Fourier transform (Viewing the frequency components of a signal)
+    
+    f(x) is the original signal, a continuous signal of x (time domain)
+        f(x) is the same thing as f(t)
+        f(x) = For signal
+        f(t) = For Sound (signals varying in time)
+    Convert time domain to frequency domain - Fourier
+    Convert frequency domain to time domain - Reverse Fourier
+    To work in Matlab, Discrete Fourier Tranform will be used
+    f(k) is the discrete signal (original signal)
+    From f(k), the Discrete Fourier Transform "f(n)" can be calculated
+    In Matlab, FFT (Fast Fourier Transform) will be used for calculating discrete fourier transform to analog n time
+    Discrete Fourier Transform contains real part and imaginary part (0.0123 + 0.0012i) => (Real, Imaginary)
+    Typically when plotting FFTs, real pert will be used
+
+    Example 1:
+        x = linspace(0,5*pi,1000);
+        y = sin(x)                            //Create sine wave
+        Y = fft(y);                           //Calculates fft for the sine wave
+        plot(real(Y))                         //Plots the real number, Usually in fourier transform visualization, the graph is symmetric in the center
+
+    Example 2:
+        d = audioread('helloworld.mp3');     //Male more bassy voice
+        D = fft(d(:, 1));
+        size(D)                              //84480
+        plot(real(D))
+
+        f = audioread('helloworld_female.mp3');     //Female more high pitch voice
+        F = fft(f);
+        size(F)                              //8297
+        plot(real(F))
+
+        subplot(2,1,1);                             //Plotting 2 separate graphs of different sizes
+        plot(real(F))
+        subplot(2,1,2);     
+        plot(real(D))
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+14. Fourier transform of a sine wave
+
 
 
 
