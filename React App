@@ -1818,7 +1818,7 @@ CONTENTS
             Dashboard.js               (Topic 17)
             Notifications.js
         src/components/layout
-            Navbar.js                  (Topic 3)
+            Navbar.js                  (Topic 20)
             SignedInLinks.js           (Topic 3)
             SignedOutLinks.js          (Topic 3)
         src/components/project
@@ -1971,7 +1971,7 @@ CONTENTS
             Dashboard.js               (Topic 17)
             Notifications.js
         src/components/layout
-            Navbar.js                  (Topic 3)
+            Navbar.js                  (Topic 20)
             SignedInLinks.js           (Topic 3)
             SignedOutLinks.js          (Topic 3)
         src/components/project
