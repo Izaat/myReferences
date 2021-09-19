@@ -2082,6 +2082,82 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 23. Tracking Authentication status
 
+    Keeping track of firebase property (Console > Object > firebase > auth)
+    Ability to show content when logged in or different content when not logged in
+    Current state: 
+        Signup, Login, New Project, Log Out, Initials
+    Ideal State:
+        Not logged in: Signup, Login
+        Logged in: New Project, Log Out, Initials
+
+    App Structure
+        src/components/auth
+            SignIn.js                  (Topic 21)
+            SignOut.js                 (Topic 7)
+        src/components/dashboard
+            Dashboard.js               (Topic 17)
+            Notifications.js
+        src/components/layout
+            Navbar.js                  (Topic 20)
+            SignedInLinks.js           (Topic 3)
+            SignedOutLinks.js          (Topic 3)
+        src/components/project
+            CreateProject.js           (Topic 12)
+            ProjectDetails.js          (Topic 18)
+            ProjectList.js             (Topic 18)
+            ProjectSummary.js          (Topic 11)
+        src 
+            App.js                     (Topic 7)
+            index.css                  (Topic 9)
+            index.js                   (Topic 15)
+        src/store/reducers
+            authReducer.js             (Topic 21)
+            projectReducer.js          (Topic 16)
+            rootReducer.js             (Topic 17)
+        src/store/actions
+            projectActions.js          (Topic 16)
+            authActions.js             (Topic 21)
+        src/config      
+            fbConfig.js                (Topic 13)
+
+    Navbar.js
+        import React from 'react'
+        import {Link} from 'react-router-dom'
+        import SignedInLinks from './SignedInLinks'
+        import SignedOutLinks from './SignedOutLinks'
+        import {connect} from 'react-redux'    
+        
+        //const Navbar = () => {  
+        const Navbar = (props) => {                               //02. Add props
+            const {auth} = props;                                 //03. destructure auth property
+            console.log(auth);                                    //04. For checking, when logged in, contains uid, when logged out, isEmpty = true
+            const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;                  //05. Check if uid matches with links. If true, then sign in, if false then signout
+            return (
+                <nav className="nav-wrapper grey darken-3">
+                    <div className="container">
+                        <Link to='/' className="brand-logo">React App</Link>
+                        //<SignedInLinks />                        //06. Not in use since links will be used instead
+                        //<SignedOutLinks />                       //07. Not in use since links will be used instead
+                        {links}
+                    </div>
+                </nav>
+            )
+        }
+        
+        const mapStateToProps = (state) => {
+            //console.log(state);                  
+            return {
+                auth: state.firebase.auth                          //01. Add accessibility for the component
+            }
+        }  
+        
+        export default connect(mapStateToProps)(Navbar)   
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+24. Waiting for Auth Ready
+
+
+
 
 
 
