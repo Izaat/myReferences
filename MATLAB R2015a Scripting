@@ -654,6 +654,39 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 14. Fourier transform of a sine wave
 
+    Usually in Fourier Transform, a delta function or a spike will be seen in frequency domain
+    But in Matlab, 2 spikes (300, -300) will be seen instead of a single spike when zoomed in
+    This is due to the absence of infinite sinewave
+    Example (w/o infinite sine wave):
+        x = linspace(0,5*pi,1000);
+        plot(real(fft(sin(x))))
+    Example (with infinite sine wave):
+        x = linspace(0,10*pi,5000);
+        plot(real(fft(sin(x))))
+
+    
+    Fourier Transform of a music piece
+    Every single musical note has it's own frequency, multiples of each other
+    Therefore, frequency changes constantly throughout the music
+    Showing the frequency change with Fourier transform
+    Fourier transform takes in the entire signal from time = -inf to +inf
+    Therefore it takes in all the different frequencies over all of time and then plotting on fourier transform
+    Short Time Fourier Transform will be used, aka Spectogram
+    2 dimensional graph will show time on one axis and frequency on another axis
+    https://www.mathworks.com/help/signal/ref/spectogram.html
+
+    Example:
+        x = linspace(0,10*pi,5000);
+        y2 = sin(x.*x);              //Element bby element multiplication
+        spectogram(y2)           //Blocky spectogram
+        spectogram(y2,500)    //Less blocky but shows uncertainty principles. (When momentum is being measured, it will be accurate, but position will never be as accurately)
+        //                                 //Same applies to Fourier Transform, to measure frequency accurately, longer time window is required
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+15. Applying a low-pass filter to an audio stream
+
+
+
 
 
 
