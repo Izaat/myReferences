@@ -2731,7 +2731,130 @@ CONTENTS
                     Right Click > Control and Simulation > Simulation > Graph Utilities > Sim Time Waveform
                     
                     
-                    
+    Example 2 - PID:
+        |                                       t
+        | u(t) = Kpe + [kp/Ti] integral(edTau + KpTd*e-hat)
+        |                                       0
+        |
+        |           |----------------------------------------------------------------------------------------------------|
+        |           |                                                                                                    |
+        |           |                                                           +--- V                                   |
+        |           |                                                           |                                        |      
+        |           |                    e         Kp, Ti, Td       u           V                     y                  |
+        |           |    r ---- (+/-) --------> |     PID    |-----------> | Process | -----------+---------->           |
+        |           |            ^                                                                |                      |
+        |           |            | (-)                                                            |                      |
+        |           |            |                                                                |                      |
+        |           |            +--------------------------------------| Sensor | <--------------+                      |
+        |           |                                                                                                    |
+        |           |----------------------------------------------------------------------------------------------------|
+        |
+        |
+        
+        r = Reference Value, SP (Set Point), SV (Set Value)
+        y = Measurement Value (MV), Process Value (PV)
+        e = Error between the reference value and the measurement value (e=r-y)
+        v = Disturbance
+        Kp, Ti, Td = PID Parameters
+        
+        |
+        |
+        |           |---Simulation Loop Border---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+        |     Input |                                                                                                                                                                                                    | Error                                                  
+        |           |       Derivative Time [s] Td -------------------+                                                                                                                                                  |
+        |           |                                                 |                                                                                                                                                  |
+        |           |       Integral Time [s] Ti -----------------+   |                                                                                                                                                  |
+        |           |                                             |   |                                                                                                                                                  |
+        |           |       Prop Gain (Kc) -------------------+   |   |                                                                                                                                                  |
+        |           |                                         |   |   |                                                                                                                                                  |
+        |           |                                         |   |   |        +---- u                                                                                                                                   |
+        |           |         (+)   Sum                    |------------|      |       Multiplication            Sum        Integrator                                                                                   |
+        |           |    r -------> +/- -----------------> | PID        |------+----> | x          =|-----------> +/-  ------>  1/s -----------------+----+------> | Simulation    |----------> Waveform Chart           |
+        |           |                    ^                 |------------|   +-------> | x           |              ^                                 |    |        | Time Waveform |                                     |
+        |           |                    |  (-)                             |         |-------------|              |                                 |    |                                                              |
+        |           |                    |                         b -------+                                      |      |----------|               |    |                                                              |
+        |           |                    |                                                                         +------| =      x | <-------------+    |                                                              |
+        |           |                    |                                                                                |        x | <--- a             |                                                              |
+        |           |                    |                                                                                |----------|                    |                                                              |
+        |           |                    |                                                                                                                |                                                              |
+        |           |                    |                                                                                                                |                                                              |
+        |           |                    +----------------------------------------------------------------------------------------------------------------+                                                              |
+        |           |                                                                                                                                                               Stop Button---->Halt Simulation      |
+        |           |                                                                                                                                                                                                    |
+        |           |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+        |
+        |
+
+        Program for Example 2:
+            Front Panel:
+                Inherited from Example 1
+                    u, a, b
+                Add Numeric Controls
+                    Rename to "r"
+                Add Numeric Controls
+                    Rename to "P"
+                Add Numeric Controls
+                    Rename to "I"
+                Add Numeric Controls
+                    Rename to "D"
+            Block Diagram:
+                Inherited from Example 1
+                    u, a, b
+                    Convert "u" as indicator 
+                Inherited from Front Panel
+                    r, P, I, D
+                Add PID
+                    Right Click > Control and Simulation > Simulation > Continuous Linear Systems > Integrator
+                    Configure:
+                        Right click > Configuration
+                        Polymorphic instance: Academic
+                        Parameter Source: Terminal
+                            Select Parameters > Proportional 
+                            Select Terminal in Parameter Source
+                            Do the same for Integral and Derivative
+                Add Summation
+                    Right Click > Control and Simulation > Simulation > Signal Arithmetic > Summation
+
+        Run Program
+            Set "r" as 4
+            
+
+    Example 3 (Set to Continuous simulation)
+        Right click on Simulation Loop Border
+        Simulation Parameters Tab
+            Simulation Time
+                Initial Time: 0
+                Final Time: Inf
+            Solver Method
+                ODE Solver: Runga Kutta (Variable)
+            Continuous Time Step Tolerance
+                Step Size: 0.1
+                Min: 1E-10 
+                Max: 1
+                Rel: 0.001
+                Abs Tolerance: 1E-7 
+            Discrete Time Step
+                Auto Discrete Time
+            Signal Collection
+                Decimation: 0
+        Timing Parameters
+            Enable Synchronized Timing
+                Synchronized Loop to Timing Source: Checked (Simulation in Real-Time)
+            Timing Source
+                Source Type: 1kHz Clock
+                Source: 1kHz
+            Loop Timing Attributes
+                Period: 100
+                Auto Period: Unchecked
+                Offset/Phase: 0
+                Priority: 100
+                Deadline: -1
+                Timeout(ms): -1 
+            Processor Assignment
+                Mode: Automatic
+        
+        Add Stop Button and link this to "Halt Simulation" inside Simulation Loop Border (Similar to While Loop Stop Button)
+            Right Click > Control and Simulation > Simulation > Utilities > Halt Simulation
                     
                     
                     
