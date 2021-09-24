@@ -2944,19 +2944,60 @@ CONTENTS
 
         Node Configuration (Boxes next to Icon Image - Top Right corner)
             |           +----+----+----+----+
-            | Empty     |    |    |    |    |  Status
+            | Empty     |    |    |    |    |  Empty
             |           +----+    |    |----+
             | u         |    |    |    |    |  x
             |           +----+----+----+----+
             | Empty     |    |    |    |    |  Empty
             |           +----+    |    |----+
-            | Error In  |    |    |    |    |  Error Out
+            | Empty     |    |    |    |    |  Empty
             |           +----+----+----+----+
             |                  a     b
 
         Drag and Drop subsystem icon into the main program
 
 
+    Creating the subsystem 2:
+
+        |
+        |           |---Simulation Loop Border--------------------------------------------------------------------------------------------------------------------------------------------|
+        |     Input |                                                                                                                                                                     | Error
+        |           |       Derivative Time [s] Td --------------------+                                                                                                                  |
+        |           |                                                  |                                                                                                                  |
+        |           |       Integral Time [s] Ti ------------------+   |                                                                                                                  |
+        |           |                                              |   |                                                                                                                  |
+        |           |       Prop Gain (Kc) -------------------+    |   |                                                                                                                  |
+        |           |                                         |    |   |                                                                                                                  |
+        |           |                                         |    |   |     u                                                                                                            |
+        |           |        (+)                            |------------|   |      |----------------|                                                                                    |
+        |           |    r -------------------------------> | PID.vi     |---+----> | Process.vi     |--+-------> | Simulation    |----------> Waveform Chart                             |
+        |           |                                       |------------|          |----------------|  |         | Time Waveform |                                                       |
+        |           |                                             ^                                     |                                                                                 |
+        |           |                                             |  (y)                                |                                                                                 |
+        |           |                                             |                                     |                                                                                 |
+        |           |                                             |                                     |                                                                                 |
+        |           |                                             |                                     |                                                                                 |
+        |           |                                             |                                     |                                                                                 |
+        |           |                                             |                                     |                                                                                 |
+        |           |                                             +-------------------------------------+                                                                                 |
+        |           |                                                                                                                                Stop Button---->Halt Simulation      |
+        |           |                                                                                                                                                                     |
+        |           |---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+        |
+
+        Node Configuration (Boxes next to Icon Image - Top Right corner)
+            |              +----+----+----+----+
+            | r            |    |    |    |    |  Empty
+            |              +----+    |    |----+
+            | kc           |    |    |    |    |  u
+            |              +----+----+----+----+
+            | ti           |    |    |    |    |  Empty
+            |              +----+    |    |----+
+            | td           |    |    |    |    |  Empty
+            |              +----+----+----+----+
+            |                      y      
+
+        Drag and Drop subsystem icon into the main program
 
 
 
