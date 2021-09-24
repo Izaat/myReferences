@@ -2921,7 +2921,46 @@ CONTENTS
         |
         |
    
-                    
+    Creating the subsystem:
+        From front panel, click on Main Menu > File > New
+        From Create New window, Other Files > Simulation Subsystem
+        Click OK
+        Note: No simulation border being used
+        |
+        |           |---Subsystem.vi -------------------------------------------------------------------------------------------------------------|
+        |           |                                                                                                                             |
+        |           |                       Multiplication            Sum        Integrator                                                       |
+        |           |    u ---------------> | x         =|-----------> +/-  ------>  1/s ------------------+----------> Numeric Indicator  (x)    |
+        |           |           +---------> | x          |    (+)       ^                                  |                                      |
+        |           |           |           |------------|          (-) |                                  |                                      |
+        |           |    b -----+                                       |      |----------|                |                                      |
+        |           |                                                   +------| =      x | <--------------+                                      |
+        |           |                                                          |        x | <--- a                                                |
+        |           |                                                          |----------|                                                       |
+        |           |                                                                                                                             |
+        |           |                                                                                                                             |
+        |           |                                                                                                                             |
+        |           |-----------------------------------------------------------------------------------------------------------------------------|
+
+        Node Configuration (Boxes next to Icon Image - Top Right corner)
+            |           +----+----+----+----+
+            | Empty     |    |    |    |    |  Status
+            |           +----+    |    |----+
+            | u         |    |    |    |    |  x
+            |           +----+----+----+----+
+            | Empty     |    |    |    |    |  Empty
+            |           +----+    |    |----+
+            | Error In  |    |    |    |    |  Error Out
+            |           +----+----+----+----+
+            |                  a     b
+
+        Drag and Drop subsystem into the main program
+
+
+
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 [END]
 
