@@ -2660,7 +2660,8 @@ CONTENTS
         |                    |                  |
         |                    +-------- a <------+
         |
-            
+
+    ////////////////////////////////////////////////////////////////////////////////////
     Example 1 (Contd) - Step Response
         | x-hat = -ax + bu
         | set a = 0.25 and b = 2
@@ -2730,7 +2731,7 @@ CONTENTS
                 Add Graph
                     Right Click > Control and Simulation > Simulation > Graph Utilities > Sim Time Waveform
                     
-                    
+    ////////////////////////////////////////////////////////////////////////////////////                    
     Example 2 - PID:
         |                                       t
         | u(t) = Kpe + [kp/Ti] integral(edTau + KpTd*e-hat)
@@ -2818,7 +2819,7 @@ CONTENTS
         Run Program
             Set "r" as 4
             
-
+    ////////////////////////////////////////////////////////////////////////////////////
     Example 3 (Set to Continuous simulation)
         Right click on Simulation Loop Border
         Simulation Parameters Tab
