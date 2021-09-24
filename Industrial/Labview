@@ -2998,7 +2998,10 @@ CONTENTS
             |                      y      
 
         Drag and Drop subsystem icon into the main program
-
+        NOTE: 
+            With the PID.vi and Process.vi built, Simulation loop border can be replaced with While Loop
+            Simulation Time Waveform and Halt Simulation will be removed
+            Feedback node will be added for the feedback line
 
 
 
