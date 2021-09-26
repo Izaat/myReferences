@@ -2156,9 +2156,76 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 24. Waiting for Auth Ready
 
+    When Refresh button is pressed, the Log-Out Login will flash momentarily
+    This is due to the app reinitializes the DOM to reauthenticate with firebase
+    Solution is to leave authentication status into the DOM
 
+    App Structure
+        src/components/auth
+            SignIn.js                  (Topic 21)
+            SignOut.js                 (Topic 7)
+        src/components/dashboard
+            Dashboard.js               (Topic 17)
+            Notifications.js
+        src/components/layout
+            Navbar.js                  (Topic 23)
+            SignedInLinks.js           (Topic 3)
+            SignedOutLinks.js          (Topic 3)
+        src/components/project
+            CreateProject.js           (Topic 12)
+            ProjectDetails.js          (Topic 18)
+            ProjectList.js             (Topic 18)
+            ProjectSummary.js          (Topic 11)
+        src 
+            App.js                     (Topic 7)
+            index.css                  (Topic 9)
+            index.js                   (Topic 15)
+        src/store/reducers
+            authReducer.js             (Topic 21)
+            projectReducer.js          (Topic 16)
+            rootReducer.js             (Topic 17)
+        src/store/actions
+            projectActions.js          (Topic 16)
+            authActions.js             (Topic 21)
+        src/config      
+            fbConfig.js                (Topic 13)
 
+    index.js
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import './index.css';
+        import App from './App';
+        import registerServiceWorker from './registerServiceWorker';   
+        import {createStore, applyMiddleware, compose} from 'redux'    
+        import rootReducer from './store/reducers/rootReducer'       
+        import {Provider} from 'react-redux'           
+        import thunk from 'redux-thunk'     
+        import {reduxFirestore, getFirestore} from 'redux-firestore'   
+        import {reactReduxFirebase, getFirebase} from 'react-redux-firebase'  
+        import fbConfig from './config/fbConfig'      
+         
+        const store = createStore(
+            rootReducer, 
+            compose (
+                applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
+                reduxFirestore(fbConfig),           
+                //reactReduxFirebase(fbConfig)   
+                reactReduxFirebase(fbConfig, {attachAuthReady: true})                            //01. Allows access to store
+            )
+        );
+        
+        //store.firebaseAuthIsReady                                                                               //02. Waits for firebase to be ready
+        //store.firebaseAuthIsReady.then(() => {})                                                         //03. Once firebase is ready, then do something
+        store.firebaseAuthIsReady.then(() => {
+            ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));    //04. Then render to DOM
+            registerServiceWorker();
+        }) 
+        
+        //ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));  
+        //registerServiceWorker();
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+25. Route Guarding
 
 
 
