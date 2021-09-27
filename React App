@@ -2225,7 +2225,201 @@ CONTENTS
         //registerServiceWorker();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-25. Route Guarding
+25. Route Guarding Part 1 (RouteGuard)
+
+    Protecting certain route or certain pages
+    Example, hiding pages, URLs or details from users who are not signed in
+    If not signed in, page will redirect users to the log in page
+    mapStateToProps needed for redirecting the page to signIn page
+    
+    App Structure
+        src/components/auth
+            SignIn.js                    (Topic 21)
+            SignOut.js                   (Topic 7)
+        src/components/dashboard
+            Dashboard.js                 (Topic 17)
+            Notifications.js
+        src/components/layout
+            Navbar.js                    (Topic 23)
+            SignedInLinks.js             (Topic 22)
+            SignedOutLinks.js            (Topic 3)
+        src/components/project
+            CreateProject.js             (Topic 12)
+            ProjectDetails.js            (Topic 18)
+            ProjectList.js               (Topic 18)
+            ProjectSummary.js            (Topic 11)
+        src 
+            App.js                       (Topic 7)
+            index.css                    (Topic 9)
+            index.js                     (Topic 24)
+        src/store/reducers
+            authReducer.js               (Topic 22)
+            projectReducer.js            (Topic 16)
+            rootReducer.js               (Topic 17)
+        src/store/actions
+            projectActions.js            (Topic 16)
+            authActions.js               (Topic 22)
+        src/config      
+            fbConfig.js                  (Topic 13)
+
+    Dashboard.js
+        import React, {Component} from 'react'
+        import Notifications from './Notifications'
+        import ProjectList from '../project/ProjectList'   
+        import {connect} from 'react-redux'               
+        import {firestoreConnect} from 'react-redux-firebase' 
+        import {compose} from 'redux'
+        import {Redirect} from 'react-router-dom'                        //03. Import redirect "<>"
+        
+        class Dashboard extends Component {
+            render() {
+                //const {projects} = this.props;           
+                const {projects, auth} = this.props;                     //02. Grab "auth" for destructuring
+                //if (!auth.uid) return <>                               //04. If uid does not exist (not signed in), then redirect "<>"
+                if (!auth.uid) return <Redirect to='/signIn' />          //05. Redirect to signIn page
+                return(
+                    <div className="dashboard container">
+                        <div className="row">
+                            <div className="col s12 m6">
+                                <ProjectList projects={projects} />   
+                            </div>
+                            
+                            <div className="col s12 m5 offset-m1">
+                                <Notifications />
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        }
+        
+        const mapStateToProps = (state) => {
+            return {
+                projects: state.firestore.ordered.projects    
+                auth: state.firebase.auth                                    //01. Check whether user is signed in or not
+            }
+        }     
+        
+        export default compose(
+            connect(mapStateToProps),
+            firestoreConnect([
+                {collection: 'projects'}     
+            ])
+        )(Dashboard) 
+
+    CreateProject.js                                                      
+        import React, {Component} from 'react'    
+        import {connect} from 'react-redux'                            
+        import {createProject} from '../../store/actions/projectActions'     
+        import {Redirect} from 'react-router-dom'                           //11. Import redirect "<>" as per point 03
+        
+        class CreateProject extends Component {
+            state = {
+                title:'',              
+                content:''
+            }
+            handleChange = (e) => {   
+                this.setState({                 
+                    [e.target.id]: e.target.value  
+                })
+            }
+            handleSubmit = (e) => {    
+                e.preventDefault();       
+                this.props.createProject(this.state)     
+            }
+            const {auth} = this.props;                                      //09. Grab "auth" for destructuring as per point 02
+            if (!auth.uid) return <Redirect to='/signIn' />                 //10. Redirect to signIn page as per point 05
+            render() {
+                return(
+                    <div className="container">
+                        <form onSubmit={this.handleSubmit} className="white">   
+                            <h5 className="grey-text text-darken-3">Create new project</h5>
+                            <div className="input-field">
+                                <label htmlFor="title">Title</label>
+                                <input type="text" id="title" onChange={this.handleChange} /> 
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="content">Project Content</label>
+                                <textarea id="content" className="materialize-textare" onChange={this.handleChange}></textarea>   
+                            </div>
+                            <div className="input-field">
+                                <button className="btn pink light-1 z-depth-0">Create</button>
+                            </div>
+                        </form>
+                    </div>
+                )
+            }
+        }
+        
+        //const mapStateToProps = (state) => {return{}}                      //06. Create mapStateToProps for redirect
+        const mapStateToProps = (state) => {
+            return{
+                auth: state.firebase.auth                                    //07. Add auth as per point 01
+            }
+        }
+        
+        const mapDispatchToProps = (dispatch) => {
+            return {
+                createProject: (project) => dispatch(createProject(project))  
+            }
+        }
+        
+        //export default connect(null, mapDispatchToProps)(CreateProject)   
+        export default connect(mapStateToProps, mapDispatchToProps)(CreateProject)         //08. Add mapStateToProps to connect
+
+    ProjectDetails.js
+        import React from 'react'
+        import {connect} from 'react-redux'                                    
+        import {firestoreConnect} from 'react-redux-firebase'         
+        import {compose} from 'redux'                  
+        import {Redirect} from 'react-router-dom'                             //12. Import redirect "<>" as per point 03
+        
+        const ProjectDetails = (props) => {      
+            //const {project} = props;     
+            //const {auth} = this.props;                                      //13. Grab "auth" for destructuring as per point 02
+            const {project, auth} = props;                                    //14. Sing line 13 is similar to project prop, the 2 will be combined
+            if (!auth.uid) return <Redirect to='/signIn' />                   //15. Redirect to signIn page as per point 05            
+            if (project) {
+                return(                          
+                    <div className="container section project-details">
+                        <div className="card z-depth-0">         
+                            <div className="card-content">
+                                <span className"card-title">{project.title}</span>
+                                <p>{project.content}</p>
+                            </div>
+                            <div className="card-action gret lighten-4 grey-text">
+                                <div>Posted by {project.authorFirstName} {project.authorLastName}</div>      
+                                <div>Today's date</div>
+                            </div>
+                        </div>
+                    </div>
+                )    
+            } else {
+                return(
+                    <div className="container center">
+                        <p>Loading project...</p>     
+                    </div>
+                )
+            }
+        }
+
+        const mapStateToProps = (state, ownProps) => {     
+            const id = ownProps.match.params.id;                
+            const projects = state.firestore.data.projects;      
+            const project = projects ? projects[id] : null        
+            return{
+                project: project,
+                auth: state.firebase.auth                                       //16. Add auth as per point 01
+            }
+        }  
+        
+        export default compose(
+            connect(mapStateToProps),
+            firestoreConnect([
+                {collection: 'projects'}       
+            ]) 
+        )(ProjectDetails) 
+
 
 
 
