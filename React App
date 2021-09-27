@@ -27,9 +27,10 @@ CONTENTS
 22. Logging users out
 23. Tracking Authentication status
 24. Waiting for Auth Ready
-25. Route Guarding
-26. User Sign up (Firebase Auth)
-27. User Profile Data
+25. Route Guarding Part 1 (RouteGuard)
+26. Route Guarding Part 2 (RouteGuard)
+27. User Sign up (Firebase Auth)
+28. User Profile Data
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Planning the App
@@ -2231,6 +2232,7 @@ CONTENTS
     Example, hiding pages, URLs or details from users who are not signed in
     If not signed in, page will redirect users to the log in page
     mapStateToProps needed for redirecting the page to signIn page
+    Read 16 points
     
     App Structure
         src/components/auth
@@ -2421,9 +2423,41 @@ CONTENTS
         )(ProjectDetails) 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+26. Route Guarding Part 2 (RouteGuard)
 
+    If logged in, dont redirect to signIn page and signup page
+    The rest is similar to Topic 25    
 
-
+    App Structure
+        src/components/auth
+            SignIn.js                    (Topic 21)
+            SignOut.js                   (Topic 7)
+        src/components/dashboard
+            Dashboard.js                 (Topic 25)
+            Notifications.js
+        src/components/layout
+            Navbar.js                    (Topic 23)
+            SignedInLinks.js             (Topic 22)
+            SignedOutLinks.js            (Topic 3)
+        src/components/project
+            CreateProject.js             (Topic 25)
+            ProjectDetails.js            (Topic 25)
+            ProjectList.js               (Topic 18)
+            ProjectSummary.js            (Topic 11)
+        src 
+            App.js                       (Topic 7)
+            index.css                    (Topic 9)
+            index.js                     (Topic 24)
+        src/store/reducers
+            authReducer.js               (Topic 22)
+            projectReducer.js            (Topic 16)
+            rootReducer.js               (Topic 17)
+        src/store/actions
+            projectActions.js            (Topic 16)
+            authActions.js               (Topic 22)
+        src/config      
+            fbConfig.js                  (Topic 13)
 
 
 
