@@ -1654,7 +1654,7 @@ CONTENTS
             const projects = state.firestore.data.projects;                //15. Store data into "projects" that were received by the state from the firestore
             const project = projects ? projects[id] : null                 //16. Get individual project. If no project in firebase, then return null
             return{
-                //project : project                                        //17. Add project
+                project: project                                        //17. Add project
             }
         }  
         
