@@ -2432,7 +2432,7 @@ CONTENTS
     App Structure
         src/components/auth
             SignIn.js                    (Topic 21)
-            SignOut.js                   (Topic 7)
+            SignUp.js                    (Topic 7)
         src/components/dashboard
             Dashboard.js                 (Topic 25)
             Notifications.js
@@ -2458,6 +2458,137 @@ CONTENTS
             authActions.js               (Topic 22)
         src/config      
             fbConfig.js                  (Topic 13)
+
+    SignIn.js                                                      
+        import React, {Component} from 'react'     
+        import {connect} from 'react-redux'                                    
+        import {signIn} from '../../store/actions/authActions'       
+        import {Redirect} from 'react-router-dom'                     //01. Import Redirect
+        
+        class SignIn extends Component {
+            state = {
+                email:'',                    
+                password:''
+            }
+            handleChange = (e) => {               
+                this.setState({                        
+                    [e.target.id]: e.target.value        
+                })
+            }
+            handleSubmit = (e) => {    
+                e.preventDefault();          
+                this.props.signIn(this.state);      
+            }
+            render() {
+                //const {authError} = this.props;                                  
+                const {authError, auth} = this.props;                        //02. Add auth
+                //if (!auth.uid) return <Redirect to='/' />                  //03. Add redirect function
+                if (auth.uid) return <Redirect to='/' />                     //04. Remove "Not"
+                return(
+                    <div className="container">
+                        <form onSubmit={this.handleSubmit} className="white">  
+                            <h5 className="grey-text text-darken-3">Sign In</h5>
+                            <div className="input-field">
+                                <label htmlFor="email">Email</label>
+                                <input type="email" id="email" onChange={this.handleChange} />  
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="password">Password</label>
+                                <input type="password" id="password" onChange={this.handleChange} /> 
+                            </div>
+                            <div className="input-field">
+                                <button className="btn pink light-1 z-depth-0">Login</button>
+                                <div className="red-text center">
+                                    {authError ? <p>{authError}</p> : null}        
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                )
+            }
+        }
+        
+        const mapStateToProps = (state) => {
+            return{
+                authError: state.auth.authError,
+                auth: state.firebase.auth                             //05. Add authentication state
+            }
+        }
+        
+        const mapDispatchToProps = (dispatch) => {
+            return{
+                signIn: (creds) => dispatch(signIn(creds))      
+            }
+        } 
+        
+        export default connect(mapStateToProps, mapDispatchToProps)(SignIn)  
+
+    SignUp.js                                                             
+        import React, {Component} from 'react'    
+        import {Redirect} from 'react-router-dom'                     //06. Import Redirect
+        import {connect} from 'react-redux'                           //12. Import connect wrapper
+        
+        class SignUp extends Component {
+            state = {
+                email: '',             
+                password: '',
+                firstName: '',                                                               
+                lastName: ''
+            }
+            handleChange = (e) => {  
+                this.setState({                 
+                    [e.target.id]: e.target.value     
+                })
+            }
+            handleSubmit = (e) => {    
+                e.preventDefault();     
+                console.log(this.state);  
+            }
+            render() {
+                const {auth} = this.props;                                    //07. Add auth
+                if (auth.uid) return <Redirect to='/' />                      //08. Add redirect function
+                return(
+                    <div className="container">
+                        <form onSubmit={this.handleSubmit} className="white">  
+                            <h5 className="grey-text text-darken-3">Sign Up</h5>
+                            <div className="input-field">
+                                <label htmlFor="email">Email</label>
+                                <input type="email" id="email" onChange={this.handleChange} />  
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="password">Password</label>
+                                <input type="password" id="password" onChange={this.handleChange} /> 
+                            </div>
+                            <div className="input-field">                                                          
+                                <label htmlFor="firstName">First Name</label>
+                                <input type="text" id="firstName" onChange={this.handleChange} /> 
+                            </div>   
+                            <div className="input-field">                                                           
+                                <label htmlFor="lastName">Last Name</label>
+                                <input type="text" id="lastName" onChange={this.handleChange} /> 
+                            </div>                            
+                            <div className="input-field">
+                                <button className="btn pink light-1 z-depth-0">Sign Up</button>
+                            </div>
+                        </form>
+                    </div>
+                )
+            }
+        }
+        
+        const mapStateToProps = (state) => {                          //09. Add mapStateToProps
+            return{
+                auth: state.firebase.auth                             //10. Add authentication state
+            }
+        }
+        
+        //export default SignUp
+        export default connect(mapStateToProps)(SignUp)               //11. Wrap SignUp
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 
