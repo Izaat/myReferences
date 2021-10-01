@@ -685,6 +685,39 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 15. Applying a low-pass filter to an audio stream
 
+    Listen to soundwave at different frequencies
+        x = linspace(0,50*pi,10000);
+        y = sin(x);
+        sound(y,44100)      //Listen at common sampling frequency
+        sound(y,22050)      //Listen at lower pitch
+
+    Create low pass filter (Blocks out higher sets of frequencies)
+    Blocks 2.5kHz and above, Gradient at 1kHz to 2.5kHz, Pass at 10Hz to 1kHz, No sweep
+    Link: https://www.mathworks.com/help/matlab/ref/filter.html
+    
+    Apply High Pass filter
+        b = ones(40,1)/40;                                  //Create matrix, See topic 3, Matrix of ones
+        [d,fs] = audioread('helloworld.wav');               //Load data
+        dlp = filter(b, 1, d);                              //filter(denominator, numerator, data)
+        sound(d,fs)                                         //Play original sound 'helloworld.wav'
+        sound(dlp,fs)                                       //Play sound with low pass filter (Muffled, where high frequency is not being played)
+
+    Plotting 
+        xaxis = 1:84480;
+        plot(xaxis,d,xaxis,dlp)                             //Note that the waveform with low pass filter is smoother without sharp edges
+
+    Plot to frequency domain
+        subplot(2,1,1);
+        plot(real(fft(d)))                                  //Original
+        subplot(2,1,2);
+        plot(real(fft(dlp)))                                //Filtered
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+16. Saving images (resolution sampling)
+
+
+
 
 
 
