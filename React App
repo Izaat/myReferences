@@ -2587,6 +2587,231 @@ CONTENTS
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+27. User Sign up (Firebase Auth)
+    
+    Read 29 points
+    Enabling Sign up through firebase
+    Currently, sign up data is retrieved but has no function
+    Now is to make request to firebase and create new user with the new information
+    To do that, an action creator should be created
+
+    App Structure
+        src/components/auth
+            SignIn.js                    (Topic 26)
+            SignUp.js                    (Topic 26)
+        src/components/dashboard
+            Dashboard.js                 (Topic 25)
+            Notifications.js
+        src/components/layout
+            Navbar.js                    (Topic 23)
+            SignedInLinks.js             (Topic 22)
+            SignedOutLinks.js            (Topic 3)
+        src/components/project
+            CreateProject.js             (Topic 25)
+            ProjectDetails.js            (Topic 25)
+            ProjectList.js               (Topic 18)
+            ProjectSummary.js            (Topic 11)
+        src 
+            App.js                       (Topic 7)
+            index.css                    (Topic 9)
+            index.js                     (Topic 24)
+        src/store/reducers
+            authReducer.js               (Topic 22)
+            projectReducer.js            (Topic 16)
+            rootReducer.js               (Topic 17)
+        src/store/actions
+            projectActions.js            (Topic 16)
+            authActions.js               (Topic 22)
+        src/config      
+            fbConfig.js                  (Topic 13)
+
+    authActions.js
+        export const signIn = (credentials) => {
+            return (dispatch, getState, {getFirebase}) => {
+                const firebase = getFirebase();             
+                firebase.auth().signInWithEmailAndPassword(
+                    credentials.email,                 
+                    credentials.password
+                ).then(() => {
+                    dispatch({type: 'LOGIN_SUCCESS'});
+                }).catch((err) => {
+                    dispatch({type: 'LOGIN_ERROR', err});  
+                }) 
+            }
+        }
+
+        export const signOut = () => {
+            return (dispatch, getState, {getFirebase}) => {
+                const firebase = getFirebase();              
+                firebase.auth().signOut() .then(() => {
+                    dispatch({type: 'SIGNOUT_SUCCESS'});      
+                });
+            }
+        }
+
+        //export const signUp = (newUser) => {}                                       //01. Create new user function
+        export const signUp = (newUser) => {
+            //return (dispatch, getState, {getFirebase, getFirestore}) => {}          //02. Firebase stores Email and Firestore UID. Firestore stores firstName and lastName
+            return (dispatch, getState, {getFirebase, getFirestore}) => {
+                const firebase = getFirebase();                                       //03. Refer to Topic 16
+                const firestore = getFirestore();
+                
+                //firebase.auth().createUserWithEmailAndPassword()                    //04. Refer to Topic 21
+                firebase.auth().createUserWithEmailAndPassword(
+                    newUser.email,
+                    newUser.password
+                //)
+                //).then(() => {})                                                     //05. Asynchronous so need .then method
+                //).then((resp) => {})                                                 //06. Add response and this will contain information of new user
+                ).then((resp) => {
+                    //resp.user                                                        //07. Information will be stored in resp.user which creates the uid
+                    //return firestore.collection('users').doc()                       //08. Instead of using .add() which creates uid again, .doc() is used in reference to uid created by "resp"
+                    //return firestore.collection('users').doc(resp.user.uid)          //09. This points towards the generated uid created by resp
+                    //return firestore.collection('users').doc(resp.user.uid).set({})  //10. This will set the document
+                    return firestore.collection('users').doc(resp.user.uid).set({
+                        firstName: newUser.firstName,                                  //11. This will refer to the "newUser"
+                        lastName: newUser.lastName,
+                        initials: newUser.firstName[0] + newUser.lastName[0]           //12. This will create the initials using the first letters (index0) and then concatenate them
+                    })
+                //})
+                //}).then(() => {})                                                    //13. Another "then" method 
+                }).then(() => {
+                    dispatch({type: 'SIGNUP_SUCCESS'})
+                //}) 
+                //}).catch(err)                                                         //14. If the .then(resp) fails, then catch the error
+                //}).catch(err => {})                                                   //15.  Move error to an object
+                }).catch(err => {
+                    dispatch({type: 'SIGNUP_ERROR', err})                               //16. Dispatch error as type called SIGNUP_ERROR
+                })
+            }
+        }
+
+    authReducer.js
+        const initState = {
+            authError: null           
+        }
+        
+        const authReducer = (state = initState, action) => {
+            switch(action.type){
+                case 'LOGIN_ERROR':
+                    return {
+                        ...state,
+                        authError: 'Login failed'    
+                    } 
+                case 'LOGIN_SUCCESS':
+                    return {          
+                        ...state,
+                        authError: null
+                    }
+                case 'SIGNOUT_SUCCESS':     
+                    console.log('signout success');       
+                    return state;                                      
+                case 'SIGNUP_SUCCESS':                                              //17. Add case for signup
+                    console.log('signup success');   
+                    return{
+                        ...state,
+                        authError: null                                             //18. If no error then null
+                    }
+                case 'SIGNUP_ERROR':                                                //19. Add case for error
+                    console.log('signup error');   
+                    return{
+                        ...state,
+                        authError: action.err.message                               //20. Attach error message ans store into authError
+                    }                    
+                    
+                default:                  
+                    return state;
+            }
+        }
+        export default authReducer
+        
+    SignUp.js                                                             
+        import React, {Component} from 'react'    
+        import {Redirect} from 'react-router-dom'                    
+        import {connect} from 'react-redux'                            
+        import {signUp} from '../../store/actions/authActions'                       //22. Import signUp from authActions
+        
+        class SignUp extends Component {
+            state = {
+                email: '',             
+                password: '',
+                firstName: '',                                                               
+                lastName: ''
+            }
+            handleChange = (e) => {  
+                this.setState({                 
+                    [e.target.id]: e.target.value     
+                })
+            }
+            handleSubmit = (e) => {    
+                e.preventDefault();     
+                //console.log(this.state);                                            //21. No longer in use
+                this.props.signUp(this.state)                                         //26. Add signUp props that has attachment of this.state
+            }
+            render() {
+                //const {auth} = this.props;                                        
+                const {auth, authError} = this.props;                                 //28. Add authError
+                if (auth.uid) return <Redirect to='/' />              
+                return(
+                    <div className="container">
+                        <form onSubmit={this.handleSubmit} className="white">  
+                            <h5 className="grey-text text-darken-3">Sign Up</h5>
+                            <div className="input-field">
+                                <label htmlFor="email">Email</label>
+                                <input type="email" id="email" onChange={this.handleChange} />  
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="password">Password</label>
+                                <input type="password" id="password" onChange={this.handleChange} /> 
+                            </div>
+                            <div className="input-field">                                                          
+                                <label htmlFor="firstName">First Name</label>
+                                <input type="text" id="firstName" onChange={this.handleChange} /> 
+                            </div>   
+                            <div className="input-field">                                                           
+                                <label htmlFor="lastName">Last Name</label>
+                                <input type="text" id="lastName" onChange={this.handleChange} /> 
+                            </div>                            
+                            <div className="input-field">                                                           //29. Add JSX for authError
+                                <button className="btn pink lighten-1 z-depth-0">Sign up</button>
+                                <div className="red-text center">
+                                    {authError ? <p>{authError}</p> : null}
+                                </div>
+                            </div>   
+                            <div className="input-field">
+                                <button className="btn pink light-1 z-depth-0">Sign Up</button>
+                            </div>
+                        </form>
+                    </div>
+                )
+            }
+        }
+        
+        const mapStateToProps = (state) => {                        
+            return{
+                auth: state.firebase.auth                                
+                authError: state.auth.authError                                   //27. Add error as props
+            }
+        }
+        
+        //const mapDispatchToProps = (dispatch) => {}                             //22. Add mapDispatchToProps
+        const mapDispatchToProps = () => {
+            return {
+                //signUp: (newUser) => dispatch(signUp(newUser))                  //23. "signUp:" will take in "(newUser)" and dispatch the imported "signUp()" which has attachment of "newUser"
+                signUp: (newUser) => dispatch(signUp(newUser))                    //24. signUp function in authActions.js will recieve the data at (newUser)
+            }
+        } 
+        
+        //export default connect(mapStateToProps)(SignUp)            
+        export default connect(mapStateToProps, mapDispatchToProps)(SignUp)      //25. Add mapDispatchToProps
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+28. User Profile Data
+
+
+
 
 
 
