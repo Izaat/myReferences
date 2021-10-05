@@ -2809,6 +2809,138 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 28. User Profile Data
+    
+    Ideally, when a user is logged into the app, the lastName, firstName, etc can be seen via console 
+    Currently, all the elements are missing from the console
+    Check state [Console > {auth...} > firebase > auth: > apiKey, appName, etc]
+    These informations can be retrieved from firestore
+    To do that, sync user to firestore state so it can be used in app's components
+    Check another state [Console > {auth...} > firebase > profile: > isEmpty, isLoaded], therefore no profile data in the app's state
+    Firebase reducer created in the app can automatically sync the profile element above to the firestore
+    
+    App Structure
+        src/components/auth
+            SignIn.js                    (Topic 26)
+            SignUp.js                    (Topic 27)
+        src/components/dashboard
+            Dashboard.js                 (Topic 25)
+            Notifications.js
+        src/components/layout
+            Navbar.js                    (Topic 23)
+            SignedInLinks.js             (Topic 22)
+            SignedOutLinks.js            (Topic 3)
+        src/components/project
+            CreateProject.js             (Topic 25)
+            ProjectDetails.js            (Topic 25)
+            ProjectList.js               (Topic 18)
+            ProjectSummary.js            (Topic 11)
+        src 
+            App.js                       (Topic 7)
+            index.css                    (Topic 9)
+            index.js                     (Topic 24)
+        src/store/reducers
+            authReducer.js               (Topic 27)
+            projectReducer.js            (Topic 16)
+            rootReducer.js               (Topic 17)
+        src/store/actions
+            projectActions.js            (Topic 16)
+            authActions.js               (Topic 27)
+        src/config      
+            fbConfig.js                  (Topic 13)
+
+    Navbar.js
+        import React from 'react'
+        import {Link} from 'react-router-dom'
+        import SignedInLinks from './SignedInLinks'
+        import SignedOutLinks from './SignedOutLinks'
+        import {connect} from 'react-redux'    
+        
+        const Navbar = (props) => {        
+            //const {auth} = props;                    
+            const {auth, profile} = props;                                      //05. Enabling the destructuring of profile data
+            //console.log(auth);                                       
+            //const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;         
+            const links = auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />;  //06. Profile is destructured, the data can be used for the app
+            return (
+                <nav className="nav-wrapper grey darken-3">
+                    <div className="container">
+                        <Link to='/' className="brand-logo">React App</Link>
+                        {links}
+                    </div>
+                </nav>
+            )
+        }
+        
+        const mapStateToProps = (state) => {           
+            //console.log(state);                                               //01. Check state in console
+            return {
+                auth: state.firebase.auth        
+                profile: state.firebase.profile                                 //04. Now profile data appears in console and therefore data can be used
+            }
+        }  
+        
+        export default connect(mapStateToProps)(Navbar)   
+
+    index.js
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import './index.css';
+        import App from './App';
+        import registerServiceWorker from './registerServiceWorker';   
+        import {createStore, applyMiddleware, compose} from 'redux'    
+        import rootReducer from './store/reducers/rootReducer'       
+        import {Provider} from 'react-redux'           
+        import thunk from 'redux-thunk'     
+        import {reduxFirestore, getFirestore} from 'redux-firestore'   
+        import {reactReduxFirebase, getFirebase} from 'react-redux-firebase'  
+        import fbConfig from './config/fbConfig'      
+         
+        const store = createStore(
+            rootReducer, 
+            compose (
+                applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
+                reduxFirestore(fbConfig),           
+                //reactReduxFirebase(fbConfig, {attachAuthReady: true})       
+                //reactReduxFirebase(fbConfig, {useFirestoreForProfile: true, attachAuthReady: true})                          //02. Add useFirestoreForProfile and set to true
+                reactReduxFirebase(fbConfig, {useFirestoreForProfile: true, userProfile: 'users', attachAuthReady: true})      //03. Add userProfile and set path to 'users' to sync with firestore
+            )
+        );
+        
+        store.firebaseAuthIsReady.then(() => {
+            ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));   
+            registerServiceWorker();
+        }) 
+        
+    SignedInLinks.js
+        import React from 'react'
+        import {Link} from 'react-router-dom'
+        import {connect} from 'react-redux'                                     
+        import {signOut} from '../../store/actions/authActions'    
+        
+        const SignedInLinks = (props) => {              
+            return (
+                <ul className="right">
+                    <li><NavLink to ='/'>New Project</NavLink></li>
+                    <li><a onClick={props.signOut}>Log Out</a></li>                
+                    //<li><NavLink to ='/' className='btn btn-floating pink lighten-1'>Icon</NavLink></li>     //07. Output an object instead of "Icon" text
+                    <li><NavLink to ='/' className='btn btn-floating pink lighten-1'>
+                        {props.profile.initials}                                                                                                                                   //08. Initials of signed in profile being used
+                    </NavLink></li>
+                </ul>
+            )
+        }
+        
+        const mapDispatchToProps = (dispatch) => {
+            return {
+                signOut: () => dispatch(signOut())                  
+            }
+        }
+        
+        export default connect(null, mapDispatchToProps)(SignedInLinks)   
+        
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+29. Adding Projects
+
 
 
 
