@@ -716,27 +716,28 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 16. Saving images (resolution sampling)
 
+    Sound is a one dimensional function - Amplitude
+    Sound is plotted amplitude against time
+    Images are 2 dimensional functions
+    Image is plotted against resolution
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    Think of image "A" with coordinates "i" and "j"
+    1 parameter = greyscale
+    3 parameters = rgb colour
+    Values will be 0 to 255, therefore 256
+    RGB can gold up to 256*3 = 16,777,216
+    For 500 by 500 rgb image, then 500*500*3        //Matrix being used for representing RGB image aka image bitmap
+    uint8:
+        unsigned integer 8 bits
+        8bits = 2^8 = 256
+    
+    Open an image:
+        A = imread('example.bmp');
+        size(A)                                     //512, 512, 3
+        imshow(A)                                   //This plots the image
+        
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+17. Image manipulation (Flip images, etc)
 
 
 
