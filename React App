@@ -32,7 +32,7 @@ CONTENTS
 27. User Sign up (Firebase Auth)
 28. User Profile Data
 29. Adding Projects (Revisited)
-30. Formatting Dates with Moment
+30. Formatting Dates with Moment       **npm install moment
 31. Firestore Security Rules
 32. Cloud Functions Intro and Setup
 33. A Simple Cloud Function
