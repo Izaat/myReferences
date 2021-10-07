@@ -2950,9 +2950,37 @@ CONTENTS
         export default connect(null, mapDispatchToProps)(SignedInLinks)   
         
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-29. Adding Projects
+29. Adding Projects (Revisited)
 
-
+    App Structure
+        src/components/auth
+            SignIn.js                    (Topic 26)
+            SignUp.js                    (Topic 27)
+        src/components/dashboard
+            Dashboard.js                 (Topic 25)
+            Notifications.js
+        src/components/layout
+            Navbar.js                    (Topic 28)
+            SignedInLinks.js             (Topic 28)
+            SignedOutLinks.js            (Topic 3)
+        src/components/project
+            CreateProject.js             (Topic 25)
+            ProjectDetails.js            (Topic 25)
+            ProjectList.js               (Topic 18)
+            ProjectSummary.js            (Topic 11)
+        src 
+            App.js                       (Topic 7)
+            index.css                    (Topic 9)
+            index.js                     (Topic 28)
+        src/store/reducers
+            authReducer.js               (Topic 27)
+            projectReducer.js            (Topic 16)
+            rootReducer.js               (Topic 17)
+        src/store/actions
+            projectActions.js            (Topic 16)
+            authActions.js               (Topic 27)
+        src/config      
+            fbConfig.js                  (Topic 13)
 
 
 
