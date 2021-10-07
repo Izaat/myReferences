@@ -2952,6 +2952,10 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 29. Adding Projects (Revisited)
 
+    Refer to projectActions.js from Topic 12 to Topic 16
+    Currently, projectActions.js is running on predetermined set of properties (dummy data). 
+    Here, the file will retrieve properties from firestore database
+
     App Structure
         src/components/auth
             SignIn.js                    (Topic 26)
@@ -2982,7 +2986,115 @@ CONTENTS
         src/config      
             fbConfig.js                  (Topic 13)
 
+    projectActions.js
+        export const createProject = (project) => {
+            return (dispatch, getState, {getFirebase, getFirestore}) => {  
+                const firestore = getFirestore();    
+                //const profile = getState()                     //01. Creates a profile and return getState()
+                const profile = getState().firebase.profile;     //02. Retrieve properties that are already retrieved from firestore
+                const authorId = getState().firebase.auth.uid;   //03. Retrieve author's authentication uid from the state
+                firestore.collection('projects').add({
+                    ...project,                                                        
+                    //authorFirstName: 'justFirstName',     
+                    authorFirstName: profile.firstName,          //04. Retrieve the first name from state     
+                    //authorLastName: 'justLastName',
+                    authorLastName: profile.lastName,            //05. Retrieve the last name from state   
+                    //authorId: 12345,
+                    authorId: authorId,                          //06. Retrieve the authorId
+                    createdAt: new Date()                                       
+                }).then(() => {                                                                 
+                    dispatch({type: 'CREATE_PROJECT', project});            
+                }).catch((err)=>{
+                    dispatch({type: 'CREATE_PROJECT_ERROR', err});   
+                })   
+            }
+        };
 
+    ProjectSummary.js                 
+        import React from 'react'
+
+        const ProjectSummary = ({project}) => {                                
+            return (  
+                <div className="card z-depth-0 project-summary">
+                    <div className="card-content grey-text text-darken-3">
+                        <span className="card-title">{project.title}</span>    
+                        //<p>Posted by ...</p>                                                     //07. Random name will show up in main page and not the actual author
+                        <p>Posted by {project.authorFirstName} {project.authorLastName}</p>        //08. In firbase dashboard, "authorLastName" is used, therefore, "project.authorLastName" for data retrieval
+                        <p className="grey-text">Date</p>
+                    </div>
+                </div>
+            )
+        }
+        export default ProjectSummary
+
+    CreateProject.js                                                      
+        import React, {Component} from 'react'    
+        import {connect} from 'react-redux'                            
+        import {createProject} from '../../store/actions/projectActions'     
+        import {Redirect} from 'react-router-dom'                                          
+        
+        class CreateProject extends Component {
+            state = {
+                title:'',              
+                content:''
+            }
+            handleChange = (e) => {   
+                this.setState({                 
+                    [e.target.id]: e.target.value  
+                })
+            }
+            handleSubmit = (e) => {    
+                e.preventDefault();       
+                this.props.createProject(this.state)                  //09. After creating the project, the user should be rerouted to the homepage automatically
+                this.props.history.push('/');                         //10. This will reroute the user back to homepage after successfully created the project card
+            }
+            
+            //const {auth} = this.props;                                                                        
+            //if (!auth.uid) return <Redirect to='/signIn' />                                   
+            
+            render() {
+            
+                const {auth} = this.props;                                                                        
+                if (!auth.uid) return <Redirect to='/signIn' />  
+            
+                return(
+                    <div className="container">
+                        <form onSubmit={this.handleSubmit} className="white">   
+                            <h5 className="grey-text text-darken-3">Create new project</h5>
+                            <div className="input-field">
+                                <label htmlFor="title">Title</label>
+                                <input type="text" id="title" onChange={this.handleChange} /> 
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="content">Project Content</label>
+                                <textarea id="content" className="materialize-textare" onChange={this.handleChange}></textarea>   
+                            </div>
+                            <div className="input-field">
+                                <button className="btn pink light-1 z-depth-0">Create</button>
+                            </div>
+                        </form>
+                    </div>
+                )
+            }
+        }
+        
+        const mapStateToProps = (state) => {
+            return{
+                auth: state.firebase.auth                                 
+            }
+        }
+        
+        const mapDispatchToProps = (dispatch) => {
+            return {
+                createProject: (project) => dispatch(createProject(project))  
+            }
+        }
+        
+        export default connect(mapStateToProps, mapDispatchToProps)(CreateProject)        
+        
+        
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+30. Formatting Dates with Moment
 
 
 
