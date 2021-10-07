@@ -31,7 +31,17 @@ CONTENTS
 26. Route Guarding Part 2 (RouteGuard)
 27. User Sign up (Firebase Auth)
 28. User Profile Data
-29. Adding Projects
+29. Adding Projects (Revisited)
+30. Formatting Dates with Moment
+31. Firestore Security Rules
+32. Cloud Functions Intro and Setup
+33. A Simple Cloud Function
+34. Notification Component
+35. Cloud Function Firestore Triggers
+36. Cloud Function Auth Trigger
+37. Showing Notifications
+38. Ordering Firestore Data
+39. Deploying to Firebase Hosting
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Planning the App
