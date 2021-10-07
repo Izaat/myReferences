@@ -737,7 +737,33 @@ CONTENTS
         imshow(A)                                   //This plots the image
         
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-17. Image manipulation (Flip images, etc)
+17. Image manipulation (Flip images, RGB)
+
+    Open an image:
+        A = imread('example.bmp');
+        size(A)                                                                 //512, 512, 3
+        imshow(A)                                                          //This plots the image
+
+    Flip Up Down (Vertical Flip)
+        U = flipud(A);                                                      //Flips image upside down
+        imshow(U)
+
+    Flip (Horizontal Flip)
+        V = fliplr(A);                                                      //Flips image horizontal direction
+        imshow(V)
+
+    Flip Horizontally and Vertically
+        UL = flipud(fliplr(A));
+        imshow(UL)
+
+    Show blue channel
+        B = A;
+        B(:,:,1) = 0;                //Meaning: (Select all rows, select all columns, set first channel) = set to 0, Red OFF
+        B(:,:,2) = 0;                //Meaning: (Select all rows, select all columns, set second channel) = set to 0, Green OFF
+        imshow(B)                //Blue channel image
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+18. Convolution (Blurring an image)
 
 
 
