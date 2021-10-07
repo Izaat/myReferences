@@ -3096,6 +3096,119 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 30. Formatting Dates with Moment
 
+    Retrieving timestamp from firebase and output to DOM
+    Use https://momentjs.com for cleaner date format
+    Default method returns very long date and time format
+    Install: ..\projectName> npm install moment
+
+    App Structure
+        src/components/auth
+            SignIn.js                    (Topic 26)
+            SignUp.js                    (Topic 27)
+        src/components/dashboard
+            Dashboard.js                 (Topic 25)
+            Notifications.js
+        src/components/layout
+            Navbar.js                    (Topic 28)
+            SignedInLinks.js             (Topic 28)
+            SignedOutLinks.js            (Topic 3)
+        src/components/project
+            CreateProject.js             (Topic 29)
+            ProjectDetails.js            (Topic 25)
+            ProjectList.js               (Topic 18)
+            ProjectSummary.js            (Topic 29)
+        src 
+            App.js                       (Topic 7)
+            index.css                    (Topic 9)
+            index.js                     (Topic 28)
+        src/store/reducers
+            authReducer.js               (Topic 27)
+            projectReducer.js            (Topic 16)
+            rootReducer.js               (Topic 17)
+        src/store/actions
+            projectActions.js            (Topic 29)
+            authActions.js               (Topic 27)
+        src/config      
+            fbConfig.js                  (Topic 13)
+
+    ProjectSummary.js                 
+        import React from 'react'
+        import moment from 'moment'                                                                     //02. Import moment after installing
+
+        const ProjectSummary = ({project}) => {                                
+            return (  
+                <div className="card z-depth-0 project-summary">
+                    <div className="card-content grey-text text-darken-3">
+                        <span className="card-title">{project.title}</span>    
+                        <p>Posted by {project.authorFirstName} {project.authorLastName}</p> 
+                        //<p className="grey-text">Date</p>
+                        //<p className="grey-text">{project.createdAt.toDate().toString()}</p>          //01. Add timestamp but a long winded format (This method will show error if other firebase project has no timestamp)
+                        //<p className="grey-text">{moment(project.createdAt.toDate())}</p>             //03. This uses the moment function for cleaner date and time format
+                        <p className="grey-text">{moment(project.createdAt.toDate()).calendar}</p>      //04. Deploy moment format .calendar()
+                    </div>
+                </div>
+            )
+        }
+        export default ProjectSummary
+
+
+    ProjectDetails.js
+        import React from 'react'
+        import {connect} from 'react-redux'                                    
+        import {firestoreConnect} from 'react-redux-firebase'         
+        import {compose} from 'redux'                  
+        import {Redirect} from 'react-router-dom'      
+        import moment from 'moment'                                                                     //05. Import moment
+        
+        const ProjectDetails = (props) => {      
+            const {project, auth} = props;                                  
+            if (!auth.uid) return <Redirect to='/signIn' />         
+            if (project) {
+                return(                          
+                    <div className="container section project-details">
+                        <div className="card z-depth-0">         
+                            <div className="card-content">
+                                <span className"card-title">{project.title}</span>
+                                <p>{project.content}</p>
+                            </div>
+                            <div className="card-action gret lighten-4 grey-text">
+                                <div>Posted by {project.authorFirstName} {project.authorLastName}</div>      
+                                //<div>Today's date</div>
+                                <div>{moment(project.createdAt.toDate()).calendar}</div>                //06. Uses moment formatting
+                            </div>
+                        </div>
+                    </div>
+                )    
+            } else {
+                return(
+                    <div className="container center">
+                        <p>Loading project...</p>     
+                    </div>
+                )
+            }
+        }
+
+        const mapStateToProps = (state, ownProps) => {     
+            const id = ownProps.match.params.id;                
+            const projects = state.firestore.data.projects;      
+            const project = projects ? projects[id] : null        
+            return{
+                project: project,
+                auth: state.firebase.auth      
+            }
+        }  
+        
+        export default compose(
+            connect(mapStateToProps),
+            firestoreConnect([
+                {collection: 'projects'}       
+            ]) 
+        )(ProjectDetails) 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+31. Firestore Security Rules
+
+
 
 
 
