@@ -3208,20 +3208,86 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 31. Firestore Security Rules
 
+    Locking down the states and databases from access by other users
+    Documentation:
+        https://firebase.google.com/docs/firestore/security/rules-structure
+    
+    Firebase Security Rules:
+        Firebase Dashboard > Project Overview > Develop > Database > Rules Tab
+        A script will be shown
+        
+    Security Rules Scripting:
+        Done by matching certain paths in the database and declaring rules for the paths
+        
+    Script (Unlocked state for testing purpose):
+        service cloud.firestore {                                  //Scopes the rules for firestore database only
+            match /databases/{database}/documents {                //Rules should match the firestore database in the app [Currently the app contains 1 database]
+                match /{document=***} {                            //The specific document in the database
+                    allow read, write;                             //The rules states that anyone is allowed to read or write
+                }
+            }
+        }
+        
+    Simulator:
+        This tool enables developers to simulate requests to different paths within the app database to see who can get access
+        Simulation Type: get OR update OR delete
+        Location: /projects/xHhkHOHjoj89dFED - [Example UID]
+        Authenticated: OFF  //This means that simulating as an unauthenticated user or not logged in
+        Click on RUN            //"Simulated access allowed" means that any user can access the project
 
+    Locking The Project Database:
+        service cloud.firestore {                                        
+            match /databases/{database}/documents {    
+                match /projects/{project} {                          //This disables ALL document to be accessed and use single collection/document instead
+                    allow read, write: if request.auth.uid != null   //Only if the user for the document is granted access (Only if the user is logged in)                                    
+                }
+            }
+        }   
 
+    Testing the Authentication with Simulator:
+        Simulation Type: get OR update OR delete
+        Location: /projects/xHhkHOHjoj89dFED - [Example UID]
+        Authenticated: OFF
+        Click on RUN            //Will show error. But if "Authenticated" is ON, then "Simulated data access allowed" will be displayed
 
+    Locking The User Database:
+        service cloud.firestore {                                        
+            match /databases/{database}/documents {    
+                match /projects/{project} {                                 
+                    allow read, write: if request.auth.uid != null                                
+                }
+                match /users/{userId} {                                //Adds the user Id Path
+                    allow create                                       //Allows anyone to create a database (SignUp)
+                    allow read: if request.auth.uid != null            //Allows anyone to read data of other users
+                    allow write: if request.auth.uid == userId         //Allows the user to edit his/her own profile or database
+                }
+            }
+        }   
 
+    Testing the Authentication with Simulator:
+        Simulation Type: create
+        Location: /users/xHhkHOHjoj89dFED - [Example UID]
+        Authenticated: OFF
+        Click on RUN            //"Simulated data access allowed" will be displayed
+        
+        Simulation Type: get
+        Location: /users/xHhkHOHjoj89dFED - [Example UID]
+        Authenticated: OFF
+        Click on RUN            //Error will be displayed 
+        
+        Simulation Type: update
+        Location: /users/xHhkHOHjoj89dFED - [Example UID]
+        Authenticated: OFF
+        Click on RUN            //Error will be displayed
 
+        Simulation Type: update
+        Location: /users/xHhkHOHjoj89dFED - [Example UID]
+        Authenticated: ON
+        Firebase UID: xHhkHOHjoj89dFED
+        Click on RUN           //"Simulated data access allowed" will be displayed
 
-
-
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+32. Cloud Functions Intro and Setup
 
 
 
