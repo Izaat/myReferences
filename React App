@@ -3289,6 +3289,51 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 32. Cloud Functions Intro and Setup
 
+    |---------------------------------|------------------------------------|
+    | Client/Browser                  | Server/Firebase                    |
+    |---------------------------------|------------------------------------|
+    |                                 |   +--> Firestore db                |
+    |                                 |   |                                |
+    | React App --> Redux ----------> | --+--> Firebase Auth               |
+    |                                 |   |                                |
+    |                                 |   +-->  Cloud Functions            | **
+    |---------------------------------|------------------------------------|
+
+    Setting Up:
+        Firebase Dashboard > Project Overview > Develop > Functions > Dashboard Tab
+            Click on "Get Started"
+            npm install -g firebase-tools         //Install from VSCode
+            firebase login                        //Login to firebase account [From Project Folder]
+            firebase init                         //Initialize from VSCode [From Project Folder]
+                Feature Selection Menu [Spacebar to select and Enter to continue to next step]
+                    ( ) Database:
+                    ( ) Firestore:                //No need to add in since it is already been created in Topic 31
+                    (x) Functions:
+                    (x) Hosting:
+                    ( ) Storage:
+                Project Selectino menu
+                    Select the Project name
+                Programming Language Selection Menu
+                    JavaScript
+                ESLint
+                    Not using ESLint
+                Install npm edepndencies
+                    Yes
+                What do you use for public directory //Creating the firebase folder to publish the app publically
+                    Type in: dist                    //All resources and app code will be stored in a cloud folder called "dist"
+                Configure as single page            
+                    Yes
+            Two folders "functions" and "dist" will appear in the project tree in VSCode        
+            firebase deploy                         //Deploy from VSCode [From Project Folder]
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+33. A Simple Cloud Function
+
+
+
+
+
+
 
 
 
