@@ -3395,13 +3395,78 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 34. Notification Component
 
+    App Structure
+        dist
+            index.html                   (Topic 33)
+        functions
+            node_modules                 (Topic 33)
+            index.js                     (Topic 33)
+            package-lock.json            (Topic 33)
+            package.json                 (Topic 33)
+        src/components/auth
+            SignIn.js                    (Topic 26)
+            SignUp.js                    (Topic 27)
+        src/components/dashboard
+            Dashboard.js                 (Topic 25)
+            Notifications.js
+        src/components/layout
+            Navbar.js                    (Topic 28)
+            SignedInLinks.js             (Topic 28)
+            SignedOutLinks.js            (Topic 3)
+        src/components/project
+            CreateProject.js             (Topic 29)
+            ProjectDetails.js            (Topic 25)
+            ProjectList.js               (Topic 18)
+            ProjectSummary.js            (Topic 29)
+        src 
+            App.js                       (Topic 7)
+            index.css                    (Topic 9)
+            index.js                     (Topic 28)
+        src/store/reducers
+            authReducer.js               (Topic 27)
+            projectReducer.js            (Topic 16)
+            rootReducer.js               (Topic 17)
+        src/store/actions
+            projectActions.js            (Topic 29)
+            authActions.js               (Topic 27)
+        src/config      
+            fbConfig.js                  (Topic 13)
+
+    functions/index.js
+        const functions = require('firebase-functions');
+
+        exports.helloWorld = functions.https.onRequest((request, response) => {    
+            response.send("Hello from Firebase!");
+        });
 
 
+    Notifications.js
+        import React from 'react'
+        
+        //const Notifications = () => {                  
+        const Notifications = (props) => {                            //04. This enables Dashboard.js to receive the props
+            return (
+                <div className="section">
+                    <div className="card z-depth-0">                  //01. div.card.z-depth-0
+                        <div className="card-content">                //02. div.card-content
+                            <span className="card-title">             //03. span.card-title
+                                Notifications
+                            </span>
+                            <ul className="notifications">
+                                <li>Notification</li>
+                                <li>Notification</li>
+                                <li>Notification</li>
+                                <li>Notification</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        export default Notifications
 
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+35. Cloud Function Firestore Triggers
 
 
 
