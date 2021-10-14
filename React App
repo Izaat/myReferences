@@ -35,7 +35,7 @@ CONTENTS
 30. Formatting Dates with Moment       **npm install moment
 31. Firestore Security Rules
 32. Cloud Functions Intro and Setup    **npm install -g firebase-tools
-33. A Simple Cloud Function
+33. A Simple Cloud Function            **firebase deploy --only functions
 34. Notification Component
 35. Cloud Function Firestore Triggers
 36. Cloud Function Auth Trigger
@@ -3329,6 +3329,71 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 33. A Simple Cloud Function
 
+    After installing Cloud Functions, 2 folders will appear in the project tree
+        projectFolder/dist
+        projectFolder/functions
+            node_modules [Folder]
+            index.js
+            package-lock.json
+            package.json
+
+    App Structure
+        dist
+            index.html
+        functions
+            node_modules
+            index.js
+            package-lock.json
+            package.json
+        src/components/auth
+            SignIn.js                    (Topic 26)
+            SignUp.js                    (Topic 27)
+        src/components/dashboard
+            Dashboard.js                 (Topic 25)
+            Notifications.js
+        src/components/layout
+            Navbar.js                    (Topic 28)
+            SignedInLinks.js             (Topic 28)
+            SignedOutLinks.js            (Topic 3)
+        src/components/project
+            CreateProject.js             (Topic 29)
+            ProjectDetails.js            (Topic 25)
+            ProjectList.js               (Topic 18)
+            ProjectSummary.js            (Topic 29)
+        src 
+            App.js                       (Topic 7)
+            index.css                    (Topic 9)
+            index.js                     (Topic 28)
+        src/store/reducers
+            authReducer.js               (Topic 27)
+            projectReducer.js            (Topic 16)
+            rootReducer.js               (Topic 17)
+        src/store/actions
+            projectActions.js            (Topic 29)
+            authActions.js               (Topic 27)
+        src/config      
+            fbConfig.js                  (Topic 13)
+
+
+    functions/index.js
+        const functions = require('firebase-functions');
+        
+        //exports.helloWorld                                                         //01. Export request and creating helloWorld function
+        exports.helloWorld = functions.https.onRequest((request, response) => {      //02. Function can be requested and it takes in "response" object in firebase server)
+            response.send("Hello from Firebase!");
+        });
+
+        //03. In VSCode terminal, type in "firebase deploy --only functions"
+        //04. Point 03 will deploy the "functions" folder into the firebase server
+        //05. To check, go to FirebaseConsole > ProjectOverview > Develop > Functions > Dashboard
+        //06. Take note of the "Function URL" in VSCode terminal
+        //07. If we go to "Function URL", the "response.send()" will be triggered
+        //08. The browser will show "Hello from Firebase!"
+        //09. The requests will appear in Firebase Console > ... > Functions > Dashboard/Logs
+        //10. This will be used for the app's notification system but instead of using URL, it will trigger by adding a card
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+34. Notification Component
 
 
 
