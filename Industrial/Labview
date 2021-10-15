@@ -3004,6 +3004,43 @@ CONTENTS
             Feedback node will be added for the feedback line
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+22. Labview *.exe file to project 
+    
+    Let's say yhe target Labview project is called "project1.exe"
+    Project1 Folder contains:
+        Project1.aliases
+        Project1.exe
+        Project1.ini
+    Start Terminal    
+    Start "MING64" in Project1 Folder
+    # file project1.exe                                       //Project1.exe" PE32 executable (GUI) Intel #####, for MS Windows
+    # wrestool --help                                         //Opens help list
+    # wrestool -l Project1.exe                                //Output list of resources in the executable file
+    # wrestool -x --raw Project1.exe -o ./                    //Extract raw resources and place in current folder    
+    # ls -l                                                   //Shows the entire list of extractable file from Project1.exe in current folder
+    # file Project1.exe_*                                     //Shows the attributes on all the extracted files. Then determine the one with "NI, LabVIEW File, VI Library, data"
+    Download "pylabview" from GitHub [mefistotelis/pylabview]
+    # git clone https://github.com/Izaat/pylabview.git        //This adds the "pylabview" folder into the Project1 directory
+    # cp Project1.exe_10_2_0 pylabview/                       //Copy the determined exe file (The onle with "LabVIEW" attribute) into the "pylabview" folder
+    # cd pylabview                                            //Enter pylabview folder
+    # ./readRSRC.py --help                                    //Opens help file
+    # ./readRSRC.py -vv -x -i Project1.exe_10_2_0             //Extract with stage 2 verbosity
+    Here, Labview "Project1.xml" file and "Project1_LVzp.bin" file are both extracted
+    # file Project1_LVzp.bin                                  //Shows type of file
+    # unzip Project1_LV.zp.bin                                //Unzips "bin" file
+    At this point, Front.vi and Subvi.vi will be extracted
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 [END]
