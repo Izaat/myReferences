@@ -3035,7 +3035,7 @@ CONTENTS
     Create new Labview Project
     Run project
 
-    To rebuild extracted files into an executable, Remove all "Additional Exclusions" (Untick all boxes)
+    To rebuild extracted files into an executable, Remove all "Additional Exclusions" from properties (Untick all boxes)
         Disconnect type definitions
         Remove unused polymorphic VI instances
         Remove unused members of project libraries
