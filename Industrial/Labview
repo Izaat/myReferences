@@ -3034,7 +3034,16 @@ CONTENTS
     Consolidate everything into a single project folder
     Create new Labview Project
     Run project
-    
+
+    To rebuild extracted files into an executable, Remove all "Additional Exclusions" (Untick all boxes)
+        Disconnect type definitions
+        Remove unused polymorphic VI instances
+        Remove unused members of project libraries
+            Modify project library file after removing unused members
+        Disconnect unused inline subVIs
+        Exclude dependent packed libraries
+        Exclude dependent shared libraries
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
