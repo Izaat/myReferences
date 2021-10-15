@@ -3043,17 +3043,22 @@ CONTENTS
         Disconnect unused inline subVIs
         Exclude dependent packed libraries
         Exclude dependent shared libraries
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
+        
+    At this point notice that block diagram can't be opened
+    Also note that the block diagram file is named "Subvi.vi" and is already been extracted from earlier
+    # ./readRSRC.py -vv -x -i Subvi.vi                                  //Extract with stage 2 verbosity
+    # ls -l Subvi*                                                      //List down all files extracted from Subvi.vi
+    
+    Some of the data from Subvi.vi converted into *.xml and the remaining that can't be converted become binary files
+    Assembly byte code stored into *_VICD_code.bin 
+    Map files stored in *_VICD_code.map
+    The file that bindds everything together is the XML file
+    
+    Recreating the block diagram
+    # ./modRSRC.py --help                                    //Opens help file
+    # ./modRSRC.py -vv -f -m Project1.xml                    //Modify XML
+    # ./readRSRC.py -vv -c -m Subvi.xml                      //Recreate XML file into VI file (Subvi.vi)
+    Then copy file back into Labview Project
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 [END]
