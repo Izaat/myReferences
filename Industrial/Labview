@@ -33,6 +33,7 @@ CONTENTS
 19. CompactRio/myRIO FPGA Application
 20. State Machine Principles
 21. PID Labview
+22. Labview *.exe file to project 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -3030,7 +3031,10 @@ CONTENTS
     # file Project1_LVzp.bin                                  //Shows type of file
     # unzip Project1_LV.zp.bin                                //Unzips "bin" file
     At this point, Front.vi and Subvi.vi will be extracted
-
+    Consolidate everything into a single project folder
+    Create new Labview Project
+    Run project
+    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
