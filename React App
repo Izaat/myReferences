@@ -3469,6 +3469,106 @@ CONTENTS
 35. Cloud Function Firestore Triggers
 
 
+    App Structure
+        dist
+            index.html                (Topic 33)
+        functions
+            node_modules              (Topic 33)
+            index.js                  (Topic 34)**
+            package-lock.json         (Topic 33)
+            package.json              (Topic 33)
+        src/components/auth
+            SignIn.js                 (Topic 26)
+            SignUp.js                 (Topic 27)
+        src/components/dashboard
+            Dashboard.js              (Topic 25)
+            Notifications.js          (Topic 34)**
+        src/components/layout
+            Navbar.js                 (Topic 28)
+            SignedInLinks.js          (Topic 28)
+            SignedOutLinks.js         (Topic 3)
+        src/components/project
+            CreateProject.js          (Topic 29)
+            ProjectDetails.js         (Topic 25)
+            ProjectList.js            (Topic 18)
+            ProjectSummary.js         (Topic 29)
+        src 
+            App.js                    (Topic 7)
+            index.css                 (Topic 9)
+            index.js                  (Topic 28)
+        src/store/reducers
+            authReducer.js            (Topic 27)
+            projectReducer.js         (Topic 16)
+            rootReducer.js            (Topic 17)
+        src/store/actions
+            projectActions.js         (Topic 29)
+            authActions.js            (Topic 27)
+        src/config      
+            fbConfig.js               (Topic 13)
+
+
+    functions/index.js
+        const functions = require('firebase-functions');
+        const admin = require('firebase-admin');                         //01. Import "firebase-admin"
+        admin.initializeApp(functions.config().firebase);                //02. Initialize "firebase-admin" to interact with different services ie auth service and firestore service
+
+        exports.helloWorld = functions.https.onRequest((request, response) => {    
+            response.send("Hello from Firebase!");
+        });
+        
+        //const createNotification = (notification => {})              //12. Typo err
+        //const createNotification = (notification) => {}              //13. This will be linked to "exports.projectCreated"
+        const createNotification = (notification) => {
+            return admin.firestore().collection('notifications')
+                .add(notification)
+                .then(doc => console.log('notification added', doc));
+        }
+
+        //exports.projectCreated = functions.firestore.document().onCreate()                                  //03. Ability to request a function and it takes in "response" object in firebase server
+        //exports.projectCreated = functions.firestore.document().onCreate(doc => {})                         //04. Add a call back function
+        //exports.projectCreated = functions.firestore.document('projects/{projectId}').onCreate(doc => {})   //05. Add a specific projectId reference
+        //exports.projectCreated = functions.firestore
+        //    .document('projects/{projectId}')                                                               //06. When a new project is created under "projects" then run callback function
+        //    .onCreate(doc => {})                                                                            //07. Callback function runs after project is created and this takes in the document
+
+        exports.projectCreated = functions.firestore
+            .document('projects/{projectId}')            
+            .onCreate(doc => {
+                const project = doc.data();                           //08. This adds the data
+                //const notification = {}                             //09. Adds notification object (Determines what to notify. Someone joined? New project added?)
+                const notification = {
+                    content: 'Added a new project',
+                    user: `${project.authorFirstName} ${project.authorLastName}`,  //10. NOTE THE BACK-TICKS. This will put the 2 names into single string
+                    time: admin.firestore.FieldValue.serverTimestamp()             //11. Recieve current time stamp from firestore
+                }
+                
+                return createNotification(notification);                 //14. Add return object
+                
+            })     
+
+    Deployment
+        In Terminal, type in "firebase deploy --only functions"
+        Check Firebase Dashboard to see if a function is created
+            Firebase dashboard > Project Overview > Develop > Functions > Dashboard Tab
+                Function Column: projectCreated
+                Trigger: document.create
+                Link: /projects/{projectId}
+        Check functionality of the function
+            Create a project in the App and then check the log
+            Firebase dashboard > Project Overview > Develop > Functions > Logs Tab
+                Time: Current time
+                Function: projectCreated
+                Event Message: Notification added DocumentReference
+        Check Database
+            A new collection will be created in the database
+            Firebase dashboard > Project Overview > Develop > Database > Data Tab
+            
+            
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+36. Cloud Function Auth Trigger
+
+
+
 
 
 
