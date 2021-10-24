@@ -741,15 +741,15 @@ CONTENTS
 
     Open an image:
         A = imread('example.bmp');
-        size(A)                                                                 //512, 512, 3
+        size(A)                                                            //512, 512, 3
         imshow(A)                                                          //This plots the image
 
     Flip Up Down (Vertical Flip)
-        U = flipud(A);                                                      //Flips image upside down
+        U = flipud(A);                                                     //Flips image upside down
         imshow(U)
 
     Flip (Horizontal Flip)
-        V = fliplr(A);                                                      //Flips image horizontal direction
+        V = fliplr(A);                                                     //Flips image horizontal direction
         imshow(V)
 
     Flip Horizontally and Vertically
@@ -760,10 +760,59 @@ CONTENTS
         B = A;
         B(:,:,1) = 0;                //Meaning: (Select all rows, select all columns, set first channel) = set to 0, Red OFF
         B(:,:,2) = 0;                //Meaning: (Select all rows, select all columns, set second channel) = set to 0, Green OFF
-        imshow(B)                //Blue channel image
+        imshow(B)                    //Blue channel image
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 18. Convolution (Blurring an image)
+
+    The filter used for sound is called "moving average"
+    Moving average is taking a window (let's say 5 samples in a window) and then "sweeping" across the entire signal and taking in the average as the output
+    The "sweeping" action is called convolution
+    Convolution:
+        https://mathworld.wolfram.com/Convolution.html
+        Since convolution in time equals to multiplication in frequency
+        Therefore, take Fourier Transform of both signals and then multiply them
+        Then do the inverse Fourier Transform to return to time domain
+
+    Reference:
+        https://graphics.stanford.edu/courses/cs178/applets/convolution.html
+        Single Dimension, ie across time
+            Continuous variable filtered by another continuous variable
+                f(x) * g(x) = integral [ f(tau) . g(x - tau) d tau ]
+            Discretize by turning into sum
+                f|x| * g|x| = Sum [ f|k| . g|x-k| ]        
+        Two dimensions (with 2 dummy variables), ie Spatial dimensions (x,y) of an image
+            f(x,y) * g(x,y) = integral1 integral2 [ f(tau1,tau2) . g(x-tau1, y-tau2) dtau1 dtau2 ]  //Where integral1 is Tau1 and Integral2 is Tau2
+            -OR-
+            f[x,y] * g[x,y] = Sum1 Sum2 f[n1, n2] . g[x-n1, y-n2]      //Where Sum1 is n1 and Sum2 is n2
+
+    Create a function (my_gaussian.m)
+    my_gaussian.m
+        function H = my_gaussian(n, sigma)
+        
+        two_sigma_sq = 2*sigma*sigma;
+        H = zeros(n);     //Initialize n by n matrix with zeros
+        for i=1:n         //Assign every value of H
+            for j=1:n
+                x = 1 - n/2;       //Enables the center point of H to be the highest point of gaussian
+                y = j - n/2;       //Enables the center point of H to be the highest point of gaussian
+                H(i,j) = exp(-(x*x + y*y)/two_sigma_sq);       // (x=0, y=0), exponent of 0 is 1
+            end
+        end
+        end
+        
+        //Where n is the size of the square, output will be n by n matrix
+        //Sigma is the standard deviation of gaussian
+
+    Command Window
+        H = my_gaussian(100,10);    //n=100, sigma=10
+        imshow(H)                   //Shows the Gaussian brush (Circular with brightest at center)
+
+        H = my_gaussian(100,25);    //n=100, sigma=25
+        imshow(H)                   //Shows the Gaussian brush (Radius of the brightest inner strength increased)
+
+
+
 
 
 
