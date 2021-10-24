@@ -3544,7 +3544,7 @@ CONTENTS
                 
                 return createNotification(notification);                 //14. Add return object
                 
-            })     
+            });     
 
     Deployment
         In Terminal, type in "firebase deploy --only functions"
