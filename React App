@@ -3567,6 +3567,113 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 36. Cloud Function Auth Trigger
 
+    Whenever there is a new user registered, a notification will be sent out
+
+    App Structure
+        dist
+            index.html                  (Topic 33)
+        functions
+            node_modules                (Topic 33)
+            index.js                    (Topic 35)**
+            package-lock.json           (Topic 33)
+            package.json                (Topic 33)
+        src/components/auth
+            SignIn.js                   (Topic 26)
+            SignUp.js                   (Topic 27)
+        src/components/dashboard
+            Dashboard.js                (Topic 25)
+            Notifications.js            (Topic 34)
+        src/components/layout
+            Navbar.js                   (Topic 28)
+            SignedInLinks.js            (Topic 28)
+            SignedOutLinks.js           (Topic 3)
+        src/components/project
+            CreateProject.js            (Topic 29)
+            ProjectDetails.js           (Topic 25)
+            ProjectList.js              (Topic 18)
+            ProjectSummary.js           (Topic 29)
+        src 
+            App.js                      (Topic 7)
+            index.css                   (Topic 9)
+            index.js                    (Topic 28)
+        src/store/reducers
+            authReducer.js              (Topic 27)
+            projectReducer.js           (Topic 16)
+            rootReducer.js              (Topic 17)
+        src/store/actions
+            projectActions.js           (Topic 29)
+            authActions.js              (Topic 27)
+        src/config      
+            fbConfig.js                 (Topic 13)
+
+
+    functions/index.js
+        const functions = require('firebase-functions');
+        const admin = require('firebase-admin');            
+        admin.initializeApp(functions.config().firebase);       
+
+        exports.helloWorld = functions.https.onRequest((request, response) => {    
+            response.send("Hello from Firebase!");
+        });
+        
+        const createNotification = (notification) => {
+            return admin.firestore().collection('notifications')
+                .add(notification)
+                .then(doc => console.log('notification added', doc));
+        }
+
+        exports.projectCreated = functions.firestore
+            .document('projects/{projectId}')            
+            .onCreate(doc => {
+                const project = doc.data();         
+                const notification = {
+                    content: 'Added a new project',
+                    user: `${project.authorFirstName} ${project.authorLastName}`,   
+                    time: admin.firestore.FieldValue.serverTimestamp()                    
+                }
+                return createNotification(notification);            
+        });     
+
+        //exports.userJoined = functions.auth.user().onCreate(user => {})              //01. Will run when a user is created using the auth service
+        exports.userJoined = functions.auth.user()
+            .onCreate(user => {
+                //return admin.firestore().collection('users').doc(user.uid)           //02. Making reference to firestore collection and retrieve information
+                return admin.firestore().collection('users').doc(user.uid)   
+                    //.get()                                                           //03. Create asynchronuous request
+                    //.get().then()                                                    //04. Takes in the callback function which will run when document retrieval is successful 
+                    //.get().then(doc => {})                                           //05. Retrieves firestore document
+                    .get().then(doc => {
+                        const newUser = doc.data();                                    //06. Access data from the new document
+                        //const notification = {}                                      //07. Create a notification
+                        const notification = {
+                            content: 'New user joined',
+                            user: `${newUser.firstName} ${newUser.lastName},           //08. Retrieves user firstname and lastname from firestore
+                            time: admin.firestore.FieldValue.serverTimestamp()         //09. Adds timestamp
+                        }
+                        return createNotification(notification);                       //10. Add a call function
+                    })    
+        })
+
+    Deployment                                                                         //11. Deploy to Firebase
+        In Terminal, type in "firebase deploy --only functions"
+        Check Firebase Dashboard to see if a function is created
+            Firebase dashboard > Project Overview > Develop > Functions > Dashboard Tab
+                Function Column: userJoined
+                Trigger: user.create
+        Create a new user        
+        Check Database
+            A new collection will be created in the database
+            Firebase dashboard > Project Overview > Develop > Database > Data Tab
+        Check functionality of the function
+            Create a project in the App and then check the log
+            Firebase dashboard > Project Overview > Develop > Functions > Logs Tab
+                Time: Current time
+                Function: userJoined
+                Event Message: Notification added DocumentReference
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+37. Showing Notifications
+
 
 
 
