@@ -3673,6 +3673,169 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 37. Showing Notifications
+    
+    Read 16 points
+    Grab notification data from Topic 36 and show in Project Page in App (Notification Section)
+    The props (mapStateToProps) of Dashboard.js will be used since Dashboard.js is the parent component of Notification.js
+    This prop will be passed into the Notifications
+    Note: Security Rules in Firestore needs to be set
+
+    App Structure
+        dist
+            index.html                  (Topic 33)
+        functions
+            node_modules                (Topic 33)
+            index.js                    (Topic 36)
+            package-lock.json           (Topic 33)
+            package.json                (Topic 33)
+        src/components/auth
+            SignIn.js                   (Topic 26)
+            SignUp.js                   (Topic 27)
+        src/components/dashboard
+            Dashboard.js                (Topic 25)
+            Notifications.js            (Topic 34)
+        src/components/layout
+            Navbar.js                   (Topic 28)
+            SignedInLinks.js            (Topic 28)
+            SignedOutLinks.js           (Topic 3)
+        src/components/project
+            CreateProject.js            (Topic 29)
+            ProjectDetails.js           (Topic 25)
+            ProjectList.js              (Topic 18)
+            ProjectSummary.js           (Topic 29)
+        src 
+            App.js                      (Topic 7)
+            index.css                   (Topic 9)
+            index.js                    (Topic 28)
+        src/store/reducers
+            authReducer.js              (Topic 27)
+            projectReducer.js           (Topic 16)
+            rootReducer.js              (Topic 17)
+        src/store/actions
+            projectActions.js           (Topic 29)
+            authActions.js              (Topic 27)
+        src/config      
+            fbConfig.js                 (Topic 13)
+
+
+    Dashboard.js
+        import React, {Component} from 'react'
+        import Notifications from './Notifications'
+        import ProjectList from '../project/ProjectList'   
+        import {connect} from 'react-redux'               
+        import {firestoreConnect} from 'react-redux-firebase' 
+        import {compose} from 'redux'
+        import {Redirect} from 'react-router-dom'       
+        
+        class Dashboard extends Component {
+            render() {        
+                //const {projects, auth} = this.props;                   
+                const {projects, auth, notifications} = this.props;           //04. Destructure notification props before attaching to the component
+                if (!auth.uid) return <Redirect to='/signIn' />         
+                return(
+                    <div className="dashboard container">
+                        <div className="row">
+                            <div className="col s12 m6">
+                                <ProjectList projects={projects} />   
+                            </div>
+                            
+                            <div className="col s12 m5 offset-m1">
+                                //<Notifications />
+                                <Notifications notifications={notifications} />  //05. Attaching the destructured notifications prop to the component
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        }
+        
+        const mapStateToProps = (state) => {
+            return {
+                projects: state.firestore.ordered.projects,    
+                auth: state.firebase.auth,
+                notifications: state.firestore.ordered.notifications           //03. Attaching the notification collection to the props
+            }
+        }     
+        
+        export default compose(
+            connect(mapStateToProps),
+            firestoreConnect([
+                {collection: 'projects'},
+                //{collection: 'notifications'}                 //01. Add notification since "connect" is an array
+                {collection: 'notifications', limit: 3}         //02. Set limit to 3 so only 3 notifications will be shown
+            ])
+        )(Dashboard) 
+
+
+    Notifications.js
+        import React from 'react'
+        import moment from 'moment'                              //14. Import moment for the date formatting
+         
+        const Notifications = (props) => {                        
+            const {notifications} = props;                       //06. Retrieving the destructured notifications component from local prop
+            return (
+                <div className="section">
+                    <div className="card z-depth-0">                
+                        <div className="card-content">             
+                            <span className="card-title">           
+                                Notifications
+                            </span>
+                            <ul className="notifications">
+                                //<li>Notification</li>
+                                //<li>Notification</li>
+                                //<li>Notification</li>
+                                //<li>Notification</li>
+                                
+                                //{notifications &&}                                  //07. This will check if there is value in Notifications above, if empty, then ignore
+                                //{notifications && notifications.map()}              //08. This will map out the notifications and cycle through all the notifications instead of the "li" tags
+                                //{notifications && notifications.map(item => {})}    //09. Adds Call back function and set to "item"
+                                {notifications && notifications.map(item => {
+                                    return (
+                                        //<li key=>{item.id}></li>                    //10. This will retrieve the notifications id "key" set in the collection (firestore database)
+                                        <li key=>{item.id}>
+                                            <span className="pink-text">{item.user}</span>    //11. This will output the firstname
+                                            <span>{item.content}</span>                                     //12. Outputs the content
+                                            //<div className="grey-text note-date"></div>     //13. This will be the container to output the date
+                                            <div className="grey-text note-date">
+                                                {moment(item.time.toDate()).fromNow()}        //14. Retrieve date from firestore and output date format set by the imported 'moment' ["2 mins ago" or "1 hour ago"]
+                                            </div>
+                                        </li> 
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        export default Notifications
+
+    Setting up security rules                                                                 //15. Setup the security rules
+        All of the above requires security rules to be set in firestore
+        Firebase Website > Project Overview > Database > Rules
+    
+    Rules script
+        service cloud.firestore {
+            match /databases/{database}/documents {
+                match /projects/{project} {
+                    allow read, write: if request.auth.uid != null
+                }
+                match /users/{userId} {
+                    allow create
+                    allow read: if request.auth.uid != null
+                    allow write: if request.auth.uid == userId
+                }
+                match /notifications/{notification} {
+                    allow read: if request.auth.uid != null                                      //16. Allow read access if the user is logged in
+                }
+            }
+        }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+38. Ordering Firestore Data
+
+
 
 
 
