@@ -3833,7 +3833,103 @@ CONTENTS
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-38. Ordering Firestore Data
+38. Ordering Firestore Data 
+
+    Notice that both the notifications and the projects are in random order and not ordered with time
+    To order them according to time, "firestoreConnect" array in dashboard.js will be utilized
+    Also note that for "projects" cards, timestamp property is attached to "createdAt" property
+        Firebase Dashboard > Project Overview > Develop > Database > Data Tab > Collection Column > projects > document column > Any UID > field column > createdAt
+    Similarly with "notifications" where timestamp is attached to "time" property
+        Firebase Dashboard > Project Overview > Develop > Database > Data Tab > Collection Column > notifications > document column > Any UID > field column > time
+
+    App Structure
+        dist
+            index.html                   (Topic 33)
+        functions
+            node_modules                 (Topic 33)
+            index.js                     (Topic 36)
+            package-lock.json            (Topic 33)
+            package.json                 (Topic 33)
+        src/components/auth
+            SignIn.js                    (Topic 26)
+            SignUp.js                    (Topic 27)
+        src/components/dashboard
+            Dashboard.js                 (Topic 37)
+            Notifications.js             (Topic 37)
+        src/components/layout
+            Navbar.js                    (Topic 28)
+            SignedInLinks.js             (Topic 28)
+            SignedOutLinks.js            (Topic 3)
+        src/components/project
+            CreateProject.js             (Topic 29)
+            ProjectDetails.js            (Topic 25)
+            ProjectList.js               (Topic 18)
+            ProjectSummary.js            (Topic 29)
+        src 
+            App.js                       (Topic 7)
+            index.css                    (Topic 9)
+            index.js                     (Topic 28)
+        src/store/reducers
+            authReducer.js               (Topic 27)
+            projectReducer.js            (Topic 16)
+            rootReducer.js               (Topic 17)
+        src/store/actions
+            projectActions.js            (Topic 29)
+            authActions.js               (Topic 27)
+        src/config      
+            fbConfig.js                  (Topic 13)
+        Rules Script in Firestore
+
+    Dashboard.js
+        import React, {Component} from 'react'
+        import Notifications from './Notifications'
+        import ProjectList from '../project/ProjectList'   
+        import {connect} from 'react-redux'               
+        import {firestoreConnect} from 'react-redux-firebase' 
+        import {compose} from 'redux'
+        import {Redirect} from 'react-router-dom'       
+        
+        class Dashboard extends Component {
+            render() {                      
+                const {projects, auth, notifications} = this.props;  
+                if (!auth.uid) return <Redirect to='/signIn' />         
+                return(
+                    <div className="dashboard container">
+                        <div className="row">
+                            <div className="col s12 m6">
+                                <ProjectList projects={projects} />   
+                            </div>
+                            
+                            <div className="col s12 m5 offset-m1">
+                                <Notifications notifications={notifications} /> 
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        }
+        
+        const mapStateToProps = (state) => {
+            return {
+                projects: state.firestore.ordered.projects,    
+                auth: state.firebase.auth,
+                notifications: state.firestore.ordered.notifications         
+            }
+        }     
+        
+        export default compose(
+            connect(mapStateToProps),
+            firestoreConnect([
+                //{collection: 'projects'},
+                {collection: 'projects', orderBy: ['createdAt', 'desc']},                   //01. Order by "createdAt" timestamp in descending order
+                //{collection: 'notifications', limit: 3}   
+                {collection: 'notifications', limit: 3, orderBy: ['time', 'desc']}          //02. Order by "time" timestamp in descending order
+            ])
+        )(Dashboard) 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+39. Deploying to Firebase Hosting   
+
 
 
 
