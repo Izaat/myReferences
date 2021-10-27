@@ -41,7 +41,7 @@ CONTENTS
 36. Cloud Function Auth Trigger
 37. Showing Notifications
 38. Ordering Firestore Data
-39. Deploying to Firebase Hosting
+39. Deploying to Firebase Hosting      **firebase deploy
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Planning the App
@@ -3929,6 +3929,33 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 39. Deploying to Firebase Hosting   
+
+    Deploy to Firebase
+        Firebase Dashboard > Project Overview > Develop > Hosting
+            Click on "Get Started"
+            Install via VSCode Terminal: $ npm install -g firebase-tools (Completed in previous topic)
+            Sign in to Google: $ firebase login
+            Initiate project: $ firebase init (Completed in previous topic)
+            Deploy website: $ firebase deploy (The only thing left to do)
+
+    Before deploying: 
+        Build the App so it can be assigned to "build" folder. This folder will be created
+        To do this:
+            VSCode > Terminal > ProjectAppFolder > Type in: npm run build
+        Move all the contents of "build" folder to "dist" folder and replace the index.html in "dist" folder
+
+    Deploying:
+        Terminal > ProjectAppFolder > Type in: $ firebase deploy
+
+    Verify deployment:
+        Refresh browser
+        Firebase Dashboard > Project Overview > Develop > Hosting > Dashboard > Domains Section
+        Domain: ProjectAppName.firebaseapp.com
+        Click on the link to enter the website
+        
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[End]
+
 
 
 
