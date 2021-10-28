@@ -22,8 +22,7 @@ CONTENTS
 17. Image manipulation (Flip images, etc)
 18. Convolution (Blurring an image with Gaussian filter, Edge Detection)
 19. Probability
-
-20. Measuring probability
+        Measuring probability
         Generating random values
         Birthday paradox
         Continuous variables from Discrete variables
