@@ -840,6 +840,41 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 19. Probability
 
+    How a programmer approach problems in probability.
+    Therefore, does not follow standard probability and statistics approach
+    
+    Content:
+        Measuring Probability (Identify and quantify uncertainty)
+        Generating random values
+        Birthday paradox
+        Continuous variables from Discrete variables
+        Mean and variance
+        Gaussian (normal) distribution
+        Test for normality (Test if a random variable is Gaussian distributed)
+        2 sample tests (Compare 2 groups of Gaussian Distributed data)
+        Multivariate Gaussian (Multidimensional Gaussian)
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    19A Measuring Probability (Identify and quantify uncertainty)
+    
+        Theory: 
+            Coin flips are 50% heads or tails. 
+            As the number of flips approaches infinity, probability will approach 0.5 -OR- 50%
+            
+        Link: github.com/lazyprogrammer/matlab-probability-class
+        Clone and download the files
+        In Matlab, change "Current Folder" panel to the downloaded folder
+        Command Window
+            R = csvread('random_integers.csv');                //Load data to R 
+            size(R)                                                              //Shows 100 as the size of R, 100 by 1 matrix
+            sum(R == -5) / length(R)                                  //Calculates the probability of data that R = -5.  //Ans: 0.07 -OR- 7%
+            hist(R)                                                              //Shows the Histogram of R
+            sum(mod(R,2) == 0) / length                           //Using modulo to find out if probability is even, //Ans: 0.43
+            sum(mod(R,2) == 1) / length                           //Using modulo to find out if probability is odd,   //Ans: 0.57
+            sum(R == 5 | R == -5) / 2                                 //If R takes in a specific value, in this case, 5 or -5.  Ans: 0.21 -OR- 21%
+
+
+
 
 
 
