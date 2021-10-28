@@ -22,15 +22,16 @@ CONTENTS
 17. Image manipulation (Flip images, etc)
 18. Convolution (Blurring an image with Gaussian filter, Edge Detection)
 19. Probability
+
 20. Measuring probability
-21. Generating random values
-22. Birthday paradox
-23. Continuous variables
-24. Mean and variance
-25. Gaussian (normal) distribution
-26. Test for normality
-27. 2 sample tests
-28. Multivariate Gaussian
+        Generating random values
+        Birthday paradox
+        Continuous variables from Discrete variables
+        Mean and variance
+        Gaussian (normal) distribution
+        Test for normality (Test if a random variable is Gaussian distributed)
+        2 sample tests (Compare 2 groups of Gaussian Distributed data)
+        Multivariate Gaussian (Multidimensional Gaussian)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction (Basic syntax, command window, and working directory)
