@@ -1,0 +1,487 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Microsoft Excel
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENT
+
+01. Developer Mode
+02. Record Macro
+03. Using Relative References
+04. Recording Simple Macros
+05. Sort and Filter Macro Button
+06. Protecting and Formatting Sheets with the Macro Recorder
+07. VBA Interface
+08. Record Macro vs. Manual Code
+09. Debugging Macros
+10. Macro Scripting
+11. Range
+12. Selection & Color
+13. Value and Clear
+14. ActiveSheet, Sheets, and Name
+15. CurrentRegion
+Practice 1:58:08
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Developer Mode
+    
+    Turn ON the Developer Tab
+        Main Menu > File > Options > Customize Ribbons
+        Check the "Developer" checkbox under the "Customize the Ribbon" column
+        Click OK
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. Record Macro
+
+    Similar to "Robot Teaching"
+    Record Macro records what the user does and converts them into code
+    The code will be able to re-execute anytime, similar to creating shortcuts
+    
+    Example:
+        In Developer Tab, click on "Record Macro" and a window will appear
+            Macro Name: Example                   //Naming convention shouldn't have any spaces in between
+            Shortcut key: CTRL+Shift+R           //Assigning as CTRL+S will overwrite the save document functionality. Add in "Shift" to differentiate
+            Store macro in:  This workbook     //This workbook (Integrate into file), Personal macro workbook (Private), New workbook (Public)
+            Click OK to start recording
+        Process to be recorded
+            Click on C2, 
+            Type in "Example", 
+            Ctrl+Enter, 
+            Home Tab
+                Bold, Italic, Underline, Thick Borders, Fill Green
+        In Developer Tab, click on "Stop Recording"
+
+    Executing Macro:
+        Open New Sheet
+        In Developer Tab, click on "Macros"
+        Select "Example" and click "Run"
+        
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Using Relative References
+
+    Absolute cell addressing: $A$1, where "$" is to lock the axis
+    Relative cell address: A1
+    From Topic 2, running the macro will lock to the same cell
+    To use the macro on multiple cells, use relative References
+        Select Target cell
+        Enable Use Relative References
+            Developer Tab > Code Section > Use Relative References
+        Record Macro
+        Save Macro
+        Now the Macro can be placed in any of the cell
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. Recording Simple Macros
+
+    Number formatting macro
+        Assume a worksheet column full of phone numbers in US format
+        Converting the phone numbers to another country's format
+        Cenverting directly will only convert from "US format" to "No format" 
+        To solve this, create a macro custom number formatting
+        Procedure:
+            Enable "Use Relative References"
+                Developer Tab > Main Toolbar > Code Section > Use Relative References
+            Select Target Cell
+            Activate "Record Macro"
+                Name: CustomFormat
+                Shortcut Key: CTRL + Shift + E
+                Click OK
+            Open Format Cells Window
+                Home Tabe > Number Section > Format Cells Numbers (Corner icon)
+                Format Cells Window
+                    Number Tab > Category > Custom
+                        Type: (+65) #### ####
+                        Click OK
+            Stop Recording
+                Developer Tab > Code Section > Stop Recording
+            Conversion
+                Select ALL the cells in target column
+                Press CTRL + Shift + E   -OR-  Click on "Macros" and select CustomFormat
+
+    Display/Hide last 4 digit of numbers
+        Assume a worksheet column full of credit card numbers
+        Display the last 4 digits and hide the rest of the numbers
+        Procedure:
+            Enable "Use Relative References"
+                Developer Tab > Main Toolbar > Code Section > Use Relative References
+            Select Target Cell    
+            Click on Record Macro
+                Name: LastFourDigits
+            Using a RIGHT/LEFT/MID function, "=RIGHT(text, [num_chars])" to key into "unused column"
+                In the "Unused column", select the cell that is at the same row as target cell
+                Type in "=RIGHT(A1,4)"                                  //This will show the last 4 digit for the number in cell A1
+                -OR-
+                Type in ="****-****-****-"&RIGHT(A1,4)   //This will show ****-****-****-1234
+            Copy the cell in "unused column"
+            Paste Values into target column
+                Home Tab > Toolbar > Clipboard section > "Paste" drop down menu > Paste values > Value(V)
+            Delete the content in the "unused column"
+            Stop Macro
+            Select another cell that contains the target number
+            Click on Macro
+            Select "LastFourDigits"
+            Click on Run
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+05. Sort and Filter Macro Button
+    
+    To use Sort and Filter, deactivate "Use Relative References" before recording
+    
+    Create Sort Macro Button
+        Do not activate "Use Relative References" for Sorting and Filtering
+        Record Macro
+            Name: Sort
+        Click okn Sort
+            Toolbar > Sort&Filter Section > Sort
+            Click on "Add Level"
+                SortBy: Column Title 1
+                ThenBy: Column Title 2
+        Stop Macro Recording
+        Add Button
+            Developer Tab > Controls Section > Insert > Form Controls > Button (Top Left Icon)
+            Click and drag in worsheet to create a button, Assign Window will appear
+            Select "Sort" and click OK
+            Right click on button to edit
+
+    Create Filter Macro Button
+        Similar to Sort Button
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Protecting and Formatting Sheets with the Macro Recorder
+    
+    Setup
+        Disable "Use Relative References"
+        Record Macro
+            Name: InputCellFormatProtect
+            Store macro in : Workbook
+        Home Tab > Editing Section > Find & Select Menu > Go To Special
+            Choose Constants and check "Numbers"
+            Uncheck Text, Logic, Errors
+        Home Tab > Cells Section > Format Menu > Lock Cells
+            Change cell colors
+        Home Tab > Cells Section > Format Menu > Protect Sheet
+            Check Protect worksheet and contents
+            Check Select locked cells
+            Check Select unlocked cells
+        Stop recording
+    Deploy
+        Developer > Macros 
+        Select "InputCellFormatProtect"
+        Click Run
+        Note that if the cell is linked to another worksheet, they will also be affected by the protection
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07. VBA Interface
+
+    Open VBA
+        Developer Tab > Toolbar > Code > Visual Basic
+        Visual Basic for Applications window will appear
+    
+    Module Folder
+        This folder will contain all the scripts for Excel
+        Folder resides in VBE Project Tree Panel
+        Adding a module
+            Main Menu > Insert > Module
+            Module tree folder aill appear in Project Tree
+
+    Immediate Window
+        Main Menu > View > Immediate Window
+        "Immediate Window" works like "Terminal" in VSCode or "Command Window" in Matlab
+        
+        Syntax: 
+            ?Worksheets.Count                                                                 //Print number of worksheets in current workbook
+            ?Range("B2")                                                                          //Prints out value in Cell B2
+            Selection.HorizontalAlignment = xlCenterAcrossSelection    //Make text in selected cell centered
+            Selection.HorizontalAlignment = xlLeft                                 //Make text in selected cell snaps to the left
+
+    Syntax Libraries
+        Main Menu > View > Object Browser
+        An entire list of libraries, classes, methods are listed in Object Browser
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+08. Record Macro vs. Manual Code
+
+    Record Macro, Selecting ALL cells and then change fonts to NewTimeRoman
+    
+    Script below will automatically be produced in VBA
+        Sub TimesNewRoman()                         //Name of Macro
+        '   TimesNewRoman Macro                   //Title of Macro and the apostrophe is the comment tag
+            Keyboard Shortcut: Ctrl+Shift+T
+                Cells.Select
+                With Selection.Font
+                    .Name = "Times New Roman"    //Name of Font
+                    .Strikethrough = False
+                    .Superscript = False                    //The false statements can be deleted. They were added as a default for recording macros
+                    .Subscript = False
+                    .OutlineFont = False
+                    .Shadow = False
+                    .Underline = xlUnderlineStyleNone
+                    .ColorIndex = xlAutomatic
+                    .TintAndShade = 0
+                    .ThemeFont = xlThemeFontNone
+                End With
+        End Sub
+
+    Shorter script for the Macro above (Manual entry)
+        Sub TimesNewRoman()
+            Keyboard Shortcut: Ctrl+Shift+T
+                Cells.Select
+                Selection.Font.Name = "Times New Roman"
+        End Sub
+
+    Running sections of the script
+        Place the blinking text cursor at the beginning of Sub tag
+        Click on "Play" button
+            Main Toolbar > Play Button
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+09. Debugging Macros
+
+    Enable Debugging Tool in Toolbar Menu
+        Right click on Toolbar > Customize > Categories: Debug > Commands Section
+        Drag and Drop Items into the Toolbar
+            Compile Project
+            Step Into                          //Single line execution. Click on icon repeatedly to execute the highlighted line
+            Toggle Breakpoint
+    Note:
+        Excel can't undo the actions done by Macro and therefore, run the macro on the backup worksheet backup, instead of the original
+
+    Macro Script
+        Sub CreateReport()
+        InsertRowsCols       //Calls another Macro script to Insert columns and rows
+        InsertTxt                 //Calls another Macro to Insert Headers
+        FmtTxt                    //Formats report text
+        End Sub
+
+        Sub InsertRowsCols()
+            Rows("2:4").Select                              //Correction: "1:4"
+            Selection.Insert Shift:=x1Down
+            Columns("A:A").Select
+            Selection.Insert Shift:=x1ToRight
+        End Sub
+
+        Sub InsertTxt()
+            Range("A10").Select                             //Correction "A1"
+            ActiveCell.FormulaR1C1 = "Header"
+            Range("A2").Select
+            ActiveCell.FormulaR1C1 = "Prices:"
+            Range("B4").Select
+            ActiveCell.FormulaR1C1 = "Symbol:"
+            Range("C4").Select
+            ActiveCell.FormulaR1C1 = "Open:"
+            Range("D4").Select
+            ActiveCell.FormulaR1C1 = "High:"
+            Range("E4").Select
+            ActiveCell.FormulaR1C1 = "Low:"
+            Range("F4").Select
+            ActiveCell.FormulaR1C1 = "Close:"
+            Range("G4").Select
+            ActiveCell.FormulaR1C1 = "Net Change:"
+            Range("H4").Select            
+            ActiveCell.FormulaR1C1 = "Pct Change:"
+            Range("I4").Select
+            ActiveCell.FormulaR1C1 = "Prt Alloc:"
+            Range("J4").Select
+            ActiveCell.FormulaR1C1 = "Prt Pct Change:"
+        End Sub
+
+        Sub FmtTxt()
+            Columns("C:G").Select
+            Selection.Style = "Currency"
+
+            Columns("H:J").Select
+            Selection.Style = "Percent"
+
+            Range("A1").Select                             //Correction: Inherited error from InsertTxt()
+            With Selection.Font
+                .Name = "Arial"
+                .Size = 18
+                .Bold = True
+            End With    
+
+            Range("A2").Select
+            With Selection.Font
+                .Name = "Arial"
+                .Size = 14
+                .Bold = True
+            End With    
+
+            Range("B4:J4").Select
+            With Selection.Font
+                .Name = "Arial"
+                .Size = 12
+                .Bold = True
+            End With 
+            
+            Columns("B:J").EntireColumn.AutoFit
+
+        End Sub
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+10. Macro Scripting
+    
+    Objects:
+        Sheets, Tables, Charts, Cells, Rows, Columns, Range
+    Properties/Method
+        *.Color, *.Value, *.Insert, *.Font, *.Select 
+    
+    Sub FormatData()
+    '   FormatData Macro
+    '
+        Rows("1:1").Insert
+        Range("A1").Value = "Emp ID"
+        Range("B1").Value = "Last Name"
+        Range("C1").Value = "First Name"
+        Rows("1:1").Font.Bold = True
+        Range("A1").Select                       //Deselect cell
+    End Sub
+
+    Add new module and Procedure to current Project Tree
+        VBA > Main Menu > Insert > Module         //This will add a new Module in Project Tree > Project Root > Modules > Module2
+        VBA > Main Menu > Insert > Procedure    //Add procedure window will appear
+            Name: FormatDataTest
+            Type: Sub                                               //Regular Macro 
+            Scope: Public                                         //Shareable between external workbooks
+
+    Module2 (Default)
+        Public Sub FormatDataTest()
+        End Sub
+
+    Module2 (Coded)
+        Public Sub FormatDataTest()
+        Rows("1:1").Insert
+        Range("A1").Value = "Emp ID"
+        Range("B1").Value = "Last Name"
+        Range("C1").Value = "First Name"
+        Rows("1:1").Font.Bold = True
+        Range("A1").Select
+        End Sub
+        
+    Run Macro
+        Place text cursor on top of the scrpt and click on "Run"
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+11. Range
+    
+    Methods to make cell selection
+        Simply clicking on the cell
+        Range("C3")
+        Range("C1").Select
+        Range("B2").Range("B2").Select             //Range inside another range (Relative to first B1), This will select C3
+        Cells(3,3).Select                                      //Cells(Rows, Cols)
+        [C3].Select                                              //Self explanatory
+        Range("A1").Offest(2,2).Select              //Cells(Downwards, Across), Offset 2 rows and 2 columns from A1, Therefore C3
+        
+        myRange = "C3"
+        Range(myRange)
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+12. Selection & Color
+
+    Difference between *.Select and Selection.*
+        The *.Select is the action
+        The Selection.* is the object
+        
+        Range("C3"). Select                        //Selects the cell
+        Selection.Example                          //Do something to the cell
+        Selection.Value = "Bitch"               //Adds value to the cell
+        Selection.Interior.Color = 65535    //Change color (65535 is color code in VB - Yellow)
+        
+    Color options in VBA
+        Theme Colors                    | VB Colors 
+        xlThemeColorLight1          | vbBlack
+        xlThemeColorDark1          | vbWhite
+        xlThemeColorDark2          | vbRed
+        xlThemeColorlight2          | vbLine
+        xlThemeColorAccent1      | vbYellow
+        xlThemeColorAccent2      | vbBlue
+        xlThemeColorAccent3      | vbMagenta
+        xlThemeColorAccent4      | vbCyan
+        xlThemeColorAccent5      | Range("A1").Font.Color = vbRed
+        xlThemeColorAccent6      | Range("A1").Font.ThemeColor = xlThemeColorLight1
+    
+        RGB Colors
+        Blue = (0,0,255)
+        Yellow = (255,255,0)
+        Cyan = (0,255,255)
+        Magenta = (255,0,255)
+        Range("A1").Font.Color = RGB(0,0,0)
+        
+        Hex Colors
+        Blue = 16711680
+        Yellow = 65535
+        Cyan = 16776960
+        Magenta = 16711935
+        Range("A1").Font.Color = 65535
+        
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+13. Value and Clear
+
+    
+    Range("A1").Value = "Hello"              //Insert value to Cell
+    Range("A1").Clear                              //Clear the selected cell (ClearComments, ClearContents, ClearFormats, ClearHyperlinks, ClearNotes)
+    
+    -OR-
+    
+    Selection.Value = "Hello"
+    Selection.Clear
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+14. ActiveSheet, Sheets, and Name
+
+    Module
+        VBA > Main Menu > Insert > Module
+        VBA > Main Menu > Insert > Procedure
+            Name: Test
+        Code:    
+            Public Sub Test()
+                Sheets("Sheet1").Select                                                      //Selects "Sheet 1" in workbook
+                ActiveSheet.Name = "New Worksheet Name"                    //Rename worksheet
+            End Sub
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+15. CurrentRegion
+
+    Highlighting a region:
+        Imagine a data is filled from columns F to J and from Rows 10 to 15
+        Select one of the cell within an "isle" of data
+        CTRL+A to select an "isle" of data
+        This will select the entire region, from F10 to J15
+
+    Using VBA to highlight a region:
+        Selection.CurrentRegion.Select
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+16. Others
+
+    Concatenate
+        Range("C1").Value = ActiveSheet.Name & "_SecondName"       //If Active worksheet is "FirstName", this will concatenate to "FirstName_SecondName" as value for cell C1 
+
+        Execution
+            Select blank worksheet (Sheet1) in workbook
+            In VBA, press play button
+
+    With Selection.Something.Something
+        With Selection.Font
+            .Name = "Arial"
+            .Size = 20
+        End With
+        
+        -Similar To-
+        
+        Selection.Font.Name = "Arial"
+        Selection.Font.Size = 20
+        
+    Sub Procedure
+        Sub and Public Sub
+        in VBA script (Module1) contains a single group of script or subscripts (Sub Procedure)
+        Sub Procedures can be inserted into the script page via MainMenu > Insert > Procedure
+        When inserted, "Public Sub" will appear as the header
+        Note the before inserting sub procedure, make sure the blinking text input cursor is at the bottom of the script
+        To execute sub procedures, place blinking text input cursor at the header and then press play button
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[End]
+
