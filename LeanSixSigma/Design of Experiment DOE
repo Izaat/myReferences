@@ -70,7 +70,7 @@ CONTENTS
             Cup Elevation: 220 to 280            
             Release Angle: 140 to 180
         Create table in Minitab Worksheet
-            | Pin Elevation | Bungee Position | Cup Elevation | Release Angle |
+            | Pin Elevation      | Bungee Position         | Cup Elevation       | Release Angle         |
             |         120        |           120           |         220         |          140          |
             |         180        |           180           |         280         |          180          |
         Number of runs
@@ -84,11 +84,11 @@ CONTENTS
             Number of Factors: 4
             Click on "Designs" > Select Full factorial (Runs:16) from table
             Click on "Factors" >     
-                | Factor | Name                  | Type       | Low | High |
-                |     A     | Pin Elevation      | Numeric | 120  | 180   |
+                |   Factor  | Name            | Type    | Low  | High  |
+                |     A     | Pin Elevation   | Numeric | 120  | 180   |
                 |     B     | Bungee Position | Numeric | 120  | 180   |
-                |     C     | Cup Elevation     | Numeric | 220  | 280   |
-                |     D     | Release Angle    | Numeric | 140  | 180   |
+                |     C     | Cup Elevation   | Numeric | 220  | 280   |
+                |     D     | Release Angle   | Numeric | 140  | 180   |
             Click on "Options" >
                 Fold Design: Do not fold
                 Randomize Runs: Unchecked
@@ -103,8 +103,8 @@ CONTENTS
             NOTE: Since most machines are electronically controlled, it will be between 119.5 to 121.2 even when you try to set at 120
         Repeat test for other results
         RESULT:
-            | N  | PE   | BP   | CE  | RA   | Result |
-            | 01 | 120 | 120 | 220 | 140 | 88       |
+            | N  | PE  | BP  | CE  | RA  | Result  |
+            | 01 | 120 | 120 | 220 | 140 | 88      |
             | 02 | 180 | 120 | 220 | 140 | 119     |
             | 03 | 120 | 180 | 220 | 140 | 120     |
             | 04 | 180 | 180 | 220 | 140 | 162     |
@@ -154,8 +154,8 @@ CONTENTS
                 In Minitab > Main Menu > Stat > DOE > Factorial > Response Optimizer
                     Add "Results" to "Selected" input box
                     Click on "Setup"
-                        |Response | Goal    | Lower | Target | Upper | Weight |
-                        | Result      | Target | 240    | 250      | 260     |    1       |
+                        |Response   | Goal    | Lower  | Target   | Upper   | Weight     |
+                        | Result    | Target  | 240    | 250      | 260     |    1       |
                         Click on OK and Optimization Plot window appears
             Optimization Plot Window
                 Result:
