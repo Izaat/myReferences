@@ -922,7 +922,7 @@ CONTENTS
 
                 Command Window:
                     biased_coin(0.25)              //Ans = h OR t, enter multiple times
-                    test_biased_coin(0.25, 1000)   //Shows the histogram of biased distribution
+                    test_biased_coin(0.25, 1000)   //Shows the histogram of biased distribution, where 104 is heads
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     19C Birthday Paradox
