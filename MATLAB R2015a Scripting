@@ -23,7 +23,7 @@ CONTENTS
 18. Convolution (Blurring an image with Gaussian filter, Edge Detection)
 19. Probability
         Measuring probability
-        Generating random values
+        Generating random values from a certain distribution
         Birthday paradox
         Continuous variables from Discrete variables
         Mean and variance
@@ -865,15 +865,16 @@ CONTENTS
         Clone and download the files
         In Matlab, change "Current Folder" panel to the downloaded folder
         Command Window
-            R = csvread('random_integers.csv');                //Load data to R 
-            size(R)                                                              //Shows 100 as the size of R, 100 by 1 matrix
-            sum(R == -5) / length(R)                                  //Calculates the probability of data that R = -5.  //Ans: 0.07 -OR- 7%
-            hist(R)                                                              //Shows the Histogram of R
-            sum(mod(R,2) == 0) / length                           //Using modulo to find out if probability is even, //Ans: 0.43
-            sum(mod(R,2) == 1) / length                           //Using modulo to find out if probability is odd,   //Ans: 0.57
-            sum(R == 5 | R == -5) / 2                                 //If R takes in a specific value, in this case, 5 or -5.  Ans: 0.21 -OR- 21%
+            R = csvread('random_integers.csv');        //Load data to R 
+            size(R)                                    //Shows 100 as the size of R, 100 by 1 matrix
+            sum(R == -5) / length(R)                   //Calculates the probability of data that R = -5.  //Ans: 0.07 -OR- 7%
+            hist(R)                                    //Shows the Histogram of R
+            sum(mod(R,2) == 0) / length                //Using modulo to find out if probability is even, //Ans: 0.43
+            sum(mod(R,2) == 1) / length                //Using modulo to find out if probability is odd,   //Ans: 0.57
+            sum(R == 5 | R == -5) / 2                  //If R takes in a specific value, in this case, 5 or -5.  Ans: 0.21 -OR- 21%
 
-
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    19B Generating random values from certain distribution
 
 
 
