@@ -874,7 +874,59 @@ CONTENTS
             sum(R == 5 | R == -5) / 2                  //If R takes in a specific value, in this case, 5 or -5.  Ans: 0.21 -OR- 21%
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    19B Generating random values from certain distribution
+    19B Generating random variable from certain distribution
+    
+        Useful for simulations of systems with uncertainty
+        
+        randi(imax)        //Uniformed distributed variable between "1" and "imax"
+        randi(10)          //Ans: 9, between 1 and 10 where 10 is the "imax"
+
+        R = randi(10, 3)   //Where imax = 10 and n = 3, will return nxn matrix, "randi(imax, n)"
+            Ans:
+                10  7    6
+                2    1  10
+                10  3  10
+
+        R = randi(10, 3) + 10  //Returns values between 10 to 20
+            Ans:
+                12  15  15
+                20  19  20
+                20  12  18
+
+        rand                  //Return numbers between 0 to 1, in 4 decimal places
+        hist(rand(100,1))     //Returns histogram of random numbers, the higher the imax number, the more equally distributed it is
+        //                    //"When n approaches infinity, probability approach their true values"
+
+        P(heads) = 0.25, P(tails) = 0.75 
+            Discreet distribution: Simulate an unfair coin and to draw its distribution, not from a uniformed distribution
+            To create a function to do this
+            
+            Test 1
+                Function file 1: (biased_coin.m)
+                    function [face] = biased_coin(p_heads)       //Returns the coin "face" from "biased coin"
+                        if rand < p_heads                        //Generate random value
+                            face = 'h';                          //Return heads
+                        else
+                            face = 't';                          //Else return tails
+                        end    
+                    end
+
+                Function file 2: (test_biased_coin.m)
+                    function test_biased_coin(p_heads, n)
+                        A = zeros(n, 1);
+                        for i=1:n
+                            A(i) = biased_coin(p_heads);
+                        end    
+                        hist(A);
+                    end
+
+                Command Window:
+                    biased_coin(0.25)              //Ans = h OR t, enter multiple times
+                    test_biased_coin(0.25, 1000)   //Shows the histogram of biased distribution
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    19C Birthday Paradox
+
 
 
 
