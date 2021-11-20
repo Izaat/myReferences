@@ -205,6 +205,7 @@ CONTENTS
 
     Sinking:
         The common connection on PLC side is connected to 0V
+        Sensors to be used: PNP
         
         Sensor:- PNP, 3 wires
             +------------+
@@ -224,7 +225,7 @@ CONTENTS
 
     Sourcing:
         The common connection on PLC side is connected to 24V
-        npn
+        Sensors to be used: NPN
         
         Sensor:- NPN
             +------------+
