@@ -927,6 +927,37 @@ CONTENTS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     19C Birthday Paradox
 
+    Problem: Given a class of n students, what is the probability that at least 1 pair of students shares a birthday
+    At n = 23, probability is about 50%, which is why this problem is called a paradox.
+    Therefore if a class has more than 23 students, there is more likely to have 2 students sharing the same birthday.
+    This is counterintuitive when there are 365 days per year and having 2 students sharing the same birthday is more unlikely
+    And with a class of 50, 100% chance that there will be 2 people sharing a birthday
+    
+    P(at least 1 pair shares a birthday) + P(nobody shares a birthday) = 1
+    P(at least 1 pair shares a birthday) = 1 - P(nobody shares a birthday)
+    1st person = 365/365
+    2nd person = 1 - (364/365) = 0.0027 (Case for 2 people)
+    3rd person = 1 - (364/365)*(363/365) = 0.0082 (Case for 3 people sharing a birthday)
+
+    birthday.m
+        function [A] = birthday(n)
+            A = ones(n,1);
+            p = 1;
+            for i=1:n
+                A(i) = 1 - p;
+                p = p*(365-i)/365;
+            end
+        end
+
+    Command window
+        A = birthday(100);
+        plot(A)
+
+        A(23)   //Ans: 0.507
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    19D Continuous Variables from Discrete Variables
+
 
 
 
