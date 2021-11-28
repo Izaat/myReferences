@@ -956,7 +956,54 @@ CONTENTS
         A(23)   //Ans: 0.507
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    19D Continuous Variables from Discrete Variables
+    19D Continuous Variables
+
+        Discrete variables can only take discrete values
+        Continuous variables can take on any values
+        In continuous variables, there is no such thing as exact value
+        This is because in continuous variable, X can take infinite number of values
+        This in turn makes continuous variables to have no probability of exact value, but are usually in range format
+            Exact: x = 3.2342
+            Range: x = 3 to 3.5
+        Probability for ranges in continuous variable
+            P(3 < x < 3.5) > 0
+        Cumulative Distribution Function (CDF):- To measure the probabiliy for ranges
+            Fx(x) = P(-inf < X < x)
+            Also note that the probability for X is between -inf and +inf is 1 since x has to take a value
+                Fx(inf) = P(-inf < X < inf) = 1
+        P(3.13 < X < 3.15) > 0
+            = F(3.15) - F(3.13)
+
+        Probability Density Function (PDF)
+            fx(x) is defined by the derivative of Fx(x) with respecto to x (Slope)
+            Therefore: fx(x) = [dFx(x)] / dx
+            This can be greater than 1 since it's not a probability
+            But, f(x) has to be greater or equal to 0, f(x) >= 0
+
+            Example where f(x) is greater than 1
+                Assume the random numbers "x" is distributed uniformly between 0 and 0.1 
+                Then f(x) 
+                    10 (IF 0 <= x < 0.1), 
+                    0 (IF otherwise)   
+                Because F(x) is the integral of f(x)
+                    |         x
+                    F(x) = integral [f(x)dx]
+                    |       -inf
+                Take constant out
+                    |                x
+                    F(x) = const. integral dx
+                    |                0
+                Integral
+                    |                            0.1
+                    Integral = F(inf) = const. integral dx = 0.1c
+                    |                             0
+                Therefore, find value of c 
+                    c = 10
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    19E Mean and Variance
+
+
 
 
 
