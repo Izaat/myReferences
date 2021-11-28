@@ -975,6 +975,7 @@ CONTENTS
             = F(3.15) - F(3.13)
 
         Probability Density Function (PDF)
+            https://www.youtube.com/watch?v=Fvi9A_tEmXQ
             fx(x) is defined by the derivative of Fx(x) with respecto to x (Slope)
             Therefore: fx(x) = [dFx(x)] / dx
             This can be greater than 1 since it's not a probability
