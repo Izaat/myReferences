@@ -85,6 +85,69 @@ Testing
             Short Gate and Emitter to switch off and this will result in OL between C1 and E1
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+Test on Power Module
+    
+    Set DMM to "-|>-" diode test
+    Black:
+        +: Black lead
+        L1: Red Lead
+        Result: 0.5V
+
+        +: Black lead
+        L2: Red Lead
+        Result: 0.5V
+
+        +: Black lead
+        L3: Red Lead
+        Result: 0.5V
+
+        +: Black lead
+        -: Red Lead
+        Result: 0.4V
+
+        +: Black lead
+        U: Red Lead
+        Result: 0.4V
+
+        +: Black lead
+        V: Red Lead
+        Result: 0.4V
+
+        +: Black lead
+        W: Red Lead
+        Result: 0.4V
+    
+    Red:
+        -: Red lead
+        L1: Black Lead
+        Result: 0.5V
+
+        -: Red lead
+        L2: Black Lead
+        Result: 0.5V
+
+        -: Red lead
+        L3: Black Lead
+        Result: 0.5V
+
+        -: Red lead
+        +: Black Lead
+        Result: 0.4V
+
+        -: Red lead
+        U: Black Lead
+        Result: 0.4V
+
+        -: Red lead
+        V: Black Lead
+        Result: 0.4V
+
+        -: Red lead
+        W: Black Lead
+        Result: 0.4V
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 End
 
 
