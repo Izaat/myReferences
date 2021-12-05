@@ -1027,6 +1027,45 @@ CONTENTS
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     19F Gaussian (normal) distribution
+    
+        Mean and Variance in topic 19E describes what a continuous distribution looks like
+        In Gaussian Distribution, the mean and variance completely describe the shape of the distribution curve
+        The standard distribution shows the normal bell curve
+        The mean shows the amplitude of the bell curve or how high the peak is in the bell curve. 
+        Variance shows the how much the bell curve is spread out horizontally 
+
+        Sigma = standard deviation
+        Sigma^2 = variance
+
+        Probability density of normal distribution
+            PDF = f(x | mu, sigma)                          //Where mu is the mean
+            PDF = [1 / (sigma sqrt(2*pi))] e -[((x-mu)^2)/2sigma^2]
+
+        my_gaussian.m
+            function [X, f] = my_gaussian(mu, sigma_sq, min_x, max_x, n) //n is the number of different values between min_x and max_x, X is in array format
+                
+                X = zeros(n, 1);      //Initialize the X array
+                f = zeros(n, 1);      //Initialize the f array
+                x = min_x;            //Begin with min_x
+                dx = (max_x - min_x) / n;      //Mean
+                
+                for i = 1:n           //Increment at each iteration
+                    X(i) = x;
+                    f(i) = 1/sqrt(2*pi*sigma_sq) * exp( -(x-mu)^2 / (2*sigma_sq) );
+                    x = x + dx;
+                end
+                
+            end
+
+        Command Window
+            [X, f] = my_gaussian(0, 1, -10, 10, 1000);     //Where my_gaussian(mu, sigma_sq, min_x, max_x, n)
+            plot(X, f)      //Bell curve will pop up and the peak will be at 0.4, and the spread will be from -2 to 2
+
+            [X, f] = my_gaussian(0, 0.1, -2, 2, 1000);
+            plot(X, f)      //Bell curve will pop up and the peak will be at 1.2, and the spread will be from -1 to 1. In PDF, value above 1 is allowed (See 19D)
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    19F Test for normality (Test if a random variable is Gaussian distributed)
 
 
 
