@@ -1004,6 +1004,30 @@ CONTENTS
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     19E Mean and Variance
 
+        Measuring the distribution of continuous variables
+        Discrete: How often the variable takes a certain value and divide by the total number of values
+        Continuous: Need certain characteristics of the distribution that defines the shape of the distribution curve (Mean and Variance)
+        
+        Mean: Add all values and divide by total values to get the middle value (The center of all values)
+        Command Window 
+            R = csvread('random_integers.csv');                       //Refer to 19A for the csv file
+            sum(R)                     //Sum of all values
+            length(R)                  //Total number of values 
+            sum(R)/length(R)           //Mean
+            mean(R)                    //Exactly the same as "sum(R)/length(R)"
+
+        Variance: The spread of a distribution from the middle value "E[(X-mean(X))^2]"
+        Command Window
+            meanR = mean(R)        //Set mean of R as meanR
+            varR = (R-meanR)'      //Dot product (squaring of all individual values)
+            varR = (R-meanR)'*(R-meanR)                 //Multiply with corresponding value, Treating R as a vector and then finding the dot product with itself after subtracting the mean
+            varR = (R-meanR)'*(R-meanR)/length(R)       //Subtracting the mean and then taking the squared distance/length. The answer is the variance
+            varR = (R-meanR)'*(R-meanR)/(length(R)-1)   //Unbiased estimate of the variance
+            var(R)                                      //Exactly the same as "(R-meanR)'*(R-meanR)/(length(R)-1)". Therefore MATLAB's variance is the unbiased form
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    19F Gaussian (normal) distribution
+
 
 
 
