@@ -1065,7 +1065,42 @@ CONTENTS
             plot(X, f)      //Bell curve will pop up and the peak will be at 1.2, and the spread will be from -1 to 1. In PDF, value above 1 is allowed (See 19D)
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    19F Test for normality (Test if a random variable is Gaussian distributed)
+    19G Test for normality (Test if a random variable is Gaussian distributed) - aka Hypothesis Testing
+    
+        In hypothesis testing, there will by null hypothesis and alternative hypothesis
+        Generate some random data
+        Command Window
+            R = randn(1000, 1);            //Generate random value
+            hist(R)                        //Plot to histogram
+            hist(R, 50)                    //Histogram with 50 columns (finer details)
+            
+            R = randn(10000, 1); 
+            hist(R, 50)                    //Note that the higher the value, the more the histogram look like the Gaussian curve (Normal Distribution)
+    
+        In real world, data generally wont look normal distributed 
+        Test to see if the data is Normal (Gaussian distributed) - Hypothesis Testing
+        
+        Jarque Bera Test
+            https://www.mathworks.com/help/stats/jbtest.html
+            To return a hypothesis (whether or not data is randomly distributed) and a "p" value (strength of hypothesis)
+    
+            Command Window
+                R = randn(10000, 1);
+                [h,p] = jbtest(R)         //Null hypothesis (Is the data normally distributed?) h=0, p=0.5, (Means the the answer is "not rejected")
+        
+        Kolmogorov Smirnov test
+            
+            Essentially similar to Jarque Bera test
+                R = randn(10000, 1);     //To use the same R from Jarque Bera test
+                [h,p] = kstest(U)        //Rejecting null hypothesis, h=0, p=0.2613,  (Means the the answer is "not rejected")
+    
+        Generate data that is not normally distributed
+            U = rand(1000, 1);
+            [h,p] = kstest(U)           //hp = 1, (Means the the answer is "rejected" therefore data is not normally distributed)
+            [h,p] = jbtest(U)           //hp = 1, (Means the the answer is "rejected" therefore data is not normally distributed)
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    19H 2 sample tests (Compare 2 groups of Gaussian Distributed data)
 
 
 
