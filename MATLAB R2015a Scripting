@@ -1100,7 +1100,36 @@ CONTENTS
             [h,p] = jbtest(U)           //hp = 1, (Means the the answer is "rejected" therefore data is not normally distributed)
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    19H 2 sample tests (Compare 2 groups of Gaussian Distributed data)
+    19H 2 sample tests (Compare 2 groups of Gaussian Distributed data) - 2sample t-test
+            
+        Two types of statistical hypotheses
+            Null hypothesis: Denoted by H0, sample observations result purely from chance [H0: P = 0]
+            Alternative hypothesis: Denoted by H1 or Ha, sample observations are influenced by some non-random cause [Ha: P != 0]
+            
+        Command Window
+            Test 1
+                R1 = randn(100, 1);                   //Mean of 0 and variance of 1
+                R2 = (randn(20, 1) + 1) * 2;          //Mean of 1 and std deviation of 2
+                [h,p] = ttest2(R1,R2)                 //Finding the difference of the 2 datas (2sample t test), Ans: h=1, p=6.545e-08, Null hypothesis rejected because p value is lower than 5%
+            Test 2
+                R1 = randn(10, 1);                    //Mean of 0 and variance of 1
+                R2 = (randn(20, 1) + 1) * 2;          //Mean of 1 and std deviation of 2
+                [h,p] = ttest2(R1,R2)                 //(2sample t test), Ans: h=1, p=0.06, Null hypothesis rejected because p value is lower than 5%  
+            Test 3
+                R1 = randn(10, 1);                    //Mean of 0 and variance of 1
+                R2 = (randn(10, 1) + 1) * 2;          //Mean of 1 and std deviation of 2
+                [h,p] = ttest2(R1,R2)                 //(2sample t test), Ans: h=1, p=0.008, Null hypothesis rejected because p value is lower than 5%  
+            Test 4
+                R1 = randn(10, 1);                    //Mean of 0 and variance of 1
+                R2 = (randn(10, 1) + 1) * 50000;      //Mean of 1 and variance of 50000
+                [h,p] = ttest2(R1,R2)                 //(2sample t test), Ans: h=0, p=0.224, Null hypothesis accepted because p value is higher than 5%  
+            Test 5
+                R1 = randn(10, 1);                    //Mean of 0 and variance of 1
+                R2 = (randn(10, 1) +0.1) * 2;         //Mean of 0.1 and variance of 2
+                [h,p] = ttest2(R1,R2)                 //(2sample t test), Ans: h=0, p=0.24, Null hypothesis accepted because p value is higher than 5%  
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    19I
 
 
 
