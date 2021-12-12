@@ -1151,10 +1151,10 @@ CONTENTS
                 F = mvnpdf([X1(:) X2(:)], mu, Sigma);   //Calculates PDF value
                 F = reshape(F,length(x2), length(x1));  //Calculates PDF value
                 
-                surf(x1,x2,F);                          //Surface plotting
+                surf(x1,x2,F);                          //Surface plotting, 3D graph will appear
                 caxis([min(F(:))-.5*range(F(:)), max(F(:))]);
                 axis([-3 3 -3 3 0 .4])
-                xlabel('x1'); ylabel('x2'); zlabel('Probability Density');        //3D graph will appear
+                xlabel('x1'); ylabel('x2'); zlabel('Probability Density');        
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 [End]
