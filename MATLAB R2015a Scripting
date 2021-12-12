@@ -30,7 +30,7 @@ CONTENTS
         Gaussian (normal) distribution
         Test for normality (Test if a random variable is Gaussian distributed)
         2 sample tests (Compare 2 groups of Gaussian Distributed data)
-        Multivariate Gaussian (Multidimensional Gaussian)
+        Multivariate Gaussian  (Multidimensional Distribution - 2 or more dimensions)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction (Basic syntax, command window, and working directory)
