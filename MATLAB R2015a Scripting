@@ -1129,7 +1129,35 @@ CONTENTS
                 [h,p] = ttest2(R1,R2)                 //(2sample t test), Ans: h=0, p=0.24, Null hypothesis accepted because p value is higher than 5%  
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    19I
+    19i Multivariate Gaussian (Multidimensional Distribution - 2 or more dimensions)
+
+        In multivariate distribution, the mean becomes a vector
+        Command Window:
+            X = rand(100,10);       //Random matrix with 100 values and 10 dimensions
+            mean(X)                     //Ans: 0.4727, 0.5247, 0.5278, 0.5312, ..., 0.5145
+            cov(X)                        //Covariance Matrix: Sum = [Cov[Xi, Xj]], i=1,2,...,k; j=1,2,...,k
+            size(cov(X))               //Check size Ans: 10, 10. Therefore 10x10 hence the dimension is 10
+
+        PDF for multidimension does not use covariance directly but instead uses inverse and determinant
+            fx(x1,...,xk) = 1/[sqrt((2*pi)^k |Sum|)]exp(-0.5(x-mu)^tau Sum^-1 (x-mu))         //|Sum| is the determinant and Sum^-1 is the inverse
+            Matlab:
+                F = mvnpdf([X1(:) X2(:)], mu, Sigma)
+            Command Window:
+                mu = [0 0];
+                Sigma = [.25 .3; .3 1];                 //Dimension of Sigma is 2x2
+                x1 = -3:.2:3; x2 = -3:.2:3;
+                [X1, X2] = meshgrid(x1, x2);            //Set the dimension of X as 2
+                
+                F = mvnpdf([X1(:) X2(:)], mu, Sigma);   //Calculates PDF value
+                F = reshape(F,length(x2), length(x1));  //Calculates PDF value
+                
+                surf(x1,x2,F);                          //Surface plotting
+                caxis([min(F(:))-.5*range(F(:)), max(F(:))]);
+                axis([-3 3 -3 3 0 .4])
+                xlabel('x1'); ylabel('x2'); zlabel('Probability Density');        //3D graph will appear
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[End]
 
 
 
