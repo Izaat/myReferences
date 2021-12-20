@@ -57,8 +57,14 @@ Another method is by tuning P, D, then I
 Physical System > State Space > Transfer Function (S-Domain) > Transfer Function (Z-Domain) > PID Controller 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+        Table:
+            |   Controller       |      Kp      |   Ki    |  Kd    |
+            |      P             |      T/L     |   0     |   0    |
+            |      PI            | 0.9 * (T/L)  |  L/0.3  |   0    |
+            | PID (Classic)      | 1.2 * (T/L)  |   2L    |  0.5L  |
 
 
 
