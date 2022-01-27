@@ -70,8 +70,8 @@ CONTENTS
 
         To start coding
             cd myproject       //Enter directory
-            code .                  //To open project with VSCode
-            expo start           //To begin coding in VSCode (Enter this line in Command Prompt/Terminal) - OR - npm start
+            code .             //To open project with VSCode
+            expo start         //To begin coding in VSCode (Enter this line in Command Prompt/Terminal) - OR - npm start
             
             NOTE: The browser is more for a debugging tool. Scan the QR code (With Expo Client) to  preview your project app inside the phone
     
