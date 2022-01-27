@@ -1,4 +1,4 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 React Native - Mobile App Development
 
 All 3 links below must be understood before heading out here
@@ -8,11 +8,117 @@ All 3 links below must be understood before heading out here
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CONTENTS
-01.
+01. Creating React Native App  - npm install expo-cli --global
+02. View, Text and Styles
+03. Using State
+04. Text Inputs
+05. Lists and ScrollView
+06. List Component
+07. Touchable Components
+08. Todo App - Part 1
+09. Todo App - Part 2
+10. Todo App - Part 3
+
+11. Alerts
+12. Dismissing the Keyboard
+13. Flexbox Basics
+14. Icons and more Flexbox
+15. Reviews App
+16. Custom Fonts
+17. Global Styles
+18. React Navigation Setup
+19. Stack Navigator
+20. Navigating Around
+
+21. Passing Data Between Screens
+22. Navigation Options
+23. Drawer Navigation
+24. Custom Header Component
+25. Custom Card Component
+26. Using Images
+27. Background Images
+28. Modals
+29. Formik Forms - Part 1
+30. Formik Forms - Part 2
+31. Validation with Yup
+32. Showing Form Errors
+33. Custom Button Component
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Creating React Native App
+
+    React Native Apps can be coded in multiple different ways in CLI (Command Line Interface): 
+        Expo CLI - For beginners (Simplified app development workflow) - Standalone dev GUI
+        React Native CLI - Requires Xcode or Android Studio to get started
+
+    Installing Expo CLI
+        npm install expo-cli --global
+        Paste the line above into Command Prompt/Terminal
+
+    Create Project (From Terminal)
+        Navigate into your target directory and enter the lines below
+            expo init myproject
+            cd myproject
+            expo start
+        
+        A menu will appear and select "Blank - Minimal app as clean as empty canvas"
+        Type in project name
+            "expo"; {
+                "name": "myproject",
+                "slug": "myproject"
+            }
+
+        To start coding
+            cd myproject       //Enter directory
+            code .                  //To open project with VSCode
+            expo start           //To begin coding in VSCode (Enter this line in Command Prompt/Terminal) - OR - npm start
+            
+            NOTE: The browser is more for a debugging tool. Scan the QR code (With Expo Client) to  preview your project app inside the phone
+    
+    Preview Menu in Command Prompt / VS Code Terminal
+        a - Android Emulator (Open Emulator first before pressing "a")
+        e - email
+        s - Sign in to Expo
+        Ctrl+C - Exit menu
+    
+    Previewing App directly from iPhone
+        Install app "Expo Client"
+
+    Preview App from Android Studio
+        Start Android Studio > Configure > AVD Manager > Create Android Virtual Device > Press Play
+        Browser > Side Panel > Run on Android Device/Emulator - To install and allow drawing on Expo
+        Browser > Side Panel > Run on Android Device/Emulator - To download and run app
+
+    Project Directory
+        ../assets - Images
+        ../node_modules - dependencies and packages
+        gitignore - version control
+        App.js - project codes
+        app.json - project information
+        babel.config.js - Babel is a compiler that allows project to use modern javascript features
+        package-lock.json - Project information
+        package.json - Project information
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+02. View, Text and Styles
+
+
+
+
+
+
+
+
 
 
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
 
