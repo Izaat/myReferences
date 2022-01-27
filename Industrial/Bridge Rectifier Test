@@ -5,7 +5,7 @@ Bridge Rectifier
 
     Schematics    
     #       
-    #              U  V  W        
+    #              W  V  U        
     #              o  o  o
     #              |  |  |           
     #              |  |  |              
@@ -17,3 +17,11 @@ Bridge Rectifier
     #  |                                |
     #  |                                |
     #  o (-)                            o (+)
+
+
+    ##########################
+    Every diode should have values of about 0.46
+
+
+
+
