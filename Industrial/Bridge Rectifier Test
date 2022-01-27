@@ -4,8 +4,8 @@ Bridge Rectifier
     ##########################
 
     Schematics    
-    #       
-    #              W  V  U        
+    #              A  B  C
+    #              ~  ~  ~        
     #              o  o  o
     #              |  |  |           
     #              |  |  |              
@@ -18,10 +18,11 @@ Bridge Rectifier
     #  |                                |
     #  o (-)                            o (+)
 
-
     ##########################
-    Every diode should have values of about 0.46
+    Set DMM to diode test
+    Every diode should have values of about 0.48 ( - to A, A to +, etc)
+    All diodes should be at 0.85 ( - to + )
+    Opposite direction of every diode should be OL
 
 
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
