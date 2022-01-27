@@ -17,12 +17,39 @@ Bridge Rectifier
     #  |                                |
     #  |                                |
     #  o (-)                            o (+)
-
+    
+    
     ##########################
+    Test without power
+    
     Set DMM to diode test
     Every diode should have values of about 0.48 ( - to A, A to +, etc)
     All diodes should be at 0.85 ( - to + )
     Opposite direction of every diode should be OL
 
+    ##########################
+    Test with power
+    
+    Since A, B and C are from 3 phase incoming AC supply, test phase to phase voltage
+    (-) and (+) are DC output, so test DC voltage, should be about 580VDC (530VDC to 590VDC)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[End]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
