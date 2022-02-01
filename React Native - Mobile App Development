@@ -102,6 +102,124 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 02. View, Text and Styles
 
+    ////////////////////////////////////
+    App.js (Default Code)
+        import React from 'react';
+        import {StyleSheet, Text, View} from 'react-native';
+        
+        export default function App() {
+            return (
+                <View style={styles.container}>                     //"View" is similar to "Div" in Html
+                    <Text>Open up App.js to start working on your app!</Text>
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({                           //This will be like stylesheet from CSS but without ".container" in "stylesheet.css"
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',                                  //Notice that in CSS, the title will be "background-color", but in React, titles use camel cases (backgroundColor) 
+                alignItems: 'center',
+                justifyContent: 'center',
+            },
+        });
+        
+    ////////////////////////////////////
+    App.js (Adding HTML style header container and body container)
+        import React from 'react';
+        import {StyleSheet, Text, View} from 'react-native';
+        
+        export default function App() {
+            return (
+                <View style={styles.container}>           
+                    //<Text>Open up App.js to start working on your app!</Text>        //Remove
+                    <View style={styles.header}>                                       //Add another View within a view (Just like Div)
+                        //<Text>Hello</Text>
+                        <Text style={styles.boldText}>Hello</Text>                     //Add style to the text, to be reflected in "style"
+                    </View>
+                    
+                    <View style={styles.body}>                                         //Add body texts
+                        <Text>Lorem ipsum dolor sit amet</Text>
+                        <Text>Lorem ipsum dolor sit amet</Text>
+                        <Text>Lorem ipsum dolor sit amet</Text>
+                    </View>
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({    
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+                alignItems: 'center',
+                justifyContent: 'center',
+            },
+            header: {                                                                  //Add header stylesheet
+                backgroundColor: 'pink',
+                padding: 20,
+            },
+            boldText: {
+                fontWeight: 'bold',
+            },
+            body: {                                                               //Add body stylesheet
+                backgroundColor: 'yellow',
+                padding: 20,                                                      //In pixels
+                //fontWeight: bold,                                               //Note that the body will not inherit fontWeight from header container
+            },
+        });
+
+    ////////////////////////////////////
+    App.js (Using bold fonts to body container) - 3 Points
+        import React from 'react';
+        import {StyleSheet, Text, View} from 'react-native';
+        
+        export default function App() {
+            return (
+                <View style={styles.container}>           
+                    <View style={styles.header}>    
+                        <Text style={styles.boldText}>Hello</Text>
+                    </View>
+                    
+                    <View style={styles.body}>                  
+                        //<Text>Lorem ipsum dolor sit amet</Text>
+                        //<Text style={styles.boldText}>Lorem ipsum dolor sit amet </Text>          //02. Similar method from header container will be used for body instead
+                        <Text style={styles.boldText}>   
+                            Lorem ipsum <Text>Test</Text>  dolor sit amet                           //03. The text inside text component (child components) will also inherit the parent's bold style
+                        </Text>
+                        <Text>Lorem ipsum dolor sit amet</Text>
+                        <Text>Lorem ipsum dolor sit amet</Text>
+                    </View>
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({    
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+                alignItems: 'center',
+                justifyContent: 'center',
+            },
+            header: {                
+                backgroundColor: 'pink',
+                padding: 20,
+            },
+            boldText: {
+                fontWeight: 'bold',
+            },
+            body: {                            
+                backgroundColor: 'yellow',
+                padding: 20,                           
+                //fontWeight: bold,                                                               //01. Note that the body will not inherit fontWeight from the header container
+            },
+        });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+03. Using State
+
+
+
+
 
 
 
