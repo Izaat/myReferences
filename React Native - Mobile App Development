@@ -217,6 +217,81 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 03. Using State
 
+    ////////////////////////////////////
+    App.js (Default)
+        import React from 'react';
+        import {StyleSheet, Text, View} from 'react-native';
+        
+        export default function App() {
+            return (
+                <View style={styles.container}>           
+                    <Text></Text>
+                    <Text></Text>
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({    
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+                alignItems: 'center',
+                justifyContent: 'center',
+            },
+        });
+
+    //////////////////////////////////// 
+    App.js (Using react hooks for deploying state in a function component) - 16 points
+        import React, {useState} from 'react';                                   //01. Add useState library
+        //import {StyleSheet, Text, View} from 'react-native'; 
+        import {StyleSheet, Text, View, Button} from 'react-native';             //06. Import react default button styles
+        
+        export default function App() {
+            //const []                                                           //02. Create an array
+            const [name, setName] = useState('izaat');                           //03. name will get value of izaat. Use "setName" to change "name" value (Note that this is a string)
+            
+            //const [person, setPerson] = useState({});                          //13. Use useState as object
+            const [person, setPerson] = useState({name: 'mario', age: 40});      //14. Use 2 properties for the object (name and age)
+            
+            //const clickHandler = () => {}                                      //10.  Const for the function
+            const clickHandler = () => {
+                setName('Ali');                                                  //11. Add the setName and assign as another name
+                setPerson({name: 'luigi', age: 39});                             //16. Add and assign the new properties to the button
+            }   
+            
+            return (
+                <View style={styles.container}>           
+                    //<Text></Text>
+                    <Text>My name is {name} </Text>                              //04. To output the name
+                    
+                    <Text>His name is {person.name} and his age is {person.age}</Text>        //15. Deploy the 2 properties into the text
+                    
+                    <View style={styles.buttonContainer}>                        //05. Add button style
+                        //<Button title='update name' />                         //07. Add the button to update name. Notice this is the default style button and can't be customized
+                        //<Button title='update name' onPress{} />               //09. Make the button clickable, but first, create a const for the function
+                        <Button title='update name' onPress{clickHandler} />     //12. Assign the function to the button (When button is clicked, Ali will appear instead)
+                    </View>
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({    
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+                alignItems: 'center',
+                justifyContent: 'center',
+            },
+            buttonContainer: {
+                marginTop: 20,                                                      //08. This brings doen the button lower (Similar to padding)
+            },
+        });
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+04. Text Inputs
+
+
 
 
 
