@@ -466,18 +466,18 @@ CONTENTS
                     //</ScrollView>  
                     
                     //CLEANING UP THE CODE
-                    <ScrollView>
+                    //<ScrollView>
                         //{people.map( (item)=>{ 
                         //{people.map( item=>{                                     //03. Bracket not required since single item is used
-                        {people.map( item=>(                                       //04. Curly braces and return line wont be used and this can be done directly 
+                    //    {people.map( item=>(                                     //04. Curly braces and return line wont be used and this can be done directly 
                             //return(
-                                <View key={item.key}>       
-                                    <Text style={styles.item}>{item.name}</Text>   
-                                </View>
+                    //            <View key={item.key}>       
+                    //                <Text style={styles.item}>{item.name}</Text>   
+                    //            </View>
                             //) 
                         //})} 
-                        ))} 
-                    </ScrollView>  
+                    //    ))} 
+                    //</ScrollView>  
                     
                     //THEREFORE AFTER CLEANING UP
                     <ScrollView>
