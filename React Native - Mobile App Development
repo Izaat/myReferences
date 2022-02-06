@@ -12,7 +12,7 @@ CONTENTS
 02. View, Text and Styles
 03. Using State
 04. Text Inputs
-05. Lists and ScrollView
+05. Lists and ScrollView - Mapping Method
 06. List Component
 07. Touchable Components
 08. Todo App - Part 1
@@ -369,7 +369,149 @@ CONTENTS
         });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-05. Lists and ScrollView
+05. Lists and ScrollView - Mapping Method
+
+    //////////////////////////////////// 
+    App.js (With input list)
+        import React, {useState} from 'react';
+        import {StyleSheet, Text, View} from 'react-native';     
+        
+        export default function App() {
+            //const [people, setPeople] = useState([]);       //01. Set as array  
+            const [people, setPeople] = useState([
+                { name: 'izaat', key: '1' },
+                { name: 'yoshi', key: '2' },
+                { name: 'mario', key: '3' },
+                { name: 'luigi', key: '4' },
+                { name: 'peach', key: '5' },
+                { name: 'toad', key: '6' },
+                { name: 'bowser', key: '7' },
+            ]); 
+            
+            return (
+                <View style={styles.container}>           
+                    //{people.map}                                             //06. Use map method to turn an array into a list
+                    //{people.map( ()=>{} )}                               //07. Add arrow function that will execute each item in the array
+                    //{people.map( (item)=>{} )}                        //08. Assign a name to retrieve the item from array
+                    //{people.map( (item)=>{ return() } )}          //09. To return JSX code for each item in the array
+                    {people.map( (item)=>{ 
+                        return(
+                            //<View>
+                            <View key={item.key}>                          //11. Retrieve the unique key for each property/item
+                                //<Text>{item.name}</Text>            //10. This will grab the name property from the array
+                                <Text style={styles.item}>{item.name}</Text>    //12. Add styles
+                            </View>
+                        ) 
+                    })} 
+                    
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({    
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+                paddingTop: 40,                                                 //02. Add padding
+                paddingHorizontal: 20,                                       //03. Add padding
+                //alignItems: 'center',                                        //04. Not in use
+                //justifyContent: 'center',                                  //05. Not in use
+            },
+            item: {                                                                   //13. Add style
+                marginTop: 24,
+                padding: 30,
+                backgroundColor: 'pink',
+                fontSize: 24,
+            },
+        });
+
+    //////////////////////////////////// 
+    App.js (With ScrollView)
+        import React, {useState} from 'react';
+        //import {StyleSheet, Text, View} from 'react-native';     
+        import {StyleSheet, Text, View, ScrollView} from 'react-native';        //01. Import ScrollView
+        
+        export default function App() {
+            const [people, setPeople] = useState([
+                { name: 'izaat', key: '1' },
+                { name: 'yoshi', key: '2' },
+                { name: 'mario', key: '3' },
+                { name: 'luigi', key: '4' },
+                { name: 'peach', key: '5' },
+                { name: 'toad', key: '6' },
+                { name: 'bowser', key: '7' },
+            ]); 
+            
+            return (
+                <View style={styles.container}>           
+                
+                    //{people.map( (item)=>{ 
+                    //    return(
+                    //        <View key={item.key}>       
+                    //            <Text style={styles.item}>{item.name}</Text>   
+                    //        </View>
+                    //    ) 
+                    //})} 
+                    
+                    //<ScrollView>{people.map}</ScrollView>                      //02. Add everything into ScrollView
+                    
+                    //<ScrollView>
+                    //    {people.map( (item)=>{ 
+                    //        return(
+                    //            <View key={item.key}>       
+                    //                <Text style={styles.item}>{item.name}</Text>   
+                    //            </View>
+                    //        ) 
+                    //    })} 
+                    //</ScrollView>  
+                    
+                    //CLEANING UP THE CODE
+                    <ScrollView>
+                        //{people.map( (item)=>{ 
+                        //{people.map( item=>{                                     //03. Bracket not required since single item is used
+                        {people.map( item=>(                                       //04. Curly braces and return line wont be used and this can be done directly 
+                            //return(
+                                <View key={item.key}>       
+                                    <Text style={styles.item}>{item.name}</Text>   
+                                </View>
+                            //) 
+                        //})} 
+                        ))} 
+                    </ScrollView>  
+                    
+                    //THEREFORE AFTER CLEANING UP
+                    <ScrollView>
+                        {people.map( item=>(         
+                            <View key={item.key}>       
+                                <Text style={styles.item}>{item.name}</Text>   
+                            </View>
+                        ))} 
+                    </ScrollView>  
+
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({    
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+                paddingTop: 40,                         
+                paddingHorizontal: 20,       
+            },
+            item: {                      
+                marginTop: 24,
+                padding: 30,
+                backgroundColor: 'pink',
+                fontSize: 24,
+            },
+        });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+06. List Component
+
+
+
 
 
 
