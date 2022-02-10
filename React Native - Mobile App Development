@@ -508,7 +508,130 @@ CONTENTS
         });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-06. List Component
+06. List Component - FlatList
+    
+    ////////////////////////////////////  - 10 points
+    FlatList only updates the differences in the list (Fast loading cycle)
+    Scrollview rerender everything from the beginning (Slow loading cycle)
+    
+    App.js (With FlatList)
+        import React, {useState} from 'react';
+        import {StyleSheet, Text, View, FlatList} from 'react-native';             //01. Import FlatList
+        
+        export default function App() {
+            const [people, setPeople] = useState([
+                //{ name: 'izaat', key: '1' },                                     //06. Using "id" instead of "key" like database. App will give warning about missing keys
+                //{ name: 'yoshi', key: '2' },
+                //{ name: 'mario', key: '3' },
+                //{ name: 'luigi', key: '4' },
+                //{ name: 'peach', key: '5' },
+                //{ name: 'toad', key: '6' },
+                //{ name: 'bowser', key: '7' },
+                
+                { name: 'izaat', id: '1' },                                        //07. To work around the missing key, "keyExtractor" will be used
+                { name: 'yoshi', id: '2' },
+                { name: 'mario', id: '3' },
+                { name: 'luigi', id: '4' },
+                { name: 'peach', id: '5' },
+                { name: 'toad', id: '6' },
+                { name: 'bowser', id: '7' },
+                
+            ]); 
+            
+            return (
+                <View style={styles.container}>           
+                    //<FlatList />                                                  //02. Add FlatList
+                    <FlatList 
+                        //keyExtractor={() => }                                     //08. To mention what will be used for the keys
+                        //keyExtractor={(item) => }                                 //09. Iterates each item in the array
+                        keyExtractor={(item) => item.id}                            //10. Declaring "id" as the key
+                        data={people}                                               //03. Us people array as the data
+                        //renderItem={()=>(JSX)}                                    //04. Add renderItem to render the data
+                        //renderItem={({item})=>(JSX)}                              //05. Add array properties (item) to function (Curly braces is to destructure the array)
+                        renderItem={({item})=>(       
+                            <Text style={styles.item}>{item.name}</Text>
+                        )}                   
+                    />
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({    
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+                paddingTop: 40,                         
+                paddingHorizontal: 20,       
+            },
+            item: {                      
+                marginTop: 24,
+                padding: 30,
+                backgroundColor: 'pink',
+                fontSize: 24,
+            },
+        });
+
+    //////////////////////////////////// 
+    From the above code, the app only output the array in a single column
+    numColumns enables the app to output multiple columns
+    
+    App.js (With numColumns)
+        import React, {useState} from 'react';
+        import {StyleSheet, Text, View, FlatList} from 'react-native';     
+        
+        export default function App() {
+            const [people, setPeople] = useState([
+                
+                { name: 'izaat', id: '1' },                      
+                { name: 'yoshi', id: '2' },
+                { name: 'mario', id: '3' },
+                { name: 'luigi', id: '4' },
+                { name: 'peach', id: '5' },
+                { name: 'toad', id: '6' },
+                { name: 'bowser', id: '7' },
+                
+            ]); 
+            
+            return (
+                <View style={styles.container}>           
+                    <FlatList 
+                        numColumns={2}                                                            //01. Added numColumns
+                        keyExtractor={(item) => item.id}     
+                        data={people}                          
+                        renderItem={({item})=>(       
+                            <Text style={styles.item}>{item.name}</Text>
+                        )}                   
+                    />
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({    
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+                paddingTop: 40,                         
+                paddingHorizontal: 20,       
+            },
+            item: {                      
+                marginTop: 24,
+                padding: 30,
+                backgroundColor: 'pink',
+                fontSize: 24,
+                marginHorizontal: 10,                                                             //02. Add horizontal margins to columns
+                marginTop: 24,                                                                    //03. Add top margins
+            },
+        });
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+07. Touchable Components
+
+
+
+
+
+
 
 
 
