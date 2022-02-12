@@ -626,6 +626,89 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 07. Touchable Components
+    
+    13 points
+    Adding onPress event to individual items (Use button and attach to onPress prop)
+    But the method can't be applied to text components "<Text>"
+    Although <Text> components can be turned into buttons, custom stylized props can't be added to those buttons
+    To use custom styled buttons on text components, touchable component will be used
+    Take note of the entire list of Touchable components available and the one being used here is "TouchableOpacity" - Transparent when touched
+    
+    App.js 
+        import React, {useState} from 'react';
+        //import {StyleSheet, Text, View, FlatList} from 'react-native';     
+        import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';     //01. Import TouchableOpacity
+        
+        export default function App() {
+            const [people, setPeople] = useState([
+                
+                { name: 'izaat', id: '1' },                      
+                { name: 'yoshi', id: '2' },
+                { name: 'mario', id: '3' },
+                { name: 'luigi', id: '4' },
+                { name: 'peach', id: '5' },
+                { name: 'toad', id: '6' },
+                { name: 'bowser', id: '7' },
+                
+            ]); 
+            
+            //const pressHandler = ()  => {}                              //06. Create pressHandler function
+            //const pressHandler = (id)  => {}                            //07. pressHandler to take in id as the value
+            const pressHandler = (id)  => {
+                console.log(id);                                          //08. Output to console (To view console, check Expo in browser)
+                //setPeople([]);                                          //09. Add function to edit entire array (Tap to add new value - empty means delete) - Slow as it edit the entire array
+                //setPeople(() => {});                                    //10. Add function to edit what is selected leaving the unselected at current state
+                
+                //setPeople(() => {
+                setPeople((prevPeople) => {                                                   //11. Takes the current state
+                    //return prevPeople.filter();                                             //12. Filter out the selected items from the unselected ones
+                    return prevPeople.filter(person => person.id != id);                      //13. Filter will run a function that returns a boolean where TRUE is when the id selected is not equal to the id
+                });
+            } 
+            
+            return (
+                <View style={styles.container}>           
+                    <FlatList 
+                        numColumns={2}         
+                        keyExtractor={(item) => item.id}     
+                        data={people}                          
+                        renderItem={({item})=>(       
+                            //<Text style={styles.item}>{item.name}</Text>
+                            //<TouchableOpacity><Text style={styles.item}>{item.name}</Text></TouchableOpacity>   //02. Add Touchable Component
+                            
+                            //<TouchableOpacity>
+                            //<TouchableOpacity onPress={}>                                                       //03. Add onPress prop
+                            //<TouchableOpacity onPress={() => pressHandler()}>                                   //04. Add function
+                            //<TouchableOpacity onPress={() => pressHandler(item.id)}>                            //05. Add id of every property in the array
+                                <Text style={styles.item}>{item.name}</Text>
+                            </TouchableOpacity>
+                        )}                   
+                    />
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({    
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+                paddingTop: 40,                         
+                paddingHorizontal: 20,       
+            },
+            item: {                      
+                marginTop: 24,
+                padding: 30,
+                backgroundColor: 'pink',
+                fontSize: 24,
+                marginHorizontal: 10,          
+                marginTop: 24,               
+            },
+        });
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+08. Todo App - Part 1
+
 
 
 
