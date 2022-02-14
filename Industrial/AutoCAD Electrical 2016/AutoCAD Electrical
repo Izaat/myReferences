@@ -16,7 +16,7 @@ CONTENT
         Create New Project
             Side Panel > Click on "New Project" icon
             Setup the new project and click "OK-Properties"
-            In Project Settings tab > Paths > Schematic Libraries
+            In Left Panel > Project Manager Panel > Right click on Properties > Project Settings tab > Paths > Schematic Libraries
                 A few libraries were automatically added
 
         Save main project to the new folder
