@@ -1,0 +1,452 @@
+
+Sony A7SIII Settings
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Menu
+    Star Icon (Favorites)
+    Camera Icon (Shooting)
+        Image Quality
+            File Format
+                XAVC HS 4k
+                XAVC S 4k
+                XAVC S HD
+                XAVC S-I 4k
+                XAVC S-I HD
+            Movie Settings
+                Recording Frame Rate (60/30/24)
+                Record Setting (Depends on File Format settings)
+                    100M 4:2:2 10bit
+                    100M 4:2:0 10bit
+                    50M 4:2:2 10bit
+                    50M 4:2:0 10bit
+                    30M 4:2:0 10bit
+            S&Q Settings
+                Recording Frame Rate (60/30/24) - To match project frame rate
+                Frame Rate (120/60/30/15/8/4) - Camera frame rate, Note this can go to 240p if XAVC S-I HD is used
+                Record Setting
+            Proxy Settings
+                Proxy Recording (ON/OFF)
+                Proxy File Format  (XAVC HS HD / XAVC S HD)
+                Proxy Rec Setting
+            APS-C S35 Shooting (Option only available in HD Mode) - ON/Auto/OFF
+            Lens Compensation
+                Shading Compensation
+                Chromatic Compensation
+                Distortion Compensation (Steadyshot must be off to activate)
+        Media
+            Format (Slot 1 / Slot 2) - Formatting the memory card
+            Recording Media Settings
+                Prioritize Recording Media
+                Recording Mode
+                    Standard
+                    Simultaneous (Image)
+                    Simultaneous (Video)
+                    Simultaneous (Image/Video)
+                    Sort (RAW/JPEG)
+                    Sort (JPEG/RAW)
+                Auto Switch Media
+            Recover Image DB
+            Display Media Info
+        File
+            File Settings
+                File Number
+                    Series
+                    Reset
+                Series Counter Reset
+                File Name Format
+                    Standard
+                Title Name Settings (For multiple camera naming convention)
+        Shooting Mode
+        Shutter/Silent
+        Audio Recording
+            Audio Recording
+            Audio Rec Level
+            Audio Out Timing
+            Wind Noise Reduction
+            Shoe Audio Set
+            Audio Level Display
+        TC/UB
+            Time Code Preset
+            User Bit Preset
+            Time Code Format
+            Time Code Run
+            Time Code Make
+            User Bit Time Rec
+        Image Stabilization
+            SteadyShot
+            SteadyShot Adjust
+            Focal Length
+        Zoom
+            Zoom
+            Zoom Range
+            Zoom Speed
+            iZoom Speed
+        Shooting Display
+            Grid Line Display
+            Grid Line Type
+            Emph display duration REC
+        Marker Display
+            Marker Display
+            Center Marker
+            Aspect Marker
+                Off
+                4:3
+                13:9 
+                14:9 
+                15:9 
+                1.66:1 
+                1.85:1 
+                2.35:1 
+            Safety Zone (Shows box zone)
+                Off 
+                80%
+                90%
+            Guideframe
+    +/- Icon (Exposure/Color)
+        Exposure
+        Exposure Composition
+        Metering
+            Metering Mode
+            Face Priority in Multi Metering
+            Spot Metering Point
+                Center
+                Focus Point Link
+        White Balance
+            White Balance
+            Priority Set in AWB
+                Standard Mode
+                Ambience Mode
+                White Mode
+            Shockless WB
+                Off
+                1 (Fast)
+                2 
+                3 (Slow)
+        Color/Tone
+            D-Range Optimizer
+            Creative Look (Basically Filters)
+                ST/PT/NT/VV/VV2/FL/IN/SH/BW/SE
+            Picture Profile
+        Zebra Display
+            Zebra Display
+            Zebra Level
+    AF/MF Icon
+        AF/MF
+            Focus Mode
+            AF Transition Speed
+            AF Subject Shift Sensitivity
+        Focus Area
+            Focus Area
+            Focus Area Color
+            Circ of Focus Pont
+            AF Frame Move Amt
+        Face/Eye AF
+            Face/Eye Prior in AF
+            Face/Eye Subject
+            Right/Left Eye Select
+            Face/Eye Frame Disp.
+            Regist. Faces Priority
+        Focus Assistant
+            Focus Magnifier
+            Focus Magnification Time
+            Initial Focus Mag
+        Peaking Display
+            Peaking Display
+            Peaking Level
+            Peaking Color
+    Playback Icon
+        Playback Target
+        Magnification
+        Selection/Memo
+        Delete
+        Edit
+        Viewing
+        Playback Option
+    Network/Globe Icon
+        Transfer/Remote
+            Ctrl w/ Smartphone
+            Send to Smartphone
+            Sending Target
+            Cnct during Power Off
+            FTP Transfer Function
+            PC Remote Function
+            Bluetooth Rmt Ctrl
+        Location Information
+        WiFi
+        Bluetooth
+        Wired LAN
+        Network Option
+        
+    Setup/Bag icon
+        Area/Date
+            Language
+            Area/Date/Time
+            NTSC/PAL
+        Reset/Save Settings
+            Setting Reset
+            Save/Load Settings
+        Operation Customize
+            Custom Setting
+            Custom Key Setting
+            Fn Menu Settings
+            Different Set for Still/Mv
+            DISP (Screen Disp) Set
+            REC w/ Shutter
+        Dial Customize
+            My Dial Settings
+            Dial Setup
+            Av/Tv Rotate
+            Dial Ev Compensation
+            Function Ring (Lens)
+            Lock Operation Parts
+        Touch Operation
+            Touch Operation
+            Touch Sensitivity
+            Touch Panel/Pad
+            Touch Pad Settings
+            Touch Func. in Shooting
+        Finder/Monitor
+            Select Finder/Monitor
+            Monitor Brightness
+            Viewfinder Bright
+            Finder Color Temp
+            Viewfinder Magnification
+            Display Quality
+            Finder Frame Rate
+        Display Option
+            TC/UB Disp Setting
+            Gamma Display Assistant
+            Gamma Disp Assist Type
+            Remain Shoot Display
+            Auto Review
+        Power Setting Option
+            Power Save Start Time: 5 min
+            Auto Power OFF Temp: High (Lets the camera heat up hotter without auto shut off)
+        Sound Option
+            Volume Settings
+            4ch Audio Monitoring
+            Audio Signals
+        USB
+            USB Connection
+            USB LUN Setting
+            USB Power Supply
+        External Output
+            HDMI Resolution
+            HDMI Output Settings
+            HDMI Info Display
+            CTRL FOR HDMI
+        Setup Option
+            Video Light Mode
+            IR Remote Ctrl
+            Sensor Cleaning
+            Auto Pixel Mapping
+            Pixel Mapping
+            Version
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Sony A7S-III Settings
+
+    Memory: CF Express Card
+    Format: XAVC S-I (4k)
+
+    Recommended Picture Profiles
+        Picture Profile: PP1 (Look flat but better than default)
+            Black Level: +2
+            Gamma: Movie
+            Black Gamma: N/A
+            Knee: N/A
+            Color Mode: Movie
+            Saturation: -2
+            Color Phase: 0
+            Color Depth: N/A
+            Detail
+                Level: -2
+                Adjust: N/A
+    
+        Picture Profile: PP6 (Looks natural yet cinematic)
+            Black Level: +10
+            Gamma: Cine2
+            Black Gamma: N/A
+            Knee: N/A
+            Color Mode: Cinema
+            Saturation: -10
+            Color Phase: 0
+            Color Depth: N/A
+            Detail
+                Level: +2
+                Adjust: N/A
+    
+        Picture Profile: PP7 (Looks a bit cinematic) - 4k, 1600ISO
+            Black Level: 0
+            Gamma: S-Log3
+            Black Gamma: N/A
+            Knee: N/A
+            Color Mode: S-Gammut3.Cine
+            Saturation: 0
+            Color Phase: 0
+            Color Depth: N/A
+            Detail
+                Level: -3 (Day time), -7 (Night shots)
+                Adjust: N/A
+    
+        Picture Profile: PP10 (Cinematic silhouette) - A6600 HLG3 in SDR
+            Black Level: 0
+            Gamma: HLG3
+            Black Gamma: N/A
+            Knee: N/A
+            Color Mode: BT.2020
+            Saturation: 0
+            Color Phase: 0
+            Color Depth: N/A
+            Detail
+                Level: N/A
+                Adjust: N/A
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Menu Setting
+
+    /////////////////////////
+    Camera Icon
+        Image Quality
+            File Format:
+                XAVC S-I (4k) - Recommended: XAVC HS 4k
+
+            Movie Settings
+                Rec Frame Rate: 24p
+                Record Setting 50M 4:2:0
+
+            Slow and Quick Setting (S&Q)
+                Rec Frame Rate: 60p
+                Frame Rate: 120fps
+                Record Setting 50M 4:2:0
+
+            Proxy
+                Proxy Recording: Off
+                Proxy File Format: XAVC S-I (4k)
+                Proxy Rec. Settings: 16M 4:2:0
+
+        Media >
+            Rec. Media Settings
+                Prioritize Rec. Media: Slot 1 
+                Recording Mode: Simultaneous (Video)
+                Auto Switch Media: On
+                
+        File >
+            File Settings
+                File Number: Series
+                Series Counter Reset
+                File Name Format: Standard
+                Title Name Settings
+            
+        Audio Recording>
+            Audio Recording: On
+            Audio Rec Level: 6 (With Video Mic Go), 25 (With External Mic)
+            Audio Out Timing: Live
+            Wind Noise: Off
+            Shoe Audio Set: -
+            Audio Level Display: On (For internal audio recording)
+
+        Image Stabilization >
+            SteadyShot: Active
+            SteadyShot Adjust: Auto
+            Focal Length: -
+
+        Zoom >
+            Zoom >
+            Zoom Range: Clear Image Zoom (Will crop the video) - Use only with low ISO (good lighting)
+            Zoom Speed >
+            i Zoom Speed >
+
+        Shooting Display >
+            Grid Line Display (Usually for Photo)
+
+        Marker Display
+            Marker Display: ON
+            Center Marker: Off
+            Apect Marker: Off
+            Safety Zone: 90%
+            Guideframe: On
+
+    /////////////////////////
+    +/- Icon (Exposure/Color)
+        Metering
+            Metering Mode: Multi
+            Face Priority in Multi Metering: On (Detect faces and show exposure for their faces)
+            Spot Metering Point: Focus Point Link
+        White Balance
+            White Balance: C.Temp./Filter
+            Priority Set in AWB: Standard
+            Shockless WB: 2 (Smoothly adjust to white)
+        Color/Tone
+            D-Range Optimizer: Off
+            Creative Look: ST
+            Picture Profile: Off
+        Zebra Display
+            Zebra Display
+            Zebra Level: 100+
+
+    /////////////////////////
+    AF/MF Icon
+        AF/MF
+            Focus Mode: Continuous AF
+            AF Transition Speed: 4
+            AF Subject Shift Sensitivity: 5(Responsive)
+        Focus Area
+            Focus Area: Zone (Wide / Spot:M)
+            Focus Area Limit
+            Focus Area Color: White
+            Circ of Focus Point: Does not circulate
+            AF Frame Move Amt: Standard
+        Face/Eye AF
+            Face/Eye Prior. in AF: On
+            Face/Eye Subject: Human
+            Right/Left Eye Select: Auto
+            Face/Eye Frame Display: On
+            Regist. Faces Priority: On (The camera recognizes target's face among the group)
+        Focus Assistant
+            Focus Magnification Time: No Limit
+            Initial Focus Mag: x4.0
+
+    /////////////////////////
+    Playback Icon (Leave as default)
+
+    /////////////////////////
+    Network (Leave as Default) - Transfer pictures and not videos
+        
+    /////////////////////////
+    Setup
+        Reset/Save Settings
+            Save/Load Settings (Load custom settings from 3rd parties)
+                https://drive.google.com/drive/folders/1aJQ37p4yJcvCOnLu4Wfv_8IZOcuEJLLQ
+        Finder/Monitor
+            Select Finder/Monitor: N/A
+            Monitor Brightness: N/A
+            Viewfinder Bright: N/A
+            Finder Color Temp: N/A
+            Viewfinder Magnification: Standard
+            Display Quality: High
+            Finder Frame Rate: High (Standard = higher battery life)
+        Power Setting Option
+            Power Save Start Time: 5 min
+            Auto Power OFF Temp: High (Lets the camera heat up hotter without auto shut off)
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[End]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
