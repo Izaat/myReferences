@@ -709,6 +709,270 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 08. Todo App - Part 1
 
+    ///////////////////////////
+    App.js (Initial Code)
+        import React, {useState} from 'react';
+        import {StyleSheet, Text, View} from 'react-native'; 
+
+        export default function App() {
+            return (
+                <View style={styles.container}>
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+            },
+        });
+
+    ///////////////////////////
+    App.js (Format)
+        import React, {useState} from 'react';
+        import {StyleSheet, Text, View} from 'react-native'; 
+
+        export default function App() {
+            return (
+                <View style={styles.container}>
+                    {/* header */}
+                    <View style={styles.content}>
+                        {/* todo form */}
+                        <View style={styles.list}>
+                            {/* todo list */}
+                        </View>
+                    </View>
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+            },
+        });
+
+    ///////////////////////////
+    App.js (Code)
+        import React, {useState} from 'react';
+        //import {StyleSheet, Text, View} from 'react-native'; 
+        import {StyleSheet, Text, View, FlatList} from 'react-native';           //01. Add FlatList
+
+        export default function App() {
+            //const [todos, setTodos] = useState([]);                            //03. Add data array
+            const [todos, setTodos] = useState([                                 //04. Add data
+                { text: 'buy coffee', key: '1' },
+                { text: 'create an app', key: '2' },
+                { text: 'play on the switch', key: '3' },
+            ]);  
+            
+            return (
+                <View style={styles.container}>
+                    {/* header */}
+                    <View style={styles.content}>
+                        {/* todo form */}
+                        <View style={styles.list}>
+                            //{/* todo list */}
+                            //<FlatList />                                         //02. Add FlatList component
+                            <FlatList 
+                                data={todos}                                       //05. Add todos data
+                                //renderItem={}                                    //06. This renders each item in the list
+                                //renderItem={() => ()}                            //07. Is a function to return JSX
+                                //renderItem={({item}) => ()}                      //08. Extracts the item
+                                renderItem={({item}) => (
+                                    <Text>{item.text}</Text>                       //09. Output the item text i.e buy coffee
+                                )} 
+                            />
+                        </View>
+                    </View>
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+            },
+            //content: {}                   //10. Styling under <View style={styles.content}> (Move text to right)
+            content: {
+                padding: 40,
+            },
+            //list: {}                      //11. Styling under <View style={styles.list}> (Move text down)
+            list: {
+                marginTop: 20,
+            }
+        });
+
+    ///////////////////////////
+    Creating header and form with another file
+        Create new folder under "MYPROJECT" and name it "components"
+        Add new files under "components" folder
+        Explorer
+            Myproject
+                .expo
+                .expo-shared
+                assets
+                node_modules
+                components                     //01. Add components folder
+                    header.js                  //02. Add file
+                App.js
+    
+    header.js
+        import React from 'react';                               //03. Import default
+        import {StyleSheet, Text, View} from 'react-native';     //04. Import 3 items
+    
+        //export default function Header() {}                    //05. header.js will ultimately be exported to App.js as a function called "Header"
+        export default function Header() {
+            //return ()                                          //06. To return some JSX
+            return (
+                //<View></View>                                  //07. Add View
+                //<View>
+                <View style={styles.header}>                     //08. Add style property for header
+                    //<Text>My Todos</Text>
+                    <Text style={style.title}>My Todos</Text>    //09. Add style property for title
+                </View>
+            )   
+        }
+    
+        //const styles = StyleSheet.create({});                  //10. Create stylesheet
+        const styles = StyleSheet.create({
+            header: {                                            //11. Add stylesheet properties
+                height: 80,
+                paddingTop: 38,
+                backgroundColor: 'coral'
+            },
+            title: {
+                textAlign: 'center',
+                color: '#fff',
+                fontSize: 20,
+                fontWeight: 'bold'
+            }
+        });        
+    
+    
+    App.js
+        import React, {useState} from 'react';
+        import {StyleSheet, Text, View, FlatList} from 'react-native';  
+        import Header from './components/header';                        //12. Import header file
+
+        export default function App() {
+            const [todos, setTodos] = useState([   
+                { text: 'buy coffee', key: '1' },
+                { text: 'create an app', key: '2' },
+                { text: 'play on the switch', key: '3' },
+            ]);  
+            
+            return (
+                <View style={styles.container}>
+                    //{/* header */}
+                    <Header />                                             //13. Add header.js
+                    <View style={styles.content}>
+                        {/* todo form */}
+                        <View style={styles.list}>
+                            <FlatList 
+                                data={todos}          
+                                renderItem={({item}) => (
+                                    <Text>{item.text}</Text>  
+                                )} 
+                            />
+                        </View>
+                    </View>
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+            },
+            content: {
+                padding: 40,
+            },
+            list: {
+                marginTop: 20,
+            }
+        });
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+08. Todo App - Part 2
+
+    header.js
+        import React from 'react';                                         
+        import {StyleSheet, Text, View} from 'react-native'; 
+    
+        export default function Header() {
+            return (
+                <View style={styles.header}> 
+                    <Text style={style.title}>My Todos</Text>
+                </View>
+            )   
+        }
+    
+        const styles = StyleSheet.create({
+            header: {                              
+                height: 80,
+                paddingTop: 38,
+                backgroundColor: 'coral'
+            },
+            title: {
+                textAlign: 'center',
+                color: '#fff',
+                fontSize: 20,
+                fontWeight: 'bold'
+            }
+        });       
+
+    App.js
+        import React, {useState} from 'react';
+        import {StyleSheet, Text, View, FlatList} from 'react-native';  
+        import Header from './components/header';  
+
+        export default function App() {
+            const [todos, setTodos] = useState([   
+                { text: 'buy coffee', key: '1' },
+                { text: 'create an app', key: '2' },
+                { text: 'play on the switch', key: '3' },
+            ]);  
+            
+            return (
+                <View style={styles.container}>
+                    <Header />    
+                    <View style={styles.content}>
+                        {/* todo form */}
+                        <View style={styles.list}>
+                            <FlatList 
+                                data={todos}          
+                                renderItem={({item}) => (
+                                    <Text>{item.text}</Text>  
+                                )} 
+                            />
+                        </View>
+                    </View>
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+            },
+            content: {
+                padding: 40,
+            },
+            list: {
+                marginTop: 20,
+            }
+        });
+
+
+
+
 
 
 
