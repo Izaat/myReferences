@@ -16,7 +16,7 @@ CONTENTS
 06. List Component
 07. Touchable Components
 08. Todo App - Part 1
-09. Todo App - Part 2
+09. Todo App - Part 2 - Add Press event
 10. Todo App - Part 3
 
 11. Alerts
@@ -899,7 +899,7 @@ CONTENTS
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-08. Todo App - Part 2
+08. Todo App - Part 2 - Add Press event
 
     header.js
         import React from 'react';                                         
