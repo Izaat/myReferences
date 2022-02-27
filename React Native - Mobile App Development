@@ -899,38 +899,52 @@ CONTENTS
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-08. Todo App - Part 2 - Add Press event
-
-    header.js
-        import React from 'react';                                         
-        import {StyleSheet, Text, View} from 'react-native'; 
+09. Todo App - Part 2 - Add Press event to delete item
     
-        export default function Header() {
-            return (
-                <View style={styles.header}> 
-                    <Text style={style.title}>My Todos</Text>
-                </View>
-            )   
+    File Structure <Explorer>
+        MyProject
+            Component
+                header.js [Topic 7]
+                todoItem.js                                                  // 01. To create
+            App.js    
+    
+    todoItem.js
+        import React from 'react';                                         
+        import {StyleSheet, Text, TouchableOpacity} from 'react-native';     //02. Surround text with TouchableOpacity
+        
+        //export default function TodoItem() {}                              //03. Add in export function
+        //export default function TodoItem(props) {}                         //04. To pass in props item from App.js
+        //export default function TodoItem({item}) {}                        //09. Use destructuring method to get the item instead of using "props"
+        //export default function TodoItem({item}) {
+        export default function TodoItem({item, pressHandler}) {             //22. Destucture the pressHandler
+            return(
+                //<TouchableOpacity>
+                //<TouchableOpacity onPress={}>                              //14. Add onPress event handler
+                //<TouchableOpacity onPress={() => pressHandler()}>          //23. Calls the function
+                <TouchableOpacity onPress={() => pressHandler(item.key)}>    //24. Also to pass in the key 
+                    //<Text>{item.text}</Text>                               //10. Add Text that is surrounded by TouchableOpacity
+                    <Text style={styles.item}>{item.text}</Text>             //12. Apply style to the texts
+                </TouchableOpacity>
+            )
         }
     
-        const styles = StyleSheet.create({
-            header: {                              
-                height: 80,
-                paddingTop: 38,
-                backgroundColor: 'coral'
-            },
-            title: {
-                textAlign: 'center',
-                color: '#fff',
-                fontSize: 20,
-                fontWeight: 'bold'
+        const styles = StyleSheet.create({                                    //11. Add StyleSheet
+            item: {                              
+                padding: 16,
+                marginTop: 16,
+                borderColor: '#bbb',
+                borderWidth: 1,
+                borderStyle: 'dashed',
+                borderRadius: 10
             }
-        });       
+        }) 
 
+    
     App.js
         import React, {useState} from 'react';
         import {StyleSheet, Text, View, FlatList} from 'react-native';  
         import Header from './components/header';  
+        import TodoItem from './components/todoItem';                     //13. Import todoItem.js
 
         export default function App() {
             const [todos, setTodos] = useState([   
@@ -938,6 +952,17 @@ CONTENTS
                 { text: 'create an app', key: '2' },
                 { text: 'play on the switch', key: '3' },
             ]);  
+            
+            //const pressHandler = (key) => {}                            //15. Add pressHandler for onPress function
+            const pressHandler = (key) => {
+                //setTodos(() => {})                                      //16. Pass a function
+                //setTodos((prevTodos) => {})                             //17. Add previous todos
+                setTodos((prevTodos) => {
+                    //return prevTodos.filter()                           //18. Filter out previous todos from current array and take out the one with the same key
+                    //return prevTodos.filter(todo)                       //19. Takes in individual todo as it cycles through the array
+                    return prevTodos.filter(todo => todo.key != key);     //20. Return true or false
+                }) 
+            } 
             
             return (
                 <View style={styles.container}>
@@ -948,7 +973,11 @@ CONTENTS
                             <FlatList 
                                 data={todos}          
                                 renderItem={({item}) => (
-                                    <Text>{item.text}</Text>  
+                                    //<Text>{item.text}</Text>              //05. Remove
+                                    //<TodoItem />                          //06. To use separate <TodoItem /> component file instead
+                                    //<TodoItem item={} />                  //07. Add in props
+                                    //<TodoItem item={item} />              //08. To be equal to item being rendered in "renderItem={}"
+                                    <TodoItem item={item} pressHandler={pressHandler} />             //21. Pass down the pressHandler function as prop
                                 )} 
                             />
                         </View>
@@ -971,13 +1000,8 @@ CONTENTS
         });
 
 
-
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+10. Todo App - Part 3 - Add Press event to add item
 
 
 
