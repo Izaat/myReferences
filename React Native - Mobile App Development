@@ -1001,7 +1001,134 @@ CONTENTS
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-10. Todo App - Part 3 - Add Press event to add item
+10. Todo App - Part 3 - Create form and add a Press event to add items
+    
+    Create Form = Point 1 to 15
+    Adding Press event = Point 16 to 27
+    NOTE: Scrolling wont work since Flatlist is used
+    
+    File Structure <Explorer>
+        MyProject
+            Component
+                header.js [Topic 7]
+                todoItem.js  [Topic 9]
+                addTodo.js                                                         //01. Create addTodo.js in "Component" folder
+            App.js    
+
+    addTodo.js
+        import React, {useState} from 'react';                                      //02. Import React and useState
+        import {StyleSheet, Text, View, TextInput, Button} from 'react-native';     //03. Import View, TextInput and Button
+        
+        //export default function AddTodo() {}                                      //04. add export default function
+        //export default function AddTodo() {
+        export default function AddTodo({submitHandler}) {                          //26. Destructure "submitHandler" prop
+            
+            const [text, setText] = useState('');                                   //10. Add a function that tracks the user's text in text input box where the default is an empty string
+            
+            //const changeHandler = () => {}                                        //09. Add changeHandler function
+            //const changeHandler = (val) => {}                                     //11. Takes in a parameter pushed by "onChangeText"
+            const changeHandler = (val) => {
+                setText(val);                                                       //12. Set the text
+            } 
+            
+            return (
+                <View>
+                    //<TextInput />                                                 //05. Add Text input container
+                    <TextInput 
+                        style={styles.input}                                        //13. Add styles to text
+                        placeholder='new todo...'                                   //06. The default text inside text input box
+                        //onChangeText={(val) => changeHandler(val)}                //07. Triggers a function (changeHandler) once text input box has user text and push to "val"
+                        onChangeText={changeHandler}                                //08.  Shorter version of above code
+                    /> 
+                    
+                    //<Button onPress={} text='add todo' color='coral' />           //17. Add button with placeholder text and color
+                    //<Button onPress={() => console.log(text)} title='add todo' color='coral' />      //18. Add anonymous function and output the current text to console (Run app to see result)
+                    <Button onPress={() => submitHandler(text)} title='add todo' color='coral' />      //27. Pass text to submitHandler instead of console.log
+                </View>
+            )
+        }     
+        
+        //const styles = StyleSheet.create({})                              //14. Add StyleSheet function
+        const styles = StyleSheet.create({
+            input: {
+                marginBottom: 10,
+                paddingHorizontal: 8,
+                paddingVertical: 6,
+                borderBottomWidth: 1,
+                borderBottomColor: '#ddd'
+            }
+        })  
+
+    
+    App.js
+        import React, {useState} from 'react';
+        import {StyleSheet, Text, View, FlatList} from 'react-native';  
+        import Header from './components/header';  
+        import TodoItem from './components/todoItem';      
+        import AddTodo from './components/addTodo';                           //15. Link file "addTodo" to "App.js"
+
+        export default function App() {
+            const [todos, setTodos] = useState([   
+                { text: 'buy coffee', key: '1' },
+                { text: 'create an app', key: '2' },
+                { text: 'play on the switch', key: '3' },
+            ]);  
+            
+            const pressHandler = (key) => {
+                setTodos((prevTodos) => {
+                    return prevTodos.filter(todo => todo.key != key);   
+                }) 
+            } 
+            
+            //const submitHandler = (text) => {}                                 //19. This function is to push the text to the useState array
+            const submitHandler = (text) => {
+                //setTodos()                                                     //20. Add setTodos() to update the useState array
+                //setTodos((prevTodos) => {})                                    //21. Add function as an argument and capture current array as "prevTodos"
+                setTodos((prevTodos) => {
+                    //return[];                                                  //22. Return a new array
+                    return[
+                        {text: text, key: Math.random.toString},                 //24. Add in new text into array and tag a key with random number to it and convert it into a string. DO NOT USE MATH OPERATION FOR PRODUCTION CODE
+                        ...prevTodos                                             //23. Use spread operator to spread out the array
+                    ];
+                })
+            }     
+            
+            return (
+                <View style={styles.container}>
+                    <Header />    
+                    <View style={styles.content}>
+                        //{/* todo form */}
+                        //<AddTodo />                                             //16. Nest AddTodo
+                        <AddTodo submitHandler={submitHandler} />                 //25. Add "submitHandler" as prop
+                        
+                        <View style={styles.list}>
+                            <FlatList 
+                                data={todos}          
+                                renderItem={({item}) => (
+                                    <TodoItem item={item} pressHandler={pressHandler} />   
+                                )} 
+                            />
+                        </View>
+                    </View>
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+            },
+            content: {
+                padding: 40,
+            },
+            list: {
+                marginTop: 20,
+            }
+        });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+11. Alerts
 
 
 
