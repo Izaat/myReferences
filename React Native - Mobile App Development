@@ -19,7 +19,7 @@ CONTENTS
 09. Todo App - Part 2 - Add Press event
 10. Todo App - Part 3
 
-11. Alerts
+11. Todo App - Part 4 - Alerts
 12. Dismissing the Keyboard
 13. Flexbox Basics
 14. Icons and more Flexbox
@@ -1127,8 +1127,106 @@ CONTENTS
             }
         });
 
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-11. Alerts
+11. Todo App - Part 4 - Alerts
+    
+    Add minimum character limit: Point 1 to 4
+    Add alert: Point 5 to 9
+    
+    File Structure <Explorer>
+        MyProject
+            Component
+                header.js      [Topic 7]
+                todoItem.js   [Topic 9]
+                addTodo.js   [Topic 10]
+            App.js               [Topic 10]
+
+    App.js
+        import React, {useState} from 'react';
+        //import {StyleSheet, Text, View, FlatList} from 'react-native';  
+        import {StyleSheet, Text, View, FlatList, Alert} from 'react-native';       //05. Add Alert component
+        import Header from './components/header';  
+        import TodoItem from './components/todoItem';      
+        import AddTodo from './components/addTodo';       
+
+        export default function App() {
+            const [todos, setTodos] = useState([   
+                { text: 'buy coffee', key: '1' },
+                { text: 'create an app', key: '2' },
+                { text: 'play on the switch', key: '3' },
+            ]);  
+            
+            const pressHandler = (key) => {
+                setTodos((prevTodos) => {
+                    return prevTodos.filter(todo => todo.key != key);   
+                }) 
+            } 
+            
+            const submitHandler = (text) => {
+                
+                //if(text.length > 3){}                                        //01. If the characters entered into the text input box is more than 3 chracters, then updating useState is enabled
+                if(text.length > 3){
+                    setTodos((prevTodos) => {                                  //03. Paste here
+                        return[
+                            {text: text, key: Math.random.toString},    
+                            ...prevTodos                        
+                        ];
+                    });                                                        //04. Add semicolon since it is no longer a main function
+                //} 
+                //}else{}                                                      //06. Add else statement
+                }else{
+                    //Alert.alert();                                           //07. Calling ".alert()" method on the "Alert." object
+                    //Alert.alert('Oops', 'Todos title too short', []);        //08. Alert.alert('Title', 'message', [array])
+                    Alert.alert('Oops', 'Todos title too short', [
+                        {text: 'OK', onPress: () => console.log('alert closed')}  //09. This adds the alert text box with OK button
+                    ]);
+                }   
+                
+                //setTodos((prevTodos) => {                                     //02. Move setTodos into the "if" function
+                //    return[
+                //        {text: text, key: Math.random.toString},    
+                //        ...prevTodos                        
+                //    ];
+                //})
+            }     
+            
+            return (
+                <View style={styles.container}>
+                    <Header />    
+                    <View style={styles.content}>
+                        <AddTodo submitHandler={submitHandler} />  
+                        
+                        <View style={styles.list}>
+                            <FlatList 
+                                data={todos}          
+                                renderItem={({item}) => (
+                                    <TodoItem item={item} pressHandler={pressHandler} />   
+                                )} 
+                            />
+                        </View>
+                    </View>
+                </View>
+            );
+        }
+        
+        const styles = StyleSheet.create({
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+            },
+            content: {
+                padding: 40,
+            },
+            list: {
+                marginTop: 20,
+            }
+        });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+12. Dismissing the Keyboard
+
 
 
 
