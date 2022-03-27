@@ -1335,6 +1335,199 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 13. Flexbox Basics
+    
+    Notice that when there are too many items in the list, the list will bleed off screen and users can't see what is off screen
+    Flexbox solves this problem and has the exact same characteristics with CSS Flexbox
+    Read all 30 points
+    
+    File Structure <Explorer>
+        MyProject
+            Component
+                addTodo.js   [Topic 10]
+                header.js      [Topic 7]
+                sandbox.js    [Add sandbox file]
+                todoItem.js   [Topic 9]
+            App.js               [Topic 12]
+
+
+    sandbox.js [Default]                                                                 //01. Create sandbox.js file
+        import React from 'react';
+        import {StyleSheet, Text, View} from 'react-native'; 
+        
+        export default function Sandbox() {
+            return (
+                <Text>sandbox</Text>
+            )
+        }
+        
+        const styles = StyleSheet.create({});
+
+    sandbox.js [Code]                        
+        import React from 'react';
+        import {StyleSheet, Text, View} from 'react-native'; 
+        
+        export default function Sandbox() {
+            return (
+                //<Text>sandbox</Text>
+                //<View style = {styles.container}></View>                                 //05. Add view wrapper with style container
+                <View style = {styles.container}>
+                    <Text style={styles.boxOne}> one </Text>                               //10. Add a nest of texts
+                    <Text style={styles.boxTwo}> two </Text>
+                    <Text style={styles.boxThree}> three </Text>
+                    <Text style={styles.boxFour}> four </Text>
+                </View>
+            )
+        }
+        
+        const styles = StyleSheet.create({
+            //container: {}                                                                 //06. Add style container
+            container: {
+                //flex: 1,                                                                  //09. Try adding flexbox and hit save. The light grey box (#ddd) will cover entire screen (stretch).   //15. If removed, only the padding area is filled
+                //flexDirection: 'column',                                                  //13. Adding the default style of flexbox. Save this and nothing will happen
+                flexDirection: 'row',                                                       //14. Notice that by changing column to "row", everything is vertical. Not that this is the declaration for the "main axis" while the secondary will be "column"
+                justifyContent: 'space-around',                                             //16. How different element should be spread out in the main axis (center/flex-end/flex-start(default)/space-around/space-between/space-evenly)
+                //alignItems: 'center',                                                     //17. For secondary axis (baseline/center/flex-end/flex-start/stretch). Save and note that nothing will change until the paddings for each box are different
+                alignItems: 'flex-start',                                                   //19. If flex-start is used, boxes of different sizes will aligned to the top. Flex-end is bottom
+                paddingTop: 40,                                                             //07. Add paddings
+                backgroundColor: '#ddd',                                                    //08. Add color - light grey. When hit save here, a grey strip appears at the top
+            },
+            
+            //boxOne: {},                                                                   //11. Add nest of styles
+            //boxTwo: {},
+            //boxThree: {},
+            //boxFour: {},
+            
+            boxOne: {
+                //flex: 1,                                                                   //20a. Add flex 1 and this will stretch out the box. 
+                flex: 3,                                                                     //21. [Add all the numbers of flexes across all boxes and divide by the entire length of column, this will give the size of flex number]
+                backgroundColor: 'violet',                                                   //12a. Add properties. Save and test to see the bars of different colors on screen
+                padding: 10,                                                                 //12b. Also note that the default behavior of flex is that it takes the entire width or height
+            },                                                                               //12c. And for this, flexDirection style is set as 'column' (horizontal) as default
+            boxTwo: {
+                flex: 1,                                                                     //20b
+                backgroundColor: 'gold',
+                //padding: 10,                                                               //18a. Change 10 to 20
+                padding: 20, 
+            },
+            boxThree: {
+                flex: 1,                                                                      //20c
+                backgroundColor: 'coral',
+                //padding: 10,                                                                //18b. Change 10 to 30
+                padding: 30, 
+            },
+            boxFour: {
+                flex: 1,                                                                      //20d. Save and watch the 4 boxes stretch horizontally
+                backgroundColor: 'skyblue',
+                //padding: 10,                                                                //18c. Change 10 to 40 (Save and see the boxes of different sizes are centered horizontally)
+                padding: 40, 
+            }
+        });
+
+    App.js
+        import React, {useState} from 'react'; 
+        import {StyleSheet, Text, View, FlatList, Alert, TouchableWithoutFeedback, Keyboard} from 'react-native';
+        import Header from './components/header';  
+        import TodoItem from './components/todoItem';      
+        import AddTodo from './components/addTodo';       
+        import Sandbox from './components/sandbox';                                       //03. Import sandbox file into App.js
+
+        export default function App() {
+            const [todos, setTodos] = useState([   
+                { text: 'buy coffee', key: '1' },
+                { text: 'create an app', key: '2' },
+                { text: 'play on the switch', key: '3' },
+            ]);  
+            
+            const pressHandler = (key) => {
+                setTodos((prevTodos) => {
+                    return prevTodos.filter(todo => todo.key != key);   
+                }) 
+            } 
+            
+            const submitHandler = (text) => {
+                
+                if(text.length > 3){
+                    setTodos((prevTodos) => {               
+                        return[
+                            {text: text, key: Math.random.toString},    
+                            ...prevTodos                        
+                        ];
+                    });                                                       
+                }else{
+                    Alert.alert('Oops', 'Todos title too short', [
+                        {text: 'OK', onPress: () => console.log('alert closed')} 
+                    ]);
+                }   
+                
+            }     
+            
+            return (
+                //<TouchableWithoutFeedback onPress={() => {                                  //02. Comment out touchable component
+                //    Keyboard.dismiss();                              
+                //}}> 
+                //    <View style={styles.container}>
+                //        <Header />    
+                //        <View style={styles.content}>
+                //            <AddTodo submitHandler={submitHandler} />  
+                //            
+                //            <View style={styles.list}>
+                //                <FlatList 
+                //                    data={todos}          
+                //                    renderItem={({item}) => (
+                //                        <TodoItem item={item} pressHandler={pressHandler} />   
+                //                    )} 
+                //                />
+                //            </View>
+                //        </View>
+                //    </View>
+                //</ TouchableWithoutFeedback>
+                
+                //<Sandbox />                                                                   //04. Add sandbox. Save project and "sandbox" text will appear on the screen.      //22. Remove sandbox
+                
+                <TouchableWithoutFeedback onPress={() => {                                      //23. Add back Touchable to implement flexbox method to enable scroll
+                    Keyboard.dismiss();                              
+                }}> 
+                    <View style={styles.container}>
+                        <Header />    
+                        <View style={styles.content}>                                           //24. Only 2 wrapper can be setup for flexbox. "container" and "content" Since flex already exist in "container" (stretch to screen height), "content" is left for scroll
+                            <AddTodo submitHandler={submitHandler} />  
+                            
+                            <View style={styles.list}>
+                                <FlatList 
+                                    data={todos}          
+                                    renderItem={({item}) => (
+                                        <TodoItem item={item} pressHandler={pressHandler} />   
+                                    )} 
+                                />
+                            </View>
+                        </View>
+                    </View>
+                </ TouchableWithoutFeedback>
+                
+            );
+        }
+        
+        const styles = StyleSheet.create({
+            container: {
+                flex: 1,
+                backgroundColor: '#fff',
+            },
+            content: {
+                padding: 40,
+                //backgroundColor: 'pink',                                                      //25. Add this and save to see where the wrapper actually is on screen           //29. Remove
+                flex: 1,                                                                      //26. The wrapper will stretch as more todo list elements are being added
+            },
+            list: {
+                marginTop: 20,
+                //backgroundColor: 'yellow',                                                     //27. Add this and save to see where the wrapper actually is on screen             //30. Remove
+                flex: 1,                                                                      //28. The wrapper will constraint to content flexbox as more todo list elements are being added
+            }
+        });
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+14. Icons and more Flexbox
 
 
 
