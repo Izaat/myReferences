@@ -1,0 +1,77 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Oscilloscope
+Keysight DSOX1204G
+Overview: 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENT
+01. Preset and Autoset
+02. Measure DC Voltage Rail
+03. DC and AC Channel Coupling
+04. PWM and Measurements
+05. Auto-Reset with Triggering and Measuring
+06. Probe Loading and Reference Waveforms
+07. UART/Serial Trigger & Decode
+08. Differential Probes and 2 channels
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+01. Panels
+
+    A. Horizontal - Adjusting time (10us/div)
+        ----------------| Horizontal |-------------------
+            +------+     +-------+     +------+
+            | Fine |     |Acquire|     | Push |
+            | Push |     +-------+     | Zero |
+            +------+                   +------+
+        
+        Fine Push: CW to spread horizontally, CCW to narrow down horizontally
+        Acquire:
+        Push Zero: CW to scroll left, CCW to scroll right, PUSH to return to original position
+        
+    B. Vertical -  Adjusting V/div or A/div
+        ------| Vertical |-------
+            +------+  +-----+
+            | Fine |  |  1  |
+            | Push |  +-----+  
+            +------+  
+                      +-----+  
+            +---+     |  2  |
+            | L |     +-----+ 
+            | E |
+            | D |     +-----+ 
+            +---+     |  3  |
+                      +-----+
+            +------+
+            | Push |  +-----+
+            | Zero |  |  4  |
+            +------+  +-----+
+            
+        Fine Push: CW to spread vertically, CCW to narrow down vertically
+        Acquire:
+        Push Zero: CW to move lines upwards, CCW to move line downwards, PUSH to return to original position
+        1-4: Press to activate channel. Light up means activated
+        LED Indicator: Press 1-4 and will show which channel is selected based on its colour
+
+    C. Screen Menu
+        
+        Coupling DC: Select between AC or DC
+        BW Limit: Press to activate bandwidth limiting, 20Mhz limit
+        Fine: Move lines in finer increments when turning Push Zero knob. Can also be activated via Push Zero knob by pressing it
+        Invert: No explanation needed
+        Probe
+            Unit Amps: Select between Amps or Voltage. Defines what Push Zero knob will adjust (Current or Voltage)
+            Probe: Select between Ratio or Decibels. Default at Ratio - (V/A if Amp is selected in Unit Amps, 10:1 if Voltage is selected in Unit Amps). Adjust with Entry knob
+            Skew
+            Probe Check: Only available when Unit Amps is in Voltage. Disabled when it is in Amp. If failed after connecting probe, adjust BNC with screw to get 90deg square waves
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
