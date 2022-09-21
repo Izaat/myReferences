@@ -23,7 +23,7 @@ CONTENTS
 12. Dismissing the Keyboard
 13. Flexbox Basics
 14. Icons and more Flexbox
-15. Reviews App
+15. Reviews App                       [New App]
 16. Custom Fonts
 17. Global Styles
 18. React Navigation Setup
@@ -1528,6 +1528,234 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 14. Icons and more Flexbox
+
+    Using Expo Icon Collections
+        docs.expo.io/versions/latest/guides/icons/
+        Click on @expo/vector-icons directory
+        expo.github.io/vector-icons/                   //Note where the icons come from (Example: AntDesign, MaterialIcons, etc)
+
+    File Structure <Explorer>
+        MyProject
+            Component
+                addTodo.js   [Topic 10]
+                header.js      [Topic 7]
+                sandbox.js    [Topic 13]
+                todoItem.js   [Topic 9]
+            App.js               [Topic 13]
+
+    todoItem.js
+        import React from 'react';                                         
+        //import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+        import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';        //02. Add View component
+        import {MaterialIcons} from '@expo/vector-icons';                             //01. Import icons
+        
+        export default function TodoItem({item, pressHandler}) { 
+            return(
+                <TouchableOpacity onPress={() => pressHandler(item.key)}>  
+                    //<View></View>                                                    //03. Add View component
+                    //<View style={styles.item}></View>                                //04. Add styles to view component
+                    <View style={styles.item}>
+                        //<MaterialIcons name='delete' />                              //05. Add MaterialIcons tag
+                        <MaterialIcons name='delete' size={18} color='#333' />         //09. Add style to icon where "18" is pixel size. Note icon is still on top of of text.
+                        //<Text style={styles.item}>{item.text}</Text>                 //07. Inside view component and test the app. The icon will show up outside the box on top of text
+                        //<Text>{item.text}</Text>                                     //08. Icon will appear inside the box on top of text
+                        <Text style={styles.itemText}>{item.text}</Text>               //11. To add space between icon and text
+                    </View>
+                    //<Text style={styles.item}>{item.text}</Text>                     //06. Move this line to View component
+                </TouchableOpacity>
+            )
+        }
+    
+        const styles = StyleSheet.create({      
+            item: {                              
+                padding: 16,
+                marginTop: 16,
+                borderColor: '#bbb',
+                borderWidth: 1,
+                borderStyle: 'dashed',
+                borderRadius: 10,
+                flexDirection: 'row'                                                     //10. This will relocate the icon to the side of text. Note that there is no space in between
+            },
+            itemText: {
+                marginLeft: 10,                                                          //12. Add space spacing and save.
+            }
+        }) 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+15. Reviews App
+
+    **New App. Previous App stays at topic 14
+    
+    Structure of "Reviews App"
+        Screens
+            Home
+            Reviews Details
+            About
+        Behaviour
+            Modal -> Slider & Popup, Also Adds a review to the app
+            React Navigation -> Linking between Screens
+
+                +------------------------------------------------------+
+                |                                                      |
+        +---------+                  +--------------------+      +---------+
+        |   Home  |----<-------->----| Review Details     |      |  About  |
+        +---------+                  +--------------------+      +---------+
+
+
+    Starting Up
+        Command Prompt > Navigate to Project Folder > 
+            Example: "C:\Users\...\...\Project\apps>"
+        Type in:
+            expo init gamezone                         //01. Where "gamezone" is the name of the project. 
+        A menu will appear and under "Managed workflow", choose "blank" and press Enter
+        A script will appear and replace "<The name of your app ... screen>" with "gamezone"
+        Press Enter and React Native project will be created.
+        
+        Type In:
+            cd gamezone                                 //01. This will enter the newly created directory
+            code .                                      //02. This opens up VSCode
+        
+        In terminal, makesure it's in the correct directory "../app/gamezone>"
+        Type In:
+            expo start                                  //03. This will open up the Expo development GUI
+
+        In Expo Dev GUI > Left Panel > Click on "Run on Android device/emulator"
+        Dummy app will appear in the ALREADY OPENED Android emulator - This will show whatever being coded in App.js
+
+    File Structure <Explorer>
+        Gamezone
+           >.expo
+           >.expo-shared
+           >assets
+           >node_modules
+            .gitignore
+            App.js
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+           
+    Create a new folder and name it to "screens"
+    Create new files under the "screens" folder         //04. Right click and click on "New File"
+        about.js
+        home.js
+        reviewsDetails.js
+
+
+    home.js
+        import React from 'react';
+        import {StyleSheet, View, Text} from 'react-native';
+        
+        //export default function Home() {}
+        export default function Home() {
+            return (
+                //<View>
+                <View style={styles.container}>          //05. Add style container
+                    <Text>Home Screen</Text>
+                </View>
+            )
+        }
+
+        //const styles = StyleSheet.create({})          //06. Create style ffor style container
+        const styles = StyleSheet.create({
+            container: {
+                padding: 24                             //07. This will add top padding to the screen
+            }
+        });   
+
+
+    about.js                                            //08. Copy paste code from home.js to about.js
+        import React from 'react';
+        import {StyleSheet, View, Text} from 'react-native';
+        
+        export default function About() {
+            return (
+                <View style={styles.container}> 
+                    <Text>About Screen</Text>
+                </View>
+            )
+        }
+
+        const styles = StyleSheet.create({
+            container: {
+                padding: 24  
+            }
+        });   
+
+    reviewDetails.js                                       //09. Copy paste code from home.js to reviewDetails.js
+        import React from 'react';
+        import {StyleSheet, View, Text} from 'react-native';
+        
+        export default function ReviewDetails() {
+            return (
+                <View style={styles.container}> 
+                    <Text>Review Details Screen</Text>
+                </View>
+            )
+        }
+
+        const styles = StyleSheet.create({
+            container: {
+                padding: 24  
+            }
+        });   
+
+    App.js                         
+        import React from 'react';
+        //import {StyleSheet, View, Text} from 'react-native';     //11. Remove this line
+        import Home from './screens/home';                         //13. This will import home.js to App.js
+        
+        export default function App() {
+            return (
+                //<View style={styles.container}>                  //12. Remove the JSX block
+                //    <Text>Open up App.js to start working on your app!</Text>
+                //</View>
+                
+                <Home />                                           //14. This will load up the Home.js as App.js mainscreen
+                
+            )
+        }
+
+        //const styles = StyleSheet.create({                       //10. Remove entire block
+        //    container: {
+        //        flex: 1,
+        //        backgroundColor: '#fff',
+        //        alignItems: 'center',
+        //        justifyContent: 'center',
+        //    },
+        //});   
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+16. Custom Fonts
+
+    File Structure <Explorer>
+        Gamezone
+           >screens
+                home.js               [Topic 15]
+                about.js              [Topic 15]
+                reviewDetails.js [Topic 15]
+           >.expo
+           >.expo-shared
+           >assets
+           >node_modules
+            .gitignore
+            App.js                     [Topic 15]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+
+
+
+
+
+
+
+
+
 
 
 
