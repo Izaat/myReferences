@@ -1713,7 +1713,7 @@ CONTENTS
                 
                 <Home />                                           //14. This will load up the Home.js as App.js mainscreen
                 
-            )
+            );
         }
 
         //const styles = StyleSheet.create({                       //10. Remove entire block
