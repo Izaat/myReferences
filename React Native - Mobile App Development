@@ -1729,16 +1729,39 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 16. Custom Fonts
-
+    
+    Read 20 Points
+    
+    Links: 
+        docs.expo.io/versions/latest/guides/using-custom-fonts/
+        fonts.google.com/       -> Downloadable fonts, download Nunit Font for this example
+        Terminal: 
+            npm install --save expo
+        Import: 
+            import * as Font from 'expo-font';
+        Loading Code: 
+            export default class App extends React.Component {
+                componentDidMount() {
+                    Font.loadAsync({
+                        'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+                    });
+                }
+            }
+    
     File Structure <Explorer>
         Gamezone
            >screens
-                home.js               [Topic 15]
+                home.js              [Topic 15]
                 about.js              [Topic 15]
                 reviewDetails.js [Topic 15]
            >.expo
            >.expo-shared
            >assets
+               >fonts                                                //01. Create fonts folder and add in font files to be used
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
            >node_modules
             .gitignore
             App.js                     [Topic 15]
@@ -1746,6 +1769,86 @@ CONTENTS
             babel.config.js
             package-lock.json
             package.json
+
+
+    App.js                         
+        //import React from 'react';
+        import React, {useState} from 'react';                         //09. Import "useState" for point 8
+        import * as Font from 'expo-font';                             //02. Import fonts
+        import Home from './screens/home';   
+        import {AppLoading} from 'expo';                               //13. AppLoading for loading component manually in If-else statement
+        
+        //componentDidMount() {}                                       //03. No access to "componentDidMount" lifecycle hook inside functional components
+        //const getFonts () => {}                                      //04. Using arrow function instead
+        
+        //const getFonts () => {                                       //06. Can be shortened. See point 07 for shortened version
+        //    //return Font.loadAsync({})                              //05. Adds the loader with key object inside it
+        //    return Font.loadAsync({
+        //        'nunito-regular': require('./assets/fonts/Nunito-Regular.ttf'),
+        //        'nunito-bold': require('./assets/fonts/Nunito-Bold.ttf')
+        //    });
+        //}  
+        
+        const getFonts () => Font.loadAsync({                          //07. Shortened version
+            'nunito-regular': require('./assets/fonts/Nunito-Regular.ttf'),
+            'nunito-bold': require('./assets/fonts/Nunito-Bold.ttf')
+        });
+        
+        export default function App() {
+            const [fontsLoaded, setFontsLoaded] = useState(false);     //08. This is to hold App() from executing first by default, and make it wait for fonts to load up first.
+            
+            //return (                                                 //10. To use If-else statement instead. If fonts are loaded, then it will be true. If true, load home component. Else, load fonts.
+            //    <Home />          
+            //);
+            
+            //if(fontsLoaded){} else {}                                //11.  The If-else statement skeleton
+            
+            if(fontsLoaded){                                           //12. "If" statement with home component.
+                return(
+                    <Home />
+                );
+            } else {
+                //return(<AppLoading />)                               //14. Execute the AppLoading. Just a skeleton.
+                return(
+                    <AppLoading 
+                        //startAsync={}                                //15. Start Async property with AppLoading. But the function is not defined.
+                        startAsync={getFonts}                          //16. Start Async property with AppLoading with defined function "getFonts"
+                        
+                        //onFinish={() => ()}                          //17. State change function but state is undefined
+                        onFinish={() => setFontsLoaded(true)}          //18. Once loading is complete, change state to "true"
+                        
+                    />
+                )
+            }
+        }
+
+
+    home.js
+        import React from 'react';
+        import {StyleSheet, View, Text} from 'react-native';
+        
+        export default function Home() {
+            return (
+                <View style={styles.container}> 
+                    //<Text>Home Screen</Text>                        //19. Add loaded fonts to the title text using style container
+                    <Text style={styles.titleText}>Home Screen</Text>
+                </View>
+            )
+        }
+
+        const styles = StyleSheet.create({
+            container: {
+                padding: 24       
+            },
+            titleText: {
+                fontFamily: 'nunito-bold',                            //20. The style container for titleText
+                fontSize: 18,
+            }
+        });   
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+17. Global Styles
 
 
 
