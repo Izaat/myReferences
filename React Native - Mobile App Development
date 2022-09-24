@@ -1932,7 +1932,7 @@ CONTENTS
         //    }
         //});  
     
-    **DO THE SAME ON about.js and reviewDetails.js, excetp for "Text" container
+    **DO THE SAME ON about.js and reviewDetails.js, except for "Text" container
     
     about.js                        
         import React from 'react';
