@@ -1963,6 +1963,27 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 18. React Navigation Setup
+    
+    Using Stack Navigator
+        This method stacks up pages over each other.
+        Bottom stack will always be home. When About.js is being called, the page will be stacked on top of Home.js
+        With Home.js at the bottom and About.js is on top, calling reviewDetails.js from About will stack reviewDetails on top of about.js
+        To return to Home.js from reviewDetails, one needs to pop the stacked screens twice.
+        The downside of using this Navigator is duplicated screens
+        To avoid duplicate pages from happening, plan the pages carefully
+        Stack Navigator will not be used for About.js
+    
+    Stack Navigator Structure
+        Home - ReviewDetails screen can be called from
+            ReviewDetails - With added "Back" button to return to Home
+            
+    Link: reactnavigation.org/docs/en/getting-started.html
+    Installing: 
+        npm install react-navigation
+        expo install react-native-gesture-handler react-native-reanimated
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+19. Stack Navigator
 
 
 
