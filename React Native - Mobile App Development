@@ -1849,6 +1849,121 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 17. Global Styles
+    
+    Instead of copying and paste long "titleText" into every page, Global Styles provides a shorter code.
+    To do this, "global.js" will be used where it contains ALL the styles instead of having those codes in every single page
+
+    File Structure <Explorer>
+        Gamezone
+           >screens
+                home.js               [Topic 16]
+                about.js               [Topic 15]
+                reviewDetails.js  [Topic 15]
+           >styles    
+                global.js                                                                //01. Add folder and file
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts                   [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                     [Topic 16]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+    global.js                                                
+        import {StyleSheet} from 'react-native';
+
+        //const styles = StyleSheet.create({                              //02. Codes copied from home.js "styles"
+        //    container: {
+        //        padding: 24       
+        //    },
+        //    titleText: {
+        //        fontFamily: 'nunito-bold',
+        //        fontSize: 18,
+        //    }
+        //});  
+
+        export const globalStyles = StyleSheet.create({
+            container: {
+                flex: 1,
+                padding: 20,       
+            },
+            titleText: {
+                fontFamily: 'nunito-bold',
+                fontSize: 18,
+                color: '#333',
+            },
+            paragraph: {
+                marginVertical: 8,
+                lineHeight: 20,
+            }
+        });  
+
+    
+    home.js
+        import React from 'react';
+        import {StyleSheet, View, Text} from 'react-native';
+        import {globalStyles} from '../styles/global';                                    //03. Import globalStyles.js
+        
+        export default function Home() {
+            return (
+                //<View style={styles.container}>                                                 //04. Convert "styles.container" to "globalStyles.container"
+                <View style={globalStyles.container}> 
+                    //<Text style={styles.titleText}>Home Screen</Text>              //05. Convert "styles.titleText" to "globalStyles.titleText"
+                    <Text style={globalStyles.titleText}>Home Screen</Text>
+                </View>
+            )
+        }
+
+        //const styles = StyleSheet.create({                                                       //06. Code block no longer in use
+        //    container: {
+        //        padding: 24       
+        //    },
+        //    titleText: {
+        //        fontFamily: 'nunito-bold',
+        //        fontSize: 18,
+        //    }
+        //});  
+    
+    **DO THE SAME ON about.js and reviewDetails.js, excetp for "Text" container
+    
+    about.js                        
+        import React from 'react';
+        import {StyleSheet, View, Text} from 'react-native';
+        import {globalStyles} from '../styles/global'; 
+        
+        export default function About() {
+            return (
+                <View style={globalStyles.container}> 
+                    <Text>About Screen</Text>
+                </View>
+            )
+        }
+
+    reviewDetails.js                        
+        import React from 'react';
+        import {StyleSheet, View, Text} from 'react-native';
+        import {globalStyles} from '../styles/global'; 
+        
+        export default function ReviewDetails() {
+            return (
+                <View style={globalStyles.container}> 
+                    <Text>Review Details Screen</Text>
+                </View>
+            )
+        }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+18. React Navigation Setup
+
 
 
 
