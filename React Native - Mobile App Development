@@ -1984,6 +1984,127 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 19. Stack Navigator
+    
+    Installing:
+        npm install react-navigation-stack
+    
+    File Structure <Explorer>
+        Gamezone
+           >routes                                                       //01. Create folder
+                homeStack.js                                             //02. Add new file
+           >screens
+                home.js               [Topic 17]
+                about.js               [Topic 17]
+                reviewDetails.js  [Topic 17]
+           >styles    
+                global.js               [Topic 17]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts                   [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                     [Topic 16]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+    homeStack.js
+        import { createStackNavigator } from 'react-navigation-stack';
+        import { createAppContainer } from 'react-navigation';
+        import Home from '../screens/home';                           //07. Import home.js as a component
+        Import ReviewDetails from '../screens/reviewDetails';         //10. Import reviewDetails.js
+        
+        //const HomeStack = createStackNavigator();
+        //const HomeStack = createStackNavigator({});                 //03. Add an object that will control home.js and reviewDetails.js to be configurable with stack navigator
+        
+        //const screens = {}                                          //04. Instead of using object, a constant is used to make it visually easy to code
+        //const HomeStack = createStackNavigator(screens);
+
+        const screens = {
+            Home: {                                                   //05. "Home:" can be renamed to any word of your choice.
+                //screen:                                             //06. "screen:" is to load which file. In this case, home.js
+                screen: Home                                          //08. Adding imported Home component as the Home screen
+            },
+            ReviewDetails: {                                          //09. Same with Home screen. Also note that the top most screen will be the default screen
+                screen: ReviewDetails                                 //11. Added ReviewDetails as the screen
+            }
+        }  
+        
+        const HomeStack = createStackNavigator(screens);              //12. With only this line, it cannot do anything. Needs to be wrapped in "createAppContainer" and exported to App.js
+        
+        export default createAppContainer(HomeStack);                 //13. Adding the wrapper and the export code
+
+
+    App.js                         
+        import React, {useState} from 'react';   
+        import * as Font from 'expo-font';       
+        import Home from './screens/home';   
+        import {AppLoading} from 'expo';          
+        import Navigator from './routes/homeStack';                    //14. Importing homeStack.js as component named "Navigator"
+        
+        const getFonts () => Font.loadAsync({  
+            'nunito-regular': require('./assets/fonts/Nunito-Regular.ttf'),
+            'nunito-bold': require('./assets/fonts/Nunito-Bold.ttf')
+        });
+        
+        export default function App() {
+            const [fontsLoaded, setFontsLoaded] = useState(false);  
+            
+            if(fontsLoaded){      
+                return(
+                    //<Home />                                          //15. Instead of <Home />, Navigator will be used
+                    <Navigator />
+                );
+            } else {
+                return(
+                    <AppLoading 
+                        startAsync={getFonts}          
+                        onFinish={() => setFontsLoaded(true)} 
+                    />
+                )
+            }
+        }
+
+    RELOADING:                                                          //16. Reloading the app after installing packages
+        In VSCode > Terminal > 
+            expo start
+            
+        In Android Emulator >
+            Exit the opened emulated App (Swipe up)
+
+        In Expo > Left panel
+            Click on "Run on Android device/emulator"
+
+    Once reloaded, an empty top bar will appear. Usually this may contain the back button, etc. 
+
+    |------------------------------------------------------------------------------------------------|
+    |                                     REACT NAVIGATION                                           |
+    |------------------------------------------------------------------------------------------------|
+    |                                                                                                |
+    |                           App <Navigator/>                                                     |
+    |                             /                                                                  |
+    |                            /                                                                   |
+    |       +---------------HomeStack------------+                                                   |
+    |       |                                    |                                                   |
+    |       |  Home  <------>  ReviewDetails     |                    About                          |
+    |       |                                    |                                                   |
+    |       +------------------------------------+                                                   |
+    |                                                                                                |
+    |------------------------------------------------------------------------------------------------|
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+20. Navigating Around
+
+
+
 
 
 
