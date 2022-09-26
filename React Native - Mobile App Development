@@ -2104,20 +2104,105 @@ CONTENTS
 20. Navigating Around
 
 
+    File Structure <Explorer>
+        Gamezone
+           >routes      
+                homeStack.js           [Topic 19]
+           >screens
+                home.js                [Topic 17]
+                about.js               [Topic 17]
+                reviewDetails.js  [Topic 17]
+           >styles    
+                global.js              [Topic 17]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts                  [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                     [Topic 19]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+    home.js  -  Navigation Method
+        import React from 'react';
+        //import {StyleSheet, View, Text} from 'react-native';
+        import {StyleSheet, View, Text, Button} from 'react-native';               //01. Import Button
+        import {globalStyles} from '../styles/global';                  
+        
+        //export default function Home() {
+        //export default function Home(props) {                                    //06. Usually, props object is used for onPress handler
+        export default function Home({navigation}) {                               //07. Instead, destructure a navigation object
+            
+            //props.navigation                                                     //05. Used for navigating different screens within a stack
+            
+            //const pressHandler = () => {}                                        //04. Define onPress handler
+            const pressHandler = () => {
+                navigation.navigate('ReviewDetails');                              //08. This will call "AnyName:" but in this case, "ReviewDetails:" from the screen object in homeStack.js
+            }
+            
+            return (               
+                <View style={globalStyles.container}>   
+                    <Text style={globalStyles.titleText}>Home Screen</Text>
+                    //<Button title='go to review dets' />                         //02. Load button
+                    <Button title='go to review dets' onPress={pressHandler} />    //03. Add onPress handler
+                </View>
+            )
+        }
+
+    *home.js  -  Push Method (Not in use with this App)
+        import React from 'react';
+        import {StyleSheet, View, Text, Button} from 'react-native'; 
+        import {globalStyles} from '../styles/global';                  
+        
+        export default function Home({navigation}) {     
+            
+            const pressHandler = () => {
+                //navigation.navigate('ReviewDetails');     
+                navigation.push('ReviewDetails');                                 //09. Replace navigate to push. End result is the same. Here, we wont be using Push Method.
+            }
+            
+            return (               
+                <View style={globalStyles.container}>   
+                    <Text style={globalStyles.titleText}>Home Screen</Text>
+                    <Button title='go to review dets' onPress={pressHandler} />
+                </View>
+            )
+        }
+
+    reviewDetails.js                        
+        import React from 'react';
+        //import {StyleSheet, View, Text} from 'react-native';
+        import {StyleSheet, View, Text, Button} from 'react-native';               //10. Import Button
+        import {globalStyles} from '../styles/global'; 
+        
+        
+        
+        //export default function ReviewDetails() {
+        export default function ReviewDetails({navigation}) {                      //13. Destructure navigation
+        
+            //const pressHandler = () => {}                                        //12. Define pressHandler
+            const pressHandler = () => {
+                navigation.goBack();                                               //14. Add event "goBack"
+            }   
+            
+            return (
+                <View style={globalStyles.container}> 
+                    <Text>Review Details Screen</Text>
+                    <Button title='back to home screen' onPress={pressHandler} />  //11. Add Button with pressHandler
+                </View>
+            )
+        }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+21. Passing Data Between Screens
 
 
 
