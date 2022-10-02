@@ -2155,7 +2155,23 @@ CONTENTS
                 </View>
             )
         }
-
+        
+    *home.js  -  Navigation Method 2
+        import React from 'react';
+        import {StyleSheet, View, Text, Button} from 'react-native';
+        import {globalStyles} from '../styles/global';                  
+        
+        export default function Home({navigation}) {     
+            
+            const [name, setNames] = useState([ {title: 'ABC', rating:5, key:'1'}, {title: 'DEF', rating:2, key:'2'}, ]);
+            
+            return (               
+                <View style={globalStyles.container}>   
+                    <Text style={globalStyles.titleText}>Home Screen</Text>
+                </View>
+            )
+        }
+        
     *home.js  -  Push Method (Not in use with this App)
         import React from 'react';
         import {StyleSheet, View, Text, Button} from 'react-native'; 
