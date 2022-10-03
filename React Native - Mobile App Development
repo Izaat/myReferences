@@ -2233,6 +2233,8 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 21. Passing Data Between Screens
 
+    21 points
+
     File Structure <Explorer>
         Gamezone
            >routes      
@@ -2328,6 +2330,113 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 22. Navigation Options
+
+    Add Header name at main screen and Title Header when entering a review screen
+    To do this, navigationOptions will be used.
+        title = for header text
+        headerStyle = for coloring the header
+    12 points
+
+    File Structure <Explorer>
+        Gamezone
+           >routes      
+                homeStack.js          [Topic 19]
+           >screens
+                home.js               [Topic 21]
+                about.js              [Topic 17]
+                reviewDetails.js      [Topic 21]
+           >styles    
+                global.js             [Topic 17]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts                 [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                     [Topic 19]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+
+    homeStack.js - Long Method
+        import { createStackNavigator } from 'react-navigation-stack';
+        import { createAppContainer } from 'react-navigation';
+        import Home from '../screens/home';        
+        Import ReviewDetails from '../screens/reviewDetails'; 
+
+        const screens = {
+            Home: {             
+                screen: Home,          
+                //navigationOptions: {}                                  //01. Add navigationOptions as an object "{}"
+                navigationOptions: {
+                    title: 'GameZone',                                   //02. This will show the title "GameZone" as the home screen header
+                    //headerStyle: {}                                    //04. Add headerStyle
+                    headerStyle: {
+                        backgroundColor: '#eee'
+                    }          
+                }  
+            },
+            ReviewDetails: {                         
+                screen: ReviewDetails,
+                navigationOptions: {
+                    title: 'Review Details',                             //03. This will show the title "Review Details" as the home screen header
+                    headerStyle: {                      
+                        backgroundColor: '#eee'                          //05. Add headerStyle
+                    }          
+                }  
+            }
+        }  
+        
+        const HomeStack = createStackNavigator(screens); 
+        export default createAppContainer(HomeStack);      
+
+
+    homeStack.js - Shorter Method
+        import { createStackNavigator } from 'react-navigation-stack';
+        import { createAppContainer } from 'react-navigation';
+        import Home from '../screens/home';        
+        Import ReviewDetails from '../screens/reviewDetails'; 
+
+        const screens = {
+            Home: {             
+                screen: Home,          
+                navigationOptions: {
+                    title: 'GameZone',   
+                    headerStyle: {backgroundColor: '#333'}               //10. To overwrite the global "defaultNavigationOptions", add another headerStyle here
+                }  
+            },
+            ReviewDetails: {                         
+                screen: ReviewDetails,
+                navigationOptions: {
+                    title: 'Review Details',                    
+                }  
+            }
+        }  
+        
+        //const HomeStack = createStackNavigator(screens);                //06. Shorter method to add headerStyle [for apps with hundreds of screens]
+        //const HomeStack = createStackNavigator(screens, {});            //07. Add object
+        const HomeStack = createStackNavigator(screens, {
+            //defaultNavigationOptions: {}                                //08. Add a function
+            defaultNavigationOptions: {
+                //headerStyle: {backgroundColor: '#eee'},                 //09. Add headerStyle property here instead of in point 4. 
+                headerStyle: {backgroundColor: '#eee', height: 60},       //11. Adjust height of the header bar           
+                headerTintColor: '#444',                                  //12. Lightens the header color including the text
+            }  
+        }); 
+        export default createAppContainer(HomeStack);      
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+23. Drawer Navigation
+
+
+
 
 
 
