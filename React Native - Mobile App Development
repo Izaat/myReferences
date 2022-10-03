@@ -2233,6 +2233,104 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 21. Passing Data Between Screens
 
+    File Structure <Explorer>
+        Gamezone
+           >routes      
+                homeStack.js      [Topic 19]
+           >screens
+                home.js               [Topic 20]
+                about.js               [Topic 17]
+                reviewDetails.js  [Topic 20]
+           >styles    
+                global.js               [Topic 17]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts                   [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                     [Topic 19]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+    home.js  -  Navigation Method 2
+        import React, {useState} from 'react';
+        //import {StyleSheet, View, Text, Button} from 'react-native';
+        import {StyleSheet, View, Text, FlatList, TouchableOpacity} from 'react-native';                //02. Remove button, Add FlatList and TouchableOpacity
+        import {globalStyles} from '../styles/global';                  
+        
+        export default function Home({navigation}) {     
+            
+            //const [name, setNames] = useState([ {title: 'ABC', rating:5, key:'1'}, {title: 'DEF', rating:2, key:'2'}, ]);    //01. Load Navigation Method 2
+            const [reviews, setReviews] = useState([ 
+                {title: 'Zelda, Breath of Fresh Air', rating:5, body: 'lorem ipsum', key:'1'}, 
+                {title: 'Gotta Catch Them All', rating:4, body:'lorem ipsum', key:'2'}, 
+                {title: 'Not So Final Fantasy', rating:3, body:'lorem ipsum', key:'3'}, 
+            ]); 
+            
+            return (               
+                <View style={globalStyles.container}>   
+                    //<Text style={globalStyles.titleText}>Home Screen</Text>                             //03. Remove to use the Flatlist instead
+                    //<FlatList />
+                    <FlatList 
+                        //data={}                                                                         //04. Add function to specify what data to cycle through
+                        data={reviews}                                                                    //05. Define which data to cycle
+                        //renderItem={}                                                                   //06. Add renderItem
+                        //renderItem={ () => () }                                                         //07. Add arrow object to return JSX
+                        //renderItem={ ({item}) => () }                                                   //08. Add "item" to be destructured [reviews > title:, OR reviews > rating, etc]
+                        renderItem={({item}) => (
+                            //<TouchableOpacity></TouchableOpacity>                                       //09. Add TouchableOpacity component
+                            
+                            //<TouchableOpacity>
+                            //<TouchableOpacity onPress={()=>()}>                                         //13. Add onPress Handler with arrow function
+                            //<TouchableOpacity onPress={()=>navigation.navigate()}>                      //14. Use navigation object "Home({navigation})" to navigate into another object
+                            //<TouchableOpacity onPress={()=>navigation.navigate('ReviewDetails')}>       //15. Define the object to navigate into as ReviewDetails
+                            //<TouchableOpacity onPress={()=>navigation.navigate('ReviewDetails', {})}>   //16. Add in another object as parameter to set it as accessible by the navigate function
+                            <TouchableOpacity onPress={()=>navigation.navigate('ReviewDetails', item)}>   //17. Define object with "item" to mark all items (title, rating, key, etc) as accessible
+                                //<Text></Text>                                                           //10. Add text component
+                                //<Text>{item.title}</Text>                                            //11. Grab "title" from item property
+                                <Text style={globalStyles.titleText}>{item.title}</Text>               //12. Add text style
+                            </TouchableOpacity> 
+                        )}                 
+                    />
+                </View>
+            )
+        }
+
+    reviewDetails.js  - Navigation Method 2    
+        import React from 'react';
+        import {StyleSheet, View, Text, Button} from 'react-native'; 
+        import {globalStyles} from '../styles/global'; 
+        
+        export default function ReviewDetails({navigation}) {          
+            
+            return (
+                //<View style={globalStyles.container}> 
+                //    //<Text>Review Details Screen</Text>
+                //    //<Text>{}</Text>                                                                 //18. Instead of text, use a function to output the item object
+                //    //<Text>{navigation.getParam()}</Text>                                            //19. The statement for the function
+                //    <Text>{navigation.getParam('title')}</Text>                                       //20. This will call the title from the item object to be displayed
+                //</View>
+                
+                <View style={globalStyles.container}>                                                   //21. This will turn the entire container to call all the items
+                    <Text>{navigation.getParam('title')}</Text> 
+                    <Text>{navigation.getParam('body')}</Text> 
+                    <Text>{navigation.getParam('rating')}</Text> 
+                </View>
+            )
+        }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+22. Navigation Options
+
+
+
 
 
 
