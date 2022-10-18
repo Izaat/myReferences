@@ -2435,6 +2435,187 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 23. Drawer Navigation
 
+    Totally different from stack navigator - A vertical menu
+    A drawer navigator is when the user click on the "hamburger icon", a list will drop down or pop up from the side.
+    Also note that drawer navigators have no headers
+    Terminal:
+        ..\apps\yourAppProject> npm install react-navigation-drawer
+    Restart expo
+        Terminal > Dropdown Menu > Select "node"
+        ..\apps\yourAppProject> expo start
+    Emulator
+        exit app
+    Browser
+        Restart expo: "Run on Android device/emulator"
+
+    |---------------------------------------------------------------------------------------------|
+    |                                     REACT NAVIGATION                                        |
+    |---------------------------------------------------------------------------------------------|
+    |                                                                                             |
+    |                                     p <Navigator/>                                          |
+    |                                            |                                                |
+    |                                            |                                                |
+    |                                Drawer Navigator                                             |
+    |                               /                   \                                         |    
+    |                              /                      \                                       |    
+    |                             /                         \                                     |
+    |       +---------------HomeStack------------+     +----AboutStack-----+                      |
+    |       |                                    |     |        \          |                      |
+    |       |  Home  <------>  ReviewDetails     |     |       About       |                      |
+    |       |                                    |     |                   |                      |
+    |       +------------------------------------+     +-------------------+                      |
+    |                                                                                             |
+    |---------------------------------------------------------------------------------------------|
+
+    File Structure <Explorer>
+        Gamezone
+           >routes      
+                homeStack.js      [Topic 22]
+                aboutStack.js                                             //01. Add file
+                drawer.js                                                 //13. Add another file
+           >screens
+                home.js               [Topic 21]
+                about.js               [Topic 17]
+                reviewDetails.js  [Topic 21]
+           >styles    
+                global.js               [Topic 17]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts                   [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                     [Topic 19]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+    homeStack.js - Shorter Method
+        import { createStackNavigator } from 'react-navigation-stack';
+        import { createAppContainer } from 'react-navigation';
+        import Home from '../screens/home';        
+        Import ReviewDetails from '../screens/reviewDetails'; 
+
+        const screens = {
+            Home: {             
+                screen: Home,          
+                navigationOptions: {
+                    title: 'GameZone',   
+                }  
+            },
+            ReviewDetails: {                         
+                screen: ReviewDetails,
+                navigationOptions: {
+                    title: 'Review Details',                    
+                }  
+            }
+        }  
+        
+        const HomeStack = createStackNavigator(screens, {
+            defaultNavigationOptions: {
+                headerStyle: {backgroundColor: '#eee', height: 60},           
+                headerTintColor: '#444',    
+            }  
+        }); 
+        //export default createAppContainer(HomeStack);                              //03. Since aboutStack is used, createAppContainer is no longer used
+        export default HomeStack;     
+        
+    aboutStack.js - Shorter Method
+        import { createStackNavigator } from 'react-navigation-stack';
+        //import { createAppContainer } from 'react-navigation';                     //02. No longer in use
+        //import Home from '../screens/home';                                        //10. No longer in use
+        //Import ReviewDetails from '../screens/reviewDetails';                      //11. No longer in use
+        import About from '../screens/about';                                        //12. import from screens/about.js
+
+        const screens = {
+            //Home: {                                                                //07. Change to About
+            About: {       
+                //screen: Home,                                                      //08. Change to About          
+                screen: About,
+                navigationOptions: {
+                    //title: 'GameZone',                                             //09. Change to 'About GameZone'
+                    title: 'About GameZone', 
+                }  
+            },
+            //ReviewDetails: {                                                       //06. No longer used
+            //    screen: ReviewDetails,
+            //    navigationOptions: {
+            //        title: 'Review Details',                    
+            //    }  
+            //}
+        }  
+        
+        //const HomeStack = createStackNavigator(screens, {                          //05. Change HomeStack to AboutStack
+        const AboutStack = createStackNavigator(screens, {
+            defaultNavigationOptions: {
+                headerStyle: {backgroundColor: '#eee', height: 60},           
+                headerTintColor: '#444',    
+            }  
+        }); 
+        //export default createAppContainer(HomeStack);                              //04. Since aboutStack is used, createAppContainer is no longer used
+        export default AboutStack; 
+
+    drawer.js
+        import { createDrawerNavigator } from 'react-navigation-drawer';
+        import { createAppContainer } from 'react-navigation';
+        
+        import AboutStack from './aboutStack';                                       //19. Import aboutStack
+        import HomeStack from './homeStack';                                         //20. Import homeStack
+        
+        //const RootDrawerNavigator = createDrawerNavigator({})                      //14. Create a method
+        const RootDrawerNavigator = createDrawerNavigator({
+            //Home: {}                                                               //15. Add an object. Item inside the drawer menu bar
+            Home: {
+                screen: HomeStack,                                                   //16. Link to HomeStack
+            },
+            //About: {}                                                              //17. Add an object. Item inside the drawer menu bar
+            About: {
+                screen: AboutStack,                                                  //18. Link to AboutStack
+            }
+        });
+        
+        export default createAppContainer(RootDrawerNavigator);                      //21. Wrap drawer.js for export to App.js
+
+    App.js                         
+        import React, {useState} from 'react';   
+        import * as Font from 'expo-font';       
+        import Home from './screens/home';   
+        import {AppLoading} from 'expo';          
+        //import Navigator from './routes/homeStack';                                //22. Instead of using homeStack.js, drawer.js will be used
+        import Navigator from './routes/drawer'; 
+        
+        const getFonts () => Font.loadAsync({  
+            'nunito-regular': require('./assets/fonts/Nunito-Regular.ttf'),
+            'nunito-bold': require('./assets/fonts/Nunito-Bold.ttf')
+        });
+        
+        export default function App() {
+            const [fontsLoaded, setFontsLoaded] = useState(false);  
+            
+            if(fontsLoaded){      
+                return(
+                    <Navigator />
+                );
+            } else {
+                return(
+                    <AppLoading 
+                        startAsync={getFonts}          
+                        onFinish={() => setFontsLoaded(true)} 
+                    />
+                )
+            }
+        }
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+24. Custom Header Component
+
 
 
 
