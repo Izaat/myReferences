@@ -2614,9 +2614,149 @@ CONTENTS
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-24. Custom Header Component
+24a. Custom Header Component
+    
+    Add "Burger" menu bar (Part 1)
+    
+    File Structure <Explorer>
+        Gamezone
+           >shared                                              //01. Create folder
+                header.js                                       //02. Create header.js
+           >routes      
+                homeStack.js       [Topic 23]
+                aboutStack.js      [Topic 23]
+                drawer.js          [Topic 23]
+           >screens
+                home.js            [Topic 21]
+                about.js           [Topic 17]
+                reviewDetails.js   [Topic 21]
+           >styles    
+                global.js          [Topic 17]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts              [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                  [Topic 23]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
 
 
+    header.js
+        import React from 'react';
+        import { StyleSheet, Text, View } from 'react-native';
+        import { MaterialIcons } from '@expo/vector-icons';
+        
+        //export default function Header() {return()}                        //03. Copy
+        export default function Header() {
+            return(
+                //<View style={styles.header}></View>                       //04. Add style
+                <View style={styles.header}>
+                    {/* icon for the menu */}                               //07. Add for future use
+                    //<View><Text></Text></View>                            //05. Add Text
+                    <View>
+                        //<Text style={styles.headerText}></Text>           //06. Add style prop
+                        <Text style={styles.headerText}>GameZone</Text>     //16. Add text and save. The old theader will still show up.
+                    </View>     
+                </View> 
+            );
+        }       
+
+        //const styles = StyleSheet.create({});                              //08. Add Styles
+        const styles = StyleSheet.create({
+            //header: {}                                                     //09. Add Header Style
+            header: {
+                width: '100%',               //10. This will add a container header to the already existing header
+                height: '100%',              //11. This will add a container header to the already existing header
+                flexDirection: 'row',        //12. Specify direction to horizontal
+                alignItems: 'center',        //13. Horizontally centered
+                justifyContent: 'center',    //14a. Vertically centered in header container
+                //backgroundColor: 'red',    //14b. Header's background color (Optional)
+            },         
+            //headerText: {}                                                 //15. Add text styling
+            headerText: {
+                fontWeight: 'bold',
+                fontSize: 20,
+                color: '#333',
+                letterSpacing: 1,
+            }, 
+        });
+
+
+    homeStack.js - Shorter Method
+        import { createStackNavigator } from 'react-navigation-stack';
+        //import { createAppContainer } from 'react-navigation';              //17. Not in use
+        import Home from '../screens/home';        
+        Import ReviewDetails from '../screens/reviewDetails'; 
+        import Header from '../shared/header';                                //18. Import header component
+        import React from 'react';                                            //19. To enable library that provide communication with header component
+
+        const screens = {
+            Home: {             
+                screen: Home,          
+                navigationOptions: {
+                    //title: 'GameZone',     
+                    //title: () => <Header />,                                 //20. Instead of using "text", header component will be used  (to call text from header.js)
+                    headerTitle: () => <Header />,                             //21. Uses another propertyname instead of "title" since title prop can't call a component. Save and see the headerbar again
+                }  
+            },
+            ReviewDetails: {                         
+                screen: ReviewDetails,
+                navigationOptions: {
+                    title: 'Review Details',                    
+                }  
+            }
+        }  
+        
+        const HomeStack = createStackNavigator(screens, {
+            defaultNavigationOptions: {
+                headerStyle: {backgroundColor: '#eee', height: 60},           
+                headerTintColor: '#444',    
+            }  
+        }); 
+        export default HomeStack;     
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+24b. Custom Header Component
+
+    Add "Burger" menu bar (Part 2)
+    
+    File Structure <Explorer>
+        Gamezone
+           >shared                                           
+                header.js          [Topic 24a] 
+           >routes      
+                homeStack.js       [Topic 24a]
+                aboutStack.js      [Topic 23]
+                drawer.js          [Topic 23]
+           >screens
+                home.js            [Topic 21]
+                about.js           [Topic 17]
+                reviewDetails.js   [Topic 21]
+           >styles    
+                global.js          [Topic 17]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts              [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                 [Topic 23]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
 
 
 
