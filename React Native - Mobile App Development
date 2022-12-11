@@ -2703,8 +2703,8 @@ CONTENTS
                 screen: Home,          
                 navigationOptions: {
                     //title: 'GameZone',     
-                    //title: () => <Header />,                                 //20. Instead of using "text", header component will be used  (to call text from header.js)
-                    headerTitle: () => <Header />,                             //21. Uses another propertyname instead of "title" since title prop can't call a component. Save and see the headerbar again
+                    //title: () => <Header />,                   //20. Instead of using "text", header component will be used  (to call text from header.js)
+                    headerTitle: () => <Header />,               //21. Uses another propertyname instead of "title" since title prop can't call a component. Save and see the headerbar again
                 }  
             },
             ReviewDetails: {                         
