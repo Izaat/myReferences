@@ -2654,7 +2654,7 @@ CONTENTS
         import { StyleSheet, Text, View } from 'react-native';
         import { MaterialIcons } from '@expo/vector-icons';
         
-        //export default function Header() {return()}                        //03. Copy
+        //export default function Header() {return()}                       //03. Copy
         export default function Header() {
             return(
                 //<View style={styles.header}></View>                       //04. Add style
@@ -2731,32 +2731,304 @@ CONTENTS
     File Structure <Explorer>
         Gamezone
            >shared                                           
-                header.js          [Topic 24a] 
+                header.js               [Topic 24a] 
            >routes      
-                homeStack.js       [Topic 24a]
-                aboutStack.js      [Topic 23]
-                drawer.js          [Topic 23]
+                homeStack.js            [Topic 24a]
+                aboutStack.js           [Topic 23]
+                drawer.js               [Topic 23]
            >screens
-                home.js            [Topic 21]
-                about.js           [Topic 17]
-                reviewDetails.js   [Topic 21]
+                home.js                 [Topic 21]
+                about.js                [Topic 17]
+                reviewDetails.js  [Topic 21]
            >styles    
-                global.js          [Topic 17]
+                global.js               [Topic 17]
            >.expo
            >.expo-shared
            >assets
-               >fonts              [Topic 16]           
+               >fonts                   [Topic 16]           
                     Nunito-Regular.ttf
                     Nunito-Bold.ttf
                 icon.png
                 splash.png
            >node_modules
             .gitignore
-            App.js                 [Topic 23]
+            App.js                       [Topic 23]
             app.json
             babel.config.js
             package-lock.json
             package.json
+
+    aboutStack.js - Shorter Method
+        import { createStackNavigator } from 'react-navigation-stack';
+        import About from '../screens/about'; 
+        import Header from '../shared/header';                                           //01. Import header component
+        import React from 'react';                                                       //02. Import React
+
+        const screens = {
+            About: {            
+                screen: About,
+                //navigationOptions: {                                                    //17. Same principle applies to aboutStack.js
+                //    //title: 'About GameZone',                                          //03. Replace "title" with "headerTitle" that returns Header component
+                //    headerTitle: () => <Header />                                       //04. This will duplicate the Header component across all pages (Save and refresh)
+                //},  
+                
+                navigationOptions: ({ navigation }) => {                                  //18. Same principle applies to aboutStack.js
+                    return {
+                        headerTitle: () => <Header navigation={navigation} />, 
+                    }
+                } 
+            },
+        }  
+        
+        const AboutStack = createStackNavigator(screens, {
+            defaultNavigationOptions: {
+                headerStyle: {backgroundColor: '#eee', height: 60},           
+                headerTintColor: '#444',    
+            }  
+        }); 
+
+        export default AboutStack; 
+
+    header.js
+        import React from 'react';
+        import { StyleSheet, Text, View } from 'react-native';
+        import { MaterialIcons } from '@expo/vector-icons';
+        
+        //export default function Header() {
+        export default function Header({ navigation }) {                                             //19. Add navigation property
+            
+            //const openMenu = () => {}                                                              //08. Add onPress handler
+            const openMenu = () => {
+                navigation.openDrawer();                                                             //20. By default, this object is not registered in Header(). To register, see points 12 to 19
+            }        
+            
+            return(
+                <View style={styles.header}>
+                    //{/* icon for the menu */}   
+                    //<MaterialIcons />                                                               //05. Add MaterialIcons component
+                    //<MaterialIcons name="menu" />                                                   //06. Add Icons from "ExpoDocs" website
+                    //<MaterialIcons name="menu" size={28} onPress={} style={styles.icon} />          //07. Add size, onPress handler and style property
+                    <MaterialIcons name="menu" size={28} onPress={openMenu} style={styles.icon} />    //09. Add openMenu function. 
+                    
+                    <View>
+                        <Text style={styles.headerText}>GameZone</Text>    
+                    </View>     
+                </View> 
+            );
+        }       
+
+        const styles = StyleSheet.create({
+            header: {
+                width: '100%',     
+                height: '100%',      
+                flexDirection: 'row',       
+                alignItems: 'center',        
+                justifyContent: 'center',  
+            },         
+
+            headerText: {
+                fontWeight: 'bold',
+                fontSize: 20,
+                color: '#333',
+                letterSpacing: 1,
+            }, 
+            
+            //icon: {},                                                                  //10. Add icon style property
+            icon: {
+                position: 'absolute',                                                    //11. This will position the icon to the very left of screen. Save and refresh to see the burger icon
+                left: 16,
+            }, 
+            
+        });
+
+
+    homeStack.js - Shorter Method
+        import { createStackNavigator } from 'react-navigation-stack';
+        import Home from '../screens/home';        
+        Import ReviewDetails from '../screens/reviewDetails'; 
+        import Header from '../shared/header';           
+        import React from 'react';               
+
+        const screens = {
+            Home: {             
+                screen: Home,          
+                //navigationOptions: {                                                   //12. Rewrite navigationOptions as a function so it can be used by header.js
+                //    headerTitle: () => <Header />,  
+                //}  
+                
+                //navigationOptions: () => {}                                            //13. Rewritten as function
+                //navigationOptions: ({ navigation }) => {}                              //14. Enable destructure property
+                navigationOptions: ({ navigation }) => {
+                    return {
+                        //headerTitle: () => <Header />,                                 //15. Function now able to push the object to header.js
+                        headerTitle: () => <Header navigation={navigation} />,           //16. With navigation property enabled, destination object "{navigation}" is be added
+                    }
+                }  
+            },
+            ReviewDetails: {                         
+                screen: ReviewDetails,
+                navigationOptions: {
+                    title: 'Review Details',                    
+                }  
+            }
+        }  
+        
+        const HomeStack = createStackNavigator(screens, {
+            defaultNavigationOptions: {
+                headerStyle: {backgroundColor: '#eee', height: 60},           
+                headerTintColor: '#444',    
+            }  
+        }); 
+        export default HomeStack;     
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+24c. Custom Header Component
+
+    Add "Burger" menu bar (Part 3) - Dynamic title
+    
+    File Structure <Explorer>
+        Gamezone
+           >shared                                           
+                header.js            [Topic 24b] 
+           >routes      
+                homeStack.js         [Topic 24b]
+                aboutStack.js        [Topic 24b]
+                drawer.js            [Topic 23]
+           >screens
+                home.js              [Topic 21]
+                about.js             [Topic 17]
+                reviewDetails.js     [Topic 21]
+           >styles    
+                global.js            [Topic 17]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts                [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                    [Topic 23]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+    aboutStack.js - Shorter Method
+        import { createStackNavigator } from 'react-navigation-stack';
+        import About from '../screens/about'; 
+        import Header from '../shared/header';                  
+        import React from 'react';                                                               
+
+        const screens = {
+            About: {            
+                screen: About,
+                
+                navigationOptions: ({ navigation }) => {   
+                    return {
+                        headerTitle: () => <Header navigation={navigation} title='About GameZone'  />,    //02. Add title property
+                    }
+                } 
+            },
+        }  
+        
+        const AboutStack = createStackNavigator(screens, {
+            defaultNavigationOptions: {
+                headerStyle: {backgroundColor: '#eee', height: 60},           
+                headerTintColor: '#444',    
+            }  
+        }); 
+
+        export default AboutStack; 
+
+    header.js
+        import React from 'react';
+        import { StyleSheet, Text, View } from 'react-native';
+        import { MaterialIcons } from '@expo/vector-icons';
+        
+        //export default function Header({ navigation }) {  
+        export default function Header({ navigation, title }) {                                          //03. Add title object
+            
+            const openMenu = () => {
+                navigation.openDrawer();    
+            }        
+            
+            return(
+                <View style={styles.header}>
+                    <MaterialIcons name="menu" size={28} onPress={openMenu} style={styles.icon} />   
+                    
+                    <View>
+                        //<Text style={styles.headerText}>GameZone</Text>    
+                        <Text style={styles.headerText}>{ title }</Text>                                  //04. Dynamic output of the title
+                    </View>     
+                </View> 
+            );
+        }       
+
+        const styles = StyleSheet.create({
+            header: {
+                width: '100%',     
+                height: '100%',      
+                flexDirection: 'row',       
+                alignItems: 'center',        
+                justifyContent: 'center',  
+            },         
+
+            headerText: {
+                fontWeight: 'bold',
+                fontSize: 20,
+                color: '#333',
+                letterSpacing: 1,
+            }, 
+            
+            icon: {
+                position: 'absolute',                                                         
+                left: 16,
+            }, 
+            
+        });
+
+
+    homeStack.js - Shorter Method
+        import { createStackNavigator } from 'react-navigation-stack';
+        import Home from '../screens/home';        
+        Import ReviewDetails from '../screens/reviewDetails'; 
+        import Header from '../shared/header';           
+        import React from 'react';               
+
+        const screens = {
+            Home: {             
+                screen: Home,          
+
+                navigationOptions: ({ navigation }) => {
+                    return {
+                        //headerTitle: () => <Header navigation={navigation} />, 
+                        headerTitle: () => <Header navigation={navigation} title='GameZone' />,             //01. Add title property
+                    }
+                }  
+            },
+            ReviewDetails: {                         
+                screen: ReviewDetails,
+                navigationOptions: {
+                    title: 'Review Details',                    
+                }  
+            }
+        }  
+        
+        const HomeStack = createStackNavigator(screens, {
+            defaultNavigationOptions: {
+                headerStyle: {backgroundColor: '#eee', height: 60},           
+                headerTintColor: '#444',    
+            }  
+        }); 
+        export default HomeStack;     
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+25. Custom Card Component
 
 
 
