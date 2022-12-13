@@ -2540,7 +2540,7 @@ CONTENTS
                 navigationOptions: {
                     //title: 'GameZone',                                             //09. Change to 'About GameZone'
                     title: 'About GameZone', 
-                }  
+                },  
             },
             //ReviewDetails: {                                                       //06. No longer used
             //    screen: ReviewDetails,
