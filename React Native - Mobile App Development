@@ -3029,6 +3029,138 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 25. Custom Card Component
+    
+    Display every single title as a "card", a user interface component
+    
+    File Structure <Explorer>
+        Gamezone
+           >shared                                           
+                header.js             [Topic 24c] 
+                card.js                                           //01. Create card.js so this will be used on home, reviewDetails and about
+           >routes      
+                homeStack.js          [Topic 24c]
+                aboutStack.js         [Topic 24c]
+                drawer.js             [Topic 23]
+           >screens
+                home.js               [Topic 21]
+                about.js              [Topic 17]
+                reviewDetails.js      [Topic 21]
+           >styles    
+                global.js             [Topic 17]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts                 [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                     [Topic 23]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+
+    card.js
+        import React from 'react';                                //02. Import the basic
+        import { StyleSheet, View } from 'react-native';      
+        
+        //export default function Card() {}                       //03. Create function and name it Card
+        //export default function Card(props) {}                  //04. Give Card function the ability to take in props
+        export default function Card(props) {
+            //return()                                            //05. Card function will return a JSX code
+            return(
+                //<View style={StyleSheet.card}></View>           //06. Add View widget and give it a style
+                <View style={styles.card}>
+                    //<View style={styles.cardContent}></View>    //07. Add another View widget and give it a style for cardContent
+                    <View style={styles.cardContent}>
+                        { props.children }                        //08. This will swallow up the <Text> widget inside "<Card>...</Card>" written anywhere in the App. A centralized control.
+                    </View>
+                </View>
+            )     
+        }
+
+        //const styles = StyleSheet.create({});          //09. Create styles
+        const styles = StyleSheet.create({
+            //card: {},                                  //10. Create style property for card
+            card: {
+                borderRadius: 6,                         //15. Corner round edge
+                elevation: 3,                            //16. Distance between back of card to the screen (Dropshadow)
+                backgroundColor: '#fff',                 //17. White
+                shadowOffset: {width: 1, height, 1},     //18. Height and width of the shadow (Imagine italic alphabets)
+                shadowColor: '#333',                     //19. Black
+                shadowOpacity: 0.3,                      //20. Value of 0 is totally transparent
+                shadowRadius: 2,                         //21. How much shadow blends with the card
+                marginHorizontal: 4,
+                marginVertical: 6,
+            },   
+            
+            //cardContent: {},                           //11. Create style property for cardContent
+            cardContent: {
+                marginHorizontal: 18,                    //22. Padding for text and card borders
+                marginVertical: 10,                      //23. Padding for text and card borders
+            },   
+        });   
+
+    home.js
+        import React, {useState} from 'react';
+        import {StyleSheet, View, Text, FlatList, TouchableOpacity} from 'react-native';  
+        import {globalStyles} from '../styles/global';                  
+        import Card from '../shared/card';                                                         //12. Import card.js
+        
+        export default function Home({navigation}) {     
+            
+            const [reviews, setReviews] = useState([ 
+                {title: 'Zelda, Breath of Fresh Air', rating:5, body: 'lorem ipsum', key:'1'}, 
+                {title: 'Gotta Catch Them All', rating:4, body:'lorem ipsum', key:'2'}, 
+                {title: 'Not So Final Fantasy', rating:3, body:'lorem ipsum', key:'3'}, 
+            ]); 
+            
+            return (               
+                <View style={globalStyles.container}>   
+                    <FlatList 
+                        data={reviews}     
+                        renderItem={({item}) => (
+                            <TouchableOpacity onPress={()=>navigation.navigate('ReviewDetails', item)}> 
+                                //<Text style={globalStyles.titleText}>{item.title}</Text>         //13. Wrap with Card widget. See point 8
+                                <Card>
+                                    <Text style={globalStyles.titleText}>{item.title}</Text>       //14. Wrapped so this will be forwarded to {props.children} in card.js
+                                </Card>
+                            </TouchableOpacity> 
+                        )}                 
+                    />
+                </View>
+            )
+        }
+
+    reviewDetails.js  - Navigation Method 2    
+        import React from 'react';
+        import {StyleSheet, View, Text, Button} from 'react-native'; 
+        import {globalStyles} from '../styles/global'; 
+        import Card from '../shared/card';                                                  //24. Import card.js
+        
+        export default function ReviewDetails({navigation}) {          
+            return (
+                <View style={globalStyles.container}>         
+                    //<Text>{navigation.getParam('title')}</Text>                           //25. Wrap all the lines into a card
+                    //<Text>{navigation.getParam('body')}</Text> 
+                    //<Text>{navigation.getParam('rating')}</Text> 
+                    
+                    <Card>
+                        <Text>{navigation.getParam('title')}</Text>                         //26. Wrapped
+                        <Text>{navigation.getParam('body')}</Text> 
+                        <Text>{navigation.getParam('rating')}</Text> 
+                    </Card>
+                    
+                </View>
+            )
+        }
+        
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+26. Using Images
 
 
 
