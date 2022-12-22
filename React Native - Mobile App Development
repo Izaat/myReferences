@@ -3161,6 +3161,124 @@ CONTENTS
         
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 26. Using Images
+    
+    Show images for the ratings. Example, 5hearts.png for rating of 5, etc
+    Download assets:
+        github.com/iamshaunjp/react-native-tutorial/tree/lesson-27/gamezone/assets
+
+    File Structure <Explorer>
+        Gamezone
+           >shared                                           
+                header.js            [Topic 24c] 
+                card.js                [Topic 25] 
+           >routes      
+                homeStack.js      [Topic 24c]
+                aboutStack.js      [Topic 24c]
+                drawer.js             [Topic 23]
+           >screens
+                home.js               [Topic 25] 
+                about.js               [Topic 17]
+                reviewDetails.js  [Topic 25] 
+           >styles    
+                global.js               [Topic 17]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts                   [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                     [Topic 23]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+    reviewDetails.js  - Navigation Method 2    
+        import React from 'react';
+        //import {StyleSheet, View, Text, Button} from 'react-native'; 
+        import {StyleSheet, View, Text, Image} from 'react-native';        //04. Remove Button (No longer in use) and add in Image. 
+        //import {globalStyles} from '../styles/global'; 
+        import {globalStyles, images} from '../styles/global';             //14. Import images from global.js
+        import Card from '../shared/card';        
+        
+        export default function ReviewDetails({navigation}) {     
+            
+            const rating = navigation.getParam('rating');                  //16. Create a variable to store the rating from home.js
+            
+            return (
+                <View style={globalStyles.container}>         
+                    
+                    <Card>
+                        <Text>{navigation.getParam('title')}</Text>     
+                        <Text>{navigation.getParam('body')}</Text> 
+                        //<Text>{navigation.getParam('rating')}</Text>      //01. Remove to make way for the image
+                        
+                        //<View style={styles.rating}></View>               //02. Insert View component with style
+                        <View style={styles.rating}>
+                            <Text>GameZone rating: </Text>                  //03. Add Text component
+                            //<Image source={require()} />                                    //05. Add Image component with "source" prop and a function called "require"
+                            //<Image source={require('../assets/rating-1.png')} />            //06. Add in the image link
+                            //<Image source={require('../assets/rating-' + '1' + '.png')} />  //09. Another method is to use concatenate.
+                            //<Image source={require('../assets/rating-' + navigation.getParam('rating') + '.png')} />    //10. For dynamic loading by using the state, but this will not work since "require" cant do concatenate.
+                            //<Image source={require(images.ratings)} />                      //15. Load ratings from the list
+                            <Image source={images.ratings[rating]} />                         //17. No longer need to use the function "require". "Ratings" will extract "rating" variable
+                        </View>
+                        
+                    </Card>
+                    
+                </View>
+            )
+        }
+        
+        //const styles = StyleSheet.create({})                                //07. Create styles that passes in an object. Save and load app. 
+        const styles = StyleSheet.create({                                    //08. You will see all ratings will show 1 heart image regardless the rating number
+            rating: {                                                         //18. Add rating styles
+                flexDirection: 'row',
+                justifyContent: 'center',
+                paddingTop: 16,
+                marginTop: 16,
+                borderTopWidth: 1,
+                borderTopColor: '#eee',
+            }
+        });  
+
+    global.js                                                
+        import {StyleSheet} from 'react-native';
+
+        export const globalStyles = StyleSheet.create({
+            container: {
+                flex: 1,
+                padding: 20,       
+            },
+            titleText: {
+                fontFamily: 'nunito-bold',
+                fontSize: 18,
+                color: '#333',
+            },
+            paragraph: {
+                marginVertical: 8,
+                lineHeight: 20,
+            }
+        });  
+        
+        //export const images = {};                                     //11. Solution for "require" function
+        export const images = {
+            //ratings: {}                                               //12. Create ratings as an object. Also note the name ratings VS rating in home.js
+            ratings: {
+                '1': require('../assets/rating-1.png'),                 //13. Create list for "require" function
+                '2': require('../assets/rating-2.png'),
+                '3': require('../assets/rating-3.png'),
+                '4': require('../assets/rating-4.png'),
+                '5': require('../assets/rating-5.png'),
+            }   
+        };        
+        
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+27. Background Images
 
 
 
