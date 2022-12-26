@@ -3389,7 +3389,254 @@ CONTENTS
         });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-28. Modals
+28a. Modals
+    
+    A modal is similar to a popup.
+    
+    File Structure <Explorer>
+        Gamezone
+           >shared                                           
+                header.js          [Topic 27] 
+                card.js            [Topic 25] 
+           >routes      
+                homeStack.js       [Topic 24c]
+                aboutStack.js      [Topic 24c]
+                drawer.js          [Topic 23]
+           >screens
+                home.js            [Topic 25] 
+                about.js           [Topic 17]
+                reviewDetails.js   [Topic 26] 
+           >styles    
+                global.js          [Topic 26]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts              [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                 [Topic 23]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+    home.js
+        import React, {useState} from 'react';
+        //import {StyleSheet, View, Text, FlatList, TouchableOpacity} from 'react-native';  
+        import {StyleSheet, View, Text, FlatList, TouchableOpacity, Modal} from 'react-native';            //01. Import Modal component
+        import {globalStyles} from '../styles/global';                  
+        import Card from '../shared/card';            
+        import { MaterialIcons } from '@expo/vector-icons';                //08. Import MaterialIcons for the popup toggle button
+        
+        export default function Home({navigation}) {     
+            
+            //const [modalOpen, setModalOpen] = useState();                //05. To toggle Modal between visible of not visible via a button
+            const [modalOpen, setModalOpen] = useState(false);             //06. Set default to false so the popup wont open automatically when App starts
+            
+            const [reviews, setReviews] = useState([ 
+                {title: 'Zelda, Breath of Fresh Air', rating:5, body: 'lorem ipsum', key:'1'}, 
+                {title: 'Gotta Catch Them All', rating:4, body:'lorem ipsum', key:'2'}, 
+                {title: 'Not So Final Fantasy', rating:3, body:'lorem ipsum', key:'3'}, 
+            ]); 
+            
+            return (               
+                <View style={globalStyles.container}>   
+                    
+                    //<Modal visible={true}></Modal>                             //02. Add modal with visible prop
+                    //<Modal visible={true}>
+                    //<Modal visible={modalOpen}>                                //07. Set prop to "modalOpen"
+                    <Modal visible={modalOpen} animationType='slide'>            //15. Add sliding animation
+                        //<View style={StyleSheet.modalContent}></View>          //03. Add View component with style prop
+                        <View style={StyleSheet.modalContent}>
+                            
+                            //<MaterialIcons />                         //12. Add another MaterialIcons component to close the opened popup
+                            <MaterialIcons 
+                                name='close'                            //13. Set to "close"
+                                size={24}
+                                onPress={() => setModalOpen(false)}     //14. Set to false. Save and run test
+                            />
+                            
+                            <Text>Hello from the modal</Text>           //04. Add Text widget for testing. Save and test. Note: Restart the App to get rid of the popup
+                        </View>
+                    </Modal>   
+                    
+                    //<MaterialIcons />                                 //09. Add MaterialIcons component (To open start a popup)
+                    <MaterialIcons 
+                        name='add'                                      //10. Add props
+                        size={24}
+                        onPress={() => setModalOpen(true)}              //11. When pressed, setModalOpen prop turns into "true"
+                    />
+                    
+                    <FlatList 
+                        data={reviews}     
+                        renderItem={({item}) => (
+                            <TouchableOpacity onPress={()=>navigation.navigate('ReviewDetails', item)}> 
+                                <Card>
+                                    <Text style={globalStyles.titleText}>{item.title}</Text>
+                                </Card>
+                            </TouchableOpacity> 
+                        )}                 
+                    />
+                </View>
+            )
+        }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+28b. Modals
+    
+    Add styling to the button
+    
+    File Structure <Explorer>
+        Gamezone
+           >shared                                           
+                header.js          [Topic 27] 
+                card.js            [Topic 25] 
+           >routes      
+                homeStack.js       [Topic 24c]
+                aboutStack.js      [Topic 24c]
+                drawer.js          [Topic 23]
+           >screens
+                home.js            [Topic 28a] 
+                about.js           [Topic 17]
+                reviewDetails.js   [Topic 26] 
+           >styles    
+                global.js          [Topic 26]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts              [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                 [Topic 23]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+    home.js
+        import React, {useState} from 'react';
+        import {StyleSheet, View, Text, FlatList, TouchableOpacity, Modal} from 'react-native';   
+        import {globalStyles} from '../styles/global';                  
+        import Card from '../shared/card';            
+        import { MaterialIcons } from '@expo/vector-icons'; 
+        
+        export default function Home({navigation}) {     
+            
+            const [modalOpen, setModalOpen] = useState(false);     
+            
+            const [reviews, setReviews] = useState([ 
+                {title: 'Zelda, Breath of Fresh Air', rating:5, body: 'lorem ipsum', key:'1'}, 
+                {title: 'Gotta Catch Them All', rating:4, body:'lorem ipsum', key:'2'}, 
+                {title: 'Not So Final Fantasy', rating:3, body:'lorem ipsum', key:'3'}, 
+            ]); 
+            
+            return (               
+                <View style={globalStyles.container}>   
+                    
+                    <Modal visible={modalOpen} animationType='slide'>        
+                        <View style={StyleSheet.modalContent}>
+                            
+                            <MaterialIcons 
+                                name='close'            
+                                size={24}
+                                //style={styles.modalToggle}                                 //04. Add style for close button
+                                //style={{}}                                                 //05. To have an custom close button that doesnt share with open button, insert an object
+                                style={{ ...styles.modalToggle, ...styles.modalClose }}      //06. Destructure the modalToggle and modalClose and combine them as the object
+                                onPress={() => setModalOpen(false)}   
+                            />
+                            
+                            <Text>Hello from the modal</Text>   
+                        </View>
+                    </Modal>   
+                    
+                    <MaterialIcons 
+                        name='add'                      
+                        size={24}
+                        style={styles.modalToggle}               //01. Add style for open button
+                        onPress={() => setModalOpen(true)}      
+                    />
+                    
+                    <FlatList 
+                        data={reviews}     
+                        renderItem={({item}) => (
+                            <TouchableOpacity onPress={()=>navigation.navigate('ReviewDetails', item)}> 
+                                <Card>
+                                    <Text style={globalStyles.titleText}>{item.title}</Text>
+                                </Card>
+                            </TouchableOpacity> 
+                        )}                 
+                    />
+                </View>
+            )
+        }
+
+        //const styles = StyleSheet.create({})     //02. Add stylesheet
+        const styles = StyleSheet.create({
+            //modalToggle: {}                      //03. Add modalToggle
+            modalToggle: {
+                marginBottom: 10,
+                borderWidth: 1,
+                borderColor: '#f2f2f2',
+                padding: 10,
+                borderRadius: 10,
+                alignSelf: 'center',
+            },
+
+            //modalClose: {}                        //07. Add modalClose
+            modalClose: {
+                marginTop: 20,
+                marginBottom: 0,
+            },
+            
+            //modalContent: {}                      //08. Add modalContent styling for the contents in the popup
+            modalContent: {
+                flex: 1,                            //09. To make the content take up all the space available
+            } 
+        })     
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+29. Formik Forms - Part 1
+
+    File Structure <Explorer>
+        Gamezone
+           >shared                                           
+                header.js          [Topic 27] 
+                card.js            [Topic 25] 
+           >routes      
+                homeStack.js       [Topic 24c]
+                aboutStack.js      [Topic 24c]
+                drawer.js          [Topic 23]
+           >screens
+                home.js            [Topic 28b] 
+                about.js           [Topic 17]
+                reviewDetails.js   [Topic 26] 
+           >styles    
+                global.js          [Topic 26]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts              [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                 [Topic 23]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+
 
 
 
