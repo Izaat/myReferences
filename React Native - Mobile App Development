@@ -3450,8 +3450,8 @@ CONTENTS
                     //<Modal visible={true}>
                     //<Modal visible={modalOpen}>                                //07. Set prop to "modalOpen"
                     <Modal visible={modalOpen} animationType='slide'>            //15. Add sliding animation
-                        //<View style={StyleSheet.modalContent}></View>          //03. Add View component with style prop
-                        <View style={StyleSheet.modalContent}>
+                        //<View style={styles.modalContent}></View>          //03. Add View component with style prop
+                        <View style={styles.modalContent}>
                             
                             //<MaterialIcons />                         //12. Add another MaterialIcons component to close the opened popup
                             <MaterialIcons 
@@ -3542,7 +3542,7 @@ CONTENTS
                 <View style={globalStyles.container}>   
                     
                     <Modal visible={modalOpen} animationType='slide'>        
-                        <View style={StyleSheet.modalContent}>
+                        <View style={styles.modalContent}>
                             
                             <MaterialIcons 
                                 name='close'            
