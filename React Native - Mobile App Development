@@ -3604,41 +3604,245 @@ CONTENTS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 29. Formik Forms - Part 1
+    
+    All 29 points
+    Add a fill up form to the modal aka popup
+    Use 2 3rd party libraries
+        Formik: Helps create forms and track values (using state)
+        Yop: A validation library that allows easily setup validation rules for each form field
 
     File Structure <Explorer>
         Gamezone
            >shared                                           
-                header.js          [Topic 27] 
-                card.js            [Topic 25] 
+                header.js             [Topic 27] 
+                card.js               [Topic 25] 
            >routes      
-                homeStack.js       [Topic 24c]
-                aboutStack.js      [Topic 24c]
-                drawer.js          [Topic 23]
+                homeStack.js          [Topic 24c]
+                aboutStack.js         [Topic 24c]
+                drawer.js             [Topic 23]
            >screens
-                home.js            [Topic 28b] 
-                about.js           [Topic 17]
-                reviewDetails.js   [Topic 26] 
+                home.js               [Topic 28b] 
+                about.js              [Topic 17]
+                reviewDetails.js      [Topic 26] 
+                reviewForm.js                                       //02. Create new file
            >styles    
-                global.js          [Topic 26]
+                global.js             [Topic 26]
            >.expo
            >.expo-shared
            >assets
-               >fonts              [Topic 16]           
+               >fonts                 [Topic 16]           
                     Nunito-Regular.ttf
                     Nunito-Bold.ttf
                 icon.png
                 splash.png
            >node_modules
             .gitignore
-            App.js                 [Topic 23]
+            App.js                    [Topic 23]
             app.json
             babel.config.js
             package-lock.json
             package.json
 
+    Terminal:
+        ..\apps\gamezone> npm install formik                       //01. Install Formik
+        Refresh process after installing a package
+            Terminal > dropdown menu > 1:node > type in "expo start"
+            Close app in smartphone emulator
+            Browser > ExpoDevIDE > LeftPanel > Run on Android device/emulator
+        
+    reviewForm.js   
+        import React from 'react';
+        import { StyleSheet, Button, TextInput, View, Text } from 'react-native';
+        import { globalStyles } from '../styles/global.js';
+        import { Formik } from 'formik';
 
+        //export default function ReviewForm() {}                  //02. Add export function
+        export default function ReviewForm() {
+            
+            //return()                                             //03. Return JSX template
+            return(
+                //<View style={globalStyles.container}> </View>    //04. Add View component with style
+                <View style={globalStyles.container}> 
+                    //<Formik></Formik>                      //05. Add Formik tag and this tag can take in several props
+                    <Formik
+                        //initialValues={}                   //06. Add "initialValues" prop
+                        //initialValues={{}}                 //07. The prop will be equal to an object and this object will list down different fields in the form
+                        initialValues={{
+                            title: '',                       //08. Add fields with empty strings. Initial value of the fields will be empty
+                            body: '',
+                            rating: '',
+                        }} 
+                        
+                        //onSubmit={() => {}}                //09. Add onSubmit and this will be equal to a function
+                        //onSubmit={(values) => {}}          //10. Will also take in an argument called "values". Represents the values taken by empty strings
+                        onSubmit={(values) => {
+                            console.log(values);                                      //26. Save and run. This will output the values
+                        }}
+                    >
+                        //{() => ()}                                                  //11. Add a renderer that generates the form. Returns JSX
+                        //{(props) => ()}                                             //12. Add Formik's internal props that handles the change inside the formfields
+                        {(props) => (
+                            //<View></View>                                           //13. Add View component
+                            <View>
+                                //<TextInput />                                       //14. This will output the title
+                                <TextInput 
+                                    style={globalStyles.input}                        //15. Add style prop
+                                    placeholder='Review Title'                        //16. Add placeholder
+                                    //onChangeText={}                                 //17. This prop expects a function whenever the text changes
+                                    //onChangeText={props.handleChange()}             //18. Will take in props function from point 12
+                                    onChangeText={props.handleChange('title')}        //19. This means when text in "title" box changes, a function will run (updates "values" property in point 10)
+                                    value={props.values.title}                        //20. This will just update the value in realtime. i.e alphabets appears in textbox while typing
+                                />   
+                                
+                                //<TextInput />                                       //21. Insert the second TextInput component for body
+                                <TextInput 
+                                    multiline                                         //22. Add to enable multiple line input textbox
+                                    style={globalStyles.input}  
+                                    placeholder='Review Body'    
+                                    onChangeText={props.handleChange('body')}    
+                                    value={props.values.body}                     
+                                />   
+                                
+                                //<TextInput />                                       //23a. Insert the third TextInput component for rating
+                                <TextInput                                  
+                                    style={globalStyles.input}  
+                                    placeholder='Rating (1-5)'    
+                                    onChangeText={props.handleChange('rating')}    
+                                    value={props.values.rating}                     
+                                    keyboardType='numeric'                             //23b. Set textbox to only accept numbers
+                                />   
+                                
+                                //<Button title='submit' color='maroon' onPress={} />                     //24. Add submit button
+                                <Button title='submit' color='maroon' onPress={props.handleSubmit} />     //25. This will run point 9 when pressed
+                                
+                            </View>       
+                        )} 
+                        
+                    </Formik>   
+                </View>
+            )
+            
+        } 
 
+    home.js
+        import React, {useState} from 'react';
+        import {StyleSheet, View, Text, FlatList, TouchableOpacity, Modal} from 'react-native';   
+        import {globalStyles} from '../styles/global';                  
+        import Card from '../shared/card';            
+        import { MaterialIcons } from '@expo/vector-icons'; 
+        import ReviewForm from './reviewForm';                                 //27. Import from reviewForm.js
+        
+        export default function Home({navigation}) {     
+            
+            const [modalOpen, setModalOpen] = useState(false);     
+            
+            const [reviews, setReviews] = useState([ 
+                {title: 'Zelda, Breath of Fresh Air', rating:5, body: 'lorem ipsum', key:'1'}, 
+                {title: 'Gotta Catch Them All', rating:4, body:'lorem ipsum', key:'2'}, 
+                {title: 'Not So Final Fantasy', rating:3, body:'lorem ipsum', key:'3'}, 
+            ]); 
+            
+            return (               
+                <View style={globalStyles.container}>   
+                    
+                    <Modal visible={modalOpen} animationType='slide'>        
+                        <View style={styles.modalContent}>
+                            
+                            <MaterialIcons 
+                                name='close'            
+                                size={24}
+                                style={{ ...styles.modalToggle, ...styles.modalClose }}
+                                onPress={() => setModalOpen(false)}   
+                            />
+                            
+                            //<Text>Hello from the modal</Text>   
+                            <ReviewForm />                                     //28. This will render the reviewForm.js into the modal/popup
+                            
+                        </View>
+                    </Modal>   
+                    
+                    <MaterialIcons 
+                        name='add'                      
+                        size={24}
+                        style={styles.modalToggle}    
+                        onPress={() => setModalOpen(true)}      
+                    />
+                    
+                    <FlatList 
+                        data={reviews}     
+                        renderItem={({item}) => (
+                            <TouchableOpacity onPress={()=>navigation.navigate('ReviewDetails', item)}> 
+                                <Card>
+                                    <Text style={globalStyles.titleText}>{item.title}</Text>
+                                </Card>
+                            </TouchableOpacity> 
+                        )}                 
+                    />
+                </View>
+            )
+        }
 
+        const styles = StyleSheet.create({
+            modalToggle: {
+                marginBottom: 10,
+                borderWidth: 1,
+                borderColor: '#f2f2f2',
+                padding: 10,
+                borderRadius: 10,
+                alignSelf: 'center',
+            },
+
+            modalClose: {
+                marginTop: 20,
+                marginBottom: 0,
+            },
+            
+            modalContent: {
+                flex: 1,       
+            } 
+        })     
+
+    global.js                                                
+        import {StyleSheet} from 'react-native';
+
+        export const globalStyles = StyleSheet.create({
+            container: {
+                flex: 1,
+                padding: 20,       
+            },
+            titleText: {
+                fontFamily: 'nunito-bold',
+                fontSize: 18,
+                color: '#333',
+            },
+            paragraph: {
+                marginVertical: 8,
+                lineHeight: 20,
+            },
+            
+            //input: {}                                       //29. Add input prop, Save and run. Fill up form and see result in IDE
+            input: {
+                borderWidth: 1,
+                borderColor: '#ddd',     //grey
+                padding: 10,
+                fontSize: 18,
+                borderRadius: 6,
+            }
+            
+        });  
+        
+        export const images = {
+            ratings: {
+                '1': require('../assets/rating-1.png'),     
+                '2': require('../assets/rating-2.png'),
+                '3': require('../assets/rating-3.png'),
+                '4': require('../assets/rating-4.png'),
+                '5': require('../assets/rating-5.png'),
+            }   
+        };      
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+30. Formik Forms - Part 2
 
 
 
