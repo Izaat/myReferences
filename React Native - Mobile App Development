@@ -3842,7 +3842,347 @@ CONTENTS
         };      
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-30. Formik Forms - Part 2
+30a. Formik Forms - Part 2
+    
+    Taking in Values from "reviewForm.js > console.log(values)", and add them to the state
+    
+    File Structure <Explorer>
+        Gamezone
+           >shared                                           
+                header.js          [Topic 27] 
+                card.js            [Topic 25] 
+           >routes      
+                homeStack.js       [Topic 24c]
+                aboutStack.js      [Topic 24c]
+                drawer.js          [Topic 23]
+           >screens
+                home.js            [Topic 29] 
+                about.js           [Topic 17]
+                reviewDetails.js   [Topic 26] 
+                reviewForm.js      [Topic 29] 
+           >styles    
+                global.js          [Topic 29]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts              [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                 [Topic 23]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+
+    home.js
+        import React, {useState} from 'react';
+        import {StyleSheet, View, Text, FlatList, TouchableOpacity, Modal} from 'react-native';   
+        import {globalStyles} from '../styles/global';                  
+        import Card from '../shared/card';            
+        import { MaterialIcons } from '@expo/vector-icons'; 
+        import ReviewForm from './reviewForm';           
+        
+        export default function Home({navigation}) {     
+            
+            const [modalOpen, setModalOpen] = useState(false);     
+            
+            const [reviews, setReviews] = useState([ 
+                {title: 'Zelda, Breath of Fresh Air', rating:5, body: 'lorem ipsum', key:'1'}, 
+                {title: 'Gotta Catch Them All', rating:4, body:'lorem ipsum', key:'2'}, 
+                {title: 'Not So Final Fantasy', rating:3, body:'lorem ipsum', key:'3'}, 
+            ]); 
+            
+            //const addReview = (review) => {}                   //01a. Add arrow function and add parameter called "review"
+            //                                                   //01b. Takes in "values" from reviewForm.js > onSubmit={(values)} which consist of title, body and rating
+            //                                                   //01c. Also note the title in home.js contains the key therefore review requires a key
+            const addReview = (review) => {
+                review.key = Math.random().toString();           //02. Not the best way to create a key since numbering is based on random numbers.
+                //setReviews(() => {});                          //03. Use set function to update the state "setReviews" in "const [reviews, setReviews] = useState([])"
+                //setReviews((currentReviews) => {});            //04. Add a current state of reviews and call it "currentReviews"
+                setReviews((currentReviews) => {
+                    //return[];                                  //05. Returns a new array
+                    //return[review, ];                          //06. Place an updated review
+                    return[review, ...currentReviews];           //07. Use "..." to spread out "currentReviews" as an array
+                }); 
+                //setModalOpen(false);                           //08. Upon form submission, the modal/popup closes
+                //setModalOpen(false);                           //13. Remove to simulate the function set on another page of the app. Now it wont close the popup and clear after submit
+                setModalOpen(false);                             //16. Re-add the function for the app to close
+            }
+            
+            return (               
+                <View style={globalStyles.container}>   
+                    
+                    <Modal visible={modalOpen} animationType='slide'>        
+                        <View style={styles.modalContent}>
+                            
+                            <MaterialIcons 
+                                name='close'            
+                                size={24}
+                                style={{ ...styles.modalToggle, ...styles.modalClose }}
+                                onPress={() => setModalOpen(false)}   
+                            />
+                            
+                            //<ReviewForm />               
+                            <ReviewForm addReview={addReview} />       //09. Add addReview function to the ReviewForm
+                            
+                        </View>
+                    </Modal>   
+                    
+                    <MaterialIcons 
+                        name='add'                      
+                        size={24}
+                        style={styles.modalToggle}    
+                        onPress={() => setModalOpen(true)}      
+                    />
+                    
+                    <FlatList 
+                        data={reviews}     
+                        renderItem={({item}) => (
+                            <TouchableOpacity onPress={()=>navigation.navigate('ReviewDetails', item)}> 
+                                <Card>
+                                    <Text style={globalStyles.titleText}>{item.title}</Text>
+                                </Card>
+                            </TouchableOpacity> 
+                        )}                 
+                    />
+                </View>
+            )
+        }
+
+        const styles = StyleSheet.create({
+            modalToggle: {
+                marginBottom: 10,
+                borderWidth: 1,
+                borderColor: '#f2f2f2',
+                padding: 10,
+                borderRadius: 10,
+                alignSelf: 'center',
+            },
+
+            modalClose: {
+                marginTop: 20,
+                marginBottom: 0,
+            },
+            
+            modalContent: {
+                flex: 1,       
+            } 
+        })     
+
+
+    reviewForm.js   
+        import React from 'react';
+        import { StyleSheet, Button, TextInput, View, Text } from 'react-native';
+        import { globalStyles } from '../styles/global.js';
+        import { Formik } from 'formik';
+
+        //export default function ReviewForm() {
+        //export default function ReviewForm({}) {                   //10. Add destructure object
+        export default function ReviewForm({ addReview }) {          //11. Destructure the addReview
+            
+            return(
+                <View style={globalStyles.container}> 
+                    <Formik
+                        initialValues={{
+                            title: '',                               
+                            body: '',
+                            rating: '',
+                        }} 
+                        
+                        //onSubmit={(values) => {
+                        onSubmit={(values, actions) => {               //14. Add "actions" for solution to clear the popup when point 13 happens
+                            actions.resetForm();                       //15. This will revert the form to its original state which is to clear the popup textboxes (Restarting the app required)
+                            //console.log(values);            
+                            addReview(values);                         //12. Output addReview values instead of going through console
+                        }}
+                    >
+
+                        {(props) => (
+                            <View>
+                                <TextInput 
+                                    style={globalStyles.input}               
+                                    placeholder='Review Title'    
+                                    onChangeText={props.handleChange('title')}    
+                                    value={props.values.title}                 
+                                />   
+                                
+                                <TextInput 
+                                    multiline                 
+                                    style={globalStyles.input}  
+                                    placeholder='Review Body'    
+                                    onChangeText={props.handleChange('body')}    
+                                    value={props.values.body}                     
+                                />   
+                                
+                                <TextInput                                  
+                                    style={globalStyles.input}  
+                                    placeholder='Rating (1-5)'    
+                                    onChangeText={props.handleChange('rating')}    
+                                    value={props.values.rating}                     
+                                    keyboardType='numeric'      
+                                />   
+                                
+                                <Button title='submit' color='maroon' onPress={props.handleSubmit} />    
+                                
+                            </View>       
+                        )} 
+                        
+                    </Formik>   
+                </View>
+            )
+            
+        } 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+30b. Formik Forms - Part 2
+
+    Clearing the keyboard after tapping on empty space of screen
+    
+    File Structure <Explorer>
+        Gamezone
+           >shared                                           
+                header.js          [Topic 27] 
+                card.js            [Topic 25] 
+           >routes      
+                homeStack.js       [Topic 24c]
+                aboutStack.js      [Topic 24c]
+                drawer.js          [Topic 23]
+           >screens
+                home.js            [Topic 30a] 
+                about.js           [Topic 17]
+                reviewDetails.js   [Topic 26] 
+                reviewForm.js      [Topic 30a] 
+           >styles    
+                global.js          [Topic 29]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts              [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                  [Topic 23]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+            
+            
+    home.js
+        import React, {useState} from 'react';
+        //import {StyleSheet, View, Text, FlatList, TouchableOpacity, Modal} from 'react-native';   
+        import { StyleSheet, View, Text, FlatList, TouchableOpacity, Modal, TouchableWithoutFeedback, Keyboard } from 'react-native';    //01. Add 2 items for this to work
+        import {globalStyles} from '../styles/global';                  
+        import Card from '../shared/card';            
+        import { MaterialIcons } from '@expo/vector-icons'; 
+        import ReviewForm from './reviewForm';           
+        
+        export default function Home({navigation}) {     
+            
+            const [modalOpen, setModalOpen] = useState(false);     
+            
+            const [reviews, setReviews] = useState([ 
+                {title: 'Zelda, Breath of Fresh Air', rating:5, body: 'lorem ipsum', key:'1'}, 
+                {title: 'Gotta Catch Them All', rating:4, body:'lorem ipsum', key:'2'}, 
+                {title: 'Not So Final Fantasy', rating:3, body:'lorem ipsum', key:'3'}, 
+            ]); 
+            
+            const addReview = (review) => {
+                review.key = Math.random().toString();    
+                setReviews((currentReviews) => {
+                    return[review, ...currentReviews];      
+                }); 
+                setModalOpen(false);         
+            }
+            
+            return (               
+                <View style={globalStyles.container}>   
+                    
+                    <Modal visible={modalOpen} animationType='slide'>        
+                        
+                        //<TouchableWithoutKeyboard></TouchableWithoutKeyboard>                             //02. Add the component
+                        //<TouchableWithoutKeyboard onPress={Keyboard.dismiss}></TouchableWithoutKeyboard>  //03. Add the dismiss keyboard function
+                        
+                        //<View style={styles.modalContent}>
+                        //    
+                        //    <MaterialIcons 
+                        //        name='close'            
+                        //        size={24}
+                        //        style={{ ...styles.modalToggle, ...styles.modalClose }}
+                        //        onPress={() => setModalOpen(false)}   
+                        //    />
+                        //     
+                        //    <ReviewForm addReview={addReview} /> 
+                        //    
+                        //</View>
+                        
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>                                //04. Nest everything inside the component
+                            <View style={styles.modalContent}>
+                                <MaterialIcons 
+                                    name='close'            
+                                    size={24}
+                                    style={{ ...styles.modalToggle, ...styles.modalClose }}
+                                    onPress={() => setModalOpen(false)}   
+                                />
+                                <ReviewForm addReview={addReview} /> 
+                            </View>
+                        </TouchableWithoutFeedback>
+                        
+                    </Modal>   
+                    
+                    <MaterialIcons 
+                        name='add'                      
+                        size={24}
+                        style={styles.modalToggle}    
+                        onPress={() => setModalOpen(true)}      
+                    />
+                    
+                    <FlatList 
+                        data={reviews}     
+                        renderItem={({item}) => (
+                            <TouchableOpacity onPress={()=>navigation.navigate('ReviewDetails', item)}> 
+                                <Card>
+                                    <Text style={globalStyles.titleText}>{item.title}</Text>
+                                </Card>
+                            </TouchableOpacity> 
+                        )}                 
+                    />
+                </View>
+            )
+        }
+
+        const styles = StyleSheet.create({
+            modalToggle: {
+                marginBottom: 10,
+                borderWidth: 1,
+                borderColor: '#f2f2f2',
+                padding: 10,
+                borderRadius: 10,
+                alignSelf: 'center',
+            },
+
+            modalClose: {
+                marginTop: 20,
+                marginBottom: 0,
+            },
+            
+            modalContent: {
+                flex: 1,       
+            } 
+        })     
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+31. Validation with Yup
+
+
 
 
 
