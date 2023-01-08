@@ -4182,6 +4182,146 @@ CONTENTS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 31. Validation with Yup
 
+    Adding validation when Review Title is added to the stack of cards.
+    This is to prevent users from adding anything else other than Games/Movies/Music/etc to the stack
+    Note: 
+        Schema is a set of rules defined inside an object and that object is created by Yup
+        The object contains the key which signifies the different form fields (title, body, rating)
+        Value to the keys are validation rules
+            If not equal to validation rules, it returns an error
+        Remember to restart the current app after installation
+            Terminal > DropdownMenu > Node
+                ..\apps\gamezone> expo start
+            Close App in emulator
+            Browser > Click on "Run on Android device/emulator"
+
+    File Structure <Explorer>
+        Gamezone
+           >shared                                           
+                header.js          [Topic 27] 
+                card.js            [Topic 25] 
+           >routes       
+                homeStack.js       [Topic 24c]
+                aboutStack.js      [Topic 24c]
+                drawer.js          [Topic 23]
+           >screens
+                home.js            [Topic 30b] 
+                about.js           [Topic 17]
+                reviewDetails.js   [Topic 26] 
+                reviewForm.js      [Topic 30a] 
+           >styles    
+                global.js          [Topic 29]
+           >.expo
+           >.expo-shared
+           >assets
+               >fonts              [Topic 16]           
+                    Nunito-Regular.ttf
+                    Nunito-Bold.ttf
+                icon.png
+                splash.png
+           >node_modules
+            .gitignore
+            App.js                  [Topic 23]
+            app.json
+            babel.config.js
+            package-lock.json
+            package.json
+
+    Installation:
+        Terminal > DropdownMenu > Powershell
+            ..\apps\gamezone> npm install yup
+
+    reviewForm.js   
+        import React from 'react';
+        import { StyleSheet, Button, TextInput, View, Text } from 'react-native';
+        import { globalStyles } from '../styles/global.js';
+        import { Formik } from 'formik';
+        import * as yup from 'yup';                           //01. Import Yup. * = everything
+        
+        //const reviewSchema = yup.object({})                 //02. This is the method to create a Yup object
+        const reviewSchema = yup.object({
+            //title: yup.string().required().min()            //03. key: yup.validationMethod1().validationMethod2().validationMethod3().etc()
+            //title: yup.string().required().min(4),          //04. If string is less than 4 characters, then return error
+            title: yup.string()
+                .required()
+                .min(4), 
+                
+            body: yup.string()                                 //05. Add for body
+                .required()
+                .min(8),
+                
+            rating: yup.string()                               //06. Note that once any character be it number of alphabet, it automatically becomes a string
+                .required()
+                //.test(),                                                          //07. Test method allows defining a function that takes in the rating value as a parameter. 
+                //.test('is-num-1-5'),                                              //08. If values equals to 1 to 5, then return True. 
+                //.test('is-num-1-5', 'Rating must be number 1 - 5'),               //09. Else return the error defined in second parameter
+               //.test('is-num-1-5', 'Rating must be number 1 - 5', (value) => {}), //10. Adds in a function that takes in a value which is the rating
+               .test( 'is-num-1-5', 'Rating must be number 1 - 5', (value) => {
+                    //return parseInt(val)                                          //11. Pass in the value (val) into "parseInt"
+                    return parseInt(val) < 6 && parseInt(val) > 0;          //12. If string is lesser than 6 AND greater than 0, then return True (Validation Passed)
+               }),
+        })  
+        
+        export default function ReviewForm({ addReview }) {    
+            
+            return(
+                <View style={globalStyles.container}> 
+                    <Formik
+                        initialValues={{
+                            title: '',                               
+                            body: '',
+                            rating: '',
+                        }} 
+                        
+                        validationSchema={reviewSchema}                      //13. This will run the Schema via Formik forms
+                        
+                        onSubmit={(values, actions) => {      
+                            actions.resetForm();                 
+                            addReview(values);          
+                        }}
+                    >
+
+                        {(props) => (
+                            <View>
+                                <TextInput 
+                                    style={globalStyles.input}               
+                                    placeholder='Review Title'    
+                                    onChangeText={props.handleChange('title')}    
+                                    value={props.values.title}                 
+                                />   
+                                
+                                <TextInput 
+                                    multiline                 
+                                    style={globalStyles.input}  
+                                    placeholder='Review Body'    
+                                    onChangeText={props.handleChange('body')}    
+                                    value={props.values.body}                     
+                                />   
+                                
+                                <TextInput                                  
+                                    style={globalStyles.input}  
+                                    placeholder='Rating (1-5)'    
+                                    onChangeText={props.handleChange('rating')}    
+                                    value={props.values.rating}                     
+                                    keyboardType='numeric'      
+                                />   
+                                
+                                <Button title='submit' color='maroon' onPress={props.handleSubmit} />    
+                                
+                            </View>       
+                        )} 
+                        
+                    </Formik>   
+                </View>
+            )
+        } 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+32. Showing Form Errors
+
+
+
+
 
 
 
