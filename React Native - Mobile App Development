@@ -40,7 +40,7 @@ CONTENTS
 28. Modals
 29. Formik Forms - Part 1 - npm install formik
 30. Formik Forms - Part 2
-31. Validation with Yup
+31. Validation with Yup - npm install yup
 32. Showing Form Errors
 33. Custom Button Component
 
