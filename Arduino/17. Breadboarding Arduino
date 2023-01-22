@@ -51,7 +51,7 @@
   Part Required
     01. LED
     02. Resistor01: 220ohm
-    03. Resistor02: 
+    03. Resistor02: 47kohm
     04. Capacitor: 22pF (2pcs)
     05. Push Button
     06. Crystal Oscillator: 16Mhz oscillator
@@ -59,7 +59,7 @@
         
   Pin Mapping        
   
-    Pin01 (PCINT/Reset) --+--- 5V Supply
+    Pin01 (PCINT/Reset) --+--- Resistor02 -- 5V Supply
                           |
                           +--- PB -- Gnd
 
