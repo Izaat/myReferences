@@ -43,7 +43,7 @@
           Click on "Program"
         Step5
           Uplug the Programmer and transfer to the breadboard
-        
+        NOTE: Also make sure the sketch is already loaded to the chip before transferring to breadboard
         
 /////////////////////////////////////////////////////////
 02. Breadboard Termination
