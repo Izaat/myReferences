@@ -1,0 +1,105 @@
+/////////////////////////////////////////////////////////
+01. Burning bootloader onto Atmel Chip
+02. Breadboard Termination
+
+/////////////////////////////////////////////////////////
+01. Burning bootloader onto Atmel Chip
+
+  Part Required: AVR ISP MKII
+  Software: Atmel Studio
+  
+  Swap Target Chip with existing chip on Arduino
+  Connect AVR ISP MKII to 6 Pins ISCP of Arduino Board
+  Connect AVR ISP to PC
+  Power up the Arduino Board
+    - Via USB
+    - Adapter
+    - Connecting 5V supply line to Power Vin and Gnd
+  
+  Atmel Studio
+    Main Menu > Tools > Device Programming - OR - Ctrl+Shift+P
+    Device Programming Window
+      Step1
+        Tool: AVRISP mkII
+        Device: ATmega328
+        Interface: ISP
+        Click on "Apply"
+      Step2
+        Device Signature: Click on Read
+        Check Target Voltage is about 5V
+      Step3
+        Left Panel > Memories > Flash 
+          Make sure the file is linked to optiboot_atmega328.hex file
+          Erase device before programming: Box Checked
+          Verify Flash after programming: Box Checked
+          Click on "Program" button
+       Step4
+        Left Panel > Fuses > Fuse Registers
+          Extended: Change 0xFF to 0x05
+          High: Change 0xD9 to 0xDE
+          Low: Change 0x62 to 0xFF
+          Auto Read: Box Checked
+          Verify after programming: Box checked
+          Click on "Program"
+        Step5
+          Uplug the Programmer and transfer to the breadboard
+        
+        
+/////////////////////////////////////////////////////////
+02. Breadboard Termination
+  
+  Part Required
+    01. LED
+    02. Resistor01: 220ohm
+    03. Resistor02: 
+    04. Capacitor: 22pF (2pcs)
+    05. Push Button
+    06. Crystal Oscillator: 16Mhz oscillator
+        
+        
+  Pin Mapping        
+  
+    Pin01 (PCINT/Reset) --+--- 5V Supply
+                          |
+                          +--- PB -- Gnd
+
+    Pin07 (Vcc)  -- 5V Supply
+    
+    Pin09 (OSC1) -----------+-- 22pF -- Gnd
+                            |
+                     Crystal Oscillator
+                            |
+    Pin10 (OSC2) -----------+-- 22pF -- Gnd
+    
+    Pin08 (Gnd ) -- Gnd
+    Pin19 (SCK/PCInt5) -- 220ohms -- LED -- Gnd (For blink program Example)
+    Pin20 (AVCC) -- 5V Supply
+    Pin22 (Gnd)  -- Gnd
+
+/////////////////////////////////////////////////////////
+[End]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
