@@ -61,7 +61,7 @@
   
     Pin01 (PCINT/Reset) --+--- Resistor02 -- 5V Supply
                           |
-                          +--- PB -- Gnd
+                          +--- PB(NO) -- Gnd
 
     Pin07 (Vcc)  -- 5V Supply
     
