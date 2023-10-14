@@ -33,18 +33,18 @@ CONTENTS
 	+---------+----+---+----+--------------+----+------------------------------+
 
 	
-	01. Audio
+	01. Audio: pynq.lib.audio
 	02. USB
-	03. HDMI Out (Display)
-	04. RPi GPIO: pynq.lib.rpi
-        05. HDMI In (Camera)
-        06. Jumper J1 [SD/DSP/JTAG]
+	03. HDMI Out (Display): pynq.lib.video
+	04. RPi GPIO: pynq.lib.rpi / pynq.gpio
+	05. HDMI In (Camera): pynq.lib.video
+	06. Jumper J1 [SD/DSP/JTAG]
 	07. Pmod A: pynq.lib.pmod
 	08. Pmod B: pynq.lib.pmod
 	09. ArduinoShield: pynq.lib.arduino
 	10. SD Card Slot
 	11. Prgramming Button
-        12. Reset	
+	12. Reset	
 	13-14. Switch
 	15. Power Switch
 	16. microUSB
@@ -53,7 +53,7 @@ CONTENTS
 	22-25. LEDs
 	
 	
-        //////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////
 	Zynq7000
 	#This chip has 2 sides. PL Side and Arm Side
 		1. All Rpi Hats Slot, Arduino Shield Slot, Pmod Slot are connected through PL Side
@@ -63,6 +63,7 @@ CONTENTS
 		3. USB connected to Arm side of Zynq7000
 		4. Audios are connected to PL side of Zynq7000
 			Audio Library: pynq.lib.audio
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 02. Starting Up
