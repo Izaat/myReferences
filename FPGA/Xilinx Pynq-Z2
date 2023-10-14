@@ -38,7 +38,7 @@ CONTENTS
 	03. HDMI Out (Display)
 	04. RPi GPIO: pynq.lib.rpi
         05. HDMI In (Camera)
-        06. Jumper [SD/DSP/JTAG]
+        06. Jumper J1 [SD/DSP/JTAG]
 	07. Pmod A: pynq.lib.pmod
 	08. Pmod B: pynq.lib.pmod
 	09. ArduinoShield: pynq.lib.arduino
