@@ -1,0 +1,394 @@
+FPGA Spartan 7 Blinky LED
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+	01. Block Diagram
+	02. Vivado
+	03. Verilog Default File
+	04. Verilog Programming
+	05. Vivado Simulation
+	06. Using FPGA to convert 12MHz physical CMOS clock into a 10MHz clock
+	07. Loading to Spartan 7
+	08. Program Flash Memory
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+01. Block Diagram
+
+
+	Block Diagram
+	+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+	|  +-----------------+                                                                                                                                                                                                     |
+	|  |                 |                                                               +-----------+                     +-----------+                                                                                       |
+	|  | Buck Converters |------------> DIG PWR                                          |           |                     |           |                                                                                       |
+	|  | +1V0 +1V8 +3v3  |                                                               |  RGB LED  |                     |  BUTTON   |                                                                                       |
+	|  |                 |                                                               |           |                     |           |                                                                                       |
+	|  +--------+--------+                                                               +-----+-----+                     +-----+-----+                                                                                       |
+	|           |                                                                              |                                 |                                                                                             |
+	|           |                                                                              ^                                 V                                                                                             |
+	|           |       +--------+                                                             |                                 |                                                                                             |
+	|           |       |        |                                               +-------------+---------------------------------+-----------+              +---------------+                                                  |
+	|           |------>| Filter |----> ANA PWR                                  |                                                           |              |               |                                                  |
+	|           |       |        |                                               |                                                           |              |               |                                                  |
+	|           |       +--------+                                               |                                                           |<--- SPI ---->|               |                                                  |
+	|           |                                                                |                                                           |              |               |                                                  |
+	|           |                        +---------------------+                 |                                                           |              |               |                                                  |
+	|           |                        |     QSPI FLASH      |                 |                                                           |              |               |                                                  |
+	|           |                        |    Micron MT25QL    |<---- QSPI ----->|                                                           |              |               |      +----------------+      +-----------------+ |
+	|           |                        |      256 Mbit       |                 |                                                           |              |               |      |                |      |                 | |
+	|           |                        +---------------------+                 |                            FPGA                           |              |               |      |    Analogue    |      | 1/4" Audio Jack | |
+	|           |                                                                |                     AMD/Xilinx Spartan 7                  |              |  AUDIO CODEC  |<---->| Front/BackEnds |<---->|  2x In. 2x Out  | |
+	|  +-----------------+               +---------------------+                 |                       XC7S25-2CSGA225I                    |              |               |      |                |      |                 | |
+	|  |                 |               | USB-JTAG / USB-UART |                 |                                                           |              |    Cirrus     |      +----------------+      +-----------------+ |
+	|  |    USB Type C   |<--- D+/D- --->|                     |<-- JTAG UART -->|                                                           |              |    CS42770    |                                                  |
+	|  |    Connector    |               |      FTDI 2232H     |                 |                                                           |              |               |                                                  |
+	|  |                 |               +---------------------+                 |                                                           |              |               |                                                  |
+	|  +--------+--------+                                                       |                                                           |              |               |                                                  |
+	|                                    +---------------------+                 |                                                           |<--- I2S ---->|               |                                                  |
+	|                                    |      HYPERRAM       |                 |                                                           |              |               |                                                  |
+	|                                    |      ISSI66WV*      |<-- HYPER RAM--->|                                                           |              |               |                                                  |
+	|                                    |       64 Mbit       |                 |                                                           |              |               |                                                  |
+	|                                    +---------------------+                 |                                                           |              |               |                                                  |
+	|                                                                            |                                                           |              |               |                                                  |
+	|                                                                            +-------------+----------------+----------------+-----------+              +---------------+                                                  |
+	|                                                                                          |                |                |                                                                                             |
+	|                                                                                          |                |                |                                                                                             |
+	|                                                                                          |                |                |                                                                                             |
+	|                                                                                          |                |                |                                                                                             |
+	|                                                                                    +------------+   +-----------+    +-----------+                                                                                       |
+	|                                                                                    |    CMOS    |   |           |    |           |                                                                                       |
+	|                                                                                    | Oscillator |   |  DIP (3x) |    |    LED    |                                                                                       |
+	|                                                                                    |            |   |           |    |           |                                                                                       |
+	|                                                                                    |   12 MHz   |   |           |    |           |                                                                                       |
+	|                                                                                    +------------+   +-----------+    +-----------+                                                                                       |  
+	|                                                                                                                                                                                                                          |
+	+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+02. Vivado
+	
+	New Project
+		1. In Main Menu > Quick Start > Create Project
+		2. New Project Window Appears
+			Project Name: 01-Blinky
+			Project Location: C:/Xilinx/Spartan7/01-Blinky
+			Check "Create project Subdirectory"
+		3. Check RTL Project and check "Do not specify sources at this time". Leave the rest of check boxes unchecked
+		4. In Parts selection tab, key in the model number of the FPGA chip [XC7S25-2CSGA225I-2] and hit "Next" and "Finish".  //The "**-2" is the speed grade 
+	
+	Verilog Module Creation
+		1. Creating the top file that integrates the DIP switches, clock input and LEDs to Spartan 7 FPGA
+			Flow Navigator > Project Manager > Sources Panel
+			Click on add symbol "+" and select "Add or create design sources". Hit "Next"
+			Click on "Create File"
+				File Type: Verilog
+				File Name: 01-blinky
+				File Location: *Do not use "<Local to Project>"
+			Click "Finish"
+
+		2. Define Module Window
+			Module Name: 01-blinky
+			I/O Port Definitions
+				Clock
+					Port Name: clk10      //Clock Input at 10Mhz
+					Direction: input
+					Bus: Unchecked
+					MSB: Blank
+					LSB: Blank
+				DIP Switches
+					Port Name: dip
+					Direction: input
+					Bus: Unchecked
+					MSB: Blank
+					LSB: Blank
+				LED Lights
+					Port Name: led
+					Direction: output
+					Bus: Unchecked
+					MSB: Blank
+					LSB: Blank
+			A file will appear in Sources Panel > Design Sources [01-blinky.v]
+			
+		3. Double click on "01-blinky.v" to edit the verilog file
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+03. Verilog Default File
+
+	01-blinky.v
+		'timescale 1ns / 1ps
+		//////////////////////////////
+		//Company:
+		//Engineer:
+		//
+		//Create Date: 
+		//Design Name:
+		//Module Name: 01-blinky
+		//Project Name:
+		//Target Devices:
+		//Tool Versions:
+		//Description:
+		//
+		//Dependencies:
+		//
+		//Revision:
+		//Revision 0.01 - File Created
+		//Additional Comments
+		//
+		//////////////////////////////
+
+		module blinky(
+			input clk10,
+			input dip,
+			output led
+			);
+		endmodule
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+04. Verilog Programming
+
+	01-blinky.v
+		module blinky(
+			input clk10,                  //02. The variable set clock speed at 10MHz but at 10MHz, LED stays ON from naked eyes.
+			input dip,
+			output led
+			);
+			
+			//01. Space for the logic to toggle LED at certain frequency with certain clock input frequency
+			//03. We can use binary counters to harness this 10MHz frequency which controls the LEDs
+			//04. Therefore, in order to trigger 0010, 2 cycles of 10MHz needs to be achieved.
+			//05. Achieving 32 cycles in 32bit counter just means 429.5 seconds. Calculation: 2^32/(10*10^6), where (10*10^6) is 10MHz. 
+			
+			reg [31:0] counter = 0;       //06. Setting 32bit counter to 0
+			reg ledState = 0;             //07. Set LED as internal register. This will be assigned to "led" output variable.
+			
+			assign led = ledState;        //08. Assigning "ledState" to "led" output variable
+			
+			//always @ (posedge clk10)    //09. This will increment the counter "reg [31:0] counter" using positive edge (Rising edge) whenever "clk10" variable is being triggered
+			//begin
+			//end
+			
+			always @ (posedge clk10)
+			begin
+				counter <= counter + 1;
+				
+				if (dip)
+					ledState <= counter[22];   //10. If Dip switch is 1, shorter LED ON period on 22nd bit of the counter (0.4s interval)
+				else
+					ledState <= counter[23];   //11. If Dip switch is 0, longer LED ON period on 23rd bit of the counter (0.8s interval)
+				
+			end
+			
+			
+		endmodule
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////
+05. Vivado Simulation
+
+	Creating Simulation File           //01. Creating the file
+		Flow Navigator > Project Manager > Sources
+			Right click on "Simulation Sources" Folder
+			Click on "Add Sources" and a window will appear
+			Choose "Add or create simulation sources" and click on "Next"
+			Click on "Create File"
+				File Type: Verilog
+				File Name: tb_blinky
+				File Location: *Do not use "<Local to Project>"
+			Click on "Ok" and "Finish"
+			Define Module Window will appear. Ignore all and click on Ok.
+			Click Yes for "Module definition has not been changed".
+			A file will appear in Simulation Sources "tb_blinky(tb_blinky.v)
+			
+	Default simulation file  
+		tb_blinky.v
+			'timescale 1ns / 1ps
+			module tb_blinky(
+				);
+			endmodule
+
+	Simulation File Programming         //02. Editing the file
+		tb_blinky.v
+			//'timescale 1ns / 1ps      //03. Delay time and Precision of simulation environment. 10MHz has a period of 100ns
+			'timescale 10ns / 100ps     //04. 10MHz has a period of 100nanosec and toggling at 50 duty cycle is 50nanosec intervals therefore timescale is at 10nanosec with precision of 100 picosec
+			
+			//module tb_blinky();
+			//endmodule
+			
+			//module tb_blinky();       //05. The sim has no input or output but registers must be defined
+			//	
+			//	  reg clk10;
+			//	  reg dip;
+			//	  wire led;
+			//	
+			//endmodule
+			
+			//module tb_blinky(); 
+			//
+			//	  reg clk10;
+			//	  reg dip;
+			//	  wire led;
+			//
+			//	  01-blinky dut (.clk10 (clk10), .dip (dip), .led(led));  //06. This will import the variables from 01-blinky.v 
+			//	
+			//endmodule
+
+			module tb_blinky(); 
+				
+				reg clk10;
+				reg dip;
+				wire led;
+				
+				01-blinky dut (.clk10 (clk10), .dip (dip), .led(led));
+				
+				initial                       //07. Resets both clk10 and dip to 0 during initialization whenever simulation starts
+					begin
+						clk10 <= 0;
+						dip <= 0;
+					end
+					
+				always                        //08. This will always run the moment simulation starts
+					begin
+						#5                    //09. This indicates the loop will start the clock after 5x timescale cycle therefore after 50ns
+						clk10 = ~clk10;       //10. This indicates the clock is not equal current clock state
+					end
+				
+			endmodule
+
+	Run Simulation
+		Flow Navigator > Simulation > Run Simulation > Run Behavioral Simulation
+		Simulator Window will open up
+		In the toolbar, next to the play button with "(T)", enter a value in seconds. This is the duration of the simulation
+		Run simulation for 2 sec (Click on Play Button with "(T)" to run timed simulation
+		To stop simulation, click on "Pause" button
+		To check the dip switch, change dip variable to 1 and rerun the simulation. Notice the time period shortens by half.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+06. Using FPGA to convert 12MHz physical CMOS clock into a 10MHz clock
+
+	Adding Block Diagram 
+		Flow Navigator > IP Integrator > Create Block Design
+			Design Name: design_1
+			Directory: *Do not use "<Local to Project>"
+			Specify Source set: Design Sources
+			Click Ok
+			
+		Flow Navigator > IP Integrator > Block Design > Diagram > Right click on Diagram window area > Add Module
+			Module Type: RTL
+			Highlight "blinky (blinky.v)"
+			Click Ok
+			A block will appear in the diagram
+
+	Mapping the i/o block to adapt to physical board
+		In schematic, 
+			LED is connected to "IO_L2N_T0_34" Pin A2
+			12MHz Clock is connected to "IO_L13P_T2_MRCC_34" Pin H4
+		In Diagram Window,
+			Wiring LED
+				Right click on "led" and choose "make external"
+				External Port Properties
+					Name: LED
+			Wiring DIP Switch
+				Right click on "dip" and choose "make external"
+				External Port Properties
+					Name: DIP
+			Wiring Clock
+				Diagram Window > Window Toolbar >  Add IP "+" > Search for "Clocking Wizard"
+				Click on "Clocking Wizard" and a block will appear
+				Double click on Clocking Wizard Block and change the properties
+				In Clocking Wizard Window
+					Clocking Options Tab > Input Clock Information Panel > Input Frequency Column
+						Toggle Primary Clock to "Manual" and change value from "100.000" to "12"
+					Output Clocks Tab > Output Frequency Column
+						Change "clk_out1" value from "100.000" to "10"	
+						Clocking Feedback Section
+							Source: Select Automatic Control On-Chip
+						All checkboxes in "Enable Optional I/O for MMCM/PLL" section should be unchecked
+					Click on Ok
+				In Diagram Window
+					Wire up "clk_out1" of Clocking Wizard Block to "clk10" of blinky_v1_0 Block
+					Right click on "clk_in1" and select "Make External"
+					Highlight the new "clk_in1_0" node and rename the properties 
+						Eternal Properties Window
+							Name: CLK12
+							Direction: Input
+							Net: clk_in1_0_1
+							Frequency (MHz): 12
+				In Block Design Window > Sources Tab > Click on Add Sources "+" > Add or create constraints > Create File
+					Create Constraints File
+						File Type: XDC
+						File Name: boardname-contraints
+						File Location: *Do not use "<Local to Project>"
+						The board name will appear in the popup window
+						Click Ok and Finish
+						The "boardname-contraints.xdc" will appear under: 
+							"Flow Navigator > IP Integrator > Block Design Window > Sources Tab > Constraints Folder > constrs_1"
+							Double click on "boardname-contraints.xdc" to edit
+					Programming
+						boardname-contraints.xdc
+							## CLOCK
+							set_property -dict { PACKAGE_PIN G1  IOSTANDARD LVCMOS33 } [get_ports { CLK12MHZ }];
+							create_clock -add -name sys_clk -period 83.333 -waveform {0 41.667} [get_ports { CLK12MHZ }];
+							
+							## LED
+							set_property -dict { PACKAGE_PIN A2  IOSTANDARD LVCMOS33 } [get_ports { LED }];
+							
+							## DIP Switch
+							set_property -dict { PACKAGE_PIN R12  IOSTANDARD LVCMOS33 } [get_ports { DIP }];
+							
+							//Take note that the names CLK12, LED and DIP coincides with the wired names found on the block diagram
+							
+		Create HDL Wrapper
+			Flow Navigator > IP Integrator > Block Design Window > Sources Tab > Design Sources Folder
+				Right click on "design_1(design_1.bd)" and select "Create HDL Wrapper
+				Create HDL Wrapper Window
+					In "Options" section, select "Let Vivado manage wrapper and auto-update" and click on Ok
+					The "design_1(design_1.bd)" selected will convert to "design_1_wrapper (design_1_wrapper.v)"
+					IF the wrapper is not at the top of the list in the folder, right click on the wrapper and select "Set as Top"
+					
+		Generate Bitstream
+			Usually "Run Synthesis" and Run Implementation" is done before "Generate Bitstream"
+			But skip the entire process and click on "Generate Bitstream" instead since it also covers both the previous process
+			
+		Flash the Spartan7 FPGA with Bitstream
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+07. Loading to Spartan 7
+	
+	Physically connect the board to the computer and power up the board
+	
+	In Vivado, Open Hardware Manager
+		Flow Navigator > Program and Debug > Open Hardware Manager
+		In Hardware Manager Window, there will be a top message "No Hardware found, Open Target". 
+		Click on "Open Target" and choose "Auto-Connect"
+		The FPGA board will be discovered in the small "Hardware" window in Hardware Manager
+		Also notice that in the top message bar, "Program Device" will also appear.
+		Click on "Program Device"
+		Program Device Window
+			Bitstream File: *choose the right bitstream file* "../~/impl_1/design_1_wrapper.bit"
+			Debug probes file: *Blank*
+			Enable end of startup check: Checked
+			Click on "Program"
+			
+	Testing
+		LED should be blinking and notice the blinking speed once the DIP switch been toggled.
+		Take note that this is a volatile program. Meaning when the board is OFF, bitstream needs to be reloaded into the board.
+	
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+08. Program Flash Memory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
