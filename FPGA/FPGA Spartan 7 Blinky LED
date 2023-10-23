@@ -419,7 +419,58 @@ CONTENTS
 	
 	M2_0, M6 is MODE2 and this determines how boot mode of the FPGA from the DIP switch. [M2 DIP SW should be ON to load from Flash]
 
+	Memory Configuration file setup
+		After generating the bitstream, generate memory configuration file.
+			Vivado > Top menu > Tools > Generate Memory Configuration File >
+				Write Mem Configuration File Window
+					Format: MCS
+					Memory Part: mt25ql256-spi-x1_x2_x4   //Choose from the user guide by Xilinx
+					Custom Mem: Unchecked
+					Filename: ../~/blinky-memcfg.mcs
+					
+					Interface: SPIx4
+					Load Bitstream file: Checked
+					Daisy chain configuration file: Unchecked
+						Start Address: 00000000 [Default]
+						Direction: Up [Default]
+						Bitfile: ../~/impl_1/design_1_wrapper.bit
+					Load Data Files: Unchecked: [Default]
+					Write checksum: Unchecked
+					Disable bit swapping: Unchecked
+					Overwrite: Unchecked
+					
+	Flash Configuration Memory
+		Flow Navigator > Program and Debug > Hardware Manager Panel > Hardware Panel
+			Right click on xilinx_tcf/Xilinx/PLEX01A/xc7s25_0
+			Select "Add Configuration Memory Device
+				Add Config Memory Device Window
+					In the search bar, search for "mt25ql" and choose "mt25ql256-spi-x1_x2_x4"
+					Click OK and "mt25ql256-spi-x1_x2_x4" will be added to the Hardware panel under "xc7s25_0"
+				AddConfiguration Memory Device Completed Window
+					Click Yes on "Program the config memory device now?" and "Program Config Mem Device Window will appear
+						Memory Device: mt25ql256-spi-x1_x2_x4
+						Configuration File: ../~/impl_1/blinky-memcfg.mcs
+						PRM File: Blank
+						State of non-config mem I/O pins: Pull None
+						Program Operations
+							Address Range: Configuration File Only
+							Erase: Checked
+							Blank Check: Unchecked
+							Program: Checked
+							Verify: Checked
+							Verify Checksum: Unchecked
+						SVF Options
+							Create SVF Only (no program operations): Unchecked
+					NOTE: If you have already flashed the memory configuration device but haven't program it, then, in hardware panel,
+						Right click on xilinx_tcf/Xilinx/PLEX01A/xc7s25_0/mt25ql256-spi-x1_x2_x4
+						Select "Program Configuration Memory Device
+					
+	Testing
+		Switch OFF and on the board to see the LED timiing via DIP switches
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+[END]
 
 
 
