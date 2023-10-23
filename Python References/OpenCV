@@ -981,8 +981,6 @@ Python 3 in Jupyter Notebook and VSCode
         print(characters[np.argmax(predictions[0])])
 
 
-https://www.github/jasmcaus/opencv-course
-
 //Canaro - Installs Tensorflow by default
 pip install canaro
 
