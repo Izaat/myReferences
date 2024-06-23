@@ -261,6 +261,13 @@ Python 3 in Jupyter Notebook and VSCode
         rotated_rotated = rotate(rotate, 45) //This will rotate the rotated image by another 45deg, but take note together with black background
         cv.imshow('Rotated2', rotated_rotated)
 
+    //Program - Rotate Image CCW 2
+	img = cv2.imread('Images/cat.jpg',0)
+	rows,cols = img.shape
+	
+	M = cv2.getRotationMatrix2D((cols/2, rows/2),90,1)
+	dst = cv2.warpAffine(img,M,(cols,rows))
+
     //Program
         import...
         img = cv.imread(...)
