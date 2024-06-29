@@ -1,0 +1,1141 @@
+Xilinx Pynq FPGA Development Cheatsheet
+//pynq.readthedocs.io/en/v2.5/pynq_package/pynq.lib/pynq.lib.pmod.html
+//https://github.com/Xilinx/PYNQ_Workshop
+//https://groups.google.com/forum/#!forum/pynq_project
+//CNN on PYNQ - https://www.youtube.com/watch?v=DoA8hKBltV4
+//https://pynq.readthedocs.io/en/v2.0/overlay_design_methodology/python_packaging.html
+//https://github.com/hillhao/PYNQ-project#5-neural-network-design
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//    ∑ 𝒳𝑥 𝒲𝑤 𝑏 𝑓ƒ 𝒰𝑢
+//////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+	01. Introduction
+			1.1 The Board
+			1.2 Zynq7000
+			1.3 Starting Up
+			1.4 Revert Board to Factory settings
+			1.5 Access the terminal of PYNQ
+			1.6 Jupyter Notebook
+			1.7 Grove Temperature Sensor v1.2 Example
+	02. PYNQ with Python OpenCV for Image/Video Processing
+			2.1 Programming, Conditional Statements, Loops with GPIO
+			2.2 OpenCV Development - OpenCV Basics
+			2.3 Face Eye Detection
+			2.4 HDMI Streaming and Processing
+			2.5 License Plate Localizer
+	03. Installing Pyhton Library in PYNQ - Cryptography Library
+	04. Machine Learning with Python in PYNQ
+			4.1 Character Recognition with BNN
+	05. Creating Custom Overlay (VIVADO Project) for PYNQ
+			5.1 Custom Overlay: Addition and Multiplication App
+			5.2 How to create a Custom Overlay
+			5.3 Creating VDMA Overlay with VIVADO and Notebook
+	06. Creating Custom Python Function Accelerator on PYNQ with VIVADO tool
+			6.1 Accelerate Custom Image Processing Function
+	07. Tensorflow Installation on PYNQ FPGA 
+	08. Machine Learning with Xilinx Deep Learning (DPU) IP on PYNQ 
+			8.1 DPU on PYNQ Boards: Ultra96/ZCU104/ZCU111
+	09. Blinking LED with Vivado + Vitis
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////
+01. Introduction
+	
+	1.1 The Board
+		+----+-+----+--+----+------------------------------------------------------+
+		| 01 | | 02 |  | 03 |           +-------------------------------+    +-----|
+		|----+ +----+  +----+           |              04               |    | 05  |
+		|                               +-------------------------------+    +-----|
+		|                          +---------------------------------------+       |   +---------------+       
+		|           Arm            | +-----------------------------------+ | +-----|   | A | B | C | D |
+		|           +----------+   | |                                   | | | 06  |   |---------------|
+		|           |          |   | +-----------------------------------+ | +-----|   | E | F | G | H |    
+		|----+      | Zynq7000 |   |                                 +---+ |       |   +---------------+ 
+		| 17 |      |          |   |                                 |   | | +-----|   A+B: Load from SD
+		|----+      +----------+   |                 [09]            |   | | | 07  |
+		|           PL             |                                 +---+ | +-----|
+		|----+                     |         +---------------------------+ |       |
+		| 16 |                     |         |                           | | +-----|
+		|----+                     |         +---------------------------+ | | 08  |
+		|          [26]     [27]   +---------------------------------------+ +-----|    
+		|----+    +----+   +----+                                                  |                       
+		| 15 |    |    |   |    |              +----+    [22]  [23] [24]  [25]     |
+		|----+    | 14 |   | 13 |  [12] [11]   | 10 |    [18]  [19] [20]  [21]     |
+		+---------+----+---+----+--------------+----+------------------------------+
+
+	
+		01. Audio: pynq.lib.audio
+		02. USB
+		03. HDMI Out (Display): pynq.lib.video
+		04. RPi GPIO: pynq.lib.rpi / pynq.gpio
+		05. HDMI In (Camera): pynq.lib.video
+		06. Jumper J1 [SD/DSP/JTAG]
+		07. Pmod A: pynq.lib.pmod
+		08. Pmod B: pynq.lib.pmod
+		09. ArduinoShield: pynq.lib.arduino
+		10. SD Card Slot
+		11. Prgramming Button
+		12. Reset	
+		13-14. Switch
+		15. Power Switch
+		16. microUSB
+		17. Ethernet
+		18-21. Buttons
+		22-25. LEDs
+		26-27. RGB LEDs
+	
+	
+	1.2 Zynq7000
+			#This chip has 2 sides. PL Side and Arm Side
+				1. All Rpi Hats Slot, Arduino Shield Slot, Pmod Slot are connected through PL Side
+					Library: pynq.gpio
+				2. All HDMI In/Out connected to PL
+					HDMI Library: pynq.lib.video
+				3. USB connected to Arm side of Zynq7000
+				4. Audios are connected to PL side of Zynq7000
+					Audio Library: pynq.lib.audio
+	
+	1.3 Starting Up
+			1. Connect Ethernet and microUSB to the PC
+			2. Ensure Jumper J1 [06] is at SD Mode
+			3. Power ON using [15] switch and wait for 4 LEDs (22, 23, 24, 25) to light up
+			4. In Windows, go to: Control Panel > Network & Internet > Network & Sharing > Ethernet > Properties > IPv4 > Properties
+				> Change "Auto Obtain" to "Manual"
+					IP Address: 192.168.2.10
+					Subnet Mask: 255.255.255.0
+					DNS: 127.0.0.1
+			5. Open Google Chrome and go to "http://192.168.2.99:9090/
+				Password: xilinx
+			6. Click on New > Open Terminal
+				Key in: #ifconfig
+	
+			7. Other Script in Python
+				Python 3
+					!lscpu = CPU information
+					!free-m = RAM information
+					!ip-br address show eth0 = Wired Network information
+					!hostname = show hostname of board. Instead of using URL, use shortcut. http://{hostname}
+					!lsb_release -a = Show Linux version
+			8. Python script to check version
+				pythonscript.py
+					import.sys
+					print (f'Python Version: {sys.version}')
+					print ('Python path settings:')
+					for path_entry in sys.path:
+						print(path_entry)
+					!pip list --format=columns    //This lists down all installed packages
+	
+	1.4 Revert Board to Factory settings
+			Vivado Board Setup
+				1. Download Pynq-Z2 board library, boot images and Master XDC from http://www.tulembedded.com/fpga/ProductsPYNQ-Z2.html
+				2. Cope/Move "C:\downloads\boards\TUL\pynq-z2\" to "C:\Xilinx\Pynq\pynq-z2\"
+				3. Add initialization file in "Users\user\AppData\Roaming\Xilinx\Vivado\"
+					init.tcl
+						set_param board.repoPaths [list "C:\Xilinx\Pynq\pynq-z2\A.0"]
+				4. Start Vivado > Create Project 
+					While choosing board in "board" tab, click on refresh
+	
+			Build PYNQ SD card image
+				https://pynq.readthedocs.io/en/latest/pynq_sd_card.html
+				Pynq Z2 version: v3.0.1
+				Recommended Ubuntu Version: 20.04
+		
+		
+			Load file to Vivado and Program to board
+				1. Start Vivado
+				2. Tools > Run Tcl Script > Select Tcl File
+				
+	1.5 Access the terminal of PYNQ
+			Download and install terminal programs
+				TeraTerm for Windows
+				gtkterm for Ubuntu
+			Connect your PYNQ board with USB
+			Open TeraTerm/Gtkterm
+				Set PYNQ Board to serial port
+				Set Baudrate to 115200
+				Click Connect and this will lead to root on the terminal
+			Install any Package or Library on PYNQ
+				sudo pip3.6 install git+https://github.com/Xilinx/BNN-PYNQ.git //For PYNQ v2.0 or later
+	1.6 Jupyter Notebook
+			Jupyter Header
+				Set Notebook to "Markdown"
+				#Header Title         //This will create largest font available, with bold
+				*Sub header*          //This will be in Italic
+				**Subject Header**    //Bold
+				*Bullet Points        //Just give the bullet points
+				<html>Lilnks</html>   //Provide the link
+
+			Check Python Version in Jupyter	
+				from platform import python_version
+				print(python_version())
+				
+			Check Tensorflow Version
+				import tensorflow as tf
+				print tf.VERSION
+
+			PYNQ Libraries for button and led modules
+				Sleep-              //to add delay in the execution of program
+				Rgbled_position-
+				On-                 //LED on
+				Off-                //LED off
+				Buttons-            //controls the onboard push button
+				Read-               //read the current values of the button
+				Toggle-             //Checks the selected elements for visibility
+				Wait_for_value-     //Wait for the button to be pressed of released
+				
+			Programming onboard peripherals
+				from pynq.overlays.base import BaseOverlay
+				base = BaseOverlay("base.bit")
+				from pynq.lib import LED, Switch, Button
+				led0 = LED(base.leds[0])
+				led0.on()            //use "led0.off()" to off
+				
+				#Toggle led0 using the sleep() method from time package for it to flash
+				import time
+				led0 = LED(base.leds[0])
+				for i in range(20):
+					led0.toggle()
+					time.sleep(.1)
+					
+			PYNQ Libraries for audio modules
+				Record()-            //Record data from audio controller to audio buffer
+				Save()-              //Save audio buffer content to file 
+				Load()-              //Load files into the internal audio buffer
+				Play()-              //Play audio buffer via audio jack
+				
+			Example Code for Audio
+				from pynq.overlays.base import BaseOverlay
+				base = BaseOverlay("base.bit")
+				audio = base.audio
+				
+				#Record a sample
+				audio.record(4)      //Recording 4 seconds of audio
+				
+				#Save recorded sample
+				audio.save("Recording_1.pdm")
+				
+				#Play recorded sample
+				audio.play()
+				
+				#Load and play audio
+				audio.load("/home/xilinx/jupyter_notebooks/base/audio/Recording_1.pdm")
+				audio.play()
+				
+			PYNQ Libraries for video modules
+				Configure()-         //Configure the pipeline to use the specified pixel format
+				Start()-             //Start the video transfer through the HDMI in
+				Tie()-               //Monitor should turn on and show blank screen. To pass the image data through, tie the output to input.
+				Numframes-           //Returns a frame of the appropriate size for video mode
+				writeframe-          //Write the frame to the video output
+				readframe-           //Read the video frame
+				Cvtcolour()-         //Converts an image from one color space to another
+				
+			Example Code for Video
+				from pynq import Overlay
+				from pynq.drivers.video import HDMI
+				
+				#Download bitstream
+				Overlay("base.bit").download()
+				
+				#Initialize HDMI as an input device
+				hdmi_in = HDMI('in')
+				
+				##
+				hdmi_in.start()
+				width = hdmi_in.frame_width()
+				height = hdmi_in.frame_height()
+				print('HDMI is capturing a video source of resolution {}x{}'\.format(width,height))
+			
+	1.7 Grove Temperature Sensor v1.2 Example	
+			#import libraries and load the overlay-bitstream on FPGA
+			from pynq.pl
+			import Overlay Overlay("base.bit").download()
+			import math
+			#instantiating the PMOD for temperature sensor connected at G4
+			from pynq.iop import Grove_TMP
+			from pynq.iop import PMODB
+			from pynq.iop import PMOD_GROVE_G4
+			#Read the temperature from the sensor
+			tmp = Grove_TMP(PMODB, PMOD_GROVE_G4)
+			temperature = tmp.read()
+			print(float("{0:.2f}".format(temperature)),'degree Celsius)
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////
+02. PYNQ with Python OpenCV for Image/Video Processing
+
+	2.1 Programming, Conditional Statements, Loops with GPIO
+	
+		If-else Statement
+			from pynq.overlays.base import BaseOverlay
+			base = BaseOverlay("base.bit")
+			from pynq.lib import LED, Switch, Button
+			led0 = LED(base.leds[0])
+			switch = Switch(base.switches[0])
+			if(switch.read()==1):
+				#led0.on()
+				led0.on()
+			else:
+				led0.off()
+				
+		For Loop Statement
+			from pynq.overlays.base import BaseOverlay
+			base = BaseOverlay("base.bit")
+			from pynq.lib import LED, Switch, Button
+			
+			#turn ON all LEDs
+			for led in base.leds:
+				led.on()
+				
+			#turn ON all LEDs on interval of 1 seconds
+			import time
+			for led in base.leds:
+				led.on()
+				time.sleep(1)
+				led.off()
+
+		While Loop Statement [Once]
+			from pynq.overlays.base import BaseOverlay
+			base = BaseOverlay("base.bit")
+			from pynq.lib import LED, Switch, Button
+			
+			led0 = LED(base.leds[0])
+			switch = Switch(base.switches[0])
+			while(switch.read()==1):
+				led0.on()
+				
+				led0.off()
+		
+		While Loop Statement [Infinite]
+			from pynq.overlays.base import BaseOverlay
+			base = BaseOverlay("base.bit")
+			from pynq.lib import LED, Switch, Button
+			
+			led0 = LED(base.leds[0])
+			switch = Switch(base.switches[0])
+			while True:
+				if(switch.read()==1):
+					led0.on()
+				else:
+					led0.off()
+
+		While-else Loop Statement
+			from pynq.overlays.base import BaseOverlay
+			base = BaseOverlay("base.bit")
+			from pynq.lib import LED, Switch, Button
+			import time
+			
+			led0 = LED(base.leds[0])
+			switch = Switch(base.switches[0])
+			while(switch.read()==1):
+				led0.on()
+			else:
+				led0.off()
+
+		GPIO Control with Loops
+			#WHILE IF-ELSE-IF STATEMENT FOR GPIO CONTROL
+			from pynq.overlays.base import BaseOverlay
+			base = BaseOverlay("base.bit")
+			from pynq.lib import LED, Switch, Button
+			
+			#Turn ON all LEDs
+			for led in base.leds:
+				led.on()
+				
+			#CONTROLLING ALL SWITCHES, LED AND BUTTONS
+			#Set the number of LED, Switches and buttons
+			MAX_LEDS = 4
+			MAX_SWITCHES = 2
+			MAX_BUTTONS = 4
+			leds = [LED(base.leds[index]) for index in range(MAX_LEDS)]
+			switches = [Switch(base.switches[index]) for index in range(MAX_SWITCHES)]
+			buttons = [Button(base.buttons[index]) for index in range(MAX_BUTTONS)]
+			
+			#Create lists for each of the IO component groups
+			for i in range(MAX_LEDS):
+				leds[i] = LED(base.leds[i])
+			for i in range(MAX_SWITCHES):
+				switches[i] = Switch(base.switches[i])
+			for i in range(MAX_BUTTONS):
+				buttons[i] = Button(base.buttons[i])
+			
+			#CHANGING THE CORRESPONDING LED AS THE SWITCH VALUE
+			#LEDs start in the off state
+			for i in range(MAX_LEDS):
+				leds[i].off()
+				
+			#If a slide switch is on, light the corresponding LED
+			for i in range(MAX_LEDS):
+				if switches[i%2].read():
+					leds[i].on()
+				else:
+					leds[i].off()
+
+			#IF THE PUSH BUTTONS IS PRESSED AND THE FOLLOWING CODE RUN, THEN THE CORRESPONDING LED WILL TOGGLE 
+			for i in range(MAX_LEDS):
+				if buttons[i].read():
+					leds[i].toggle()
+					
+					
+		SciPy Library
+			from scipy import fftpack
+			
+			A = fftpack.fft(a)
+			frequency = fftpack.fftfreq(len(a)) * fre_samp
+			figure, axis = plt.subplots()
+			
+			axis.stem(frequency, np.abs(A))
+			axis.set_xlabel('Frequency in Hz')
+			axis.set_ylabel('Frequency Spectrum Magnitude')
+			axis.set+xlim(-fre_samp / 2, fre_samp / 2)
+			axis.set_ylim(-5, 110)
+			plt.show()
+
+		SciPy for Image Processing
+			#scipy.ndimage is a submodule of SciPy which is used for performing image related operation
+			#ndimage means the "n" dimensional image
+			#SciPy Image Processing provides Geometrics transformation (rotate, crop, flip), image filtering (sharp and denoising), 
+			#display image, image segmentation, classification and feature extraction
+			#MISC Package in SciPy contains prebuilt images which can be used to perform image manipulation task
+			
+			#Show Image
+				from scipy import misc
+				from matplotlib import pyplot as plt
+				import numpy as np
+				
+				#get face image of panda from misc package
+				panda = misc.face()
+				
+				#plot or show image of face
+				plt.imshow(  panda  )
+				plt.show()
+				
+			#Flip down image
+				#Flip down using scipy misc.face image
+				flip_down = np.flipud(misc.face())
+				plt.imshow(flip_down)
+				plt.show()
+				
+			#Rotate Image
+				from scipy import ndimage, misc
+				from matplotlib import pyplot as plt
+				panda = misc.face()
+				
+				#rotation function of scipy for image - image rotated 135 degrees
+				panda_rotate = ndimage.rotate(panda, 135)
+				plt.imshow(panda_rotate)
+				plt.show()
+				
+		Numpy
+			import numpy as np
+			print(np.__version__)
+			
+			#Create a Numpy Array
+			#Simplest way to create an array in Numpy is to use Python List
+			myPythonList = [1,9,8,3]
+			
+			numpy_array_from_list = np.array(myPythonList)
+			numpy_array_from_list
+
+		Matplotlib
+			%matplotlib inline
+			from matplotlib import pyplot as plt
+			import numpy as np
+			
+			#Frequency in terms of Hz
+			fre = 5
+			
+			#Sample Rate
+			fre_samp = 50
+			t = np.linspace(0, 2, 2 * fre_samp, endpoint = False)
+			a = np.sin(fre * 2 * np.pi * t)
+			figure, axis = plt.subplots()
+			axis.plot(t, a)
+			axis.set_xlabel ('Time(s)')
+			axis.set_ylabel ('Signal amplitude')
+			plt.show()
+
+
+	2.2 OpenCV Development - OpenCV Basics
+		
+		PIL Library
+			Showing an image
+				from PIL import Image as PIL_Image
+				orig_img_path = ('/home/xilinx/jupyter_notebooks/Digitronix/Pynq.jpg') //Upload an image file to here in Jupyter
+				
+				#Locate the image directory
+				img = PIL_Image.open(orig_img_path)
+				
+				#show the image
+				img
+				
+			Grey Scale an Image
+				from PIL import Image as PIL_Image
+				orig_img_path = ('/home/xilinx/jupyter_notebooks/Digitronix/Pynq.jpg') //Upload an image file to here in Jupyter
+				
+				#Locate the image directory
+				img = PIL_Image.open(orig_img_path)
+				
+				#Gray scale the image
+				bw_img = img.convert("L")
+				
+				#Show the Image
+				bw_img
+
+			Rotate the Image
+				from PIL import Image as PIL_Image
+				orig_img_path = ('/home/xilinx/jupyter_notebooks/Digitronix/Pynq.jpg') //Upload an image file to here in Jupyter
+				
+				#Locate the image directory
+				img = PIL_Image.open(orig_img_path)
+				
+				#Rotate the Image
+				rot_img = img.rotate(45) //45 degrees
+				
+				#Show image
+				rot_img
+				
+		Matplot Library
+			
+			Color Representation - Shows both BGR and RGB images side by side
+				import cv2
+				from matplotlib import pyplot as plt
+				img = cv2.imread('/home/xilinx/jupyter_notebooks/Digitronix/Pynq.jpg')
+				
+				#In OpenCV images are actually represented in BGR order rather than RGB 
+				plt.subplot(121), plt.imshow(img)
+				
+				#All we need to do is convert the image from BGR to RGB 
+				plt.subplot(122), plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+			
+			Display a Matplotlib RGB Image
+				from matplotlib import pyplot as plt
+				import matplotlib.image as mpimg
+				img = mpimg.imread('/home/xilinx/jupyter_notebooks/Digitronix/Pynq.jpg')
+				plt.imshow(img)
+
+			Comparing OpenCV and MpImg images side by side
+				import cv2
+				import numpy as np
+				from matplotlib import pyplot as plt
+				import matplotlib.image as mpimg
+				
+				img = cv2.imread('/home/xilinx/jupyter_notebooks/Digitronix/Pynq.jpg')
+				img2 = mpimg.imread('/home/xilinx/jupyter_notebooks/Digitronix/Pynq.jpg')
+				
+				plt.subplot(2,2,1),plt.imshow(img2)
+				plt.title('OpenCV'),
+				plt.subplot(2,2,2),plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+				plt.title('mpimg')
+
+		OpenCV Library
+			Shifting Image 2
+				import cv2
+				import numpy as np
+				img = cv.imread('/home/xilinx/jupyter_notebook/Digitronix/cat.jpg',0)
+				rows,cols = img.shape
+				
+				M = np.float32([[1,0,100], [0,1,50]])
+				dst = cv2.warpAffine(img,M,(cols,rows))
+				
+				cv2.imshow('img',dst)
+				cv2.waitKey(0)
+				cv2.destroyAllWindows()		
+
+			Rotating an Image - 90 degree rotation
+				img = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/cat.jpg',0)
+				rows,cols = img.shape
+				
+				M = cv2.getRotationMatrix2D((cols/2, rows/2),90,1)
+				dst = cv2.warpAffine(img,M,(cols,rows))
+
+
+			Geometric Transformation - Isometric View
+				img = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/drawing.jpg')
+				rows,cols,ch = img.shape
+				
+				pts1 = np.float32([[50,50],[200,50],[50,200]])
+				pts2 = np.float32([[10,100],[200,50],[100,250]])
+				
+				M = cv2.getAffineTransform(pts1,pts2)
+				dst = cv2.warpAffine(img,M,(cols,rows))
+				
+				plt.subplot(121),plt.imshow(img),plt.title('Input')
+				plt.subplot(122),plt.imshow(dst),plt.title('Output')
+				plt.show()
+
+			Perspective Transformation - Make Sudoku photo to align with grid
+				img = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/sudoku.jpg')
+				rows,cols,ch = img.shape
+				
+				pts1 = np.float32([[56,65],[368,52],[28,387],[389,390]])
+				pts2 = np.float32([[0,0],[300,0],[0,300],[300,300]])
+				
+				M = cv2.getPerspectiveTransform(pts1,pts2)
+				dst = cv2.warpPerspective(img,M,(300,300))
+				
+				plt.subplot(121),plt.imshow(img),plt.title('Input')
+				plt.subplot(122),plt.imshow(dst),plt.title('Output')
+				plt.show()
+				
+			Smoothing Images
+				import cv2
+				import numpy as np
+				from matplotlib import pyplot as plt
+				
+				img = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/opencv_logo.png')
+				
+				kernel = np.ones((5,5),np.float32)/25
+				dst = cv2.filter2D(img,-1,kernel)
+				
+				plt.subplot(121),plt.imshow(img),plt.title('Original')
+				plt.xticks([]), plt.yticks([])
+				plt.subplot(122),plt.imshow(dst),plt.title('Averaging')
+				plt.xticks([]), plt.yticks([])
+				plt.show()
+				
+			Blurring Images
+				import cv2
+				import numpy as np
+				from matplotlib import pyplot as plt
+				
+				img = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/opencv_logo.png')
+				
+				blur = cv2.blur(img,(5,5))
+				
+				plt.subplot(121),plt.imshow(img),plt.title('Original')
+				plt.xticks([]), plt.yticks([])
+				plt.subplot(122),plt.imshow(blur),plt.title('Blurred')
+				plt.xticks([]), plt.yticks([])
+				plt.show()
+				
+			Gaussian Blurring Images
+				import cv2
+				import numpy as np
+				from matplotlib import pyplot as plt
+				
+				img = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/opencv_logo.png')
+				
+				blur = cv2.GaussianBlur(img,(5,5),0)
+				
+				plt.subplot(121),plt.imshow(img),plt.title('Original')
+				plt.xticks([]), plt.yticks([])
+				plt.subplot(122),plt.imshow(blur),plt.title('Blurred')
+				plt.xticks([]), plt.yticks([])
+				plt.show()
+				
+			Median Filtering - Lowering down the image noise
+				import cv2
+				import numpy as np
+				from matplotlib import pyplot as plt
+				
+				img = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/opencv_logo.png')
+				
+				median = cv2.medianBlur(img,5)
+				
+				plt.subplot(121),plt.imshow(img),plt.title('Original')
+				plt.xticks([]), plt.yticks([])
+				plt.subplot(122),plt.imshow(median),plt.title('Median')
+				plt.xticks([]), plt.yticks([])
+				plt.show()
+
+			Bilateral Filtering - Blurring without blurring the edges
+				import cv2
+				import numpy as np
+				from matplotlib import pyplot as plt
+				
+				img = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/opencv_logo.png')
+				
+				blur = cv2.bilateralFilter(img,9,75,75)
+				
+				plt.subplot(121),plt.imshow(img),plt.title('Original')
+				plt.xticks([]), plt.yticks([])
+				plt.subplot(122),plt.imshow(blur),plt.title('Blurred')
+				plt.xticks([]), plt.yticks([])
+				plt.show()
+
+	2.3 Face Eye Detection - Morphological Tranformations
+		
+		OpenCV Library
+			Morphological Transformations
+				import cv2
+				import numpy as np
+				img = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/j.png',0)
+				kernel = np.ones((5,5),np.uint8)
+				erosion = cv2.erode(img,kernel,iterations = 1)
+				dilation = cv2.dilate(img,kernel,iterations = 1)
+				
+				opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+				closing = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)
+				gradient = cv2.morphologyEx(img, cv2.MORPH_GRADIENT, kernel)
+				tophat = cv2.morphologyEx(img, cv2.MORPH_TOPHAT, kernel)
+				blackhat = cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel)
+				
+			Image Gradients
+				import cv2
+				import numpy as np
+				from matplotlib import pyplot as plt
+				img = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/sudoku.jpg',0)
+				laplacian = cv2.Laplacian(img, cv2.CV_64F)      //Inverse image, bold lines and thin lines become equal
+				sobelx = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=5)  //Inverse Image, only vertical line become visible
+				sobely = cv2.Sobel(img,cv2.CV_64F,0,1,ksize=5)  //Inverse image, only horizontal line become visible
+				
+				#Show Image 1
+				plt.imshow(img,cmap = 'gray')
+				
+				#Show Image 2
+				#Original Image
+				plt.subplot(2,2,1),plt.imshow(img,cmap = 'gray')
+				plt.title('Original'), plt.xticks([]), plt.yticks([])
+				#showing the sobel X output
+				plt.subplot(2,2,2),plt.imshow(sobelx,cmap = 'gray')
+				plt.title('SobelX'), plt.xticks([]), plt.yticks([])
+				
+			Sobel Edge Detection
+				import cv2
+				import numpy as np
+				from matplotlib import pyplot as plt
+				
+				img0 = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/sudoku.jpg')  //Or use Pynq.jpg image
+				
+				gray = cv2.cvtColor(img0, cv2.COLOR_BGR2GRAY)
+				img = cv2.GaussianBlur(gray,(3,3),0)
+				
+				sobelx = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=5)  //x
+				sobely = cv2.Sobel(img,cv2.CV_64F,0,1,ksize=5)  //y
+				
+				plt.subplot(2,2,1),plt.imshow(img,cmap = 'gray')
+				plt.title('Original'), plt.xticks([]), plt.yticks([])
+				
+				plt.subplot(2,2,2),plt.imshow(img,cmap = 'gray')
+				plt.title('SobelX'), plt.xticks([]), plt.yticks([])
+				plt.subplot(2,2,3),plt.imshow(img,cmap = 'gray')
+				plt.title('SobelY'), plt.xticks([]), plt.yticks([])
+				
+				plt.show
+
+
+			Canny Edge Detection
+				import cv2
+				import numpy as np
+				from matplotlib import pyplot as plt
+				img0 = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/sudoku.jpg',0)
+				edges = cv2.Canny(img,100,200)
+				
+				plt.subplot(121),plt.imshow(img,cmap = 'gray')
+				plt.title('Original'), plt.xticks([]), plt.yticks([])
+				plt.subplot(122),plt.imshow(img,cmap = 'gray')
+				plt.title('Edge Image'), plt.xticks([]), plt.yticks([])
+				
+				plt.show
+			
+			Harris Corner Detection - Find corners and mark as green lines
+				import cv2
+				import numpy as np
+				img = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/sudoku.jpg')
+				
+				gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+				gray = np.float32(gray)
+				dst = cv2.cornerHarris(gray,2,3,0.04)
+				
+				#result is dilated for marking the corners, not important
+				dst = cv2.dilate(dst,None)
+				
+				#Threshold for an optimal value, varies depending on the image
+				img[dst>0.01*dst.max()]=[0,0,255]
+				cv2.imshow('dst',img)
+				if cv2.waitKey(0) & 0xff == 27:
+					cv2.destroyAllWindows()
+			
+			
+			FAST Algorithm for Corner Detection
+				Feature Detection using FAST
+					1. Select a pixel "p" in the image which is to be identified as an intereset point or not. Let intensity be "Ip"
+					2. Select appropriate threshold value "t"
+					3. Consider a circle of 16 pixels around the pixel under test
+				Machine Learning
+					1. Select a set of images for training (preferably from the target application domain)
+					2. Run FAST algorithm in every images to find feature points
+					3. For every feature point, store the 16 pixels around it as a vector. Do it for all the images to get feature vector "p"
+					4. Each pixel (say x) in these 16 pixels can have one of the following three states: a corner detector
+				Non-Maximal Suppression - Detecting multiple interest points in adjacent locations is a problem. Solved by using Non-Maximum Suppression.
+					1. Compute a score function, "V" for all the detected feature points. 
+						"V" is the sum of absolute difference between "p" and 16 surrounding pixels values
+					2. Consider two adjacent keypoints and compute their "V" values
+					3. Discard the one with lower "V" value
+					
+			
+			FAST Algorithm Example
+				import numpy as np
+				import cv2 as cv
+				from matplotlib import pyplot as plt
+				img = cv.imread('blox.jpg', cv.IMREAD_GRAYSCALE) # `<opencv_root>/samples/data/blox.jpg`
+				
+				# Initiate FAST object with default values
+				fast = cv.FastFeatureDetector_create()
+				
+				# find and draw the keypoints
+				kp = fast.detect(img,None)
+				img2 = cv.drawKeypoints(img, kp, None, color=(255,0,0))
+				
+				# Print all default params
+				print( "Threshold: {}".format(fast.getThreshold()) )
+				print( "nonmaxSuppression:{}".format(fast.getNonmaxSuppression()) )
+				print( "neighborhood: {}".format(fast.getType()) )
+				print( "Total Keypoints with nonmaxSuppression: {}".format(len(kp)) )
+				cv.imwrite('fast_true.png', img2)
+				
+				# Disable nonmaxSuppression
+				fast.setNonmaxSuppression(0)
+				kp = fast.detect(img, None)
+				print( "Total Keypoints without nonmaxSuppression: {}".format(len(kp)) )
+				img3 = cv.drawKeypoints(img, kp, None, color=(255,0,0))
+				cv.imwrite('fast_false.png', img3)
+			
+		Face & Eye Detection
+			Classifiers - Face Detection
+				#Already been trained to detect faces using millions of images to get accuracy
+				#There are two types of classifiers in OpenCV: Local Binary Pattern (LBP), and Haar Cascades
+				#Haarcascade face detection uses training data called: haarcascade_frontalface_default.xml
+				#Haarcascade eye detection uses training data called: haarcascade_eye.xml
+				
+				import cv2
+				import numpy as np
+				from matplotlib import pyplot as plt
+				img = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/faces.jpg')
+				cascPath = "/home/xilinx/jupyter_notebook/base/video/data/haarcascade_frontalface_default.xml
+				
+				#Create the haarcascade 
+				faceCascade = cv2.CascadeClassFilter(cascPath)
+				gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+				
+				#Detect faces in the image
+				faces = faceCascade.detectMultiScale(
+					gray,
+					scaleFactor=1.1,
+					minNeighbors=5,
+					minSize=(30,30)
+					#flags = cv2.cv.CV_HAAR_SCALE_IMAGE
+				)
+				
+				print("Found {0} faces!".format(len(faces)))
+				
+				#Draw a rectangle around the face
+				for (x,y,w,h) in faces:
+					cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+				plt.imshow(image)	
+				#cv2.imshow("Faces found", image)
+				
+			Classifiers - Face Color Detection
+				import cv2
+				import numpy as np
+				from matplotlib import pyplot as plt
+				img = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/faces.jpg')
+				
+				np_frame = image
+				gray = cv2Color(np_frame, cv2.COLOR_BGR2GRAY)
+				
+				#Haar Classifiers
+				face_cascade = cv2.CascadeClassifier(
+					'home/xilinx/jupyter_notebook/base/video/data/'
+					'haarcascade_frontalface_default.xml'
+				)
+				faces = face_cascade.detectMultiScale(gray, 1.3, 5)          //Kernel size or size of image reduced, when detection being applied
+				for (x,y,w,h) in faces:                                      //5 is the number of neighbors after which we accept that is face
+					cv2.rectangle(np_frame,(x,y),(x+w,y+h),(255,0,0),2)
+					
+				#Output OpenCV results via matplotlib 
+				plt.imshow(image[:,:,[2,1,0]])
+				plt.show()
+			
+			FACE and EYE Detection with Haar Cascade 
+				import cv2
+				import numpy as np
+				from matplotlib import pyplot as plt
+				img = cv2.imread('/home/xilinx/jupyter_notebook/Digitronix/one_face.jpg')
+				np_frame=image 
+				
+				gray = cv2.cvtColor(np_frame, cv2.COLOR_BGR2GRAY)
+				
+				#haar classifiers
+				face_cascade = cv2.CascadeClassifier(
+					'home/xilinx/jupyter_notebook/base/video/data/'
+					'haarcascade_frontalface_default.xml'
+				)
+				
+				face_cascade = cv2.CascadeClassifier(
+					'home/xilinx/jupyter_notebook/base/video/data/'
+					'haarcascade_eye.xml'
+				)
+				
+				gray = cv2.cvtColor(np_frame, cv2.COLOR_BGR2GRAY)
+				faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+				
+				#Iterate over the faces and detect eyes
+				for (x,y,w,h) in faces:
+					cv2.rectangle(np_frame, (x,y), (x+w,y+h), (255,0,0),2)
+					
+					#Arguments => image, top left coord, bottom right coord, color, rectangle border thickness
+					#Need two regions of interest(ROI)grey and color for eyes to detect and another to draw the rect
+					roi_gray = gray[y:y+h, x:x+w]
+					roi_color = np_frame[y:y+h, x:x+w]
+					
+					#Detecting eyes
+					eyes = eye_cascade.detectMultiScale(roi_gray)
+					
+					#Draw rectangle over eyes
+					for (ex,ey,ew,eh) in eyes:
+						cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh), (0,255,0),2)
+			
+				plt.imshow(image[:,:,[2,1,0]])
+				plt.show()
+				
+	2.4 HDMI Streaming and Processing
+		//https://community.element14.com/products/roadtest/rv/roadtest_reviews/689/pynq-z2_dev_board_py_3
+		
+		Streaming/Processing directly from HDMI Input
+			#Board Setup
+			1. Connect PYNQ's HDMI Out to Display
+			2. Connect PYNQ's HDMI In to Laptop
+			3. Connect PYNQ's Ethernet to Laptop
+			4. Connect PYNQ's Power to USB
+			5. Run 5_base_overlay_video.ipynb
+			
+	2.5 License Plate Localizer	
+		1. Download license_plate_localization_pynq.ipynb
+		2. Upload to Jupyter Notebook
+			
+//////////////////////////////////////////////////////////////////////////////////////////////////
+03. Installing Pyhton Library in PYNQ - Cryptography Library
+		github.com/amiralis/python-crypto-tutorial
+	
+	Two methods:
+		1. Connecting PYNQ with PROG-UART Port with USB cable and using the serial terminal programs.
+			TerraTerm / Putty (Baud Rate of 115200)
+		2. Connecting PYNQ with LAN/Ethernet cable and accessing with Jupyter's Terminal Console
+			In Jupyter, click on "New" and select Terminal
+		
+	Jupyter Terminal:
+		pip3 install cryptography
+		pip3 install pycryptodome
+		
+	Retrieving the installed library list on Jupyter
+		import pip        //needed to use the pip functions
+		for i in pip.get_installed_distributions(local_only=True):
+			print(i)
+			
+	Git-clone or Upload project to Pynq
+		In Jupyter, click on "Upload"
+		
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+04. Machine Learning with Python in PYNQ
+	
+	Libraries already available in PYNQ 
+		CNN, //github.com/awai54st/PYNQ-Classification
+		QNN, //github.com/Xilinx/QNN-MO-PYNQ
+		BNN  //github.com/Xilinx/BNN-PYNQ
+	
+	IMPORTANT LINKS
+	//https://pynq.readthedocs.io/en/v2.0/overlay_design_methodology/python_packaging.html
+	//https://github.com/hillhao/PYNQ-project#5-neural-network-design
+
+	4.1 Character Recognition with BNN - Vehicle Number Plate Detection
+		
+		Installation
+			Open Jupyter and open a Terminal
+			sudo pip3 install git+https://github.com/Xilinx/BNN-PYNQ.git      //On PYNQ v2.3 and later versions, tested up to v2.5
+			sudo pip3.6 install git+https://github.com/Xilinx/BNN-PYNQ.git    //On PYNQ v2.2 and earlier
+
+		Major steps on "Character Recognition System"
+			Load the overlay and BNN
+			Download the network parameters
+			Load image from camera
+			Image segmentation
+
+		Char_Recognition_with_PYNQ_V2.ipynb
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+05. Creating Custom Overlay (VIVADO Project) for PYNQ
+	//pynq.readthedocs.io/en/v2.4/overlay_design_methodology/overlay_tutorial.html
+
+	5.1 Custom Overlay: Addition and Multiplication App
+		
+		Components required in th eprocess of creating an overlay
+			Board settings
+			PS-PL Interface
+			MicroBlaze Soft Processors
+			Python/C Integration
+			Python AsyncIO
+			Python Overlay API
+			Python Packaging
+			
+		Addition & Multiplication based overlay with Vivado HLS, IP Integrator and Jupyter
+			Create custom Multiplier IP with Vivado HLS and implement it on Jupyter Interface
+			Create Vivado HLS IP with C++ for the add and mul of two numbers.
+			Synthesize and export RTL/IP of this IP to Vivado IP Integrator
+			In Vivado IP integrator, 
+				Create Block Design with Zynq PS and HLS IP.
+				Run the Automation
+				Create HDL Wrapper
+				Synthesize the design
+				Implement the Design
+				Generate the Design
+		
+		Vivado HLS Source Code for Adder and Multiplicator [adder_multiplier.cpp]
+			void addmul(int a, int b, int& c, int& m){
+			#pragma HLS INTERFACE ap_ctrl_none port=return
+			#pragma HLS INTERFACE s_axilite port=a
+			#pragma HLS INTERFACE s_axilite port=b
+			#pragma HLS INTERFACE s_axilite port=c
+			#pragma HLS INTERFACE s_axilite port=m
+			
+				c = a + b;
+				m = a * b;
+				
+			}
+			
+		Vivado HLS 2018 [Step 1]
+			01. Create new project, name "Project Name" as "addmul_hls" and click "Next"
+			02. Create "New File", navigate to "addmul" folder and save file as "addmul.cpp". "addmul.cpp" will appear in the panel.
+			03. Key in "addmul" to "Top Functions" textbox and click Next
+			04. Skip "TestBech Files" selection window by clicking "Next"
+			05. In Solution Configuration window, under "Part Selection" section, click on "browse icon" and select xc7z020clg400-1 for PYNQ Z2 FPGA
+			06. Click on OK to close the Part Selection window and click on Finish
+			07. You will now see project window on Vivado HLS
+			08. Expand the "Sources" option on left Pane "Explorer"
+			09. Double click on "addmul.cpp"
+			10. Copy Paste the source code above to this "addmul.cpp" and save the project
+			11. Click on "Run C Synthesis". You will get Synthesis report once the synthesis completes.
+			12. Click on "Export RTL" [The icon with 4 section box]
+			13. Leave Format Selectrion as default [IP Catalog]
+			14. Under "Evaluate Generated RTL" section, select Verilog or VHDL language and click OK //VHDL being used here
+			15. After IP exports completes, open Vivado tool from startup menu
+			16. Visit Explorer Pane > addmul_hls > solution1 > impl > ip > drivers > addmul_v1_0 > src > xaddmul_hw.haar
+					Here, you can see the "XADDMUL_AXILITES_ADDR_A_DATA" 0x10, etc, etc
+					All these ar in line with the Source code
+	
+		Vivado IP Integration [Step 2]
+			01. Open Vivado [NOT Vivado HLS] from startup menu
+			02. Create new project on Vivado
+			03. Click on "RTL Project" and click Next [Ensure "do not specify sources" checkbox is checked]
+			04. Select Part/Board
+			05. In "Part Selection", select xc7z020clg400-1 for PYNQ FPGA. Click Next and "Finish"
+			06. Vivado Project window will appear
+			07. In Left window Pane, Under IP Integrator, click on "Create Block Design", use default name "design_1" and click OK
+					Design Name: design_1
+					Directory: <Local to Project>
+					Specify source set: <Design Sources>
+			08. In Left window Pane, Under Project Manager, click on "Settings 
+					Project Setting > IP > Repository 
+						Click on "+" button
+						Highlight the "ip" folder and click on "Select"
+							pynq_overlay/addmul/addmul_hls/solution1/impl/ip
+						Vivado will automatically sync the Ip
+					Click on "Apply"
+			09. In "Block Design" window, in Diagram section, click on "+" button:
+					Search for addmul and add into Diagram. "addmul_0" block will appear
+					In Diagram toolbar, click on "+". Search for "Zynq Processing System" and add this block
+					Click on Run Block Automation
+						Make sure "processing_system7_0" checkbox is checked
+						Options:
+							Make Interface External: FIXED_IO, DDR
+							Cross Trigger In: Disable
+							Cross Trigger Out: Disable
+						Click OK
+					Click on Run Connection Automation
+						Make sure "addmul_0" and "s_axi_AXILiteS" checkboxes are checked 
+						Options:
+							Master: /processing_system7_0/M_AXI_GP0 [greyed out]
+							Bridge IP: New AXI Interconnect [greyed out]
+							Clock source for driving Interconnected IP: Auto
+							Clock source for Master Interface: Auto
+							Clock source for Slave Interface: Auto
+						Click on OK
+					In Diagram Toolbar, click on "Box with Tick" icon to validate the design
+					Open Address Editor Tab to check the addresses
+	
+		Vivado Project Generation [Step 3]
+			01. You will see the Block Design window appears with blocks interconnected in the Diagram Tab
+			02. On the Top Left Pane of "Block Design" window, Goto "Sources" tab and right click on Design Sources > design_1 [mentioned in Step 2]
+					Notice the yellow icon
+			03. Click on "Create HDL Wrapper"
+			04. Click on "Let VIVADO manage wrapper and auto update" option and press OK
+					Now we have the HDL of the block design we made.
+					Notice that the Yellow icon turns into Purple icon and name turns into "design_1-wrapper"
+			05. In Flow Navigator > Program and Debug > Generate Bitstream
+					Click on "Generate Bitstream"
+						Launch Directory: <Default Launch Directory>
+						Checked Launch runs on local host: 
+						Number of Jobs: 4
+						Unchecked Generate scripts only
+						Click OK
+					Bitstream Generation Completed window appears
+						Select "Cancel"
+			06. Goto File > Export and click on Export Block Design 
+					Export Block Design
+						Tcl file: ../Desktop/pynq_overlay/addmul/addmul_vivado/design_1.tcl
+						Make sure "Automatically create top design" checkbox is checked.
+						Click OK
+			07. Copy the BitStream (../Desktop/pynq_overlay/addmul/addmul_vivado/addmul_vivado.runs/impl_1/design_1_wrapper.bit) 
+			08. Paste the Bitstream file together in the folder containing the Tcl file (../Desktop/pynq_overlay/addmul/addmul_vivado/design_1.tcl). 
+			09. Name these two files using the same name (design_1_addmul.tcl, design_1_addmul.bit)
+			10. Copy Paste both these BitStram file and Tcl file into PYNQ FPGA file directory:
+					Goto file explorer on windows, type: \\192.168.2.99\9090 or \\pynq\xilinx
+					Enter username and password: xilinx
+					Navigate to Network\pynq\xilinx\jupyter_notebooks\
+					Create new folder "addmul" and add the 2 files in the folder
+					--OR--
+					Upload directly from Jupyter Interface in Chrome
+			11. Goto Jupyter Interface
+			12. Create New Python 3 file
+	
+		Python Program in Jupyter
+			from pynq import Overlay
+			overlay = Overlay('/home/xilinx/jupyter_notebooks/addmul/design_1_addmul.bit')
+			
+			overlay?
+			
+			add_ip = overlay.addmul_0
+			
+			#give input a=4
+			add_ip.write(0x10, 4)
+			#give input b=5
+			add_ip.write(0x18, 5)
+			
+			#read the addition result
+			add_ip.read(0x20)    //Output: 9 
+			
+			#read the multiplication result
+			ass_ip.read(0x28)    //Output20
+		
+		Creating a Driver
+			from pynq import DefaultIP
+			class AddDriver(DefaultIP):
+				def __init__(self, description):
+					super().__init__(description=description)
+				
+				bindto = ['xilinx.com:hls:addmul:1.0'] 
+				//Verify the version in Vivado [Explorer Pane > addmul_hls > solution1 >impl > ip > drivers > addmulv1_0]
+				
+				def add(self, a, b):
+					self.write(0x10, a)
+					self.write(0x18, b)
+					return self.read(0x20)
+					
+				def mul(self, a, b):
+					self.write(0x10, a)
+					self.write(0x18, b)
+					return self.read(0x28)
+			
+			overlay = Overlay('/home/xilinx/jupyter_notebooks/addmul/design_1_addmul.bit')
+			
+			overlay.addmul_0.add(15,20)    //Output:35
+			
+			overlay.addmul_0.mul(15,2)     //Output:30
+	
+	5.2 How to create a Custom Overlay
+	5.3 Creating VDMA Overlay with VIVADO and Notebook
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
