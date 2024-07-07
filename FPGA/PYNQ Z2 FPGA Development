@@ -1135,7 +1135,8 @@ CONTENTS
 
 	/////////////////////////////////
 	5.2 How to create a Custom Overlay
-		
+
+		/////////////////////////////////
 		Creating basic GPIO Overlay (Vivado Design with GPIO Controlling)
 			Download HDL code of Johnson Counter from myhdl.org
 				https://www.myhdl.org/docs/examples/jc2.html
@@ -1428,46 +1429,47 @@ CONTENTS
 					File menu > Export > Export Block Design
 					This will be saved in the local project folder as "..jonson_counter/johnson_counter.tcl" file
 				
-		Connect Board to the PC
-			Enter Jupyter Notebook
-				Create a folder and name this "johnson_counter"
-					Copy Paste design_1_wrapper.bit from ../johnson_counter.runs/impl_1" into this folder and rename as "johnson_counter.bit"
-					Copy Paste design_1.tcl from "../johnson_counter" into this folder and rename as "johnson_counter.tcl"
-					
-				Read up pynq.readthedocs.io/en/v2.1/pynq_libraries/psgpio.html	
-					Navigate to Examples section
-						from pynq import GPIO
-						ps_led = GPIO(GPIO.get_gpio_pin(0), 'out')
-						ps_switch = GPIO(GPIO.get_gpio_pin(1), 'out')
-						ps_led.write(0)
-						ps_switch.read(1)
+			Connect Board to the PC
+				Enter Jupyter Notebook
+					Create a folder and name this "johnson_counter"
+						Copy Paste design_1_wrapper.bit from ../johnson_counter.runs/impl_1" into this folder and rename as "johnson_counter.bit"
+						Copy Paste design_1.tcl from "../johnson_counter" into this folder and rename as "johnson_counter.tcl"
 						
-				Open Python3 Terminal and run the code below
-					from pynq import Overlay
-					ol = Overlay("./johnson_counter.bit")
-					
-					from pynq import GPIO
-					
-					left = GPIO(GPIO.get_gpio_pin(0), 'out')
-					right = GPIO(GPIO.get_gpio_pin(1), 'out')
-					stop = GPIO(GPIO.get_gpio_pin(2), 'out')
-					
-					left.write(1)
-					stop.write(1)
-					
-					//Editing the clock divider 
-					//(Changing the PS clock to the divider instead of changing the clock divider and then rebuilding the design)
-					from pynq import Clocks
-					Clocks.fclk0_mhz = 10                       //This controls the frequency speed
-					print(f'FCLK0: {Clocks.fclk0_mhz:.6f}MHz')  //This will output 10MHz. Change to 1MHz
-					
-					//Testing for other direction
-					right.write(1)
-					stop.write(1)
-					
-				Rename this notebook as johnson_counter.ipynb (File Menu > Rename)
-				Save this notebook file
-			
+					Read up pynq.readthedocs.io/en/v2.1/pynq_libraries/psgpio.html	
+						Navigate to Examples section
+							from pynq import GPIO
+							ps_led = GPIO(GPIO.get_gpio_pin(0), 'out')
+							ps_switch = GPIO(GPIO.get_gpio_pin(1), 'out')
+							ps_led.write(0)
+							ps_switch.read(1)
+							
+					Open Python3 Terminal and run the code below
+						from pynq import Overlay
+						ol = Overlay("./johnson_counter.bit")
+						
+						from pynq import GPIO
+						
+						left = GPIO(GPIO.get_gpio_pin(0), 'out')
+						right = GPIO(GPIO.get_gpio_pin(1), 'out')
+						stop = GPIO(GPIO.get_gpio_pin(2), 'out')
+						
+						left.write(1)
+						stop.write(1)
+						
+						//Editing the clock divider 
+						//(Changing the PS clock to the divider instead of changing the clock divider and then rebuilding the design)
+						from pynq import Clocks
+						Clocks.fclk0_mhz = 10                       //This controls the frequency speed
+						print(f'FCLK0: {Clocks.fclk0_mhz:.6f}MHz')  //This will output 10MHz. Change to 1MHz
+						
+						//Testing for other direction
+						right.write(1)
+						stop.write(1)
+						
+					Rename this notebook as johnson_counter.ipynb (File Menu > Rename)
+					Save this notebook file
+	
+		/////////////////////////////////	
 		Adding IP to PYNQ Overlay Design (Vivado IP Integrator Design)
 			Tutorial: https://www.youtube.com/watch?v=LomArt-hi4M
 			
