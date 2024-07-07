@@ -1140,7 +1140,6 @@ CONTENTS
 			Download HDL code of Johnson Counter from myhdl.org
 				https://www.myhdl.org/docs/examples/jc2.html
 			Also, Verilog code for Clock Divider from AllaboutFPGA
-			Follow Cathal McCabe Tutorial: https://www.youtube.com/watch?v=UBsCNPWudww
 			
 			Create New Project in Vivado
 				Project name: Johnson_counter
