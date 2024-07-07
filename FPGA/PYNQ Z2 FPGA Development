@@ -957,6 +957,7 @@ CONTENTS
 05. Creating Custom Overlay (VIVADO Project) for PYNQ
 	//pynq.readthedocs.io/en/v2.4/overlay_design_methodology/overlay_tutorial.html
 
+	/////////////////////////////////
 	5.1 Custom Overlay: Addition and Multiplication App
 		
 		Components required in th eprocess of creating an overlay
@@ -1131,10 +1132,368 @@ CONTENTS
 			overlay.addmul_0.add(15,20)    //Output:35
 			
 			overlay.addmul_0.mul(15,2)     //Output:30
-	
-	5.2 How to create a Custom Overlay
-	5.3 Creating VDMA Overlay with VIVADO and Notebook
 
+	/////////////////////////////////
+	5.2 How to create a Custom Overlay
+		
+		Creating basic GPIO Overlay (Vivado Design with GPIO Controlling)
+			Download HDL code of Johnson Counter from myhdl.org
+				https://www.myhdl.org/docs/examples/jc2.html
+			Also, Verilog code for Clock Divider from AllaboutFPGA
+			Follow Cathal McCabe Tutorial: https://www.youtube.com/watch?v=UBsCNPWudww
+			
+			Create New Project in Vivado
+				Project name: Johnson_counter
+				Location: c:/johnson_counter
+				Create subdir: Checkbox checked
+				Click on Next
+				
+				Project Type window
+					Check RTL Project checkbox
+					Do not specify sources at this time: checkbox checked
+					Click Next
+					
+				Default Part Windows
+					Select "Boards" Tab
+					Select PYNQ Board
+					Click on Next
+					
+				Click on Finish
+				
+			Flow Navigator Panel > IP Integrator > Create Block Design
+				Create Block Design window
+					Design Name: design_1
+					Directory: <Local to Project>
+					Specify source set: Design Sources
+					Click OK
+					
+			Block Design Panel > Diagram window	
+				Click on "+" on "This design is empty. Press the + button"
+				Search for "zynq7 processing system" and press enter
+				A block will appear.
+				Click on "Run Block Automation"
+				Run Block Automation Window
+					Make sure check boxes on the left panel are checked
+					Options:
+						Make Internal External: FIXED_IO, DDR
+						Apply Board Preset: Checkbox checked
+						Cross Trigger In: Disable
+						Cross Trigger Out: Disable
+						Click on OK
+			
+			Go to MyHDL.org and copy a snippet from Johnson Counter. Link above.
+				module jc2 (
+					goLeft,
+					goRight,
+					stop,
+					clk,
+					q
+				);
+				// A bi-directional 4-bit Johnson counter with stop control.
+				// 
+				// I/O pins:
+				// --------
+				// clk      : input free-running slow clock 
+				// goLeft   : input signal to shift left (active-low switch)
+				// goRight    : input signal to shift right (active-low switch)
+				// stop     : input signal to stop counting (active-low switch)
+				// q        : 4-bit counter output (active-low LEDs; q[0] is right-most)
+
+				input goLeft;
+				input goRight;
+				input stop;
+				input clk;
+				output [3:0] q;
+				reg [3:0] q;
+
+				reg [0:0] dir;
+				reg run;
+
+
+
+				always @(posedge clk) begin: JC2_LOGIC
+					if ((goRight == 0)) begin
+						dir <= 1'b0;
+						run <= 1'b1;
+					end
+					else if ((goLeft == 0)) begin
+						dir <= 1'b1;
+						run <= 1'b1;
+					end
+					if ((stop == 0)) begin
+						run <= 1'b0;
+					end
+					if (run) begin
+						if ((dir == 1'b1)) begin
+							q[4-1:1] <= q[3-1:0];
+							q[0] <= (!q[3]);
+						end
+						else begin
+							q[3-1:0] <= q[4-1:1];
+							q[3] <= (!q[0]);
+						end
+					end
+				end
+
+				endmodule
+			
+			In Flow Navigator, click on "IP Integrator" to open Block Design window 
+				Block Design window 
+					Open Sources Tab and right click to select "Add sources"
+					Add Sources Window
+						Select Add or create design sources
+						Click on Next
+						
+						Add or create Design sources window
+							Click on "Create File"
+							
+							Create Source File window
+								File Type: Verilog
+								File name: johnson_counter
+								File location: <Local to Project>
+								Click on OK
+								
+							Click on Finish	
+						
+						Define Module wnidow will appear
+							Module name: johnson_counter
+							I/O Port Definitions: Leave blank
+							Click OK and save.
+							
+					johnson_counter.v will appear under Design Sources directory in the Sources tab
+						Double click to open it
+						Paste the copied code into this space and save file
+						
+					Open Diagram tab
+						Drag and drop "jc2(johnson_counter.v)" from Sources tab
+						Right click on "q[3:0]" node and select "make external"
+						A node will appear "q_0[3:0]"
+						Click on this external node "q_0[3:0]" and navigate to "External Port Properties" panel on the left
+							Name: leds
+							Direction: Output
+							From: 3 To: 0
+							Net: jc2_0_q
+							
+						Double click on Zynq7 Processing System Block
+							ZYNQ7 Processing System Window
+								Page Navigator > MIO Configuration > IO Peripherals > GPIO
+									Check EMIO GPIO (Width)
+									Click on OK
+						
+				Clockrate, visit https://allaboutfpga.com/vhdl-code-for-clock-divider/		
+				Copy VHDL Code for Clock Divider
+					library IEEE;
+					use IEEE.STD_LOGIC_1164.ALL;
+					use IEEE.numeric_std.ALL;
+					  
+					entity Clock_Divider is
+					port ( clk,reset: in std_logic;
+					clock_out: out std_logic);
+					end Clock_Divider;
+					  
+					architecture bhv of Clock_Divider is
+					  
+					signal count: integer:=1;
+					signal tmp : std_logic := '0';
+					  
+					begin
+					  
+					process(clk,reset)
+					begin
+					if(reset='0') then  
+					count<=1;
+					tmp<='0';
+					elsif(clk'event and clk='1') then
+					count <=count+1;
+					if (count = 25000) then
+					tmp <= NOT tmp;
+					count <= 1;
+					end if;
+					end if;
+					clock_out <= tmp;
+					end process;
+					  
+					end bhv;
+					
+				Back in Vivado > IP Integrator > Block Design 
+					Open "Sources" tab
+					Right click and click on "Add sources"
+					Click on "Add or create design sources" and click Next
+					Click on Create File
+						File type: VHDL
+						File name: clock_divider
+						File Location: <Local to Project>
+						Click OK
+						Click on Finish
+						
+					Define Module Window
+						Entity name: clock_divider
+						Architecture: Behavioral
+						Leave IO Port Definition blank
+						Click OK and use values
+						clock_divider.vhd will appear in the Design sources directory
+						Open "clock_divider.vhd" text editor
+						Paste clock divider VHDL code from above and save. 
+						The file "clock_divider(Behavioral)(clock_divider.vhd)" will be automatically renamed to "Clock_Divider(bhv)(clock_divider.vhd)"
+					
+					Open Diagram Tab						
+						Drag and drop "Clock_Divider(bhv)(clock_divider.vhd)" into Block Diagram panel
+						Link up "processing_system7_0 > FCLK_CLK0" to "Clock_Divider_0 > clk"
+						Link up "processing_system7_0 > FCLK_RESET0_N" to "Clock_Divider_0 > reset"
+						Link up "Clock_Divider_0 > clock_out" to "jc2_0 > clk"
+						Expand "processing_system7_0 > GPIO_0"
+						Add IP to the block diagram and search for "Slice". This is to select specific GPIO wire from the 64bit bundle
+						Link "xlslice_0 > Din[31:0]" to "processing_system7_0 > GPIO_0 > GPIO_O[63:0]"
+						Click on "xlslice_0" block and under Block Properties panel, rename to "left"
+						Duplicate this block and rename to "right"
+						Duplicate again and rename this block as "stop"
+						Jump the "right > Din[31:0]", "stop > Din[31:0]", and "left > Din[31:0]" together
+						Link "right > Dout[0:0]" to "jc2_0 > goRight"
+						Link "stop > Dout[0:0]" to "jc2_0 > stop"
+						Link "left > Dout[0:0]" to "jc2_0 > goLeft"
+						Double click on "left" block and Re-customize window will pop up
+							Din Width: 32
+							Din From: 0     //left will be controlled by GPIO 0
+							Din Down To: 0
+							Dout Width: 1
+						Double click on "right" block and Re-customize window will pop up
+							Din Width: 32
+							Din From: 1     //right will be controlled by GPIO 1
+							Din Down To: 1
+							Dout Width: 1
+						Double click on "stop" block and Re-customize window will pop up
+							Din Width: 32
+							Din From: 2     //stop will be controlled by GPIO 2
+							Din Down To: 2
+							Dout Width: 1
+						Double click on "processing_system7_0" block and Re-customize window will pop up
+							PS-PL Configuration Tab
+								Expand AXI Non Secure Enablement > GP Master AXI Interface
+									Uncheck box for "M AXI GP0 interface"
+									Click on OK
+						Click on "Validate design"	
+					
+					Right click on "design_1" under Sources > Design Sources
+						Select "Create HDL wrapper"
+							Choose "Let Vivado manage wrapper and auto-update"
+							Click OK and ignore warnings
+								Warnings are because not all GPIOs are connected
+								
+					Right click on "Sources Tab > Design Sources > design_1_wrapper" and select "Set as top"
+					
+			Back in Vivado, Flow Navigator > Synthesis
+				Click on "Run Synthesis"
+				Synthesis Completed window
+					Select "Open Synthesized Design
+					Click OK
+			
+			If Synthesized Design Panel does not show the checkered Package screen, activate the I/O Planning
+				Top menu bar > Layout > I/O Planning
+			
+			Download "Master XDC file" from Pynq website and open the xdc file in Notepad++
+				Search for "LEDs" and you'll find a list of codes under this header*
+					#set_property -dict { PACKAGE_PIN R14   IOSTANDARD LVCMOS33 } [get_ports { led[0] }]; #IO_L6N_T0_VREF_34 Sch=led[0]
+					#set_property -dict { PACKAGE_PIN P14   IOSTANDARD LVCMOS33 } [get_ports { led[1] }]; #IO_L6P_T0_34 Sch=led[1]
+					#set_property -dict { PACKAGE_PIN N16   IOSTANDARD LVCMOS33 } [get_ports { led[2] }]; #IO_L21N_T3_DQS_AD14N_35 Sch=led[2]
+					#set_property -dict { PACKAGE_PIN M14   IOSTANDARD LVCMOS33 } [get_ports { led[3] }]; #IO_L23P_T3_35 Sch=led[3]
+				
+			Synthesized Design Panel
+				Bottom Panel > I/O Ports Tab
+					Expand "leds" and expand "Package Pin" column and key in the numbers that follows Master XDC file above
+						leds[0]: R14
+						leds[1]: P14
+						leds[2]: N16
+						leds[3]: M14
+				Save file and "Save Constraints" window will appear
+					File Type: XDC
+					File name: pin_constraints
+					File Location: <Local to Project>
+					
+				Open Sources tab and navigate to Constraints > pin_constraints.xdc
+					Double click to open text editor
+					You'll see only Pin numbers are set. IO standards must also be set [IOSTANDARD LVCMOS33]
+					
+				Open I/O Ports tab
+					In "I/O Std" column, "leds(4)" row, set "I/O std" to "LVCMOS33"
+					Save project
+					Go to Flow Navigator > Constraints > pin_constraints.xdc and click on "Reload"
+					
+			Navigate to Flow Navigator > Program and Debug
+				Click on "Generate Bitstream"
+				In Synthesized Design panel, "Synthesized Design is out of date" will appear. 
+				Click on "Close Design"
+				Bitstream Generation Completed window will pop up. Click on Cancel
+				
+			Export file
+				Open up "Flow Navigator > IP Integrator > Block Design" Panel
+					File menu > Export > Export Block Design
+					This will be saved in the local project folder as "..jonson_counter/johnson_counter.tcl" file
+				
+		Connect Board to the PC
+			Enter Jupyter Notebook
+				Create a folder and name this "johnson_counter"
+					Copy Paste design_1_wrapper.bit from ../johnson_counter.runs/impl_1" into this folder and rename as "johnson_counter.bit"
+					Copy Paste design_1.tcl from "../johnson_counter" into this folder and rename as "johnson_counter.tcl"
+					
+				Read up pynq.readthedocs.io/en/v2.1/pynq_libraries/psgpio.html	
+					Navigate to Examples section
+						from pynq import GPIO
+						ps_led = GPIO(GPIO.get_gpio_pin(0), 'out')
+						ps_switch = GPIO(GPIO.get_gpio_pin(1), 'out')
+						ps_led.write(0)
+						ps_switch.read(1)
+						
+				Open Python3 Terminal and run the code below
+					from pynq import Overlay
+					ol = Overlay("./johnson_counter.bit")
+					
+					from pynq import GPIO
+					
+					left = GPIO(GPIO.get_gpio_pin(0), 'out')
+					right = GPIO(GPIO.get_gpio_pin(1), 'out')
+					stop = GPIO(GPIO.get_gpio_pin(2), 'out')
+					
+					left.write(1)
+					stop.write(1)
+					
+					//Editing the clock divider 
+					//(Changing the PS clock to the divider instead of changing the clock divider and then rebuilding the design)
+					from pynq import Clocks
+					Clocks.fclk0_mhz = 10                       //This controls the frequency speed
+					print(f'FCLK0: {Clocks.fclk0_mhz:.6f}MHz')  //This will output 10MHz. Change to 1MHz
+					
+					//Testing for other direction
+					right.write(1)
+					stop.write(1)
+					
+				Rename this notebook as johnson_counter.ipynb (File Menu > Rename)
+				Save this notebook file
+			
+		Adding IP to PYNQ Overlay Design (Vivado IP Integrator Design)
+			Tutorial: https://www.youtube.com/watch?v=LomArt-hi4M
+			
+		How to Accelerate (Run Program on Programmable Logic Hardware) a Python Function with PYNQ 
+			Tutorial: https://www.youtube.com/watch?v=PwG037LuNvA
+			IP File: https://www.fpgadeveloper.com/2018/03/how-to-accelerate-a-python-function-with-pynq.html/
+			
+		Other PYNQ FPGA Projects
+			Main PYNQ Repository: https://github.com/Xilinx/PYNQ
+			Xilinx PYNQ Networking: https://github.com/Xilinx/PYNQ-Networking
+			Xilinx PYNQ Quantized Neural Network: https://github.com/Xilinx/QNN-MO-PYNQ
+			Xilinx PYNQ Binary Neural Networks: https://github.com/Xilinx/BNN-PYNQ
+			Xilinx PYNQ Computer Vision: https://github.com/Xilinx/PYNQ-ComputerVision
+			Xilinx PYNQ Deep Learning: https://github.com/Xilinx/PYNQ-DL
+			Xilinx PYNQ Bot: https://github.com/Xilinx/PYNQ-BOT
+			Hillhao's PYNQ Neural Networks: https://github.com/hillhao/PYNQ-project
+			Awai54st's PYNQ Convolution Neural Networks: https://github.com/awai54st/PYNQ-Classification
+
+	/////////////////////////////////
+	5.3 Creating VDMA Overlay with VIVADO and Notebook (AXI Video Direct Memory Access)
+		
+		Usually used in applications with video pipelines
+		Video pipelines includes video source, HDMI input, Filters, controllers, compressions, memories, etc
+		https://www.youtube.com/watch?v=XAzu3_bqzqM
+		https://xilinx.com/support/documentation/ip_documentation/axi_vdma/v6_2/pg020_axi_vdma.pdf
 
 
 
