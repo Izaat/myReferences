@@ -1800,6 +1800,65 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////
 07. Tensorflow Installation on PYNQ FPGA 
 
+	1.Download the PYNQ OS from Pynq.io: 
+		Pynq_Z1_Image_2016_09_14 , consists of Python2.7. 
+		Update the Python into Python3.4 for installation of tensorflow.
+
+	2.Connect the PYNQ OS to the Router and goto browser and enter: http://pynq:9090
+
+		a. Login and Password both are: xilinx
+		b. You do not need to login on Pynq for now, so let’s Log Out on it.
+
+	3.Connect PYNQ Board with USB cable to PC.
+
+		a. Run the Serial Terminal Program: Tera Term or Putty
+		b. Goto Serial, Select the COM Port [Tera Term automatically identifies the COM Port but Putty needs to be entered manually; 
+			for COM port number, check the Device Manager].
+		c. Baud rate is: 115200, and then Enter
+
+	4.Updating:
+		$sudo apt-get update
+
+	5.For installation of Python
+	
+		a.Check the Python installation:
+			Enter, $python on your terminal. //This will show the version of python on your Pynq OS. 
+			Now do exit(); and enter.
+	
+		b.For Python 2.7
+			$sudo apt-get install python-pip python-dev
+
+		c.For Python 3.3+
+			$sudo apt-get install python3-pip python3-dev
+
+		If your python version updated to Python3.4 then you do not need to follow Step d below.
+			But this install option will not install the required python [There will be errors for not getting the download location]. 
+			So instead, install Python3.4 manually.
+
+		d.Python 3.4 Installation on PYNQ
+			a. $wget https://www.python.org/ftp/python/3.4.0/Python-3.4.0.tar.xz
+			b. $tar -xf Python-3.4.0.tar.xz
+			c. $cd Python-3.4.0
+			d. $./configure
+			e. $sudo make install
+
+			Installing the Python3.4.0 will take some time, 30 min or more.
+
+			f.Key in:
+				$wget https://github.com/samjabrahams/tensorflow-on-raspberry-pi/releases/download/v1.1.0/tensorflow-1.1.0-cp34-cp34m-linux_armv7l.whl
+
+			g.Key in:
+				$sudo pip3 install tensorflow-1.1.0-cp34-cp34m-linux_armv7l.whl
+
+			h.Installation completes message will appear [maximum 10-20 minutes or earlier].
+			i.Go to browser, enter  http://pynq:9090, password is: xilinx
+			j.Create New python 3 File from New [right hand side].
+			k.Write this down and check the output
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+08. Machine Learning with Xilinx Deep Learning (DPU) IP on PYNQ 
+
+
 
 
 
