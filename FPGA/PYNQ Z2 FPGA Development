@@ -1471,7 +1471,119 @@ CONTENTS
 	
 		/////////////////////////////////	
 		Adding IP to PYNQ Overlay Design (Vivado IP Integrator Design)
-			Tutorial: https://www.youtube.com/watch?v=LomArt-hi4M
+			
+			Download
+				Download Zip file from https://www.github.com/Xilinx/PYNQ
+				Extract files and navigate to ../PYNQ-master/boards/Pynq-Z2/base/
+					Open base.tcl with Notepad++
+					Add the lines below to the bottom of the file [Below create_root_design]
+						# Additional steps to get to bitstream
+						# Add top wrapper and xdc files
+						add_files -norecurse ./vivado/top.v
+						update_compile_order -fileset sources_1
+						set_property top top [current_fileset]
+						update_compile_order -fileset sources_1
+						add_files -fileset constrs_1 -norecurse ./vivado/constraints/top.xdc
+
+						# Call implement
+						launch_runs impl_1 -to_step write_bitstream -jobs 4
+						wait_on_run impl_1
+
+						# This hardware definition file will be used for microblaze projects
+						file mkdir ./base/base.sdk
+						write_hwdef -force  -file ./base/base.sdk/base.hdf
+						file copy -force ./base/base.sdk/base.hdf .
+
+						# Move and rename bitstream to final location
+						file copy -force ./base/base.runs/impl_1/top.bit base.bit
+						
+					Comment out the "launch_runs impl_1 -to_step write_bitstream -jobs 4" code to avoid rebuilding bitstream
+					Save this tcl file
+					
+			Open Vivado
+				In Tcl Console, key in:
+					cd {C:\PYNQ-master\boards\PYNQ-Z2\base}  //Make sure no spacing in the path or there will be an error
+					source ./build_ip.tcl
+					source ./base.tcl
+				Ignore comment "Run 'impl_1' is not active. Its caused by the line commented out earlier
+				
+			Editing the Block Diagram
+				A diagram window with interconnected blocks will appear 
+				Enlarge this window and zoom in to "axi_mem_intercon"
+				Remove anything that is not needed. Also make sure to tidy up unconnected ports to "axi_mem_intercon"
+					Removing block "trace_analyzer_pmoda"
+						Select "axi_mem_intercon" and open Re-customize IP window
+							Component Name: axi_mem_intercon
+							Number of Slave Interface: 1
+							Number of Master Interface: 1
+							Interconnect Optimization Strategy: Custom
+							Enable Adv Config Options: Unchecked
+							Click OK
+						Notice that the second S01_AXI is removed from "trace_analyzer_arduino > M_AXI" leaving only one S00_AXI
+						Reconnect "trace_analyzer_arduino > M_AXI" to "axi_mem_intercon > S00_AXI"
+					Removing everything except for 	block "ps7_0"
+						Select all but deselect ps7_0 and the links (DDR, FIXED_IO, and IIC_0)
+						Hit Delete
+							Confirm Delete Window
+								System Nets: Checked
+								Sub-blocks: Checked
+								Interface Connections: Checked
+								Blocks: Checked
+								External Interfaces: Checked
+								External Ports: Checked
+								Click OK
+						Tidy up ports
+							Remove Slave Ports
+								Open Zynq Processing System Window
+									Navigate to Page Navigator > PS-PL Configuration
+										Navigate to AXI Non Secure Enablement > GP Master AXI Interface 
+											M AXI GP0 interface: Checked
+											M AXI GP1 Interface: Unchecked
+										Navigate to GP Slave AXI Interface 
+											S AXI GP0 interface: Unchecked
+											S AXI GP1 Interface: Unchecked
+										Navigate to HP Slave AXI Interface 
+											S AXI HP0 interface: Unchecked
+											S AXI HP1 Interface: Unchecked
+											S AXI HP2 interface: Unchecked
+											S AXI HP3 Interface: Unchecked
+										Click OK
+							Remove unused clocks		
+								Highlight all 3 clocks (FCLK_CLK1, FCLK_CLK2, FCLK_CLK3)
+								Open Zynq Processing System Window
+									Navigate to Page Navigator > Clock Configuration
+										Basic Clocking Tab
+											Input Frequency(MHz): 50
+											CPU Clock Ration: 6:2:1
+											
+											PL Fabric Clocks >
+												FCLK_CLK0: Checked
+												FCLK_CLK1: Unchecked
+												FCLK_CLK2: Unchecked
+												FCLK_CLK3: Unchecked
+									Click OK
+							Remove unused Memory
+								Open Zynq Processing System Window
+									Navigate to Page Navigator > MIO Configuration
+										I/O Peripherals > GPIO
+											GPIO MIO: Unchecked
+											EMIO GPIO(Width): Unchecked
+											ENET Reset: Unchecked
+											USB Reset: Unchecked
+											I2C Reset: Unchecked
+											Click OK
+							Add Block "+"
+								Search for AXI Quad SPI and click on Enter
+								Click on "Run Connection Automation"
+								Run Connection Automation Window
+									Tick the checkbox on "All Automation"
+									Click on AXI_LITE
+										Master: /ps7_0/M_AXI_GP0
+										Interconnect IP: New AXI Interconnect
+										Crossbar clock source of Interconnect IP: Auto
+										Clock source for Master interface: Auto
+										Clock source for Slave interface: Auto
+									Click OK
 			
 		How to Accelerate (Run Program on Programmable Logic Hardware) a Python Function with PYNQ 
 			Tutorial: https://www.youtube.com/watch?v=PwG037LuNvA
@@ -1495,6 +1607,211 @@ CONTENTS
 		Video pipelines includes video source, HDMI input, Filters, controllers, compressions, memories, etc
 		https://www.youtube.com/watch?v=XAzu3_bqzqM
 		https://xilinx.com/support/documentation/ip_documentation/axi_vdma/v6_2/pg020_axi_vdma.pdf
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+06. Creating Custom Python Function Accelerator on PYNQ with VIVADO tool
+	github.com/Xilinx/PYNQ-HelloWorld
+
+	6.1 Accelerate Custom Image Processing Function
+		
+		In Vivado, create new Project
+			Project Name: project_resizer
+			Project Location: C:/../resizer_pynq_overlay
+			Create project subdirectory: Checkbox ticked
+			Click Next
+			
+			Project Type Window
+				Select "RTL Project"
+				Do not specify sources at this time: Checkbox ticked
+				Click Next
+			
+			Default Part window
+				Select Boards Tab
+					Select Pynq-Z2
+					Click Next
+					
+			New Project Summary
+				Click Finish
+
+
+		Settings
+			Flow Manager > Project Manager > Settings
+				Settings Window	
+					Project Settings > IP > Repository
+						Click on "+"
+						Select the "ip" folder that contains "hls" folder and "resize_1.0" folder
+							Refer to the downloaded "resizer_hardware_accelerator" folder
+						Click Next
+						Add Repository window will pop up
+							Expand ">IPs" and you will see "resize_accel"
+							Click OK
+						Click Apply and the OK
+
+				Bottom Panel
+					Open Tcl Console
+						Key in: source C:/../../resizer_pynq_overlay/resizer.tcl
+						Press Enter
+						
+				Interconnected block diagram will appear in the IP Integrator> Block Design > Diagram Tab
+
+		HDL Wrapper
+			Flow Manager > IP Integrator
+				Block Design Window > Sources Tab
+					Right click on Design Sources > resizer (resizer.bd)
+					Click on "Create HDL Wrapper"
+
+					Create HDL Wrapper Window
+						Select "Let Vivado manage wrapper and auto update"
+						Click OK
+						"Design Sources > resizer (resizer.bd)" will change to "Design Sources > resizer_wrapper (resizer_wrapper.v)"
+						
+						
+		Generate Bitstream (Automatic Synthesis and Implementation)
+			Flow Manager > IP Integrator
+				Block Design Window > Sources Tab
+					Highlight "Design Sources > resizer_wrapper (resizer_wrapper.v)"
+					Click on Flow Manager > Program and Debug > Generate Bitstream
+						No implementation Results Available window will appear. 
+							Click on Yes
+						Launch Runs Window will appear
+							Launch Directory: <Default Launch Directory>
+							Options
+								Launch Runs on Local Host: Selected
+								Number of jobs: 4
+								Generate scripts only: Not selected
+							Click OK
+						When completed, "Bitstream Generation Completed" window appears
+							Click on Cancel
+				To watch the current status of Synthesis to see if it has completed
+					IP Integrator > Block Design > Bottom Panel > Design Runs Tab
+				
+		Export Hardware
+			Main Menu > File > Export > Export Hardware
+				Export Hardware Window
+					Include Bitstream: Checkbox ticked
+					Export to: <Local to Project>
+					Click OK
+
+		Export Bitstream File
+			Main Menu > File > Export > Export Bitstream File
+				Export Bitstream File Window
+					Select "project_resizer" folder
+					Save file as resizer_accel.bit
+
+		Export Block Design
+			Main Menu > File > Export > Export Block Design
+				Export Block Design Window
+					Tcl file: C:/../resizer_pynq_overlay/project_resizer/resizer_accel.tcl
+					Automatically create top design: Checkbox ticked
+					Click OK
+
+		Preparing files to upload to Pynq Z2 Board
+			In Windows Explorer, navigate to C:/../resizer_pynq_overlay/project_resizer/
+				Duplicate and Rename "resizer_accel.bit" to "resizer.bit"
+				Duplicate and Rename "resizer_accel.tcl" to "resizer.tcl"
+
+		Upload files to Pynq Z2 Board
+			pynq.readthedocs.io/en/v2.5/pynq_libraries/dma.html  //For send and receive
+			Jupyter
+				Create a folder and name this "resizer_accelerator"
+					Upload tesla.jpg, resizer.bit, resizer.tcl
+				Create a notebook Project
+					Accelerating the Resizing Function on Software and Hardware
+						import numpy as np
+						import pandas as pd
+						import matplotlib.pyplot as plt
+						from PIL import Image
+						import cv2
+						
+						image_path = "./tesla.jpg"
+						original_image = cv2.imread(image_path)
+						# plt.imshow(original_image)
+						
+						# showing RGB image using PIL Image function while it can also be showed eith CV2 function
+						img_show=Image.open("./tesla.jpg")
+						img_show
+						
+					Software Acceleration Section	
+						import time
+						print('Software Resize')
+						start_time = time.time()
+						# Main resizing function running on Software-ARM CPU
+						img_lp_sw = cv2.resize(original_image, (150, 75))
+						stop_time = time.time()
+						sw_exec_time = stop_time - start_time
+						print('Software Resize execution time: ', sw_exec_time)
+						
+						plt.imshow(img_lp_sw)
+
+					Hardware accelerated Resizing
+						# Importing the hardware accelerator library
+						
+						from pynq import Xlnk, Overlay
+						
+						# loading Bitstream from same directory as this notebook is
+						resize_design = Overlay("resizer.bit")
+						
+						# Printing the Overlay details
+						resize_design?  
+						
+						dma = resize_design.axi_dma_0
+						resizer = resize_design.resize_accel_0
+						
+						# Allocating memory space using the CMA array for our "tesla.jpg" input image. 3 channels, 1133x1700
+						# The output buffer will be going to hold the resized image of 75x150
+						xlnk = Xlnk()
+						in_buffer = xlnk.cma_array(shape=(1133, 1700, 3), dtype=np.uint8, cacheable=1)
+						out_buffer = xlnk.cma_array(shape=(75, 150, 3), dtype=np.uint8, cacheable=1)
+						
+						in_buffer[:] = np.array(original_image)
+						
+						
+						
+						#resizer.write(0x10, old_height)
+						#resizer.write(0x18, old_width)
+						#resizer.write(0x20, new_height)
+						#resizer.write(0x28, new_height)
+						
+						resizer.write(0x10, 1133)
+						resizer.write(0x18, 1700)
+						resizer.write(0x20, 75)
+						resizer.write(0x28, 150)
+						
+						import time
+						print('Hardware Resize')
+						start_time = time.time()
+						# Main resizing function running on hardware accelerator-PL 
+						dma.sendchannel.transfer(in_buffer)
+						dma.recvchannel.transfer(out_buffer)
+						
+						resizer.write(0x00, 0x81) #start
+						
+						dma.sendchannel.wait()
+						dma.recvchannel.wait()
+						
+						stop_time = time.time()
+						hw_exec_time = stop_time - start_time
+						print('Hardware Resize execution time: ', hw_exec_time)
+						
+						img_lp_hw = Image.fromarray(out_buffer)
+						plt.imshow(img_lp_hw)
+						
+						
+//////////////////////////////////////////////////////////////////////////////////////////////////
+07. Tensorflow Installation on PYNQ FPGA 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
