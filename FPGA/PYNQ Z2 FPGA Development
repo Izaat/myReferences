@@ -33,9 +33,7 @@ CONTENTS
 	06. Creating Custom Python Function Accelerator on PYNQ with VIVADO tool
 			6.1 Accelerate Custom Image Processing Function
 	07. Tensorflow Installation on PYNQ FPGA 
-	08. Machine Learning with Xilinx Deep Learning (DPU) IP on PYNQ 
-			8.1 DPU on PYNQ Boards: Ultra96/ZCU104/ZCU111
-	09. Blinking LED with Vivado + Vitis
+	08. Blinking LED with Vivado + Vitis
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////
 01. Introduction
@@ -1856,10 +1854,7 @@ CONTENTS
 			k.Write this down and check the output
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-08. Machine Learning with Xilinx Deep Learning (DPU) IP on PYNQ 
-
-	/////////////////////////////////
-	8.1 DPU on PYNQ Boards: Ultra96/ZCU104/ZCU111
+08. Blinking LED with Vivado + Vitis
 
 
 
