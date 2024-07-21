@@ -1,0 +1,320 @@
+Verilog Basics
+//////////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+	01. Introduction
+	02. Level of Abstraction
+	03. Modules and Instantiation
+	04. Simulation, Synthesis and Design Methodology
+	05. Data Types
+	06. Net Data Types
+	07. Reg Data Types
+	08. Vectors, Arrays, Memories, Parameters and Strings
+	09. Operators
+	10. Examples
+	11. Gate Level Modeling
+	12. Behavioral Modeling
+	14. Compiler Directive and System Tasks
+	15. Task and Functions
+	16. Test Bench Writing
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+01. Introduction
+	
+	Concurrency [Executed simultaneosly]
+		Verilog and VHDL are concurrence languages
+		C-Type languages are all sequential languages
+		Python is not a C-Type Language, but is still is sequential
+	Notion of Time
+		HDLs includes notion of time
+		Normal languages like C and Python do not have notion of time	
+		
+	C-Type Languages
+		PHP, C, C++, Javascript, Dart, Swift, R
+	Verilog
+		Weakly Typed
+		IEEE 1364-2001
+		File Extension as *.v
+		Describes the structure and behavior of electronic circuits
+		Syntax is similar to C
+		Case sensitive
+		Simple Data-types
+	VHDL
+		Strongly typed and deterministic
+			The code is longer compared to verilog
+		File Extension as *.vhd
+		Model the behavior and structure of digital systems at multiple abstraction levels
+		Syntax based on Pascal and Ada
+		Not case sensitive
+		Complex data types
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+02. Level of Abstraction
+
+	Four Levels of Abstraction
+		Switch Level (Switching)
+		Gate Level (Logic Gates Interconnection)
+		Data Flow Level (Based on Equations)
+		Behavioral Level (Based on Behavior of the Circuit)
+
+	Switch Level
+		Module Implemented in terms of switches
+		Syntax: mos_name instance_name (output, data, control)
+		Example:
+			NMOS and PMOS are used as switches
+			
+			=======================
+			module inverter(Q,A)
+				input A;
+				output Q;
+				supply1 vdd;
+				supplt0 vss;
+				
+				pmos p(Q,vdd,A);
+				nmos n(Q,vss,A);
+			endmodule
+			=======================
+			
+			|  Vdd--------------+-----------
+			|                   |
+			|                |  |
+			|              | +--+
+			|         +---0| |      pmos
+			|         |    | +--+
+			|         |      |  |
+			|  A -----+         +------ Q
+			|         |      |  |
+			|         |    | +--+
+			|         +----| |      nmos
+			|              | +--+
+			|                |  |
+			|                   |
+			|  Vss--------------+-----------
+			|
+			| Notice the 2 MOSFETs
+			
+	Gate Level
+		Syntax: Primitive_name instance_name(output, inputs)
+		Example:
+			
+			=====================
+			1. and G1(out, A, B);
+			|           ____
+			|    A-----|    \
+			|          |     |----- out
+			|    B-----|____/
+			|
+			=====================
+			
+			=====================
+			2. nand G2(Y, A, B);
+			|           ____
+			|    A-----|    \
+			|          |     |O---- Y
+			|    B-----|____/
+			|
+			=====================
+
+			=====================
+			3. or G3(out, A, B);
+			|           ___
+			|    A-----\   \
+			|           \   \----out 
+			|           /   /
+			|    B-----/___/
+			|
+			=====================
+
+	Data Flow Level
+		Register Transfer Level
+		Module is designed by specifying data flow
+		Signals are assigned by data manipulating equations
+		Design is implemented using continuous assignments
+		All assignments are concurent in nature
+		
+		Example:
+			=====================
+			"assign" keyword is used as variable for this example
+			
+			assign z = x & y;    //And
+			assign p = q | r;    //Or
+			assign z = ~y;       //Or
+			
+	Behavioral Level
+		The highest level of abstraction provided by HDLs
+		Describes the system by its behavior
+		Elements like function, task and blocks can be used
+		Two important constructs:
+			Initial
+			Always
+		Example:
+			=====================
+			(2*1 mux)
+			
+			always@(i0, i1, sel)
+			begin
+				if(sel)
+					out = i1;
+				else
+					out = i0;
+			end
+			=====================
+		
+//////////////////////////////////////////////////////////////////////////////////////////////////
+03. Modules and Instantiation
+
+	Modules
+		Basic building block in Verilog
+		Can be an element or a collection of lower level design blocks
+		Provides required functionality to the higher level block through its port interface but hide internal implementation
+		Provides flexibility to the designer to modify the module internals without affecting the rest of the design
+		
+		Verilog Framework
+		=============================
+		module module_name (x,y,z);
+			input x,y;
+			output z;
+			statements;
+			............;
+			............;
+		endmodule
+		=============================
+	
+	Instantiation
+		Allows the creation of hierarchy in Verilog description
+		A process of creating object from a module template and the objects are called instances
+		In Verilog, nesting is illegal
+		One module definition cannot contain another module definition
+		However, copies of other module can be incorporated by instantiating them
+
+
+		Example: 4*1 mux using 2*1 mux
+		=============================
+		|
+		|
+		|               |\
+		|      i0 ----> | \  2x1
+		|               |  | mux
+		|               |  |--------+
+		|               |  |        |
+		|      i1 ----> | /         |    |\
+		|               |/ |     x1 +--->| \  2x1
+		|                  |             |  | mux
+		|                  |             |  |----> out
+		|  +-------->------+     x2 +--->|  |
+		|  |                        |    | /
+		|  |            |\          |    |/ |
+		|  |   i2 ----> | \  2x1    |       |
+		|  |            |  | mux    |      /|\
+		|  |            |  |--------+       |
+		|  |            |  |                |
+		|  |   i3 ----> | /                 |
+		|  |            |/ |                |
+		|  |               |                |
+		|  +-------<-------+                |
+		|                  |                |
+		|                 /|\               |
+		|                  |                |
+		|                  |                |
+		|                  s1               s0
+		|
+		|
+		=============================
+		
+		Code
+		=============================
+		//2*1 mux
+		module mux_2to1 (i0,i1,sel,out);
+			input i0,i1,sel;
+			output out;
+			always@(i0,i1,sel)
+			begin
+				if(sel)
+					out = i1;
+				else
+					out = i0;
+			end
+		endmodule
+		
+		//4*1 mux
+		module mux_4to1 (i0, i1, i2, i3, s1, s0, out);
+			input i0, i1, i2, i3, s1, s0;
+			output out;
+			wire x1, x2;
+			
+			mux_2to1 m1 (i0, i1, s1, x1);
+			mux_2to1 m2 (i2, i3, s1, x2);
+			mux_2to1 m3 (x1, x2, s0, out);
+		endmodule
+		=============================
+			
+
+	Verilog Keywords
+		Case sensitive
+		$, underscore, alphanumeric characters can be used
+		
+		Examples:
+			Correct format:
+				new_block
+				new_block1
+				new_block$
+			Incorrect format:
+				1new_block
+				$new_block
+				1_new_block
+
+	Comments similar to C++
+		Single line comments: --> //
+		Multiple line comments --> /* example */
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+04. Simulation, Synthesis and Design Methodology
+
+	Simulation
+		Used for verifying the functionality of the digital design that is modeled using HDL like Verilog
+		In simulation, apply different input stimulus to the design at different timing to check the RTL code behaves as intended.
+
+		| 
+		|          +-----------------+
+		| Verilog  |                 |
+		| Module ->|                 |
+		|          |   Simulation    |--> Evaluation
+		| Test     |                 |     Result
+		| Bench -->|                 |
+		|          +-----------------+
+		|
+		
+	Synthesis
+		A process where the design is modeled using HDL is translated into an implementation consisting of logic gates
+		It makes an optimal design based on the working strategy
+		It gives the consumption of resources as available
+		
+		| 
+		|          +-----------------+
+		|          |                 |
+		| Verilog  |                 |--> ASIC
+		| Module-->|    Synthesis    |
+		|          |                 |--> FPGA
+		|          |                 |
+		|          +-----------------+
+		|
+
+	Design Methodologies
+		Top Down
+			Define the top level block and identify the sub blocks necessary to build the top level blocks
+			Sub Blocks are further subdivided until it cannot be subdivided further (Leaf cells)
+			Looks similar to organisation chart
+		
+		Bottom Up
+			Identify the building blocks that are available (Leaf cells)
+			Combine these building blocks to build the bigger blocks
+			These cells are then used for higher level blocks
+			Continue until top-level block is established
+			Instead of starting from top level block, this method starts from leaf cells
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+05. Data Types
+
+
