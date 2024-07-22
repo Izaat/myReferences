@@ -317,4 +317,107 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////
 05. Data Types
 
+	Specifies which type of value can be assigned to a variable
+	What type of mathematical operation can be applied to the data type
+	2 types of data type:
+		Registers
+		Nets
+		
+	Register Data Type
+		Represents data storage elements
+		A variable that can hold a value
+		Commonly declared by keyword "reg"
+		Default value of register data type is "X"
+		Register represents a class of data types such as reg, integer, real, time, etc
+		
+	Net Data Type
+		Represents connections between hardware elements
+		Must be continuously driven i.e cannot be used to store values
+		Declared primarily with the keyword "wire"
+		Default value of net is "Z"
+		Represents a class of data types such as wire, wand, wor, tri, triand, trior, trireg
+		
+	Values and Signal Strength
+		Verilog supports 4 value levels and 8 strength levels to model the functionality of real hardware
+		
+		+--------+-------------------------+
+		| Value  | Condition in Hardware   |
+		| Levels |       Circuits          |
+		+--------+-------------------------+
+		|   0    | Logic Zero, false cond  |
+		|   1    | Logic One, true cond    |
+		|   X    | Unknown Logic value     |
+		|   Z    | High Impedance, Float   |
+		+--------+-------------------------+
+
+		+-----------+-----------+----------------+
+		| Degree    | Strength  | Type           |
+		|           | Level     |                |
+		+-----------+-----------+----------------+
+		| Strongest | supply    | Driving        |
+		|    / \    | strong    | Driving        |
+		|   /_|_\   | pull      | Driving        |
+		|     |     | large     | Storage        |
+		|     |     | weak      | Driving        |
+		|     |     | medium    | Storage        |
+		|     |     | small     | Storage        |
+		|   Weak    | highz     | High Impedance |
+		+-----------+-----------+----------------+
+		
+		+-----------------------------------------+
+		| supply1 o--------+                      |
+		|                  |-------o supply1      |
+		| pull1   o--------+                      |
+		+-----------------------------------------+
+		If two signals of unequal strength are driven on a wire, the stronger signal prevails
+		
+		+-----------------------------------------+
+		| strong1 o--------+                      |
+		|                  |-------o X            |
+		| strong0 o--------+                      |
+		+-----------------------------------------+
+		If two signals of equal strengths are driven on a wire, result will be unknown
+
+	Port Assignments
+		Input - internally net
+		Output - internally reg or net, externally net
+		Inout - only wire data type
+	
+		Input
+		+---------------------------------------+
+		|             +----------------+        |
+		|             |     module     |        |
+		|             |                |        |
+		| reg or net  |  net           |        |
+		|     ------->+---->           |        |
+		|    input    |                |        |
+		|             +----------------+        |
+		+---------------------------------------+
+		
+		Output
+		+---------------------------------------+
+		|             +----------------+        |
+		|             |     module     |        |
+		|             |                |        |
+		|             |     reg or net |  net   |       
+		|             |         ------>+---->   |       
+		|             |                | Output |       
+		|             +----------------+        |
+		+---------------------------------------+
+		
+		Inout
+		+---------------------------------------+
+		|             +----------------+        |
+		|             |     module     |        |
+		|             |                |        |
+		|      net    |  net           |        |
+		|     <------>+<--->           |        |
+		|    inout    |                |        |
+		|             +----------------+        |
+		+---------------------------------------+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+06. Net Data Types
+
+
 
