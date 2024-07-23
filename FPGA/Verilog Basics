@@ -417,10 +417,131 @@ CONTENTS
 		+---------------------------------------+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-06. Reg Data Types
+06. Register Data Types
+
+	Represents data storage elements
+	A variable that can hold a value
+	Commonly declared by keyword "reg"
+	Default value of register data type is "X"
+	Register represents a class of data types such as reg, integer, real, time, etc
+		reg: most widely used
+		integer: used for loop counting
+		real: used for storing float point numbers
+		time: keeps track of simulation time
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 07. Net Data Types
+
+	Represents connections between hardware elements
+	Must be continuously driven, and connot be used to store values
+	Declared primarily with keyword "wire"
+	Default value of net is "Z"
+	Represents a class of data types such as wire, wand, wor, tri, triand, trior, trireg
+	The term "wor" and "wand" are simpy "wire OR gate" and "wire AND gate"
+	To model power supply connection, "supply0" and "supply1" will be used 
+	Both "wire" and "tri" are equivalent. 
+		when there are multiple drivers driving them, the terms wor, wand, trior, triand will be used
+	
+	Wire
+		
+		|
+		|           ____  
+		|  a ------|     \
+		|          | and  |---- c
+		|  b ------|____ /
+		|
+		|
+		|          +---------+
+		|          |         |
+		|  a ----->| Half    |----> sum
+		|          | Adder   |
+		|  b ----->|         |----> carry
+		|          |         |
+		|          +---------+
+		
+		Code
+		====================================
+		module half_add (a, b, sum, carry);
+			input a, b;
+			output sum, carry;
+			wire sum, carry;
+			
+			assign sum = a^b;
+			assign carry = a&b;
+		endmodule
+		====================================
+		
+	Wire OR and AND (wor, wand)
+	
+		|
+		|           ____  
+		|  a ------|     \
+		|          | and  |----|
+		|  b ------|____ /     |
+		|                      |  
+		|                      +---- y
+		|           ____       |
+		|  a ------\     \     |
+		|           \ or  \----+
+		|           /     /
+		|  b ------/____ /
+		|
+		|
+		
+		Code: Y=(A&B)&(C|D)
+		====================================
+		module use_of_wire (y,A,B,C,D);
+			input A, B, C, D;
+			output y;
+			wand y;
+			
+			assign y = A&B;
+			assign y = C|D;
+		endmodule
+		====================================
+
+	Supply1 and Supply0
+		====================================
+		module using_wire_supply(Y,A,B,C,D);
+			input A,B,C,D;
+			output Y;
+			
+			supply1 vdd;
+			supply0 gnd;
+			
+			or G1(x1,A,gnd);
+			and G2(x2,B,vdd);
+			xor G3 (Y,x1,x2);
+		endmodule
+		====================================
+
+	Numbers
+		Syntax: <size>'<base><number>
+		
+		1'b1       //logic-1(1-bit) where "b" is binary
+		8'h21      //8 bit number 0010 0001 where "h" is hexadecimal, 2 is 0010 and 1 is 0001
+		12'ha35    //12 bit number 1010 0011 0101 where "h" is hexadecimal, "a" is 1010 in binary, 3 is 0011 and 5 is 0101
+		12'o42xx   //12 bit number 100 010 xxx xxx where "o" is octal, 4 is 100, 2 is 010, x is xxx
+		4'd1       //4 bit number 0001 where "d" is decimal
+		35         //signed number, in 32 bits(size not specified)
+
+		Binary: b or B
+		Octal: o or O
+		Decimal: d or D
+		Hexadecimal: h or H 
+		
+		Use of underscores to improve readability
+			"32'h64_ab" can also be written as "32'b 0110_0100_1010_1011"
+			
+		Zero, X, Z extension/filler
+			4'bX0   //XXX_0 where 0 is binary and XXX_ is just an extension/filler to make it 4 bits
+			5'd1    //0000_1 where 1 is decimal and 0000_ is just an extension/filler to make it 5 bits
+			16'hz6  //ZZZZ_ZZZZ_ZZZZ_0110 where 0110 is hexadecimal of 6 and ZZZZ_ZZZZ_ZZZZ_ is just an extension/filler to make it 16 bits
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+08. Vectors, Arrays, Memories, Parameters and Strings
 
 
 
