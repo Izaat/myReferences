@@ -6,8 +6,8 @@ CONTENTS
 	03. Modules and Instantiation
 	04. Simulation, Synthesis and Design Methodology
 	05. Data Types
-	06. Net Data Types
-	07. Reg Data Types
+	06. Reg Data Types
+	07. Net Data Types
 	08. Vectors, Arrays, Memories, Parameters and Strings
 	09. Operators
 	10. Examples
@@ -417,7 +417,10 @@ CONTENTS
 		+---------------------------------------+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-06. Net Data Types
+06. Reg Data Types
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+07. Net Data Types
 
 
 
