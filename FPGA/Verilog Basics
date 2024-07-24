@@ -614,9 +614,34 @@ CONTENTS
 			5'd1    //0000_1 where 1 is decimal and 0000_ is just an extension/filler to make it 5 bits
 			16'hz6  //ZZZZ_ZZZZ_ZZZZ_0110 where 0110 is hexadecimal of 6 and ZZZZ_ZZZZ_ZZZZ_ is just an extension/filler to make it 16 bits
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////
 08. Vectors, Arrays, Memories, Parameters and Strings
 
+	Data types like "nets" and "regs" can be declared as vectors (multiple bit widths)
+	If bit width is not specified, default size is scalar (1 bit)
+	Vectors represents buses
+	Vectors are declared by specifying the range [r1:r2] 
+		Where r1 is always the most significant bit (MSB) and r2 is the least significant bit (LSB)
+		[MSB:LSB]
+
+	Example:
+		====================================
+		wire x,y,z;         //single bit variable aka scalars
+		wire [15:0] data;   //16 bit data
+		wire [0:31] sum;    //32 bit data, MSB is sum[0], LSB is sum[31]
+		reg clock;          //scalar register, default
+		reg [7:0] d1,d2,d3; //3 buses of 8 bit width
+		reg [1:40] bus;     //vector register, 40 bit bus
+		====================================
+	
+	Arrays
+		Arrays are allowed to be used on data types like reg, integer, time, real, and vector
+		Multi dimensional arrays can be declared with any number of dimensions
+		
+		Example:
+		====================================
+		reg [7:0] register_bank [15:0];   //16 by 8bit registers
+		reg num [31:0];                   //array of 32 by 1 bit numbers
+		====================================
 
 
