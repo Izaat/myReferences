@@ -644,4 +644,82 @@ CONTENTS
 		reg num [31:0];                   //array of 32 by 1 bit numbers
 		====================================
 
+		Example
+			reg rega [0:7];           //an array of 8x 1 bit registers   
+				|0|1|2|3|4|5|6|7|
+				
+			reg arraya [0:1] [0:3]    //Two dimensional array of 1 bit registers, reg arraya [rows] [columns]
+				   |0|1|2|3|
+				0. |x|x|x|x|
+				1. |x|x|x|x|
+				
+			wire arrayw [0:7] [0:3]   //Two dimensional array of wires
+				   |0|1|2|3|
+				0. |x|x|x|x|
+				1. |x|x|x|x|
+				2. |x|x|x|x|
+				3. |x|x|x|x|
+				4. |x|x|x|x|
+				5. |x|x|x|x|
+				6. |x|x|x|x|
+				7. |x|x|x|x|
+				
+	Memories
+		Modeled as a one dimensional array of registers
+		Used to model register files ie ROMs and RAMs
+		Each element of the array is known as an element or word
+		Elements are addressed by a single array index
+		Each element can be of one or more bits
+		
+		Example
+			reg mem_1bit [0:1023];       //Memory mem_1bit with 1K 1-bit words
+				|  0 |
+				|  1 |
+				|  2 |
+				|  . |
+				|  . |
+				|  . |
+				|1023|
+				
+			reg [7:0] membyte [0:1023];  //Memory membyte with 1K 8bit words
+			         |7|6|5|4|3|2|1|0|
+			   0000. |0|0|0|0|0|0|0|0|
+			   0001. |0|0|0|0|0|0|0|0|
+			   0002. |0|0|0|0|0|0|0|0|
+			   0003. |0|0|0|0|0|0|0|0|
+			   .
+			   .
+			   .
+			   1023. |0|0|0|0|0|0|0|0|
+
+	Parameters
+		Cannot be used as variables, it is a constant value
+		Values for each module instance can be overridden individually at compile time
+		This allows the module instances to be customized
+		
+		Example
+			parameter width_new = 8;       //Defines width_new as a constant value of 8
+			parameter depth_new = 256;     //Defines depth_new as a constant value of 256
+			
+	Strings
+		Can be stored in reg
+		Width of reg variables must be larger, enough to hold the string
+		Each string character takes up 8bits(1byte)
+		Sequence of characters enclosed by double quotes(" ")
+		
+		Example
+			reg [8*10:1] string_value;       //Declaration, 8 bits with 10 characters
+			string_value = "VLSI Point";     //Assignment of string
+
+		Special Characters
+			| \n |  newline |
+			| \t |  tab     |
+			| \% |  %       |
+			| \\ |  \       |
+			| \" |  "       |
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+09. Operators
+
+
 
