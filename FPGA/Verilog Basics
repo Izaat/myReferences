@@ -721,5 +721,106 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////
 09. Operators
 
+	Arithemetic
+		Unary
+			Operators "+" and "-". Used to specify positive and negative sign and operands
+			e.g "-4" or negative 4 and "+5" or positive 5
+		Binary
+			They are multiply(*), addition(+), subtract(-), power(**) and modulus(%)
+			Binary operators take two operands
+			If any operand bit has a value of x, then the result of the entire expression is x.
+			
+			Examples 1
+				Where A = 4'b0010 and B = 4'b0011
+				A and B are register vectors
+				D, E, F are integers (D=7, E=4, F=2)
+				
+				A*B     //Multiply A and B to get 4'b0110
+				D/E     //Divide D by E to get 1. Truncates any fractional part
+				A+B     //Add A and B to get 4'b0101
+				B-A     //Subtract A from B to get 4'b0001
+				F=E**F  //E to the power of F which is 16
+			
+			Example 2
+				If any operand bit has a value of x, then result is x
+				a = 4'b001x; b = 4'b1011;
+				sum = a+b;   //sum will be 4'bx which translates to "unknown"
+				
+				Modulus produce the remainder from the division of two numbers
+				17%4   //Answer 1
+				16%4   //Answer 0
+				-7%2   //Answer -1, takes sign of the first operand (Applies only if either of the number is in negative)
+				7%-2   //Answer +1, takes sign of the first operand (Applies only if either of the number is in negative)
+				
+	Logical
+		Logical "AND": &&  //Binary Operator. Number of operands is 2
+		Logical "OR": ||   //Binary Operator, Number of operands is 2
+		Logical "NOT": !   //Unary Operator, Negation, Number of operands is 1
+		
+		Logical operators always evaluate to a one bit value; 1(true), 0(false), x(ambiguous)
+		
+		Example1 (A=5; B=0;)
+			A&&B   //Output: 0
+			A||B   //Output: 1
+			!A     //Output: 0
+			!B     //Output: 1
+			
+		Example2 (A=2'b0x; B=2'b10;)
+			A&&B   //Output: x
+
+	Bitwise
+		Performs a bit by bit operation on 2 operands
+		It takes each bit in one operand and perform the operation with the corresponding bit in another operand
+		
+		Bitwise AND: &            //Number of operands: 2 
+		Bitwise OR: |             //Number of operands: 2
+		Bitwise Negation/NOT: ~   //Number of operands: 1
+		Bitwise XOR: ^            //Number of operands: 2
+		Bitwise XNOR: ^~ or ~^    //Number of operands: 2
+		
+		Bitwise Truth Table
+			+-----+---+---+---+
+			| AND | 0 | 1 | x |
+			|  0  | 0 | 0 | 0 |
+			|  1  | 0 | 1 | x |
+			|  x  | 0 | x | x |
+			+-----+---+---+---+
+			
+			+-----+---+---+---+
+			| OR  | 0 | 1 | x |
+			|  0  | 0 | 1 | x |
+			|  1  | 1 | 1 | 1 |
+			|  x  | x | 1 | x |
+			+-----+---+---+---+
+			
+			+-----+---+---+---+
+			| XOR | 0 | 1 | x |
+			|  0  | 0 | 1 | x |
+			|  1  | 1 | 0 | x |
+			|  x  | x | x | x |
+			+-----+---+---+---+
+			
+			+-----+---+---+---+
+			| XNOR| 0 | 1 | x |
+			|  0  | 1 | 0 | x |
+			|  1  | 0 | 1 | x |
+			|  x  | x | x | x |
+			+-----+---+---+---+
+			
+			+-----+-------+
+			| NOT | Result|
+			|  0  |   1   |
+			|  1  |   0   |
+			|  x  |   x   |
+			+-----+-------+
+		
+		Example (X=4'b1010, Y=b1101, Z=4'b10x1)
+			~X    //Negation. Output: 4'b0101
+			X&Y   //AND. Output: 4'b1000
+			X|Y   //OR. Output: 4'b1111
+			X^Y   //XOR. Output: 4'b0111
+			X^~Y  //XNOR. Output: 4'b1000
+			X&Z   //Output: 4'b10x0
+
 
 
