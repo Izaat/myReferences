@@ -822,5 +822,177 @@ CONTENTS
 			X^~Y  //XNOR. Output: 4'b1000
 			X&Z   //Output: 4'b10x0
 
+	Equality
+		Logical Equal: ==       //Number of operands: 2
+		Logical Not Equal: !=   //Number of operands: 2
+		Case Equal: ===         //Number of operands: 2
+		Case Not Equal: !==     //Number of operands: 2
+		
+		Returns 1(true) or 0(false)
+		Difference between logical equality operators and case equality operators
+			Logical Equality Operators do not include x and z
+			Case Equality Operators include x and z
+		
+		Example: 
+			A=4, B=3
+			X=4'b1010, Y=4'b1101, Z=4'b1xxz
+			M=4'b1xxz, N=4'b1xxx
+			
+			A==B      //Output: Logical 0
+			X!=Y      //Output: Logical 1
+			X==Z      //Output: x
+			Z===M     //Output: Logical 1 (All bits match, including x and z)
+			Z===N     //Output: Logical 0 (LSB does not match)
+			M!==N     //Output: Logical 1
+	
+	Relational
+		Greater Than: >              //Number of operands: 2
+		Less Than: <                 //Number of operands: 2
+		Greater than or equal: >=    //Number of operands: 2
+		Less than or equal: <=       //Number of operands: 2
+		
+		Return logical value of 1(true) or 0(false)
+		
+		Example: 
+			A=4, B=3
+			X=4'b1010, Y=4'b1101, Z=4'b1xxx		
+		
+			A<=B     //Output:0
+			A>B      //Output:1
+			Y>=X     //Output:1
+			Y<Z      //Output:x
+		
+	Reduction
+		AND: &         //Number of operands: 1
+		OR: |          //Number of operands: 1
+		NAND: ~&       //Number of operands: 1
+		NOR: ~|        //Number of operands: 1
+		XOR: ^         //Number of operands: 1
+		XNOR: ~^, ^~   //Number of operands: 1
+		
+		It takes only one operand.
+		Reduction operator performs a bitwise operation on a single vector operand and yield 1-bit result
+		
+		Example (X=4'b1010)
+			&X    //Equivalent to 1&0&1&0. Output: 1'b0.
+			|X    //Equivalent to 1|0|1|0. Output: 1'b1.
+			^X    //Equivalent to 1^0^1^0. Output: 1'b0.
+			
+			Reduction XOR or XNOR can be used for even or odd parity generation of a vector
+
+	Shift
+		Right Shift: >>
+		Left Shift: <<
+		Arithemetic Left Shift: <<<
+		Arithemetic Right Shift: >>>
+		
+		Regular shift operators shift a vector operand to the right or the left by a specified number of bits
+		When the bits are shifted, the vacant bit positions are filled with zeros
+		
+		Arithemetic Shift Operators use the context of the expression to determine the value with which to fill the vacated bits
+		
+		Example1 (X=4'b1100)
+			Y=X>>1       //Y is 4'b0110. Shift right 1 bit. 0 fills in MSB
+			Y=X<<1       //Y is 4'b1000. Shift left 1 bit. 0 fills in LSB
+			Y=X<<2       //Y is 4'b0000. Shift left 2 bits.
+			Y=X>>>1      //Y is 4'b1110. Shift left 1 bit.
+			
+		Example2 
+			integer a, b, c (Signed data types are 32bits)
+			a=0, 
+			b=-10            //11111111 11111111 11111111 11110110 (32bits)
+			c=a+(b>>>3)      //Result is -2 decimal, by converting 11111111 11111111 11111111 11111101 to decimal
+		
+	Concatenation
+		Concatenation: {, }
+		
+		Provides a mechanism to append multiple operands
+		Operands must be sized
+		Unisized operands are not allowed due to size of each operand must be known for computation of the size of the result
+		Operands can be of the followings:
+			scalar nets or registers, 
+			vector nets or registers, 
+			bit-select, 
+			part-select, 
+			sized constants
+		
+		Example: A=1'b1, B=2'b00, C=2'b10, D=3'b110
+			Y={B,C}               //Output Y is 4'b0010
+			Y={A,B,C,D,3'b001}    //Output Y is 11'b10010110001
+			Y={A,B[0],C[1]}       //Output Y is 3'b101 
+			Y={A,2{B},3{C}}       //Output Y is 11'b10000101010
+			
+	Conditional (Similar to Ternary Operator in C++)
+		Conditional operator(?:) takes three operands.
+		
+		Usage: condition_expr ? true_expr : false_expr;
+			The condition expression (condition_expr) is first evaluated
+			If the result is true, then the true_expr is evaluated.
+			If the result is false, then the false_expr is evaluated
+			
+		Conditional operations can be nested:
+			assign out = (A==3) ? (control ? x:y):(control ? m:n);
+
+			C++ Equivalent
+			======================
+			if (A == 3) {
+				if (control) {
+					out = x;
+				} else {
+					out = y;
+				}
+			} else {
+				if (control) {
+					out = m;
+				} else {
+					out = n;
+				}
+			}
+			======================
+
+		The action of a conditional operator is similar to a multiplexer.
+		Alternatively, it can be compared to a if-else expression
+			+------------------------------------+
+			|                                    |
+			|               +-------------+      |
+			| false_expr -> |0            |      |
+			|               |             |      |
+			|               |   2 to 1    |      |
+			|               | multiplexer |->out |
+			|               |             |      |
+			| true_expr  -> |1            |      |
+			|               +-------------+      |
+			|                    /|\             |
+			|                     |              |
+			|                    cond_expr       |
+			+------------------------------------+
+
+	Operator Precedence
+		+----------------------------+-------------------+------------+
+		| Operators                  | Operator Symbols  | Precedence |
+		+----------------------------+-------------------+------------+
+		| Unary                      | + - ! ~           | Highest    |
+		| Multiply, Divide, Modulus  | * / %             |            |
+		| Add, Subtract              | + -               |            |
+		| Shift                      | << >>             |            |
+		| Relational                 | < <= > >=         |            |
+		| Equality                   | == != === !==     |            |
+		+----------------------------+-------------------+------------+
+		|                            | & ~&              |            |
+		| Reduction                  | ^ ^~              |            |
+		|                            | | ~|              |            |
+		+----------------------------+-------------------+------------+
+		| Logical                    | &&                |            |
+		|                            | ||                |            |
+		+----------------------------+-------------------+------------+
+		| Conditional                | ?:                | Lowest     |
+		+----------------------------+-------------------+------------+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+10. Examples
+
+
+
+
 
 
