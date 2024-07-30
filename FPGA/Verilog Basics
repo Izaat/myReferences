@@ -982,7 +982,7 @@ CONTENTS
 			assign q = (m<n) ? 2'b10:2'b11;
 			
 			Result:
-				q=2'bxx
+				q=2'bxx   //Unknown
 				Relational operator is unable to merge "x" and "z"
 
 	Operator Precedence
