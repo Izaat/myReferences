@@ -1013,6 +1013,51 @@ CONTENTS
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 10. Examples
+	
+	Example 1:
+		Find the value q for the following
+		Given a=4'b0101 and y=4'b1100
+		
+		reg[3:0]q,a,y;
+		assign q=a|y;  <- Bitwise OR operation will be performed
+		
+		Bitwise operation
+			a=0101
+			y=1100
+			q=1101
+			
+		Answer:
+			q=4'b1101
+
+	Example 2:
+		Find output of "c" and "f" from the following
+		=================
+		reg[3:0]a,b,c;
+		integer d,e,f;
+		initial
+		begin
+		a=4'b0011;
+		b=4'b0001;
+		d=7;
+		e=3;
+		c=a+b;    //Addition
+		f=d/e;
+		end
+		=================
+		
+		Perform Addition to get "c"
+			a=0011   //Decimal 3
+			b=0001   //Decimal 1
+			c=0100   //Decimal 4
+			
+			Therefore: c=4'b0100
+			
+		Perform Division for "f"
+			d/e = 7/3 = 2.333
+			Therefore f=2, since f is an integer and answer will be a truncated value
+			
+//////////////////////////////////////////////////////////////////////////////////////////////////
+11. Gate Level Modeling
 
 
 
