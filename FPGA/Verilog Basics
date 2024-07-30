@@ -902,6 +902,11 @@ CONTENTS
 			a=0, 
 			b=-10            //11111111 11111111 11111111 11110110 (32bits)
 			c=a+(b>>>3)      //Result is -2 decimal, by converting 11111111 11111111 11111111 11111101 to decimal
+
+		Example3
+			If Y=1101
+			a=y>>1'b1   //a:0110, 0 added to MSB
+			b=y>>>1'b1  //b:1110, 1 added to MSB
 		
 	Concatenation
 		Concatenation: {, }
