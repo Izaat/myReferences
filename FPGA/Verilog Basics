@@ -926,6 +926,10 @@ CONTENTS
 			Y={A,B,C,D,3'b001}    //Output Y is 11'b10010110001
 			Y={A,B[0],C[1]}       //Output Y is 3'b101 
 			Y={A,2{B},3{C}}       //Output Y is 11'b10000101010
+
+		Example
+			If "p" is a vector of length 10 bit, then find the value p for this expression
+			p={2'bx1, 3'b101, 2'b10, 2{1'b1}}   //p: 10'b0x11011011, 0 added to MSB to form 10 bit from 9 bit
 			
 	Conditional (Similar to Ternary Operator in C++)
 		Conditional operator(?:) takes three operands.
