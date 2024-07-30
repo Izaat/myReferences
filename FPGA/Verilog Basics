@@ -844,6 +844,11 @@ CONTENTS
 			Z===M     //Output: Logical 1 (All bits match, including x and z)
 			Z===N     //Output: Logical 0 (LSB does not match)
 			M!==N     //Output: Logical 1
+
+		Example
+			m=5'b10x1z ; n='b10x1z
+			m==n    //Output: x, the 2 logical equal operator cant process "x" and "z" values
+			m===n   //Output: 1
 	
 	Relational
 		Greater Than: >              //Number of operands: 2
