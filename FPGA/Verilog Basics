@@ -976,6 +976,15 @@ CONTENTS
 			|                    cond_expr       |
 			+------------------------------------+
 
+		Example
+			Finding value of q from the following
+			m=2'b10, n=2'b1x;
+			assign q = (m<n) ? 2'b10:2'b11;
+			
+			Result:
+				q=2'bxx
+				Relational operator is unable to merge "x" and "z"
+
 	Operator Precedence
 		+----------------------------+-------------------+------------+
 		| Operators                  | Operator Symbols  | Precedence |
