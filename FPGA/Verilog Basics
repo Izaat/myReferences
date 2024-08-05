@@ -1223,6 +1223,59 @@ CONTENTS
 				endmodule
 				
 		BUF/NOT Gates
+			These type of gates have one scalar input and one scalar output
+		
+			|          buf
+			|         |\
+			|  in ____| \_______ out
+			|         | /
+			|         |/
+			
+			|          not
+			|         |\
+			|  in-----| \O------ out
+			|         | /
+			|         |/
+		
+			Truth Tables
+			+-----+----+-----+
+			| BUF | IN | OUT |
+			|     |  0 |   0 |
+			|     |  1 |   1 |
+			|     |  x |   x |
+			|     |  z |   x |
+			+-----+----+-----+
+			
+			+-----+----+-----+
+			| NOT | IN | OUT |
+			|     |  0 |   1 |
+			|     |  1 |   0 |
+			|     |  x |   x |
+			|     |  z |   x |
+			+-----+----+-----+
+			
+			Example:
+			
+				|             buf_gate
+				|             |\
+				|  I1 ________| \_______ O1
+				|      DATAIN | / OUT0
+				|             |/
+				|
+				|              O2~not
+				|             |\
+				|  I2---------| \O------ O2
+				|             | /
+				|             |/
+				
+				module gate_eg(O1,O2,I1,I2);
+					input I1,I2;
+					output O1,O2;
+					
+					buf buf_gate(O1,I1);
+					not not_gate(O2,I2);
+				endmodule
+
 			
 
 
