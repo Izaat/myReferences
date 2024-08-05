@@ -1058,6 +1058,172 @@ CONTENTS
 			
 //////////////////////////////////////////////////////////////////////////////////////////////////
 11. Gate Level Modeling
+	
+	Verilog has predefined inbuilt gate primitives
+	It is the lowest level of abstraction
+	All logic gates can be implemented using these gates
+	There are two types of gates:
+		Basic Gates (AND/OR, BUF/NOT)
+		Bufif/Notif Gates
+	
+	Basic Gates (AND/OR, BUF/NOT)
+	
+		AND/OR Gates	
+			One scalar output and multicalar inputs
+			Output of a gate is evaluated as soon as one of the input changes
+			The AND/OR gates available in verilog are:
+				AND 
+				OR 
+				NAND 
+				NOR 
+				XOR
+				XNOR
+				
+				Truth Tables
+				+-----+---+---+---+---+
+				| AND | 0 | 1 | x | z |
+				|  0  | 0 | 0 | 0 | 0 |
+				|  1  | 0 | 1 | x | x |
+				|  x  | 0 | x | x | x |
+				|  z  | 0 | x | x | x |
+				+-----+---+---+---+---+
+				
+				+-----+---+---+---+---+
+				| OR  | 0 | 1 | x | z |
+				|  0  | 0 | 1 | x | x |
+				|  1  | 1 | 1 | 1 | 1 |
+				|  x  | x | 1 | x | x |
+				|  z  | x | 1 | x | x |
+				+-----+---+---+---+---+
+				
+				+-----+---+---+---+---+
+				| NAND| 0 | 1 | x | z |
+				|  0  | 1 | 1 | 1 | 1 |
+				|  1  | 1 | 0 | x | x |
+				|  x  | 1 | x | x | x |
+				|  z  | 1 | x | x | x |
+				+-----+---+---+---+---+
+				
+				+-----+---+---+---+---+
+				| NOR | 0 | 1 | x | z |
+				|  0  | 1 | 0 | x | x |
+				|  1  | 0 | 0 | 0 | 0 |
+				|  x  | x | 0 | x | x |
+				|  z  | x | 0 | x | x |
+				+-----+---+---+---+---+
+				
+				+-----+---+---+---+---+
+				| XOR | 0 | 1 | x | z |
+				|  0  | 0 | 1 | x | x |
+				|  1  | 1 | 0 | x | x |
+				|  x  | x | x | x | x |
+				|  z  | x | x | x | x |
+				+-----+---+---+---+---+
+				
+				+-----+---+---+---+---+
+				| XNOR| 0 | 1 | x | z |
+				|  0  | 1 | 0 | x | x |
+				|  1  | 0 | 1 | x | x |
+				|  x  | x | x | x | x |
+				|  z  | x | x | x | x |
+				+-----+---+---+---+---+
+		
+			Syntax: Primitive_naame instance_name (output, inputs)
+			Example01:
+				
+				=====================
+				| and G1(out,A,B);
+				|           ____
+				|    A-----|    \
+				|          |     |----- out
+				|    B-----|____/
+				|
+				=====================
+		
+				=====================
+				| nand G2(out,A,B);
+				|           ____
+				|    A-----|    \
+				|          |     |O----- out
+				|    B-----|____/
+				|
+				=====================
+		
+				=====================
+				| or G3(out,A,B);
+				|           ___
+				|    A-----\   \
+				|           \   \----out 
+				|           /   /
+				|    B-----/___/
+				|
+				=====================
+		
+			Example02:
+				
+				=====================
+				|           ____  and_gate
+				|   I1-----|    \
+				|          |     |----- O1
+				|   I2-----|____/
+				|
+				|           ___   xor_gate
+				|   I3-----\\   \  
+				|           \\   \----out 
+				|           //   /
+				|   I4-----//___/
+				|
+				=====================
+				
+				module gate_eg(O1,O2,I1,I2,I3,I4);
+					input I1,I2,I3,I4;
+					output O1,O2;
+					
+					and and_gate(O1,I1,I2);
+					xor xor_gate(O2,I3,I4);
+				endmodule
+			
+			Example03:
+				
+				=========================================
+				|                           ___  or_gate
+				|   I1---------------------\   \
+				|                           \   \_____O1
+				|                           /   /
+				|   I2---------------------/___/
+				|
+				|           ____ nand_gate    O2~not
+				|   I2-----|    \           |\
+				|          |     |----------| \_______O2
+				|   I3-----|____/           | /
+				|                           |/
+				|
+				|           ___  nor_gate     O3~not
+				|   I3-----\   \            |\
+				|           \   \-----------| \_______O3
+				|           /   /           | /
+				|   I4-----/___/            |/
+				|
+				|           ___  xor_gate     O4~not
+				|   I3-----\\   \           |\
+				|           \\   \----------| \_______O4
+				|           //   /          | /
+				|   I4-----//___/           |/
+				=========================================
+				
+				module gate_eg(O1,O2,O3,O4,I1,I2,I3,I4,I5,I6,I7,I8);
+				input I1,I2,I3,I4,I5,I6,I7,I8;
+				output O1,O2,O3,O4;
+				
+				or(O1,I1,I2);
+				nand(O2,I3,I4);
+				nor(O3,I5,I6);
+				xnor(O4,I7,I8);
+				
+				endmodule
+				
+		BUF/NOT Gates
+			
 
 
 
