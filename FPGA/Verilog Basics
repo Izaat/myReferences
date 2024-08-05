@@ -1212,13 +1212,13 @@ CONTENTS
 				=========================================
 				
 				module gate_eg(O1,O2,O3,O4,I1,I2,I3,I4,I5,I6,I7,I8);
-				input I1,I2,I3,I4,I5,I6,I7,I8;
-				output O1,O2,O3,O4;
-				
-				or(O1,I1,I2);
-				nand(O2,I3,I4);
-				nor(O3,I5,I6);
-				xnor(O4,I7,I8);
+					input I1,I2,I3,I4,I5,I6,I7,I8;
+					output O1,O2,O3,O4;
+					
+					or(O1,I1,I2);
+					nand(O2,I3,I4);
+					nor(O3,I5,I6);
+					xnor(O4,I7,I8);
 				
 				endmodule
 				
