@@ -1276,7 +1276,202 @@ CONTENTS
 					not not_gate(O2,I2);
 				endmodule
 
+	Bufif/Notif Gates
+		These gates have additional control signal
+		They propagate if the control signal is given otherwise the output will be in high state of impedence
+		
+		bufif1
+			+------------------------------+
+			|                              |
+			|             |\               |
+			|  in ________| \_______ out   |
+			|             | /              |
+			|             |/|              |
+			|               |              |
+			|      ctrl-----+              |
+			+------------------------------+
+	
+		bufif0
+			+------------------------------+
+			|                              |
+			|             |\               |
+			|  in ________| \_______ out   |
+			|             | /              |
+			|             |/O              |
+			|               |              |
+			|      ctrl-----+              |
+			+------------------------------+
+	
+		notif1
+			+------------------------------+
+			|                              |
+			|             |\               |
+			|  in ________| \O------ out   |
+			|             | /              |
+			|             |/|              |
+			|               |              |
+			|      ctrl-----+              |
+			+------------------------------+
+	
+		notif0
+			+------------------------------+
+			|                              |
+			|             |\               |
+			|  in ________| \O------ out   |
+			|             | /              |
+			|             |/O              |
+			|               |              |
+			|      ctrl-----+              |
+			+------------------------------+
+	
+		Truth Table
+			+--------+---+---+---+---+
+			| bufif1 | 0 | 1 | x | z |
+			|   0    | z | 0 | L | L |
+			|   1    | 0 | 1 | H | H |
+			|   x    | z | x | x | x |
+			|   z    | z | x | x | x |
+			+--------+---+---+---+---+
+	
+			+--------+---+---+---+---+
+			| bufif0 | 0 | 1 | x | z |
+			|   0    | 0 | z | L | L |
+			|   1    | 0 | 1 | H | H |
+			|   x    | x | z | x | x |
+			|   z    | x | z | x | x |
+			+--------+---+---+---+---+
 			
+			+--------+---+---+---+---+
+			| notif1 | 0 | 1 | x | z |
+			|   0    | z | 1 | H | H |
+			|   1    | z | 0 | L | L |
+			|   x    | z | x | x | x |
+			|   z    | z | x | x | x |
+			+--------+---+---+---+---+
+	
+			+--------+---+---+---+---+
+			| notif0 | 0 | 1 | x | z |
+			|   0    | 1 | z | H | H |
+			|   1    | 0 | z | L | L |
+			|   x    | x | z | x | x |
+			|   z    | x | z | x | x |
+			+--------+---+---+---+---+
+		
+		Example
+			+-----------------------------------+
+			|                   OE              |
+			|            +-------+              |
+			|            |       |              |
+			|            |       | not_gate1    |
+			|            |     |\|              |
+			|            |     | \_______ O2    |
+			|    I2------|----O| /  OUT0        |
+			|            |     |/               |
+			| Control ---o                      |
+			|            |      OE              |
+			|            o-------+              |
+			|            |       | buf_gate1    |
+			|            |     |\|              |
+			|            |     | \_______ O1    |
+			|    I1------|-----| /  OUT0        |
+			|            |     |/               |
+			|            |                      |
+			|            |      OE              |
+			|            o-------+              |
+			|            |       | buf_gate2    |
+			|            |     |\O              |
+			|            |     | \_______ O3    |
+			|    I3------|-----| /  OUT0        |
+			|            |     |/               |
+			|            |      OE              |
+			|            +-------+              |
+			|                    | not_gate2    |
+			|                  |\O              |
+			|                  | \_______ O4    |
+			|    I4-----------O| /  OUT0        |
+			|                  |/               |
+			|                                   |        
+			|                                   | 			
+			+-----------------------------------+
+			
+			module gate_eg(O1,O2,O3,O4,,I1,I2,I3,I4,Control);
+				input I1,I2,I3,I4,Control;
+				output O1,O2,O3,O4;
+				
+				bufif1 buf_gate1 (O1,I1,Control);
+				notif1 not_gate1 (O2,I2,Control);
+				
+				bufif0 buf_gate2 (O3,I3,Control);
+				notif0 not_gate2 (O4,I4,Control);
+			endmodule
+
+	Gate Delays
+		Three types of delays
+			Rise Delay
+			Fall Delay
+			Turn-off Delay
+			
+			Rise Delay
+				Slows down the transition time from 0 to 1
+				+--------------------------------------------+
+				|                          |_____________ 1  |
+				|                         /|                 |
+				|                      | / |                 |
+				|  0, x or z __________|/  |                 |
+				|                      |   |                 |
+				|                      t_rise                |
+				+--------------------------------------------+
+
+			Fall Delay
+				Opposite of Rise Delay
+				+--------------------------------------------+
+				|  1, x or z __________|                     |
+				|                      |\                    |
+				|                      | \ |                 |
+				|                      |  \|__________  0    |
+				|                      |   |                 |
+				|                      t_fall                |
+				+--------------------------------------------+
+
+			Turn-off Delay
+				When gate output changes to high impedance(z) from any other logic (0,1,x)
+				If the gate output changes to unknown(x), then minimum of three delays will be considered
+
+				Syntax:
+					For all transition
+					gate_name #(delay_time) a1(output, inputs)
+					
+					For rise and fall delay specification
+					gate_name #(rise_val,fall_val) a1(output, inputs)
+					
+					For rise fall and turnoff delay specification
+					gate_name #(rise_val,fall_vall,turnoff_value) a1(output,inputs)
+
+		Example01:
+			+---------------------------------------------+
+			|                                             |
+			|            ____  and_gate                   |
+			|   a ------|     \                           |
+			|           | #5   |--+ e                     |
+			|   b ------|____ /   |                       |
+			|                     |     ____  or_gate     |
+			|                     +----\    \             |
+			|                           \    \_____out    |
+			|                           / #4 /            |
+			|   c ---------------------/____/             |
+			|                                             |
+			+---------------------------------------------+
+			
+			module D(a,b,c,out);
+				input a,b,c;
+				output out;
+				wire e;
+				
+				and #(5) a1(e,a,b);
+				or #(4) o1(out,e,c);
+			endmodule
+				
+
 
 
 
