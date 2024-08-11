@@ -12,7 +12,8 @@ CONTENTS
 	09. Operators
 	10. Examples
 	11. Gate Level Modeling
-	12. Behavioral Modeling
+	12. Dataflow Modelling
+	13. Behavioral Modeling
 	14. Compiler Directive and System Tasks
 	15. Task and Functions
 	16. Test Bench Writing
@@ -1527,7 +1528,7 @@ CONTENTS
 			endmodule
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-12. Behavioral Modeling
+12. Dataflow Modelling
 
 
 
