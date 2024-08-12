@@ -1530,6 +1530,116 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////
 12. Dataflow Modelling
 
+	Continuous assignment (assign) statement, restriction on assign statement, implicit continuous statement
+	Delays - assignment delay, implicit assignment delay, net delay
+	Examples: Circuit in verilog using dataflow modelling
+	
+	Continuous assignment
+		Used to derive a value onto a net. 
+		Replaces gates in the description of the circuit 
+		Describes the circuit at a higher level of abstraction
+		Continuous assignment statement starts with the word "assign"
+		
+		Characteristics
+			Left hand side of an assignment must always be a net type. Right hand side can be a reg or net
+			Continuous assignment are always active
+			Delay values can be specified for assignments in terms of time units
+			
+			Example 1 : Continuous assign
+				assign out = in1 & in2;   //Out is a net. Both in1 and in2 are reg
+				
+			Example 2 : Concatenation
+				assign {c_out, sum[3:0]} = a[3:0] + b[3:01] + c_in;   //Left is a concat of a scalar net (c_out) and a vector net (sum)
+
+	Implicit continuous assignment
+		Continuous assignment can be placed on a net when it is declared
+		There can be only one implicit declaration assignment per net because a net is declared only once
+		Instead of using two lines, single line can be used
+		
+		Example: Difference between Regular and Implicit
+			//Regular continuous assignment
+			wire out;
+			assign out = in1 & in2;
+			
+			//Implicit continuous assignment
+			wire out = in1 & in2;
+
+	Delays
+		Delay values control the time between the change in a right-hand-side operand and when the new value is assigned to the left-hand-side
+		Three ways of specifying delays in continuous assignment statements	
+			Regular assignment delay
+			Implicit continuous assignment delay 
+			Net declaration delay
+			
+		Regular Assignment Delay
+			The delay value is specified after the keyword assign
+			Any change in values of in1 or in2 will result in a delay of 10 time units before recomputation of the expression in in1 & in2. 
+				The result will be assigned to out.
+				
+			Example: Delay in a continuous assign
+				assign #10 out = in1 & in2;   //Where #10 is 10 time unit
+			
+				+-----------------------------------------------------------------+
+				|                   ______________________              __        |
+				| in1   ___________|                      |____________|  |_____  |
+				|                                                                 |
+				|                   ____________________________________________  |
+				| in2   ___________|                                              |
+				|                                                                 |
+				|       ____              ______________________                  |
+				| out   xxxx|____________|                      |_______________  |
+				|                                                                 |
+				| time      10    20    30    40    50    60    70    80  85      |
+				+-----------------------------------------------------------------+
+				Notice the time in 80-85 mark.
+				This is called Inertial delay
+
+		Implicit continuous assignment delay
+			Specify both a delay and an assignment on the net
+			
+			Example: 
+				wire #10 out = in1 & in2;
+
+		Net Declaration Delay
+			A delay can be specified on a net when it is declared without putting a continuous assignment on the net
+			Example: Net Delays
+				wire #10 out;
+				assign out = in1 & in2;
+
+	Examples
+		Example 1: 4 bit Full Adder, Using Dataflow Operators
+			module fulladd4 (sum, c_out, a,b,c_in);    //Defines a 4bit full adder by using dataflow statements
+			
+				//IO port declarations
+				output [3:0] sum;
+				output c_out;
+				input [3:0] a,b;
+				input c_in;
+				
+				//Specify the function of a full adder
+				assign {c_out, sum} = a+b+c_in;
+				
+			endmodule
+
+		Example 2: Dataflow description of 2 to 4 line decoder with enable input (E)
+			module decoder_df (A,B,E,D);
+				input A,B,E;
+				output [3:0] D;
+				assign D[3] =~(~A & ~B & ~E);
+				assign D[2] =~(~A & B & ~E);
+				assign D[1] =~( A & ~B & ~E);
+				assign D[0] =~( A & B & ~E);
+				
+				Or assign D[3] =~(~A & ~B & ~E),
+				D[2] =~(~A & B & ~E),
+				D[1] =~( A &~B & ~E),
+				D[0] =~( A & B & ~E);
+			endmodule
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+13. Behavioral Modelling
+
+
 
 
 
