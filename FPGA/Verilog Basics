@@ -1639,6 +1639,155 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////
 13. Behavioral Modelling
 
+	Structured procedures (initial and always block)
+	Procedural Assignment (Blocking/Non-Blocking)
+	Delays in Procedural Assignment
+	Block Statement (begin-end/fork-join)
+	Conditional and Multiway branching statements
+	Looping Constructs (While, For, Repeat, Forever)
+	Examples
+	
+	Structured procedures (initial and always block)
+		Verilog supports two structured procedure statements
+			Initial
+			Always
+		All behavioral statements are written inside these blocks
+		These blocks run in parallel i.e concurrent in nature
+		Their activity starts at 0 simulation time
+		Blocks cannot be nested
+		
+		Initial Statement
+			Executable once only
+			Execution starts at 0 simulation time
+			Execution stops when the last statement is executed
+			Parallel execution in case of multiple initial blocks
+			Multiple statements inside an initial block needs to be grouped with begin and end statements
+			
+			Example:
+				module stimulus;
+				
+				reg x,y, a,b, m;
+				
+				initial
+					m = 1'b0;      //single statement, does not need to be grouped
+				
+				initial
+				begin	
+					#5 a = 1'b1;   //multiple statements, need to be grouped with "begin" and "end"
+					#25 b = 1'b0;
+				end
+				
+				initial
+				begin
+					#10 x = 1'b0;
+					#25 y = 1'b1;
+				end
+				
+				initial
+					#50 $finish;
+				
+				endmodule
+				
+			Simulation Result
+				+------+--------------------+
+				| time | Statement Executed |
+				+------+--------------------+
+				| 0    | m=1'b0;            |
+				| 5    | a=1'b1;            |
+				| 10   | x=1'b0;            |
+				| 30   | b=1'b0;            |
+				| 35   | y=1'b1;            |
+				| 50   | $finish;           |
+				+------+--------------------+
+			
+		Always Statement
+			Repeats continuously throughout the duration of simulation time
+			Concurrent in nature and starts at 0 simulation time
+			Parallel execution in case of multiple always blocks
+			A deadlock condition will be created if an always construct has no control for simulation time
+			
+			Example
+				module clock_gen;
+				
+				reg clock;
+				
+				//Initialize clock at time 0
+				initial
+					clock = 1'b0;
+					
+				//Toggle clock every half-cycle (time period = 20)
+				always
+					#10 clock = ~clock;
+					
+				initial
+					#1000 $finish;
+					
+				endmodule
+
+		Procedural Assignment
+			Procedural assignments update values of reg, integer, real, or time variables.
+			The value placed on a variable will remain unchanged, 
+				until another procedural assignment updates the variable with a different value.
+			These are unlike continuous assignments
+			
+			2 types of procedural assignments
+				Blocking Assignments
+				Non-Blocking Assignments
+				
+			Blocking Assignments
+				Represented with the sign "="
+				Statements are executed sequentially
+				Statements are executed in the order they are specified in a sequential block
+				One statement blocks the execution of other statements until it is executed
+				Delay values will be added
+				Blocking assignments can be used in both procedural and contagious assignments
+				
+				Example
+					reg x, y, z;
+					reg [15:0] reg_a, reg_b;
+					integer count;
+					
+					//All behavioral statements must be inside an initial or always block
+					
+					initial
+					begin
+					x=0; y=1; z=1;             //Scalar assignments
+					count=0;                   //Assignment to integer variables
+					reg_a=16'b0; reg_b=reg_a;  //Initialize vectors
+					#15 reg_a[2]=1'b1;         //Bit select assignment with delay
+					#10 reg_b[15:13]={x,y,z};  //Assign result of concatenation to
+					count=count+1;             //Assignment to an integer (increment)
+					end
+
+			Non-Blocking Assignments
+				Represented with the sign "<="
+				Statements are executed concurrently
+				Right-hand sides are evaluated first, subsequently the specified assignments are scheduled
+				Non-blocking assignments can't be used in a continuous assignment statement or in a net declaration
+				Order of the execution of distinct non-blocking assignments to a given variable shall be preserved
+				
+				Example
+					reg x, y, z;
+					reg [15:0] reg_a, reg_b;
+					integer count;
+					
+					//All behavioral statements must be inside an initial or always block
+					
+					initial
+					begin
+					x=0; y=1; z=1;              //Scalar assignments
+					count=0;                    //Assignment to integer variables
+					reg_a=16'b0; reg_b=reg_a;   //Initialize vectors
+					reg_a[2] <= #15 1'b1;       //Bit select assignment with delay
+					reg_b[15:13] <= #10{x,y,z}; //Assign result of concatenation to
+					count<=count+1;             //Assignment to an integer (increment)
+					end
+
+		Delays in Procedural Assignment
+
+
+
+
 
 
 
