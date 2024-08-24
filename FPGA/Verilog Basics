@@ -1784,6 +1784,58 @@ CONTENTS
 					end
 
 		Delays in Procedural Assignment
+			Like timer delays in PLC systems.
+				Regular Delay
+				Intra-assignment delay
+
+			Regular Delay				
+				With a regular delay, the specified delay applies to the entire operation. 
+				After the delay period, the RHS is evaluated, and the result is then assigned to the LHS.
+
+				Example
+					initial
+					begin
+						x=0;                    //no delay control
+						#10 y=1;                //delay control with a number. Delay execution of y=1 by 10 units
+						
+						#latency z=0;           //Delay control with identifier
+						#(latency+delta) p=1;   //Delay control with expression
+						
+						#y x = x+1;             //Delay control with identifier. Take value of y. 
+									//"x+1" will be assigned to "x" after "y" delay
+						
+						#(4:5:6) q=0;           //Minimum, typical and maximum delay values
+						                        //Discussed in gate-level modelling chapter
+						end
+				
+			Intra Assignment Delay	
+				RHS of the equation is evaluated at current time but the value is assigned to LHS after the delay time
+				Can be applied to both blocking and nonblocking assignment
+				
+				Example
+					initial
+					begin 
+						x=0; 
+						z=0;
+						y=#5 x+z;    //Evaluate x+z at time=0, wait 5 time units and assign to y
+				
+		Block Statements
+			Two types of block statements 
+				Sequence Block
+				Parallel Block
+				
+			Sequence Block
+				The "begin-end" is used to group multiple statements
+				Statements are executed in the order they are mentioned
+				Delay is treated relative to the simulation time and previous statement
+				
+			Parallel Block
+				The "fork-join" is used to group multiple statements
+				Statements are executed are concurrently
+				Delay is treated relative to the simulation time of entering the block
+				
+				
+				
 
 
 
