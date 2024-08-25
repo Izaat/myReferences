@@ -1869,6 +1869,103 @@ CONTENTS
 				
 				
 	Conditional and Multiway branching statements
+		IF-Else
+			Multiple statements inside an if else statement is enclosed by begin-end block
+			Nested if-else-if statements also come in conditional statement
+		
+			Syntax
+				//Type 1 conditional statement. No else statement
+				//Statement executes or does not executed
+				if (<expression>) true_statement;
+				
+				//Type 2 conditional statement. One else statement
+				//Either true_statement or false_statement is evaluated
+				if (<expression>) true_statement;
+				else false_statement;
+					
+				//Type 3 conditional statement. Nested if-else-if
+				//Choice of multiple statements. Only one is executed
+				if (<expression1>) true_statement1;
+				else if (<expression2>) true_statement2;
+				else if (<expression3>) true_statement3;
+				else default_statement;
+					
+		Multiway Branching
+			Keywords: case, endcase and default
+			Multiple statements can be contained by begin-end block
+			
+			Syntax
+				case (expression)
+					alternative1: statement1;
+					alternative2: statement2;
+					alternative3: statement3;
+					alternative4: statement4;
+					...
+					...
+					...
+					default: default_statement;
+				endcase
+
+	Looping Constructs (While, For, Repeat, Forever)
+		While Loop
+			Multiple statements are grouped in begin-end
+			Example
+				//Increment 0 to 127, exit at 128.
+				integer count;
+				
+				initial
+				begin
+					count = 0;
+					while (count<128)    //Execute loop to 127 and exit at 128
+					begin
+						$display("Count = %d", count);
+						count = count + 1;
+					end
+				end
+
+		For Loop
+			Notice there is no "end to "begin-end"
+			Example
+				integer count;
+				initial
+					for(count=0; count<128; count=count+1)
+						$display("Count = %d", count);
+
+		Repeat Loop
+			Iterates for fixed number of times
+			No expression required
+			Loop must contain a number
+			
+			Example
+				initial
+				begin
+					count=0;
+					repeat(128)
+					begin
+						$display("Count = %d", count);
+						count=count+1;
+					end
+				end
+
+		Forever Loop
+			Executes forever until a disable statement or $finish is encountered
+			No expression needed
+			
+			Example
+				initial
+				begin
+					clock = 1'b0;
+					forever #10 clock = ~clock;  //Clock with period of 20 units
+				end
+
+
+
+
+
+
+
+
+
 
 
 
