@@ -1724,119 +1724,161 @@ CONTENTS
 					
 				endmodule
 
-		Procedural Assignment
-			Procedural assignments update values of reg, integer, real, or time variables.
-			The value placed on a variable will remain unchanged, 
-				until another procedural assignment updates the variable with a different value.
-			These are unlike continuous assignments
-			
-			2 types of procedural assignments
-				Blocking Assignments
-				Non-Blocking Assignments
-				
+	Procedural Assignment
+		Procedural assignments update values of reg, integer, real, or time variables.
+		The value placed on a variable will remain unchanged, 
+			until another procedural assignment updates the variable with a different value.
+		These are unlike continuous assignments
+		
+		2 types of procedural assignments
 			Blocking Assignments
-				Represented with the sign "="
-				Statements are executed sequentially
-				Statements are executed in the order they are specified in a sequential block
-				One statement blocks the execution of other statements until it is executed
-				Delay values will be added
-				Blocking assignments can be used in both procedural and contagious assignments
-				
-				Example
-					reg x, y, z;
-					reg [15:0] reg_a, reg_b;
-					integer count;
-					
-					//All behavioral statements must be inside an initial or always block
-					
-					initial
-					begin
-					x=0; y=1; z=1;             //Scalar assignments
-					count=0;                   //Assignment to integer variables
-					reg_a=16'b0; reg_b=reg_a;  //Initialize vectors
-					#15 reg_a[2]=1'b1;         //Bit select assignment with delay
-					#10 reg_b[15:13]={x,y,z};  //Assign result of concatenation to
-					count=count+1;             //Assignment to an integer (increment)
-					end
-
 			Non-Blocking Assignments
-				Represented with the sign "<="
-				Statements are executed concurrently
-				Right-hand sides are evaluated first, subsequently the specified assignments are scheduled
-				Non-blocking assignments can't be used in a continuous assignment statement or in a net declaration
-				Order of the execution of distinct non-blocking assignments to a given variable shall be preserved
+			
+		Blocking Assignments
+			Represented with the sign "="
+			Statements are executed sequentially
+			Statements are executed in the order they are specified in a sequential block
+			One statement blocks the execution of other statements until it is executed
+			Delay values will be added
+			Blocking assignments can be used in both procedural and contagious assignments
+			
+			Example
+				reg x, y, z;
+				reg [15:0] reg_a, reg_b;
+				integer count;
 				
-				Example
-					reg x, y, z;
-					reg [15:0] reg_a, reg_b;
-					integer count;
+				//All behavioral statements must be inside an initial or always block
+				
+				initial
+				begin
+				x=0; y=1; z=1;             //Scalar assignments
+				count=0;                   //Assignment to integer variables
+				reg_a=16'b0; reg_b=reg_a;  //Initialize vectors
+				#15 reg_a[2]=1'b1;         //Bit select assignment with delay
+				#10 reg_b[15:13]={x,y,z};  //Assign result of concatenation to
+				count=count+1;             //Assignment to an integer (increment)
+				end
+
+		Non-Blocking Assignments
+			Represented with the sign "<="
+			Statements are executed concurrently
+			Right-hand sides are evaluated first, subsequently the specified assignments are scheduled
+			Non-blocking assignments can't be used in a continuous assignment statement or in a net declaration
+			Order of the execution of distinct non-blocking assignments to a given variable shall be preserved
+			
+			Example
+				reg x, y, z;
+				reg [15:0] reg_a, reg_b;
+				integer count;
+				
+				//All behavioral statements must be inside an initial or always block
+				
+				initial
+				begin
+				x=0; y=1; z=1;              //Scalar assignments
+				count=0;                    //Assignment to integer variables
+				reg_a=16'b0; reg_b=reg_a;   //Initialize vectors
+				reg_a[2] <= #15 1'b1;       //Bit select assignment with delay
+				reg_b[15:13] <= #10{x,y,z}; //Assign result of concatenation to
+				count<=count+1;             //Assignment to an integer (increment)
+				end
+
+	Delays in Procedural Assignment
+		Like timer delays in PLC systems.
+			Regular Delay
+			Intra-assignment delay
+
+		Regular Delay				
+			With a regular delay, the specified delay applies to the entire operation. 
+			After the delay period, the RHS is evaluated, and the result is then assigned to the LHS.
+
+			Example
+				initial
+				begin
+					x=0;                    //no delay control
+					#10 y=1;                //delay control with a number. Delay execution of y=1 by 10 units
 					
-					//All behavioral statements must be inside an initial or always block
+					#latency z=0;           //Delay control with identifier
+					#(latency+delta) p=1;   //Delay control with expression
 					
-					initial
-					begin
-					x=0; y=1; z=1;              //Scalar assignments
-					count=0;                    //Assignment to integer variables
-					reg_a=16'b0; reg_b=reg_a;   //Initialize vectors
-					reg_a[2] <= #15 1'b1;       //Bit select assignment with delay
-					reg_b[15:13] <= #10{x,y,z}; //Assign result of concatenation to
-					count<=count+1;             //Assignment to an integer (increment)
+					#y x = x+1;             //Delay control with identifier. Take value of y. 
+											//"x+1" will be assigned to "x" after "y" delay
+					
+					#(4:5:6) q=0;           //Minimum, typical and maximum delay values
+											//Discussed in gate-level modelling chapter
 					end
-
-		Delays in Procedural Assignment
-			Like timer delays in PLC systems.
-				Regular Delay
-				Intra-assignment delay
-
-			Regular Delay				
-				With a regular delay, the specified delay applies to the entire operation. 
-				After the delay period, the RHS is evaluated, and the result is then assigned to the LHS.
-
-				Example
-					initial
-					begin
-						x=0;                    //no delay control
-						#10 y=1;                //delay control with a number. Delay execution of y=1 by 10 units
-						
-						#latency z=0;           //Delay control with identifier
-						#(latency+delta) p=1;   //Delay control with expression
-						
-						#y x = x+1;             //Delay control with identifier. Take value of y. 
-									//"x+1" will be assigned to "x" after "y" delay
-						
-						#(4:5:6) q=0;           //Minimum, typical and maximum delay values
-						                        //Discussed in gate-level modelling chapter
-						end
+			
+		Intra Assignment Delay	
+			RHS of the equation is evaluated at current time but the value is assigned to LHS after the delay time
+			Can be applied to both blocking and nonblocking assignment
+			
+			Example
+				initial
+				begin 
+					x=0; 
+					z=0;
+					y=#5 x+z;    //Evaluate x+z at time=0, wait 5 time units and assign to y
 				
-			Intra Assignment Delay	
-				RHS of the equation is evaluated at current time but the value is assigned to LHS after the delay time
-				Can be applied to both blocking and nonblocking assignment
-				
-				Example
-					initial
-					begin 
-						x=0; 
-						z=0;
-						y=#5 x+z;    //Evaluate x+z at time=0, wait 5 time units and assign to y
-				
-		Block Statements
-			Two types of block statements 
-				Sequence Block
-				Parallel Block
-				
+	Block Statements
+		Two types of block statements 
 			Sequence Block
-				The "begin-end" is used to group multiple statements
-				Statements are executed in the order they are mentioned
-				Delay is treated relative to the simulation time and previous statement
-				
 			Parallel Block
-				The "fork-join" is used to group multiple statements
-				Statements are executed are concurrently
-				Delay is treated relative to the simulation time of entering the block
+			
+		Sequence Block
+			The "begin-end" is used to group multiple statements
+			Statements are executed in the order they are mentioned
+			Delay is treated relative to the simulation time and previous statement
+			
+			Example1: Sequential block without delay
+				initial
+				begin
+					x=1'b0;
+					y=1'b1;
+					z={x,y};
+					w={y,x};
+				end
+				
+			Example2: Sequential blocks with delay
+				reg x, y;
+				reg [1:0] x, w;
+				
+				initial
+				begin
+					x = 1' b0;       //Completes at time 0
+					#5 y = 1'b1;     //Completes at simulation time 5
+					#10 z = {x, y};  //Completes at simulation time 15
+					#20 w = {y, x};  //Completes at simulation time 35
+				end
+			
+		Parallel Block
+			The "fork-join" is used to group multiple statements
+			Statements are executed are concurrently
+			Delay is treated relative to the simulation time of entering the block
+			
+			Example
+				reg x, y;
+				reg [1:0] z, w;
+				
+				initial
+				fork
+					x = 1'b0;         //Completes at simulation time 0
+					#5 y = 1'b1;      //Completes at simulation time 5
+					#10 z = {x, y};   //Completes at simulation time 10
+					#20 w = {y, x};   //Completes at simulation time 20
+				join
 				
 				
-				
+	Conditional and Multiway branching statements
 
+
+
+
+
+
+
+
+
+.
 
 
 
