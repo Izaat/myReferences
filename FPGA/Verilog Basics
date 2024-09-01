@@ -1959,16 +1959,59 @@ CONTENTS
 				end
 
 
+	Examples
+		Example 1: 4X1 mux
+			//4-to-1 multiplexer. Port list is taken exactly from the I/O diagram
+			module mux4_to_1 (out, i0, i1, i2, i3, s1, s0);
+			
+			//Port declarations from the I/O diagram
+			output out;
+			input i0, i1, i2, i3;
+			input s1, s0;
+			
+			//output declared as register
+			reg out;
+			
+			//Recompute the signal out if any input signal changes.
+			//All input signals that cause a recomputation of out to occur must go into "always @(..)" sensitivity list.
+			always @(s1 or s0 or i0 or i1 or i2 or i3)
+			begin
+				case ({s1, s0})
+				2'b00: out = i0;
+				2'b01: out = i1;
+				2'b10: out = i2;
+				2'b11: out = i3;
+				default: out = 1'bx;
+				endcase
+			end
+			
+			endmodule
+
+		Example 2: 4-bit counter
+			//4-bit Binary Counter
+			module counter(Q, clock, clear);
+			
+			//I/O ports
+			output [3:0] Q;
+			input clock, clear;
+			
+			//Output defined as register
+			reg [3:0] Q;
+			
+			always @(posedge clear or negedge clock)
+			begin
+				if (clear)
+					Q = 4'd0;
+				else
+					Q = (Q+1) % 16;
+			end
+			
+			endmodule
 
 
 
-
-
-
-
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
+14. Compiler Directive and System Tasks
 
 
 
