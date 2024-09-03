@@ -2013,6 +2013,148 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////
 14. System Tasks and Compiler Directive
 
+	System tasks
+		Internal variable monitoring ST 
+		Simulation control tasks
+		Simulation time related tasks
+	Compiler Directives
+
+	System Tasks
+		Used for generating input and output during simulation
+		Syntax begins with "$"
+
+		Internal variable monitoring ST 
+			$display, $write, $strobe, $monitor	
+				System tasks that extract data like $monitor need to be in an initial or always block
+				$display and $strobe display once everytime they are executed 
+				$monitor displays everytime one of the parameter changes
+				$display automatically adds a new line character and $write does not add
+				Difference between $display and $strobe is that $strobe displays the parameters at the very end of the current simulation time unit
+				$display shows the parameters when it is being executed
+
+				Syntax
+					$display ("format_string", par_1, par_2);
+					$strobe ("format_string", par_1, par_2);
+					$monitor ("format_string", par_1, par_2);
+
+				Example
+					module example_display;
+						reg new_reg;
+						initial
+							begin
+							new_reg = 1'b1;
+							$strobe ("Strobe value of new_reg = %b", new_reg);
+							$display ("Display value of new_reg = %b", new_reg);
+							new_reg = 1'b0;
+							$monitor ("Monitor value of new_reg = %b", new_reg);
+						end
+					endmodule
+
+					Result:
+						Strobe value of new_reg = 0    //new_reg begins with 0
+						Display value of new_reg = 1   //new_reg turns1 at 1'b1
+						Monitor value of new_reg = 1   //Displays the changes from 1 to 0
+						Monitor value of new_reg = 0
+
+			$random
+				Generates a random integer everytime it is called
+				If a sequence is to be repeateable, the first time invokes a random numerical seed
+				Otherwise the seed is derived from the computer clock
+				
+				Syntax:
+					xyz = $random[(integer)];
+					
+		Simulation Control Tasks
+			$reset, $stop, $finish
+				$reset resets the simulation back to time 0
+				$stop halts the simulator and puts it in an interactive mode where the user can enter commands (pause)
+				$finish exits the simulator back to the operating system (terminate)
+				
+		Simulation Time Related Tasks		
+			$time, $stime, $realtime
+				$time returns the current simulation time as a 64bit integer
+				$stime returns the current simulation time as a 32bit integer
+				$realtime returns the current simulation time as a real number
+
+				Example 1:
+					'timescale 10ns/1ns
+					
+					module p_array;
+						logic clk;
+						logic a;
+						
+						initial
+							clk=0;
+							
+						always begin
+							#50 clk = ~clk;
+						end
+						
+						initial begin
+							#1.55 a=0;
+							#1.55 a=1;
+							#50 $stop;
+						end
+						
+						initial
+							$monitor("Time = %0t, clk = %0b, a = %0b ", $time, clk, a);
+							
+						initial begin
+							$dumpfile("dump.vcd");
+							$dumpvars(0, p_array);
+						end
+					endmodule
+					
+					Result
+						//Time = 0, clk=0, a=x
+						//Time = 20, clk=0, a=0
+						//Time = 30, clk=0, a=1
+						//Time = 500, clk=1, a=1
+
+				Example 2:
+					'timescale 10ns/1ns
+					
+					module p_array;
+						logic clk;
+						logic a;
+						
+						initial
+							clk=0;
+							
+						always begin
+							#50 clk = ~clk;
+						end
+						
+						initial begin
+							#1.55 a=0;
+							#1.55 a=1;
+							#50 $stop;
+						end
+						
+						initial
+							$monitor("Time = %0t, clk = %0b, a = %0b ", $realtime, clk, a);  //Notice $realtime is used here instead of $time in example1
+							
+						initial begin
+							$dumpfile("dump.vcd");
+							$dumpvars(0, p_array);
+						end
+					endmodule
+					
+					Result
+						//Time = 0, clk=0, a=x
+						//Time = 16, clk=0, a=0
+						//Time = 32, clk=0, a=1
+						//Time = 500, clk=1, a=1
+
+	Compiler Directives
+		'define, 'include, 'timescale
+		A compiler directive may be used to control the compilation of a verilog description
+		The accent mark(') denotes a compiler directive
+		A directive is effective from the point at which it is declared to the point at which another directive overrides it, even across file boundaries
+		
+
+
+
 
 
 
