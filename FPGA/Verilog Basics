@@ -2152,6 +2152,37 @@ CONTENTS
 		The accent mark(') denotes a compiler directive
 		A directive is effective from the point at which it is declared to the point at which another directive overrides it, even across file boundaries
 		
+		'define
+			Gives a name to a collection of characters.
+			Once defined, that name can be used in lieu of the characters.
+			This name is then referred to as macro
+			
+			Example:
+				'define size 8
+				electrical [0:'size-1] out;   //size will be 1 instead of 8
+
+		'include
+			Will be replaced by the contents of a file
+			It takes the filename as an argument which can be specified with a relative or absolute path to the file
+			The included files may include other files, etc
+			
+			Example
+				'include "disciplines.vams"
+		
+		'timescale
+			The 'timescale compiler directive defines the time unit and the time precision for the modules that follow it
+			The time unit and time precision is specified using 1, 10, 100 followed by a measurement unit (s, ms, us, ns, ps, fs)
+			
+			Example:
+				'timescale 10ns/1ns
+
+
+
+
+
+
+
+
 
 
 
