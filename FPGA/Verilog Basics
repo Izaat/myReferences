@@ -2176,7 +2176,89 @@ CONTENTS
 			Example:
 				'timescale 10ns/1ns
 
+//////////////////////////////////////////////////////////////////////////////////////////////////
+15. Task and Functions
 
+	Basically called a "subroutine" in other languages
+	Like other languages, this can also be reused on other modules
+
+	Tasks
+		Are declared with the keywords "task" and "endtask"
+		Tasks must be used if any one of the following conditions is true for the procedure
+			There are delay, timing, or event control constructs in the procedure
+			The procedure has zero or more than one output arguments
+			The procedure has no input arguments
+
+		Syntax
+			task [name];
+				input [port_list];
+				inout [port_list];
+				output [port_list];
+				begin
+					[statements]
+				end
+			endtask
+			
+		Example
+			task sum;
+				input [7:0] a, b;
+				output [7:0] c;
+				begin
+					c=a+b;
+				end
+			endtask
+			
+			initial begin
+				reg [7:0] x, y, z;
+				sum (x; y, z);
+			end
+
+		Example - Simple Task
+			module simple_task();
+			
+			task convert;
+			input [7:0] temp_in;
+			output [7:0] temp_out;
+			begin
+				temp_out = (9/5)*(temp_in+32);
+			end
+			endtask
+			
+			endmodule
+			
+		Example - Task using Global Variables
+			module task_global();
+			
+			reg [7:0] temp_out;
+			reg [7:0] temp_in;
+			
+			task convert;
+			begin
+				temp_out = (9/5)*(temp_in+32);
+			end
+			endtask
+			
+			endmodule
+
+		Example - Calling a task
+			module task_calling(temp_a, temp_b, temp_c, temp_d);
+			input [7:0] temp_a, temp_c;
+			output [7:0] temp_b, temp_d;
+			reg [7:0] temp_b, temp_d;
+			
+			'include "mytask.v"
+			
+			always @ (temp_a)
+			begin
+				convert(temp_a, temp_b);  //temp_a will act as input and temp_b will act as output
+			end
+			
+			always @ (temp_c)
+			begin
+				convert(temp_c, temp_d);
+			end
+			
+			endmodule
 
 
 
