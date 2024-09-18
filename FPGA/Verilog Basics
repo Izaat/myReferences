@@ -2359,7 +2359,9 @@ CONTENTS
 //////////////////////////////////////////////////////////////////////////////////////////////////
 16. Test Bench Writing
 
-
+	Combinational design
+	Sequential design
+	Clock generation and input synchronization
 
 
 
