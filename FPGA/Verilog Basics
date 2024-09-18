@@ -2306,7 +2306,6 @@ CONTENTS
 			endmodule
 
 	Difference between Tasks and Functions
-		
 		+---------------------------------------+--------------------------------------+
 		|               Task                    |               Function               |
 		+---------------------------------------+--------------------------------------+
@@ -2329,8 +2328,36 @@ CONTENTS
 		+---------------------------------------+--------------------------------------+
 
 
+	Automatic (Re-entrant) task and Static task
+		+---------------------------------------+---------------------------------------+
+		|         Re-entrant Task               |             Static Task               |
+		+---------------------------------------+---------------------------------------+
+		| Has the keyword "automatic" between   | Does not have the keyword "automatic" |
+		| the "task" keyword and identifier     | between the "task" keyword and        |
+		|                                       | identifier                            |
+		+---------------------------------------+---------------------------------------+
+		| Variables declared within the task    | Variable declarations within the task |
+		| are allocated dynamically for each    | are allocated statically              |
+		| concurrent task call                  |                                       |
+		+---------------------------------------+---------------------------------------+
+		| All variables will be replicated in   | Each concurrent call to the task will |
+		| each concurrent call to store state   | OVERWRITE the statically allocated    |
+		| specific to that invocation           | local variables of the task from all  |
+		|                                       | other concurrent calls to the task    |
+		+---------------------------------------+---------------------------------------+
+		| Variables declared are de-allocated   | Variables retain their values between |
+		| at the end of task invocation         | invocations                           |
+		+---------------------------------------+---------------------------------------+
+		| Task items cannot be accessed by      | Task items can be accessed by         |
+		| hierarchical inferences               | hierarchical inferences               |
+		+---------------------------------------+---------------------------------------+
+		| Task items shall be allocated new     | Task items can be shared across all   |
+		| across all uses of the task executing | uses of the task executing            |
+		| concurrently                          | concurrently                          |
+		+---------------------------------------+---------------------------------------+
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
+16. Test Bench Writing
 
 
 
