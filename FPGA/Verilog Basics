@@ -2654,12 +2654,59 @@ CONTENTS
 			endmodule
 		
 		Test bench:
+			module d_ff_tb();
+				reg d,clk,reset;
+				wire q,qb;
+				d_ff DUT (d,clk,reset,q,qb);
+				
+				initial
+				begin
+					clk = 1'b0;
+					forever #5 clk = ~clk;
+				end
+				
+				task initialize;
+				begin
+					d = 0;
+					reset = 0;
+				end
+				endtask
+				
+				task stimulus(input i, input j);
+				begin
+					#12; d=i; reset=j;
+				end
+				endtask
+				
+				initial
+				begin
+				initialize;
+					stimulus (1,1);
+					stimulus (1,0);
+					stimulus (0,0);
+					stimulus (1,0);
+				end
+				
+				initial
+				begin
+					$monitor($time, "input d=%b, reset=%b output q=%b, qb=%b",d, reset,q,qb);
+					#100 $finish;
+				end
+			endmodule
 
+			#Terminal Output:
+			0input d=0, reset=0 output q=x, qb=x
+			5input d=0, reset=0 output q=0, qb=1
+			12input d=1, reset=1 output q=0, qb=1
+			24input d=1, reset=0 output q=0, qb=1
+			25input d=1, reset=0 output q=1, qb=0
+			36input d=0, reset=0 output q=1, qb=0
+			45input d=0, reset=0 output q=0, qb=1
+			48input d=1, reset=0 output q=0, qb=1
+			55input d=1, reset=0 output q=1, qb=0
 
-
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
+[End]
 
 
 
