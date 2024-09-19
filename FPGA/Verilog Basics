@@ -2427,7 +2427,32 @@ CONTENTS
 			assign carry = (a$b) | (b&cin) | (cin&a);
 		endmodule
 
-
+	Full Adder Test-bench (Combinational)
+		module test_bench();
+			reg a, b, cin;
+			wire sum, carry;
+			
+			full_adder FA (sum, carry, a, b, cin);
+			
+			initial
+			begin
+				a=0; b=0; cin=0;
+			end
+			
+			intial
+			begin
+				#10 a=1; b=0; cin=0;
+				#10 a=1; b=1; cin=0;
+				#10 a=0; b=1; cin=1;
+				#10 a=1; b=1; cin=1;
+			end
+			
+			initial
+			begin
+				$monitor ($time, "a=%b, b=%b, cin=%b, sum=%b, carry=%b", a, b, cin, sum, carry);
+				#60 $finish;
+			end
+		endmodule
 
 
 .
