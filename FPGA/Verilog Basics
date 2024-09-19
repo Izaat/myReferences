@@ -2555,6 +2555,105 @@ CONTENTS
 			#input j=0, k=0 ouput q=0, qb=1
 
 	4 bit synchronous loadable binary up-down counter
+		Format:
+			module up_down_counter(clk,rst,load,din,up_down,count);
+				input [3:0] din;
+				input clk,rst,load,up_down;
+				output reg [3:0] count;
+				
+				always@(posedge clk)
+				begin
+				if(rst)
+					count <= 0;
+				else if (load)
+					count <= din;
+				else if (up_down)
+					count <= count + 4'd1;
+				else
+					count <= count - 4'd1;
+				end
+			endmodule
+		
+		Test bench:
+			module up_down_counter_tb();
+				reg [3:0] din;
+				reg clk,rst,load,up_down;
+				wire [3:0] count;
+				up_down_counter DUT (clk,rst,load,din,up_down,count);
+				
+				initial
+				begin
+					clk = 1'b0;
+					forever #5 clk = ~clk;
+				end
+				
+				initial
+				begin
+					{rst,load,up_down} = 3'd0;
+					din = 4'd0;
+					#10;
+				end
+				
+				initial
+				begin
+					{rst,load,up_down} = 3'b100; din=4'd3; #10;
+					{rst,load,up_down} = 3'b010; din=4'd4; #10;
+					{rst,load,up_down} = 3'b001; din=4'd0; #10;
+					{rst,load,up_down} = 3'b001; din=4'd0; #10;
+					{rst,load,up_down} = 3'b001; din=4'd0; #10;
+					{rst,load,up_down} = 3'b001; din=4'd9; #10;
+					{rst,load,up_down} = 3'b001; din=4'd9; #10;
+					{rst,load,up_down} = 3'b001; din=4'd9; #10;
+					{rst,load,up_down} = 3'b000; din=4'd9; #10;
+					{rst,load,up_down} = 3'b000; din=4'd9; #10;
+					{rst,load,up_down} = 3'b010; din=4'd1;
+				end
+				
+				initial
+				begin
+					$monitor ("input din=%b, rst=%b, load=%b, up_down=%b output count=%b", din, rst, load, up_down, count);
+					#150 $finish;
+				end
+			endmodule
+				
+			#Terminal Output:
+			#input din=0011, rst=1, load=0, up_down=0 output count=xxxx
+			#input din=0011, rst=1, load=0, up_down=0 output count=0000
+			#input din=0100, rst=0, load=1, up_down=0 output count=0000
+			#input din=0100, rst=0, load=1, up_down=0 output count=0100
+			#input din=0000, rst=0, load=0, up_down=1 output count=0100
+			#input din=0000, rst=0, load=0, up_down=1 output count=0101
+			#input din=0000, rst=0, load=0, up_down=1 output count=0110
+			#input din=0000, rst=0, load=0, up_down=1 output count=0111
+			#input din=1001, rst=0, load=0, up_down=1 output count=0111
+			#input din=1001, rst=0, load=0, up_down=1 output count=1000
+			#input din=1001, rst=0, load=0, up_down=1 output count=1001
+			#input din=1001, rst=0, load=0, up_down=1 output count=1010
+			#input din=1001, rst=0, load=0, up_down=0 output count=1010
+			#input din=1001, rst=0, load=0, up_down=0 output count=1001
+			#input din=1001, rst=0, load=0, up_down=0 output count=1000
+			#input din=0001, rst=0, load=1, up_down=0 output count=1000
+			#input din=0001, rst=0, load=1, up_down=0 output count=0001
+
+	D Flip-flop
+		Format:
+			module d_ff(d,clk,reset,q,qb);
+				input d,clk,reset;
+				output reg q;
+				output qb;
+				
+				assign qb=~q;
+				
+				always@(posedge clk)
+				begin
+				if(reset)
+					q <= 0;
+				else
+					q <= d;
+				end
+			endmodule
+		
+		Test bench:
 
 
 
