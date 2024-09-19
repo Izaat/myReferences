@@ -2419,93 +2419,96 @@ CONTENTS
 			endmodule
 
 	Full Adder
-		module full_adder (sum, carry, a, b, cin);
-			input a,b,cin;
-			output sum,carry;
-			
-			assign sum = a^b^cin;
-			assign carry = (a$b) | (b&cin) | (cin&a);
-		endmodule
-
-	Full Adder Test-bench 1
-		module test_bench();
-			reg a, b, cin;
-			wire sum, carry;
-			
-			full_adder FA (sum, carry, a, b, cin);
-			
-			initial
-			begin
-				a=0; b=0; cin=0;
-			end
-			
-			intial
-			begin
-				#10 a=1; b=0; cin=0;
-				#10 a=1; b=1; cin=0;
-				#10 a=0; b=1; cin=1;
-				#10 a=1; b=1; cin=1;
-			end
-			
-			initial
-			begin
-				$monitor ($time, "a=%b, b=%b, cin=%b, sum=%b, carry=%b", a, b, cin, sum, carry);
-				#60 $finish;
-			end
-		endmodule
-
-	Full Adder Test-bench 2
-		module test_bench();
-			reg a, b, cin;
-			wire sum, carry;
-			integer i;
-			
-			full_adder FA (sum, carry, a, b, cin);
-			
-			initial
-			begin
-				a=0; b=0; cin=0;
-			end
-			
-			intial
-			begin
-				for(i=1; i<8; i=i+1)
-					begin
-					{a, b, cin} = i;
-					#10;
+		Format:
+			module full_adder (sum, carry, a, b, cin);
+				input a,b,cin;
+				output sum,carry;
+				
+				assign sum = a^b^cin;
+				assign carry = (a$b) | (b&cin) | (cin&a);
+			endmodule
+		
+		
+		Test-bench 1
+			module test_bench();
+				reg a, b, cin;
+				wire sum, carry;
+				
+				full_adder FA (sum, carry, a, b, cin);
+				
+				initial
+				begin
+					a=0; b=0; cin=0;
 				end
-			end
-			
-			initial
-			begin
-				$monitor ($time, "a=%b, b=%b, cin=%b, sum=%b, carry=%b", a, b, cin, sum, carry);
-				#60 $finish;
-			end
-		endmodule
+				
+				intial
+				begin
+					#10 a=1; b=0; cin=0;
+					#10 a=1; b=1; cin=0;
+					#10 a=0; b=1; cin=1;
+					#10 a=1; b=1; cin=1;
+				end
+				
+				initial
+				begin
+					$monitor ($time, "a=%b, b=%b, cin=%b, sum=%b, carry=%b", a, b, cin, sum, carry);
+					#60 $finish;
+				end
+			endmodule
+
+		Test-bench 2
+			module test_bench();
+				reg a, b, cin;
+				wire sum, carry;
+				integer i;
+				
+				full_adder FA (sum, carry, a, b, cin);
+				
+				initial
+				begin
+					a=0; b=0; cin=0;
+				end
+				
+				intial
+				begin
+					for(i=1; i<8; i=i+1)
+						begin
+						{a, b, cin} = i;
+						#10;
+					end
+				end
+				
+				initial
+				begin
+					$monitor ($time, "a=%b, b=%b, cin=%b, sum=%b, carry=%b", a, b, cin, sum, carry);
+					#60 $finish;
+				end
+			endmodule
 
 	J-K flip-flop
-		module jk_ff(q, qb, j, k, clk);
-		
-		input j,k,clk;
-		output reg q;
-		output qb;
-		
-		parameter Hold = 2'b00,
-				  ReSet = 2'b01,
-				  Set = 2'b10,
-				  Toggle = 2'b11;
-				  
-		assign qb = ~q;
-		always@(posedge clk)
-			begin
-				case({j,k})
-					Hold: q<=q;
-					ReSet: q<=0;
-					Set: q<=1;
-					Toggle: q<=~q;
-				endcase
-			end
-		endmodule
+		Format:
+			module jk_ff(q, qb, j, k, clk);
+			
+			input j,k,clk;
+			output reg q;
+			output qb;
+			
+			parameter Hold = 2'b00,
+					  ReSet = 2'b01,
+					  Set = 2'b10,
+					  Toggle = 2'b11;
+					  
+			assign qb = ~q;
+			always@(posedge clk)
+				begin
+					case({j,k})
+						Hold: q<=q;
+						ReSet: q<=0;
+						Set: q<=1;
+						Toggle: q<=~q;
+					endcase
+				end
+			endmodule
 .
 
 
