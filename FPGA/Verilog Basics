@@ -2554,7 +2554,7 @@ CONTENTS
 			#input j=0, k=1 ouput q=0, qb=1
 			#input j=0, k=0 ouput q=0, qb=1
 
-
+	4 bit synchronous loadable binary up-down counter
 
 
 
