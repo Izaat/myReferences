@@ -2540,12 +2540,19 @@ CONTENTS
 				initial
 				begin
 					$monitor("input j=%b, k=%b output q=%b, qb=%b", j, k, q, qb);
-					#100 $finish;
+					#100 $finish;  //Total time "#100" must not be more than the sum of time stated above
 				end
 				
 			endmodule
 
-
+			#Terminal Output:
+			#input j=0, k=0 ouput q=x, qb=x
+			#input j=1, k=0 ouput q=x, qb=x
+			#input j=1, k=0 ouput q=1, qb=0
+			#input j=0, k=0 ouput q=1, qb=0
+			#input j=0, k=1 ouput q=1, qb=0
+			#input j=0, k=1 ouput q=0, qb=1
+			#input j=0, k=0 ouput q=0, qb=1
 
 
 
