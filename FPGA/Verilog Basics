@@ -2363,7 +2363,60 @@ CONTENTS
 	Sequential design
 	Clock generation and input synchronization
 
+	Combinational design
+		Format:
+			module test_bench;
+				//input declaration
+				//output declaration
+				
+				//DUT instantiation
+				
+				initial
+				begin
+					//initialization
+				end
+				
+				initial
+				begin
+					//variation(fixed values/loops)
+				end
+				
+				initial
+				begin
+					$monitor("",);
+					$finish;
+				end
+			endmodule
+			
+	Sequential design
+		Format:
+			module test_bench;
+				//input declaration
+				//output declaration
+				
+				//DUT instantiation
+				
+				initial
+				begin
+					//clock_generation
+				end
 
+				initial
+				begin
+					//initialization
+				end
+
+				initial
+				begin
+					//variation(fixed values/loops)
+				end
+				
+				initial
+				begin
+					$monitor("",);
+					$finish;
+				end
+			endmodule
 
 
 
